@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="shortcut icon" href="{$url}application/themes/admin/assets/images/fusiongen.png">
+		<link rel="shortcut icon" href="{$url}application/themes/admin/assets/images/fusionico.png">
 
 		<link rel="stylesheet" href="{$url}application/themes/admin/assets/vendor/bootstrap/css/bootstrap.css" />
 		<link rel="stylesheet" href="{$url}application/themes/admin/assets/vendor/animate/animate.compat.css">
@@ -143,7 +143,7 @@
 		<header class="header">
 			<div class="logo-container">
 				<a href="{$url}mod" class="logo">
-					<img src="{$url}application/themes/admin/assets/images/WoW_icon.svg" width="35" height="35">
+					<img src="{$url}application/themes/admin/assets/images/fusion.svg">
 					<span class="text-light font-weight-normal">{$serverName}</span>
 				</a>
 				<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">

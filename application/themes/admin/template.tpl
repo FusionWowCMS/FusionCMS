@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="shortcut icon" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusiongen.png">
+		<link rel="shortcut icon" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusionico.png">
 
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/animate/animate.compat.css">
@@ -145,14 +145,14 @@
 	<div class="wrapper">
 	<!-- Preloader -->
 	<div class="preloader">
-		<img src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/WoW_icon.svg" class="preloader-img"  height="60" width="60">
+		<img src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusion.svg" class="preloader-img"  height="60px" width="auto">
 	</div>
 	</div>
 	<section class="body">
 		<header class="header">
 			<div class="logo-container">
 				<a href="{$url}admin" class="logo">
-					<img src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/WoW_icon.svg" width="35" height="35">
+					<img src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusion.svg">
 					<span class="text-light font-weight-normal">{$serverName}</span>
 				</a>
 				<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -388,7 +388,7 @@
 				<div class="row align-items-center">
 					<div class="col-lg-1">
 						<a href="#" onclick="WhatHappenedHere(this)" class="logo">
-							<img alt="FusionGen" class="img-fluid" src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusiongen.png">
+							<img alt="FusionGen" class="img-fluid" src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusionico.png">
 						</a>
 					</div>
 					<div class="col-lg-7">
