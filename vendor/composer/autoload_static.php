@@ -15,13 +15,8 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         array (
             'phpseclib\\' => 10,
         ),
-        'V' => 
-        array (
-            'VisualAppeal\\' => 13,
-        ),
         'P' => 
         array (
-            'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
         ),
         'M' => 
@@ -32,28 +27,12 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         array (
             'Laizerox\\' => 9,
         ),
-        'D' => 
-        array (
-            'Desarrolla2\\Cache\\' => 18,
-        ),
-        'C' => 
-        array (
-            'Composer\\Semver\\' => 16,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'phpseclib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
-        ),
-        'VisualAppeal\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/visualappeal/php-auto-update/src',
-        ),
-        'Psr\\SimpleCache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -66,14 +45,6 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'Laizerox\\' => 
         array (
             0 => __DIR__ . '/..' . '/laizerox/php-wowemu-auth/src',
-        ),
-        'Desarrolla2\\Cache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/desarrolla2/cache/src',
-        ),
-        'Composer\\Semver\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
     );
 
