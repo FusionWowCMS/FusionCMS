@@ -506,10 +506,11 @@ class Template
         $data['module'] = array_key_exists("module", $data) ? $data['module'] : $this->module_name;
 
         // Get the rest of the data
-        $data['url']        = array_key_exists("url", $data) ? $data['url'] : $this->page_url;
-        $data['theme_path'] = array_key_exists("theme_path", $data) ? $data['theme_path'] : $this->theme_path;
-        $data['image_path'] = array_key_exists("image_path", $data) ? $data['image_path'] : $this->image_path;
-        $data['CI']         = array_key_exists("CI", $data) ? $data['CI'] : $this->CI;
+        $data['url']             = array_key_exists("url", $data) ? $data['url'] : $this->page_url;
+        $data['theme_path']      = array_key_exists("theme_path", $data) ? $data['theme_path'] : $this->theme_path;
+        $data['image_path']      = array_key_exists("image_path", $data) ? $data['image_path'] : $this->image_path;
+        $data['full_theme_path'] = array_key_exists("full_theme_path", $data) ? $data['full_theme_path'] : $this->full_theme_path;
+        $data['CI']              = array_key_exists("CI", $data) ? $data['CI'] : $this->CI;
 
         // Should we load from the default views or not?
         if ($data['module'] == "default")
