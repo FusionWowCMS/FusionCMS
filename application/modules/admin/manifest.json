@@ -241,34 +241,6 @@
 	},
 
 	"admin": [
-	
-		{
-			"text":"Logs",
-			"icon":"list",
-			"links": [
-				{
-					"text": "HP Error Logs",
-					"icon": "list-ul",
-					"controller": "hplogs",
-					"requirePermission": "editSystemSettings"
-				},
-				
-				{
-					"text": "Website logs",
-					"icon": "list-ul",
-					"controller": "logging",
-					"requirePermission": "viewLogs"
-				},
-
-				{
-					"text": "Email logs",
-					"icon": "list-ul",
-					"controller": "emaillogs",
-					"requirePermission": "editSystemSettings"
-				}
-			]
-		},
-
 		{
 			"text": "Website",
 			"icon": "link",
@@ -329,7 +301,7 @@
 				},
 				
 				{
-					"text": "User groups &amp; permissions",
+					"text": "User group &amp; permission",
 					"icon": "cogs",
 					"controller": "aclmanager",
 					"requirePermission": "viewPermissions"
@@ -340,6 +312,32 @@
 					"icon": "list-ul",
 					"controller": "sessions",
 					"requirePermission": "viewSessions"
+				}
+			]
+		},
+		{
+			"text":"Logs",
+			"icon":"list",
+			"links": [
+				{
+					"text": "HP Error Logs",
+					"icon": "list-ul",
+					"controller": "hplogs",
+					"requirePermission": "editSystemSettings"
+				},
+				
+				{
+					"text": "Website logs",
+					"icon": "list-ul",
+					"controller": "logging",
+					"requirePermission": "viewLogs"
+				},
+
+				{
+					"text": "Email logs",
+					"icon": "list-ul",
+					"controller": "emaillogs",
+					"requirePermission": "editSystemSettings"
 				}
 			]
 		}

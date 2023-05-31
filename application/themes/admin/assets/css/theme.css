@@ -5175,14 +5175,6 @@ html.header-dark .header.header-nav-menu .header-nav-main nav > ul > li.dropdown
 	right: 0px !important;
 }
 
-.top-1 {
-	top: 1px !important;
-}
-
-.bottom-1 {
-	bottom: 1px !important;
-}
-
 .left-1 {
 	left: 1px !important;
 }
@@ -21536,9 +21528,6 @@ html.dark .hidden-on-dark {
 	display: none !important;
 }
 
-html.dark .bg-white {
-	background-color: #21262d !important;
-}
 
 /* Dark - Titles */
 html.dark h1,

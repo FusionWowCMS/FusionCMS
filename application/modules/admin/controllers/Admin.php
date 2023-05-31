@@ -26,7 +26,6 @@ class Admin extends MX_Controller
         $this->administrator->setTitle("Dashboard");
 
         $this->administrator->loadModules();
-
         $data = array(
             'url' => $this->template->page_url,
             'enabled_modules' => $this->administrator->getEnabledModules(),
@@ -40,6 +39,12 @@ class Admin extends MX_Controller
             'views' => $this->getViews(),
             'income' => $this->getIncome(),
             'votes' => $this->getVotes(),
+            "nickname" => $this->user->getNickname(),
+            "avatar" => $this->user->getAvatar($this->user->getId()),
+            "groups" => $this->acl_model->getGroupsByUser($this->user->getId()),
+            "email" => $this->user->getEmail(),
+            "location" => $this->internal_user_model->getLocation(),
+            "register_date" => $this->user->getRegisterDate(),
             'signups' => $this->getSignups(),
             'graphMonthly' => $this->graphMonthly(),
             'graphDaily' => $this->graphDaily(),
@@ -73,6 +78,7 @@ class Admin extends MX_Controller
     {
         $data['this'] = $this->dashboard_model->getIncome("this");
         $data['last'] = $this->dashboard_model->getIncome("last");
+        $data['growth'] = $data['this'] > 0 ? ((($data['this'] - $data['last']) / $data['last']) * 100) : 0;
 
         return $data;
     }
@@ -81,6 +87,7 @@ class Admin extends MX_Controller
     {
         $data['this'] = $this->dashboard_model->getVotes("this");
         $data['last'] = $this->dashboard_model->getVotes("last");
+        $data['growth'] = $data['this'] > 0 ? ((($data['this'] - $data['last']) / $data['last']) * 100) : 0;
 
         return $data;
     }
@@ -91,6 +98,7 @@ class Admin extends MX_Controller
         $data['month'] = $this->dashboard_model->getSignupsDaily("month");
         $data['this'] = $this->dashboard_model->getSignupsMonthly("this");
         $data['last'] = $this->dashboard_model->getSignupsMonthly("last");
+        $data['growth'] = $data['this'] > 0 ? ((($data['this'] - $data['last']) / $data['last']) * 100) : 0;
 
         $cache = $this->cache->get("total_accounts");
 

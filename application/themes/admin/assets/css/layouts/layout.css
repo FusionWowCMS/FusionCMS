@@ -6,3 +6,9 @@
     border-color: #f43f5e !important;
     color: #f43f5e !important;
 }
+li a i.fa-solid {
+    font-size: 16px;
+}
+li button i.fa-solid {
+    font-size: 16px;
+}

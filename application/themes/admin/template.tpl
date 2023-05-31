@@ -4,7 +4,25 @@
 		<title>{if $title}{$title}{/if}{$serverName}</title>
 
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com/">
+        <link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Roboto%20Flex&amp;family=Inter&amp;family=Karla&amp;family=Fira%20Code&amp;display=swap">
+        <link rel="icon" type="image/png" href="../img/favicon.png">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@cssninjaStudio">
+        <meta name="og:image:type" content="image/png">
+        <meta name="og:image:width" content="1200">
+        <meta name="og:image:height" content="630">
+        <meta name="og:image" content="../../media.cssninja.io/embed/marketplace/product/wide79c5.png?headline=Analytics%20dashboard%20-%20For%20heavy%20stats%20and%20kpis&amp;url=https%3A%2F%2Fmedia.cssninja.io%2Fcontent%2Fproducts%2Flogos%2Ftairo-text-white.svg&amp;previewUrl=https%3A%2F%2Ftairo.cssninja.io%2Fimg%2Fscreens%2Fdashboards-analytics.png">
+        <link rel="canonical" href="{$url}">
+        <meta property="og:url" content="{$url}">
+        <meta property="og:locale" content="en">
+        <meta property="og:site_name" content="{if $title}{$title}{/if}{$serverName}">
+        <meta name="description" content="Admin Panel {$serverName}">
+        <meta property="og:description" content="Admin Panel {$serverName}">
+        <meta property="og:type" content="website">
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+        <meta property="og:title" content="Tairo">
 		
 		<link rel="shortcut icon" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusionico.png">
 
@@ -30,8 +48,8 @@
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/imagesloader/jquery.imagesloader.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/dropzone/basic.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/dropzone/dropzone.css">
-		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/theme.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/skins/default.css">
+		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/theme.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/custom.css">
 		{if $extra_css}<link rel="stylesheet" href="{$url}application/{$extra_css}" type="text/css">{/if}
 
@@ -136,301 +154,230 @@
 				$(".nano-pane").show();
 			});
 		});
-
-		
 	</script>
+
+    <link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/layouts/layout.css">
 	</head>
-
-	<body>
-	<div class="wrapper">
-	<!-- Preloader -->
-	<div class="preloader">
-		<img src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusion.svg" class="preloader-img"  height="60px" width="auto">
-	</div>
-	</div>
-	<section class="body">
-		<header class="header">
-			<div class="logo-container">
-				<a href="{$url}admin" class="logo">
-					<img src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusion.svg">
-					<span class="text-light font-weight-normal">{$serverName}</span>
-				</a>
-				<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
-					<i class="fa-solid fa-bars" aria-label="Toggle sidebar"></i>
+    <body>
+        <div class="bg-muted-100 dark:bg-muted-900 pb-20">
+			<div class="dark:bg-muted-800 border-muted-200 dark:border-muted-700 fixed left-0 top-0 z-[60] flex h-full flex-col border-r bg-white transition-all duration-300 w-[280px] -translate-x-full lg:translate-x-0">
+				<div class="flex h-16 w-full items-center justify-between px-6">
+					<img src="{$url}application/themes/admin/assets/images/fusion.svg" class="fusion-logo mt-4"/>
+					<button
+						type="button"
+						class="nui-mask nui-mask-blob hover:bg-muted-200 dark:hover:bg-muted-700/60 text-muted-500 dark:text-muted-400 hidden h-10 w-10 cursor-pointer items-center justify-center transition-colors duration-300 lg:flex"
+					>
+						<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-4 w-4" width="1em" height="1em" viewBox="0 0 24 24">
+							<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+								<circle cx="11" cy="11" r="8"></circle>
+								<path d="m21 21l-4.35-4.35"></path>
+							</g>
+						</svg>
+					</button>
+					<button type="button" class="nui-mask nui-mask-blob hover:bg-muted-200 dark:hover:bg-muted-800 text-muted-700 dark:text-muted-400 flex h-10 w-10 cursor-pointer items-center justify-center transition-colors duration-300 lg:hidden">
+						<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" width="1em" height="1em" viewBox="0 0 24 24">
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7 7l-7-7l7-7"></path>
+						</svg>
+					</button>
 				</div>
-			</div>
-			<!-- start: user box -->
-				<div class="header-right">
-					<ul class="notifications">
-						<a href="{$url}admin/support" class="label label-primary">Support</a>
-					</ul>
-
-					<span class="separator"></span>
-					
-					<ul class="notifications" id="realmstatus">
-						<i class="fas fa-spinner fa-pulse"></i>
-					</ul>
-					
-					<script type="text/javascript">
-						var RealmStatus = {
-							statusField: $("#realmstatus"),
-
-							update: function()
-							{
-								$.get(Config.URL + "admin/realmstatus", function(data)
-								{
-									RealmStatus.statusField.html(data);
-								});
-							}
-						}
-					
-						RealmStatus.update();
-					</script>
-
-					<span class="separator"></span>
-
-					<ul class="notifications">
-						<a href="{$url}" target="_blank"><i class="fa-solid fa-house fa-2x"></i></a>
-					</ul>
-
-					<span class="separator"></span>
-
-					<ul class="notifications">
+				<div class="slimscroll relative w-full grow overflow-y-auto py-6 px-6">
+					<ul id="sidebar-menu" class="space-y-2">
 						<li>
-							<a href="#" class="dropdown-toggle notification-icon" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-								<i class="fa-solid fa-bell"></i>
-								<span class="badge count" id="count"></span>
+							<a href="{$url}admin" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
+								<i class="fa-solid fa-home {if $current_page == "admin/"}text-primary-500{/if}"></i>
+								<span class="whitespace-nowrap font-sans text-sm block {if $current_page == "admin/"}text-primary-500{/if}">Dashboard</span>
 							</a>
-
-							<div class="dropdown-menu notification-menu" style>
-								<div class="notification-title">
-									<span class="float-end badge badge-default" id="count2"></span>
-									Alerts
-								</div>
-								<div class="content" id="content">
-								</div>
+						</li>
+						
+						{foreach from=$menu item=group key=text}
+						{if count($group.links)}
+						<li>
+							<div class="group">
+								<button onclick="AdminMenu.openSection({$group.nr})" nr="{$group.nr}" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center rounded-lg py-3 transition-colors duration-300 gap-4 px-4">
+									<i class="fa-solid fa-{$group.icon} {if isset($group.active)}text-primary-500{/if}" aria-hidden="true"></i>
+									<span class="block whitespace-nowrap font-sans text-sm {if isset($group.active)}text-primary-500{/if} block">{$text}</span>
+									<span class="ms-auto items-center justify-center flex">
+										
+										<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-4 w-4 transition-transform duration-200 rotate-180" width="1em" height="1em" viewBox="0 0 24 24">
+											<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m18 15l-6-6l-6 6"></path>
+										</svg>
+									</span>
+								</button>
+								<ul class="border-muted-200 relative block ps-4 {if isset($group.active)}after:border-muted-200 max-h-max opacity-100 {else}max-h-0 overflow-hidden group-focus-within:max-h-max group-focus-within:overflow-visible group-focus-within:opacity-100{/if}" nr="{$group.nr}">
+									{foreach from=$group.links item=link}
+									<li class="border-muted-300 dark:border-muted-700 border-s-2 first:mt-2">
+										<a aria-current="page" href="{$url}{$link.module}/{$link.controller}" class="{if isset($link.active)}router-link-active !border-primary-500 !text-primary-500 dark:!text-primary-500 -left-0.5 {/if} nui-focus text-muted-500 hover:text-muted-600 dark:text-muted-400/80 dark:hover:text-muted-200 relative flex cursor-pointer items-center gap-2 border-s-2 border-transparent py-2 ps-4 transition-colors duration-300">
+											<i class="fa-solid fa-{$link.icon}"></i>
+											<span class="whitespace-nowrap font-sans text-[0.85rem] block">{$link.text}</span>
+										</a>
+									</li>
+									{/foreach}
+								</ul>
 							</div>
 						</li>
-					</ul>
+						{/if}
+						{/foreach}
 
-					<span class="separator"></span>
-
-					<div id="userbox" class="userbox">
-						<a href="#" data-bs-toggle="dropdown">
-							<figure class="profile-picture">
-								<img src="{$avatar}" alt="{$nickname}" class="rounded-circle" data-lock-picture="{$avatar}">
-							</figure>
-							<div class="profile-info" data-lock-name="{$nickname}">
-								<span class="name">{$nickname}</span>
-								<span class="role">{foreach from=$groups item=group} ({$group.name}) {/foreach}</span>
-							</div>
-
-							<i class="fa custom-caret"></i>
-						</a>
-
-						<div class="dropdown-menu">
-							<ul class="list-unstyled mb-2">
-								<li class="divider"></li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="{$url}mod"><i class="fa-solid fa-shield"></i> Mod Panel</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="{$url}ucp"><i class="fa-solid fa-user-circle"></i> UCP</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="javascript:void(0)" data-lock-screen="true" onClick="Custom.destroySession()"><i class="fa-solid fa-lock"></i> Lock Screen</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="{$url}logout"><i class="fa-solid fa-power-off"></i> Logout</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- end: user box -->
-			<!-- end: header -->
-		</header>
-	<div class="inner-wrapper">
-		
-		<div class="modal fade" id="modalui" tabindex="-1" role="dialog" aria-labelledby="modaluititle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="modaluititle">Modal title</h5>
-					</div>
-					<div class="modal-body" id="modaluibody"> Modal body </div>
-					<div class="modal-footer" id="modaluifooter"> Modalfooter </div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Modal -->
-		<div class="modal fade" id="confirm">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h5 class="modal-title" id="modaluititle">Question...</h5>
-					</div>
-					<div class="modal-body" id="modaluibody">
-						<h5 class="popup_question" id="confirm_question"></h5>
-					</div>
-					<!-- Modal footer -->
-					<div class="modal-footer" id="popup_links">
-						<button type="button" a href="javascript:void(0)" class="btn btn-primary" id="confirm_button"></a></button>
-						<button type="button" a href="javascript:void(0)" class="btn btn-secondary" id="confirm_hide" onClick="UI.hidePopup()">Cancel</a></button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="alert">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h5 class="modal-title" id="modaluititle">Warning</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="UI.hidePopup()"> <span aria-hidden="true">&times;</span> </button>
-					</div>
-					<div class="modal-body" id="modaluibody">
-						<h5 class="popup_message" id="alert_message"></h5>
-					</div>
-					<!-- Modal footer -->
-					<div class="modal-footer" id="popup_links">
-						<button type="button" a href="javascript:void(0)" class="btn btn-primary" id="alert_button">Okay</a></button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- ./modal -->
-		<!-- Main Sidebar Container -->
-		<aside id="sidebar-left" class="sidebar-left">
-
-			<div class="sidebar-header">
-			    <div class="sidebar-title">
-			        Navigation
-			    </div>
-			    <div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
-			        <i class="fa-solid fa-bars" aria-label="Toggle sidebar"></i>
-			    </div>
-			</div>
-
-			<div class="nano">
-			    <div class="nano-content">
-			        <nav id="menu" class="nav-main" role="navigation">
-			            <ul class="nav nav-main">
-						<li {if $current_page == "admin/"}class="nav-active" style="background-color: #225890;"{/if}>
-							<a class="nav-link {if $current_page == "admin/"}nav-active{/if}" href="{$url}admin"> <i class="fa-solid fa-home"></i> <span>Dashboard</span> </a>
-						</li>
-						{if hasPermission("editSystemSettings", "admin")}
-						<li {if $current_page == "admin/settings"}class="nav-active" style="background-color: #225890;"{/if}>
-							<a class="nav-link {if $current_page == "admin/settings"}nav-active{/if}" href="{$url}admin/settings"> <i class="fa-solid fa-cog"></i> <span>Settings</span> </a>
+						{if hasPermission("toggleModules", "admin")}
+						<li>
+							<a href="{$url}admin/modules" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
+								<i class="fa-solid fa-sitemap {if $current_page == "admin/modules"}text-primary-500{/if}"></i>
+								<span class="whitespace-nowrap font-sans text-sm block {if $current_page == "admin/modules"}text-primary-500{/if}">Modules</span>
+							</a>
 						</li>
 						{/if}
 						{if hasPermission("viewBackups", "admin")}
-						<li {if $current_page == "admin/backups"}class="nav-active" style="background-color: #225890;"{/if}>
-							<a class="nav-link {if $current_page == "admin/backups"}nav-active{/if}" href="{$url}admin/backups"> <i class="fa-solid fa-hard-drive"></i> <span>Backups</span> </a>
-						</li>
-						{/if}
-
-						{if hasPermission("toggleModules", "admin")}
-							<li {if $current_page == "admin/modules"}class="nav-active" style="background-color: #225890;"{/if}>
-								<a class="nav-link {if $current_page == "admin/modules"}nav-active{/if}" href="{$url}admin/modules"> <i class="fa-solid fa-sitemap"></i> <span>Modules</span> </a>
-							</li>
-						{/if}
-
-						{foreach from=$menu item=group key=text}
-						{if count($group.links)}
-						<li onclick="AdminMenu.openSection({$group.nr})" nr="{$group.nr}" class="nav-parent {if isset($group.active)}nav-expanded{/if} admin_section_icon" {if isset($group.active)}style="background-color: #225890;"{/if}>
-							<a href="#" class="nav-link">
-							<i class="fa-solid fa-{$group.icon}" aria-hidden="true"></i>
-							<span>{$text}</span>
+						<li>
+							<a href="{$url}admin/backups" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
+								<i class="fa-solid fa-hard-drive {if $current_page == "admin/backups"}text-primary-500{/if}"></i>
+								<span class="whitespace-nowrap font-sans text-sm block {if $current_page == "admin/backups"}text-primary-500{/if}">Backups</span>
 							</a>
-						
-						<ul class="nav nav-children admin_section" nr="{$group.nr}" style="display:{if isset($group.active)}block{/if};">
-							{foreach from=$group.links item=link}
-								<li {if isset($link.active)}class="nav-active"{/if}>
-									<a class="nav-link {if isset($link.active)}nav-active{/if}" href="{$url}{$link.module}/{$link.controller}"> <i class="fa-solid fa-{$link.icon}"></i> <span>{$link.text}</span> </a>
-								</li>
-							{/foreach}
-						</ul>
-						{/if}
-						{/foreach}
 						</li>
-						</ul>
-					</nav>
-				</div>
-				
-				<script>
-					if (typeof localStorage !== 'undefined') {
-						if (localStorage.getItem('sidebar-left-position') !== null) {
-							var initialPosition = localStorage.getItem('sidebar-left-position'),
-								sidebarLeft = document.querySelector('#sidebar-left .nano-content');
-				
-							sidebarLeft.scrollTop = initialPosition;
-						}
-					}
-				</script>
-				
-				<div class="nano-pane" style="opacity: 1; visibility: visible;"><div class="nano-slider" style="height: 412px; transform: translate(0px, 0px);"></div></div>
-			</div>
-		</aside>
-		<section role="main" class="content-body">
-			<header class="page-header">
-				<h2>{$headline}</h2>
-			</header>
-			{$page}
-		</section>
-	</div>
-	</section>
-	<footer id="footer">
-		<div class="footer-copyright">
-			<div class="content-body pt-0 pb-3">
-				<div class="row align-items-center">
-					<div class="col-lg-1">
-						<a href="#" onclick="WhatHappenedHere(this)" class="logo">
-							<img alt="FusionGen" class="img-fluid" src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusionico.png">
-						</a>
-					</div>
-					<div class="col-lg-7">
-						<p>© Copyright {date("Y")}. All Rights Reserved.</p>
-					</div>
-					<div class="col-lg-4">
-						<nav id="sub-menu">
-							<ul>
-								<li><i class="fa-solid fa-wifi"></i><a href="https://status.fusiongen.net"> CDN Status</a></li>
-								<li><i class="fa-brands fa-discord"></i><a href="https://discord.gg/5nSt9puU4V"> Discord</a></li>
-								<li><i class="fa-solid fa-book"></i><a href="https://docs.fusiongen.net/"> Docs</a></li>
-								<li><i class="fa-brands fa-github"></i><a href="https://github.com/FusionGen/FusionGEN"> Github</a></li>
-								<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Us', '#29abe0', 'M4M0BFX1Y');kofiwidget2.draw();</script> 
-							</ul>
-						</nav>
-					</div>
+						{/if}
+						{if hasPermission("editSystemSettings", "admin")}
+						<li>
+							<a href="{$url}admin/settings" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
+								<i class="fa-solid fa-cog {if $current_page == "admin/settings"}text-primary-500{/if}"></i>
+								<span class="whitespace-nowrap font-sans text-sm block {if $current_page == "admin/settings"}text-primary-500{/if}">Settings</span>
+							</a>
+						</li>
+						{/if}
+					</ul>
 				</div>
 			</div>
-		</div>
-	</footer>
-	<script>
-		function WhatHappenedHere(btn) {
-			Swal.fire({
-				width: 0,
-				padding: '0',
-				color: '#716add',
-				showCancelButton: false,
-				showConfirmButton: false,
-				backdrop: `
-					rgba(0,0,123,0.4)
-					url("https://sweetalert2.github.io/images/nyan-cat.gif")
-					center
-					no-repeat
-					`
-			})
-		};
-	</script>
+
+            <div class="bg-muted-100 dark:bg-muted-900 relative min-h-screen w-full overflow-x-hidden px-4 transition-all duration-300 xl:px-10 xl:max-w-[calc(100%_-_300px)] xl:ms-[300px]">
+                <div class="mx-auto w-full max-w-7xl">
+                    <div class="relative z-50 mb-5 flex h-16 items-center gap-2">
+                        <button type="button" class="flex h-10 w-10 items-center justify-center -ms-3">
+                            <div class="scale-90 relative h-5 w-5"><span class="-rotate-45 rtl:rotate-45 max-w-[75%] top-1 bg-primary-500 absolute block h-0.5 w-full transition-all duration-300"></span><span class="opacity-0 translate-x-4 bg-primary-500 absolute top-1/2 block h-0.5 w-full max-w-[50%] transition-all duration-300"></span><span class="rotate-45 rtl:-rotate-45 max-w-[75%] bottom-1 bg-primary-500 absolute block h-0.5 w-full transition-all duration-300"></span></div>
+                        </button>
+                        <h1 class="font-heading text-2xl font-light leading-normal leading-normal text-muted-800 dark:text-white md:block">
+                            {$headline}
+                        </h1>
+                        <div class="ms-auto"></div>
+                        <div class="flex items-center gap-2 h-16">
+                            <label class="nui-focus relative block h-9 w-9 shrink-0 overflow-hidden rounded-full transition-all duration-300 focus-visible:outline-2 dark:ring-offset-muted-900">
+                                <input type="checkbox" class="absolute start-0 top-0 z-[2] h-full w-full cursor-pointer opacity-0">
+                                <span class="bg-white dark:bg-muted-800  border border-muted-300 dark:border-muted-700 relative block h-9 w-9 rounded-full">
+                                    <svg aria-hidden="true" viewbox="0 0 24 24" class="pointer-events-none absolute start-1/2 top-1/2 block h-5 w-5 text-yellow-400 transition-all duration-300 -translate-y-1/2 translate-x-[-50%] opacity-100 rtl:translate-x-[50%]">
+                                        <g fill="currentColor" stroke="currentColor" class="stroke-2">
+                                            <circle cx="12" cy="12" r="5"></circle>
+                                            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                                        </g>
+                                    </svg>
+                                    <svg aria-hidden="true" viewbox="0 0 24 24" class="pointer-events-none absolute start-1/2 top-1/2 block h-5 w-5 text-yellow-400 transition-all duration-300 translate-x-[-45%] translate-y-[-150%] opacity-0 rtl:translate-x-[45%]">
+                                        <path fill="currentColor" stroke="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="stroke-2"></path>
+                                    </svg>
+                                </span>
+                            </label>
+                            <button type="button" class="border-muted-200 hover:ring-muted-200 dark:hover:ring-muted-700 dark:border-muted-700 dark:bg-muted-800 dark:ring-offset-muted-900 flex h-9 w-9 items-center justify-center rounded-full border bg-white ring-1 ring-transparent transition-all duration-300 hover:ring-offset-4"><img class="h-7 w-7 rounded-full" src="../img/icons/flags/united-states-of-america.svg" alt="flag icon"></button>
+                            <div class="group inline-flex items-center justify-center text-right">
+                                <div data-headlessui-state class="relative h-9 w-9 text-left">
+                                    <div id="headlessui-menu-button-35" aria-haspopup="menu" aria-expanded="false" data-headlessui-state>
+                                        <button type="button" class="group-hover:ring-muted-200 dark:group-hover:ring-muted-700 dark:ring-offset-muted-900 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-transparent transition-all duration-300 group-hover:ring-offset-4" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                            <span class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 flex h-9 w-9 items-center justify-center rounded-full border bg-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
+                                                    <g fill="currentColor">
+                                                        <path d="M208 192H48a8 8 0 0 1-6.88-12C47.71 168.6 56 139.81 56 104a72 72 0 0 1 144 0c0 35.82 8.3 64.6 14.9 76a8 8 0 0 1-6.9 12Z" opacity=".2"/>
+                                                        <path d="M221.8 175.94c-5.55-9.56-13.8-36.61-13.8-71.94a80 80 0 1 0-160 0c0 35.34-8.26 62.38-13.81 71.94A16 16 0 0 0 48 200h40.81a40 40 0 0 0 78.38 0H208a16 16 0 0 0 13.8-24.06ZM128 216a24 24 0 0 1-22.62-16h45.24A24 24 0 0 1 128 216Zm-80-32c7.7-13.24 16-43.92 16-80a64 64 0 1 1 128 0c0 36.05 8.28 66.73 16 80Z"/>
+                                                    </g>
+                                                </svg>
+                                            </span>
+											<div id="notifications" class="hidden absolute -end-0.5 top-0.5"><span class="relative flex h-2 w-2"><span class="bg-primary-400 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span><span class="bg-primary-500 relative inline-flex h-2 w-2 rounded-full"></span></span></div>
+                                        </button>
+                                    </div>
+									<div aria-labelledby="headlessui-menu-button-3" id="headlessui-menu-items-4" role="menu" tabindex="0" data-headlessui-state="open" class="dropdown-menu divide-muted-100 border-muted-200 dark:divide-muted-700 dark:border-muted-700 dark:bg-muted-800 absolute end-0 mt-2 w-72 origin-top-right divide-y rounded-md border bg-white shadow-lg focus:outline-none">
+										<div class="p-4" role="none">
+											<div class="relative flex items-center justify-between" role="none">
+												<h4 class="font-heading text-muted-500 dark:text-muted-200 text-xs uppercase" role="none"> Notifications </h4>
+												<a aria-current="page" href="javascript:void(0)" onClick="Notify.markAllRead()" class="router-link-active router-link-exact-active font-alt text-primary-500 text-sm font-semibold" role="none"> Mark all read </a>
+											</div>
+										</div>
+										<div id="content"></div>
+									</div>
+                                </div>
+                            </div>
+                            <button type="button" class="border-muted-200 hover:ring-muted-200 dark:hover:ring-muted-700 dark:border-muted-700 dark:bg-muted-800 dark:ring-offset-muted-900 flex h-9 w-9 items-center justify-center rounded-full border bg-white ring-1 ring-transparent transition-all duration-300 hover:ring-offset-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
+                                    <g fill="currentColor">
+                                        <path d="M112 80a32 32 0 1 1-32-32a32 32 0 0 1 32 32Zm64 32a32 32 0 1 0-32-32a32 32 0 0 0 32 32Zm-96 32a32 32 0 1 0 32 32a32 32 0 0 0-32-32Zm96 0a32 32 0 1 0 32 32a32 32 0 0 0-32-32Z" opacity=".2"/>
+                                        <path d="M80 40a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm96 16a40 40 0 1 0-40-40a40 40 0 0 0 40 40Zm0-64a24 24 0 1 1-24 24a24 24 0 0 1 24-24Zm-96 80a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm96-64a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Z"/>
+                                    </g>
+                                </svg>
+                            </button>
+                            <div class="group inline-flex items-center justify-center text-right">
+                                <div data-headlessui-state class="relative h-9 w-9 text-left">
+                                    <button class="group-hover:ring-primary-500 dark:ring-offset-muted-900 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-transparent transition-all duration-300 group-hover:ring-offset-4" id="headlessui-menu-button-37" aria-haspopup="menu" aria-expanded="false">
+                                        <div class="relative inline-flex h-9 w-9 items-center justify-center rounded-full"><img src="{$avatar}" class="max-w-full rounded-full object-cover shadow-sm dark:border-transparent" alt></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <main>
+				        {$page}
+                    </main>
+                </div>
+            </div>
+            <div>
+                
+                <div class="opacity-0 pointer-events-none bg-muted-800/60 fixed start-0 top-0 z-[99] h-full w-full cursor-pointer transition-opacity duration-300"></div>
+            </div>
+            <div class="after:bg-primary-600 after:shadow-primary-500/50 dark:after:shadow-muted-800/10 fixed end-[1em] top-[0.6em] z-[90] transition-transform duration-300 after:absolute after:end-0 after:top-0 after:block after:h-12 after:w-12 after:rounded-full after:shadow-lg after:transition-transform after:duration-300 after:content-[&#39;&#39;] -translate-y-24">
+                <button type="button" class="bg-primary-500 shadow-primary-500/50 dark:shadow-muted-800/10 relative z-30 flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg"><span class="-top-0.5 relative block h-3 w-3 transition-all duration-300"><span class="top-0.5 bg-muted-50 absolute block h-0.5 w-full transition-all duration-300"></span><span class="bg-muted-50 absolute top-1/2 block h-0.5 w-full transition-all duration-300"></span><span class="bottom-0 bg-muted-50 absolute block h-0.5 w-full transition-all duration-300"></span></span></button>
+                <div>
+                    
+                    <div class="translate-x-0 translate-y-0 absolute end-[0.2em] top-[0.2em] z-20 flex items-center justify-center transition-all duration-300">
+                        <label class="nui-focus relative block h-9 w-9 shrink-0 overflow-hidden rounded-full transition-all duration-300 focus-visible:outline-2 ring-offset-muted-500 dark:ring-offset-muted-400 ms-auto">
+                            <input type="checkbox" class="absolute start-0 top-0 z-[2] h-full w-full cursor-pointer opacity-0">
+                            <span class="bg-primary-700 relative block h-9 w-9 rounded-full">
+                                <svg aria-hidden="true" viewbox="0 0 24 24" class="pointer-events-none absolute start-1/2 top-1/2 block h-5 w-5 text-yellow-400 transition-all duration-300 -translate-y-1/2 translate-x-[-50%] opacity-100 rtl:translate-x-[50%]">
+                                    <g fill="currentColor" stroke="currentColor" class="stroke-2">
+                                        <circle cx="12" cy="12" r="5"></circle>
+                                        <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                                    </g>
+                                </svg>
+                                <svg aria-hidden="true" viewbox="0 0 24 24" class="pointer-events-none absolute start-1/2 top-1/2 block h-5 w-5 text-yellow-400 transition-all duration-300 translate-x-[-45%] translate-y-[-150%] opacity-0 rtl:translate-x-[45%]">
+                                    <path fill="currentColor" stroke="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="stroke-2"></path>
+                                </svg>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div class="translate-x-0 translate-y-0 absolute end-[0.2em] top-[0.2em] z-20 flex items-center justify-center transition-all duration-300"><button type="button" class="bg-primary-700 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300"><img class="h-7 w-7 rounded-full" src="../img/icons/flags/united-states-of-america.svg" alt="flag icon"></button></div>
+                    
+                    <div class="translate-x-0 translate-y-0 absolute end-[0.2em] top-[0.2em] z-20 flex items-center justify-center transition-all duration-300">
+                        <a aria-current="page" href="analytics.html#" class="router-link-active router-link-exact-active inline-flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300">
+                            <span class="bg-primary-700 flex h-9 w-9 items-center justify-center rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5 text-white" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
+                                    <g fill="currentColor">
+                                        <path d="M208 192H48a8 8 0 0 1-6.88-12C47.71 168.6 56 139.81 56 104a72 72 0 0 1 144 0c0 35.82 8.3 64.6 14.9 76a8 8 0 0 1-6.9 12Z" opacity=".2"/>
+                                        <path d="M221.8 175.94c-5.55-9.56-13.8-36.61-13.8-71.94a80 80 0 1 0-160 0c0 35.34-8.26 62.38-13.81 71.94A16 16 0 0 0 48 200h40.81a40 40 0 0 0 78.38 0H208a16 16 0 0 0 13.8-24.06ZM128 216a24 24 0 0 1-22.62-16h45.24A24 24 0 0 1 128 216Zm-80-32c7.7-13.24 16-43.92 16-80a64 64 0 1 1 128 0c0 36.05 8.28 66.73 16 80Z"/>
+                                    </g>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                    
+                    <div class="translate-x-0 translate-y-0 absolute end-[0.2em] top-[0.2em] z-20 flex items-center justify-center transition-all duration-300">
+                        <button type="button" class="bg-primary-700 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5 text-white" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
+                                <g fill="currentColor">
+                                    <path d="M112 80a32 32 0 1 1-32-32a32 32 0 0 1 32 32Zm64 32a32 32 0 1 0-32-32a32 32 0 0 0 32 32Zm-96 32a32 32 0 1 0 32 32a32 32 0 0 0-32-32Zm96 0a32 32 0 1 0 32 32a32 32 0 0 0-32-32Z" opacity=".2"/>
+                                    <path d="M80 40a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm96 16a40 40 0 1 0-40-40a40 40 0 0 0 40 40Zm0-64a24 24 0 1 1-24 24a24 24 0 0 1 24-24Zm-96 80a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm96-64a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Z"/>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 	<script type="text/javascript">
 	var Notify = {
 		notifyField: $("#content"),
-		countField: $("#count"),
-		count2Field: $("#count2"),
+		countField: $("#notifications"),
 	
 		update: function()
 		{
@@ -438,11 +385,14 @@
 			{
 				Notify.notifyField.html(data);
 			});
-			
+
 			$.get(Config.URL + "admin/notifications/count", function(data)
 			{
-				Notify.countField.html(data);
-				Notify.count2Field.html(data);
+				if (data > 0)
+					Notify.countField.removeClass("hidden");
+				else
+					Notify.countField.addClass("hidden");
+
 			});
 		},
 		
@@ -450,9 +400,8 @@
 		{
 			element = $(element);
 			$.get(Config.URL + "admin/markReadNotification/" + id)
-			element.removeClass("fw-bold");
-			$("#count").html(parseInt($("#count").html()) - 1);
-			$("#count2").html(parseInt($("#count2").html()) - 1);
+			element.removeClass("font-semibold");
+			Notify.countField.addClass("hidden");
 		},
 		
 		markAllRead: function()
@@ -464,5 +413,5 @@
 	Notify.update();
 	setInterval(Notify.update, 10000);
 	</script>
-	</body>
+    </body>
 </html>
