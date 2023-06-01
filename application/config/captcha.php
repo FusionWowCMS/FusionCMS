@@ -12,7 +12,7 @@ $config['use_captcha'] = true;
  * What type of captcha?
  *
  * 'recaptcha' = Google Recaptcha v2 | NOT WORKING ATM
- * 'inbuilt'   = FusionGen inbuilt captcha system
+ * 'inbuilt'   = inbuilt captcha system
  *
  */
 $config["captcha_type"] = 'inbuilt';

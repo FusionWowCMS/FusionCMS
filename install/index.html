@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Installation - FusionCMS</title>
+
+        <meta charset="utf-8">
+
+		<link rel="shortcut icon" href="images/favicon.png" />
+		<link rel="stylesheet" href="css/main.css" />
+
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+		<script src="js/ui.js"></script>
+		<script src="js/ajax.js"></script>
+		<script src="js/memory.js"></script>
+		<script>
+			$(document).ready(function()
+			{
+				UI.initialize();
+				Ajax.initialize();
+				Memory.populate();
+			})
+		</script>
+
+		<!--[if IE]>
+			<style type="text/css">
+			#main .right h2 img {
+				position:relative;
+			}
+			</style>
+		<![endif]-->
+
+		<!--[if LTE IE 7]>
+			<style type="text/css">
+			#main .right .statistics span {
+				width:320px;
+			}
+			</style>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div id="popup_bg"></div>
+
+		<!-- confirm box -->
+		<div id="confirm" class="popup">
+			<h1 class="popup_question" id="confirm_question"></h1>
+
+			<div class="popup_links">
+				<a href="javascript:void(0)" class="popup_button" id="confirm_button"></a>
+				<a href="javascript:void(0)" class="popup_hide" id="confirm_hide" onClick="UI.hidePopup()">
+					Cancel
+				</a>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+
+		<!-- alert box -->
+		<div id="alert" class="popup">
+			<h1 class="popup_message" id="alert_message"></h1>
+
+			<div class="popup_links">
+				<a href="javascript:void(0)" class="popup_button" id="alert_button">Okay</a>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+
+		<div id="wrap">
+			<div id="fixer">
+				<!-- Top bar -->
+				<header>
+					<div class="center_1020">
+						<a href="https://github.com/FusionWowCMS/FusionCMS" class="logo"></a>
+					</div>
+				</header>
+
+				<!-- Main content -->
+				<section id="wrapper">
+					<div id="top_spacer"></div>
+					<div class="center_1020" id="main">
+
+						<!-- Main Left column -->
+						<aside class="left">
+							<nav>
+								<a class="active"><div class="icon dashboard"></div> Install</a>
+								<section class="sub">
+									<a class="active" id="1"><div class="icon file"></div> Introduction</a>
+									<a id="2"><div class="icon link"></div> Requirements</a>
+									<a id="3"><div class="icon list"></div> General</a>
+									<a id="4"><div class="icon database"></div> Database</a>
+									<a id="5"><div class="icon database"></div> Realms</a>
+									<a id="6"><div class="icon cursor"></div> Complete installation</a>
+								</section>
+							</nav>
+
+							<div class="spacer"></div>
+						</aside>
+
+						<!-- Main right column -->
+						<aside class="right">
+							<h1 id="page_title">Install</h1>
+
+							<section class="box big step">
+								<h2><img src="images/icons/black16x16/ic_empty_document.png"/> Introduction</h2>
+								<span>
+									<div class="introduction">
+										<h3>Welcome to FusionCMS</h3>
+									
+										<b>Dear customer</b>, We are happy to introduce you to the next chapter of our very own FusionCMS. Years have passed since the initial release and the system has grown better and stronger for every version. The core of this beast is powered by clean, object oriented PHP code, kept in shape by the incredibly powerful CodeIgniter framework. On the front we also make sure to amaze your visitors with more Javascript-powered live interactions than ever before.
+									</div>
+								</span>
+
+								<div class="installer_navigation">
+									<a class="next nice_button">Start the installer</a>
+								</div>
+							</section>
+
+							<section class="box big step" data-validation="requirements" style="display:none;">
+								<h2><img src="images/icons/black16x16/ic_empty_document.png"/> Server requirements <span style="color:red;display:inline;padding:0px;">(important!)</span></h2>
+
+								<span>
+
+									<div class="introduction">
+										<h3>What do I need to run this system?</h3>
+									    
+                                        <div class="folder-permissions">
+                                            <h4>Folder Permissions</h4>
+    										<div style="font-weight:bold;margin:10px 0px;" id="config_folder">&bull; /application/config/ needs to be writable (see <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)</div>
+
+    										<div style="font-weight:bold;margin:10px 0px;" id="modules_folder">&bull; /application/modules/ is writable</div>
+
+    										<div style="font-weight:bold;margin:10px 0px;" id="cache_folder">&bull; /application/cache/</div>
+                                        </div>
+										
+										<div class="php-version">
+											<h4>PHP Version</h4>
+											Minimum required PHP version: 8.0 <span class="check-result"></span>
+										</div>
+                                        
+                                        <div class="php-extensions">
+                                            <h4>PHP Extensions</h4>
+                                            
+                                            <b>The following PHP extensions are required:</b><br>
+    										php_mysqli, php_curl, php_openssl, php_soap, php_gd, php_mbstring, php_json, php_mcrypt, php_xml, php_zip
+
+											<span class="check-result" style="display:none"></span>
+                                            <div id="php-extensions-missing" style="display:none;color:red;margin-top:15px">
+                                                <b>The following modules are missing:</b>
+                                                <span class="extensions"></span>
+                                            </div>
+                                            
+    										<div class="how_to_box">
+                                                <div class="title">How do I enable PHP extensions?</div>
+                                                <div class="content">
+        											Go into your PHP directory and find the <code>php.ini</code> file. Mine was located in <code>C:\xampp\php\</code>. Open the file with a text editor and search (CTRL+F) for one of the modules you need to enable. To enable them, simply remove the <code>;</code> character in front of the line.<br />Save the file and restart your webserver to apply the changes.<br /><br />
+
+        											<img src="images/php.jpg" style="border:1px solid #ccc" />
+                                                </div>
+    										</div>
+                                        </div>
+                                        
+                                        <div class="apache-modules">
+                                            <h4>Apache Modules</h4>
+                                            
+    										<b>We recommend FusionCMS in combination with an Apache Webserver.<br><br>
+                                            The Apache modules you'll need are:</b> <br>
+                                            mod_rewrite, mod_headers, mod_expires, mod_deflate
+
+											<span class="check-result" style="display:none"></span>
+                                            <div id="apache-modules-missing" style="display:none;color:#e18f00;margin-top:15px">
+                                                <b>The following modules are missing:</b>
+                                                <span class="modules"></span>
+                                            </div>
+    										
+                                            <div class="how_to_box">
+                                                <div class="title">How do I enable Apache modules?</div>
+                                                <div class="content">
+        											Go into your Apache directory and find the <code>httpd.conf</code> file. Mine was located in <code>C:\xampp\apache\conf\</code>. Open the file with a text editor and search <code>CTRL+F</code> for one of the modules you need to enable. To enable them, simply remove the <code>#</code> character in front of the line.<br />Save the file and restart your webserver to apply the changes.<br /><br />
+        											<img src="images/apache.jpg" style="border:1px solid #ccc" />
+                                                </div>
+    										</div>
+                                        </div>
+									</div>
+								</span>
+
+								<div class="installer_navigation">
+									<a class="prev nice_button">Previous step</a>
+									<a class="next nice_button">Next step</a>
+								</div>
+							</section>
+
+							<section class="box big step" style="display:none;">
+								<h2><img src="images/icons/black16x16/ic_list.png"/> General settings</h2>
+
+								<span>
+										All options can be modified later.
+								</span>
+
+								<form id="form-general-settings">
+									<label for="title">Website title</label>
+									<input type="text" id="title" placeholder="MyServer" required />
+
+									<label for="server_name">Server name</label>
+									<input type="text" id="server_name" placeholder="MyServer" required />
+
+									<label for="realmlist">Realmlist</label>
+									<input type="text" id="realmlist" placeholder="logon.myserver.com" required />
+
+									<label for="security_code">Admin panel extra security password</label>
+									<input type="password" id="security_code" />
+
+									<label for="max_expansion">Max expansion</label>
+									<select id="max_expansion" required>
+										<option value="9">Dragonflight</option>
+										<option value="8">Shadowlands</option>
+										<option value="7">Battle for Azeroth</option>
+										<option value="6">Legion</option>
+										<option value="5">Warlords of Draenor</option>
+										<option value="4">Mists Of Pandaria</option>
+										<option value="3">Cataclysm</option>
+										<option value="2">Wrath of the Lich King</option>
+										<option value="1">The Burning Crusade</option>
+										<option value="0">No expansion allowed</option>
+									</select>
+
+									<label for="keywords">Search engine: keywords (separated by comma)</label>
+									<input type="text" id="keywords" placeholder="world of warcraft,wow,private server,pvp" />
+
+									<label for="description">Search engine: description</label>
+									<input type="text" id="description" placeholder="Best World of Warcraft private server in the entire world!" />
+
+									<label for="analytics"><a href="http://analytics.google.com" target="_blank">Google Analytics</a> website ID for advanced statistics (optional)</label>
+									<input type="text" id="analytics" placeholder="XX-YYYYYYYY-Z" />
+
+									<label for="captcha">Enable <a href="http://www.google.com/recaptcha/admin" target="_blank">Google Captcha</a> (optional)</label>
+									<select id="captcha" onChange="if(this.value == '1'){ $('#captcha_keys').fadeIn(150); } else { $('#captcha_keys').fadeOut(150); }">
+										<option value="1">Yes</option>
+										<option value="0" selected>No</option>
+									</select>
+
+									<div id="captcha_keys" style="display:none">
+										<label for="site_key" data-tip="Use this in the HTML code your site serves to users.">Site key (?)</label>
+										<input type="text" id="site_key" />
+
+										<label for="secret_key" data-tip="Use this for communication between your site and Google. Be sure to keep it a secret.">Secret key (?)</label>
+										<input type="text" id="secret_key" />
+									</div>
+
+									<label for="cdn">Use content delivery network for Javascript libraries (do only disable it for LAN-only environments)</label>
+									<select id="cdn">
+										<option value="1">Yes</option>
+										<option value="0">No</option>
+									</select>
+								</form>
+
+								<div class="installer_navigation">
+									<a class="prev nice_button">Previous step</a>
+									<a class="next nice_button">Next step</a>
+								</div>
+							</section>
+
+							<section class="box big step" data-validation="database" style="display:none;">
+								<h2><img src="images/icons/black16x16/ic_grid.png"/> Database settings</h2>
+
+								<form>
+									<h3>Website Database</h3>
+									
+									<label for="cms_hostname">Hostname</label>
+									<input type="text" id="cms_hostname" />
+									
+									<label for="cms_username">Username</label>
+									<input type="text" id="cms_username" />
+
+									<label for="cms_password">Password</label>
+									<input type="password" id="cms_password" />
+
+									<label for="cms_database">Database name</label>
+									<input type="text" id="cms_database" />
+
+									<label for="cms_port">Port</label>
+									<input type="text" id="cms_port" placeholder="3306" />
+
+									<br />
+									<h3>Realmd/Logon/Auth Database</h3>
+									
+									<label for="realmd_hostname">Hostname</label>
+									<input type="text" id="realmd_hostname" />
+									
+									<label for="realmd_username">Username</label>
+									<input type="text" id="realmd_username" />
+
+									<label for="realmd_password">Password</label>
+									<input type="password" id="realmd_password" />
+
+									<label for="realmd_database">Database name</label>
+									<input type="text" id="realmd_database" />
+
+									<label for="realmd_port">Port</label>
+									<input type="text" id="realmd_port" placeholder="3306" />
+								</form>
+								
+								<div class="installer_navigation">
+									<a class="prev nice_button">Previous step</a>
+									<a class="next nice_button">Next step</a>
+								</div>
+							</section>
+
+							<section class="box big step" data-validation="realms" style="display:none;">
+								<h2><img src="images/icons/black16x16/ic_cloud.png"/> Realms</h2>
+
+								<span>If you want to add multiple realms, add all your realms first and then configure them. You can also add only one realm and you can configure other realms via the admin panel afterwards.</span>
+
+								<div class="realmAdd">
+									<a onClick="Ajax.Realms.addRealm();" class="nice_button">Add Realm</a>
+								</div>
+
+								<div id="realm_field"></div>
+								
+								<div id="loader" style="display:none;">
+									<form>
+										<label for="emulator">Emulator</label>
+										<select id="emulator">
+											<option disabled="disabled">Loading...</option>
+										</select>
+										
+										<label for="realmName">Realm name</label>
+										<input type="text" id="realmName" />
+
+										<label for="realmName">Hostname</label>
+										<input type="text" id="hostname" />
+
+										<label for="username">Database username</label>
+										<input type="text" id="username" />
+
+										<label for="password">Database password</label>
+										<input type="password" id="password" />
+
+										<label for="db_port">Database port</label>
+										<input type="text" id="db_port" placeholder="3306" />
+
+										<label for="characters">Characters database</label>
+										<input type="text" id="characters"/>
+
+										<label for="world">World database</label>
+										<input type="text" id="world" />
+
+										<label for="cap">Max allowed players online</label>
+										<input type="text" id="cap" />
+
+										<label for="port">Realm port (usually 8085 for Trinity/SkyFire/MaNGoS)</label>
+										<input type="text" id="port" />
+
+										<label for="console_port">Console port (only required for emulators that use remote console systems; usually 3443 for RA and 7878 for SOAP)</label>
+										<input type="text" id="console_port" />
+
+										<label for="console_username" data-tip="For an ingame account with GM level high enough to connect to your<br />emulator console remotely (see your emulator's config files for more details)">Console username (only required for emulators that use remote console systems) (?)</label>
+										<input type="text" id="console_username" />
+
+										<label for="console_password" data-tip="For an ingame account with GM level high enough to connect to your<br />emulator console remotely (see your emulator's config files for more details)">Console password (only required for emulators that use remote console systems) (?)</label>
+										<input type="password" id="console_password" />
+									</form>
+								</div>
+
+								<div style="border-top:1px solid #ccc;margin-bottom:5px;"></div>
+								
+								<div class="installer_navigation">
+									<a class="prev nice_button">Previous step</a>
+									<a class="next nice_button">Finish</a>
+								</div>
+							</section>
+
+							<section class="box big step" style="display:none;">
+								<h2><img src="images/icons/black16x16/ic_time.png"/> Installing...</h2>
+								<span id="install" style="padding: 10px 15px">
+
+								</span>
+							</section>
+						</aside>
+
+						<div class="clear"></div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer>
+			<div class="center_1020">
+				<div class="divider2"></div>
+				<aside id="logo"><a href="https://github.com/FusionWowCMS/FusionCMS" class="logo"></a></aside>
+				<div class="divider"></div>
+				<aside id="links">
+					<a href="https://github.com/FusionWowCMS/FusionCMS" target="_blank">Github</a>
+					<a href="https://github.com/FusionWowCMS/Modules" target="_blank">Modules</a>
+					<a href="https://github.com/FusionWowCMS/Themes" target="_blank">Themes</a>
+					<a href="https://github.com/FusionWowCMS/Themes/issues" target="_blank">Support</a>
+				</aside>
+				<div class="divider"></div>
+				<aside id="facebook">
+					<h1>Fusion on Telegram!</h1>
+					<div id="fb_icon"></div>
+					<a href="https://t.me/FusionCMS" target="_blank">FusionCMS</a>
+				</aside>
+				<div class="divider"></div>
+				<aside id="html5">
+					<a href="http://www.w3.org/html/logo/" data-tip="This website makes use of the next generation of web technologies">
+						<img src="images/html5.png">
+					</a>
+				</aside>
+				<div class="divider"></div>
+				<div class="clear"></div>
+			</div>
+		</footer>
+	</body>
+</html>

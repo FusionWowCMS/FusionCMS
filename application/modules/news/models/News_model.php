@@ -36,8 +36,8 @@ class News_model extends CI_Model
             return array(
                         array(
                             'id'                             => 0,
-                            'headline_' . $default_lang . '' => 'Welcome to FusionGEN V2!',
-                            'content_' . $default_lang . ''  => 'Welcome to your new website! This news article will disappear as soon as you add a new one.',
+                            'headline_' . $default_lang . '' => 'Welcome to your new FusionCMS powered website!',
+                            'content_' . $default_lang . ''  => 'Your website has been successfully installed and we, the FusionCMS team, sincerely hope that you will have a nice time using it.<div><br></div><div>To proceed, log into the administrator panel using an administrator account and the security code you specified during the installation.</div><div><br></div><br><div>Best regards,</div><div>the FusionCMS team</div>',
                             'author_id'                      => 0,
                             'timestamp'                      => time(),
                             'type'                           => 0,
