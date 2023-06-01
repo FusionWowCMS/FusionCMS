@@ -35,7 +35,7 @@ var Ajax = {
 
 		addRealm: function(form)
 		{
-			UI.confirm('<input type="text" id="realmname_preserve" placeholder="Enter the realmname" autofocus/>', 'Add', function()
+			UI.confirm('<input id="realmname_preserve" class="nui-focus border-muted-300 text-white placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-4 rounded" placeholder="Enter the realm name" autofocus />', 'Add', function()
 			{
 				var name = $("#realmname_preserve").val();
 				

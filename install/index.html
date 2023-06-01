@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Installation - FusionCMS</title>
-
         <meta charset="utf-8">
+		<title>Installation - FusionCMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="shortcut icon" href="images/favicon.png" />
+		<link rel="stylesheet" href="css/main2.css" />
 		<link rel="stylesheet" href="css/main.css" />
 
-		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/Kraken/3.8.2/js/html5.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
@@ -23,25 +24,10 @@
 				Memory.populate();
 			})
 		</script>
-
-		<!--[if IE]>
-			<style type="text/css">
-			#main .right h2 img {
-				position:relative;
-			}
-			</style>
-		<![endif]-->
-
-		<!--[if LTE IE 7]>
-			<style type="text/css">
-			#main .right .statistics span {
-				width:320px;
-			}
-			</style>
-		<![endif]-->
 	</head>
 
-	<body>
+
+    <body class="dark">
 		<div id="popup_bg"></div>
 
 		<!-- confirm box -->
@@ -49,10 +35,8 @@
 			<h1 class="popup_question" id="confirm_question"></h1>
 
 			<div class="popup_links">
-				<a href="javascript:void(0)" class="popup_button" id="confirm_button"></a>
-				<a href="javascript:void(0)" class="popup_hide" id="confirm_hide" onClick="UI.hidePopup()">
-					Cancel
-				</a>
+				<button href="javascript:void(0)" id="confirm_button" class="is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500"></button>
+				<button href="javascript:void(0)" id="confirm_hide" class="is-button rounded is-button-default" onClick="UI.hidePopup()">Cancel</button>
 				<div style="clear:both;"></div>
 			</div>
 		</div>
@@ -62,356 +46,575 @@
 			<h1 class="popup_message" id="alert_message"></h1>
 
 			<div class="popup_links">
-				<a href="javascript:void(0)" class="popup_button" id="alert_button">Okay</a>
+				<a href="javascript:void(0)" id="alert_button" class="is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500">Okay</a>
 				<div style="clear:both;"></div>
 			</div>
 		</div>
 
-		<div id="wrap">
-			<div id="fixer">
-				<!-- Top bar -->
-				<header>
-					<div class="center_1020">
-						<a href="https://github.com/FusionWowCMS/FusionCMS" class="logo"></a>
-					</div>
-				</header>
+        <div class="min-h-screen md:flex">
+            <div class="from-primary-900 to-primary-500 i group relative hidden w-1/3 items-center justify-around overflow-hidden bg-gradient-to-tr md:flex">
+                <div class="mx-auto max-w-xs text-center">
+                    <ul class="sub section space-y-1 font-sans text-sm">
+                        <li id="1">
+                            <a class="text-muted-400 hover:text-muted-600 dark:hover:text-muted-200 hover:bg-muted-50 dark:hover:bg-muted-700/50 flex items-center gap-2 rounded-lg p-3 transition-colors duration-300 router-link-active !text-white !bg-primary-600">
+                                <div class="icon file"></div> 
+                                <span>Introduction</span>
+                            </a>
+                        </li>
+                        <li id="2">
+                            <a class="text-muted-400 hover:text-muted-600 dark:hover:text-muted-200 hover:bg-muted-50 dark:hover:bg-muted-700/50 flex items-center gap-2 rounded-lg p-3 transition-colors duration-300">
+                                <div class="icon link"></div> 
+                                <span>Requirements</span>
+                            </a>
+                        </li>
+                        <li id="3">
+                            <a class="text-muted-400 hover:text-muted-600 dark:hover:text-muted-200 hover:bg-muted-50 dark:hover:bg-muted-700/50 flex items-center gap-2 rounded-lg p-3 transition-colors duration-300">
+                                <div class="icon settings"></div> 
+                                <span>General</span>
+                            </a>
+                        </li>
+                        <li id="4">
+                            <a class="text-muted-400 hover:text-muted-600 dark:hover:text-muted-200 hover:bg-muted-50 dark:hover:bg-muted-700/50 flex items-center gap-2 rounded-lg p-3 transition-colors duration-300">
+                                <div class="icon database"></div> 
+                                <span>Database</span>
+                            </a>
+                        </li>
+                        <li id="5">
+                            <a class="text-muted-400 hover:text-muted-600 dark:hover:text-muted-200 hover:bg-muted-50 dark:hover:bg-muted-700/50 flex items-center gap-2 rounded-lg p-3 transition-colors duration-300">
+                                <div class="icon list"></div> 
+                                <span>Realms</span>
+                            </a>
+                        </li>
+                        <li id="6">
+                            <a class="text-muted-400 hover:text-muted-600 dark:hover:text-muted-200 hover:bg-muted-50 dark:hover:bg-muted-700/50 flex items-center gap-2 rounded-lg p-3 transition-colors duration-300">
+                                <div class="icon cursor"></div> 
+                                <span>Complete installation</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-muted-200/20 absolute -start-6 -top-6 h-14 w-0 origin-top-left rotate-45 rounded-full transition-all delay-[25ms] duration-300 group-hover:w-72"></div>
+                <div class="bg-muted-200/20 absolute -top-12 start-20 h-14 w-0 origin-top-left rotate-45 rounded-full transition-all delay-75 duration-300 group-hover:w-48"></div>
+                <div class="bg-muted-200/20 absolute -start-7 top-24 h-14 w-0 origin-top-left rotate-45 rounded-full transition-all delay-150 duration-300 group-hover:w-40"></div>
+                <div class="bg-muted-200/20 absolute -bottom-6 -end-6 h-14 w-0 origin-bottom-right rotate-45 rounded-full transition-all delay-150 duration-300 group-hover:w-72"></div>
+                <div class="bg-muted-200/20 absolute -bottom-12 end-20 h-14 w-0 origin-bottom-right rotate-45 rounded-full transition-all delay-75 duration-300 group-hover:w-48"></div>
+                <div class="bg-muted-200/20 absolute -end-7 bottom-24 h-14 w-0 origin-bottom-right rotate-45 rounded-full transition-all delay-[25ms] duration-300 group-hover:w-40"></div>
+            </div>
+            <div class="dark:bg-muted-900 flex flex-col items-center justify-between bg-white py-10 md:w-2/3">
+                <div class="mx-auto w-full max-w-7xl">
+                    <div class="grid gap-8 sm:grid-cols-12">
+                        <div class="col-span-12">
+                            <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md mt-10 mb-10">
+								<aside class="flex items-center justify-center py-8 mx-auto w-full max-w-md">
+									<section class="box big step">
+								        <div class="flex flex-col py-2">
+								        	<img src="images/fusion.svg">
+								        	<div class="mx-auto mt-4">
+								        		<div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md shadow-muted-300/30 dark:shadow-muted-800/30 shadow-xl p-6 mt-4">
+								        	        <div class="mx-auto mb-4 max-w-xs text-center">
+								        	        	<p class="font-heading text-xxs font-medium leading-normal leading-normal text-white" tag="h2"> Welcome to FusionCMS</p>
+								        	        </div>
+								        			<p class="font-alt text-base font-normal leading-normal leading-normal text-muted-500 dark:text-muted-400"> <b>Dear customer</b>, We are happy to introduce you to the next chapter of our very own FusionCMS. Years have passed since the initial release and the system has grown better and stronger for every version. The core of this beast is powered by clean, object oriented PHP code, kept in shape by the incredibly powerful CodeIgniter framework. On the front we also make sure to amaze your visitors with more Javascript-powered live interactions than ever before. </p>
+								        		</div>
+								        		<div class="installer_navigation mt-6 flex items-center justify-between gap-2">
+								        			<button type="button" class="next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Start the installer</button>
+								        		</div>
+								        	</div>
+								        </div>
+									</section>
 
-				<!-- Main content -->
-				<section id="wrapper">
-					<div id="top_spacer"></div>
-					<div class="center_1020" id="main">
+									<section class="box big step" data-validation="requirements" style="display:none;">
+										<h2 class="text-white">Server requirements <span style="color:red;display:inline;padding:0px;">(important!)</span></h2>
+			
+										<span class="flex flex-col py-2">
+			
+											<div class="introduction text-muted-500">
+												<h3 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">What do I need to run this system?</h3>
+												
+												<div class="folder-permissions">
+													<h4 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">Folder Permissions</h4>
+													<div style="font-weight:bold;margin:10px 0px;" id="config_folder">&bull; /application/config/ needs to be writable (see <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)</div>
+			
+													<div style="font-weight:bold;margin:10px 0px;" id="modules_folder">&bull; /application/modules/ is writable</div>
+			
+													<div style="font-weight:bold;margin:10px 0px;" id="cache_folder">&bull; /application/cache/</div>
+												</div>
+												
+												<div class="php-version">
+													<h4 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">PHP Version</h4>
+													Minimum required PHP version: <span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">8.0.0</span> <span class="check-result"></span>
+												</div>
+												
+												<div class="php-extensions">
+													<h4 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">PHP Extensions</h4>
+													
+													<b>The following PHP extensions are required:</b><br>
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_mysqli</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_curl</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_openssl</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_soap</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_gd</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_mbstring</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_json</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_mcrypt</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_xml</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_zip</span>
+			
+													<span class="check-result" style="display:none"></span>
+													<div id="php-extensions-missing" style="display:none;color:red;margin-top:15px">
+														<b>The following modules are missing:</b>
+														<span class="extensions"></span>
+													</div>
+													
+													<div class="how_to_box">
+														<div class="title bg-primary-500 dark:bg-primary-500">How do I enable PHP extensions?</div>
+														<div class="content">
+															Go into your PHP directory and find the <code>php.ini</code> file. Mine was located in <code>C:\xampp\php\</code>. Open the file with a text editor and search (CTRL+F) for one of the modules you need to enable. To enable them, simply remove the <code>;</code> character in front of the line.<br />Save the file and restart your webserver to apply the changes.<br /><br />
+			
+															<img src="images/php.jpg" style="border:1px solid #ccc" />
+														</div>
+													</div>
+												</div>
+												
+												<div class="apache-modules">
+													<h4 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">Apache Modules</h4>
+													
+													<b>We recommend FusionCMS in combination with an Apache Webserver.<br><br>
+													The Apache modules you'll need are:</b> <br>
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">mod_rewrite</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">mod_headers</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">mod_expires</span>,
+													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">mod_deflate</span>
 
-						<!-- Main Left column -->
-						<aside class="left">
-							<nav>
-								<a class="active"><div class="icon dashboard"></div> Install</a>
-								<section class="sub">
-									<a class="active" id="1"><div class="icon file"></div> Introduction</a>
-									<a id="2"><div class="icon link"></div> Requirements</a>
-									<a id="3"><div class="icon list"></div> General</a>
-									<a id="4"><div class="icon database"></div> Database</a>
-									<a id="5"><div class="icon database"></div> Realms</a>
-									<a id="6"><div class="icon cursor"></div> Complete installation</a>
-								</section>
-							</nav>
+													<span class="check-result" style="display:none"></span>
+													<div id="apache-modules-missing" style="display:none;color:#e18f00;margin-top:15px">
+														<b>The following modules are missing:</b>
+														<span class="modules"></span>
+													</div>
+													
+													<div class="how_to_box">
+														<div class="title bg-primary-500 dark:bg-primary-500">How do I enable Apache modules?</div>
+														<div class="content">
+															Go into your Apache directory and find the <code>httpd.conf</code> file. Mine was located in <code>C:\xampp\apache\conf\</code>. Open the file with a text editor and search <code>CTRL+F</code> for one of the modules you need to enable. To enable them, simply remove the <code>#</code> character in front of the line.<br />Save the file and restart your webserver to apply the changes.<br /><br />
+															<img src="images/apache.jpg" style="border:1px solid #ccc" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</span>
 
-							<div class="spacer"></div>
-						</aside>
+								        <div class="installer_navigation mt-6 flex items-center justify-between gap-2">
+								        	<button type="button" class="prev is-button rounded is-button-default w-full">Previous step</button>
+								        	<button type="button" class="next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Next step</button>
+								        </div>
+									</section>
 
-						<!-- Main right column -->
-						<aside class="right">
-							<h1 id="page_title">Install</h1>
+									<section class="box big step" style="display:none;">
+										<form id="form-general-settings" class="mx-auto min-w-lg max-w-lg space-y-12 py-8">
+											<fieldset class="relative">
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">General settings</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Enter site and server information.</p></div>
+												<div class="grid grid-cols-12 gap-4">
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="title" data-tip="Website title" placeholder="Website title" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M221.66 90.34L192 120l-56-56l29.66-29.66a8 8 0 0 1 11.31 0L221.66 79a8 8 0 0 1 0 11.34Z" opacity=".2"></path><path d="m227.31 73.37l-44.68-44.69a16 16 0 0 0-22.63 0L36.69 152A15.86 15.86 0 0 0 32 163.31V208a16 16 0 0 0 16 16h44.69a15.86 15.86 0 0 0 11.31-4.69L227.31 96a16 16 0 0 0 0-22.63ZM51.31 160L136 75.31L152.69 92L68 176.68ZM48 179.31L76.69 208H48Zm48 25.38L79.31 188L164 103.31L180.69 120Zm96-96L147.31 64l24-24L216 84.68Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="server_name" data-tip="Server name" placeholder="Server name" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M176 112L74.34 213.66a8 8 0 0 1-11.31 0L42.34 193a8 8 0 0 1 0-11.31L144 80Z" opacity=".2"></path><path d="M248 152a8 8 0 0 1-8 8h-16v16a8 8 0 0 1-16 0v-16h-16a8 8 0 0 1 0-16h16v-16a8 8 0 0 1 16 0v16h16a8 8 0 0 1 8 8ZM56 72h16v16a8 8 0 0 0 16 0V72h16a8 8 0 0 0 0-16H88V40a8 8 0 0 0-16 0v16H56a8 8 0 0 0 0 16Zm128 120h-8v-8a8 8 0 0 0-16 0v8h-8a8 8 0 0 0 0 16h8v8a8 8 0 0 0 16 0v-8h8a8 8 0 0 0 0-16Zm35.31-112L80 219.31a16 16 0 0 1-22.62 0l-20.7-20.68a16 16 0 0 1 0-22.63L176 36.69a16 16 0 0 1 22.63 0l20.68 20.68a16 16 0 0 1 0 22.63Zm-54.63 32L144 91.31l-96 96L68.68 208ZM208 68.69L187.31 48l-32 32L176 100.69Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="realmlist" data-tip="Realmlist" placeholder="Realmlist: logon.myserver.com" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="m96 240l16-80l-64-24L160 16l-16 80l64 24Z" opacity=".2"></path><path d="M215.79 118.17a8 8 0 0 0-5-5.66L153.18 90.9l14.66-73.33a8 8 0 0 0-13.69-7l-112 120a8 8 0 0 0 3 13l57.63 21.61l-14.62 73.25a8 8 0 0 0 13.69 7l112-120a8 8 0 0 0 1.94-7.26ZM109.37 214l10.47-52.38a8 8 0 0 0-5-9.06L62 132.71l84.62-90.66l-10.46 52.38a8 8 0 0 0 5 9.06l52.8 19.8Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="description" data-tip="Description: Best World of Warcraft private server in the entire world!" placeholder="Search engine: description" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M224 56v144a8 8 0 0 1-8 8H40a8 8 0 0 1-8-8V56a8 8 0 0 1 8-8h176a8 8 0 0 1 8 8Z" opacity=".2"></path><path d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16Zm0 160H40V56h176v144ZM184 96a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Zm0 32a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Zm0 32a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="keywords" data-tip="Search engine, keywords (separated by comma): world of warcraft,wow,private server,pvp" placeholder="Search engine: keywords (separated by comma)" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M168 96v112a8 8 0 0 1-8 8H48a8 8 0 0 1-8-8V96a8 8 0 0 1 8-8h112a8 8 0 0 1 8 8Z" opacity=".2"></path><path d="M64 216a8 8 0 0 1-8 8h-8a16 16 0 0 1-16-16v-8a8 8 0 0 1 16 0v8h8a8 8 0 0 1 8 8Zm48-8H96a8 8 0 0 0 0 16h16a8 8 0 0 0 0-16Zm-72-40a8 8 0 0 0 8-8v-16a8 8 0 0 0-16 0v16a8 8 0 0 0 8 8Zm128 24a8 8 0 0 0-8 8v8h-8a8 8 0 0 0 0 16h8a16 16 0 0 0 16-16v-8a8 8 0 0 0-8-8Zm0-80a8 8 0 0 0 8-8v-8a16 16 0 0 0-16-16h-8a8 8 0 0 0 0 16h8v8a8 8 0 0 0 8 8ZM56 80h-8a16 16 0 0 0-16 16v8a8 8 0 0 0 16 0v-8h8a8 8 0 0 0 0-16Zm152-48H96a16 16 0 0 0-16 16v40a4.44 4.44 0 0 0 0 .55A8 8 0 0 0 88 96h24a8 8 0 0 0 0-16H96V48h112v112h-32v-16a8 8 0 0 0-16 0v24a8 8 0 0 0 8 8h40a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="password" id="security_code" data-tip="Admin panel extra security password" placeholder="Admin panel extra security password" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl"/>
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-[1.15rem] w-[1.15rem]" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71><g fill="currentColor"><path d="M224 128a96 96 0 1 1-96-96a96 96 0 0 1 96 96Z" opacity=".2"/><path d="M72 128a134.63 134.63 0 0 1-14.16 60.47a8 8 0 1 1-14.32-7.12A118.8 118.8 0 0 0 56 128a71.73 71.73 0 0 1 27-56.2a8 8 0 1 1 10 12.49A55.76 55.76 0 0 0 72 128Zm56-8a8 8 0 0 0-8 8a184.12 184.12 0 0 1-23 89.1a8 8 0 0 0 14 7.76A200.19 200.19 0 0 0 136 128a8 8 0 0 0-8-8Zm0-32a40 40 0 0 0-40 40a8 8 0 0 0 16 0a24 24 0 0 1 48 0a214.09 214.09 0 0 1-20.51 92a8 8 0 1 0 14.51 6.83A230 230 0 0 0 168 128a40 40 0 0 0-40-40Zm0-64A104.11 104.11 0 0 0 24 128a87.76 87.76 0 0 1-5 29.33a8 8 0 0 0 15.09 5.33A103.9 103.9 0 0 0 40 128a88 88 0 0 1 176 0a282.24 282.24 0 0 1-5.29 54.45a8 8 0 0 0 6.3 9.4a8.22 8.22 0 0 0 1.55.15a8 8 0 0 0 7.84-6.45A298.37 298.37 0 0 0 232 128A104.12 104.12 0 0 0 128 24ZM94.4 152.17a8 8 0 0 0-9.4 6.25a151 151 0 0 1-17.21 45.44a8 8 0 0 0 13.86 8a166.67 166.67 0 0 0 19-50.25a8 8 0 0 0-6.25-9.44ZM128 56a72.85 72.85 0 0 0-9 .56a8 8 0 0 0 2 15.87A56.08 56.08 0 0 1 184 128a252.12 252.12 0 0 1-1.92 31a8 8 0 0 0 6.92 9a8.39 8.39 0 0 0 1 .06a8 8 0 0 0 7.92-7a266.48 266.48 0 0 0 2-33A72.08 72.08 0 0 0 128 56Zm57.93 128.25a8 8 0 0 0-9.75 5.75c-1.46 5.69-3.15 11.4-5 17a8 8 0 0 0 5 10.13a7.88 7.88 0 0 0 2.55.42a8 8 0 0 0 7.58-5.46c2-5.92 3.79-12 5.35-18.05a8 8 0 0 0-5.72-9.78Z"/></g></svg>
+															</div>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+											<fieldset class="relative">
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">Max expansion</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Choose highest expansion of your server</p></div>
+												<div class="grid grid-cols-12 gap-4">
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<select id="max_expansion" data-tip="Max expansion" required class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="9">Dragonflight</option>
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="8">Shadowlands</option>
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="7">Battle for Azeroth</option>
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="6">Legion</option>
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="5">Warlords of Draenor</option>
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="4">Mists Of Pandaria</option>
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="3">Cataclysm</option>
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="2">Wrath of the Lich King</option>
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="1">The Burning Crusade</option>
+																<option class="relative flex cursor-pointer select-none items-center px-3 py-2 rounded" value="0">No expansion allowed</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+											<fieldset class="relative">
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">Google Analytics</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400"><a href="http://analytics.google.com" target="_blank">Google Analytics</a> website ID for advanced statistics (optional)</p></div>
+												<div class="grid grid-cols-12 gap-4">
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="analytics" data-tip="Google Analytics website ID : XX-YYYYYYYY-Z" placeholder="Google Analytics website ID: XX-YYYYYYYY-Z"  class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><path fill="currentColor" d="M224 128a8 8 0 0 1-8 8h-88a8 8 0 0 1 0-16h88a8 8 0 0 1 8 8Zm-96-56h88a8 8 0 0 0 0-16h-88a8 8 0 0 0 0 16Zm88 112h-88a8 8 0 0 0 0 16h88a8 8 0 0 0 0-16ZM82.34 42.34L56 68.69L45.66 58.34a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32 0l32-32a8 8 0 0 0-11.32-11.32Zm0 64L56 132.69l-10.34-10.35a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32 0l32-32a8 8 0 0 0-11.32-11.32Zm0 64L56 196.69l-10.34-10.35a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32 0l32-32a8 8 0 0 0-11.32-11.32Z"></path></svg>
+															</div>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+											<fieldset class="relative">
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">Captcha</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Enable <a href="http://www.google.com/recaptcha/admin" target="_blank">Google Captcha</a> (optional)</p></div>
+												<div class="grid grid-cols-12 gap-4">
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<select id="captcha" data-tip="Enable Google Captcha" onChange="if(this.value == '1'){ $('#captcha_site_keys').fadeIn(150); } else { $('#captcha_site_keys').fadeOut(150); };if(this.value == '1'){ $('#captcha_secret_keys').fadeIn(150); } else { $('#captcha_secret_keys').fadeOut(150); }" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option value="1">Yes</option>
+																<option value="0" selected>No</option>
+															</select>
+														</div>
+													</div>
+													<div id="captcha_site_keys" style="display:none" class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="site_key" data-tip="Use this in the HTML code your site serves to users." placeholder="Site key (?)" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M216 96v112a8 8 0 0 1-8 8H48a8 8 0 0 1-8-8V96a8 8 0 0 1 8-8h160a8 8 0 0 1 8 8Z" opacity=".2"></path><path d="M208 80h-32V56a48 48 0 0 0-96 0v24H48a16 16 0 0 0-16 16v112a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16ZM96 56a32 32 0 0 1 64 0v24H96Zm112 152H48V96h160v112Zm-68-56a12 12 0 1 1-12-12a12 12 0 0 1 12 12Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div id="captcha_secret_keys" style="display:none" class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="secret_key" data-tip="Use this for communication between your site and Google. Be sure to keep it a secret." placeholder="Secret key (?)" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M216 96v112a8 8 0 0 1-8 8H48a8 8 0 0 1-8-8V96a8 8 0 0 1 8-8h160a8 8 0 0 1 8 8Z" opacity=".2"></path><path d="M208 80h-32V56a48 48 0 0 0-96 0v24H48a16 16 0 0 0-16 16v112a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16ZM96 56a32 32 0 0 1 64 0v24H96Zm112 152H48V96h160v112Zm-68-56a12 12 0 1 1-12-12a12 12 0 0 1 12 12Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+											<fieldset class="relative">
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">CDN</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Use content delivery network for Javascript libraries (do only disable it for LAN-only environments)</p></div>
+												<div class="grid grid-cols-12 gap-4">
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<select id="cdn" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option value="1">Yes</option>
+																<option value="0">No</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										</form>
 
-							<section class="box big step">
-								<h2><img src="images/icons/black16x16/ic_empty_document.png"/> Introduction</h2>
-								<span>
-									<div class="introduction">
-										<h3>Welcome to FusionCMS</h3>
-									
-										<b>Dear customer</b>, We are happy to introduce you to the next chapter of our very own FusionCMS. Years have passed since the initial release and the system has grown better and stronger for every version. The core of this beast is powered by clean, object oriented PHP code, kept in shape by the incredibly powerful CodeIgniter framework. On the front we also make sure to amaze your visitors with more Javascript-powered live interactions than ever before.
-									</div>
-								</span>
+								        <div class="installer_navigation mt-6 flex items-center justify-between gap-2">
+								        	<button type="button" class="prev is-button rounded is-button-default w-full">Previous step</button>
+								        	<button type="button" class="next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Next step</button>
+								        </div>
+									</section>
+			
+									<section class="box big step" data-validation="database" style="display:none;">
+										<h3 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">Database settings</h3>
+			
+										<form class="mx-auto min-w-lg max-w-lg space-y-12 py-8">
+											<fieldset class="relative">
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">Website Database</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Enter website database information.</p></div>
+												<div class="grid grid-cols-12 gap-4">
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="cms_hostname" data-tip="Hostname" placeholder="Hostname" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M224 56v144a8 8 0 0 1-8 8H40a8 8 0 0 1-8-8V56a8 8 0 0 1 8-8h176a8 8 0 0 1 8 8Z" opacity=".2"></path><path d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16Zm0 160H40V56h176v144ZM184 96a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Zm0 32a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Zm0 32a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="cms_username" data-tip="Username" placeholder="Username" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M168 144a40 40 0 1 1-40-40a40 40 0 0 1 40 40ZM64 56a32 32 0 1 0 32 32a32 32 0 0 0-32-32Zm128 0a32 32 0 1 0 32 32a32 32 0 0 0-32-32Z" opacity=".2"></path><path d="M244.8 150.4a8 8 0 0 1-11.2-1.6A51.6 51.6 0 0 0 192 128a8 8 0 0 1 0-16a24 24 0 1 0-23.24-30a8 8 0 1 1-15.5-4A40 40 0 1 1 219 117.51a67.94 67.94 0 0 1 27.43 21.68a8 8 0 0 1-1.63 11.21ZM190.92 212a8 8 0 1 1-13.85 8a57 57 0 0 0-98.15 0a8 8 0 1 1-13.84-8a72.06 72.06 0 0 1 33.74-29.92a48 48 0 1 1 58.36 0A72.06 72.06 0 0 1 190.92 212ZM128 176a32 32 0 1 0-32-32a32 32 0 0 0 32 32Zm-56-56a8 8 0 0 0-8-8a24 24 0 1 1 23.24-30a8 8 0 1 0 15.5-4A40 40 0 1 0 37 117.51a67.94 67.94 0 0 0-27.4 21.68a8 8 0 1 0 12.8 9.61A51.6 51.6 0 0 1 64 128a8 8 0 0 0 8-8Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="password" id="cms_password" data-tip="Password" placeholder="Password" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-[1.15rem] w-[1.15rem]" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71><g fill="currentColor"><path d="M224 128a96 96 0 1 1-96-96a96 96 0 0 1 96 96Z" opacity=".2"/><path d="M72 128a134.63 134.63 0 0 1-14.16 60.47a8 8 0 1 1-14.32-7.12A118.8 118.8 0 0 0 56 128a71.73 71.73 0 0 1 27-56.2a8 8 0 1 1 10 12.49A55.76 55.76 0 0 0 72 128Zm56-8a8 8 0 0 0-8 8a184.12 184.12 0 0 1-23 89.1a8 8 0 0 0 14 7.76A200.19 200.19 0 0 0 136 128a8 8 0 0 0-8-8Zm0-32a40 40 0 0 0-40 40a8 8 0 0 0 16 0a24 24 0 0 1 48 0a214.09 214.09 0 0 1-20.51 92a8 8 0 1 0 14.51 6.83A230 230 0 0 0 168 128a40 40 0 0 0-40-40Zm0-64A104.11 104.11 0 0 0 24 128a87.76 87.76 0 0 1-5 29.33a8 8 0 0 0 15.09 5.33A103.9 103.9 0 0 0 40 128a88 88 0 0 1 176 0a282.24 282.24 0 0 1-5.29 54.45a8 8 0 0 0 6.3 9.4a8.22 8.22 0 0 0 1.55.15a8 8 0 0 0 7.84-6.45A298.37 298.37 0 0 0 232 128A104.12 104.12 0 0 0 128 24ZM94.4 152.17a8 8 0 0 0-9.4 6.25a151 151 0 0 1-17.21 45.44a8 8 0 0 0 13.86 8a166.67 166.67 0 0 0 19-50.25a8 8 0 0 0-6.25-9.44ZM128 56a72.85 72.85 0 0 0-9 .56a8 8 0 0 0 2 15.87A56.08 56.08 0 0 1 184 128a252.12 252.12 0 0 1-1.92 31a8 8 0 0 0 6.92 9a8.39 8.39 0 0 0 1 .06a8 8 0 0 0 7.92-7a266.48 266.48 0 0 0 2-33A72.08 72.08 0 0 0 128 56Zm57.93 128.25a8 8 0 0 0-9.75 5.75c-1.46 5.69-3.15 11.4-5 17a8 8 0 0 0 5 10.13a7.88 7.88 0 0 0 2.55.42a8 8 0 0 0 7.58-5.46c2-5.92 3.79-12 5.35-18.05a8 8 0 0 0-5.72-9.78Z"/></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="cms_database" data-tip="Database name" placeholder="Database name" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M88 104v96H32v-96Z" opacity=".2"></path><path d="M224 48H32a8 8 0 0 0-8 8v136a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a8 8 0 0 0-8-8ZM40 112h40v32H40Zm56 0h120v32H96Zm120-48v32H40V64ZM40 160h40v32H40Zm176 32H96v-32h120v32Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="cms_port" data-tip="Port" placeholder="Port: 3306" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5 transition-transform duration-300" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></g></svg>
+															</div>
+														</div>
+													</div>
+												</div>
+											</fieldset>
 
-								<div class="installer_navigation">
-									<a class="next nice_button">Start the installer</a>
-								</div>
-							</section>
+											<br />
+											<fieldset class="relative">
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">Realmd/Logon/Auth Database</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Enter Realmd/Logon/Auth database information.</p></div>
+												<div class="grid grid-cols-12 gap-4">
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="realmd_hostname" data-tip="Hostname" placeholder="Hostname" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M224 56v144a8 8 0 0 1-8 8H40a8 8 0 0 1-8-8V56a8 8 0 0 1 8-8h176a8 8 0 0 1 8 8Z" opacity=".2"></path><path d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16Zm0 160H40V56h176v144ZM184 96a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Zm0 32a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Zm0 32a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="realmd_username" data-tip="Username" placeholder="Username" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M168 144a40 40 0 1 1-40-40a40 40 0 0 1 40 40ZM64 56a32 32 0 1 0 32 32a32 32 0 0 0-32-32Zm128 0a32 32 0 1 0 32 32a32 32 0 0 0-32-32Z" opacity=".2"></path><path d="M244.8 150.4a8 8 0 0 1-11.2-1.6A51.6 51.6 0 0 0 192 128a8 8 0 0 1 0-16a24 24 0 1 0-23.24-30a8 8 0 1 1-15.5-4A40 40 0 1 1 219 117.51a67.94 67.94 0 0 1 27.43 21.68a8 8 0 0 1-1.63 11.21ZM190.92 212a8 8 0 1 1-13.85 8a57 57 0 0 0-98.15 0a8 8 0 1 1-13.84-8a72.06 72.06 0 0 1 33.74-29.92a48 48 0 1 1 58.36 0A72.06 72.06 0 0 1 190.92 212ZM128 176a32 32 0 1 0-32-32a32 32 0 0 0 32 32Zm-56-56a8 8 0 0 0-8-8a24 24 0 1 1 23.24-30a8 8 0 1 0 15.5-4A40 40 0 1 0 37 117.51a67.94 67.94 0 0 0-27.4 21.68a8 8 0 1 0 12.8 9.61A51.6 51.6 0 0 1 64 128a8 8 0 0 0 8-8Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="password" id="realmd_password" data-tip="Password" placeholder="Password" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-[1.15rem] w-[1.15rem]" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71><g fill="currentColor"><path d="M224 128a96 96 0 1 1-96-96a96 96 0 0 1 96 96Z" opacity=".2"/><path d="M72 128a134.63 134.63 0 0 1-14.16 60.47a8 8 0 1 1-14.32-7.12A118.8 118.8 0 0 0 56 128a71.73 71.73 0 0 1 27-56.2a8 8 0 1 1 10 12.49A55.76 55.76 0 0 0 72 128Zm56-8a8 8 0 0 0-8 8a184.12 184.12 0 0 1-23 89.1a8 8 0 0 0 14 7.76A200.19 200.19 0 0 0 136 128a8 8 0 0 0-8-8Zm0-32a40 40 0 0 0-40 40a8 8 0 0 0 16 0a24 24 0 0 1 48 0a214.09 214.09 0 0 1-20.51 92a8 8 0 1 0 14.51 6.83A230 230 0 0 0 168 128a40 40 0 0 0-40-40Zm0-64A104.11 104.11 0 0 0 24 128a87.76 87.76 0 0 1-5 29.33a8 8 0 0 0 15.09 5.33A103.9 103.9 0 0 0 40 128a88 88 0 0 1 176 0a282.24 282.24 0 0 1-5.29 54.45a8 8 0 0 0 6.3 9.4a8.22 8.22 0 0 0 1.55.15a8 8 0 0 0 7.84-6.45A298.37 298.37 0 0 0 232 128A104.12 104.12 0 0 0 128 24ZM94.4 152.17a8 8 0 0 0-9.4 6.25a151 151 0 0 1-17.21 45.44a8 8 0 0 0 13.86 8a166.67 166.67 0 0 0 19-50.25a8 8 0 0 0-6.25-9.44ZM128 56a72.85 72.85 0 0 0-9 .56a8 8 0 0 0 2 15.87A56.08 56.08 0 0 1 184 128a252.12 252.12 0 0 1-1.92 31a8 8 0 0 0 6.92 9a8.39 8.39 0 0 0 1 .06a8 8 0 0 0 7.92-7a266.48 266.48 0 0 0 2-33A72.08 72.08 0 0 0 128 56Zm57.93 128.25a8 8 0 0 0-9.75 5.75c-1.46 5.69-3.15 11.4-5 17a8 8 0 0 0 5 10.13a7.88 7.88 0 0 0 2.55.42a8 8 0 0 0 7.58-5.46c2-5.92 3.79-12 5.35-18.05a8 8 0 0 0-5.72-9.78Z"/></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="realmd_database" data-tip="Database name" placeholder="Database name" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M88 104v96H32v-96Z" opacity=".2"></path><path d="M224 48H32a8 8 0 0 0-8 8v136a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a8 8 0 0 0-8-8ZM40 112h40v32H40Zm56 0h120v32H96Zm120-48v32H40V64ZM40 160h40v32H40Zm176 32H96v-32h120v32Z"></path></g></svg>
+															</div>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<div class="group/nui-input relative">
+															<input type="text" id="realmd_port" data-tip="Port" placeholder="Port: 3306" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5 transition-transform duration-300" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></g></svg>
+															</div>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										</form>
 
-							<section class="box big step" data-validation="requirements" style="display:none;">
-								<h2><img src="images/icons/black16x16/ic_empty_document.png"/> Server requirements <span style="color:red;display:inline;padding:0px;">(important!)</span></h2>
-
-								<span>
-
-									<div class="introduction">
-										<h3>What do I need to run this system?</h3>
-									    
-                                        <div class="folder-permissions">
-                                            <h4>Folder Permissions</h4>
-    										<div style="font-weight:bold;margin:10px 0px;" id="config_folder">&bull; /application/config/ needs to be writable (see <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)</div>
-
-    										<div style="font-weight:bold;margin:10px 0px;" id="modules_folder">&bull; /application/modules/ is writable</div>
-
-    										<div style="font-weight:bold;margin:10px 0px;" id="cache_folder">&bull; /application/cache/</div>
-                                        </div>
-										
-										<div class="php-version">
-											<h4>PHP Version</h4>
-											Minimum required PHP version: 8.0 <span class="check-result"></span>
+								        <div class="installer_navigation mt-6 flex items-center justify-between gap-2">
+								        	<button type="button" class="prev is-button rounded is-button-default w-full">Previous step</button>
+								        	<button type="button" class="next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Next step</button>
+								        </div>
+									</section>
+			
+									<section class="box big step" data-validation="realms" style="display:none;">
+										<h3 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">Realms</h3>
+			
+										<span class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">If you want to add multiple realms, add all your realms first and then configure them. You can also add only one realm and you can configure other realms via the admin panel afterwards.</span>
+			
+										<div class="realmAdd">
+											<button type="button" onClick="Ajax.Realms.addRealm();" class="is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Add Realm</button>
 										</div>
-                                        
-                                        <div class="php-extensions">
-                                            <h4>PHP Extensions</h4>
-                                            
-                                            <b>The following PHP extensions are required:</b><br>
-    										php_mysqli, php_curl, php_openssl, php_soap, php_gd, php_mbstring, php_json, php_mcrypt, php_xml, php_zip
-
-											<span class="check-result" style="display:none"></span>
-                                            <div id="php-extensions-missing" style="display:none;color:red;margin-top:15px">
-                                                <b>The following modules are missing:</b>
-                                                <span class="extensions"></span>
-                                            </div>
-                                            
-    										<div class="how_to_box">
-                                                <div class="title">How do I enable PHP extensions?</div>
-                                                <div class="content">
-        											Go into your PHP directory and find the <code>php.ini</code> file. Mine was located in <code>C:\xampp\php\</code>. Open the file with a text editor and search (CTRL+F) for one of the modules you need to enable. To enable them, simply remove the <code>;</code> character in front of the line.<br />Save the file and restart your webserver to apply the changes.<br /><br />
-
-        											<img src="images/php.jpg" style="border:1px solid #ccc" />
-                                                </div>
-    										</div>
-                                        </div>
-                                        
-                                        <div class="apache-modules">
-                                            <h4>Apache Modules</h4>
-                                            
-    										<b>We recommend FusionCMS in combination with an Apache Webserver.<br><br>
-                                            The Apache modules you'll need are:</b> <br>
-                                            mod_rewrite, mod_headers, mod_expires, mod_deflate
-
-											<span class="check-result" style="display:none"></span>
-                                            <div id="apache-modules-missing" style="display:none;color:#e18f00;margin-top:15px">
-                                                <b>The following modules are missing:</b>
-                                                <span class="modules"></span>
-                                            </div>
-    										
-                                            <div class="how_to_box">
-                                                <div class="title">How do I enable Apache modules?</div>
-                                                <div class="content">
-        											Go into your Apache directory and find the <code>httpd.conf</code> file. Mine was located in <code>C:\xampp\apache\conf\</code>. Open the file with a text editor and search <code>CTRL+F</code> for one of the modules you need to enable. To enable them, simply remove the <code>#</code> character in front of the line.<br />Save the file and restart your webserver to apply the changes.<br /><br />
-        											<img src="images/apache.jpg" style="border:1px solid #ccc" />
-                                                </div>
-    										</div>
-                                        </div>
-									</div>
-								</span>
-
-								<div class="installer_navigation">
-									<a class="prev nice_button">Previous step</a>
-									<a class="next nice_button">Next step</a>
-								</div>
-							</section>
-
-							<section class="box big step" style="display:none;">
-								<h2><img src="images/icons/black16x16/ic_list.png"/> General settings</h2>
-
-								<span>
-										All options can be modified later.
-								</span>
-
-								<form id="form-general-settings">
-									<label for="title">Website title</label>
-									<input type="text" id="title" placeholder="MyServer" required />
-
-									<label for="server_name">Server name</label>
-									<input type="text" id="server_name" placeholder="MyServer" required />
-
-									<label for="realmlist">Realmlist</label>
-									<input type="text" id="realmlist" placeholder="logon.myserver.com" required />
-
-									<label for="security_code">Admin panel extra security password</label>
-									<input type="password" id="security_code" />
-
-									<label for="max_expansion">Max expansion</label>
-									<select id="max_expansion" required>
-										<option value="9">Dragonflight</option>
-										<option value="8">Shadowlands</option>
-										<option value="7">Battle for Azeroth</option>
-										<option value="6">Legion</option>
-										<option value="5">Warlords of Draenor</option>
-										<option value="4">Mists Of Pandaria</option>
-										<option value="3">Cataclysm</option>
-										<option value="2">Wrath of the Lich King</option>
-										<option value="1">The Burning Crusade</option>
-										<option value="0">No expansion allowed</option>
-									</select>
-
-									<label for="keywords">Search engine: keywords (separated by comma)</label>
-									<input type="text" id="keywords" placeholder="world of warcraft,wow,private server,pvp" />
-
-									<label for="description">Search engine: description</label>
-									<input type="text" id="description" placeholder="Best World of Warcraft private server in the entire world!" />
-
-									<label for="analytics"><a href="http://analytics.google.com" target="_blank">Google Analytics</a> website ID for advanced statistics (optional)</label>
-									<input type="text" id="analytics" placeholder="XX-YYYYYYYY-Z" />
-
-									<label for="captcha">Enable <a href="http://www.google.com/recaptcha/admin" target="_blank">Google Captcha</a> (optional)</label>
-									<select id="captcha" onChange="if(this.value == '1'){ $('#captcha_keys').fadeIn(150); } else { $('#captcha_keys').fadeOut(150); }">
-										<option value="1">Yes</option>
-										<option value="0" selected>No</option>
-									</select>
-
-									<div id="captcha_keys" style="display:none">
-										<label for="site_key" data-tip="Use this in the HTML code your site serves to users.">Site key (?)</label>
-										<input type="text" id="site_key" />
-
-										<label for="secret_key" data-tip="Use this for communication between your site and Google. Be sure to keep it a secret.">Secret key (?)</label>
-										<input type="text" id="secret_key" />
-									</div>
-
-									<label for="cdn">Use content delivery network for Javascript libraries (do only disable it for LAN-only environments)</label>
-									<select id="cdn">
-										<option value="1">Yes</option>
-										<option value="0">No</option>
-									</select>
-								</form>
-
-								<div class="installer_navigation">
-									<a class="prev nice_button">Previous step</a>
-									<a class="next nice_button">Next step</a>
-								</div>
-							</section>
-
-							<section class="box big step" data-validation="database" style="display:none;">
-								<h2><img src="images/icons/black16x16/ic_grid.png"/> Database settings</h2>
-
-								<form>
-									<h3>Website Database</h3>
-									
-									<label for="cms_hostname">Hostname</label>
-									<input type="text" id="cms_hostname" />
-									
-									<label for="cms_username">Username</label>
-									<input type="text" id="cms_username" />
-
-									<label for="cms_password">Password</label>
-									<input type="password" id="cms_password" />
-
-									<label for="cms_database">Database name</label>
-									<input type="text" id="cms_database" />
-
-									<label for="cms_port">Port</label>
-									<input type="text" id="cms_port" placeholder="3306" />
-
-									<br />
-									<h3>Realmd/Logon/Auth Database</h3>
-									
-									<label for="realmd_hostname">Hostname</label>
-									<input type="text" id="realmd_hostname" />
-									
-									<label for="realmd_username">Username</label>
-									<input type="text" id="realmd_username" />
-
-									<label for="realmd_password">Password</label>
-									<input type="password" id="realmd_password" />
-
-									<label for="realmd_database">Database name</label>
-									<input type="text" id="realmd_database" />
-
-									<label for="realmd_port">Port</label>
-									<input type="text" id="realmd_port" placeholder="3306" />
-								</form>
-								
-								<div class="installer_navigation">
-									<a class="prev nice_button">Previous step</a>
-									<a class="next nice_button">Next step</a>
-								</div>
-							</section>
-
-							<section class="box big step" data-validation="realms" style="display:none;">
-								<h2><img src="images/icons/black16x16/ic_cloud.png"/> Realms</h2>
-
-								<span>If you want to add multiple realms, add all your realms first and then configure them. You can also add only one realm and you can configure other realms via the admin panel afterwards.</span>
-
-								<div class="realmAdd">
-									<a onClick="Ajax.Realms.addRealm();" class="nice_button">Add Realm</a>
-								</div>
-
-								<div id="realm_field"></div>
-								
-								<div id="loader" style="display:none;">
-									<form>
-										<label for="emulator">Emulator</label>
-										<select id="emulator">
-											<option disabled="disabled">Loading...</option>
-										</select>
+			
+										<div id="realm_field"></div>
 										
-										<label for="realmName">Realm name</label>
-										<input type="text" id="realmName" />
+										<div id="loader" style="display:none;">
+											<form class="mx-auto min-w-lg max-w-lg space-y-12 py-8">
+												<fieldset class="relative">
+													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">Emulator</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Please choose right emulator for your realm.</p></div>
+													<div class="grid grid-cols-12 gap-4">
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<select id="emulator" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																	<option disabled="disabled">Loading...</option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</fieldset>
+												<fieldset class="relative">
+													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">Realm settings</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Enter realm information.</p></div>
+													<div class="grid grid-cols-12 gap-4">
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="realmName" data-tip="Realm name" placeholder="Realm name" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M221.66 90.34L192 120l-56-56l29.66-29.66a8 8 0 0 1 11.31 0L221.66 79a8 8 0 0 1 0 11.34Z" opacity=".2"></path><path d="m227.31 73.37l-44.68-44.69a16 16 0 0 0-22.63 0L36.69 152A15.86 15.86 0 0 0 32 163.31V208a16 16 0 0 0 16 16h44.69a15.86 15.86 0 0 0 11.31-4.69L227.31 96a16 16 0 0 0 0-22.63ZM51.31 160L136 75.31L152.69 92L68 176.68ZM48 179.31L76.69 208H48Zm48 25.38L79.31 188L164 103.31L180.69 120Zm96-96L147.31 64l24-24L216 84.68Z"></path></g></svg>
+																</div>
+															</div>
+														</div>
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="cap" data-tip="Max allowed players online" placeholder="Max allowed players online" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M176 112L74.34 213.66a8 8 0 0 1-11.31 0L42.34 193a8 8 0 0 1 0-11.31L144 80Z" opacity=".2"></path><path d="M248 152a8 8 0 0 1-8 8h-16v16a8 8 0 0 1-16 0v-16h-16a8 8 0 0 1 0-16h16v-16a8 8 0 0 1 16 0v16h16a8 8 0 0 1 8 8ZM56 72h16v16a8 8 0 0 0 16 0V72h16a8 8 0 0 0 0-16H88V40a8 8 0 0 0-16 0v16H56a8 8 0 0 0 0 16Zm128 120h-8v-8a8 8 0 0 0-16 0v8h-8a8 8 0 0 0 0 16h8v8a8 8 0 0 0 16 0v-8h8a8 8 0 0 0 0-16Zm35.31-112L80 219.31a16 16 0 0 1-22.62 0l-20.7-20.68a16 16 0 0 1 0-22.63L176 36.69a16 16 0 0 1 22.63 0l20.68 20.68a16 16 0 0 1 0 22.63Zm-54.63 32L144 91.31l-96 96L68.68 208ZM208 68.69L187.31 48l-32 32L176 100.69Z"></path></g></svg>
+																</div>
+															</div>
+														</div>
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="port" data-tip="Realm port (usually 8085 for Trinity/SkyFire/MaNGoS)" placeholder="Realm port (usually 8085 for Trinity/SkyFire/MaNGoS)" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5 transition-transform duration-300" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></g></svg>
+																</div>
+															</div>
+														</div>
+													</div>
+												</fieldset>
 
-										<label for="realmName">Hostname</label>
-										<input type="text" id="hostname" />
+												<fieldset class="relative">
+													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">Realm Database settings</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Enter World/Characters database information.</p></div>
+													<div class="grid grid-cols-12 gap-4">
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="hostname" data-tip="Hostname" placeholder="Hostname" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M224 56v144a8 8 0 0 1-8 8H40a8 8 0 0 1-8-8V56a8 8 0 0 1 8-8h176a8 8 0 0 1 8 8Z" opacity=".2"></path><path d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16Zm0 160H40V56h176v144ZM184 96a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Zm0 32a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Zm0 32a8 8 0 0 1-8 8H80a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8Z"></path></g></svg>
+																</div>
+															</div>
+														</div>
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="username" data-tip="Database username" placeholder="Database username" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M168 144a40 40 0 1 1-40-40a40 40 0 0 1 40 40ZM64 56a32 32 0 1 0 32 32a32 32 0 0 0-32-32Zm128 0a32 32 0 1 0 32 32a32 32 0 0 0-32-32Z" opacity=".2"></path><path d="M244.8 150.4a8 8 0 0 1-11.2-1.6A51.6 51.6 0 0 0 192 128a8 8 0 0 1 0-16a24 24 0 1 0-23.24-30a8 8 0 1 1-15.5-4A40 40 0 1 1 219 117.51a67.94 67.94 0 0 1 27.43 21.68a8 8 0 0 1-1.63 11.21ZM190.92 212a8 8 0 1 1-13.85 8a57 57 0 0 0-98.15 0a8 8 0 1 1-13.84-8a72.06 72.06 0 0 1 33.74-29.92a48 48 0 1 1 58.36 0A72.06 72.06 0 0 1 190.92 212ZM128 176a32 32 0 1 0-32-32a32 32 0 0 0 32 32Zm-56-56a8 8 0 0 0-8-8a24 24 0 1 1 23.24-30a8 8 0 1 0 15.5-4A40 40 0 1 0 37 117.51a67.94 67.94 0 0 0-27.4 21.68a8 8 0 1 0 12.8 9.61A51.6 51.6 0 0 1 64 128a8 8 0 0 0 8-8Z"></path></g></svg>
+																</div>
+															</div>
+														</div>
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="password" id="password" data-tip="Database password" placeholder="Database password" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-[1.15rem] w-[1.15rem]" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71><g fill="currentColor"><path d="M224 128a96 96 0 1 1-96-96a96 96 0 0 1 96 96Z" opacity=".2"/><path d="M72 128a134.63 134.63 0 0 1-14.16 60.47a8 8 0 1 1-14.32-7.12A118.8 118.8 0 0 0 56 128a71.73 71.73 0 0 1 27-56.2a8 8 0 1 1 10 12.49A55.76 55.76 0 0 0 72 128Zm56-8a8 8 0 0 0-8 8a184.12 184.12 0 0 1-23 89.1a8 8 0 0 0 14 7.76A200.19 200.19 0 0 0 136 128a8 8 0 0 0-8-8Zm0-32a40 40 0 0 0-40 40a8 8 0 0 0 16 0a24 24 0 0 1 48 0a214.09 214.09 0 0 1-20.51 92a8 8 0 1 0 14.51 6.83A230 230 0 0 0 168 128a40 40 0 0 0-40-40Zm0-64A104.11 104.11 0 0 0 24 128a87.76 87.76 0 0 1-5 29.33a8 8 0 0 0 15.09 5.33A103.9 103.9 0 0 0 40 128a88 88 0 0 1 176 0a282.24 282.24 0 0 1-5.29 54.45a8 8 0 0 0 6.3 9.4a8.22 8.22 0 0 0 1.55.15a8 8 0 0 0 7.84-6.45A298.37 298.37 0 0 0 232 128A104.12 104.12 0 0 0 128 24ZM94.4 152.17a8 8 0 0 0-9.4 6.25a151 151 0 0 1-17.21 45.44a8 8 0 0 0 13.86 8a166.67 166.67 0 0 0 19-50.25a8 8 0 0 0-6.25-9.44ZM128 56a72.85 72.85 0 0 0-9 .56a8 8 0 0 0 2 15.87A56.08 56.08 0 0 1 184 128a252.12 252.12 0 0 1-1.92 31a8 8 0 0 0 6.92 9a8.39 8.39 0 0 0 1 .06a8 8 0 0 0 7.92-7a266.48 266.48 0 0 0 2-33A72.08 72.08 0 0 0 128 56Zm57.93 128.25a8 8 0 0 0-9.75 5.75c-1.46 5.69-3.15 11.4-5 17a8 8 0 0 0 5 10.13a7.88 7.88 0 0 0 2.55.42a8 8 0 0 0 7.58-5.46c2-5.92 3.79-12 5.35-18.05a8 8 0 0 0-5.72-9.78Z"/></g></svg>
+																</div>
+															</div>
+														</div>
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="db_port" data-tip="Database port" placeholder="Database port: 3306" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5 transition-transform duration-300" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></g></svg>
+																</div>
+															</div>
+														</div>
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="characters" data-tip="Characters database" placeholder="Characters database" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M88 104v96H32v-96Z" opacity=".2"></path><path d="M224 48H32a8 8 0 0 0-8 8v136a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a8 8 0 0 0-8-8ZM40 112h40v32H40Zm56 0h120v32H96Zm120-48v32H40V64ZM40 160h40v32H40Zm176 32H96v-32h120v32Z"></path></g></svg>
+																</div>
+															</div>
+														</div>
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="world" data-tip="World database" placeholder="World database" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />															<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M88 104v96H32v-96Z" opacity=".2"></path><path d="M224 48H32a8 8 0 0 0-8 8v136a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a8 8 0 0 0-8-8ZM40 112h40v32H40Zm56 0h120v32H96Zm120-48v32H40V64ZM40 160h40v32H40Zm176 32H96v-32h120v32Z"></path></g></svg>
+																</div>
+															</div>
+														</div>
+													</div>
+												</fieldset>
 
-										<label for="username">Database username</label>
-										<input type="text" id="username" />
+												<fieldset class="relative">
+													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white" tag="h3">Console settings</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">Required for emulators that use remote console systems.<br />For an ingame account with GM level high enough to connect to your emulator console remotely (see your emulator's config files for more details)</p></div>
+													<div class="grid grid-cols-12 gap-4">
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="console_username" data-tip="Console username" placeholder="Console username" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-4 w-4" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71=""><g fill="currentColor"><path d="M192 96a64 64 0 1 1-64-64a64 64 0 0 1 64 64Z" opacity=".2"></path><path d="M230.92 212c-15.23-26.33-38.7-45.21-66.09-54.16a72 72 0 1 0-73.66 0c-27.39 8.94-50.86 27.82-66.09 54.16a8 8 0 1 0 13.85 8c18.84-32.56 52.14-52 89.07-52s70.23 19.44 89.07 52a8 8 0 1 0 13.85-8ZM72 96a56 56 0 1 1 56 56a56.06 56.06 0 0 1-56-56Z"></path></g></svg>
+																</div>
+															</div>
+														</div>
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="console_password" data-tip="Console password" placeholder="Console password" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-[1.15rem] w-[1.15rem]" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71><g fill="currentColor"><path d="M224 128a96 96 0 1 1-96-96a96 96 0 0 1 96 96Z" opacity=".2"/><path d="M72 128a134.63 134.63 0 0 1-14.16 60.47a8 8 0 1 1-14.32-7.12A118.8 118.8 0 0 0 56 128a71.73 71.73 0 0 1 27-56.2a8 8 0 1 1 10 12.49A55.76 55.76 0 0 0 72 128Zm56-8a8 8 0 0 0-8 8a184.12 184.12 0 0 1-23 89.1a8 8 0 0 0 14 7.76A200.19 200.19 0 0 0 136 128a8 8 0 0 0-8-8Zm0-32a40 40 0 0 0-40 40a8 8 0 0 0 16 0a24 24 0 0 1 48 0a214.09 214.09 0 0 1-20.51 92a8 8 0 1 0 14.51 6.83A230 230 0 0 0 168 128a40 40 0 0 0-40-40Zm0-64A104.11 104.11 0 0 0 24 128a87.76 87.76 0 0 1-5 29.33a8 8 0 0 0 15.09 5.33A103.9 103.9 0 0 0 40 128a88 88 0 0 1 176 0a282.24 282.24 0 0 1-5.29 54.45a8 8 0 0 0 6.3 9.4a8.22 8.22 0 0 0 1.55.15a8 8 0 0 0 7.84-6.45A298.37 298.37 0 0 0 232 128A104.12 104.12 0 0 0 128 24ZM94.4 152.17a8 8 0 0 0-9.4 6.25a151 151 0 0 1-17.21 45.44a8 8 0 0 0 13.86 8a166.67 166.67 0 0 0 19-50.25a8 8 0 0 0-6.25-9.44ZM128 56a72.85 72.85 0 0 0-9 .56a8 8 0 0 0 2 15.87A56.08 56.08 0 0 1 184 128a252.12 252.12 0 0 1-1.92 31a8 8 0 0 0 6.92 9a8.39 8.39 0 0 0 1 .06a8 8 0 0 0 7.92-7a266.48 266.48 0 0 0 2-33A72.08 72.08 0 0 0 128 56Zm57.93 128.25a8 8 0 0 0-9.75 5.75c-1.46 5.69-3.15 11.4-5 17a8 8 0 0 0 5 10.13a7.88 7.88 0 0 0 2.55.42a8 8 0 0 0 7.58-5.46c2-5.92 3.79-12 5.35-18.05a8 8 0 0 0-5.72-9.78Z"/></g></svg>
+																</div>
+															</div>
+														</div>
+														<div class="col-span-12">
+															<div class="group/nui-input relative">
+																<input type="text" id="console_port" data-tip="Console port : usually 3443 for RA and 7878 for SOAP)" placeholder="Console port: usually 3443 for RA and 7878 for SOAP)" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required />
+																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
+																	<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5 transition-transform duration-300" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></g></svg>
+																</div>
+															</div>
+														</div>
+													</div>
+												</fieldset>
+											</form>
+										</div>
 
-										<label for="password">Database password</label>
-										<input type="password" id="password" />
+										<div style="border-top:1px solid #ccc;margin-bottom:5px;"></div>
 
-										<label for="db_port">Database port</label>
-										<input type="text" id="db_port" placeholder="3306" />
-
-										<label for="characters">Characters database</label>
-										<input type="text" id="characters"/>
-
-										<label for="world">World database</label>
-										<input type="text" id="world" />
-
-										<label for="cap">Max allowed players online</label>
-										<input type="text" id="cap" />
-
-										<label for="port">Realm port (usually 8085 for Trinity/SkyFire/MaNGoS)</label>
-										<input type="text" id="port" />
-
-										<label for="console_port">Console port (only required for emulators that use remote console systems; usually 3443 for RA and 7878 for SOAP)</label>
-										<input type="text" id="console_port" />
-
-										<label for="console_username" data-tip="For an ingame account with GM level high enough to connect to your<br />emulator console remotely (see your emulator's config files for more details)">Console username (only required for emulators that use remote console systems) (?)</label>
-										<input type="text" id="console_username" />
-
-										<label for="console_password" data-tip="For an ingame account with GM level high enough to connect to your<br />emulator console remotely (see your emulator's config files for more details)">Console password (only required for emulators that use remote console systems) (?)</label>
-										<input type="password" id="console_password" />
-									</form>
-								</div>
-
-								<div style="border-top:1px solid #ccc;margin-bottom:5px;"></div>
-								
-								<div class="installer_navigation">
-									<a class="prev nice_button">Previous step</a>
-									<a class="next nice_button">Finish</a>
-								</div>
-							</section>
-
-							<section class="box big step" style="display:none;">
-								<h2><img src="images/icons/black16x16/ic_time.png"/> Installing...</h2>
-								<span id="install" style="padding: 10px 15px">
-
-								</span>
-							</section>
-						</aside>
-
-						<div class="clear"></div>
-					</div>
-				</section>
-			</div>
-		</div>
-
-		<!-- Footer -->
-		<footer>
-			<div class="center_1020">
-				<div class="divider2"></div>
-				<aside id="logo"><a href="https://github.com/FusionWowCMS/FusionCMS" class="logo"></a></aside>
-				<div class="divider"></div>
-				<aside id="links">
-					<a href="https://github.com/FusionWowCMS/FusionCMS" target="_blank">Github</a>
-					<a href="https://github.com/FusionWowCMS/Modules" target="_blank">Modules</a>
-					<a href="https://github.com/FusionWowCMS/Themes" target="_blank">Themes</a>
+								        <div class="installer_navigation mt-6 flex items-center justify-between gap-2">
+								        	<button type="button" class="prev is-button rounded is-button-default w-full">Previous step</button>
+								        	<button type="button" class="next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Next step</button>
+								        </div>
+									</section>
+			
+									<section class="box big step" style="display:none;">
+										<h2 class="text-white"> Installing...</h2>
+										<span class="text-white" id="install">
+			
+										</span>
+									</section>
+								</aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center font-sans text-sm font-normal leading-normal leading-normal text-muted-400">
+					<a href="https://github.com/FusionWowCMS/FusionCMS" target="_blank">Github</a> - 
+					<a href="https://github.com/FusionWowCMS/Modules" target="_blank">Modules</a> - 
+					<a href="https://github.com/FusionWowCMS/Themes" target="_blank">Themes</a> - 
 					<a href="https://github.com/FusionWowCMS/Themes/issues" target="_blank">Support</a>
-				</aside>
-				<div class="divider"></div>
-				<aside id="facebook">
-					<h1>Fusion on Telegram!</h1>
-					<div id="fb_icon"></div>
-					<a href="https://t.me/FusionCMS" target="_blank">FusionCMS</a>
-				</aside>
-				<div class="divider"></div>
-				<aside id="html5">
-					<a href="http://www.w3.org/html/logo/" data-tip="This website makes use of the next generation of web technologies">
-						<img src="images/html5.png">
-					</a>
-				</aside>
-				<div class="divider"></div>
-				<div class="clear"></div>
-			</div>
-		</footer>
-	</body>
+                    <p>
+                         © 2023 FusionCMS. All rights reserved. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
