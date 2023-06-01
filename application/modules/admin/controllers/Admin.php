@@ -48,7 +48,6 @@ class Admin extends MX_Controller
             'signups' => $this->getSignups(),
             'graphMonthly' => $this->graphMonthly(),
             'graphDaily' => $this->graphDaily(),
-            "autoUpdate" => $this->config->item("auto_update")
         );
 
         $output = $this->template->loadPage("dashboard.tpl", $data);

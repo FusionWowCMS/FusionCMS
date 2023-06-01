@@ -193,19 +193,3 @@ $config['analytics'] = false;
 | to furtherly use filter options in specific places and modules we dont want cached. For example: Realm Status)
 */
 $config['cache'] = false;
-
-/*
-|--------------------------------------------------------------------------
-| Update system
-|--------------------------------------------------------------------------
-|
-| Auto Update? DESCRION
-*/
-$config['auto_update'] = true;
-
-/*
-|--------------------------------------------------------------------------
-| Support tool
-|--------------------------------------------------------------------------
-*/
-$config['api_key'] = "";

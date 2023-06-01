@@ -18,10 +18,3 @@ $hook['pre_system'][] = array(
     'filename' => 'Cf_get_real_ip.php',
     'filepath' => 'hooks'
 );
-
-$hook['post_controller_constructor'][] = array(
-    'class'    => 'Auto_update',
-    'function' => 'run',
-    'filename' => 'Auto_update.php',
-    'filepath' => 'hooks'
-);

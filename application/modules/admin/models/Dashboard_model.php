@@ -198,23 +198,6 @@ class Dashboard_model extends CI_Model
         throw new Exception("Could not disable module with id: " . $moduleId);
     }
 
-    public function insertRequest($data)
-    {
-        $this->db->insert('support_requests', $data);
-        return true;
-    }
-
-    public function getSupportRequests()
-    {
-        $query = $this->db->query("SELECT * FROM support_requests ORDER BY id DESC");
-
-        if ($query->num_rows()) {
-            return $query->result_array();
-        } else {
-            return false;
-        }
-    }
-
     public function getEmailLogs()
     {
         $query = $this->db->query("SELECT * FROM email_log ORDER BY timestamp DESC");
