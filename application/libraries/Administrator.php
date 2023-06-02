@@ -329,7 +329,7 @@ class Administrator
      */
     public function getVersion()
     {
-        return $this->CI->config->item('FusionGENVersion');
+        return $this->CI->config->item('FusionCMSVersion');
     }
 
     /**
