@@ -27,4 +27,4 @@ $config['message_headline_size'] = 56;
 | Message text
 |--------------------------------------------------------------------------
 */
-$config['message_text'] = "The Website is currently down for maintenance, please come back later! - FusionGEN";
+$config['message_text'] = "The Website is currently down for maintenance, please come back later!";

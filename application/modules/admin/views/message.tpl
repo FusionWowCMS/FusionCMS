@@ -35,7 +35,7 @@
 		<div class="form-group row">
 		<label class="col-sm-2 col-form-label" for="message_text">Message</label>
 		<div class="col-sm-10">
-		<textarea class="form-control mb-3" id="message_text" name="message_text" rows="10" onKeyUp="Settings.liveUpdate(this, 'text')">The Website is currently down for maintenance, please come back later! -FusionGEN</textarea>
+		<textarea class="form-control mb-3" id="message_text" name="message_text" rows="10" onKeyUp="Settings.liveUpdate(this, 'text')">The Website is currently down for maintenance, please come back later!</textarea>
 		</div>
 		</div>
 
@@ -50,7 +50,7 @@
 	<div class="card-body">
 		<span class="text-center">
 		<h3 id="live_headline" style="font-size:56px;">Maintenance</h3>
-		<p id="live_text">The Website is currently down for maintenance, please come back later! -FusionGEN</p>
+		<p id="live_text">The Website is currently down for maintenance, please come back later!</p>
 		</span>
 	</div>
 </div>
