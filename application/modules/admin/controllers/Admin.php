@@ -54,7 +54,7 @@ class Admin extends MX_Controller
 
         $content = $this->administrator->box('Dashboard', $output);
 
-        $this->administrator->view($content, false, "modules/admin/js/admin.js");
+        $this->administrator->view($content, false);
     }
 
     private function getUnique()
