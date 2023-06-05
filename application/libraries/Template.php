@@ -48,6 +48,7 @@ class Template
         $this->view_path   = "views/";
         $this->style_path  = base_url() . APPPATH . "themes/" . $this->theme . "/css/";
         $this->image_path  = base_url() . APPPATH . "themes/" . $this->theme . "/images/";
+        $this->full_theme_path  = base_url() . APPPATH . $this->theme_path;
         $this->page_url    = ($this->CI->config->item('rewrite')) ? base_url() : base_url() . 'index.php/';
         $this->loadManifest();
         $this->loadModuleManifest();
