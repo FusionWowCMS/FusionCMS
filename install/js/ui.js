@@ -23,7 +23,7 @@ var UI = {
         });
 
         // navigation
-        $('.sub li a').click(function() {
+        $('.sub li').click(function() {
             UI.Navigation.goTo( $(this).attr('id') );
         });
 	},
@@ -67,6 +67,13 @@ var UI = {
 					notifyResult(false, 'Please fix all folder permissions to continue.');
                 }
                 else {
+                    // check Apache Modules
+                    Ajax.checkApacheModules(function(result) {
+                        if (result != '1') 
+						{
+                            notifyResult(false, 'Please enable all required Apache modules to continue.');
+                        }
+                    });
                     // check php extensions
                     Ajax.checkPhpExtensions(function(result) {
                         if (result == '1') 
