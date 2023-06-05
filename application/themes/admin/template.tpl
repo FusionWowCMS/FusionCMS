@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="fixed dark">
+<html class="dark">
 	<head>
 		<title>{if $title}{$title}{/if}{$serverName}</title>
 
