@@ -6,21 +6,21 @@
 	<div class="form-group row">
 	<label class="col-lg-3 col-form-label form-control-label" for="vote_url">Your vote link</label>
 	<div class="col-lg-9">
-		<input class="form-control" type="url" name="vote_url" id="vote_url" placeholder="http://" onChange="Topsites.check(this)"/>
+		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="url" name="vote_url" id="vote_url" placeholder="http://" onChange="Topsites.check(this)"/>
 	</div>
 	</div>
 
 	<div class="form-group row">
 	<label class="col-lg-3 col-form-label form-control-label" for="vote_sitename">Site title</label>
 	<div class="col-lg-9">
-		<input class="form-control" type="text" name="vote_sitename" id="vote_sitename"/>
+		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="vote_sitename" id="vote_sitename"/>
 	</div>
 	</div>
 
 	<div class="form-group row">
 	<label class="col-lg-3 col-form-label form-control-label" for="vote_image">Vote site image (will be auto-completed if URL is recognized)</label>
 	<div class="col-lg-9">
-		<input class="form-control" type="text" name="vote_image" id="vote_image" placeholder="(optional)" onChange="Topsites.updateImagePreview(this.value)"/>
+		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="vote_image" id="vote_image" placeholder="(optional)" onChange="Topsites.updateImagePreview(this.value)"/>
 
 	<div id="vote_image_preview" style="display:none">
 		<small>Preview:</small><br/>
@@ -34,7 +34,7 @@
 	<div class="col-lg-9">
 	<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 9999 }'>
 		<div class="input-group">
-			<input class="spinner-input form-control" type="text" name="hour_interval" id="hour_interval" value="12"/>
+			<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="hour_interval" id="hour_interval" value="12"/>
 			<div class="spinner-buttons input-group-btn btn-group-vertical">
 				<button type="button" class="btn spinner-up btn-xs btn-default">
 					<i class="fas fa-angle-up"></i>
@@ -53,7 +53,7 @@
 	<div class="col-lg-9">
 	<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 9999 }'>
 		<div class="input-group">
-			<input class="spinner-input form-control" type="text" name="points_per_vote" id="points_per_vote" value="1"/>
+			<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="points_per_vote" id="points_per_vote" value="1"/>
 			<div class="spinner-buttons input-group-btn btn-group-vertical">
 				<button type="button" class="btn spinner-up btn-xs btn-default">
 					<i class="fas fa-angle-up"></i>
@@ -74,7 +74,7 @@
 		<div class="not-supported">This topsite is not supported.</div>
 
 		<div class="form" style="display:none">
-			<select class="form-control" id="callback_enabled" name="callback_enabled" onChange="Topsites.updateLinkFormat()">
+			<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="callback_enabled" name="callback_enabled" onChange="Topsites.updateLinkFormat()">
 				<option value="0" selected>No</option>
 				<option value="1">Yes</option>
 			</select>
