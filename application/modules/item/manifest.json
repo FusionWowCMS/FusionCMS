@@ -1,7 +1,8 @@
 {
 	"name": "Item viewer",
 	"description": "Requires the tooltip. Displays the tooltip content on a direct-linkable page",
-	
+	"version": "2.0.0",
+	"date": "2023-05-30",
 	"author": {
 		"name": "FusionGen",
 		"website": "http:\/\/fusiongen.net"

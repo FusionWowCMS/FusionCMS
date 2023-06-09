@@ -1,7 +1,8 @@
 {
 	"name": "Register",
 	"description": "Allows users to sign up",
-
+	"version": "2.0.0",
+	"date": "2023-05-30",
 	"author": {
 		"name": "FusionCMS",
 		"website": "http://fusion-hub.com"

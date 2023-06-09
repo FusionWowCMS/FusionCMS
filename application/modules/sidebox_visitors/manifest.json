@@ -1,6 +1,8 @@
 {
 	"name":"Sidebox: online visitors",
 	"description":"Shows the amount of visitors in the past 5 minutes",
+	"version": "2.0.0",
+	"date": "2023-05-30",
 	"author":
 	{
 		"name":"FusionCMS",

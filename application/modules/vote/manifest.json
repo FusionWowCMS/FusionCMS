@@ -1,6 +1,8 @@
 {
 	"name":"Vote panel",
 	"description":"Obtain vote points by voting",
+	"version": "2.0.0",
+	"date": "2023-05-30",
 	"author":
 	{
 		"name":"FusionCMS",

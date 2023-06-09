@@ -1,6 +1,8 @@
 {
 	"name":"Sidebox: donation goal",
 	"description":"Displays a progress bar based on monthly donations and the goal",
+	"version": "2.0.0",
+	"date": "2023-05-30",
 	"author":
 	{
 		"name":"FusionCMS",

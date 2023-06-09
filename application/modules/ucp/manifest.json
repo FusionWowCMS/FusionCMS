@@ -1,6 +1,8 @@
 {
 	"name": "User panel",
 	"description": "Displays user info and provides them with a set of links",
+	"version": "2.0.0",
+	"date": "2023-05-30",
 	"author": {
 		"name": "FusionGEN",
 		"website": "http:\/\/fusion-hub.com"

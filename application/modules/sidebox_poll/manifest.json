@@ -1,6 +1,8 @@
 {
 	"name":"Sidebox: poll",
 	"description":"Allows your users to vote on certain questions",
+	"version": "2.0.0",
+	"date": "2023-05-30",
 	"author":
 	{
 		"name":"FusionCMS",

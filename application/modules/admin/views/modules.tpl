@@ -75,7 +75,7 @@
 					<tbody id="enabled_modules">
 						{foreach from=$enabled_modules item=module key=key}
 							<tr class="border-top">
-								<td class="font-weight-bold border-0 w-70 align-middle text-light">{ucfirst($module.name)} <span class="font-weight-normal">by</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small></td>
+								<td class="font-weight-bold border-0 w-70 align-middle text-light">{ucfirst($module.name)} <span class="font-weight-normal">by</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small><br><small>Version: {if isset($module.version)} {$module.version} {else} 1.0.0 {/if} | Date: {if isset($module.date)} {$module.date} {else} 1.0.0 {/if}</small></td>
 								<td class="pull-right">
 									<div class="flex flex-col gap-2 sm:flex-row">
 										{if $module.has_configs && hasPermission("editModuleConfigs")}
@@ -107,7 +107,7 @@
 					<tbody id="disabled_modules">
 						{foreach from=$disabled_modules item=module key=key}
 							<tr class="border-top">
-								<td class="font-weight-bold border-0 w-70 align-middle text-light">{ucfirst($module.name)} <span class="font-weight-normal">by</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small></td>
+								<td class="font-weight-bold border-0 w-70 align-middle text-light">{ucfirst($module.name)} <span class="font-weight-normal">by</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small><br><small>Version: {if isset($module.version)} {$module.version} {else} 1.0.0 {/if} | Date: {if isset($module.date)} {$module.date} {else} 2023.01.01 {/if}</small></td>
 								<td class="pull-right">
 									<div class="flex flex-col gap-2 sm:flex-row">
 										{if $module.has_configs && hasPermission("editModuleConfigs")}

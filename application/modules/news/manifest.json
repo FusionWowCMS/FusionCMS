@@ -1,6 +1,7 @@
 {
 	"description": "Displays server news to the users. Acts as front page",
-
+	"version": "2.0.0",
+	"date": "2023-05-30",
 	"author": {
 		"name": "FusionGen",
 		"website": "http://fusiongen.net"
