@@ -21865,3 +21865,6 @@ html.dark .mailbox-compose .bootstrap-tagsinput > input {
 .bs-popover-end > .popover-arrow::after, .bs-popover-auto[data-popper-placement^=right] > .popover-arrow::after {
     border-right-color: #17191d;
 }
+i.fa-solid {
+    font-size: 18px;
+}

@@ -179,11 +179,3 @@
   background-color: #141414!important;
   border-color: #141414!important;
 }
-
-.swal2-input, .swal2-file, .swal2-textarea, .swal2-select, .swal2-radio, .swal2-checkbox {
-    margin: 0em 0em 5px;
-}
-
-.swal2-input, .swal2-file, .swal2-textarea {
-    width: 100%;
-}
