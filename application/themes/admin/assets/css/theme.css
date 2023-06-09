@@ -8235,6 +8235,7 @@ html .card-dark .card-title {
 
 .owl-carousel .owl-item img {
 	transform-style: unset;
+	height: 260px;
 }
 
 .owl-carousel .thumbnail {
@@ -21861,4 +21862,7 @@ html.dark .mailbox-compose .bootstrap-tagsinput > input {
 }
 i.fa-solid {
     font-size: 18px;
+}
+img.theme {
+    height: 360px;
 }
