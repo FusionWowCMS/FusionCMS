@@ -124,7 +124,7 @@
 								<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 99 }'>
 									<div class="input-group">
 										{foreach from=$access_id item=gmlevel}
-											<input class="spinner-input form-control" type="text" id="gm_level" name="gm_level" value="{if !$gmlevel}0{else}{$gmlevel}{/if}" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
+											<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="gm_level" name="gm_level" value="{if !$gmlevel}0{else}{$gmlevel}{/if}" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
 										{/foreach}
 										<div class="spinner-buttons input-group-btn btn-group-vertical">
 											<button type="button" class="btn spinner-up btn-xs btn-default" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
@@ -153,7 +153,7 @@
                             <label class="col-sm-6 col-form-label" for="vp">Vote-Points</label>
 								<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 999999999999 }'>
 									<div class="input-group">
-										<input class="spinner-input form-control" type="text" id="vp" name="vp" value="{$internal_details.vp}" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
+										<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="vp" name="vp" value="{$internal_details.vp}" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
 										<div class="spinner-buttons input-group-btn btn-group-vertical">
 											<button type="button" class="btn spinner-up btn-xs btn-default" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
 												<i class="fas fa-angle-up"></i>
@@ -170,7 +170,7 @@
                             <label class="col-sm-6 col-form-label" for="dp">Donation-Points</label>
 								<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 999999999999 }'>
 									<div class="input-group">
-										<input class="spinner-input form-control" type="text" id="dp" name="dp" value="{$internal_details.dp}" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
+										<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="dp" name="dp" value="{$internal_details.dp}" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
 										<div class="spinner-buttons input-group-btn btn-group-vertical">
 											<button type="button" class="btn spinner-up btn-xs btn-default" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
 												<i class="fas fa-angle-up"></i>

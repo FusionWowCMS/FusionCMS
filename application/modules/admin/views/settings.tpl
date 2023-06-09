@@ -1,30 +1,30 @@
 <div class="row" id="non_realm">
 <div class="tabs">
-    <ul class="nav nav-tabs">
-	    <li class="nav-item">
-			<a class="nav-link active" href="#realms" data-bs-target="#realms" data-bs-toggle="tab">Realms</a>
+    <ul class="nav nav-tabs mb-2">
+	    <li class="nav-item mx-1">
+			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl active" href="#realms" data-bs-target="#realms" data-bs-toggle="tab">Realms</a>
         </li>
-        <li class="nav-item">
-			<a class="nav-link" href="#website" data-bs-target="#website" data-bs-toggle="tab">Website</a>
+        <li class="nav-item mx-1">
+			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl" href="#website" data-bs-target="#website" data-bs-toggle="tab">Website</a>
         </li>
-        <li class="nav-item">
-			<a class="nav-link" href="#smtp" data-bs-target="#smtp" data-bs-toggle="tab">SMTP</a>
+        <li class="nav-item mx-1">
+			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl" href="#smtp" data-bs-target="#smtp" data-bs-toggle="tab">SMTP</a>
         </li>
-        <li class="nav-item">
-			<a class="nav-link" href="#performance" data-bs-target="#performance" data-bs-toggle="tab">Performance</a>
+        <li class="nav-item mx-1">
+			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl" href="#performance" data-bs-target="#performance" data-bs-toggle="tab">Performance</a>
         </li>
-		<li class="nav-item">
-			<a class="nav-link" href="#social_media" data-bs-target="#social_media" data-bs-toggle="tab">Social Media</a>
+		<li class="nav-item mx-1">
+			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl" href="#social_media" data-bs-target="#social_media" data-bs-toggle="tab">Social Media</a>
         </li>
-		<li class="nav-item">
-			<a class="nav-link" href="#cdn" data-bs-target="#cdn" data-bs-toggle="tab">CDN</a>
+		<li class="nav-item mx-1">
+			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl" href="#cdn" data-bs-target="#cdn" data-bs-toggle="tab">CDN</a>
         </li>
-		<li class="nav-item">
-			<a class="nav-link" href="#security" data-bs-target="#security" data-bs-toggle="tab">Security</a>
+		<li class="nav-item mx-1">
+			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl" href="#security" data-bs-target="#security" data-bs-toggle="tab">Security</a>
         </li>
     </ul>
 
-    <div class="tab-content">
+    <div class="tab-content border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-6">
 	    <div class="tab-pane active" id="realms">
 			<section class="card" id="realm_settings">
 			<header class="card-header">Realms (<div style="display:inline;" id="realm_count">{count($realms)}</div>)
@@ -134,7 +134,7 @@
 					<div class="col-sm-10">
 					<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 65535 }'>
 						<div class="input-group">
-							<input class="spinner-input form-control" type="text" id="override_port_char" value="3306"/>
+							<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="override_port_char" value="3306"/>
 							<div class="spinner-buttons input-group-btn btn-group-vertical">
 								<button type="button" class="btn spinner-up btn-xs btn-default">
 									<i class="fas fa-angle-up"></i>
@@ -176,7 +176,7 @@
 					<div class="col-sm-10">
 					<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 65535 }'>
 						<div class="input-group">
-							<input class="spinner-input form-control" type="text" id="override_port_char_three" value="3306"/>
+							<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="override_port_char_three" value="3306"/>
 							<div class="spinner-buttons input-group-btn btn-group-vertical">
 								<button type="button" class="btn spinner-up btn-xs btn-default">
 									<i class="fas fa-angle-up"></i>
@@ -216,7 +216,7 @@
 					<div class="col-sm-10">
 					<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 65535 }'>
 						<div class="input-group">
-							<input class="spinner-input form-control" type="text" id="override_port_world_three" value="3306"/>
+							<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="override_port_world_three" value="3306"/>
 							<div class="spinner-buttons input-group-btn btn-group-vertical">
 								<button type="button" class="btn spinner-up btn-xs btn-default">
 									<i class="fas fa-angle-up"></i>
@@ -250,7 +250,7 @@
 				<div class="col-sm-10">
 					<div data-plugin-spinner data-plugin-options='{ "value": 0, "min": 0, "max": 99999 }'>
 						<div class="input-group">
-							<input class="spinner-input form-control" type="text" id="cap"/>
+							<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="cap"/>
 							<div class="spinner-buttons input-group-btn btn-group-vertical">
 								<button type="button" class="btn spinner-up btn-xs btn-default">
 									<i class="fas fa-angle-up"></i>
@@ -269,7 +269,7 @@
 				<div class="col-sm-10">
 					<div data-plugin-spinner data-plugin-options='{ "value": 0, "min": 0, "max": 65535 }'>
 						<div class="input-group">
-							<input class="spinner-input form-control" type="text" id="port"/>
+							<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="port"/>
 							<div class="spinner-buttons input-group-btn btn-group-vertical">
 								<button type="button" class="btn spinner-up btn-xs btn-default">
 									<i class="fas fa-angle-up"></i>
@@ -485,7 +485,7 @@
 			<div class="col-sm-10">
 			<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 65535 }'>
 				<div class="input-group">
-					<input class="spinner-input form-control" type="text" id="smtp_port" value="{$config.smtp_port}"/>
+					<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="smtp_port" value="{$config.smtp_port}"/>
 					<div class="spinner-buttons input-group-btn btn-group-vertical">
 						<button type="button" class="btn spinner-up btn-xs btn-default">
 							<i class="fas fa-angle-up"></i>
@@ -617,7 +617,7 @@
 					<label class="col-form-label" for="captcha_attemps">Captcha attemps (default: 3)</label>
 					<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 9999 }'>
 						<div class="input-group">
-							<input class="spinner-input form-control" type="text" id="captcha_attemps" value="{$config.captcha_attemps}"/>
+							<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="captcha_attemps" value="{$config.captcha_attemps}"/>
 							<div class="spinner-buttons input-group-btn btn-group-vertical">
 								<button type="button" class="btn spinner-up btn-xs btn-default">
 									<i class="fas fa-angle-up"></i>
@@ -634,7 +634,7 @@
 					<label class="col-form-label" for="block_attemps">Block attemps</label>
 					<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 9999 }'>
 						<div class="input-group">
-							<input class="spinner-input form-control" type="text" id="block_attemps" value="{$config.block_attemps}"/>
+							<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="block_attemps" value="{$config.block_attemps}"/>
 							<div class="spinner-buttons input-group-btn btn-group-vertical">
 								<button type="button" class="btn spinner-up btn-xs btn-default">
 									<i class="fas fa-angle-up"></i>
@@ -651,7 +651,7 @@
 					<label class="col-form-label" for="block_duration">Block duration in minutes (default: 15)</label>
 					<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 9999 }'>
 						<div class="input-group">
-							<input class="spinner-input form-control" type="text" id="block_duration" value="{$config.block_duration}"/>
+							<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="block_duration" value="{$config.block_duration}"/>
 							<div class="spinner-buttons input-group-btn btn-group-vertical">
 								<button type="button" class="btn spinner-up btn-xs btn-default">
 									<i class="fas fa-angle-up"></i>

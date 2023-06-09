@@ -12,3 +12,9 @@ li a i.fa-solid {
 li button i.fa-solid {
     font-size: 16px;
 }
+li.nav-item a.active {
+    background-color: rgb(var(--color-primary-500)/var(--tw-bg-opacity)) !important;
+}
+html.dark .tabs.tabs-bottom .nav-tabs, html.dark .nav-tabs {
+    border-bottom: unset;
+}

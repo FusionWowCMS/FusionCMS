@@ -7853,8 +7853,8 @@ html.dark .card-body {
 }
 
 html.dark .card-footer {
-	background: #242830;
-	border-top-color: #191c21;
+	background: rgb(var(--color-muted-800)/var(--tw-bg-opacity));
+	border-top-color: rgb(var(--color-muted-700)/var(--tw-border-opacity));
 }
 
 html .card-primary .card-header {
@@ -16892,11 +16892,6 @@ html.dark .table .actions-hover a {
 	}
 }
 /* Dark */
-html.dark .tabs.tabs-bottom .tab-content,
-html.dark .tab-content {
-	background-color: #21262d;
-	border-color: #282d36;
-}
 
 html.dark .tabs.tabs-bottom .nav-tabs,
 html.dark .nav-tabs {
