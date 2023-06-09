@@ -1,14 +1,14 @@
 <div class="row">
 <div class="tabs">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs mb-2">
 	    <li class="nav-item">
-			<a class="nav-link active" href="#DB" data-bs-target="#DB" data-bs-toggle="tab">Database</a>
+			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl active" href="#DB" data-bs-target="#DB" data-bs-toggle="tab">Database</a>
         </li>
         <!--<li class="nav-item">
 			<a class="nav-link" href="#files" data-bs-target="#files" data-bs-toggle="tab">Files</a>
         </li>-->
     </ul>
-    <div class="tab-content">
+    <div class="tab-content border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-6">
 	    <div class="tab-pane active" id="DB">
 			<div class="row">
 			<div class="col-lg-4 mb-3">
