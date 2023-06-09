@@ -18,3 +18,17 @@ li.nav-item a.active {
 html.dark .tabs.tabs-bottom .nav-tabs, html.dark .nav-tabs {
     border-bottom: unset;
 }
+
+button:is(.dark .is-button-default) {
+    --tw-border-opacity: 1;
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    background-color: rgb(var(--color-muted-700)/1);
+    background-color: rgb(var(--color-muted-700)/var(--tw-bg-opacity));
+    border-color: rgb(var(--color-muted-600)/var(--tw-border-opacity));
+    color: #fff;
+    color: rgb(255 255 255/var(--tw-text-opacity));
+}
+td.pull-right {
+    border-bottom-width: 0 !important;
+}

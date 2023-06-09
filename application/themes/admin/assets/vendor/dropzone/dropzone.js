@@ -8059,7 +8059,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       }
 
       if (this.element.classList.contains("dropzone") && !this.element.querySelector(".dz-message")) {
-        this.element.appendChild(Dropzone.createElement("<div class=\"dz-default dz-message\"><button class=\"dz-button\" type=\"button\">".concat(this.options.dictDefaultMessage, "</button></div>")));
+        this.element.appendChild(Dropzone.createElement("<div class=\"dz-default dz-message\"><button class=\"dz-button text-muted-400 group-hover:text-primary-500 group-focus:text-primary-500 cursor-pointer font-sans text-sm underline underline-offset-4 transition-colors duration-300\" type=\"button\">".concat(this.options.dictDefaultMessage, "</button></div>")));
       }
 
       if (this.clickableElements.length) {
