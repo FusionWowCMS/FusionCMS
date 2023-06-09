@@ -1,7 +1,7 @@
 {TinyMCE()}
 <div class="card">
   <div class="card-header">
-    Edit Page → {langColumn($page['name'])}<a class="btn btn-primary btn-sm pull-right" href="{$url}page/admin">Back</a>
+    Edit Page → {langColumn($page['name'])}<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="{$url}page/admin">Back</a>
   </div>
 
 	<div class="card-body">
@@ -43,7 +43,7 @@
 		</div>
 
 		<form onSubmit="Pages.send({$page.id}); return false">
-		<button type="submit" class="btn btn-primary btn-sm">Submit page</button>
+		<button type="submit" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md">Submit page</button>
 		</form>
 	</div>
 </div>

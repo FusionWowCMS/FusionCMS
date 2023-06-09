@@ -6,7 +6,7 @@
 <div class="col-12">
 	<div class="card">
 		<header class="card-header">Menu Links (<div style="display:inline;">{if !$links}0{else}{count($links)}{/if}</div>)
-		{if hasPermission("addMenuLinks")}<button class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" onClick="Menu.add()">Create link</button>{/if}
+		{if hasPermission("addMenuLinks")}<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="javascript:void(0)" onClick="Menu.add()">Create link</button>{/if}
 		</header>
 		<div class="card-body">
 			<table class="table table-responsive-md table-hover">
@@ -34,10 +34,10 @@
 						<td><a href="{$link.link}" target="_blank">{$link.link_short}</a></td>
 						<td style="text-align: center;">
 							{if hasPermission("editMenuLinks")}
-								<a class="btn btn-primary btn-sm" href="{$url}admin/menu/edit/{$link.id}">Edit</a>
+								<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="{$url}admin/menu/edit/{$link.id}">Edit</a>
 							{/if}
 							{if hasPermission("deleteMenuLinks")}
-								<a class="btn btn-primary btn-sm" href="javascript:void(0)" onClick="Menu.remove({$link.id}, this)">Delete</a>
+								<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="javascript:void(0)" onClick="Menu.remove({$link.id}, this)">Delete</a>
 							{/if}
 						</td>
 					</tr>

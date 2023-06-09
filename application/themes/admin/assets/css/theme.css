@@ -7438,7 +7438,8 @@ html.dark .call-to-action.call-to-action-grey:before {
 .card {
 	background: transparent;
 	box-shadow: none;
-	border: none;
+    border-color: rgb(var(--color-muted-700));
+    border-width: 2px;
 }
 
 .card + .card {
@@ -7838,8 +7839,9 @@ html.dark .call-to-action.call-to-action-grey:before {
 
 /* Dark - Cards */
 html.dark .card-header {
-	background: #282d36;
-	border-bottom-color: #1d2127;
+	background: rgb(var(--color-muted-800)/var(--tw-bg-opacity));
+	border-bottom-color: rgb(var(--color-muted-700)/var(--tw-border-opacity));
+    font-weight: 600;
 }
 
 html.dark .card-actions a:hover {
@@ -7847,7 +7849,7 @@ html.dark .card-actions a:hover {
 }
 
 html.dark .card-body {
-	background: #2e353e;
+	background: rgb(var(--color-muted-800)/var(--tw-bg-opacity));
 }
 
 html.dark .card-footer {
@@ -16263,8 +16265,7 @@ html.dark .table > thead > tr > td,
 html.dark .table > tbody > tr > td,
 html.dark .table > tfoot > tr > td,
 html.dark .table-bordered {
-	border-color: #262b33;
-	color: #808697;
+	color: rgb(148 163 184);
 	vertical-align: middle;
 }
 

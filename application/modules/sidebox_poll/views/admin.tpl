@@ -1,7 +1,7 @@
 <div class="card" id="main_polls">
 	<div class="card-header">
 		Polls (<div style="display:inline;" id="polls_count">{if !$polls}0{else}{count($polls)}{/if}</div>)
-		{if hasPermission("createPoll")}<a class="btn btn-primary btn-sm pull-right" href="{$url}sidebox_poll/admin/new">Create poll</a>{/if}
+		{if hasPermission("createPoll")}<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="{$url}sidebox_poll/admin/new">Create poll</a>{/if}
 	</div>
 	<div class="card-body">
 		{if $polls}
@@ -12,7 +12,7 @@
 						<tr>
 							<td>{if isset($poll.active)}<span style="padding:0px;display:inline;color:green;">Current:</span> {/if}<b>{$poll.question}</b></td>
 							<td style="text-align:center;">
-								<a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" onClick="Poll.remove({$poll.questionid}, this)">Delete</a>
+								<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="javascript:void(0)" onClick="Poll.remove({$poll.questionid}, this)">Delete</a>
 							</td>
 						</tr>
 					</tbody>
@@ -59,6 +59,6 @@
 			<input class="form-control" type="text" name="answer_2" id="answer_2" placeholder="Answer 2"/>
 		</div>
 
-		<button type="submit" class="btn btn-primary btn-sm">Submit poll</button>
+		<button type="submit" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md">Submit poll</button>
 	</form>
 </div>

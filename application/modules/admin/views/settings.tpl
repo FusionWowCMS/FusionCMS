@@ -28,7 +28,7 @@
 	    <div class="tab-pane active" id="realms">
 			<section class="card" id="realm_settings">
 			<header class="card-header">Realms (<div style="display:inline;" id="realm_count">{count($realms)}</div>)
-			<button class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" onClick="Settings.showAddRealm()">Add a new realm</button>
+			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="javascript:void(0)" onClick="Settings.showAddRealm()">Add a new realm</button>
 			</header>
 			<div class="card-body">
 			<table class="table table-responsive-md table-hover mb-0">
@@ -49,8 +49,8 @@
 							<td>{$realm->getConfig("hostname")}</td>
 							<td>{strtoupper($realm->getConfig("emulator"))}</td>
 							<td style="text-align: center;">
-								<a class="btn btn-primary btn-sm" href="{$url}admin/realmmanager/edit/{$realm->getId()}">Edit</a>&nbsp;
-								<a class="btn btn-primary btn-sm" href="javascript:void(0)" onClick="Settings.remove({$realm->getId()}, this)">Delete</a>
+								<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="{$url}admin/realmmanager/edit/{$realm->getId()}">Edit</a>&nbsp;
+								<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="javascript:void(0)" onClick="Settings.remove({$realm->getId()}, this)">Delete</a>
 							</td>
 						</tr>
 				{/foreach}
@@ -326,7 +326,7 @@
 					<input class="form-control" type="password" id="console_password"/>
 				</div>
 				</div>
-					<button class="btn btn-primary btn-sm" type="submit">Add realm</button>
+					<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Add realm</button>
 			</form>
 			</div>
 			</div>
@@ -422,7 +422,7 @@
 			</div>
 			</div>
 			
-			<button class="btn btn-primary btn-sm" type="submit">Save</button>
+			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
         </form>
         </div>
 
@@ -510,8 +510,8 @@
             </div>
             </div>
 
-			<button class="btn btn-primary btn-sm" type="submit">Save</button>
-			<button class="btn btn-primary btn-sm" onclick="Settings.mailDebug(); return false">Mail debug</button>
+			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
+			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" onclick="Settings.mailDebug(); return false">Mail debug</button>
             <button onClick="Settings.showHelp()" type="button" class="btn btn-primary pull-right"><i class="fa-solid fa-circle-info fa-lg"></i></button>
         </form>
         </div>
@@ -537,7 +537,7 @@
 			</select>
 			</div>
 			</div>
-			<button class="btn btn-primary btn-sm" type="submit">Save</button>
+			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
 		</form>
         </div>
 
@@ -571,7 +571,7 @@
 			</div>
             </div>
 
-			<button class="btn btn-primary btn-sm" type="submit">Save</button>
+			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
 		</form>
         </div>
 
@@ -594,7 +594,7 @@
 			</div>
             </div>
 
-			<button class="btn btn-primary btn-sm" type="submit">Save</button>
+			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
         </form>
         <div class="alert alert-dark mt-3" role="alert">
 			Do you like the CDN system and want to continue using it? We would appreciate your help!<br>
@@ -665,7 +665,7 @@
 				</div>
 			</div>
 
-			<button class="btn btn-primary btn-sm" type="submit">Save</button>
+			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
         </form>
         </div>
     </div>

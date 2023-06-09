@@ -21,8 +21,8 @@
                                     <td>{$value.price}</td>
                                     <td>{$value.points}</td>
                                     <td class="text-center" width="50%">
-                                    <a href="javascript:void(0)" class="btn btn-primary btn-sm" onClick="Donate.updateValue({$value.id}, {$value.price}, {$value.points}); return false">Edit</a>
-                                    <a href="javascript:void(0)" class="btn btn-primary btn-sm" onClick="Donate.deleteValue({$value.id}, this); return false">Delete</a>
+                                    <a href="javascript:void(0)" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" onClick="Donate.updateValue({$value.id}, {$value.price}, {$value.points}); return false">Edit</a>
+                                    <a href="javascript:void(0)" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" onClick="Donate.deleteValue({$value.id}, this); return false">Delete</a>
                                     </td>
                                 </tr>
                             {/foreach}
