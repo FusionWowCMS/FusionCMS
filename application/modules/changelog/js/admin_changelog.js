@@ -38,7 +38,7 @@ var Changelog = {
 			if (result.isConfirmed) {
 				$("#" + identifier + "_count").html(parseInt($("#" + identifier + "_count").html()) - 1);
 
-				$(element).parents(".card-header").slideUp(300, function()
+				$(element).parents("tr").slideUp(300, function()
 				{
 					$(this).remove();
 				});
@@ -49,6 +49,51 @@ var Changelog = {
 				});
 			}
 			})
+	},
+
+	/**
+	 * Toggle between the "add" form and the list
+	 */
+	add: function(categoryId)
+	{
+		var id = this.identifier;
+
+		if($("#add_" + id).is(":visible"))
+		{
+			$("#add_" + id).fadeOut(150, function()
+			{
+				$("#main_" + id).fadeIn(150);
+			});
+		}
+		else
+		{
+			$("#main_" + id).fadeOut(150, function()
+			{
+				$("#add_" + id).fadeIn(150);
+			});
+		}
+	},
+
+	/**
+	 * Submit the form contents to the create link
+	 * @param Object form
+	 */
+	create: function(form)
+	{
+		var values = {csrf_token_name: Config.CSRF};
+
+		$(form).find("input, select").each(function()
+		{
+			if($(this).attr("type") != "submit")
+			{
+				values[$(this).attr("name")] = $(this).val();
+			}
+		});
+
+		$.post(Config.URL + this.Links.create, values, function()
+		{
+			window.location.reload(true);
+		});
 	},
 
 	/**
@@ -78,32 +123,36 @@ var Changelog = {
 	 */
 	addChange: function(id)
 	{
-		var addHTML = '<textarea id="change_message" rows="4" placeholder="Changelog message..."></textarea>';
-
-		UI.confirm(addHTML, "Submit", function()
-		{
-			var change_message = $("#change_message").val();
-
-			$.post(Config.URL + "changelog/admin/addChange/" + id, {csrf_token_name:Config.CSRF, change_message:change_message}, function(data)
+		(async () => {
+		const { value: text } = await Swal.fire({
+		input: 'textarea',
+		inputLabel: 'Message',
+		inputPlaceholder: 'Changelog message...',
+		inputAttributes: {
+			'aria-label': 'Changelog message...'
+		},
+		showCancelButton: true
+		})
+		if (text) {
+			$.post(Config.URL + "changelog/admin/addChange/" + id, {csrf_token_name:Config.CSRF, change_message:text}, function(data)
 			{
 				data = JSON.parse(data);
 				console.log(data);
-				$("#headline_" + id).after('<li style="display:none;">' +
-						'<table width="100%">' +
+				$("#headline_" + id).after('<table class="table table-responsive-md">' +
 							'<tr>' +
-								'<td width="40%">' + data.changelog +'</td>' +
-								'<td width="20%">' + data.author + '</td>' +
-								'<td width="20%">' + data.date + '</td>' +
-								'<td style="text-align:right;" width="10%">' +
-									'<a href="' + Config.URL + 'changelog/admin/edit/' + data.id + '" data-tip="Edit"><img src="' + Config.URL + 'application/themes/admin/images/icons/black16x16/ic_edit.png" /></a>&nbsp;'+
-									'<a href="javascript:void(0)" onClick="Changelog.remove(' + data.id + ', this)" data-tip="Delete"><img src="' + Config.URL + 'application/themes/admin/images/icons/black16x16/ic_minus.png" /></a>'+
+								'<td>' + data.changelog +'</td>' +
+								'<td>' + data.author + '</td>' +
+								'<td>' + data.date + '</td>' +
+								'<td style="text-align:center;">' +
+									'<a class="btn btn-primary btn-sm" href="' + Config.URL + 'changelog/admin/edit/' + data.id + '" data-tip="Edit"><i class="fa-solid fa-pen-to-square"></i></a>&nbsp;'+
+									'<a class="btn btn-primary btn-sm" href="javascript:void(0)" onClick="Changelog.remove(' + data.id + ', this)" data-tip="Delete"><i class="fa-solid fa-trash-can"></i></a>'+
 								'</td>' +
 							'</tr>' +
-						'</table>' +
-					'</li>');
+						'</table>');
 				$("#headline_" + id).next().slideDown(300);
 			});
-		});
+		}
+		})()
 	},
 
 	/**
