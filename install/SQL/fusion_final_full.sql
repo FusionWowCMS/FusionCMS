@@ -985,6 +985,7 @@ CREATE TABLE `sideboxes`  (
   `displayName` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `rank_needed` int(10) NOT NULL DEFAULT 1,
   `order` int(11) NULL DEFAULT 100,
+  `location` text NOT NULL DEFAULT 'side' COMMENT 'side, top, bottom',
   `permission` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_sb_rank_needed`(`rank_needed`) USING BTREE,

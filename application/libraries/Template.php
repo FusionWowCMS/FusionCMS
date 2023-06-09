@@ -477,6 +477,7 @@ class Template
 
                     array_push($out, array(
                         'name' => langColumn($sidebox['displayName']),
+                        'location' => $sidebox['location'],
                         'data' => $object->view(),
                         'type' => $sidebox['type']
                     ));

@@ -11,6 +11,7 @@
 			<th>Name</th>
 			<th>Sidebox</th>
 			<th>Visibility</th>
+			<th>Location</th>
 			<th scope="col" style="text-align:center;">Actions</th>
 		</tr>
 	</thead>
@@ -24,6 +25,7 @@
 				<td><b>{langColumn($sidebox.displayName)}</b></td>
 				<td>{$sidebox.name}</td>
 				<td>{if $sidebox.permission}Controlled per group{else}Visible to everyone{/if}</td>
+				<td>{$sidebox.location}</td>
 				<td style="text-align:center;">
 					<a href="{$url}admin/sidebox/edit/{$sidebox.id}"><button type="button" class="btn btn-primary btn-sm">Edit</button></a>&nbsp;
 					<a href="javascript:void(0)" onClick="Sidebox.remove({$sidebox.id}, this)"><button type="button" class="btn btn-primary btn-sm">Remove</button></a>

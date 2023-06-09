@@ -66,6 +66,7 @@ var Sidebox = {
 				type: $("#type").val(),
 				content: $("textarea.tinymce").val(),
 				visibility: $("#visibility").val(),
+				location: $("#location").val(),
 				csrf_token_name: Config.CSRF
 			};
 

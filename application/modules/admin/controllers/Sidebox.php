@@ -78,8 +78,9 @@ class Sidebox extends MX_Controller
     {
         requirePermission("addSideboxes");
 
-        $data["type"] = preg_replace("/sidebox_/", "", $this->input->post("type"));
-        $data["displayName"] = $this->input->post("displayName");
+        $data['type'] = preg_replace("/sidebox_/", "", $this->input->post('type'));
+        $data['displayName'] = $this->input->post('displayName');
+        $data['location'] = $this->input->post('location');
 
         if (!$data["displayName"])
         {

@@ -13,6 +13,7 @@
 		<div class="container">
 			<div class="row">
 				<div id="left" class="col-sm-12 col{if $showSidebox}-lg-8{/if}" mainbar="">
+					{include file="{$theme_path}views/parts/topbox.tpl"}
 					{$page}
 				</div>
 
@@ -38,6 +39,7 @@
 		</div>
 	</section>
 
+	{include file="{$theme_path}views/parts/bottombox.tpl"}
 	{include file="{$theme_path}views/parts/footer.tpl"}
 
 </body>
