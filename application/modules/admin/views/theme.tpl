@@ -32,7 +32,7 @@
 		"dots": true,
 		"autoplay": true,
 		"autoplayTimeout": 3000,
-		"loop": false,
+		"loop": true,
 		"margin": 10,
 		"nav": false,
 		"responsive": {
