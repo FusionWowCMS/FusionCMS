@@ -53,10 +53,6 @@ var Fusion_Cache = {
 				$("#row_website").html('<div class="progress_bar"><a style="width:0%"></a></div>');
 			break;
 
-			case "message":
-				$("#row_message").html('<div class="progress_bar"><a style="width:0%"></a></div>');
-			break;
-
 			case "all":
 				$("#row_website").html('<div class="progress_bar"><a style="width:0%"></a></div>');
 				$("#row_message").html('<div class="progress_bar"><a style="width:0%"></a></div>');
@@ -104,13 +100,6 @@ var Fusion_Cache = {
 					$("#row_website .progress_bar a").animate({width:"100%"}, 200, function()
 					{
 						$("#row_website").html("0 files (0 B)");
-					});
-				break;
-
-				case "message":
-					$("#row_message .progress_bar a").animate({width:"100%"}, 200, function()
-					{
-						$("#row_message").html("0 files (0 B)");
 					});
 				break;
 
