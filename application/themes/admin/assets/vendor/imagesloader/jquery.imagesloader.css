@@ -69,10 +69,6 @@
   border-style: dashed !important;
 }
 
-.border.rounded {
-  border-radius: 1.25rem !important;
-}
-
 .image {
   border-width: 2px !important;
   border-color: #dee2e6 !important;

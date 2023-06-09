@@ -8,7 +8,7 @@
 			<div class="form-group row mb-3">
 			<label class="col-sm-2 col-form-label" for="source_{$title}">Source code</label>
 			<div class="col-sm-10">
-				<textarea class="form-control" id="source_{$title}" name="source_{$title}" rows="15" spellcheck="false">{$config.source}</textarea>
+				<textarea class="form-control nui-focus border-muted-300 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full border bg-white font-sans transition-all duration-300 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 min-h-[2.5rem] text-sm leading-[1.6] rounded resize-none p-2" id="source_{$title}" name="source_{$title}" rows="15" spellcheck="false">{$config.source}</textarea>
 			</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Save config</button>
@@ -20,7 +20,7 @@
 			<div class="form-group row mb-3">
 			<label class="col-sm-2 col-form-label" for="source_{$title}">Source code</label>
 			<div class="col-sm-10">
-				<textarea class="form-control" id="source_{$title}" name="source_{$title}" rows="15" spellcheck="false">{$config.source}</textarea>
+				<textarea class="form-control nui-focus border-muted-300 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full border bg-white font-sans transition-all duration-300 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 min-h-[2.5rem] text-sm leading-[1.6] rounded resize-none p-2" id="source_{$title}" name="source_{$title}" rows="15" spellcheck="false">{$config.source}</textarea>
 			</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Save config</button>
@@ -33,7 +33,7 @@
 					{if is_array($option) && ctype_digit(implode('', array_keys($option)))}
 						<label class="col-sm-2 col-form-label" for="{$label}">{ucfirst(preg_replace("/_/", " ", $label))}</label>
 						<div class="col-sm-10">
-							<input class="form-control" type="text" value="{foreach from=$option item=value}{$value},{/foreach}" id="{$label}" name="{$label}" />
+							<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" value="{foreach from=$option item=value}{$value},{/foreach}" id="{$label}" name="{$label}" />
 						</div>
 					{elseif is_array($option)}	
 						<label class="col-sm-2 col-form-label" for="{$label}"><b>{ucfirst(preg_replace("/_/", " ", $label))}</b></label>
@@ -41,14 +41,14 @@
 							{if is_array($sub_option) && ctype_digit(implode('', array_keys($sub_option)))}
 								<label class="col-sm-2 col-form-label" for="{$label}-{$sub_label}">{ucfirst(preg_replace("/_/", " ", $sub_label))}</label>
 								<div class="col-sm-10">
-									<input class="form-control" type="text" value="{foreach from=$sub_option item=value}{$value},{/foreach}" id="{$label}-{$sub_label}" name="{$label}-{$sub_label}" />
+									<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" value="{foreach from=$sub_option item=value}{$value},{/foreach}" id="{$label}-{$sub_label}" name="{$label}-{$sub_label}" />
 								</div>
 							{elseif is_array($sub_option)}
 								<label class="col-sm-2 col-form-label" for="{$label}-{$sub_label}"><b>{ucfirst(preg_replace("/_/", " ", $sub_label))}</b></label>
 							{elseif $sub_option === true}
 								<label class="col-sm-2 col-form-label" for="{$label}-{$sub_label}">{ucfirst(preg_replace("/_/", " ", $sub_label))}</label>
 								<div class="col-sm-10">
-								<select class="form-control" id="{$label}-{$sub_label}" name="{$label}-{$sub_label}">
+								<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="{$label}-{$sub_label}" name="{$label}-{$sub_label}">
 									<option selected value="true">Yes</option>
 									<option value="false">No</option>
 								</select>
@@ -56,7 +56,7 @@
 							{elseif $sub_option === false}
 								<label class="col-sm-2 col-form-label" for="{$label}-{$sub_label}">{ucfirst(preg_replace("/_/", " ", $sub_label))}</label>
 								<div class="col">
-								<select class="form-control" id="{$label}-{$sub_label}" name="{$label}-{$sub_label}">
+								<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="{$label}-{$sub_label}" name="{$label}-{$sub_label}">
 									<option value="true">Yes</option>
 									<option selected value="false">No</option>
 								</select>
@@ -64,14 +64,14 @@
 							{else}
 								<label class="col-sm-2 col-form-label" for="{$label}-{$sub_label}">{ucfirst(preg_replace("/_/", " ", $sub_label))}</label>
 								<div class="col">
-									<input class="form-control" type="text" value="{$sub_option}" id="{$label}-{$sub_label}" name="{$label}-{$sub_label}" />
+									<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" value="{$sub_option}" id="{$label}-{$sub_label}" name="{$label}-{$sub_label}" />
 								</div>
 							{/if}
 						{/foreach}
 					{elseif $option === true}
 						<label class="col-sm-2 col-form-label" for="{$label}">{ucfirst(preg_replace("/_/", " ", $label))}</label>
 						<div class="col-sm-10">
-						<select class="form-control" id="{$label}" name="{$label}">
+						<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="{$label}" name="{$label}">
 							<option selected value="true">Yes</option>
 							<option value="false">No</option>
 						</select>
@@ -79,7 +79,7 @@
 					{elseif $option === false}
 						<label class="col-sm-2 col-form-label" for="{$label}">{ucfirst(preg_replace("/_/", " ", $label))}</label>
 						<div class="col-sm-10">
-						<select class="form-control" id="{$label}" name="{$label}">
+						<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="{$label}" name="{$label}">
 							<option value="true">Yes</option>
 							<option selected value="false">No</option>
 						</select>
@@ -87,7 +87,7 @@
 					{else}
 						<label class="col-sm-2 col-form-label" for="{$label}">{ucfirst(preg_replace("/_/", " ", $label))}</label>
 						<div class="col-sm-10">
-							<input class="form-control" type="text" value="{$option}" id="{$label}" name="{$label}" />
+							<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" value="{$option}" id="{$label}" name="{$label}" />
 						</div>
 					{/if}
 				{/if}

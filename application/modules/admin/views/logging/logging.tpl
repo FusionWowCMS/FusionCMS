@@ -14,7 +14,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 mb-3">
 		<div class="input-group">
-			<input class="form-control" type="text" name="search" id="search" placeholder="Search by username, IP address or user ID">
+			<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="search" id="search" placeholder="Search by username, IP address or user ID">
 			<button class="input-group-text" type="submit">Search</button>
 		</div>
 	</div>

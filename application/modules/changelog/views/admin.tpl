@@ -21,13 +21,13 @@
 				{/if}
 				<td><b>{$category.typeName}</b></td>
 				
-				<td class="pull-right">
+				<td>
 					{if hasPermission("canEditCategory")}
-						<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="javascript:void(0)" onClick="Changelog.renameCategory({$category.id}, this)" data-tip="{lang("rename_category", "changelog")}"><i class="fa-solid fa-pen-to-square"></i></a>
+						<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="javascript:void(0)" onClick="Changelog.renameCategory({$category.id}, this)" data-tip="{lang("rename_category", "changelog")}"><i class="fa-solid fa-pen-to-square"></i></a>
 					{/if}
 					
 					{if hasPermission("canRemoveCategory")}
-						<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="javascript:void(0)" onClick="Changelog.removeCategory({$category.id}, this)" data-tip="{lang("delete_category", "changelog")}"><i class="fa-solid fa-trash-can"></i></a>
+						<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right mx-2" href="javascript:void(0)" onClick="Changelog.removeCategory({$category.id}, this)" data-tip="{lang("delete_category", "changelog")}"><i class="fa-solid fa-trash-can"></i></a>
 					{/if}
 				</td>
 			</tr>

@@ -109,12 +109,12 @@
 						<div class="row mb-3">
 							<div class="form-group col-md-6">
 								<label for="nickname">Displayname</label>
-								<input class="form-control" type="text" id="nickname" name="nickname" value="{$internal_details.nickname}" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
+								<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="nickname" name="nickname" value="{$internal_details.nickname}" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
 							</div>
 						
 							<div class="form-group col-md-6 border-top-0 pt-0">
 								<label for="email">Email</label>
-								<input class="form-control" type="text" id="email" name="email" value="{$external_details.email}" disabled="disabled">
+								<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="email" name="email" value="{$external_details.email}" disabled="disabled">
 							</div>
 						</div>
 
@@ -140,7 +140,7 @@
 						
 							<div class="form-group col-md-6 border-top-0 pt-0">
 								<label for="expansion">Expansion</label>
-								<select class="form-control" id="expansion" name="expansion" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
+								<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="expansion" name="expansion" {if !hasPermission("editAccounts")}disabled="disabled"{/if}>
 									{foreach from=$expansions key=id item=expansion}
 										<option value="{$id}" {if $external_details.expansion == $id}selected{/if}>{$expansion}</option>
 									{/foreach}
