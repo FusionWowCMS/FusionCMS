@@ -16,7 +16,7 @@
 .timeline.timeline-simple .tm-body .tm-items > li .tm-box:after {
     border-right-color: rgb(var(--color-muted-700)/1) !important;
 }
-.btn-default {
+html.dark .btn-default {
     background-color: #131b2e !important;
     border-color: #334155 !important;
 }
