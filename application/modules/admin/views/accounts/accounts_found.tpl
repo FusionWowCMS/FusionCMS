@@ -12,28 +12,28 @@
 
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
-						<b style="color:#808697;">Displayname</b> <a class="pull-right"><b>{$internal_details.nickname}</b></a>
+						<b style="color:#808697;">Displayname</b> <a class="pull-right text-muted-800 dark:text-white"><b>{$internal_details.nickname}</b></a>
 					</li>
 					<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
-						<b style="color:#808697;">Email</b> <a class="pull-right"><b>{$external_details.email}</b></a>
+						<b style="color:#808697;">Email</b> <a class="pull-right text-muted-800 dark:text-white"><b>{$external_details.email}</b></a>
 					</li>
 					<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
-						<b style="color:#808697;">GM Level </b> <a class="pull-right"><b>{if !$access_id}0{else}{$access_id.gmlevel}{/if}</b> </a>
+						<b style="color:#808697;">GM Level </b> <a class="pull-right text-muted-800 dark:text-white"><b>{if !$access_id}0{else}{$access_id.gmlevel}{/if}</b> </a>
 					</li>
 					<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
-						<b style="color:#808697;">Registration </b> <a class="pull-right word-break"><b>{$external_details.joindate}</b> </a>
+						<b style="color:#808697;">Registration </b> <a class="pull-right text-muted-800 dark:text-white word-break"><b>{$external_details.joindate}</b> </a>
 					</li>
 					<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
-						<b style="color:#808697;">Last login </b> <a class="pull-right"><b>{$external_details.last_login}</b> </a>
+						<b style="color:#808697;">Last login </b> <a class="pull-right text-muted-800 dark:text-white"><b>{$external_details.last_login}</b> </a>
 					</li>
 					<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
-						<b style="color:#808697;">Last IP </b> <b><a class="pull-right" href="https://db-ip.com/{$external_details.last_ip}" target="_blank">{$external_details.last_ip}</a></b>
+						<b style="color:#808697;">Last IP </b> <b><a class="pull-right text-muted-800 dark:text-white" href="https://db-ip.com/{$external_details.last_ip}" target="_blank">{$external_details.last_ip}</a></b>
 					</li>
 					<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
-						<b style="color:#808697;">VP </b> <a class="pull-right"><b>{$internal_details.vp}</b> </a>
+						<b style="color:#808697;">VP </b> <a class="pull-right text-muted-800 dark:text-white"><b>{$internal_details.vp}</b> </a>
 					</li>
 					<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
-						<b style="color:#808697;">DP </b> <a class="pull-right"><b>{$internal_details.dp}</b> </a>
+						<b style="color:#808697;">DP </b> <a class="pull-right text-muted-800 dark:text-white"><b>{$internal_details.dp}</b> </a>
 					</li>
 				</ul>
 
@@ -43,15 +43,15 @@
 	</div>
 	<div class="col-lg-9">
 		<div class="tabs">
-			<ul class="nav nav-tabs">
+			<ul class="nav nav-tabs mb-2">
 				<li class="nav-item">
-					<a class="nav-link active" href="#overview" data-bs-target="#overview" data-bs-toggle="tab">Overview</a>
+					<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl active" href="#overview" data-bs-target="#overview" data-bs-toggle="tab">Overview</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#edit" data-bs-target="#edit" data-bs-toggle="tab">Edit</a>
+					<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl mx-2" href="#edit" data-bs-target="#edit" data-bs-toggle="tab">Edit</a>
 				</li>
 			</ul>
-			<div class="tab-content">
+			<div class="tab-content border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-6">
 				<div id="overview" class="tab-pane active">
 					<h4 class="mb-3 font-weight-semibold text-dark">Timeline</h4>
 

@@ -16264,6 +16264,7 @@ html.dark .table > thead > tr > td,
 html.dark .table > tbody > tr > td,
 html.dark .table > tfoot > tr > td,
 html.dark .table-bordered {
+	color: rgb(148 163 184);
 	vertical-align: middle;
 }
 
@@ -21328,7 +21329,6 @@ html.dark .body-sign .line-thru:after {
 	background: #fff;
 	min-height: 65px;
 	padding: 10px 20px;
-	border: 1px solid #e9e9e9;
 	border-radius: 6px;
 }
 
@@ -21491,11 +21491,6 @@ html.dark .timeline.timeline-simple .tm-body .tm-title {
 	background-color: #282d36;
 	border-color: #21262d;
 }
-
-html.dark .timeline.timeline-simple .tm-body .tm-items > li:before {
-	box-shadow: 0 0 0 3px #2e353e, 0 0 0 6px #CCC;
-}
-
 html.dark .timeline.timeline-simple .tm-body .tm-items > li .tm-box:after {
 	border-right-color: #282d36;
 }
