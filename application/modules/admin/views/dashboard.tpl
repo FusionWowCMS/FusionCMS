@@ -180,7 +180,7 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="col-span-12 md:col-span-8">
+                                    <div class="col-span-12 md:col-span-12">
 										{if $graphMonthly}
                                         <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-6" id="graphSelectorWrapper">
                                             <div class="flex gap-8">
@@ -208,7 +208,7 @@
                                             </h2>
 		                                
                                             <div id="visitorsSelectorItems" class="chart-data-selector-items mt-3">
-                                                <div class="chart chart-sm" data-graph-rel="Monthly" id="graphData1" class="chart-active" style="height: 200px;"></div>
+                                                <div class="chart chart-sm chart-active" data-graph-rel="Monthly" id="graphData1" style="height: 200px;"></div>
                                                 <script>
                                                     var monthNames = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                                                     var monthlyData = [{
@@ -227,7 +227,7 @@
                                                     }];
                                                 </script>
 		                                
-                                                <div class="chart chart-sm" data-graph-rel="Daily" id="graphData2" class="chart-hidden" style="height: 200px;"></div>
+                                                <div class="chart chart-sm chart-hidden" data-graph-rel="Daily" id="graphData2" style="height: 200px;"></div>
 		                                
                                                 <script>
                                                     var dailyData = [{
@@ -348,35 +348,6 @@
 }).apply(this, [jQuery]);
 </script>
 										{/if}
-                                    </div>
-                                    <div class="col-span-12 md:col-span-4">
-                                        <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md flex h-full flex-col p-6">
-                                            
-                                            <div class="mb-10 flex items-center justify-between">
-                                                <h3 class="font-heading text-base font-semibold leading-tight text-muted-800 dark:text-white">
-                                                    <span>Goal Overview</span>
-                                                </h3>
-                                            </div>
-                                            <div class="mb-6">
-                                                <div>
-                                                    <div class="nui-placeload animate-nui-placeload m-4 w-[calc(100%-32px)]" style="height:188px;"></div>
-                                                    <span></span>
-                                                </div>
-                                            </div>
-                                            <div class="mt-auto">
-                                                <div class="border-muted-200 dark:border-muted-700 flex w-full border-t pt-4 text-center">
-                                                    <div class="border-muted-200 dark:border-muted-700 flex-1 border-r px-2">
-                                                        <span class="text-muted-400 font-sans text-xs"> Completed </span>
-                                                        <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> 1431 </p>
-                                                    </div>
-                                                    <div class="flex-1 px-2">
-                                                        <span class="text-muted-400 font-sans text-xs"> In Progress </span>
-                                                        <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> 219 </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -501,6 +472,38 @@
                                             </div>
                                         </div>
                                     </div>
+									{foreach from=$realms item=realm key=index name=count}
+                                    <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-6">
+                                        <div class="mb-10 flex items-center justify-between">
+                                            <h3 class="font-heading text-base font-semibold leading-tight text-muted-800 dark:text-white">
+                                                <span>Realm: {$realm->getName()}</span>
+                                            </h3>
+                                        </div>
+											<div class="mb-6">
+												<div>
+													<div class="semi-donut text-muted-500 dark:text-muted-400 m-2" style="--percentage : {$realm->getPercentage()};">
+														{if $realm->isOnline()}
+															<span>Online</span>
+														{else}
+															<span>Offline</span>
+														{/if}
+													</div>
+												</div>
+											</div>
+                                        <div class="mt-auto">
+                                            <div class="border-muted-200 dark:border-muted-700 flex w-full border-t pt-4 text-center">
+                                                <div class="border-muted-200 dark:border-muted-700 flex-1 border-r px-2">
+                                                    <span class="text-muted-400 font-sans text-xs"> Total players online </span>
+                                                    <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> {$realm->getOnline()} </p>
+                                                </div>
+                                                <div class="flex-1 px-2">
+                                                    <span class="text-muted-400 font-sans text-xs"> Uptime </span>
+                                                    <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> {if $realm->isOnline()} {$uptimes[$realm->getId()]} {else} 0 {/if}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									{/foreach}
                                 </div>
                             </div>
                         </div>
