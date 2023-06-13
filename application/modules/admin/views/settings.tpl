@@ -522,8 +522,17 @@
 			<label class="col-sm-2 col-form-label" for="disable_visitor_graph" data-toggle="tooltip" data-placement="bottom" title="If you have many visitors, the admin panel will become very slow because of the statistics graph - disabling it will help a lot">Disable dashboard visitor graph <a>(?)</a></label>
 			<div class="col-sm-10">
 			<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="disable_visitor_graph" id="disable_visitor_graph">
-				<option value="1" {if $config.disable_visitor_graph}selected{/if}>Yes</option>
-				<option value="0" {if !$config.disable_visitor_graph}selected{/if}>No</option>
+				<option value="true" {if $config.disable_visitor_graph}selected{/if}>Yes</option>
+				<option value="false" {if !$config.disable_visitor_graph}selected{/if}>No</option>
+			</select>
+			</div>
+			</div>
+			<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="disable_realm_status" data-toggle="tooltip" data-placement="bottom" title="If you have many visitors, the admin panel will become very slow because of the statistics graph - disabling it will help a lot">Disable realms status <a>(?)</a></label>
+			<div class="col-sm-10">
+			<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="disable_realm_status" id="disable_realm_status">
+				<option value="true" {if $config.disable_realm_status}selected{/if}>Yes</option>
+				<option value="false" {if !$config.disable_realm_status}selected{/if}>No</option>
 			</select>
 			</div>
 			</div>

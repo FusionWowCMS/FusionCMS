@@ -180,8 +180,8 @@
                                             
                                         </div>
                                     </div>
+									{if $graphMonthly}
                                     <div class="col-span-12 md:col-span-12">
-										{if $graphMonthly}
                                         <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-6" id="graphSelectorWrapper">
                                             <div class="flex gap-8">
                                                 <div>
@@ -347,8 +347,8 @@
     }
 }).apply(this, [jQuery]);
 </script>
-										{/if}
                                     </div>
+									{/if}
                                 </div>
                             </div>
                             <div class="ltablet:col-span-3 col-span-12 lg:col-span-3">
@@ -472,6 +472,7 @@
                                             </div>
                                         </div>
                                     </div>
+									{if !$realm_status}
 									{foreach from=$realms item=realm key=index name=count}
                                     <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-6">
                                         <div class="mb-10 flex items-center justify-between">
@@ -504,6 +505,7 @@
                                         </div>
                                     </div>
 									{/foreach}
+									{/if}
                                 </div>
                             </div>
                         </div>

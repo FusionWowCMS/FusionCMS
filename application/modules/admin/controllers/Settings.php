@@ -40,6 +40,7 @@ class Settings extends MX_Controller
 
         // Performance
         $config['disable_visitor_graph'] = $this->config->item('disable_visitor_graph');
+        $config['disable_realm_status'] = $this->config->item('disable_realm_status');
         $config['cache'] = $this->config->item('cache');
 
         // SMTP
@@ -125,6 +126,7 @@ class Settings extends MX_Controller
         $fusionConfig2 = new ConfigEditor("application/config/fusion.php");
 
         $fusionConfig->set('disable_visitor_graph', $this->input->post('disable_visitor_graph'));
+        $fusionConfig->set('disable_realm_status', $this->input->post('disable_realm_status'));
         $fusionConfig2->set('cache', $this->input->post('cache'));
 
         $fusionConfig->save();

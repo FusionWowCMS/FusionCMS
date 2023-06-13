@@ -54,6 +54,7 @@ class Admin extends MX_Controller
             'signups' => $this->getSignups(),
             'graphMonthly' => $this->graphMonthly(),
             'graphDaily' => $this->graphDaily(),
+            "realm_status" => $this->config->item('disable_realm_status'),
             "realms" => $realms,
             "uptimes" => $uptimes,
         );

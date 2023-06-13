@@ -272,6 +272,7 @@ var Settings = {
 	{
 		var data = {
 			disable_visitor_graph:$("#disable_visitor_graph").val(),
+			disable_realm_status:$("#disable_realm_status").val(),
 			cache:$("#cache").val(),
 			csrf_token_name: Config.CSRF
 		};

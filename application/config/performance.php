@@ -14,3 +14,4 @@ if (! defined('BASEPATH')) {
  */
 
 $config['disable_visitor_graph'] = false;
+$config['disable_realm_status'] = false;
