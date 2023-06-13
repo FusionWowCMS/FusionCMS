@@ -16264,7 +16264,6 @@ html.dark .table > thead > tr > td,
 html.dark .table > tbody > tr > td,
 html.dark .table > tfoot > tr > td,
 html.dark .table-bordered {
-	color: rgb(148 163 184);
 	vertical-align: middle;
 }
 

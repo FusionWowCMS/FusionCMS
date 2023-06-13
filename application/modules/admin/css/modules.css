@@ -61,6 +61,8 @@
 .files-container {
     position: relative;
     margin: 0px 2px 15px 2px;
+}
+.dark .files-container {
     background-color: rgba(0, 0, 0, 0.2);
 }
 .files-container span {

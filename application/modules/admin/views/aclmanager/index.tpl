@@ -21,7 +21,7 @@
 			</a>
 			</div>
 			<div class="col-lg-6 col-xl-6">
-			<a href="{$url}admin/aclmanager/roles" onclick="return false;">
+			<a href="{$url}admin/aclmanager/roles">
 				<section class="card mt-4">
 					<header class="card-header bg-white">
 						<div class="card-header-icon bg-primary">

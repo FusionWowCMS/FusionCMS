@@ -68,21 +68,21 @@
 				<div class="card-actions">
 					<span class="badge badge-success align-right" id="enabled_count">{count($enabled_modules)}</span>
 				</div>
-				<h2 class="card-title">Installed modules</h2>
+				<h2 class="card-title text-muted-800 dark:text-white"">Installed modules</h2>
 			</header>
 			<div class="card-body p-0">
 				<table class="table m-0">
 					<tbody id="enabled_modules">
 						{foreach from=$enabled_modules item=module key=key}
 							<tr class="border-top">
-								<td class="font-weight-bold border-0 w-70 align-middle text-light">{ucfirst($module.name)} <span class="font-weight-normal">by</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small><br><small>Version: {if isset($module.version)} {$module.version} {else} 1.0.0 {/if} | Date: {if isset($module.date)} {$module.date} {else} 1.0.0 {/if}</small></td>
+								<td class="font-weight-bold border-0 w-70 align-middle text-muted-800 dark:text-white">{ucfirst($module.name)} <span class="font-weight-normal">by</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small><br><small>Version: {if isset($module.version)} {$module.version} {else} 1.0.0 {/if} | Date: {if isset($module.date)} {$module.date} {else} 1.0.0 {/if}</small></td>
 								<td class="pull-right">
 									<div class="flex flex-col gap-2 sm:flex-row">
 										{if $module.has_configs && hasPermission("editModuleConfigs")}
-											<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="{$url}admin/edit/{$key}">Edit Configs</a>
+											<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="{$url}admin/edit/{$key}">Edit Configs</a>
 										{/if}
 										{if hasPermission("toggleModules")}
-											<a href="javascript:void(0)" onClick="Modules.disableModule('{$key}', this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500">Disable</a>
+											<a href="javascript:void(0)" onClick="Modules.disableModule('{$key}', this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500">Disable</a>
 										{/if}
 									</div>
 								</td>
@@ -100,7 +100,7 @@
 				<div class="card-actions">
 					<span class="badge badge-danger align-right" id="disabled_count">{count($disabled_modules)}</span>
 				</div>
-				<h2 class="card-title">Disabled modules</h2>
+				<h2 class="card-title text-muted-800 dark:text-white"">Disabled modules</h2>
 			</header>
 			<div class="card-body p-0">
 				<table class="table m-0">
@@ -111,10 +111,10 @@
 								<td class="pull-right">
 									<div class="flex flex-col gap-2 sm:flex-row">
 										{if $module.has_configs && hasPermission("editModuleConfigs")}
-											<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="{$url}admin/edit/{$key}">Edit Configs</a>
+											<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="{$url}admin/edit/{$key}">Edit Configs</a>
 										{/if}
 										{if hasPermission("toggleModules")}
-											<a href="javascript:void(0)" onClick="Modules.enableModule('{$key}', this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 bg-white border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500">Enable</a>
+											<a href="javascript:void(0)" onClick="Modules.enableModule('{$key}', this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500">Enable</a>
 										{/if}
 									</div>
 								</td>
