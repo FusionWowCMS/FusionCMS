@@ -51,7 +51,8 @@
 	</script>
 
 </head>
-<body class="dark">
+<body class="">
+	<script type="text/javascript">let theme=localStorage.getItem("mode")||" dark";document.body.classList.add(theme);</script>
     <div class="dark:bg-muted-800 flex min-h-screen bg-white">
         <div class="relative flex flex-1 flex-col justify-center px-6 py-12 lg:w-2/5 lg:flex-none">
             <div class="dark:bg-muted-800 relative mx-auto w-full max-w-sm bg-white">
@@ -76,7 +77,11 @@
                             </svg>
                         </span>
 					</label>
-                </div>
+					<script type="text/javascript">var Theme={
+					    moon:$("#moon"),sun:$("#sun"),Light:function(){
+					    document.body.classList.remove("dark"),document.body.classList.add("light"),window.localStorage.setItem("mode","light"),Theme.moon.removeClass("-translate-y-1/2").addClass("translate-y-[-150%]").removeClass("opacity-100").addClass("opacity-0"),Theme.sun.removeClass("translate-y-[-150%]").addClass("-translate-y-1/2").removeClass("opacity-0"),theme="light"},Dark:function(){
+					    document.body.classList.remove("light"),document.body.classList.add("dark"),window.localStorage.setItem("mode","dark"),Theme.moon.addClass("-translate-y-1/2").removeClass("translate-y-[-150%]").addClass("opacity-100").removeClass("opacity-0"),Theme.sun.addClass("translate-y-[-150%]").removeClass("-translate-y-1/2").addClass("opacity-0"),theme="dark"}};"dark"==theme?Theme.Dark():Theme.Light();
+					</script>                </div>
                 <div>
                     <h2 class="font-heading text-3xl font-medium mt-6 text-muted-800 dark:text-white">
                         Welcome back {$username}. 
@@ -115,38 +120,7 @@
             <div class="mx-auto w-full max-w-4xl"><img class="max-w-md mx-auto" src="{$url}application/themes/admin/assets/images/illustrations/magician.svg" alt="" width="500" height="500"></div>
         </div>
     </div>
-
-	<script type="text/javascript">
-	var Theme = {
-		moon: $("#moon"),
-		sun: $("#sun"),
-
-		Light: function()
-		{
-			document.body.classList.remove("dark")
-			document.body.classList.add("light")
-            window.localStorage.setItem('mode', 'light');
-            Theme.moon.removeClass('-translate-y-1/2').addClass('translate-y-[-150%]').removeClass('opacity-100').addClass('opacity-0');
-            Theme.sun.removeClass('translate-y-[-150%]').addClass('-translate-y-1/2').removeClass('opacity-0');
-		},
-		Dark: function()
-		{
-			document.body.classList.remove("light")
-			document.body.classList.add("dark")
-            window.localStorage.setItem('mode', 'dark');
-            Theme.moon.addClass('-translate-y-1/2').removeClass('translate-y-[-150%]').addClass('opacity-100').removeClass('opacity-0');
-            Theme.sun.addClass('translate-y-[-150%]').removeClass('-translate-y-1/2').addClass('opacity-0');
-		},
-	}
-	
-	const modeBtn = document.getElementById('mode');
-	modeBtn.onchange = (e) => {
-		if (modeBtn.checked === true) {
-			Theme.Light();
-		} else {
-			Theme.Dark();
-		}
-	}
-	</script>
+	<script type="text/javascript">const modeBtn=document.getElementById("mode");modeBtn.onchange=e=>{
+	"dark"==theme?Theme.Light():Theme.Dark()};</script>
 </body>
 </html>

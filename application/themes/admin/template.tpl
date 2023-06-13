@@ -157,7 +157,8 @@
 
     <link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/layouts/layout.css">
 	</head>
-    <body class="dark">
+    <body class="">
+	<script type="text/javascript">let theme=localStorage.getItem("mode")||" dark";document.body.classList.add(theme);</script>
         <div class="bg-muted-100 dark:bg-muted-900 pb-20">
 			<div class="dark:bg-muted-800 border-muted-200 dark:border-muted-700 fixed left-0 top-0 z-[60] flex h-full flex-col border-r bg-white transition-all duration-300 w-[280px] -translate-x-full lg:translate-x-0">
 				<div class="flex h-16 w-full items-center justify-between px-6">
@@ -270,7 +271,12 @@
                                     </svg>
                                 </span>
                             </label>
-                            <button type="button" class="border-muted-200 hover:ring-muted-200 dark:hover:ring-muted-700 dark:border-muted-700 dark:bg-muted-800 dark:ring-offset-muted-900 flex h-9 w-9 items-center justify-center rounded-full border bg-white ring-1 ring-transparent transition-all duration-300 hover:ring-offset-4"><img class="h-7 w-7 rounded-full" src="../img/icons/flags/united-states-of-america.svg" alt="flag icon"></button>
+							<script type="text/javascript">var Theme={
+							    moon:$("#moon"),sun:$("#sun"),Light:function(){
+							    document.body.classList.remove("dark"),document.body.classList.add("light"),window.localStorage.setItem("mode","light"),Theme.moon.removeClass("-translate-y-1/2").addClass("translate-y-[-150%]").removeClass("opacity-100").addClass("opacity-0"),Theme.sun.removeClass("translate-y-[-150%]").addClass("-translate-y-1/2").removeClass("opacity-0"),theme="light"},Dark:function(){
+							    document.body.classList.remove("light"),document.body.classList.add("dark"),window.localStorage.setItem("mode","dark"),Theme.moon.addClass("-translate-y-1/2").removeClass("translate-y-[-150%]").addClass("opacity-100").removeClass("opacity-0"),Theme.sun.addClass("translate-y-[-150%]").removeClass("-translate-y-1/2").addClass("opacity-0"),theme="dark"}};"dark"==theme?Theme.Dark():Theme.Light();
+							</script>
+                            <button type="button" class="border-muted-200 hover:ring-muted-200 dark:hover:ring-muted-700 dark:border-muted-700 dark:bg-muted-800 dark:ring-offset-muted-900 flex h-9 w-9 items-center justify-center rounded-full border bg-white ring-1 ring-transparent transition-all duration-300 hover:ring-offset-4"><img class="h-7 w-7 rounded-full" src="{$url}application/images/flags/us.png" alt="flag icon"></button>
                             <div class="group inline-flex items-center justify-center text-right">
                                 <div data-headlessui-state class="relative h-9 w-9 text-left">
                                     <div id="headlessui-menu-button-35" aria-haspopup="menu" aria-expanded="false" data-headlessui-state>
@@ -413,37 +419,7 @@
 	setInterval(Notify.update, 10000);
 	</script>
 
-	<script type="text/javascript">
-	var Theme = {
-		moon: $("#moon"),
-		sun: $("#sun"),
-
-		Light: function()
-		{
-			document.body.classList.remove("dark")
-			document.body.classList.add("light")
-            window.localStorage.setItem('mode', 'light');
-            Theme.moon.removeClass('-translate-y-1/2').addClass('translate-y-[-150%]').removeClass('opacity-100').addClass('opacity-0');
-            Theme.sun.removeClass('translate-y-[-150%]').addClass('-translate-y-1/2').removeClass('opacity-0');
-		},
-		Dark: function()
-		{
-			document.body.classList.remove("light")
-			document.body.classList.add("dark")
-            window.localStorage.setItem('mode', 'dark');
-            Theme.moon.addClass('-translate-y-1/2').removeClass('translate-y-[-150%]').addClass('opacity-100').removeClass('opacity-0');
-            Theme.sun.addClass('translate-y-[-150%]').removeClass('-translate-y-1/2').addClass('opacity-0');
-		},
-	}
-	
-	const modeBtn = document.getElementById('mode');
-	modeBtn.onchange = (e) => {
-		if (modeBtn.checked === true) {
-			Theme.Light();
-		} else {
-			Theme.Dark();
-		}
-	}
-	</script>
+	<script type="text/javascript">const modeBtn=document.getElementById("mode");modeBtn.onchange=e=>{
+	"dark"==theme?Theme.Light():Theme.Dark()};</script>
     </body>
 </html>
