@@ -29,3 +29,15 @@ button:is(.dark .is-button-default) {
 td.pull-right {
     border-bottom-width: 0 !important;
 }
+.chart-active {
+	visibility: visible;
+	position: relative;
+	z-index: 2;
+}
+.chart-hidden {
+	visibility: hidden;
+	position: absolute;
+	z-index: 1;
+	top: -9999px;
+}
+
