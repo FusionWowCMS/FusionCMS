@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark">
+<html>
 	<head>
 		<title>{if $title}{$title}{/if}{$serverName}</title>
 
@@ -157,7 +157,7 @@
 
     <link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/layouts/layout.css">
 	</head>
-    <body>
+    <body class="dark">
         <div class="bg-muted-100 dark:bg-muted-900 pb-20">
 			<div class="dark:bg-muted-800 border-muted-200 dark:border-muted-700 fixed left-0 top-0 z-[60] flex h-full flex-col border-r bg-white transition-all duration-300 w-[280px] -translate-x-full lg:translate-x-0">
 				<div class="flex h-16 w-full items-center justify-between px-6">
@@ -414,22 +414,36 @@
 	</script>
 
 	<script type="text/javascript">
-		const modeBtn = document.getElementById('mode');
-		var moon = document.getElementById('moon');
-		var sun = document.getElementById('sun');
-		modeBtn.onchange = (e) => {
+	var Theme = {
+		moon: $("#moon"),
+		sun: $("#sun"),
+
+		Light: function()
+		{
+			document.body.classList.remove("dark")
+			document.body.classList.add("light")
+            window.localStorage.setItem('mode', 'light');
+            Theme.moon.removeClass('-translate-y-1/2').addClass('translate-y-[-150%]').removeClass('opacity-100').addClass('opacity-0');
+            Theme.sun.removeClass('translate-y-[-150%]').addClass('-translate-y-1/2').removeClass('opacity-0');
+		},
+		Dark: function()
+		{
+			document.body.classList.remove("light")
+			document.body.classList.add("dark")
+            window.localStorage.setItem('mode', 'dark');
+            Theme.moon.addClass('-translate-y-1/2').removeClass('translate-y-[-150%]').addClass('opacity-100').removeClass('opacity-0');
+            Theme.sun.addClass('translate-y-[-150%]').removeClass('-translate-y-1/2').addClass('opacity-0');
+		},
+	}
+	
+	const modeBtn = document.getElementById('mode');
+	modeBtn.onchange = (e) => {
 		if (modeBtn.checked === true) {
-			document.documentElement.classList.remove("dark")
-			document.documentElement.classList.add("light")
-			window.localStorage.setItem('mode', 'light');
+			Theme.Light();
 		} else {
-			document.documentElement.classList.remove("light")
-			document.documentElement.classList.add("dark")
-			window.localStorage.setItem('mode', 'dark');
+			Theme.Dark();
 		}
-            moon.classList.toggle('-translate-y-1/2');moon.classList.toggle('translate-y-[-150%]');moon.classList.toggle('opacity-100');;moon.classList.toggle('opacity-0');
-            sun.classList.toggle('translate-y-[-150%]');sun.classList.toggle('-translate-y-1/2');sun.classList.toggle('opacity-0');
-		}
+	}
 	</script>
     </body>
 </html>
