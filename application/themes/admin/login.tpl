@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="utf-8">
     <title>Login - Admin Panel</title>
@@ -51,7 +51,7 @@
 	</script>
 
 </head>
-<body class="dark">
+<body>
     <div class="dark:bg-muted-800 flex min-h-screen bg-white">
         <div class="relative flex flex-1 flex-col justify-center px-6 py-12 lg:w-2/5 lg:flex-none">
             <div class="dark:bg-muted-800 relative mx-auto w-full max-w-sm bg-white">
@@ -62,9 +62,23 @@
                         </svg>
                         <span>Back to Home</span>
                     </a>
+					<label for="mode" class="nui-focus relative block h-9 w-9 shrink-0 overflow-hidden rounded-full transition-all duration-300 focus-visible:outline-2 dark:ring-offset-muted-900">
+						<input type="checkbox" id="mode" class="absolute start-0 top-0 z-[2] h-full w-full cursor-pointer opacity-0">
+                        <span class="bg-white dark:bg-muted-800  border border-muted-300 dark:border-muted-700 relative block h-9 w-9 rounded-full">
+                            <svg id="sun" viewbox="0 0 24 24" class="pointer-events-none absolute start-1/2 top-1/2 block h-5 w-5 text-yellow-400 transition-all duration-300 translate-x-[-50%] opacity-0 rtl:translate-x-[50%] translate-y-[-150%]">
+                                <g fill="currentColor" stroke="currentColor" class="stroke-2">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                                </g>
+                            </svg>
+                            <svg id="moon" viewbox="0 0 24 24" class="pointer-events-none absolute start-1/2 top-1/2 block h-5 w-5 text-yellow-400 transition-all duration-300 translate-x-[-45%] opacity-100 rtl:translate-x-[45%] -translate-y-1/2">
+                                <path fill="currentColor" stroke="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="stroke-2"></path>
+                            </svg>
+                        </span>
+					</label>
                 </div>
                 <div>
-                    <h2 class="font-heading text-3xl font-medium mt-6">
+                    <h2 class="font-heading text-3xl font-medium mt-6 text-muted-800 dark:text-white">
                         Welcome back {$username}. 
                     </h2>
                 </div>
@@ -101,5 +115,24 @@
             <div class="mx-auto w-full max-w-4xl"><img class="max-w-md mx-auto" src="{$url}application/themes/admin/assets/images/illustrations/magician.svg" alt="" width="500" height="500"></div>
         </div>
     </div>
+
+	<script type="text/javascript">
+		const modeBtn = document.getElementById('mode');
+		var moon = document.getElementById('moon');
+		var sun = document.getElementById('sun');
+		modeBtn.onchange = (e) => {
+		if (modeBtn.checked === true) {
+			document.documentElement.classList.remove("dark")
+			document.documentElement.classList.add("light")
+			window.localStorage.setItem('mode', 'light');
+		} else {
+			document.documentElement.classList.remove("light")
+			document.documentElement.classList.add("dark")
+			window.localStorage.setItem('mode', 'dark');
+		}
+            moon.classList.toggle('-translate-y-1/2');moon.classList.toggle('translate-y-[-150%]');moon.classList.toggle('opacity-100');;moon.classList.toggle('opacity-0');
+            sun.classList.toggle('translate-y-[-150%]');sun.classList.toggle('-translate-y-1/2');sun.classList.toggle('opacity-0');
+		}
+	</script>
 </body>
 </html>
