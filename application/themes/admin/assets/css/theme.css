@@ -21523,39 +21523,6 @@ html.dark .hidden-on-dark {
 	display: none !important;
 }
 
-
-/* Dark - Titles */
-html.dark h1,
-html.dark .h1,
-html.dark h2,
-html.dark .h2,
-html.dark h3,
-html.dark .h3,
-html.dark h4,
-html.dark .h4,
-html.dark h5,
-html.dark .h5,
-html.dark h6,
-html.dark .h6 {
-	color: #FFF;
-}
-
-/* Dark - Alerts */
-html.dark .alert h1,
-html.dark .alert .h1,
-html.dark .alert h2,
-html.dark .alert .h2,
-html.dark .alert h3,
-html.dark .alert .h3,
-html.dark .alert h4,
-html.dark .alert .h4,
-html.dark .alert h5,
-html.dark .alert .h5,
-html.dark .alert h6,
-html.dark .alert .h6 {
-	color: #111;
-}
-
 /* Dark - Blockquote */
 html.dark blockquote:not(.primary):not(.success):not(.danger):not(.warning):not(.info):not(.dark) {
 	border-color: #282d36;
