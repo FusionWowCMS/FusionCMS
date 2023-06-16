@@ -1,20 +1,20 @@
 <br/>
 <p align="center">
-  <a href="https://github.com/FusionGen/FusionGen">
-    <img src="https://fusiongen.net/application/themes/fusiongen/assets/images/favicon.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/FusionWowCMS/FusionCMS">
+    <img src="https://avatars.githubusercontent.com/u/135007438?s=200&v=4" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">FusionGen</h3>
+  <h3 align="center">FusionCMS</h3>
 
   <p align="center">
     <a href="https://docs.fusiongen.net/"><strong>Explore the docs »</strong></a>
     <br/>
     <br/>
-    <a href="https://github.com/FusionGen/FusionGen/issues">Report Bug</a>
+    <a href="https://github.com/FusionWowCMS/FusionCMS/issues">Report Bug</a>
   </p>
 </p>
 
-![Downloads](https://img.shields.io/github/downloads/FusionGen/FusionGen/total) ![Contributors](https://img.shields.io/github/contributors/FusionGen/FusionGen?color=dark-green) ![Issues](https://img.shields.io/github/issues/FusionGen/FusionGen) [![Discord](https://img.shields.io/discord/217589275766685707.svg)](https://discord.com/invite/5nSt9puU4V "Our community hub on Discord") 
+![Downloads](https://img.shields.io/github/downloads/FusionWowCMS/FusionCMS/total) ![Contributors](https://img.shields.io/github/contributors/FusionWowCMS/FusionCMS?color=dark-green) ![Issues](https://img.shields.io/github/issues/FusionWowCMS/FusionCMS) [![Discord](https://img.shields.io/discord/1116706973828775976.svg)](https://discord.gg/4Hz94RZn "Our community hub on Discord") 
 
 ## Table Of Contents
 
@@ -28,7 +28,7 @@
 
 ## About The Project
 
-FusionGen is a free, open-source content management system. Server owners all around the world rely upon FusionGen for its ease of use and development, safe and secure codebase and dedication to simplicity.
+FusionCMS is a free, open-source content management system. Server owners all around the world rely upon FusionCMS for its ease of use and development, safe and secure codebase and dedication to simplicity.
 
 ## Getting Started
 
@@ -49,10 +49,10 @@ Read the [installation guide](INSTALL.md).
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-* If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/FusionGen/FusionGen/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
+* If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/FusionWowCMS/FusionCMS/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
 * Please make sure you check your spelling and grammar.
 * Create individual PR for each suggestion.
-* Please also read through the [Code Of Conduct](https://github.com/FusionGen/FusionGEN/blob/main/.github/CODE_OF_CONDUCT.md) before posting your first idea as well.
+* Please also read through the [Code Of Conduct](https://github.com/FusionWowCMS/FusionCMS/blob/main/.github/CODE_OF_CONDUCT.md) before posting your first idea as well.
 
 ### Creating A Pull Request
 
@@ -64,16 +64,15 @@ Contributions are what make the open source community such an amazing place to b
 
 ## License
 
-The FusionGen source is released under the [GNU AGPL v3](https://github.com/FusionGen/FusionGEN/blob/main/LICENSE)
+The FusionCMS source is released under the [GNU AGPL v3](https://github.com/FusionWowCMS/FusionCMS/blob/main/LICENSE)
 
 ## Authors & Contributors
 
 This project exists thanks to:
 
 - **[Jesper Lindström](https://github.com/jesperlindstrom)** (FusionCMS)
-- **The [FusionGen developers and contributors](https://github.com/FusionGen/FusionGEN/graphs/contributors)**
+- **[FusionGen](https://github.com/FusionGen/FusionGEN)**
 
 ## Links
 
-**[FusionGen.net](https://fusiongen.net/)**
-**[Discord](https://discord.gg/5nSt9puU4V)**
+**[Discord](https://discord.gg/4Hz94RZn)**
