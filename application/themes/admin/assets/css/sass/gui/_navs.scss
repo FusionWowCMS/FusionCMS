@@ -1,0 +1,60 @@
+/* Nav Pills */
+.nav-pills > .active {
+	a {
+		&,
+		&:hover,
+		&:focus {
+			background-color: $color-primary;
+		}
+	}
+}
+
+// NAV PILLS
+// -----------------------------------------------------------------------------
+/* Buttons - States */
+@each $state in $states {
+	.nav-pills-#{nth($state,1)} {
+		> li {
+			a:hover,
+			a:focus {
+				color: nth($state,2);
+				@if nth($state,1) == 'primary' {
+					background-color: lighten(nth($state,2), 50%);
+				} @else {
+					background-color: lighten(adjust-hue(nth($state,2), -5), 35%);
+				}
+			}
+		}
+
+		> li.active {
+			> a {
+				&,
+				&:hover,
+				&:active,
+				&:focus {
+					background-color: nth($state,2);
+				}
+			}
+		}
+	}
+}
+
+/* Primary */
+ul.nav-list.primary > li {
+	margin: 0;
+	padding: 0;
+
+	&:last-child {
+		a {
+			border-bottom: transparent !important;
+		}
+	}
+
+	a {
+		transition: all .3s;
+		background-position: 9px 16px;
+		background-repeat: no-repeat;
+		border-bottom: 1px solid #EDEDDE;
+		padding: 8px 20px;
+	}
+}

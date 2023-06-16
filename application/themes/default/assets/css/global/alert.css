@@ -1,0 +1,170 @@
+/*-------------------------------------------------------------------------*/
+/* Alert
+/*-------------------------------------------------------------------------*/
+[alert-container] {}
+
+[alert-container] .alert {
+	width: 100%;
+	height: auto;
+	border: none;
+	margin: 0 0 var(--margin-primary) 0;
+	padding: 0;
+	display: table;
+	font-size: 0.75rem;
+	text-shadow: 0 1px 0 #000, 0 0 6px #000;
+	background-color: rgba(18, 26, 34, 0.95);
+	background-image: url('../../images/patterns/pattern-noise-02.png');
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+[alert-container] .alert::before {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	content: '';
+	position: absolute;
+	box-shadow: 0 0 20px 3px rgba(67, 181, 254, 0.2);
+	-moz-box-shadow: 0 0 20px 3px rgba(67, 181, 254, 0.2);
+	-webkit-box-shadow: 0 0 20px 3px rgba(67, 181, 254, 0.2);
+	background-color: rgba(67, 181, 254, 0.01);
+	transition: 300ms opacity ease-in-out;
+	-o-transition: 300ms opacity ease-in-out;
+	-ms-transition: 300ms opacity ease-in-out;
+	-moz-transition: 300ms opacity ease-in-out;
+	-webkit-transition: 300ms opacity ease-in-out;
+}
+
+[alert-container] .alert:hover::before,
+[alert-container] .alert:active::before {
+	opacity: 0.5;
+}
+
+[alert-container] .alert .alert-col {
+	padding: 0.5rem;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+/* Alert: Col-1
+/*---------------------------------------------------------------*/
+[alert-container] .alert .alert-col.alert-col-1 {
+	width: auto;
+}
+
+[alert-container] .alert .alert-col.alert-col-1 .alert-icon {
+	display: block;
+	background-color: transparent;
+	background-image: url('../../images/graphics/icons.png');
+	background-repeat: no-repeat;
+}
+
+/* Alert: Col-2
+/*---------------------------------------------------------------*/
+[alert-container] .alert .alert-col.alert-col-2 {
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+[alert-container] .alert .alert-col.alert-col-2 .alert-text {}
+
+[alert-container] .alert .alert-col.alert-col-2 .alert-text center[style] {display: none;}
+
+/* Alert: Col-3
+/*---------------------------------------------------------------*/
+[alert-container] .alert .alert-col.alert-col-3 {
+	width: auto;
+}
+
+[alert-container] .alert .alert-col.alert-col-3 .alert-close {
+	width: 15px;
+	height: 15px;
+	margin: 5px;
+	display: block;
+}
+
+[alert-container] .alert .alert-col.alert-col-3 .alert-close::before,
+[alert-container] .alert .alert-col.alert-col-3 .alert-close::after {
+	width: 1px;
+	height: 100%;
+	top: 0;
+	left: 50%;
+	content: '';
+	position: absolute;
+	transform: rotate(137deg);
+	-o-transform: rotate(137deg);
+	-ms-transform: rotate(137deg);
+	-moz-transform: rotate(137deg);
+	-webkit-transform: rotate(137deg);
+}
+
+[alert-container] .alert .alert-col.alert-col-3 .alert-close::after {
+	transform: rotate(-137deg);
+	-o-transform: rotate(-137deg);
+	-ms-transform: rotate(-137deg);
+	-moz-transform: rotate(-137deg);
+	-webkit-transform: rotate(-137deg);
+}
+
+/* Alert: Error (default)
+/*---------------------------------------------------------------*/
+[alert-container] .alert.alert-error {
+	color: #a23535;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6), 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 66, 0, 0.1), inset 0 0 28px 25px rgba(255, 66, 0, 0.05), inset 0 0 18px 0 rgba(255, 66, 0, 0.15);
+	-moz-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6), 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 66, 0, 0.1), inset 0 0 28px 25px rgba(255, 66, 0, 0.05), inset 0 0 18px 0 rgba(255, 66, 0, 0.15);
+	-webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6), 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 66, 0, 0.1), inset 0 0 28px 25px rgba(255, 66, 0, 0.05), inset 0 0 18px 0 rgba(255, 66, 0, 0.15);
+}
+
+[alert-container] .alert.alert-error .alert-col.alert-col-1 .alert-icon {
+	width: 28px;
+	height: 28px;
+	background-position: -431px 50%;
+}
+
+[alert-container] .alert.alert-error .alert-col.alert-col-3 .alert-close::before,
+[alert-container] .alert.alert-error .alert-col.alert-col-3 .alert-close::after {
+	background-color: #a23535;
+}
+
+/* Alert: Success
+/*---------------------------------------------------------------*/
+[alert-container] .alert.alert-success {
+	color: #54a22c;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6), 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(66, 255, 0, 0.1), inset 0 0 28px 25px rgba(66, 255, 0, 0.05), inset 0 0 18px 0 rgba(66, 255, 0, 0.15);
+	-moz-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6), 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(66, 255, 0, 0.1), inset 0 0 28px 25px rgba(66, 255, 0, 0.05), inset 0 0 18px 0 rgba(66, 255, 0, 0.15);
+	-webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6), 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(66, 255, 0, 0.1), inset 0 0 28px 25px rgba(66, 255, 0, 0.05), inset 0 0 18px 0 rgba(66, 255, 0, 0.15);
+}
+
+[alert-container] .alert.alert-success .alert-col.alert-col-1 .alert-icon {
+	width: 28px;
+	height: 26px;
+	background-position: -469px 50%;
+}
+
+[alert-container] .alert.alert-success .alert-col.alert-col-3 .alert-close::before,
+[alert-container] .alert.alert-success .alert-col.alert-col-3 .alert-close::after {
+	background-color: #54a22c;
+}
+
+/* Alert: Mail
+/*---------------------------------------------------------------*/
+[alert-container] .alert.alert-mail {
+	color: #6c6c6c;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6), 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 0 28px 25px rgba(255, 255, 255, 0.03), inset 0 0 18px 0 rgba(255, 255, 255, 0.1);
+	-moz-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6), 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 0 28px 25px rgba(255, 255, 255, 0.03), inset 0 0 18px 0 rgba(255, 255, 255, 0.1);
+	-webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6), 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 0 28px 25px rgba(255, 255, 255, 0.03), inset 0 0 18px 0 rgba(255, 255, 255, 0.1);
+}
+
+[alert-container] .alert.alert-mail .alert-col.alert-col-1 .alert-icon {
+	width: 30px;
+	height: 26px;
+	background-position: -507px 50%;
+}
+
+[alert-container] .alert.alert-mail .alert-col.alert-col-3 .alert-close::before,
+[alert-container] .alert.alert-mail .alert-col.alert-col-3 .alert-close::after {
+	background-color: #6c6c6c;
+}

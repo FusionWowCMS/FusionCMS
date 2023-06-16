@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bootstrap button</title>
+    <link href="../assets/css/dialogs.css" type="text/css" rel="stylesheet" />
+    <script src="../lib/loadjs/loadjs.min.js"></script>
+</head>
+
+<body>
+
+    <!--=====================================
+    =             Button style              =
+    ======================================-->
+
+    <section id="style" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.buttonStyle}}</span>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-primary" data-prop="style" data-value="btn-primary">Primary</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-secondary" data-prop="style" data-value="btn-secondary">Secondary</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-success" data-prop="style" data-value="btn-success">Success</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-danger" data-prop="style" data-value="btn-danger">Danger</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-warning" data-prop="style" data-value="btn-warning">Warning</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-info" data-prop="style" data-value="btn-info">Info</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-light" data-prop="style" data-value="btn-light">Light</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-dark" data-prop="style" data-value="btn-dark">Dark</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-link" data-prop="style" data-value="btn-link">Link</button>
+        </div>
+
+        <hr class="w-100 my-0 invisible">
+        <div class="selector">
+            <button type="button" class="btn btn-outline-primary" data-prop="style" data-value="btn-outline-primary">Primary</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-outline-secondary" data-prop="style" data-value="btn-outline-secondary">Secondary</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-outline-success" data-prop="style" data-value="btn-outline-success">Success</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-outline-danger" data-prop="style" data-value="btn-outline-danger">Danger</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-outline-warning" data-prop="style" data-value="btn-outline-warning">Warning</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-outline-info" data-prop="style" data-value="btn-outline-info">Info</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-outline-light" data-prop="style" data-value="btn-outline-light">Light</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-outline-dark" data-prop="style" data-value="btn-outline-dark">Dark</button>
+        </div>
+    </section>
+
+    <!--=====================================
+    =              Button size              =
+    ======================================-->
+
+    <section id="size" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.buttonSize}}</span>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-secondary btn-sm" data-prop="size" data-value="btn-sm">{{=it.small}}</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-secondary" data-prop="size" data-value="">{{=it.medium}}</button>
+        </div>
+        <div class="selector">
+            <button type="button" class="btn btn-secondary btn-lg" data-prop="size" data-value="btn-lg">{{=it.large}}</button>
+        </div>
+    </section>
+
+    <!--=====================================
+    =              Button tag               =
+    ======================================-->
+
+    <section class="{{=it.sectionSplitClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.tag}}</span>
+        </div>
+        <div class="container-fluid">
+            <div class="row mx-0">
+                <div id="tag" class="{{=it.sectionSplitColClass}}">
+                    <div id="button-select" class="selector">
+                        <span data-prop="tag" data-value="button">&lt;button&gt;</span>
+                    </div>
+                    <div id="link-select" class="selector">
+                        <span data-prop="tag" data-value="a">&lt;a&gt;</span>
+                    </div>
+                    <div id="input-select" class="selector">
+                        <span data-prop="tag" data-value="input">&lt;input&gt;</span>
+                    </div>
+                </div>
+                <div class="{{=it.sectionSplitColClass}} togglable-wrapper">
+                    <div class="form-inline toggle tag-toggle" data-activate="a">
+                        <label for="btn-link-url" class="mr-3">{{=it.link}}</label>
+                        <input type="text" data-prop="href" value="" class="form-control form-control-sm" id="btn-link-url" placeholder="https://">
+                    </div>
+                        <div class="toggle tag-toggle" data-activate="button input">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tagType" data-prop="tagType" id="tagType-button" value="button">
+                                <label class="form-check-label" for="tagType-button">{{=it.button}}</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tagType" data-prop="tagType" id="tagType-submit" value="submit">
+                                <label class="form-check-label" for="tagType-submit">{{=it.submit}}</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tagType" data-prop="tagType" id="tagType-reset" value="reset">
+                                <label class="form-check-label" for="tagType-reset">{{=it.reset}}</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tagType" data-prop="tagType" id="tagType-cancel" value="cancel">
+                                <label class="form-check-label" for="tagType-cancel">{{=it.cancel}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!--=====================================
+    =              Button icon              =
+    ======================================-->
+
+    <section class="{{=it.sectionSplitClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.icon}}</span>
+        </div>
+        <div class="container-fluid">
+            <div class="row mx-0">
+                <div class="{{=it.sectionSplitColClass}}">
+                    <div class="choice form-inline">
+                        <label class="mr-3">{{=it.icon}}</label>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm" data-prop="hasIcon" data-value="false">{{=it.no}}</button>
+                            <button type="button" class="btn btn-sm" data-prop="hasIcon" data-value="true">{{=it.yes}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="{{=it.sectionSplitColClass}} togglable-wrapper">
+                    <div class="toggle hasIcon-toggle" data-activate="true">
+                        <div class="choice">
+                            <label class="mr-3">{{=it.choose}}</label>
+                            <button class="btn btn-light" id="iconpicker"></button>
+                        </div>
+                        <div class="choice">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="iconPos" id="iconPos-before" data-prop="iconPos" value="prepend">
+                                <label class="form-check-label" for="iconPos-before">{{=it.before}}</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="iconPos" id="iconPos-after" data-prop="iconPos" value="append">
+                                <label class="form-check-label" for="iconPos-after">{{=it.after}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="togglable-wrapper">
+            <div class="alert alert-warning text-center mx-5 toggle tag-toggle" data-activate="input">
+                <span class="bootstrap-icon-alert"></span> {{=it.inputWarning}}
+            </div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =             Button others             =
+    ======================================-->
+
+    <section id="others" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.others}}</span>
+        </div>
+        <div class="choice form-inline">
+            <label class="mr-3">{{=it.disabled}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="disabled" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="disabled" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+        <div class="choice form-inline">
+            <label class="mr-3">{{=it.width}} 100%</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="blockLevel" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="blockLevel" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+        <div class="choice form-inline">
+            <label for="text" class="mr-3" id="text-label">{{=it.text}}</label>
+            <input type="text" value="" class="form-control form-control-sm" data-prop="text" name="text" id="text">
+        </div>
+    </section>
+
+    <div class="togglable-wrapper">
+        <div class="alert alert-warning text-center mx-5 toggle disabled-toggle" data-activate="true">
+            <span class="bootstrap-icon-alert"></span> {{=it.disabledWarning}}
+        </div>
+    </div>
+
+    <!--=====================================
+    =                PREVIEW                =
+    ======================================-->
+
+    <section class="{{=it.previewSectionClass}}">
+        <div id="preview-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.preview}}</span>
+        </div>
+        <div id="preview" class="{{=it.previewClass}}">
+            <div id="preview-content" class="text-center"></div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 CODE                  =
+    ======================================-->
+
+    <section id="code" class="{{=it.codeSectionClass}}">
+        <div id="code-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.code}}</span>
+        </div>
+        <div class="{{=it.codeClass}}" id="code-content">
+            <pre class="language-html"></pre>
+        </div>
+    </section>
+
+    <script src="../dialogs/button.js"></script>
+</body>
+
+</html>

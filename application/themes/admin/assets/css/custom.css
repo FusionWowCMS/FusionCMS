@@ -1,0 +1,181 @@
+/* Add here all your CSS customizations */
+.preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #171717;
+  height: 100vh;
+  width: 100%;
+  transition: height 200ms linear;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+}
+.preloader-img {
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.blob {
+  background: black;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  transform: scale(1);
+  animation: pulse-black 2s infinite;
+}
+
+.blob.green {
+  background: rgba(51, 217, 178, 1);
+  box-shadow: 0 0 0 0 rgba(51, 217, 178, 1);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(51, 217, 178, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(51, 217, 178, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(51, 217, 178, 0);
+  }
+}
+
+.blob.red {
+  background: rgba(255, 82, 82, 1);
+  box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+  }
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px black;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(46, 106, 185, 0.8);
+    border-radius: 10px;
+}
+
+/* Item quality colors */
+.q  { color: #ffd100 ! important; } /* Default (yellow) */
+.q0, .q0 a { color: #9d9d9d ! important; } /* Poor */
+.q1, .q1 a { color: #ffffff ! important; } /* Common */
+.q2, .q2 a, .q2:hover { color: #1eff00 ! important; } /* Uncommon */
+.q3, .q3 a { color: #0070dd ! important; } /* Rare */
+.q4, .q4 a { color: #a335ee ! important; } /* Epic */
+.q5, .q5 a { color: #ff8000 ! important; } /* Legendary */
+.q6, .q6 a { color: #e5cc80 ! important; } /* Artifact */
+.q7, .q7 a { color: #e5cc80 ! important; } /* Heirloom (new 00ccff)*/
+.q8, .q8 a { color: #ffff98 ! important; } /* Light yellow (item set bonuses) */
+.q9, .q9 a { color: #71D5FF ! important; } /* Light blue (glyph type) */
+.q10, .q10 a { color: #ff4040 ! important; } /* Red (requirement not met, error) */
+
+/* Labels */
+.label {
+    font-weight: normal;
+}
+
+.label {
+    display: inline;
+    padding: 0.2em 0.6em 0.3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25em;
+}
+
+.label-primary {
+	background-color: #0088CC;
+	color: #FFF;
+}
+
+.label-success {
+	background-color: #47a447;
+	color: #FFF;
+}
+
+.label-warning {
+	background-color: #ed9c28;
+	color: #FFF;
+}
+
+.label-danger {
+	background-color: #d2322d;
+	color: #FFF;
+}
+
+.label-info {
+	background-color: #5bc0de;
+	color: #FFF;
+}
+
+.label-dark {
+	background-color: #1d2127;
+	color: #FFF;
+}
+
+.border-top {
+    border-top: 1px solid #4a4e52 !important;
+}
+
+.bs-tooltip-top .tooltip-arrow::before, .bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before {
+  border-top-color: #141414!important;
+}
+
+.bs-tooltip-end .tooltip-arrow::before, .bs-tooltip-auto[data-popper-placement^=right] .tooltip-arrow::before {
+  border-right-color: #141414!important;
+}
+
+.bs-tooltip-bottom .tooltip-arrow::before, .bs-tooltip-auto[data-popper-placement^=bottom] .tooltip-arrow::before {
+  border-bottom-color: #141414!important;
+}
+
+.bs-tooltip-start .tooltip-arrow::before, .bs-tooltip-auto[data-popper-placement^=left] .tooltip-arrow::before {
+  border-left-color: #141414!important;
+}
+
+.tooltip-inner {
+  color: #fff;
+  background-color: #141414!important;
+  border-color: #141414!important;
+}

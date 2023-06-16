@@ -1,0 +1,43 @@
+#bootstrap-dialog-logo {
+    fill: #fff;
+    background: #563d7c;
+    border-radius: 4px;
+    padding: 2px;
+    margin: -4px 0 0;
+}
+
+#bs-toolbar .tox-tbtn__select-label {
+    display: none;
+}
+
+.tox #bs-btn-bootstrap {
+    background: #563D7C;
+}
+
+.tox #bs-btn-bootstrap svg {
+    fill: #fff;
+}
+
+.tox-dialog {
+    -webkit-transition: width 200ms ease-in;
+    -moz-transition: width 200ms ease-in;
+    -ms-transition: width 200ms ease-in;
+    -o-transition: width 200ms ease-in;
+    transition: width 200ms ease-in;
+}
+
+.tox .tox-dialog--width-lg.tox-dialog:not(.tox-confirm-dialog) {
+    height: 95vh;
+}
+
+/* context submenu items
+-------------------------------------------------- */
+
+.tox-collection__item-icon:empty {
+    display: none !important;
+}
+
+.tox-collection__item-icon:empty ~ .tox:not([dir=rtl]) .tox-collection--list .tox-collection__item>:not(:first-child) {
+    margin-left: 0;
+    text-align: center;
+}

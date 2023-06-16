@@ -1,0 +1,48 @@
+{
+	"name": "Custom pages",
+	"description": "Allows you to create custom pages",
+	"version": "2.0.0",
+	"date": "2023-05-30",
+	"author": {
+		"name": "FusionCMS",
+		"website": "http://fusion-hub.com"
+	},
+
+	"admin": [
+		{
+			"text": "Website",
+			"icon": "cursor",
+			"links": [
+				{
+					"text": "Custom pages",
+					"icon": "windows",
+					"controller": "admin",
+					"requirePermission": "canViewAdmin"
+				}
+			]
+		}
+	],
+
+	"permissions": {
+		"canViewAdmin": { "default": false, "description": "Manage custom pages. Requires view permission in admin module" },
+		"canAdd": { "default": false, "description": "Add a page" },
+		"canRemove": { "default": false, "description": "Remove a page" },
+		"canEdit": { "default": false, "description": "Edit a page" }
+	},
+
+	"roles": {
+		"manage": {
+			"description": "Manage the custom pages. <font style='color:red;'>Admin-tool</font>",
+			"dangerLevel": 2,
+
+			"permissions": {
+				"canViewAdmin": true,
+				"canAdd": true,
+				"canRemove": true,
+				"canEdit": true
+			}
+		}
+	},
+	
+	"enabled": true
+}

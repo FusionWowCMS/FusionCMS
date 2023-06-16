@@ -1,0 +1,583 @@
+.choice-title {
+    width: 100%;
+}
+
+.choice-title,
+#preview-title,
+#code-title {
+    position: relative;
+    border-top: 1px solid #dedede;
+}
+
+.choice-title:after,
+#preview-title:after,
+#code-title:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #FFF;
+}
+
+.choice-title span,
+#preview-title span,
+#code-title a {
+    display: inline-block;
+    margin-left: -1px;
+    padding: 2px 10px;
+    min-width: 80px;
+    text-decoration: none;
+    font-size: 13px;
+    font-variant: small-caps;
+    text-transform: lowercase;
+    -webkit-border-radius: 0 0 3px 0;
+    border-radius: 0 0 3px 0;
+    margin-top: 1px;
+    margin-bottom: -1px;
+    white-space: normal;
+}
+
+.choice-title span,
+#code-title a {
+    color: #333;
+    background-color: #E6E6E6;
+}
+
+#code {
+    background: #f5f2f0;
+}
+
+#preview-title span {
+    background: #6D5491;
+    color: #FFF;
+}
+
+#preview-title:hover span {
+    cursor: default;
+}
+
+.selector,
+.choice {
+    position: relative;
+    padding: 10px 12px;
+    margin: 0 4px 1rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.form-inline {
+    padding: 10px 12px;
+    margin: 0 4px 1rem;
+    border: 1px solid transparent;
+}
+
+.popover.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.selector,
+.selector:before,
+#preview-content:not(.no-transition) * {
+    -webkit-transition: all 200ms ease-in;
+    -moz-transition: all 200ms ease-in;
+    -ms-transition: all 200ms ease-in;
+    -o-transition: all 200ms ease-in;
+    transition: all 200ms ease-in;
+}
+
+.selector:hover,
+.selector.active {
+    border: 1px dashed #999;
+}
+
+.selector:before {
+    content: '\ea10';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 3px 7px;
+    color: green;
+    opacity: 0;
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.selector:hover:before,
+.selector.active:before {
+    opacity: 1;
+    z-index: 1;
+}
+
+.selector button[data-prop="snippetName"]> :first-child,
+.selector button[data-prop="templateName"]> :first-child {
+    pointer-events: none;
+}
+
+.selector button[data-prop="snippetName"]:focus,
+.selector button[data-prop="templateName"]:focus {
+    box-shadow: none;
+}
+
+.togglable-wrapper {
+    position: relative;
+}
+
+#snippets-wrapper .snippet-preview {
+    overflow-y: auto;
+    max-height: 250px;
+    position: relative;
+}
+
+#snippets-wrapper .list-group-item.active {
+    background-color: transparent !important;
+    border-color: #DC3545 !important;
+}
+
+#snippets-wrapper .list-group-item.active h6 {
+    background-color: #DC3545 !important;
+}
+
+
+#snippets-wrapper .snippet-preview>div.small :not(h6) {
+    -moz-transform: scale(.95);
+    -webkit-transform: scale(.95);
+    -o-transform: scale(.95);
+    -ms-transform: scale(.95);
+    transform: scale(.95);
+}
+
+#snippets-wrapper .snippet-preview>div.small img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@keyframes toggleOff {
+    from {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
+
+    40% {
+        opacity: 0;
+        transform: scale(1, 0);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1, 0);
+    }
+}
+
+@keyframes toggleOn {
+    from {
+        opacity: 0;
+        transform: scale(1, 0);
+    }
+
+    60% {
+        opacity: 0;
+        transform: scale(1, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
+}
+
+.toggle.active {
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+    transform: scale(1, 1);
+    -webkit-animation-name: toggleOn;
+    animation-name: toggleOn;
+    animation-duration: .3s;
+    transform-origin: center center;
+}
+
+.toggle:not(.active) {
+    position: absolute;
+    z-index: 0;
+    opacity: 0;
+    transform: scale(1, 0);
+    -webkit-animation-name: toggleOff;
+    animation-name: toggleOff;
+    animation-duration: .3s;
+    transform-origin: center center;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.list-group-item {
+    width: 95%;
+    margin: 1% !important;
+}
+
+.color-toggle.active {
+    z-index: 2 !important;
+}
+
+@media (min-width: 576px) {
+    .list-group-item {
+        width: 47%;
+        margin: 5px 1.5% !important;
+    }
+}
+
+.template-preview .col,
+.template-preview [class*="col-"] {
+    background: #FAF8F7;
+    border-top: 1px solid #D1CFCD;
+    border-bottom: 1px solid #D1CFCD;
+    border-left: 1px solid #D1CFCD;
+}
+
+.template-preview .col:last-child,
+.template-preview [class*="col-"]:last-child {
+    border-right: 1px solid #D1CFCD;
+}
+
+/*=============================================
+=                   icomoon                   =
+=============================================*/
+
+@font-face {
+    font-family: 'icomoon-tbp';
+    src:
+        url('../fonts/icomoon-tbp.ttf?m7ewb4') format('truetype'),
+        url('../fonts/icomoon-tbp.woff?m7ewb4') format('woff'),
+        url('../fonts/icomoon-tbp.svg?m7ewb4#icomoon-tbp') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^='bootstrap-'],
+[class*=' bootstrap-'],
+.selector:before {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon-tbp' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.bootstrap-icon-info:before {
+    content: "\ea0c";
+}
+
+.bootstrap-icon-cross:before {
+    content: "\ea0f";
+}
+
+.bootstrap-icon-circle-up:before {
+    content: "\ea41";
+}
+
+.bootstrap-icon-circle-right:before {
+    content: "\ea42";
+}
+
+.bootstrap-icon-circle-down:before {
+    content: "\ea43";
+}
+
+.bootstrap-icon-circle-left:before {
+    content: "\ea44";
+}
+
+.bootstrap-icon-bootstrap:before {
+    content: "\e600";
+}
+
+.bootstrap-icon-desktop:before {
+    content: "\e601";
+}
+
+.bootstrap-icon-mobile:before {
+    content: "\e602";
+}
+
+.bootstrap-icon-tablet:before {
+    content: "\e603";
+}
+
+.bootstrap-icon-tablet-horizontal:before {
+    content: "\e604";
+}
+
+.bootstrap-icon-btn:before {
+    content: "\e605";
+}
+
+.bootstrap-icon-icon:before {
+    content: "\e606";
+}
+
+.bootstrap-icon-card:before {
+    content: "\e607";
+}
+
+.bootstrap-icon-alert:before {
+    content: "\e608";
+}
+
+.bootstrap-icon-badge:before {
+    content: "\e609";
+}
+
+.bootstrap-icon-pager:before {
+    content: "\e60a";
+}
+
+.bootstrap-icon-pagination:before {
+    content: "\e60b";
+}
+
+.bootstrap-icon-breadcrumb:before {
+    content: "\e60c";
+}
+
+.bootstrap-icon-template:before {
+    content: "\e60d";
+}
+
+.bootstrap-icon-table:before {
+    content: "\e60e";
+}
+
+.bootstrap-icon-label:before {
+    content: "\e60f";
+}
+
+.bootstrap-icon-image:before {
+    content: "\e90d";
+}
+
+.bootstrap-icon-snippet:before {
+    content: "\e9d9";
+}
+
+.bootstrap-icon-plus:before {
+    content: "\ea0a";
+}
+
+.bootstrap-icon-minus:before {
+    content: "\ea0b";
+}
+
+.bootstrap-icon-check:before {
+    content: "\ea10";
+}
+
+/*=============================================
+=                   Modal                   =
+=============================================*/
+
+.tbp-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    z-index: 9;
+}
+
+.tbp-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 95%;
+    overflow-y: auto;
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 90%;
+    border-radius: 0.5rem;
+}
+
+.tbp-close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.tbp-close-button:hover {
+    background-color: darkgray;
+}
+
+.tbp-modal.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+/*=============================================
+=                   Table                   =
+=============================================*/
+
+#table-builder {
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
+#table-builder td {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    border: 1px solid #999;
+}
+
+.table-icons {
+    background: #fff !important;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, .25);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, .2);
+}
+
+/*=============================================
+=       popper - https://popper.js.org/       =
+=============================================*/
+
+.popper {
+    z-index: 999;
+}
+
+.popper .popper__arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 5px;
+}
+
+.popper .popper__arrow {
+    border-color: #F8F9FA;
+}
+
+.popper[x-placement^="top"] {
+    margin-bottom: 5px;
+}
+
+.popper[x-placement^="top"] .popper__arrow {
+    border-width: 5px 5px 0 5px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    bottom: -5px;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.popper[x-placement^="bottom"] {
+    margin-top: 5px;
+}
+
+.popper[x-placement^="bottom"] .popper__arrow {
+    border-width: 0 5px 5px 5px;
+    top: -5px;
+    border-color: transparent transparent #dee2e6 transparent;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+
+    border-style: solid;
+    border-width: 0 5px 5px 5px;
+}
+
+.popper[x-placement^="right"] {
+    margin-left: 5px;
+}
+
+.popper[x-placement^="right"] .popper__arrow {
+    border-width: 5px 5px 5px 0;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    left: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.popper[x-placement^="left"] {
+    margin-right: 5px;
+}
+
+.popper[x-placement^="left"] .popper__arrow {
+    border-width: 5px 0 5px 5px;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    right: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/*=============================================
+=                   File-tree                   =
+=============================================*/
+
+#file-tree-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+#ft-close-btn {
+    position: absolute;
+    display: block;
+    right: 15px;
+    top: 0;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.ft-tree,
+.ft-explorer {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 576px) {
+    .ft-tree {
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+
+    .ft-explorer {
+        -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+}

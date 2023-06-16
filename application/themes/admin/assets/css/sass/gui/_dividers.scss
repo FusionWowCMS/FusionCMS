@@ -1,0 +1,33 @@
+/* Dividers */
+hr {
+	border: 0;
+	height: 1px;
+	background-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,0.20), rgba(0,0,0,0));
+	margin: 22px 0 22px 0;
+}
+
+hr.short {
+	margin: 11px 0 11px 0;
+}
+
+hr.tall {
+	margin: 44px 0 44px 0;
+}
+
+hr.taller {
+	margin: 66px 0 66px 0;
+}
+
+hr.light {
+	background-image: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255,0.20), rgba(255,255,255,0));
+}
+
+hr.dotted {
+	height: 0;
+	border-bottom: 1px dotted #ddd;
+}
+
+hr.solid {
+	height: 0;
+	border-bottom: 1px solid #ddd;
+}

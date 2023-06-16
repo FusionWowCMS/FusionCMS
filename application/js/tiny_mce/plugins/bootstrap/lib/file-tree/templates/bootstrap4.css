@@ -1,0 +1,164 @@
+:root {
+    --active-background: #dee2e6;
+    --active-color: #007BFF;
+    --folder-color: #ffc107;
+    --text-color: #212529;
+}
+
+/*=============================================
+=                  File Tree                  =
+=============================================*/
+
+.ft-tree .ft-folder-container ul {
+    display: none;
+}
+
+.ft-tree .ft-folder-container.ft-folder-open>ul {
+    display: block;
+}
+
+.ft-tree ul {
+    list-style-type: none;
+    padding-left: 1.66rem;
+}
+
+.ft-tree .ft-folder-container i {
+    color: var(--folder-color);
+    margin-right: .5rem;
+}
+
+.ft-tree .ft-folder-container a {
+    color: var(--text-color);
+}
+
+/*=============================================
+=         Explorer - common properties        =
+=============================================*/
+
+.ft-explorer .explorer-mode-btn.active {
+    color: var(--active-color);
+}
+
+.ft-explorer .ft-folder, .ft-explorer .ft-file {
+    font-size: 1.5rem;
+}
+
+.ft-explorer .ft-folder i {
+    color: var(--folder-color);
+}
+
+.ft-explorer .ft-filename,
+.ft-explorer .ft-foldername,
+.ft-explorer .ft-imagename,
+.ft-explorer .ft-file:hover,
+.ft-explorer .ft-folder:hover,
+.ft-explorer .ft-image:hover {
+    color: var(--text-color);
+    text-decoration: none !important;
+}
+
+.ft-explorer .ft-file-container.active {
+    background: var(--active-background);
+    border-color: var(--active-background);
+}
+
+/*=============================================
+=                Explorer list                =
+=============================================*/
+
+.ft-explorer-list-container .media > a {
+    min-width: 100px;
+}
+
+.ft-explorer-list-container .media-body {
+    font-size: 0.8125rem;
+}
+
+/*=============================================
+=                Explorer grid                =
+=============================================*/
+
+/* responsive list groups
+    https://codepen.io/migli/pen/gOOmYLb
+-------------------------------------------------- */
+
+.ft-explorer-grid-container .list-group-item {
+	width: 95%;
+	margin: 1% !important;
+}
+
+.ft-explorer-grid-container .list-group-item h6 {
+    font-size: 13px;
+}
+
+.ft-explorer-grid-container .list-group-item p {
+    font-size: 12px;
+}
+
+@media (min-width: 576px) {
+	.ft-explorer-grid-container .list-group-item {
+		width: 47%;
+		margin: 5px 1.5% !important;
+	}
+}
+
+@media (min-width: 768px) {
+	.ft-explorer-grid-container .list-group-item {
+		width: 31.333%;
+		margin: 5px 1% !important;
+	}
+}
+
+@media (min-width: 992px) {
+	.ft-explorer-grid-container .list-group-item {
+		width: 23%;
+		margin: 5px 1% !important;
+	}
+}
+
+@media (min-width: 1200px) {
+	.ft-explorer-grid-container .list-group-item {
+		width: 19%;
+		margin: 5px .5% !important;
+	}
+}
+
+/*=============================================
+=              file icon colors               =
+=============================================*/
+
+i.ft-icon-file-zip {
+    color: #ffc107;
+}
+i.ft-icon-file-excel {
+    color: #0C6C36;
+}
+i.ft-icon-html-five2 {
+    color: #DE4B25;
+}
+i.ft-icon-file-picture {
+    color: #F83A12;
+}
+i.ft-icon-file-music {
+    color: #6759AA;
+}
+i.ft-icon-file-openoffice {
+    color: #0E81C7;
+}
+i.ft-icon-file-pdf {
+    color: #DF0A0A;
+}
+i.ft-icon-file-text2 {
+    color: #212529;
+}
+i.ft-icon-file-video {
+    color: #AAAA87;
+}
+i.ft-icon-file-word {
+    color: #2A5592;
+}
+i.ft-icon-file-empty {
+    color: #a1a7ac;
+}
+
+/*============  End of file icon colors  =============*/

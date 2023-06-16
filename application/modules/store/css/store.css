@@ -1,0 +1,24 @@
+.store_buttons {
+	text-align: right;
+}
+.store_item {
+	border: 1px solid #10181f !important;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+.sort {
+	padding-right: 0px;
+}
+
+#cart .store_item {
+	padding: 1rem;
+}
+
+#cart .store_item:hover {
+	background: #13151e;
+	padding: 1rem;
+}
+.vp_button,
+.dp_button {
+	padding: 0.4rem 0.8rem;
+    font-size: 1rem;
+}

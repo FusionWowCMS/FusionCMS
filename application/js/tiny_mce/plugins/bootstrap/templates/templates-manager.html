@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/jquery-sortable/jquery-sortable.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/solid.css">
+    <style>
+        .small { font-size: 75%; } .template-category { border: 1px solid #E8E9EB; } .template-name, .template-code { position: relative; } .template-name:after, .template-code:after { position: absolute; right: 5px; bottom: 2px; display: block; color: #99a6b1; opacity: .5; } .template-name { border: 1px dashed #6c757d; } .template-name:after { content: "Template Name"; font-size: .75em; } .template-code-wrapper { position:relative; min-height: 150px; } .template-code { margin: auto; height: 200px; width: 100%; } .template-code:after { content: "Template Code"; } .drag-me { cursor: move; } .category-remove, .template-remove { cursor: pointer; } a[data-toggle="collapse"] { -webkit-transition: all 200ms ease-in-out; -moz-transition: all 200ms ease-in-out; -ms-transition: all 200ms ease-in-out; -o-transition: all 200ms ease-in-out; transition: all 200ms ease-in-out; } a[data-toggle="collapse"][aria-expanded="true"] { -moz-transform: rotate(90deg); -webkit-transform: rotate(90deg); -o-transform: rotate(90deg); -ms-transform: rotate(90deg); transform: rotate(90deg); }
+    </style>
+
+    <title>Bootstrap Plugin for TinyMCE - Templates Manager</title>
+    <meta name="description" content="Bootstrap Template Manager for Tinymce - Create and store Bootstrap layouts and templates here">
+    <meta name="locations" content="Global">
+    <meta name="robots" content="index, follow">
+    <meta name="distribution" content="Global">
+    <meta name="language" content="en">
+    <meta name="author" content="Gilles Migliori">
+    <link href="https://www.tinymce-bootstrap-plugin.com/demo/plugin/templates/templates-manager.html" rel="canonical">
+</head>
+
+<body>
+
+    <h1 class="h2 text-secondary text-center py-3">Bootstrap Plugin for TinyMCE<br><small>Templates Manager</small></h1>
+    <div class="container">
+
+        <details class="mb-4">
+            <summary class="bg-light p-3 mb-4">How to use?</summary>
+            <div class="card bg-light">
+                <div class="card-header bg-dark text-light">
+                    <p>The templates are grouped into <strong>categories</strong>.</p>
+                    <p> The <strong>Templates manager</strong> allows to:</p>
+
+                    <ul>
+                        <li>add/remove categories &amp; templates</li>
+                        <li>edit the categories names</li>
+                        <li>edit the templates names &amp; code</li>
+                        <li>re-order the categories &amp; templates</li>
+                    </ul>
+                    <p>The templates are available in the main plugin <strong>Template dialog</strong>. </p>
+                    <p><a href="https://www.tinymce-bootstrap-plugin.com/documentation/index" class="text-light border-bottom text-decoration-none">Bootstrap Plugin for TinyMCE - Documentation</a></p>
+                </div>
+                <div class="card-body">
+
+                    <h3 class="h4 text-secondary font-weight-normal">How to proceed?</h3>
+
+                    <ol>
+                        <li class="mb-4">Make your changes in the templates below:<br>
+
+                            <ul>
+                                <li>drag &amp; drop the categories &amp; templates to re-order,</li>
+                                <li>edit the categories names</li>
+                                <li>edit the templates names</li>
+                                <li>edit the templates codes</li>
+                                <li>add / remove categories / templates</li>
+                            </ul>
+                        </li>
+                        <li class="mb-4">Click the <span class="badge badge-light">Generate JSON</span> button to generate the JSON output</li>
+                        <li class="mb-4">Copy/paste the JSON code in <span class="badge badge-light">templates/templates.json</span><br>- OR -<br>click the <span class="badge badge-light">Download JSON</span> button to download the JSON file,<br>then replace your <span class="badge badge-light">templates/templates.json</span> with the downloaded file.</li>
+                    </ol>
+                </div>
+            </div>
+        </details>
+
+        <h2 class="text-secondary text-center font-weight-normal border-bottom py-3">Templates</h2>
+
+        <ol id="main" class="list-group"></ol>
+        <div class="text-right mb-4">
+            <button class="btn-add-category btn btn-secondary">Add new category <i class="fas fa-plus ml-2"></i></button>
+        </div>
+
+        <div class="text-center"><button id="btn-generate-json" class="btn btn-lg btn-primary mb-5">Generate JSON</button></div>
+
+        <div id="json-output-wrapper" class="mb-5">
+
+            <h2 class="text-secondary text-center font-weight-normal border-bottom py-3">JSON output</h2>
+            <textarea name="json-output" id="json-output" class="w-100" cols="30" rows="10"></textarea>
+        </div>
+
+        <div class="text-center"><button id="btn-download-json" class="btn btn-lg btn-primary mb-5">Download JSON</button></div>
+    </div>
+
+    <template id="category-builder-wrapper" class="d-none">
+        <li class="list-group-item template-category parent px-4 mb-5 bg-light">
+            <div class="d-flex justify-content-between">
+                <span class="badge badge-secondary p-1 rounded-0 drag-me" data-tooltip="true" title="Drag &amp; drop to re-order"><i class="fas fa-arrows-alt fa-2x p-1"></i></span>
+                <span class="badge badge-danger p-1 rounded-0 category-remove" data-tooltip="true" title="Click to remove this category"><i class="fas fa-trash-alt fa-2x p-1"></i></span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="text-secondary font-weight-light border-bottom py-3 mr-2 flex-grow-1" contenteditable="true" data-tooltip="true" title="click to edit">
+                    <span class="category-name"></span>
+                </h4>
+                <a class="d-block px-3 text-secondary" data-toggle="collapse" href="" role="button" aria-expanded="false" data-tooltip="true" title="click to expand or collapse" ><i class="fas fa-2x fa-caret-right"></i></a>
+            </div>
+            <div class="collapse">
+                <ol class="list-group category-templates"></ol>
+                <div class="text-right mb-4">
+                    <button class="btn-add-template btn btn-secondary">Add new template <i class="fas fa-plus ml-2"></i></button>
+                </div>
+            </div>
+        </li>
+    </template>
+
+    <template id="template-builder-wrapper" class="d-none">
+        <li class="list-group-item child template mb-2 rounded-0 bg-dark">
+            <div class="d-flex justify-content-between mb-2">
+                <span class="badge badge-secondary p-1 rounded-0 drag-me" data-tooltip="true" title="Drag &amp; drop to re-order"><i class="fas fa-arrows-alt fa-2x p-1"></i></span>
+                <span class="badge badge-danger p-1 rounded-0 template-remove" data-tooltip="true" title="Click to remove this template"><i class="fas fa-trash-alt fa-2x p-1"></i></span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <h6 class="template-name px-3 py-2 bg-dark text-light font-weight-normal mr-2 flex-grow-1" contenteditable="true" data-tooltip="true" title="click to edit" onclick="$(this).focus();"></h6>
+                <a class="d-block px-3 text-light mb-2" data-toggle="collapse" href="" role="button" aria-expanded="false" data-tooltip="true" title="click to expand or collapse" ><i class="fas fa-2x fa-caret-right"></i></a>
+            </div>
+            <div class="template-code-wrapper collapse">
+                <div class="template-code small px-2 py-1 mb-0"></div>
+                <div class="scrollmargin"></div>
+            </div>
+        </li>
+    </template>
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Ace code editor -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/theme-tomorrow_night.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ext-language_tools.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/mode-html.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/mode-json.js"></script>
+    <!-- Font awesome -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/fontawesome.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/solid.js"></script>
+    <!-- jQuery HTML clean -->
+    <script src="../lib/js-beautify/beautify-html.min.js"></script>
+    <!-- jQuery sortable -->
+    <script src="../lib/jquery-sortable/jquery-sortable.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let loaded = false;
+            let editors = [];
+            let jsonEditor = ace.edit('json-output');
+            jsonEditor.setOptions({
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true,
+                maxLines: 30,
+                wrap: true,
+                autoScrollEditorIntoView: true,
+                readOnly: true
+            });
+            jsonEditor.setTheme("ace/theme/tomorrow_night");
+            jsonEditor.session.setMode("ace/mode/json");
+            jsonEditor.renderer.setScrollMargin(10, 10, 10, 10);
+
+            const beautifyOptions = {
+                indent_size: '4',
+                indent_char: ' ',
+                max_preserve_newlines: '5',
+                preserve_newlines: true,
+                keep_array_indentation: false,
+                break_chained_methods: false,
+                indent_scripts: 'normal',
+                brace_style: 'collapse',
+                space_before_conditional: true,
+                unescape_strings: false,
+                jslint_happy: false,
+                end_with_newline: false,
+                wrap_line_length: '0',
+                indent_inner_html: false,
+                comma_first: false,
+                e4x: false,
+                indent_empty_lines: false
+            };
+
+            /* Functions
+            -------------------------------------------------- */
+
+            /* Add / Remove category */
+
+            function addCategory(jsonCategory, callback) {
+                const template = $('#category-builder-wrapper').html();
+                const $cat = $(template).clone();
+                const categoryId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+                const collapseId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+                $cat.closest('.template-category').attr('id', categoryId).find('.category-name').text(jsonCategory.name);
+                $('#main').append($cat);
+                $cat.find('a[data-toggle="collapse"]').attr('href', '#' + collapseId);
+                $cat.find('.collapse').attr('id', collapseId);
+
+                // remove category on click
+                $cat.find('.category-remove').on('click', function(e) {
+                    const $category = $(e.target).closest(('.template-category'));
+                    const $categoryTemplatesCodes = $category.find('.template-code');
+                    $categoryTemplatesCodes.each(function(index, tpCode) {
+                        editors.splice($(tpCode).attr('id'));
+                    });
+                    $category.remove();
+                });
+
+                callback(categoryId, jsonCategory.templates);
+            }
+
+            /* Add / Remove template */
+
+            function addTemplate(categoryId, jsonTemplate, openCode = false) {
+                const template = $('#template-builder-wrapper').html();
+                const $tp = $(template).clone();
+                $tp.find('.template-name').text(jsonTemplate.name);
+                const templateId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+                const collapseId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+                const code = $('<div />').html(jsonTemplate.code).html();
+                $tp.find('.template-code').attr('id', templateId).text(html_beautify(code, beautifyOptions));
+                $('#' + categoryId + ' .category-templates').append($tp);
+                const editor = ace.edit(templateId);
+                editor.setOptions({
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true,
+                    maxLines: 30,
+                    wrap: true,
+                    autoScrollEditorIntoView: true
+                });
+                editor.setTheme("ace/theme/tomorrow_night");
+                editor.session.setMode("ace/mode/html");
+                editor.renderer.setScrollMargin(10, 10, 10, 10);
+
+                editors[templateId] = editor;
+
+                $tp.find('a[data-toggle="collapse"]').attr('href', '#' + collapseId);
+                $tp.find('.collapse').attr('id', collapseId);
+
+                if (openCode === true) {
+                    $tp.find('a[data-toggle="collapse"]').trigger('click');
+                }
+
+                // remove template on click
+                $tp.find('.template-remove').on('click', function(e) {
+                    const $listItem = $(e.target).closest('.template');
+                    const templateCodeId = $listItem.find('.template-code').attr('id');
+                    $listItem.remove();
+                    editors.splice(templateCodeId);
+                });
+
+                // disable sortable on focus
+                $tp.find('[contenteditable="true"]').add(editor).on('focus', function(e) {
+                    $("#main, #main ol").sortable('disable');
+                }).on('blur', function() {
+                    $("#main, #main ol").sortable('enable');
+                });
+
+                if (!$('#' + categoryId).hasClass('enabled')) {
+                    // add template on click
+                    $('#' + categoryId).addClass('enabled').find('.btn-add-template').on('click', function(e) {
+                        const categoryId = $(e.target).closest('.template-category').attr('id');
+                        const jsonTemplate = {name: "Template name", code: '<div class="row"><div class="col"></div></div>'};
+                        addTemplate(categoryId, jsonTemplate, true);
+                    });
+                }
+            }
+
+            /* Sortable */
+
+            const makeSortable = function() {
+                $("#main").sortable({
+                    nested: false,
+                    distance: 20,
+                    delay: 200,
+                    containerSelector: "ol",
+                    handle: ".drag-me",
+                    onDragStart: function($item, container, _super) {
+                        if($item.hasClass('parent')) {
+                            $item.find('ol').sortable('disable');
+                        } else {
+                            $('.parent').closest('ol').sortable('disable');
+                        }
+                        _super($item, container);
+                    },
+                      onDrop: function($item, container, _super) {
+                        if($item.hasClass('parent')) {
+                            $item.find('ol').sortable('enable');
+                        } else {
+                            $('.parent').closest('ol').sortable('enable');
+                        }
+                        _super($item, container);
+                    }
+                });
+
+                $("#main ol").sortable({
+                    group: 'nested'
+                });
+            };
+
+            if ("content" in document.createElement("template")) {
+                $.ajax({
+                    url: 'templates.json',
+                    type: 'GET'
+                }).done(function(templates) {
+                    $.each(templates, function(catIndex, jsonCategory) {
+                        addCategory(jsonCategory, function(categoryId, jsonTemplates) {
+                            $.each(jsonTemplates, function(tpIndex, jsonTemplate) {
+                                addTemplate(categoryId, jsonTemplate);
+                            });
+                        });
+                    });
+
+                    $('[data-tooltip="true"]').tooltip({trigger: "hover", delay: { "show": 500, "hide": 100 }});
+
+                    // add category
+                    $('.btn-add-category').on('click', function(e) {
+                        const jsonCategory = {
+                            "name": "Category name",
+                            "templates": [
+                                {name: "Template name", code: '<div class="row"><div class="col"></div></div>'}
+                            ]
+                        };
+                        addCategory(jsonCategory, function(categoryId, jsonTemplates) {
+                            $.each(jsonTemplates, function(catIndex, jsonTemplate) {
+                                addTemplate(categoryId, jsonTemplate);
+                            });
+                        });
+                    });
+
+                    makeSortable();
+
+                    // trigger on load
+                    $('#btn-generate-json').trigger('click');
+                }).fail(function(data, statut, error) {
+                    console.log(error);
+                });
+
+
+                $('#btn-generate-json').on('click', function() {
+                    const jsonCode = [];
+                    let jsonCat;
+                    let jsonTpl;
+                    let ed;
+                    let templateId;
+                    $('.template-category').each(function(index, cat) {
+                        if (this.closest('.category-builder-wrapper') === null) {
+                            jsonCat = {
+                                name: $(cat).find('.category-name').text(),
+                                templates: []
+                            }
+                            $(cat).find('.template').each(function(index, el) {
+                                templateId = $(el).find('.template-code').attr('id');
+                                ed = editors[templateId];
+                                jsonTpl = {
+                                    name: $(el).find('.template-name').text(),
+                                    code: ed.getValue().replace(/(\r\n|\n|\r|\t)/g,'')
+                                }
+                                jsonCat.templates.push(jsonTpl);
+                            });
+                            jsonCode.push(jsonCat);
+                        }
+                    });
+                    jsonEditor.session.setValue(JSON.stringify(jsonCode, undefined, 4));
+                    if (loaded === true) {
+                        // we don't sdcroll on 1st load
+                        $('html, body').animate({
+                            scrollTop: ($('#json-output-wrapper').offset().top - 60)
+                        }, 500);
+                    }
+                    loaded = true;
+                });
+
+                $('#btn-download-json').on('click', function() {
+                    const jsonOutput = jsonEditor.getValue();
+                    download(jsonOutput, 'templates.json', 'json');
+                });
+
+                // Function to download data to a file
+                function download(data, filename, type) {
+                    var file = new Blob([data], {type: type});
+                    if (window.navigator.msSaveOrOpenBlob) // IE10+
+                        window.navigator.msSaveOrOpenBlob(file, filename);
+                    else { // Others
+                        var a = document.createElement("a"),
+                                url = URL.createObjectURL(file);
+                        a.href = url;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        setTimeout(function() {
+                            document.body.removeChild(a);
+                            window.URL.revokeObjectURL(url);
+                        }, 0);
+                    }
+                }
+
+            } else {
+                alert('Your browser is too old and doesn\'t accept HTML5 templates');
+            }
+        });
+    </script>
+</body>
+
+</html>

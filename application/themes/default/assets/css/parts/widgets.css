@@ -1,0 +1,16 @@
+/*-------------------------------------------------------------------------*/
+/* Widgets
+/*-------------------------------------------------------------------------*/
+.section-widgets {}
+
+.section-widgets [widget] {}
+
+.section-widgets [widget] iframe {
+	width: 100%;
+}
+
+/* Widgets: Responsive
+/*---------------------------------------------------------------*/
+@media screen and (min-width: 992px) { /* Desktop */
+	.section-widgets [widget] {height: 500px;}
+}

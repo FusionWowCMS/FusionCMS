@@ -1,0 +1,99 @@
+/*-------------------------------------------------------------------------*/
+/* Separator
+/*-------------------------------------------------------------------------*/
+[separator] {
+	width: 100%;
+	height: 6px;
+	margin: 5rem 0;
+	display: block;
+}
+
+[separator]::before,
+[separator]::after {
+	width: -webkit-calc(100% / 2 - 30px);
+	width: expression(100% / 2 - 30px);
+	width: -moz-calc(100% / 2 - 30px);
+	width: -o-calc(100% / 2 - 30px);
+	width: calc(100% / 2 - 30px);
+	height: 100%;
+	top: 0;
+	z-index: 9;
+	content: '';
+	position: absolute;
+}
+
+[separator]::before {
+	left: 0;
+	background: #284162;
+	background: -moz-linear-gradient(left,  #13233b 0%, #284162 100%);
+	background: -webkit-linear-gradient(left,  #13233b 0%,#284162 100%);
+	background: linear-gradient(to right,  #13233b 0%,#284162 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#13233b', endColorstr='#284162',GradientType=1 );
+}
+
+[separator]::after {
+	right: 0;
+	background-color: #13233b;
+}
+
+[separator] [separator-arrow] {
+	width: 52px;
+	height: 52px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	position: absolute;
+}
+
+[separator] [separator-arrow]::before {
+	width: 700%;
+	height: 0;
+	top: 50%;
+	left: -300%;
+	content: '';
+	position: absolute;
+	box-shadow: 0 0 180px 12px #3fa1ff;
+	-moz-box-shadow: 0 0 180px 12px #3fa1ff;
+	-webkit-box-shadow: 0 0 180px 12px #3fa1ff;
+}
+
+[separator] [separator-arrow]::after {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 9;
+	content: '';
+	position: absolute;
+	border-width: 6px;
+	border-style: solid;
+	transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+
+/* Separator: Arrow down
+/*---------------------------------------------------------------*/
+[separator-arrow-down] {}
+
+[separator-arrow-down] [separator-arrow] {
+	top: -26px;
+}
+
+[separator-arrow-down] [separator-arrow]::after {
+	border-color: transparent #13233b #284162 transparent;
+}
+
+/* Separator: Arrow up
+/*---------------------------------------------------------------*/
+[separator-arrow-up] {}
+
+[separator-arrow-up] [separator-arrow] {
+	top: -20px;
+}
+
+[separator-arrow-up] [separator-arrow]::after {
+	border-color: #13233b transparent transparent #284162;
+}

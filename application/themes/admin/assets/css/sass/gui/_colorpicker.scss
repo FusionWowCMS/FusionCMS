@@ -1,0 +1,32 @@
+/* Colorpicker */
+.colorpicker {
+	width: 100%;
+	min-width: 115px !important;
+	&.colorpicker-with-alpha {
+		width: auto;
+	}
+
+	&.colorpicker-horizontal {
+		width: auto !important;
+	    min-width: 0 !important;
+		.colorpicker-bar {
+			width: auto;
+		}
+	}
+}
+
+/* Dark */
+html.dark {
+	.colorpicker {
+		background-color: $dark-color-3;
+
+		&:before {
+			border-bottom-color: $dark-color-1;
+		}
+
+		&:after {
+			border-bottom-color: $dark-color-3;
+		}
+
+	}
+}

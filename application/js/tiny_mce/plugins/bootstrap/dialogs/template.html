@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bootstrap image</title>
+    <link href="../assets/css/dialogs.css" type="text/css" rel="stylesheet" />
+    <script src="../lib/loadjs/loadjs.min.js"></script>
+</head>
+
+<body>
+
+    <!--=====================================
+    =              templates                =
+    ======================================-->
+
+    <section id="templateName" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.templates}}</span>
+        </div>
+        <div id="templates-wrapper">
+
+            <ul id="nav-tabs" class="nav nav-tabs mb-5"></ul>
+            <div id="tabs" class="tab-content"></div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =               Others                  =
+    ======================================-->
+
+    <section class="{{=it.sectionSplitClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.others}}</span>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row mx-0">
+                <div class="{{=it.sectionSplitColClass}}">
+                    <!-- container -->
+                    <div class="form-group form-inline">
+                        <label for="container" class="mr-3">{{=it.container}}</label>
+                        <select class="form-control" data-prop="container" id="container">
+                            <option value="">{{=it.noContainer}}</option>
+                            <option value="container">{{=it.normalContainer}}</option>
+                            <option value="container-fluid">{{=it.fluidContainer}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="{{=it.sectionSplitColClass}}">
+                    <!-- insertPosition  -->
+                    <div class="form-group form-inline">
+                        <label for="insertPosition" class="mr-3">{{=it.position}}</label>
+                        <select class="form-control" data-prop="insertPosition" id="insertPosition">
+                            <option value="">{{=it.insertCursorPosition}}</option>
+                            <option value="insertBeforeRow">{{=it.insertBeforeRow}}</option>
+                            <option value="insertAfterRow">{{=it.insertAfterRow}}</option>
+                            <option value="insertBeforeContainer">{{=it.insertBeforeContainer}}</option>
+                            <option value="insertAfterContainer">{{=it.insertAfterContainer}}</option>
+                            <option value="insertBeginning">{{=it.insertBeginning}}</option>
+                            <option value="insertEnd">{{=it.insertEnd}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                PREVIEW                =
+    ======================================-->
+
+    <section class="{{=it.previewSectionClass}}">
+        <div id="preview-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.preview}}</span>
+        </div>
+        <div id="preview" class="px-4 py-2 w-100 template-preview">
+            <div id="preview-content" class="text-center"></div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 CODE                  =
+    ======================================-->
+
+    <section id="code" class="{{=it.codeSectionClass}}">
+        <div id="code-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.code}}</span>
+        </div>
+        <div class="{{=it.codeClass}}" id="code-content">
+            <pre class="language-html text-left"></pre>
+        </div>
+    </section>
+
+    <script src="../dialogs/template.js"></script>
+</body>
+
+</html>

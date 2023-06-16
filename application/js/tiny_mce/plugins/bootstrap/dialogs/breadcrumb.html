@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bootstrap image</title>
+    <link href="../assets/css/dialogs.css" type="text/css" rel="stylesheet" />
+    <script src="../lib/loadjs/loadjs.min.js"></script>
+</head>
+
+<body>
+
+    <!--=====================================
+    =                items                  =
+    ======================================-->
+
+    <section class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.items}}</span>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col" id="breadcrumb-header"></div>
+            </div>
+            <div class="row">
+                <div class="col" id="breadcrumb-items"></div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-sm-2">
+                    <button type="button" id="btn-add-new-item" class="btn btn-primary btn-sm">{{=it.addNew}} <i class="bootstrap-icon-plus ml-2"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                PREVIEW                =
+    ======================================-->
+
+    <section class="{{=it.previewSectionClass}}">
+        <div id="preview-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.preview}}</span>
+        </div>
+        <div id="preview" class="{{=it.previewClass}}">
+            <div id="preview-content" class="text-center"></div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 CODE                  =
+    ======================================-->
+
+    <section id="code" class="{{=it.codeSectionClass}}">
+        <div id="code-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.code}}</span>
+        </div>
+        <div class="{{=it.codeClass}}" id="code-content">
+            <pre class="language-html text-left"></pre>
+        </div>
+    </section>
+
+    <script src="../dialogs/breadcrumb.js"></script>
+</body>
+
+</html>

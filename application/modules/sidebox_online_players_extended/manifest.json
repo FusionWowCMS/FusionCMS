@@ -1,0 +1,17 @@
+{
+	"name":"Sidebox: Extended Server Status",
+	"description":"Automated system",
+	"version": "2.0.0",
+	"date": "2023-05-30",
+	"author":
+	{
+		"name":"Dawnbrightsu",
+		"website":""
+	},
+	"admin":
+	[
+		
+	]
+	,
+	"enabled":true
+}

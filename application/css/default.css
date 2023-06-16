@@ -1,0 +1,709 @@
+#main #loading {
+    display: none;
+    height: 23px;
+    width: 23px;
+}
+
+
+/* Image slider background element */
+
+#slider_wrapper {
+    width: 708px;
+    height: 205px;
+    margin-bottom: 10px;
+}
+
+#slider {
+    overflow: hidden;
+}
+
+.clear {
+    clear: both;
+    height: 0px;
+    overflow: hidden;
+}
+
+*:focus {
+    outline: none;
+}
+
+.avatar {
+    float: left;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.fluxslider,
+.surface,
+.images,
+.image1,
+.image2 {
+    transform: translate3D(0, 0, 0);
+}
+
+input[type="radio"] {
+    background-color: transparent !important;
+}
+
+
+/* Slider number links */
+
+.pagination {
+    display: none;
+}
+
+
+/* Slider text bar */
+
+.caption {
+    padding: 10px;
+    border-top-right-radius: 2px;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    position: absolute;
+    bottom: 0px;
+}
+
+#slider_next,
+#slider_previous {
+    border-radius: 2px;
+    position: absolute;
+    padding: 10px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999999;
+}
+
+#slider_next:hover,
+#slider_previous:hover {
+    background-color: #000;
+}
+
+#pm_username_autocomplete {
+    z-index: 999999;
+}
+
+.characters_remaining {
+    float: left;
+    margin-top: 17px;
+    margin-left: 1px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+
+/* Modal boxes: alert & confirm */
+
+.popup {
+    width: 270px;
+    display: none;
+    z-index: 999999;
+    padding: 20px;
+    background-color: #eee;
+    border: 1px solid #fff;
+    position: fixed;
+    left: 50%;
+    text-shadow: none;
+    margin-left: -120px;
+    top: 30%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 35px #000;
+}
+
+.popup h1 {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #000;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.popup a {
+    display: block;
+    float: left;
+    border-radius: 3px;
+    color: #fff;
+    line-height: 1;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 7px;
+    margin-left: 7px;
+    width: 50px;
+    text-shadow: none;
+}
+
+.popup a:hover {
+    text-shadow: none;
+    text-decoration: none;
+    color: #fff;
+}
+
+.popup_button {
+    background-color: #7fbf4d;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7fbf4d), color-stop(100%, #63a62f));
+    background-image: -webkit-linear-gradient(top, #7fbf4d, #63a62f);
+    background-image: linear-gradient(top, #7fbf4d, #63a62f);
+    border: 1px solid #63a62f;
+    border-bottom: 1px solid #5b992b;
+    box-shadow: inset 0 1px 0 0 #96ca6d;
+    text-shadow: 0 -1px 0 #4c9021;
+}
+
+.popup_button:hover {
+    background-color: #76b347;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #76b347), color-stop(100%, #5e9e2e));
+    background-image: -webkit-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: linear-gradient(top, #76b347, #5e9e2e);
+    box-shadow: inset 0 1px 0 0 #8dbf67;
+}
+
+.popup_button:active {
+    border: 1px solid #5b992b;
+    border-bottom: 1px solid #538c27;
+    box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+}
+
+.popup_hide {
+    background-color: #bfbfbf;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bfbfbf), color-stop(100%, #9a9a9a));
+    background-image: -webkit-linear-gradient(top, #bfbfbf, #9a9a9a);
+    background-image: linear-gradient(top, #bfbfbf, #9a9a9a);
+    border: 1px solid #9a9a9a;
+    border-bottom: 1px solid #9a9a9a;
+    box-shadow: inset 0 1px 0 0 #cbcbcb;
+    text-shadow: 0 -1px 0 #8f8f8f;
+}
+
+.popup_hide:hover {
+    background-color: #adadad;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #adadad), color-stop(100%, #a0a0a0));
+    background-image: -webkit-linear-gradient(top, #adadad, #a0a0a0);
+    background-image: linear-gradient(top, #adadad, #a0a0a0);
+    box-shadow: inset 0 1px 0 0 #bbbbbb;
+}
+
+.popup_hide:active {
+    border: 1px solid #a0a0a0;
+    border-bottom: 1px solid #8b8b8b;
+    box-shadow: inset 0 0 8px 4px #8c8c8c, 0 1px 0 0 #eeeeee;
+}
+
+.popup_links {
+    width: 214px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#popup_bg {
+    background-color: #000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: none;
+    top: 0;
+    left: 0;
+}
+
+#alert_button {
+    float: none;
+    width: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Tooltip */
+
+#tooltip,
+.tooltip {
+    padding: 7px;
+    background-color: #070c21;
+    background-color: rgba(7, 12, 33, 0.9);
+    border-radius: 3px;
+    border: 1px solid #777777;
+    border-top: 1px solid #cfcfcf;
+    box-shadow: 0px 0px 3px #000;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+#tooltip {
+    position: absolute;
+    display: none;
+    z-index: 99999;
+}
+
+.nice_button img {
+    margin-right: 5px;
+}
+
+.page_form table {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* First column (the field label, in most cases) */
+
+.page_form table td:first-child {
+    padding-left: 20px;
+    width: 20%;
+}
+
+.page_form label {
+    font-size: 14px;
+    margin-right: 15px;
+}
+
+#forgot {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+
+/* Remember me */
+
+#remember_me {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.realm {
+    font-size: 1rem;
+    margin: 0px auto 0px auto;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.realm_online {
+    float: right;
+    font-weight: bold;
+}
+
+.realm_bar,
+.poll_bar {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+
+
+/* Realm status module [bar fill] */
+
+.realm_bar_fill,
+.poll_bar_fill {
+    border-radius: 2px;
+    height: 8px;
+}
+
+
+/* Realmlist box in the realm status sidebox */
+
+#realmlist {
+    border-radius: 5px;
+    text-align: center;
+    font-size: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+
+/* Online players bar and realm bar (used on UCP, profiles) */
+
+.online_realm_button,
+#ucp_characters h1 {
+    display: block;
+    padding: 7px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.online_realm_button:first-child {
+    margin-top: 0px;
+}
+
+
+/* Table style, used on vote panel, donate panel, online players etc. */
+
+.nice_table {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 0px;
+}
+
+.nice_table tr:first-child td {
+    font-weight: bold;
+    padding: 7px;
+    font-size: 14px;
+}
+
+.nice_table tr:not(:first-child) td {
+    padding: 7px;
+    font-size: 14px;
+    height: 40px;
+}
+
+.nice_table td:first-child {
+    font-weight: bold;
+}
+
+
+/* Shoutbox sidebox module */
+
+#shoutbox form {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#shoutbox form textarea {
+    margin-top: 5px;
+    height: 16px;
+}
+
+#shoutbox form input[type="submit"] {
+    margin-top: 4px;
+}
+
+#shoutbox .shout {
+    padding: 10px;
+    font-size: 11px;
+    overflow: hidden;
+}
+
+#shoutbox .shout .shout_author {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+#shoutbox .shout .shout_date {
+    float: right;
+    font-size: 10px;
+}
+
+
+/* "Older messages" button/link */
+
+#shoutbox #shoutbox_view {
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    padding-top: 10px;
+    margin-bottom: 5px;
+    clear: both;
+}
+
+
+/* Characters remaining counter */
+
+.shout_characters_remaining {
+    float: left;
+    margin-top: 14px;
+    font-size: 10px;
+    width: 50px;
+}
+
+#shout {
+    overflow: hidden;
+}
+
+
+/* PvP ladder sidebox */
+
+#toppvp {
+    overflow: hidden;
+}
+
+.toppvp_select {
+    padding-bottom: 10px;
+    font-size: 14px;
+    padding-top: 4px;
+}
+
+.toppvp_realm {
+    float: left;
+    width: 208px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.toppvp_next {
+    float: right;
+    font-size: 14px;
+}
+
+.toppvp_previous {
+    float: left;
+    font-size: 14px;
+}
+
+.toppvp_character {
+    padding: 10px;
+    font-size: 10px;
+    text-align: left;
+}
+
+.toppvp_character:first-child {
+    border-top: none;
+}
+
+
+/* Spot number */
+
+.toppvp_character b {
+    margin-right: 7px;
+}
+
+/*Class colors*/
+.color-c1 { color: #C69B6D ! important; } /* Warrior */
+.color-c2 { color: #F48CBA ! important; } /* Paladin */
+.color-c3 { color: #AAD372 ! important; } /* Hunter */
+.color-c4 { color: #FFF468 ! important; } /* Rogue */
+.color-c5 { color: #FFFFFF ! important; } /* Priest */
+.color-c6 { color: #C41E3A ! important; } /* Death Knight */
+.color-c7 { color: #0070DD ! important; } /* Shaman */
+.color-c8 { color: #3FC7EB ! important; } /* Mage */
+.color-c9 { color: #8788EE ! important; } /* Warlock */
+.color-c10 { color: #00FF98 ! important; } /* Monk */
+.color-c11 { color: #FF7C0A ! important; } /* Druid */
+.color-c12 { color: #A330C9 ! important; } /* Demon Hunter */
+.color-c13 { color: #33937F ! important; } /* Evoker */
+
+/* Item quality colors */
+.q  { color: #ffd100 ! important; } /* Default (yellow) */
+.q0, .q0 a { color: #9d9d9d ! important; } /* Poor */
+.q1, .q1 a { color: #ffffff ! important; } /* Common */
+.q2, .q2 a, .q2:hover { color: #1eff00 ! important; } /* Uncommon */
+.q3, .q3 a { color: #0070dd ! important; } /* Rare */
+.q4, .q4 a { color: #a335ee ! important; } /* Epic */
+.q5, .q5 a { color: #ff8000 ! important; } /* Legendary */
+.q6, .q6 a { color: #e5cc80 ! important; } /* Artifact */
+.q7, .q7 a { color: #e5cc80 ! important; } /* Heirloom (new 00ccff)*/
+.q8, .q8 a { color: #ffff98 ! important; } /* Light yellow (item set bonuses) */
+.q9, .q9 a { color: #71D5FF ! important; } /* Light blue (glyph type) */
+.q10, .q10 a { color: #ff4040 ! important; } /* Red (requirement not met, error) */
+
+/* Sockets */
+.socket-meta   { padding-left: 20px; background: url(../images/misc/socket_meta.gif) no-repeat left center; }
+.socket-red    { padding-left: 20px; background: url(../images/misc/socket_red.gif) no-repeat left center; }
+.socket-yellow { padding-left: 20px; background: url(../images/misc/socket_yellow.gif) no-repeat left center; }
+.socket-blue   { padding-left: 20px; background: url(../images/misc/socket_blue.gif) no-repeat left center; }
+
+/* FusionEditor WYSIWYG field */
+
+.fusioneditor .fusioneditor_tools {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #fff;
+    border: 1px solid #999;
+    border-bottom: none;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+
+/* The tool buttons */
+
+.fusioneditor {
+    width: auto;
+}
+
+.fusioneditor .fusioneditor_tools a {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    padding: 5px;
+    padding-bottom: 0px;
+    padding-top: 4px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    transition: 0.3s all;
+}
+
+.fusioneditor .fusioneditor_tools a:hover {
+    border: 1px solid #b7b7b7;
+    background-color: #fff;
+    box-shadow: 0px 1px 0px #fff inset;
+}
+
+.fusioneditor .fusioneditor_tools a:active {
+    border: 1px solid #666;
+}
+
+.fusioneditor .fusioneditor_field {
+    width: auto;
+    font-family: Arial, Helvetica, Sans-serif;
+    font-size: 12px;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #999;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    transition: 0.3s all;
+    overflow: hidden;
+}
+
+.fusioneditor .fusioneditor_field:focus {
+    border: 1px solid #1f9ebc;
+}
+
+.fusioneditor .fusioneditor_close {
+    float: right;
+    margin-right: 5px;
+}
+
+.fusioneditor .fusioneditor_toolbox {
+    border-top: 1px solid #999;
+    padding: 5px;
+    margin-top: 5px;
+    height: 50px;
+}
+
+.fusioneditor .fusioneditor_toolbox input[type="text"] {
+    width: 85% !important;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.fusioneditor .fusioneditor_size {
+    height: 20px;
+    width: 16px;
+    margin-right: 5px;
+    margin-top: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #666;
+}
+
+.fusioneditor .fusioneditor_size:hover {
+    color: #000;
+}
+
+.fusioneditor .fusioneditor_color {
+    height: 22px;
+    width: 17px;
+    margin-right: 5px;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+.fusioneditor .fusioneditor_color:hover {
+    border: 1px solid rgba(0, 0, 0, 0) !important;
+    box-shadow: none !important;
+    opacity: 1;
+}
+
+.fusioneditor .fusioneditor_color:active {
+    border: 1px solid rgba(0, 0, 0, 0) !important;
+}
+
+
+/* User info sidebox */
+
+.sidebox_info {
+    padding: 5px;
+}
+
+.sidebox_info td {
+    padding: 5px;
+    font-size: 1rem;
+}
+
+.sidebox_info td:first-child {
+    font-weight: bold;
+}
+
+.sidebox_info td img {
+    margin-right: 5px;
+}
+
+.sidebox_info center {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.sidebox_info center a:last-child {
+    margin-left: 10px;
+}
+
+/* Poll sidebox */
+
+.poll_question {
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#poll_answers .poll_answer,
+#poll_results .poll_answer {
+    padding: 5px;
+}
+
+#poll_answers .poll_answer label {
+    display: block;
+    cursor: pointer;
+}
+
+#poll_answers .poll_answer label:hover {
+    font-weight: bold;
+}
+
+#poll_answers .poll_answer input[type="radio"] {
+    margin-right: 5px;
+}
+
+#poll_results .poll_answer .poll_votes_count {
+    float: right;
+    font-weight: bold;
+}
+
+#poll_actions {
+    display: block;
+    text-align: center;
+    width: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}
+
+
+/* Vote reminder */
+
+#vote_reminder {
+    width: 468px;
+    height: 60px;
+    position: fixed;
+    margin-left: -234px;
+    left: 50%;
+    top: 50%;
+    margin-top: -30px;
+    background-color: #000;
+    z-index: 999999999999;
+    display: none;
+}
+
+.staff_comment .comment_author img {
+    margin-top: 3px !important;
+}
+
+.comment {
+    word-wrap: break-word;
+}

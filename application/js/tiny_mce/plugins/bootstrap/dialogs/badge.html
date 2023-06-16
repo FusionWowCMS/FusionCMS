@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bootstrap button</title>
+    <link href="../assets/css/dialogs.css" type="text/css" rel="stylesheet" />
+    <script src="../lib/loadjs/loadjs.min.js"></script>
+</head>
+
+<body>
+
+    <!--=====================================
+    =             Button style              =
+    ======================================-->
+
+    <section id="style" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.buttonStyle}}</span>
+        </div>
+        <div class="selector">
+            <span class="badge badge-primary" data-prop="style" data-value="badge-primary">Primary</span>
+        </div>
+        <div class="selector">
+            <span class="badge badge-secondary" data-prop="style" data-value="badge-secondary">Secondary</span>
+        </div>
+        <div class="selector">
+            <span class="badge badge-success" data-prop="style" data-value="badge-success">Success</span>
+        </div>
+        <div class="selector">
+            <span class="badge badge-danger" data-prop="style" data-value="badge-danger">Danger</span>
+        </div>
+        <div class="selector">
+            <span class="badge badge-warning" data-prop="style" data-value="badge-warning">Warning</span>
+        </div>
+        <div class="selector">
+            <span class="badge badge-info" data-prop="style" data-value="badge-info">Info</span>
+        </div>
+        <div class="selector">
+            <span class="badge badge-light" data-prop="style" data-value="badge-light">Light</span>
+        </div>
+        <div class="selector">
+            <span class="badge badge-dark" data-prop="style" data-value="badge-dark">Dark</span>
+        </div>
+    </section>
+
+    <!--=====================================
+    =              Button tag               =
+    ======================================-->
+
+    <section class="{{=it.sectionSplitClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.tag}}</span>
+        </div>
+        <div class="container-fluid">
+            <div class="row mx-0">
+                <div id="tag" class="{{=it.sectionSplitColClass}}">
+                    <div id="span-select" class="selector">
+                        <span data-prop="tag" data-value="span">&lt;span&gt;</span>
+                    </div>
+                    <div id="link-select" class="selector">
+                        <span data-prop="tag" data-value="a">&lt;a&gt;</span>
+                    </div>
+                </div>
+                <div class="{{=it.sectionSplitColClass}} togglable-wrapper">
+                    <div class="form-inline toggle tag-toggle" data-activate="a">
+                        <label for="badge-link-url" class="mr-3">{{=it.link}}</label>
+                        <input type="text" data-prop="href" value="" class="form-control form-control-sm" id="badge-link-url" placeholder="https://">
+                    </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!--=====================================
+    =             Button others             =
+    ======================================-->
+
+    <section id="others" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.others}}</span>
+        </div>
+        <div class="choice form-inline">
+            <label class="mr-3">{{=it.badgepill}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="badgePill" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="badgePill" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+        <div class="choice form-inline">
+            <label for="text" class="mr-3" id="text-label">{{=it.text}}</label>
+            <input type="text" value="" class="form-control form-control-sm" data-prop="text" name="text" id="text">
+        </div>
+    </section>
+
+    <!--=====================================
+    =                PREVIEW                =
+    ======================================-->
+
+    <section class="{{=it.previewSectionClass}}">
+        <div id="preview-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.preview}}</span>
+        </div>
+        <div id="preview" class="{{=it.previewClass}}">
+            <div id="preview-content" class="text-center"></div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 CODE                  =
+    ======================================-->
+
+    <section id="code" class="{{=it.codeSectionClass}}">
+        <div id="code-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.code}}</span>
+        </div>
+        <div class="{{=it.codeClass}}" id="code-content">
+            <pre class="language-html"></pre>
+        </div>
+    </section>
+
+    <script src="../dialogs/badge.js"></script>
+</body>
+
+</html>

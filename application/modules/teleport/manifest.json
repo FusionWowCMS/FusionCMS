@@ -1,0 +1,57 @@
+{
+	"name": "Teleport hub",
+	"description": "Lets your users teleport - either for free or for the cost of vp\/dp\/gold",
+	"version": "2.0.0",
+	"date": "2023-05-30",
+	"author": {
+		"name": "FusionCMS",
+		"website": "http:\/\/fusion-hub.com"
+	},
+
+	"permissions": {
+		"view": {"default" : true, "description": "View the teleport screen." },
+		"canAdd": {"default" : false, "description": "Add teleport locations." },
+		"canRemove": {"default" : false, "description": "Remove teleport locations." },
+		"canEdit": {"default" : false, "description": "Edit teleport locations." },
+		"canViewAdmin": {"default" : false, "description": "View the teleport locations admin page." }
+	},
+
+	"roles": {
+		"view": {
+			"description": "View the teleport module.",
+
+			"permissions": {
+				"view": true
+			}
+		},
+
+		"manage": {
+			"description": "Manage the teleport module. <font style='color:red;'>Admin-tool</font>",
+			"dangerLevel": 2,
+
+			"permissions": {
+				"canViewAdmin": true,
+				"canAdd": true,
+				"canRemove": true,
+				"canEdit": true
+			}
+		}
+	},
+
+	"admin": [
+		{
+			"text": "Store",
+			"icon": "share",
+			"links": [
+				{
+					"text": "Teleport locations",
+					"icon": "mouse-pointer",
+					"controller": "admin",
+					"requirePermission": "canViewAdmin"
+				}
+			]
+		}
+	],
+
+	"enabled": true
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bootstrap image</title>
+    <link href="../assets/css/dialogs.css" type="text/css" rel="stylesheet" />
+    <script src="../lib/loadjs/loadjs.min.js"></script>
+</head>
+
+<body>
+
+    <!--=====================================
+    =             File browser              =
+    ======================================-->
+
+    <section id="browser" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.image}}</span>
+        </div>
+        <!-- Button trigger modal -->
+        <div class="text-center my-5">
+            <button type="button" id="trigger-modal-btn" class="btn btn-primary">{{=it.browse}}</button>
+        </div>
+    </section>
+
+    <!--=====================================
+    =              Image style              =
+    ======================================-->
+
+    <section id="style" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.imageStyle}}</span>
+        </div>
+        <div class="selector d-flex flex-column align-items-center">
+            <img src="../assets/images/default-thumb.jpg" alt="" width="120" data-prop="style" data-value="">
+            <label>{{=it.default}}</label>
+        </div>
+        <div class="selector d-flex flex-column align-items-center">
+            <img src="../assets/images/default-thumb.jpg" class="img-thumbnail" alt="" width="120" data-prop="style" data-value="img-thumbnail">
+            <label>{{=it.thumbnail}}</label>
+        </div>
+        <div class="selector d-flex flex-column align-items-center">
+            <img src="../assets/images/default-thumb.jpg" class="rounded-sm" alt="" width="120" data-prop="style" data-value="rounded-sm">
+            <label>{{=it.smallRadius}}</label>
+        </div>
+        <div class="selector d-flex flex-column align-items-center">
+            <img src="../assets/images/default-thumb.jpg" class="rounded" alt="" width="120" data-prop="style" data-value="rounded">
+            <label>{{=it.mediumRadius}}</label>
+        </div>
+        <div class="selector d-flex flex-column align-items-center">
+            <img src="../assets/images/default-thumb.jpg" class="rounded-lg" alt="" width="120" data-prop="style" data-value="rounded-lg">
+            <label>{{=it.largeRadius}}</label>
+        </div>
+        <div class="selector d-flex flex-column align-items-center">
+            <img src="../assets/images/default-thumb.jpg" class="rounded-pill" alt="" width="120" data-prop="style" data-value="rounded-pill">
+            <label>{{=it.roundedPill}}</label>
+        </div>
+        <div class="selector d-flex flex-column align-items-center">
+            <img src="../assets/images/default-thumb.jpg" class="rounded-circle" alt="" width="120" data-prop="style" data-value="rounded-circle">
+            <label>{{=it.roundedCircle}}</label>
+        </div>
+    </section>
+
+    <section id="others" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.others}}</span>
+        </div>
+        <div class="form-group form-inline">
+            <label for="position" class="mr-3">{{=it.position}}</label>
+            <select class="form-control" data-prop="position" id="position">
+                <option value="">{{=it.default}}</option>
+                <option value="float-left">{{=it.floatLeft}}</option>
+                <option value="float-right">{{=it.floatRight}}</option>
+                <option value="d-block mx-auto">{{=it.center}}</option>
+            </select>
+        </div>
+        <div class="choice form-inline">
+            <label class="mr-3">{{=it.responsive}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="responsive" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="responsive" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+        <div class="choice form-inline">
+            <label for="img-alt" class="mr-3" id="img-alt-label">{{=it.altText}}</label>
+            <input type="text" value="" class="form-control form-control-sm" data-prop="imgAlt" name="text" id="img-alt">
+            </div>
+    </section>
+
+    <!--=====================================
+    =                PREVIEW                =
+    ======================================-->
+
+    <section class="{{=it.previewSectionClass}}">
+        <div id="preview-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.preview}}</span>
+        </div>
+        <div id="preview" class="{{=it.previewClass}}">
+            <div id="preview-content" class="text-center"></div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 CODE                  =
+    ======================================-->
+
+    <section id="code" class="{{=it.codeSectionClass}}">
+        <div id="code-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.code}}</span>
+        </div>
+        <div class="{{=it.codeClass}}" id="code-content">
+            <pre class="language-html"></pre>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 Modal                 =
+    ======================================-->
+
+    <div id="file-tree-modal" class="tbp-modal">
+        <div class="tbp-modal-content">
+            <div id="file-tree-wrapper">
+                <div class="ft-tree"></div>
+                <div class="ft-explorer"></div>
+            </div>
+            <span id="ft-close-btn">×</span>
+        </div>
+    </div>
+
+    <script src="../dialogs/image.js"></script>
+</body>
+
+</html>

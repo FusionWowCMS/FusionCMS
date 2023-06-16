@@ -1,0 +1,122 @@
+/*-------------------------------------------------------------------------*/
+/* Poll
+/*-------------------------------------------------------------------------*/
+.poll_bar {
+	width: 100%;
+	height: 20px;
+	margin: 0.75rem 0 0 0;
+	padding: 2px;
+	border-radius: 1px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius: 1px;
+	background-color: rgba(9, 11, 20, 0.85);
+}
+
+.poll_bar .poll_bar_fill {
+	width: auto;
+	height: 100%;
+	overflow: hidden;
+	border-radius: 1px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius: 1px;
+	background: #48649d;
+	background: -moz-linear-gradient(left,  #48649d 0%, #5c7cac 100%);
+	background: -webkit-linear-gradient(left,  #48649d 0%,#5c7cac 100%);
+	background: linear-gradient(to right,  #48649d 0%,#5c7cac 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#48649d', endColorstr='#5c7cac',GradientType=1 );
+}
+
+.poll_bar .poll_bar_fill::before {
+
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	content: '';
+	opacity: 0.5;
+	position: absolute;
+	background-color: transparent;
+	background-image: url('../../images/patterns/pattern-grunge.png');
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+.poll_bar .poll_bar_fill::after {
+	width: 100%;
+	height: 50%;
+	left: 0;
+	bottom: 0;
+	content: '';
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.15);
+}
+
+/*-------------------------------------------------------------------------*/
+/* Realm bar
+/*-------------------------------------------------------------------------*/
+
+/* Online extended players */
+.sidebox .sidebox-body .realm_bar  .realm_bar_fill {
+    float: left;
+    height: 1px !important;
+    top: 1px;
+}
+.sidebox .sidebox-body .realm_bar  .realm_bar_fill a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.sidebox .sidebox-body .realm_bar  .realm_bar_fill.alliance {
+    background:
+    url('../../images/realmbar/pull-fill-alliance.gif') repeat-x,
+    url(../../images/realmbar/bar_fill_repeat.png) repeat-x,
+    url(../../images/realmbar/bar_fill_left.png) no-repeat left,
+    url(../../images/realmbar/bar_fill_right.png) no-repeat right;
+	background-size: cover;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+    -webkit-border-top-right-radius: 2px !important;
+    -webkit-border-bottom-right-radius: 2px !important;
+    -moz-border-radius-topright: 2px !important;
+    -moz-border-radius-bottomright: 2px !important;
+    border-top-right-radius: 2px !important;
+    border-bottom-right-radius: 2px !important;
+    right: 1px;
+}
+.sidebox .sidebox-body .realm_bar  .realm_bar_fill.horde {
+    background: url('../../images/realmbar/pull-fill-horde.gif') repeat-x,
+    url(../../images/realmbar/bar_fill_repeat.png) repeat-x,
+    url(../../images/realmbar/bar_fill_left.png) no-repeat left,
+    url(../../images/realmbar/bar_fill_right.png) no-repeat right;
+	background-size: cover;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+    -webkit-border-top-left-radius: 2px !important;
+    -webkit-border-bottom-left-radius: 2px !important;
+    -moz-border-radius-topleft: 2px !important;
+    -moz-border-radius-bottomleft: 2px !important;
+    border-top-left-radius: 2px !important;
+    border-bottom-left-radius: 2px !important;
+    left: 1px;
+}
+.sidebox .sidebox-body .realm-bar-wrapper {
+    position: relative;
+}
+
+
+.sidebox .sidebox-body {
+    height: 60px;
+}
+.sidebox .sidebox-body .realm_bar {
+    position: relative;
+}
+.sidebox .sidebox-body .uptime-count span {
+    padding-left: 3px;
+}
+
+.sidebox .sidebox-body .realm_bar span {
+	color: #baddf4;
+    top: -3px;
+}

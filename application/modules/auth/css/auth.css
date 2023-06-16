@@ -1,0 +1,11 @@
+.cursor-pointer {cursor:pointer;}
+.rounded-bottom-start {border-bottom-left-radius: 0.25rem!important;}
+.rounded-bottom-end {border-bottom-right-radius: 0.25rem!important;}
+
+.invalid-feedback {
+    color: #dc3545!important;
+}
+
+.error-feedback {
+    color: #dc3545!important;
+}

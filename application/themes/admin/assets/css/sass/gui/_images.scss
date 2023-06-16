@@ -1,0 +1,79 @@
+/* Images */
+.rounded {
+	border-radius: 6px;
+}
+
+.rounded-circle {
+	border-radius: 50%;
+}
+
+.img-thumbnail {
+	border-radius: 8px;
+	position: relative;
+}
+
+// THUMBNAILS
+// -----------------------------------------------------------------------------
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border .2s ease-in-out;
+}
+
+.img-thumbnail {
+	display: inline-block;
+	border-radius: 8px;
+	position: relative;
+}
+
+.img-thumbnail .zoom {
+	display: block;
+	position: absolute;
+	right: 8px;
+	bottom: 8px;
+	height: 30px;
+	width: 30px;
+	padding: 6px;
+	font-size: 14px;
+	line-height: 18px;
+	background: #CCC;
+	border-radius: 100%;
+	color: #FFF;
+	text-align: center;
+}
+
+.img-thumbnail .zoom i {
+	position: relative;
+    top: 2px;
+    left: 1px;
+}
+
+/* Thumbnail Gallery */
+.thumbnail-gallery {
+	list-style: none;
+	margin: 10px 0;
+	padding: 0;
+}
+
+.thumbnail-gallery .img-thumbnail,
+.thumbnail-gallery .thumbnail {
+	margin: 10px 10px 0 0;
+}
+
+// IMAGE FRAMES
+// -----------------------------------------------------------------------------
+.image-frame {
+	.image-frame-wrapper {
+		position: relative;
+		.image-frame-badges-wrapper {
+			position: absolute;
+			top: 15px;
+			left: 15px;
+		}
+	}
+}

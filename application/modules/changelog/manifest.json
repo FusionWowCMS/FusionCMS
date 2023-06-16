@@ -1,0 +1,100 @@
+{
+	"description":"Allows developers to post changelog messages",
+	"version": "2.0.0",
+	"date": "2023-05-30",
+	"author":
+	{
+		"name":"FusionGen",
+		"website":"http:\/\/fusiongen.net"
+	},
+	"permissions":
+	{
+		"view":
+		{
+			"default":true,
+			"description":"View the changelog"
+		},
+		"canAddCategory":
+		{
+			"default":false,
+			"description":"Add a change"
+		},
+		"canAddChange":
+		{
+			"default":false,
+			"description":"Add a category"
+		},
+		"canRemoveChange":
+		{
+			"default":false,
+			"description":"Remove a change"
+		},
+		"canRemoveCategory":
+		{
+			"default":false,
+			"description":"Remove a category"
+		},
+		"canEditChange":
+		{
+			"default":false,
+			"description":"Edit a change"
+		},
+		"canEditCategory":
+		{
+			"default":false,
+			"description":"Edit a category"
+		},
+		"canViewAdmin":
+		{
+			"default":false,
+			"description":"View the changelog through the admin panel. Requires view permission in admin module"
+		}
+	},
+	"roles":
+	{
+		"view":
+		{
+			"description":"View the changelog",
+			"permissions":
+			{
+				"view":true
+			}
+		},
+		"manage":
+		{
+			"description":"Manage the changelog. <font style='color:red;'>Admin-tool<\/font>",
+			"dangerLevel":1,
+			"permissions":
+			{
+				"canViewAdmin":true,
+				"canAddChange":true,
+				"canAddCategory":true,
+				"canRemoveChange":true,
+				"canEditChange":true,
+				"canRemoveCategory":true,
+				"canEditCategory":true
+			}
+		}
+	},
+	"admin":
+	[
+		
+		{
+			"text":"Website",
+			"icon":"list-ul",
+			"links":
+			[
+				
+				{
+					"text":"Changelog",
+					"icon":"list-ul",
+					"controller":"admin",
+					"requirePermission":"canViewAdmin"
+				}
+			]
+			
+		}
+	]
+	,
+	"enabled":true
+}

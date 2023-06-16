@@ -1,0 +1,41 @@
+/* Icons */
+
+/* Size */
+.icon {
+	line-height: 1;
+	&.bx {
+	    padding-right: 4px;
+	    padding-top: 2px;
+	}
+	&.icon-inline {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+	&.icon-block {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	&.icon-sm {
+		width: 30px;
+		height: 30px;
+		font-size: 0.9rem;
+	}
+	&.icon-md {
+		width: 40px;
+		height: 40px;
+		font-size: 1.4rem;
+	}
+	&.icon-lg {
+		width: 50px;
+		height: 50px;
+		font-size: 1.7rem;
+	}
+	&.icon-xl {
+		width: 78px;
+	    height: 78px;
+	    font-size: 2.1rem;
+	}
+}
+

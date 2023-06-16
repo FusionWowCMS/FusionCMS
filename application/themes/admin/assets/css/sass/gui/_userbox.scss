@@ -1,0 +1,196 @@
+/* Userbox */
+.userbox {
+	display: inline-block;
+	margin: 3px 17px 0 0;
+	position: relative;
+	vertical-align: middle;
+
+	& > a {
+		display: inline-block;
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	.profile-info,
+	.profile-picture {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 0;
+	}
+
+	.profile-picture img {
+		width: 35px;
+		color: transparent;
+	}
+
+	.profile-info {
+		margin: -3px 25px 0 10px;
+	}
+
+	.name,
+	.role {
+		display: block;
+	}
+
+	.name {
+		color: #000011;
+		font-size: 0.8rem;
+		line-height: 1.1rem;
+	}
+
+	.role {
+		color: #ACACAC;
+		font-size: 0.7rem;
+		line-height: 0.7rem;
+	}
+
+	.custom-caret {
+		color: #000011;
+		font-size: 16px;
+		font-weight: bold;
+
+		&:before {
+			content: "\f107";
+		}
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.userbox {
+		.name,
+		.role {
+			max-width: 68px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+}
+
+// USERBOX OPENED
+// -----------------------------------------------------------------------------
+/* Userbox - Open */
+.userbox {
+	& > a.show {
+		position: relative;
+		z-index: 993;
+
+		.custom-caret:before {
+			content: "\f106";
+		}
+	}
+
+	.dropdown-menu {
+		border: none;
+		box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+		box-sizing: content-box;
+		left: -11px !important;
+		padding: 45px 10px 0;
+		top: -10px !important;
+		transform: none !important;
+		width: 100%;
+		min-width: 0;
+		z-index: 992;
+
+		li {
+			margin-bottom: 5px;
+		}
+
+		a {
+			border-radius: 2px;
+			color: #7d7d7d;
+			display: block;
+			line-height: 1.3rem;
+			padding: 4px 10px;
+			font-size: 0.75rem;
+
+			i {
+				font-size: 1.1rem;
+			}
+
+			&:hover {
+				background: $color-primary;
+				color: $color-primary-inverse;
+			}
+		}
+
+		i {
+			margin-right: 3px;
+			vertical-align: middle;
+		}
+	}
+}
+
+// USERBOX MOBILE
+// -----------------------------------------------------------------------------
+/* Userbox - Mobile */
+@media only screen and (max-width: 767px) {
+	.userbox {
+		float: left;
+		margin: 16px 0 0 12px;
+		position: relative;
+
+		&:after {
+			background: #E9E9E6;
+			content: '';
+			height: 63px;
+			margin: 0;
+			position: absolute;
+			right: -21px;
+			top: -18px;
+			width: 1px;
+		}
+
+		.profile-picture {
+			display: none;
+		}
+
+		.dropdown-menu {
+			left: -5px !important;
+			padding: 43px 0 0 0;
+		}
+	}
+}
+
+// HEADER DARK
+// -----------------------------------------------------------------------------
+/* Header Dark - Userbox */
+html.dark,
+html.header-dark {
+	.userbox {
+		&:after {
+			background: darken( #1D2127, 5% );
+		}
+
+		.name,
+		.custom-caret {
+			color: #C3C3C3;
+		}
+		.dropdown-menu {
+			.name,
+				.custom-caret {
+					color: #C3C3C3;
+				}
+
+				a {
+					color: #C3C3C3;
+
+					&:hover {
+						color: #FFF;
+					}
+				}
+			background: lighten( #1D2127, 5% );
+
+			.divider {
+				background: #1D2127;
+			}
+
+			a {
+				color: #C3C3C3;
+			}
+		}
+	}
+}

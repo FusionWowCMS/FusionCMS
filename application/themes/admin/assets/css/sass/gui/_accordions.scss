@@ -1,0 +1,114 @@
+/* Accordion */
+.accordion {
+	a{
+		cursor: pointer;
+		text-decoration: none;
+		&:hover {
+			text-decoration: none !important;
+		}
+	}
+	.card {
+		margin-top: 5px !important;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	.card-title {
+		font-size: 16px;
+	}
+	.card-header {
+		padding: 0;
+		border-radius: 3px !important;
+		border-bottom: 0;
+		a {
+			display: block;
+			padding: 10px 20px;
+			&:hover, &:focus {
+				text-decoration: none;
+			}
+			[class^="icon-"] {
+				margin-#{$right}: 4px;
+				position: relative;
+				top: 1px;
+			}
+			.fa, .fab, .fal, .far, .fas, .icons {
+				display: inline-block;
+				margin-right: 5px;
+				position: relative;
+				top: -1px;
+			}
+		}
+	}
+	.card-body {
+		border-radius: 0 0 5px 5px;
+	}
+	&.accordion-sm {
+		.card-header {
+			a {
+				padding: 5px 15px;
+				font-size: 0.9em;
+			}
+		}
+		.card-body {
+			font-size: 0.9em;
+		}
+	}
+	&.accordion-lg {
+		.card-header {
+			a {
+				padding: 15px 15px;
+				font-size: 1em;
+				font-weight: 600;
+			}
+		}
+	}
+	&.without-bg {
+		.card-default {
+			background: transparent !important;
+			> .card-header {
+				background: transparent !important;
+			}
+		}
+		.card-body {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+	&.without-borders {
+		.card {
+			border: 0;
+			box-shadow: none;
+			border-bottom: 1px solid #DDD;
+			border-radius: 0;
+		}
+		.card-header a {
+			padding-left: 0;
+			padding-right: 0;
+		}
+		.card-body {
+			padding: 0;
+		}
+	}
+}
+
+// Card Accordion
+.card-accordion {
+	a:hover {
+		text-decoration: none !important;
+	}
+	margin-top: 5px !important;
+	border: 0 !important;
+	&.card-accordion-first {
+		margin-top: 0 !important;
+	}
+	.card-body {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+	.card-title {
+		font-size: 1rem;
+	}
+	.accordion-body {
+		padding: 0;
+	}
+}

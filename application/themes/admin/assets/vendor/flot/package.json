@@ -1,0 +1,41 @@
+{
+  "_args": [
+    [
+      "jquery.flot@0.8.3",
+      "E:\\_OKLER\\Templates\\Porto-Admin\\HTML"
+    ]
+  ],
+  "_from": "jquery.flot@0.8.3",
+  "_id": "jquery.flot@0.8.3",
+  "_inBundle": false,
+  "_integrity": "sha1-gdLsT/3w3ucpyKRC6Pqjmem0ggc=",
+  "_location": "/jquery.flot",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "jquery.flot@0.8.3",
+    "name": "jquery.flot",
+    "escapedName": "jquery.flot",
+    "rawSpec": "0.8.3",
+    "saveSpec": null,
+    "fetchSpec": "0.8.3"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery.flot/-/jquery.flot-0.8.3.tgz",
+  "_spec": "0.8.3",
+  "_where": "E:\\_OKLER\\Templates\\Porto-Admin\\HTML",
+  "auther": "DerekMoe",
+  "description": "## About ##",
+  "devDependencies": {
+    "jshint": "0.9.1"
+  },
+  "main": "jquery.flot.js",
+  "name": "jquery.flot",
+  "scripts": {
+    "test": "make test"
+  },
+  "version": "0.8.3"
+}

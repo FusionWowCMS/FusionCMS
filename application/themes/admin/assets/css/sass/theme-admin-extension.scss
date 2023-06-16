@@ -1,0 +1,34 @@
+// COMMON IMPORTS
+// -----------------------------------------------------------------------------
+@import "config/imports";
+$admin-ext: true;
+
+// BASIC
+// -----------------------------------------------------------------------------
+@import "base/helpers";
+
+// GUI
+// -----------------------------------------------------------------------------
+ @import "gui/cards";
+ @import "gui/charts";
+ @import "gui/codemirror";
+ @import "gui/datatables";
+ @import "gui/datepickers";
+ @import "gui/dropzone";
+ @import "gui/fileupload";
+ @import "gui/forms";
+ @import "gui/ios7-switch";
+ @import "gui/markdown";
+ @import "gui/maxlength";
+ @import "gui/modals";
+ @import "gui/multiselect";
+ @import "gui/notifications";
+ @import "gui/select2";
+ @import "gui/sliders";
+ @import "gui/spinners";
+ @import "gui/summernote";
+ @import "gui/tables";
+ @import "gui/tagsinput";
+ @import "gui/timepicker";
+ @import "gui/paginations";
+ @import "gui/wizard";
