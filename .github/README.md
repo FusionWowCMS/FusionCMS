@@ -66,6 +66,16 @@ Contributions are what make the open source community such an amazing place to b
 
 The FusionCMS source is released under the [GNU AGPL v3](https://github.com/FusionWowCMS/FusionCMS/blob/main/LICENSE)
 
+## Sponsor this project
+
+<img src="https://raw.githubusercontent.com/Nightprince/cryptoicons/master/SVG/btc.svg" width="15" height="15"> BTC: 18yAioyePZYdvmiqMafFDP5AJ5iRCoGSP
+
+<img src="https://raw.githubusercontent.com/Nightprince/cryptoicons/master/SVG/eth.svg" width="15" height="15"> ETH(ERC20): 0x8Dfe266213BCBc94AEB5002cbaC3fF102a45C2d1
+
+<img src="https://raw.githubusercontent.com/Nightprince/cryptoicons/master/SVG/usdt.svg" width="15" height="15"> USDT(TRC20): 18yAioyePZYdvmiqMafFDP5AJ5iRCoGSP
+
+<img src="https://raw.githubusercontent.com/Nightprince/cryptoicons/master/SVG/ton.svg" width="15" height="15"> TON: EQBUvnyxEEryVdUI9ir8Dd1EvpWGqAP9nKNXBWyWgyF2DTdz
+
 ## Authors & Contributors
 
 This project exists thanks to:
