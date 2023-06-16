@@ -1,0 +1,158 @@
+// =============================================================================
+// TYPOGRAPHY
+// =============================================================================
+$font-primary: "Poppins", Arial, sans-serif;
+$font-secondary: "Shadows Into Light", cursive;
+$body-font-size: 13;
+$root-font-size: 10;
+$body-line-height: 22;
+
+// weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 900;
+
+// spacement
+$spacement-increment: 5px;
+$spacement-xs: $spacement-increment;
+$spacement-sm: $spacement-xs + $spacement-increment;
+$spacement-md: $spacement-sm + $spacement-increment;
+$spacement-lg: $spacement-md + $spacement-increment;
+$spacement-xl: $spacement-lg + $spacement-increment;
+$spacement-xlg: $spacement-xl + $spacement-increment;
+
+// borders
+$border-thin: 3px;
+$border-normal: 5px;
+$border-thick: 7px;
+
+// =============================================================================
+// COLORS
+// =============================================================================
+$color-font-default: #777;
+
+$color-default: #ebebeb;
+$color-default-inverse: #777;
+
+$color-muted: #999;
+
+$color-primary: #CCC;
+$color-primary-inverse: #FFF;
+
+$color-success: #47a447;
+$color-success-inverse: #FFF;
+
+$color-warning: #ed9c28;
+$color-warning-inverse: #FFF;
+
+$color-danger: #d2322d;
+$color-danger-inverse: #FFF;
+
+$color-info: #5bc0de;
+$color-info-inverse: #FFF;
+
+$color-secondary: #E36159;
+$color-secondary-inverse: #FFF;
+
+$color-tertiary: #2BAAB1;
+$color-tertiary-inverse: #FFF;
+
+$color-quaternary: #734BA9;
+$color-quaternary-inverse: #FFF;
+
+$color-dark: #171717;
+$color-dark-inverse: #FFF;
+
+$body-color: #ecedf0;
+$sidebar-color: #33363F;
+
+$color-black: #333;
+
+// Colors list
+$colors-list: (primary $color-primary $color-primary-inverse) (secondary $color-secondary $color-secondary-inverse) (tertiary $color-tertiary $color-tertiary-inverse) (quaternary $color-quaternary $color-quaternary-inverse) (success $color-success $color-success-inverse) (warning $color-warning $color-warning-inverse) (danger $color-danger $color-danger-inverse) (info $color-info $color-info-inverse) (dark $color-dark $color-dark-inverse);
+
+// States list
+$states: (primary $color-primary $color-primary-inverse) (success $color-success $color-success-inverse) (warning $color-warning $color-warning-inverse) (danger $color-danger $color-danger-inverse) (info $color-info $color-info-inverse) (dark $color-dark $color-dark-inverse);
+
+// Dark Version
+$dark-bg: #1d2127;
+$dark-default-text: #808697;
+
+$dark-color-1: $dark-bg;
+$dark-color-2: lighten($dark-color-1, 2%);
+$dark-color-3: lighten($dark-color-1, 5%);
+$dark-color-4: lighten($dark-color-1, 8%);
+$dark-color-5: lighten($dark-color-1, 3%);
+
+$darken-color-1: darken($dark-color-1, 2%);
+
+// =============================================================================
+// SETTINGS
+// =============================================================================
+$border-radius: 5px;
+
+// =============================================================================
+// MENU
+// =============================================================================
+$menu-item-padding-horizontal: 25px;
+$menu-item-padding-vertical: 12px;
+$menu-item-padding: 12px 25px;
+
+$menu-children-padding-horizontal: 15px;
+$menu-children-padding-vertical: 6px;
+$menu-children-padding: $menu-children-padding-vertical $menu-children-padding-horizontal $menu-children-padding-vertical ($menu-children-padding-horizontal + 42);
+$menu-children-level1-padding: $menu-children-padding-vertical $menu-children-padding-horizontal $menu-children-padding-vertical ($menu-children-padding-horizontal + 67);
+$menu-children-level2-padding: $menu-children-padding-vertical $menu-children-padding-horizontal $menu-children-padding-vertical ($menu-children-padding-horizontal + 82);
+
+$menu-item-arrow-padding: 14px 25px;
+$menu-item-children-arrow-padding: 6px 25px;
+
+// =============================================================================
+// SIDEBAR WIDGETS
+// =============================================================================
+// tasks
+$widget-tasks-colors: #D64B4B, #0090D9, #4DD79C, #D9A300, #C926FF, #FFFF26;
+
+// =============================================================================
+// ADMIN EXTENSION
+// =============================================================================
+$admin-ext: false;
+
+// =============================================================================
+// MEDIA QUERIES BREAKPOINTS
+// =============================================================================
+$screen-xs:                  576px !default;
+$screen-xs-min:              $screen-xs !default;
+$screen-phone:               $screen-xs-min !default;
+
+$screen-sm:                  768px !default;
+$screen-sm-min:              $screen-sm !default;
+$screen-tablet:              $screen-sm-min !default;
+
+$screen-md:                  992px !default;
+$screen-md-min:              $screen-md !default;
+$screen-desktop:             $screen-md-min !default;
+
+$screen-lg:                  1200px !default;
+$screen-lg-min:              $screen-lg !default;
+$screen-lg-desktop:          $screen-lg-min !default;
+
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+
+$screen-xl: 1600px;
+$screen-lg-max: $screen-xl - 1;
+
+// =============================================================================
+// GRID BREAKPOINTS
+// =============================================================================
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;

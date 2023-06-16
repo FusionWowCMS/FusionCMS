@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bootstrap icon</title>
+    <link href="../assets/css/dialogs.css" type="text/css" rel="stylesheet" />
+    <script src="../lib/loadjs/loadjs.min.js"></script>
+</head>
+
+<body>
+
+    <!--=====================================
+    =             Icon              =
+    ======================================-->
+
+    <section id="icon" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.icon}}</span>
+        </div>
+        <div class="choice">
+            <label class="mr-3">{{=it.choose}}</label>
+            <button class="btn btn-light" id="iconpicker"></button>
+        </div>
+    </section>
+
+    <!--=====================================
+    =              Icon size              =
+    ======================================-->
+
+    <section id="size" class="{{=it.sectionRowSplitClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.iconSize}}</span>
+        </div>
+        <div class="row mx-0 toggle iconFont-toggle" data-activate="fontawesome5">
+            <div class="{{=it.sectionRowSplitColClass}}">
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary fa-xs" data-prop="size" data-value="fa-xs"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary fa-sm" data-prop="size" data-value="fa-sm"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary fa-lg" data-prop="size" data-value="fa-lg"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary fa-2x" data-prop="size" data-value="fa-2x"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary fa-3x" data-prop="size" data-value="fa-3x"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary fa-5x" data-prop="size" data-value="fa-5x"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary fa-7x" data-prop="size" data-value="fa-7x"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary fa-10x" data-prop="size" data-value="fa-10x"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="{{=it.sectionRowSplitColClass}}">
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary" data-prop="size" data-value=""></i> ({{=it.default}})
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary h5" data-prop="size" data-value="h5"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary h4" data-prop="size" data-value="h4"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary h3" data-prop="size" data-value="h3"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary h2" data-prop="size" data-value="h2"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} text-secondary h1" data-prop="size" data-value="h1"></i>
+                </div>
+                <div class="selector">
+                    <p class="text-secondary mb-0" data-prop="size" data-value="custom">{{=it.custom}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="{{=it.sectionRowSplitColClass}}">
+                <div class="form-inline toggle size-toggle mb-4" data-activate="custom">
+                    <label for="sizeCustom" class="mr-3">{{=it.customSize}}</label>
+                    <div class="input-group">
+                        <input type="number" data-prop="sizeCustom" value="" class="form-control form-control-sm" id="sizeCustom">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-content="sizeCustomUnit">px</span></button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" data-prop="sizeCustomUnit" data-value="px">px</a>
+                                <a class="dropdown-item" href="#" data-prop="sizeCustomUnit" data-value="em">em</a>
+                                <a class="dropdown-item" href="#" data-prop="sizeCustomUnit" data-value="rem">rem</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =              Icon color              =
+    ======================================-->
+
+    <section id="color" class="{{=it.sectionRowSplitClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.iconColor}}</span>
+        </div>
+        <div class="row mx-0">
+            <div class="{{=it.sectionRowSplitColClass}}">
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} h3 text-primary" data-prop="color" data-value="text-primary"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} h3 text-secondary" data-prop="color" data-value="text-secondary"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} h3 text-success" data-prop="color" data-value="text-success"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} h3 text-danger" data-prop="color" data-value="text-danger"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} h3 text-warning" data-prop="color" data-value="text-warning"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} h3 text-info" data-prop="color" data-value="text-info"></i>
+                </div>
+                <div class="selector">
+                    <i class="{{=it.defaultIcon}} h3 text-dark" data-prop="color" data-value="text-dark"></i>
+                </div>
+                <div class="selector">
+                    <p class="text-secondary mb-0" data-prop="color" data-value="custom">{{=it.custom}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="{{=it.sectionRowSplitColClass}}">
+                <div class="form-inline toggle color-toggle mb-4" data-activate="custom">
+                    <label for="colorCustom" class="mr-3">{{=it.customColor}}</label>
+                    <input type="text" autocomplete="off" data-prop="colorCustom" value="" class="form-control form-control-sm" id="colorCustom">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="others" class="{{=it.sectionClass}} toggle iconFont-toggle" data-activate="fontawesome5">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.others}}</span>
+        </div>
+        <div class="choice form-inline mr-3">
+            <label class="mr-3">{{=it.border}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="border" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="border" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+        <div class="form-group form-inline">
+            <label for="rotate" class="mr-3">{{=it.rotate}}</label>
+            <select class="form-control form-control-sm" data-prop="rotate" id="rotate">
+              <option value="">0°</option>
+              <option value="fa-rotate-90">90°</option>
+              <option value="fa-rotate-180">180°</option>
+              <option value="fa-rotate-270">270°</option>
+            </select>
+        </div>
+        <div class="form-group form-inline">
+            <label for="flip" class="mr-3">{{=it.flip}}</label>
+            <select class="form-control form-control-sm" data-prop="flip" id="flip">
+                <option value="">-</option>
+                <option value="fa-flip-horizontal">{{=it.flipHorizontal}}</option>
+                <option value="fa-flip-vertical">{{=it.flipVertical}}</option>
+                <option value="fa-flip-both">{{=it.flipBoth}}</option>
+            </select>
+        </div>
+        <div class="choice form-inline mr-3">
+            <label class="mr-3">{{=it.pulse}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="pulse" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="pulse" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+        <div class="choice form-inline mr-3">
+            <label class="mr-3">{{=it.spin}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="spin" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="spin" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                PREVIEW                =
+    ======================================-->
+
+    <section class="{{=it.previewSectionClass}}">
+        <div id="preview-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.preview}}</span>
+        </div>
+        <div id="preview" class="{{=it.previewClass}}">
+            <div id="preview-content" class="text-center"></div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 CODE                  =
+    ======================================-->
+
+    <section id="code" class="{{=it.codeSectionClass}}">
+        <div id="code-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.code}}</span>
+        </div>
+        <div class="{{=it.codeClass}}" id="code-content">
+            <pre class="language-html"></pre>
+        </div>
+    </section>
+
+    <script src="../dialogs/icon.js"></script>
+</body>
+
+</html>

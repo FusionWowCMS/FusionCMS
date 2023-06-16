@@ -1,0 +1,1 @@
+<?php $config['FusionCMSVersion'] = '8.0.0';

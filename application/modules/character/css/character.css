@@ -1,0 +1,86 @@
+.top-bar {}
+
+.top-bar .avatar {
+	position:relative;
+}
+
+.top-bar .char-level {
+	position:absolute;
+	bottom:0;
+	right:0;
+}
+
+.bg-faction {
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.bg-faction.horde {
+    background-image: url(../../../images/misc/bg_horde_complete.png);
+}
+
+.bg-faction.alliance {
+    background-image: url(../../../images/misc/bg_alliance_complete.png);
+}
+
+.col-avatar,
+.col-items {
+	width:70px !important;
+}
+
+.col-main {
+	width:calc(100% - 150px) !important;
+}
+
+.char-avatar {
+	position:relative;
+	display:inline-block;
+	background-color:rgba(255,255,255,0.05);
+	width:128px;
+	height:128px;
+	border-radius:50%;
+	text-align:center;
+}
+
+.char-avatar > i {
+	height:100%;
+	width:100%;
+	display:block;
+	border-radius:50%;
+}
+
+.char-avatar .char-level {
+	position:absolute;
+	bottom:0;
+	right:0;
+	border-radius:50%;
+	width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.border-start {border-color:#1b1d29 !important;}
+
+.bg-health {background-color:#27cc4e;}
+.bg-mana {background-color:#1c8aff;}
+.bg-rage {background-color:#ab0000;}
+.bg-focus {background-color:#d45719;}
+.bg-energy {background-color:#cb9501;}
+.bg-runic {background-color:#00bcde;}
+
+.item {
+	width:70px;
+	height:70px;
+}
+
+.item a {
+	background-image:url(../../../images/misc/item_frame.png);
+	width:68px;
+	height:68px;
+	margin-top:-6px;
+	margin-left:-6px;
+	position:absolute;
+	z-index:999;
+	display:block;
+}

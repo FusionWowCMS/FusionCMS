@@ -1,0 +1,33 @@
+/*-------------------------------------------------------------------------*/
+/* Banner
+/*-------------------------------------------------------------------------*/
+.section-banner {
+	width: 100%;
+	height: 300px;
+	display: table;
+}
+
+.section-banner .container {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.section-banner .container .row {}
+
+.section-banner .container .row .col-sm-12 {}
+
+.section-banner .container .row .col-sm-12 .btn-large-holder {
+	margin: 0 auto;
+}
+
+/* Banner: Responsive
+/*---------------------------------------------------------------*/
+@media screen and (min-width: 1200px) { /* Desktop */
+	.section-banner {
+		height: 448px;
+	}
+
+	.section-banner .container .row .col-sm-12 .btn-large-holder {
+		left: -220px;
+	}
+}

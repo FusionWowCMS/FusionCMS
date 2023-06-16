@@ -1,0 +1,492 @@
+/* Notifications */
+.notifications {
+	display: inline-block;
+	list-style: none;
+	margin: 4px -10px 0 0;
+	padding: 0;
+	vertical-align: middle;
+
+	& > li {
+		float: left;
+		margin: 0 10px 0 0;
+		position: relative;
+
+		.notification-icon {
+			background: #FFF;
+			border-radius: 50%;
+			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+			display: inline-block;
+			height: 30px;
+			position: relative;
+			width: 30px;
+			text-align: center;
+
+			&.dropdown-toggle {
+				&:after {
+					content: none;
+				}
+			}
+
+			i {
+				color: #777;
+				font-size: 1.05rem;
+				line-height: 30px;
+				vertical-align: middle;
+
+				&.fa-tasks {
+					line-height: 32px;
+				}
+			}
+
+			.badge {
+				background: #D2312D;
+				color: #FFF;
+				font-size: 10px;
+				font-weight: normal;
+				height: 16px;
+				padding: 3px 5px 3px 5px;
+				position: absolute;
+				right: -8px;
+				top: -3px;
+				border-radius: 100%;
+			}
+		}
+
+		& > a {
+			border: none;
+			display: inline-block;
+		}
+	}
+
+	.notification-menu {
+		border: none;
+		box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+		@media only screen and (min-width: 768px) {
+			left: auto !important;
+		}
+		margin: 10px 0 0 0;
+		padding: 0;
+		right: -5px !important;
+		top: 9px;
+		width: 245px;
+	    transform: translate3d(0, 32px, 0) !important;
+
+		&.large {
+			width: 325px;
+		}
+
+		.notification-title {
+			background: $color-primary;
+			border-radius: 3px 3px 0 0;
+			color: #FFF;
+			font-size: 0.7rem;
+			@include line-height(11 + 4);
+			padding: 8px 6px 8px 12px;
+			text-transform: uppercase;
+
+			.badge {
+				font-size: 0.65rem;
+				font-weight: 200;
+				line-height: 14px;
+				margin-left: 10px;
+				margin-top: 2px;
+				min-width: 35px;
+			}
+
+			.badge-default {
+				background: #006697;
+				color: #FFF;
+			}
+		}
+
+		.content {
+			padding: 12px;
+		}
+
+		hr {
+			background: #E6E6E6;
+			height: 1px;
+			margin: 12px 0;
+		}
+
+		.view-more {
+			color: #ACACAC;
+			font-size: 0.7rem;
+			@include line-height(11);
+			text-transform: uppercase;
+		}
+	}
+}
+
+// NOTIFICATION MENU - PIN
+// -----------------------------------------------------------------------------
+/* notification menu - pin */
+.notifications .notification-menu,
+.notifications .notification-icon {
+	&:before {
+		border: {
+			bottom: 6px solid $color-primary;
+			left: 6px solid transparent;
+			right: 6px solid transparent;
+		}
+		content: '';
+		height: 0;
+		margin-right: -( 6px / 2);
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+}
+
+.notifications .notification-menu:before {
+	bottom: 100%;
+	right: 16px;
+}
+
+.notifications .notification-icon:before {
+	display: none;
+	right: 11px;
+	top: 35px;
+	z-index: 9999;
+}
+
+// NOTIFICATION MENU - EMAILS
+// -----------------------------------------------------------------------------
+/* notification menu - emails */
+.notification-menu {
+	color: #ACACAC;
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		margin: 0 0 12px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	a {
+		display: block;
+		text-decoration: none;
+	}
+
+	.image {
+		float: left;
+		margin: 0 10px 0 0;
+
+		i {
+			border-radius: 35px;
+			height: 35px;
+			line-height: 35px;
+			text-align: center;
+			width: 35px;
+		}
+	}
+
+	.truncate {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.title {
+		color: #000011;
+		display: block;
+		font-size: 0.8rem;
+		line-height: 1.1rem;
+		padding: 2px 0 0;
+	}
+
+	.message {
+		color: #ACACAC;
+		display: block;
+		font-size: 0.7rem;
+		line-height: 1.1rem;
+		padding: 0;
+	}
+}
+
+// HEADER DARK AND DARK VERSION
+// -----------------------------------------------------------------------------
+html.dark,
+html.header-dark {
+	.notifications {
+		> li .notification-icon {
+			background: lighten( #1D2127, 5% );
+
+			i {
+				color: #C3C3C3;
+			}
+		}
+
+		.notification-menu {
+			hr {
+				background: #8d8f91;
+			}
+		}
+	}
+}
+
+// NOTIFICATIONS
+// -----------------------------------------------------------------------------
+/* Notifications Mobile */
+@media only screen and (max-width: 767px) {
+	.notifications {
+		float: right;
+		margin: 16px 8px 0 0;
+
+		> li {
+			position: static;
+
+			&.show {
+				.notification-icon:before {
+					display: block;
+				}
+			}
+
+			.notification-menu {
+				left: 15px;
+				top: auto;
+			    width: 94vw !important;
+			    left: 50% !important;
+		        transform: translate3d(-50%, 109px, 0px) !important;
+
+				&:before {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+// BASE
+// -----------------------------------------------------------------------------
+/* Notification */
+.ui-pnotify {
+	right: 15px;
+	top: 15px;
+
+	.notification {
+		border-radius: $border-radius;
+		box-shadow: none;
+		padding: 15px 15px 15px 75px;
+
+		.ui-pnotify-icon {
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 75px;
+			text-align: center;
+
+			& > span {
+				border: 2px solid #FFF;
+				border-radius: 50%;
+				display: inline-block;
+				float: none;
+				font-size: 35px;
+				height: 50px;
+				line-height: 48px;
+				margin: 0;
+				padding: 0;
+				width: 50px;
+				text-align: center;
+			}
+		}
+
+		.ui-pnotify-title {
+			font-size: 14px;
+			letter-spacing: 0;
+			color: inherit;
+			font-weight: inherit;
+		}
+
+		.ui-pnotify-text {
+			font-size: 12px;
+			line-height: 1.3em;
+			line-height: 1.5;
+		}
+	}
+}
+
+// TIMES FIX
+// -----------------------------------------------------------------------------
+.ui-pnotify {
+	.notification.notification-danger {
+		.ui-pnotify-icon {
+			& > span.fa-times {
+				line-height: 47px;
+			}
+		}
+	}
+}
+
+// SHADOWED
+// -----------------------------------------------------------------------------
+.ui-pnotify {
+	.ui-pnotify-shadow {
+		box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+	}
+}
+
+// WITHOUT ICON
+// -----------------------------------------------------------------------------
+.ui-pnotify.ui-pnotify-no-icon {
+	.notification {
+		padding-left: 15px;
+	}
+}
+
+// WITHOUT BORDER RADIOUS
+// -----------------------------------------------------------------------------
+.ui-pnotify {
+	.ui-pnotify-sharp {
+		border-radius: 0;
+	}
+}
+
+// ICON WITHOUT BORDER
+// -----------------------------------------------------------------------------
+body {
+	.ui-pnotify.icon-nb {
+		.notification {
+			.ui-pnotify-icon {
+				& > span {
+					border-color: transparent;
+					border-radius: 0;
+				}
+			}
+		}
+	}
+}
+
+// STACK BAR TOP
+// -----------------------------------------------------------------------------
+.ui-pnotify.stack-bar-top {
+	right: 0;
+	top: 0;
+
+	.notification {
+		border-radius: 0;
+
+		.ui-pnotify-icon {
+			& > span {
+				margin-top: 7px;
+			}
+		}
+	}
+}
+
+// STACK BAR BOTTOM
+// -----------------------------------------------------------------------------
+.ui-pnotify.stack-bar-bottom {
+	bottom: 0;
+	left: auto;
+	margin-left: 15%;
+	right: auto;
+	top: auto;
+
+	.notification {
+		border-radius: 0;
+
+		.ui-pnotify-icon {
+			& > span {
+				margin-top: 9px;
+			}
+		}
+	}
+}
+
+
+// CLICK 2 CLOSE
+// -----------------------------------------------------------------------------
+.ui-pnotify.click-2-close {
+	cursor: pointer;
+}
+
+// STATES
+// -----------------------------------------------------------------------------
+/* Notification States */
+@each $state in $states {
+	.ui-pnotify {
+		.notification-#{nth($state,1)} {
+			background: rgba(nth($state,2), 0.95);
+			color: rgba(nth($state,3), 0.7);
+
+			.ui-pnotify-icon > span {
+				border-color: rgba(nth($state,3), 0.7);
+			}
+		}
+
+		&.stack-bar-top,
+		&.stack-bar-bottom {
+			.notification-#{nth($state,1)} {
+				background: nth($state,2);
+			}
+		}
+	}
+
+	.ui-pnotify.notification-#{nth($state,1)} {
+		.notification,
+		.notification-#{nth($state,1)} {
+			background: rgba(nth($state,2), 0.95);
+			color: rgba(nth($state,3), 0.7);
+
+			.ui-pnotify-icon > span {
+				border-color: rgba(nth($state,3), 0.7);
+			}
+		}
+
+		&.stack-bar-top,
+		&.stack-bar-bottom {
+			.notification,
+			.notification-#{nth($state,1)} {
+				background: nth($state,2);
+			}
+		}
+	}
+}
+
+// RESPONSIVE
+// -----------------------------------------------------------------------------
+/* Notification Responsive */
+@media only screen and (max-width: 767px) {
+	html > body > .ui-pnotify {
+		bottom: auto !important;
+		left: 0 !important;
+		margin: 0 !important;
+		right: 0 !important;
+		top: 60px !important;
+		width: auto !important;
+
+		.notification {
+			border-radius: 0 !important;
+			height: auto !important;
+			position: static !important;
+			width: 100%;
+
+			.ui-pnotify-title,
+			.ui-pnotify-text {
+				padding-right: 35px !important;
+			}
+
+			.ui-pnotify-sticker {
+				display: none !important;
+			}
+
+			.ui-pnotify-closer {
+				display: block !important;
+				font-size: 24px !important;
+				visibility: visible !important;
+			}
+		}
+	}
+}

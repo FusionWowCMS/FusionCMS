@@ -1,0 +1,120 @@
+/* Social Icons */
+.social-icons {
+	margin: 0;
+	padding: 0;
+	width: auto;
+	li {
+		display: inline-block;
+		margin: side-values(-1px 1px 0 0);
+		padding: 0;
+		border-radius: 100%;
+		overflow: visible;
+		a {
+			transition: all 0.2s ease;
+			border-radius: 100%;
+			display: block;
+			height: 28px;
+			line-height: 28px;
+			width: 28px;
+			text-align: center;
+			color: #333 !important;
+			text-decoration: none;
+			font-size: 0.8rem;
+		}
+		&:hover {
+			a {
+				background: #151719;
+				color: #FFF !important;
+			}
+			&.social-icons-twitter {
+				a {
+					background: #1aa9e1 !important;
+				}
+			}
+			&.social-icons-facebook {
+				a {
+					background: #3b5a9a !important;
+				}
+			}
+			&.social-icons-linkedin {
+				a {
+					background: #0073b2 !important;
+				}
+			}
+			&.social-icons-rss {
+				a {
+					background: #ff8201 !important;
+				}
+			}
+			&.social-icons-googleplus {
+				a {
+					background: #dd4b39 !important;
+				}
+			}
+			&.social-icons-pinterest {
+				a {
+					background: #cc2127 !important;
+				}
+			}
+			&.social-icons-youtube {
+				a {
+					background: #c3191e !important;
+				}
+			}
+			&.social-icons-instagram {
+				a {
+					background: #7c4a3a !important;
+				}
+			}
+			&.social-icons-skype {
+				a {
+					background: #00b0f6 !important;
+				}
+			}
+			&.social-icons-email {
+				a {
+					background: #dd4b39 !important;
+				}
+			}
+			&.social-icons-vk {
+				a {
+					background: #6383a8 !important;
+				}
+			}
+			&.social-icons-xing {
+				a {
+					background: #1a7576 !important;
+				}
+			}
+			&.social-icons-tumblr {
+				a {
+					background: #304e6c !important;
+				}
+			}
+			&.social-icons-reddit {
+				a {
+					background: #ff4107 !important;
+				}
+			}
+		}
+	}
+	&.social-icons-dark-2 {
+		li {
+			a {
+				background: #272a2e;
+				i {
+					color: #FFF;
+				}
+			}
+		}
+	}
+	&.social-icons-big {
+		li {
+			a {
+				height: 48px;
+				line-height: 48px;
+				width: 48px;
+			}
+		}
+	}
+}

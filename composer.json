@@ -1,0 +1,10 @@
+{
+    "require": {
+        "laizerox/php-wowemu-auth": "^1.0",
+        "monolog/monolog": "^2.8",
+        "paypal/rest-api-sdk-php": "*",
+        "psr/log": "^1.1",
+        "phpseclib/phpseclib": "*",
+        "ezyang/htmlpurifier": "^4.16"
+    }
+}

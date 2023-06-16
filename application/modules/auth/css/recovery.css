@@ -1,0 +1,15 @@
+.page-subbody {
+    margin: 0;
+}
+
+.is-fullwidth .page_form {
+    padding: 0;
+}
+
+.invalid-feedback {
+    color: #dc3545!important;
+}
+
+.valid-feedback {
+    color: #0f5132!important;
+}

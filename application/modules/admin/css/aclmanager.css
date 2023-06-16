@@ -1,0 +1,4 @@
+html.dark .btn-default:hover {
+	background-color: #d2322d !important;
+	border-color: #d2322d;
+}

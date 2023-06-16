@@ -1,0 +1,45 @@
+// Animation Performance
+@mixin performance() {
+	perspective: 1000px;
+}
+
+// Clearfix
+@mixin clearfix {
+	&::after {
+		clear: both;
+		content: "";
+		display: block;
+	}
+}
+
+// Media Breakpoint Up
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+	$min: breakpoint-min($name, $breakpoints);
+	@if $min {
+		@media (min-width: $min) {
+      		@content;
+   	 	}
+  	} @else {
+    	@content;
+  	}
+}
+
+// Flexbox
+@mixin flexbox($grow, $shrink, $basis) {
+	-webkit-box-flex: $grow;
+    -ms-flex: $grow $shrink $basis;
+    flex: $grow $shrink $basis;
+    max-width: $basis;
+}
+
+@mixin if-extension {
+	@if $admin-ext == true {
+		@content;
+	}
+}
+
+@mixin if-not-extension {
+	@if $admin-ext == false {
+		@content;
+	}
+}

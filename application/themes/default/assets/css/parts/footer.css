@@ -1,0 +1,163 @@
+/*-------------------------------------------------------------------------*/
+/* Footer
+/*-------------------------------------------------------------------------*/
+.footer {
+	width: 100%;
+	height: auto;
+	margin: 5rem 0 0 0;
+	background-color: #0a0e13;
+}
+
+.footer .container-fluid {}
+
+.footer .container-fluid .row {}
+
+.footer .container-fluid .row.row-1 {}
+.footer .container-fluid .row.row-2 {}
+.footer .container-fluid .row.row-3 {background-color: rgba(0, 0, 0, 0.3);}
+
+.footer .container-fluid .row .col-sm-12 {
+	width: 100%;
+	margin: 0 auto;
+}
+
+/* Footer: Line
+/*---------------------------------------------------------------*/
+.footer [line] {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: block;
+	position: absolute;
+}
+
+.footer [line]::before {
+	width: 100%;
+	height: 18px;
+	left: 0;
+	bottom: 0;
+	z-index: 8;
+	content: '';
+	position: absolute;
+}
+
+.footer [line] [line-glow] {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	content: '';
+	overflow: hidden;
+	position: absolute;
+}
+
+.footer [line] [line-glow]::before {
+	width: 40%;
+	height: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0 auto;
+	content: '';
+	position: absolute;
+	box-shadow: 0 0 120px 55px rgba(63, 161, 255, 0.08);
+	-moz-box-shadow: 0 0 120px 55px rgba(63, 161, 255, 0.08);
+	-webkit-box-shadow: 0 0 120px 55px rgba(63, 161, 255, 0.08);
+}
+
+/* Footer: Navbar
+/*---------------------------------------------------------------*/
+.footer .navbar {
+	width: 100%;
+	height: auto;
+	z-index: 9;
+	padding: 0 0 10px 0;
+}
+
+.footer .navbar .navbar-nav {
+	width: 100%;
+	height: 100%;
+	display: block;
+	padding: 1.5rem 0;
+	text-align: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-pack: center;
+}
+
+.footer .navbar .navbar-nav .nav-item {
+	display: inline-block;
+}
+
+.footer .navbar .navbar-nav .nav-item .nav-link {
+	color: #749db9;
+	padding: 1rem;
+	display: block;
+	font-size: 0.875rem;
+	font-family: var(--font-family-secondary);
+	text-shadow: 0 0 4px rgba(80, 187, 255, 0.2);
+	text-transform: uppercase;
+	transition: 300ms color ease-in-out;
+	-o-transition: 300ms color ease-in-out;
+	-ms-transition: 300ms color ease-in-out;
+	-moz-transition: 300ms color ease-in-out;
+	-webkit-transition: 300ms color ease-in-out;
+}
+
+.footer .navbar .navbar-nav .nav-item .nav-link:hover,
+.footer .navbar .navbar-nav .nav-item .nav-link:active,
+.footer .navbar .navbar-nav .nav-item .nav-link.nav-active {
+	color: #a1d9ff;
+}
+
+/* Footer: Text
+/*---------------------------------------------------------------*/
+.footer .footer-text {
+	color: #334450;
+	margin: 0 0 10px 0;
+	padding: 2rem;
+	font-size: 0.875rem;
+	text-align: center;
+	font-style: italic;
+	font-family: var(--font-family-primary);
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+/* Footer: Copyright
+/*---------------------------------------------------------------*/
+.footer .footer-copyright {
+	color: #2a3842;
+	padding: 1.219rem;
+	font-size: 0.875rem;
+	text-align: center;
+	font-family: var(--font-family-primary);
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.footer .footer-copyright strong {
+	color: #425b6c;
+	text-transform: uppercase;
+}
+
+/* Footer: Responsive
+/*---------------------------------------------------------------*/
+@media screen and (min-width: 576px)  {.footer .container-fluid .row .col-sm-12 {max-width: 540px;}}
+@media screen and (min-width: 768px)  {.footer .container-fluid .row .col-sm-12 {max-width: 720px;}}
+@media screen and (min-width: 992px)  {.footer .container-fluid .row .col-sm-12 {max-width: 960px;}}
+@media screen and (min-width: 1200px) {.footer .container-fluid .row .col-sm-12 {max-width: 1140px;}}
+@media screen and (min-width: 1400px) {.footer .container-fluid .row .col-sm-12 {max-width: 1320px;}}
+
+@media screen and (min-width: 992px) { /* Desktop */
+	/* Footer: Navbar
+	/*---------------------------------------------------------------*/
+	.footer .navbar .navbar-nav {
+		padding: 0;
+	}
+
+	.footer .navbar .navbar-nav .nav-item .nav-link {
+		padding: 0 2.5rem;
+		font-size: 1.125rem;
+		line-height: 102px;
+	}
+}

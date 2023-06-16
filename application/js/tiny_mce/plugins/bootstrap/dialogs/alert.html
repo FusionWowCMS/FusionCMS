@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bootstrap button</title>
+    <link href="../assets/css/dialogs.css" type="text/css" rel="stylesheet" />
+    <script src="../lib/loadjs/loadjs.min.js"></script>
+</head>
+
+<body>
+
+    <!--=====================================
+    =             Alert style              =
+    ======================================-->
+
+    <section id="style" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.buttonStyle}}</span>
+        </div>
+        <div class="selector">
+            <div class="alert alert-primary" data-prop="style" data-value="alert-primary">Primary</div>
+        </div>
+        <div class="selector">
+            <div class="alert alert-secondary" data-prop="style" data-value="alert-secondary">Secondary</div>
+        </div>
+        <div class="selector">
+            <div class="alert alert-success" data-prop="style" data-value="alert-success">Success</div>
+        </div>
+        <div class="selector">
+            <div class="alert alert-danger" data-prop="style" data-value="alert-danger">Danger</div>
+        </div>
+        <div class="selector">
+            <div class="alert alert-warning" data-prop="style" data-value="alert-warning">Warning</div>
+        </div>
+        <div class="selector">
+            <div class="alert alert-info" data-prop="style" data-value="alert-info">Info</div>
+        </div>
+        <div class="selector">
+            <div class="alert alert-light" data-prop="style" data-value="alert-light">Light</div>
+        </div>
+        <div class="selector">
+            <div class="alert alert-dark" data-prop="style" data-value="alert-dark">Dark</div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =              HTML Editor              =
+    ======================================-->
+
+    <section id="htmlContent" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.buttonStyle}}</span>
+        </div>
+        <textarea name="html-content-editor" id="html-content-editor" cols="30" rows="13"></textarea>
+    </section>
+
+    <!--=====================================
+    =              Dismissable               =
+    ======================================-->
+
+    <section id="dismissable" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.dismissable}}</span>
+        </div>
+        <div class="choice form-inline">
+            <label class="mr-3">{{=it.closeButton}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="dismissable" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="dismissable" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                PREVIEW                =
+    ======================================-->
+
+    <section class="{{=it.previewSectionClass}}">
+        <div id="preview-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.preview}}</span>
+        </div>
+        <div id="preview" class="{{=it.previewClass}}">
+            <div id="preview-content"></div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 CODE                  =
+    ======================================-->
+
+    <section id="code" class="{{=it.codeSectionClass}}">
+        <div id="code-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.code}}</span>
+        </div>
+        <div class="{{=it.codeClass}}" id="code-content">
+            <pre class="language-html text-left"></pre>
+        </div>
+    </section>
+
+    <script src="../dialogs/alert.js"></script>
+</body>
+
+</html>

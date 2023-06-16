@@ -1,0 +1,31 @@
+#item_space .item_bg {
+	margin-left:5px;
+	width:300px;
+	float:left;
+}
+
+#item_space .item {
+	width:70px;
+	height:70px;
+	float:left;
+	margin:10px;
+	margin-right:0px;
+	margin-top:12px;
+}
+
+#item_space .item a {
+	background-image:url(../../../images/misc/item_frame.png);
+	width:68px;
+	height:68px;
+	margin-top:-6px;
+	margin-left:-6px;
+	position:absolute;
+	z-index:999;
+	display:block;
+}
+
+#item_space {
+	width:350px;
+	margin-left:auto;
+	margin-right:auto;
+}

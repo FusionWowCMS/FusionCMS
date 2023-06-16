@@ -1,0 +1,27 @@
+/* Badges */
+.badge-default {
+	background: $color-default;
+	color: $color-default-inverse;
+}
+
+.badge-sm {
+	font-size: 50%;
+}
+
+.badge-md {
+	padding: 6px 11px;
+}
+
+.badge-ecommerce {
+    font-size: 0.6rem;
+    font-weight: 600;
+    border-radius: 0;
+    padding: 0.4rem 0.5rem;
+}
+
+@each $state in $states {
+	.badge-#{nth($state,1)} {
+		background: #{nth($state,2)};
+		color: #{nth($state,3)};
+	}
+}

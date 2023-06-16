@@ -1,0 +1,34 @@
+.char_avatar {
+	height:33px;
+	width:33px;
+}
+
+#search_box {
+    display: none;
+}
+
+.nice_table td:first-child {
+    font-weight: normal;
+}
+
+.faction-1 {
+    background-image: url(../../../images/factions/1.png);
+    width: 45px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.faction-2 {
+    background-image: url(../../../images/factions/2.png);
+    width: 45px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}

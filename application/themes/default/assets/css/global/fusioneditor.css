@@ -1,0 +1,87 @@
+/*-------------------------------------------------------------------------*/
+/* FusionEditor
+/*-------------------------------------------------------------------------*/
+.fusioneditor {
+	border: 1px solid #2e3b49;
+	padding: 2px;
+	box-shadow: 0 0 5px 0 rgba(10, 17, 30, 0.25);
+	-moz-box-shadow: 0 0 5px 0 rgba(10, 17, 30, 0.25);
+	-webkit-box-shadow: 0 0 5px 0 rgba(10, 17, 30, 0.25);
+	border-radius: 1px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius: 1px;
+	background-color: #0d131a;
+}
+
+.fusioneditor .fusioneditor_tools {
+	border: 1px solid rgba(31, 48, 66, 0.5);
+	box-shadow: inset 0 0 0 1px rgba(18, 34, 52, 0.5), 0 0 10px 0 rgba(0, 0, 0, 0.1), inset 0 0 9px 0 rgba(0, 0, 0, 0.08);
+	-moz-box-shadow: inset 0 0 0 1px rgba(18, 34, 52, 0.5), 0 0 10px 0 rgba(0, 0, 0, 0.1), inset 0 0 9px 0 rgba(0, 0, 0, 0.08);
+	-webkit-box-shadow: inset 0 0 0 1px rgba(18, 34, 52, 0.5), 0 0 10px 0 rgba(0, 0, 0, 0.1), inset 0 0 9px 0 rgba(0, 0, 0, 0.08);
+	border-radius: 1px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius: 1px;
+	background-color: rgba(26, 39, 51, 0.7);
+}
+
+.fusioneditor .fusioneditor_tools::before {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	content: '';
+	opacity: 0.5;
+	position: absolute;
+	background-color: transparent;
+	background-image: url('../../images/patterns/pattern-grunge.png');
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+.fusioneditor .fusioneditor_tools a,
+.fusioneditor .fusioneditor_tools a:hover,
+.fusioneditor .fusioneditor_tools a:active {
+	border: none !important;
+	padding: 0.3rem;
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.11);
+	-moz-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.11);
+	-webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.11);
+	border-radius: 1px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius: 1px;
+	background-color: rgba(31, 52, 77, 0.4);
+	transition: none;
+	-o-transition: none;
+	-ms-transition: none;
+	-moz-transition: none;
+	-webkit-transition: none;
+}
+
+.fusioneditor .fusioneditor_tools a:hover,
+.fusioneditor .fusioneditor_tools a:active {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.fusioneditor .fusioneditor_tools a img {
+	display: block;
+}
+
+.fusioneditor .fusioneditor_tools .fusioneditor_toolbox {
+	height: auto !important;
+	border-top: 2px solid rgba(0, 0, 0, 0.35);
+}
+
+.fusioneditor .fusioneditor_tools .fusioneditor_toolbox input[type='text'] {
+	margin: 0 1rem 0 0;
+}
+
+.fusioneditor .fusioneditor_field {
+	color: #6f838d;
+	border: 0 !important;
+	cursor: text;
+	padding: 0.3125rem;
+	font-size: 1rem;
+	font-family: var(--font-family-primary);
+	text-shadow: 0 0 6px rgba(41, 104, 173, 0.3);
+	background-color: transparent;
+}

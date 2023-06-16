@@ -1,0 +1,122 @@
+/*-------------------------------------------------------------------------*/
+/* nice_table
+/*-------------------------------------------------------------------------*/
+nice_table {
+	border-spacing: 0 !important;
+	border-collapse: collapse;
+}
+
+nice_table thead {}
+
+nice_table thead tr {}
+
+nice_table thead tr th {
+	vertical-align: middle;
+}
+
+nice_table tbody {}
+
+nice_table tbody tr {}
+
+nice_table tbody tr td {
+	vertical-align: middle;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Nice nice_table
+/*-------------------------------------------------------------------------*/
+.nice_table {
+	width: 100%;
+}
+
+/* Nice nice_table: Head
+/*---------------------------------------------------------------*/
+.nice_table thead {}
+
+.nice_table thead tr,
+.nice_table tbody tr:first-child {
+	box-shadow: inset 0 0 1px 0 rgba(1, 6, 14, 0.05), 0 0 10px 0 rgba(1, 6, 14, 0.08);
+	-moz-box-shadow: inset 0 0 1px 0 rgba(1, 6, 14, 0.05), 0 0 10px 0 rgba(1, 6, 14, 0.08);
+	-webkit-box-shadow: inset 0 0 1px 0 rgba(1, 6, 14, 0.05), 0 0 10px 0 rgba(1, 6, 14, 0.08);
+	background-color: rgba(39, 58, 77, 0.3) !important; /* rgba(33, 49, 65, 0.5)  */
+}
+
+.nice_table thead tr th,
+.nice_table tbody tr:first-child td {
+	color: #9cbdd3;
+	padding: 1.125rem 0.875rem;
+	font-size: 1rem;
+	font-style: italic;
+	font-weight: 100;
+	font-family: var(--font-family-primary);
+	text-shadow: 0 1px 1px rgba(10, 13, 23, 0.6);
+	vertical-align: middle;
+}
+
+/* Nice nice_table: Body
+/*---------------------------------------------------------------*/
+.nice_table tbody {}
+
+.nice_table thead + tbody::before {
+	width: 100%;
+	height: 12px;
+	content: '';
+	display: block;
+}
+
+.nice_table tbody tr,
+.nice_table thead + tbody tr:first-child {
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	transition: 200ms background-color ease-in-out;
+	-o-transition: 200ms background-color ease-in-out;
+	-ms-transition: 200ms background-color ease-in-out;
+	-moz-transition: 200ms background-color ease-in-out;
+	-webkit-transition: 200ms background-color ease-in-out;
+}
+
+.nice_table tbody tr:nth-child(odd)       {background-color: transparent;}
+.nice_table tbody tr:nth-child(odd):hover {background-color: rgba(255, 255, 255, 0.03);}
+
+.nice_table tbody tr:nth-child(even)       {background-color: rgba(9, 13, 23, 0.3);}
+.nice_table tbody tr:nth-child(even):hover {background-color: rgba(9, 13, 23, 0.6);}
+
+.nice_table thead + tbody tr:nth-child(odd)       {background-color: rgba(9, 13, 23, 0.3);}
+.nice_table thead + tbody tr:nth-child(odd):hover {background-color: rgba(9, 13, 23, 0.6);}
+
+.nice_table thead + tbody tr:nth-child(even)       {background-color: transparent;}
+.nice_table thead + tbody tr:nth-child(even):hover {background-color: rgba(255, 255, 255, 0.03);}
+
+.nice_table thead + tbody tr:first-child       {background-color: rgba(9, 13, 23, 0.3) !important;}
+.nice_table thead + tbody tr:first-child:hover {background-color: rgba(9, 13, 23, 0.6) !important;}
+
+.nice_table tbody tr td,
+.nice_table thead + tbody tr:first-child td {
+	color: #636b79!important;
+	padding: 1.125rem 0.875rem !important;
+	font-size: 1.125rem !important;
+	font-style: inherit;
+	font-weight: 400;
+	font-family: var(--font-family-primary);
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
+	vertical-align: middle;
+}
+
+/* Nice nice_table: Buttons
+/*---------------------------------------------------------------*/
+.nice_table tbody tr td button,
+.nice_table tbody tr td .nice_button,
+.nice_table tbody tr td input[type='reset'],
+.nice_table tbody tr td input[type='button'],
+.nice_table tbody tr td input[type='submit'] {
+	padding: 0.313rem 0.532rem;
+	font-size: 1rem;
+}
+
+.nice_table>:not(caption)>*>* {
+    border-bottom-width: 0px;
+}
+.nice_table>:not(:first-child) {
+    border-top: 0px;
+}

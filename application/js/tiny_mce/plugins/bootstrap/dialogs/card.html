@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bootstrap button</title>
+    <link href="../assets/css/dialogs.css" type="text/css" rel="stylesheet" />
+    <script src="../lib/loadjs/loadjs.min.js"></script>
+</head>
+
+<body>
+    <!--=====================================
+    =               options                 =
+    ======================================-->
+
+    <section id="options" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.options}}</span>
+        </div>
+        <div class="choice form-inline">
+            <label class="mr-3">{{=it.header}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="hasHeader" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="hasHeader" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+        <div class="choice form-inline">
+            <label class="mr-3">{{=it.footer}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="hasFooter" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="hasFooter" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+        <div class="choice form-inline toggle hasImage-toggle" data-activate="true">
+            <label class="mr-3">{{=it.imageOverlay}}</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm" data-prop="hasImageOverlay" data-value="false">{{=it.no}}</button>
+                <button type="button" class="btn btn-sm" data-prop="hasImageOverlay" data-value="true">{{=it.yes}}</button>
+            </div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                image                  =
+    ======================================-->
+
+    <section id="image" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.image}}</span>
+        </div>
+        <div class="container-fluid">
+            <div class="row mx-0">
+                <div class="{{=it.sectionSplitColClass}} border-right">
+                    <!-- Image browser -->
+                    <div class="text-center my-5">
+                        <label for="trigger-modal-btn" class="mr-4">{{=it.image}}</label>
+                        <button type="button" id="trigger-modal-btn" class="btn btn-primary">{{=it.browse}}</button>
+                    </div>
+                </div>
+                <div class="{{=it.sectionSplitColClass}} togglable-wrapper">
+                    <div class="toggle hasImage-toggle" data-activate="true">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="imagePosition" data-prop="imagePosition" id="imagePosition-top" value="top">
+                            <label class="form-check-label" for="imagePosition-top">{{=it.top}}</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="imagePosition" data-prop="imagePosition" id="imagePosition-bottom" value="bottom">
+                            <label class="form-check-label" for="imagePosition-bottom">{{=it.bottom}}</label>
+                        </div>
+                        <div class="choice form-inline">
+                            <label for="imageAlt" class="mr-3" id="alt-text-label">{{=it.altText}}</label>
+                            <input type="text" value="" class="form-control form-control-sm" data-prop="imageAlt" name="imageAlt" id="imageAlt" />
+                        </div>
+                        <button type="button" class="btn btn-danger" id="remove-image-btn">{{=it.removeImage}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =          Header HTML Editor           =
+    ======================================-->
+
+    <div class="toggle hasHeader-toggle" data-activate="true">
+
+        <section id="headerHtml" class="{{=it.sectionClass}}">
+            <div class="{{=it.choiceTitleClass}}">
+                <span>{{=it.headerHtml}}</span>
+            </div>
+            <textarea name="header-html-editor" id="header-html-editor" cols="30" rows="8"></textarea>
+        </section>
+    </div>
+
+    <!--=====================================
+    =       imageOverlay HTML Editor        =
+    ======================================-->
+
+    <div class="toggle hasImageOverlay-toggle" data-activate="true">
+
+        <section id="imageOverlayHtml" class="{{=it.sectionClass}}">
+            <div class="{{=it.choiceTitleClass}}">
+                <span>{{=it.imageOverlayHtml}}</span>
+            </div>
+            <textarea name="image-overlay-html-editor" id="image-overlay-html-editor" cols="30" rows="13"></textarea>
+        </section>
+    </div>
+
+    <!--=====================================
+    =           Body HTML Editor            =
+    ======================================-->
+
+    <section id="bodyHtml" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.bodyHtml}}</span>
+        </div>
+        <textarea name="body-html-editor" id="body-html-editor" cols="30" rows="13"></textarea>
+    </section>
+
+    <!--=====================================
+    =          Footer HTML Editor           =
+    ======================================-->
+
+    <div class="toggle hasFooter-toggle" data-activate="true">
+
+        <section id="footerHtml" class="{{=it.sectionClass}}">
+            <div class="{{=it.choiceTitleClass}}">
+                <span>{{=it.footerHtml}}</span>
+            </div>
+            <textarea name="footer-html-editor" id="footer-html-editor" cols="30" rows="8"></textarea>
+        </section>
+    </div>
+
+    <!--=====================================
+    =                others                 =
+    ======================================-->
+
+    <section id="others" class="{{=it.sectionClass}}">
+        <div class="{{=it.choiceTitleClass}}">
+            <span>{{=it.others}}</span>
+        </div>
+        <div class="form-group form-inline">
+            <label for="style" class="mr-3">{{=it.cardStyle}}</label>
+            <select class="form-control" data-prop="style" id="style">
+                <option value="">{{=it.default}}</option>
+                <option value="bg-primary">primary</option>
+                <option value="bg-secondary">secondary</option>
+                <option value="bg-success">success</option>
+                <option value="bg-danger">danger</option>
+                <option value="bg-warning">warning</option>
+                <option value="bg-info">info</option>
+                <option value="bg-light">light</option>
+                <option value="bg-dark">dark</option>
+            </select>
+        </div>
+        <div class="form-group form-inline">
+            <label for="color" class="mr-3">{{=it.textColor}}</label>
+            <select class="form-control" data-prop="color" id="color">
+                <option value="">{{=it.default}}</option>
+                <option value="text-primary">primary</option>
+                <option value="text-secondary">secondary</option>
+                <option value="text-success">success</option>
+                <option value="text-danger">danger</option>
+                <option value="text-warning">warning</option>
+                <option value="text-info">info</option>
+                <option value="text-light">light</option>
+                <option value="text-dark">dark</option>
+                <option value="text-white">white</option>
+            </select>
+        </div>
+        <div class="form-group form-inline">
+            <label for="border" class="mr-3">{{=it.border}}</label>
+            <select class="form-control" data-prop="border" id="border">
+                <option value="">{{=it.default}}</option>
+                <option value="border-primary">primary</option>
+                <option value="border-secondary">secondary</option>
+                <option value="border-success">success</option>
+                <option value="border-danger">danger</option>
+                <option value="border-warning">warning</option>
+                <option value="border-info">info</option>
+                <option value="border-light">light</option>
+                <option value="border-dark">dark</option>
+            </select>
+        </div>
+        <div class="form-group form-inline">
+            <label for="textAlignment" class="mr-3">{{=it.textAlignment}}</label>
+            <select class="form-control" data-prop="textAlignment" id="textAlignment">
+                <option value="">{{=it.default}}</option>
+                <option value="text-center">center</option>
+                <option value="text-right">right</option>
+                <option value="text-justify">justify</option>
+            </select>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                PREVIEW                =
+    ======================================-->
+
+    <section class="{{=it.previewSectionClass}}">
+        <div id="preview-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.preview}}</span>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-10 col-md-8">
+                <div id="preview" class="{{=it.previewClass}}">
+                    <div id="preview-content"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 CODE                  =
+    ======================================-->
+
+    <section id="code" class="{{=it.codeSectionClass}}">
+        <div id="code-title" class="{{=it.choiceTitleClass}}">
+            <span>{{=it.code}}</span>
+        </div>
+        <div class="{{=it.codeClass}}" id="code-content">
+            <pre class="language-html text-left"></pre>
+        </div>
+    </section>
+
+    <!--=====================================
+    =                 Modal                 =
+    ======================================-->
+
+    <div id="file-tree-modal" class="tbp-modal">
+        <div class="tbp-modal-content">
+            <div id="file-tree-wrapper">
+                <div class="ft-tree"></div>
+                <div class="ft-explorer"></div>
+            </div>
+            <span id="ft-close-btn">×</span>
+        </div>
+    </div>
+
+    <script src="../dialogs/card.js"></script>
+</body>
+
+</html>

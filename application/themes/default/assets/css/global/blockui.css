@@ -1,0 +1,85 @@
+/*-------------------------------------------------------------------------*/
+/* BlockUI
+/*-------------------------------------------------------------------------*/
+.blockUI {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 999999999;
+	background-color: rgba(0, 0, 0, 0.5);
+} .blockUI.fixed    {position: fixed;}
+  .blockUI.absolute {position: absolute;}
+
+.blockUI .blockUI-overlay {
+	width: 100%;
+	height: 100%;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.blockUI .blockUI-overlay .blockUI-icon {
+	width: 150px;
+	height: 150px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #bde2fa #bde2fa #bde2fa transparent;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	animation: 2s spin_anim infinite linear;
+	-o-animation: 2s spin_anim infinite linear;
+	-ms-animation: 2s spin_anim infinite linear;
+	-moz-animation: 2s spin_anim infinite linear;
+	-webkit-animation: 2s spin_anim infinite linear;
+}
+
+.blockUI .blockUI-overlay .blockUI-icon::before {
+	width: 80%;
+	height: 80%;
+	top: 10%;
+	left: 10%;
+	content: '';
+	position: absolute;
+	border-width: 2px;
+	border-style: solid;
+	border-color: transparent #fff transparent #fff;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	animation: 2s spin_anim infinite linear;
+	-o-animation: 2s spin_anim infinite linear;
+	-ms-animation: 2s spin_anim infinite linear;
+	-moz-animation: 2s spin_anim infinite linear;
+	-webkit-animation: 2s spin_anim infinite linear;
+}
+
+.blockUI .blockUI-overlay .blockUI-icon::after {
+	width: 60%;
+	height: 60%;
+	top: 20%;
+	left: 20%;
+	content: '';
+	position: absolute;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #bde2fa transparent #bde2fa transparent;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	animation: 1.5s spin_anim infinite linear;
+	-o-animation: 1.5s spin_anim infinite linear;
+	-ms-animation: 1.5s spin_anim infinite linear;
+	-moz-animation: 1.5s spin_anim infinite linear;
+	-webkit-animation: 1.5s spin_anim infinite linear;
+}

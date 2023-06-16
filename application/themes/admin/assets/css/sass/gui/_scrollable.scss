@@ -1,0 +1,50 @@
+/* Scrollable */
+.scrollable {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	.scrollable-content {
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: 0 37px 0 0;
+		overflow-x: hidden;
+		overflow-y: scroll;
+		outline: none;
+
+		&::-webkit-scrollbar {
+			visibility: hidden;
+		}
+	}
+	.scrollable-pane {
+		bottom: 0;
+		opacity: 0.01;
+		position: absolute;
+		right: 5px;
+		top: 0;
+		transition: all 0.2s ease 0s;
+		width: 4px;
+	}
+	.scrollable-slider {
+		border-radius: 5px;
+		background: none repeat scroll 0 0 #CCC;
+		margin: 0;
+		position: relative;
+		transition: opacity 0.2s ease 0s;
+		opacity: 0;
+	}
+	&.scrollable-padding {
+		.scrollable-content {
+			padding: 10px 24px 10px 10px;
+		}
+	}
+	&:hover, &.visible-slider {
+		.scrollable-slider {
+			opacity: 1;
+		}
+	}
+}
+

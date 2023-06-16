@@ -1,0 +1,141 @@
+/*-------------------------------------------------------------------------*/
+/* Popup box
+/*-------------------------------------------------------------------------*/
+.popup-box {
+	width: 90% !important;
+	height: auto;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	padding: 1.25rem;
+	z-index: 99999;
+	position: fixed;
+	max-width: 450px;
+	box-shadow: inset 0 0 0 1px #141a21, inset 0 0 0 2px rgba(65, 77, 104, 0.14), 0 0 6px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: inset 0 0 0 1px #141a21, inset 0 0 0 2px rgba(65, 77, 104, 0.14), 0 0 6px 0 rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: inset 0 0 0 1px #141a21, inset 0 0 0 2px rgba(65, 77, 104, 0.14), 0 0 6px 0 rgba(0, 0, 0, 0.15);
+	background-color: rgba(18, 26, 34, 0.95);
+	background-image: url('../../images/patterns/pattern-noise-02.png');
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+/* Popup box: Content
+/*---------------------------------------------------------------*/
+.popup-box .popup-content {
+	color: #6a7278;
+	margin: 0 !important;
+	font-size: 1.0625rem;
+	text-align: center;
+	font-style: italic;
+	font-family: var(--font-family-primary);
+}
+
+/* Popup box: Links
+/*---------------------------------------------------------------*/
+.popup-box .popup-links {
+	margin: 1rem 0 0 0;
+	text-align: center;
+}
+
+.popup-box .popup-links .popup-link {
+	width: auto !important;
+	margin: 0 0.5rem !important;
+}
+
+.popup-box .popup-links .popup-link#confirm_hide   {opacity: 0.7;}
+.popup-box .popup-links .popup-link#confirm_button {}
+
+/*-------------------------------------------------------------------------*/
+/* Popup login
+/*-------------------------------------------------------------------------*/
+.popup-login {
+	border: 2px solid #223243;
+	padding: 3rem;
+	max-width: 550px;
+	box-shadow: 0 0 59px 0 rgba(0, 0, 0, 0.15), inset 0 0 15px 0 rgba(9, 16, 28, 0.18);
+	-moz-box-shadow: 0 0 59px 0 rgba(0, 0, 0, 0.15), inset 0 0 15px 0 rgba(9, 16, 28, 0.18);
+	-webkit-box-shadow: 0 0 59px 0 rgba(0, 0, 0, 0.15), inset 0 0 15px 0 rgba(9, 16, 28, 0.18);
+	background-color: #111c28;
+}
+
+.popup-login::before {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	content: '';
+	position: absolute;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(53,93,136,0.09) 0%, rgba(53,93,136,0) 100%);
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(53,93,136,0.09) 0%,rgba(53,93,136,0) 100%);
+	background: radial-gradient(ellipse at center,  rgba(53,93,136,0.09) 0%,rgba(53,93,136,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#17355d88', endColorstr='#00355d88',GradientType=1 );
+}
+
+/* Popup login: Content
+/*---------------------------------------------------------------*/
+.popup-login .popup-content {
+	color: #657178;
+	font-style: initial;
+	text-align: initial;
+	text-shadow: 0 1px 1px rgba(4, 8, 15, 0.68);
+}
+
+.popup-login .popup-content .divider {
+	margin: 2rem 0;
+}
+
+.popup-login .popup-content table {
+	width: 100%;
+} .popup-login .popup-content .divider + table {text-align: center;}
+
+.popup-login .popup-content table tbody {}
+
+.popup-login .popup-content table tbody tr {}
+
+.popup-login .popup-content table tbody tr td {
+	vertical-align: middle;
+}
+
+.popup-login .popup-content table tbody tr td label {
+	vertical-align: middle;
+}
+
+.popup-login .popup-content table tbody tr td input[type='text'],
+.popup-login .popup-content table tbody tr td input[type='password'] {
+	margin: 0 0 2rem 0;
+}
+
+.popup-login .popup-content table tbody tr td a {
+	color: #a0c6db;
+}
+
+.popup-login .popup-content table tbody tr td a:hover,
+.popup-login .popup-content table tbody tr td a:active {
+	color: #cdeeff;
+}
+
+/* Popup login: Links
+/*---------------------------------------------------------------*/
+.popup-login .popup-links {
+	display: none;
+}
+
+/* Popup login: Responsive
+/*---------------------------------------------------------------*/
+@media screen and (max-width: 576px) { /* non-Desktop */
+	.popup-login .popup-content table,
+	.popup-login .popup-content table tbody,
+	.popup-login .popup-content table tbody tr,
+	.popup-login .popup-content table tbody tr td {
+		display: block;
+	}
+
+	.popup-login .popup-content table + table {
+		text-align: center;
+	}
+
+	.popup-login .popup-content table + table button {
+		margin: 0 0 1rem 0;
+	}
+}

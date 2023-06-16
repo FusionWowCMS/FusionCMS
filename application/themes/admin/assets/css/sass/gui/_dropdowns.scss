@@ -1,0 +1,24 @@
+/* Dropdown Menu */
+.dropdown-menu {
+	.dropdown-item {
+		font-size: 0.9rem;
+	}
+}
+
+/* Dark */
+html.dark {
+	.dropdown-menu {
+		.dropdown-item {
+			color: #EEE;
+			&:hover,
+			&:focus,
+			&:active {
+				background-color: $dark-color-2;
+			}
+		}
+
+		.dropdown-divider {
+			opacity: 0.2;
+		}
+	}
+}

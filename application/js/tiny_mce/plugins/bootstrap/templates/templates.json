@@ -1,0 +1,57 @@
+[
+    {
+        "name": "2 columns templates",
+        "templates": [
+            {
+                "name": "2 equal columns",
+                "code": "<div class=\"row\"><div class=\"col-sm-6\"><p>6/12</p></div><div class=\"col-sm-6\"><p>6/12</p></div></div>"
+            },
+            {
+                "name": "8/12 + 4/12",
+                "code": "<div class=\"row\"><div class=\"col-sm-8\"><p>8/12</p></div><div class=\"col-sm-4\"><p>4/12</p></div></div>"
+            },
+            {
+                "name": "9/12 + 3/12",
+                "code": "<div class=\"row\"><div class=\"col-sm-9\"><p>9/12</p></div><div class=\"col-sm-3\"><p>3/12</p></div></div>"
+            },
+            {
+                "name": "4/12 + 8/12",
+                "code": "<div class=\"row\"><div class=\"col-sm-4\"><p>4/12</p></div><div class=\"col-sm-8\"><p>8/12</p></div></div>"
+            },
+            {
+                "name": "3/12 + 9/12",
+                "code": "<div class=\"row\"><div class=\"col-sm-3\"><p>3/12</p></div><div class=\"col-sm-9\"><p>9/12</p></div></div>"
+            }
+        ]
+    },
+    {
+        "name": "3 columns templates",
+        "templates": [
+            {
+                "name": "3 equal columns",
+                "code": "<div class=\"row\"><div class=\"col-sm-4\"><p>4/12</p></div><div class=\"col-sm-4\"><p>4/12</p></div><div class=\"col-sm-4\"><p>4/12</p></div></div>"
+            },
+            {
+                "name": "6/12 + 3/12 + 3/12",
+                "code": "<div class=\"row\"><div class=\"col-sm-6\"><p>6/12</p></div><div class=\"col-sm-3\"><p>3/12</p></div><div class=\"col-sm-3\"><p>3/12</p></div></div>"
+            },
+            {
+                "name": "3/12 + 6/12 + 3/12",
+                "code": "<div class=\"row\"><div class=\"col-sm-3\"><p>3/12</p></div><div class=\"col-sm-6\"><p>6/12</p></div><div class=\"col-sm-3\"><p>3/12</p></div></div>"
+            },
+            {
+                "name": "3/12 + 3/12 + 6/12",
+                "code": "<div class=\"row\"><div class=\"col-sm-3\"><p>3/12</p></div><div class=\"col-sm-3\"><p>3/12</p></div><div class=\"col-sm-6\"><p>6/12</p></div></div>"
+            }
+        ]
+    },
+    {
+        "name": "4 columns templates",
+        "templates": [
+            {
+                "name": "4 equal columns",
+                "code": "<div class=\"row\"><div class=\"col-sm-3\"><p>3/12</p></div><div class=\"col-sm-3\"><p>3/12</p></div><div class=\"col-sm-3\"><p>3/12</p></div><div class=\"col-sm-3\"><p>3/12</p></div></div>"
+            }
+        ]
+    }
+]

@@ -1,0 +1,84 @@
+/* Dropzone */
+.dropzone {
+    background: rgba(0, 0, 0, 0.03) none repeat scroll 0 0;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 3px;
+    min-height: 122px;
+    padding: 23px;
+    .dz-default {
+    	span {
+    		transition: color .1s ease-in;
+    		font-size: 20px;
+    		color: rgba(0, 0, 0, 0.2);
+    	}
+    }
+    &:hover {
+	    .dz-default {
+	    	span {
+	    		color: rgba(0, 0, 0, 0.3);
+	    	}
+	    }
+    }
+}
+
+// MODERN
+// -----------------------------------------------------------------------------
+.dropzone-modern {
+	opacity: 0;
+	visibility: hidden;
+    background: transparent;
+    border: 2px dashed #e7e7e7;
+    min-height: 200px;
+    transition: ease opacity 300ms;
+    .dropzone-upload-message {
+    	position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    pointer-events: none;
+	    transform: translate3d(-50%, -50%, 0);
+	    > i {
+	    	display: block;
+	    	text-align: center;
+	    	font-size: 3rem;
+	    	color: #e7e7e7;
+	    }
+    }
+
+    &.initialized {
+    	opacity: 1;
+    	visibility: visible;
+    }
+
+    &.dz-started {
+    	.dropzone-upload-message {
+    		display: none;
+    	}
+    }
+
+    &:hover {
+    	.dropzone-upload-message {
+    		> i {
+    			color: #CCC;
+    		}
+    	}	
+    }
+}
+
+// DARK
+// -----------------------------------------------------------------------------
+html.dark {
+	.dropzone {
+	    .dz-default {
+	    	span {
+	    		color: rgba(255, 255, 255, 0.2);
+	    	}
+	    }
+	    &:hover {
+		    .dz-default {
+		    	span {
+		    		color: rgba(255, 255, 255, 0.3);
+		    	}
+		    }
+	    }
+	}
+}

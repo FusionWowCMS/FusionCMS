@@ -1,0 +1,51 @@
+/* Sidebar Right */
+.sidebar-right {
+	z-index: 1010;
+
+	.sidebar-right-wrapper {
+		padding: 20px;
+	}
+
+	h6 {
+		margin: 0;
+		color: $color-default-inverse;
+		text-transform: uppercase;
+		font-size: 0.75rem;
+		font-weight: 600;
+	}
+
+	.mobile-close {
+	    display: block;
+		background: #000;
+		color: #999;
+		left: 0;
+		line-height: 20px;
+		padding: 10px 10px 12px 20px;
+		position: relative;
+		overflow: hidden;
+		width: 100%;
+		text-align: left;
+		text-decoration: none;
+		border-radius: 5px;
+	    border-bottom: 1px solid #292929;
+
+		i {
+			margin-left: 5px;
+			vertical-align: middle;
+		}
+	}
+}
+
+/* If desktop is seeing mobile res, fix scrollbars */
+@media only screen and (max-width: 767px) {
+	html.no-mobile-device.custom-scroll {
+		.sidebar-right {
+			.nano {
+				> .nano-content {
+					overflow: scroll;
+					overflow-x: hidden;
+				}
+			}
+		}
+	}
+}

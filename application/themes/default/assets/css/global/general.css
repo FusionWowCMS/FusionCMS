@@ -1,0 +1,179 @@
+/*-------------------------------------------------------------------------*/
+/* Define variables
+/*-------------------------------------------------------------------------*/
+:root {
+	/* Margins */
+	--margin-primary: 8px;
+
+	/* Fonts */
+	--font-family-primary: 'Cambria', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-family-secondary: /*'CapitalisTypOasis',*/ 'ChanticleerRoman', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-family-tertiary: 'Assassin$', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-family-quaternary: 'Calibri', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	/* Breakpoints */
+	--breakpoint-xs: 0;
+	--breakpoint-sm: 576px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 992px;
+	--breakpoint-xl: 1200px;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Browser reset
+/*-------------------------------------------------------------------------*/
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	outline: none !important;
+	position: relative;
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+} *:focus {outline: none;}
+
+ul {
+	list-style: none;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Globally applied styles
+/*-------------------------------------------------------------------------*/
+html,
+body {
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	font-family: var(--font-family-primary);
+	background-color: transparent;
+}
+
+body {
+	flex: 1;
+	-ms-flex: 1;
+	-webkit-box-flex: 1;
+	display: flex;
+	display: -ms-flexbox;
+	display: -webkit-box;
+	min-height: 100vh;
+	flex-direction: column;
+	-ms-flex-direction: column;
+	-webkit-box-direction: normal;
+	-webkit-box-orient: vertical;
+	background-color: #080b0f;
+	background-image: url('../../images/graphics/background.jpg');
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+
+/* Global: Hyperlink
+/*---------------------------------------------------------------*/
+a {
+	color: #8ebcda;
+	text-decoration: none !important;
+} a:hover {color: #9dd0f2;}
+
+/* Global: Image
+/*---------------------------------------------------------------*/
+img {
+	border: none;
+	vertical-align: middle;
+	background-color: transparent;
+}
+
+/* Global: Selection
+/*---------------------------------------------------------------*/
+::selection {
+	color: #fff;
+	background-color: #7d71df;
+}
+
+::-moz-selection {
+	color: #fff;
+	background-color: #7d71df;
+}
+
+.navbar-side{
+    width:100%;
+    height:auto;
+    margin:0 0 var(--margin-primary) 0;
+    padding:0
+}
+.navbar-side .navbar-nav{
+    width:100%;
+    height:auto
+}
+.navbar-side .navbar-nav .nav-item{
+    width:100%;
+    height:auto;
+    margin:0 0 5px 0
+}
+.navbar-side .navbar-nav .nav-item.last-row{
+    margin:0
+}
+.navbar-side .navbar-nav .nav-item .nav-link{
+    color:#baddf4;
+    display:block;
+    padding:.794rem 1rem .794rem 3.375rem;
+    font-size:1.125rem;
+    box-shadow:inset 0 0 0 1px #141a21,inset 0 0 0 2px rgba(104,193,232,.08),inset 0 0 0 2px rgba(65,77,104,.14),0 0 6px 0 rgba(0,0,0,.15);
+    -moz-box-shadow:inset 0 0 0 1px #141a21,inset 0 0 0 2px rgba(104,193,232,.08),inset 0 0 0 2px rgba(65,77,104,.14),0 0 6px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow:inset 0 0 0 1px #141a21,inset 0 0 0 2px rgba(104,193,232,.08),inset 0 0 0 2px rgba(65,77,104,.14),0 0 6px 0 rgba(0,0,0,.15);
+    text-shadow:0 1px 1px #000;
+    text-transform:uppercase;
+    background-color:rgba(18,26,34,.95);
+    background-image:url(../images/patterns/pattern-noise-02.png);
+    background-repeat:repeat;
+    background-position:center center;
+    transition:300ms color ease-in-out;
+    -o-transition:300ms color ease-in-out;
+    -ms-transition:300ms color ease-in-out;
+    -moz-transition:300ms color ease-in-out;
+    -webkit-transition:300ms color ease-in-out
+}
+.navbar-side .navbar-nav .nav-item .nav-link::before{
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    content:'';
+    opacity:.16;
+    position:absolute;
+    background:rgb(57,178,255);
+    background:-moz-linear-gradient(90deg,rgba(57,178,255,0) 0%,rgba(57,178,255,1) 50%,rgba(57,178,255,0) 100%);
+    background:-webkit-linear-gradient(90deg,rgba(57,178,255,0) 0%,rgba(57,178,255,1) 50%,rgba(57,178,255,0) 100%);
+    background:linear-gradient(90deg,rgba(57,178,255,0) 0%,rgba(57,178,255,1) 50%,rgba(57,178,255,0) 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#39b2ff",endColorstr="#39b2ff",GradientType=1)
+}
+.navbar-side .navbar-nav .nav-item .nav-link:hover,.navbar-side .navbar-nav .nav-item .nav-link:active,.navbar-side .navbar-nav .nav-item .nav-link.nav-active{
+    color:#fff
+}
+
+.navbar-side .navbar-nav .nav-item .nav-link .arrow::before{
+    width:100%;
+    height:100%;
+    top: 4px;
+    right: 25px;
+    position:absolute;
+    content: '\f105';
+	font: var(--fa-font-solid);
+    transition:300ms opacity ease-in-out;
+    -o-transition:300ms opacity ease-in-out;
+    -ms-transition:300ms opacity ease-in-out;
+    -moz-transition:300ms opacity ease-in-out;
+    -webkit-transition:300ms opacity ease-in-out
+}
+.navbar-side .navbar-nav .nav-item .nav-link:hover .arrow::before,.navbar-side .navbar-nav .nav-item .nav-link:active .arrow::before,.navbar-side .navbar-nav .nav-item .nav-link.nav-active .arrow::before{
+    opacity:1
+}
+.navbar-side .navbar-nav .nav-item .nav-link span{
+    vertical-align:sub
+}

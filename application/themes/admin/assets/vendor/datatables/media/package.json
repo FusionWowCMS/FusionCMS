@@ -1,0 +1,77 @@
+{
+  "_args": [
+    [
+      "datatables.net-bs5@1.10.25",
+      "E:\\_OKLER\\Templates\\Porto-Admin\\HTML"
+    ]
+  ],
+  "_from": "datatables.net-bs5@1.10.25",
+  "_id": "datatables.net-bs5@1.10.25",
+  "_inBundle": false,
+  "_integrity": "sha512-SiONLsCrVOuSZm8AcKcMrpo9ZriCdtuf9udzxwK92yrI2a+mnuSi0EreG35Rcq1ORRELqrp3/2o+qcTHo7fSsg==",
+  "_location": "/datatables.net-bs5",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "datatables.net-bs5@1.10.25",
+    "name": "datatables.net-bs5",
+    "escapedName": "datatables.net-bs5",
+    "rawSpec": "1.10.25",
+    "saveSpec": null,
+    "fetchSpec": "1.10.25"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/datatables.net-bs5/-/datatables.net-bs5-1.10.25.tgz",
+  "_spec": "1.10.25",
+  "_where": "E:\\_OKLER\\Templates\\Porto-Admin\\HTML",
+  "author": {
+    "name": "SpryMedia Ltd",
+    "url": "http://datatables.net"
+  },
+  "bugs": {
+    "url": "https://datatables.net/forums"
+  },
+  "dependencies": {
+    "datatables.net": "^1.10.15",
+    "jquery": ">=1.7"
+  },
+  "description": "DataTables for jQuery with styling for [Bootstrap5](https://getbootstrap.com/)",
+  "files": [
+    "css/**/*.css",
+    "js/**/*.js",
+    "images/*"
+  ],
+  "homepage": "https://datatables.net",
+  "ignore": [
+    "composer.json",
+    "datatables.json",
+    "package.json"
+  ],
+  "keywords": [
+    "Bootstrap",
+    "Bootstrap5",
+    "Datatables",
+    "jQuery",
+    "table",
+    "filter",
+    "sort"
+  ],
+  "license": "MIT",
+  "main": "js/dataTables.bootstrap5.js",
+  "moduleType": [
+    "globals",
+    "amd",
+    "node"
+  ],
+  "name": "datatables.net-bs5",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DataTables/Dist-DataTables-Bootstrap5.git"
+  },
+  "style": "css/dataTables.bootstrap5.css",
+  "types": "./types/dataTables.bootstrap5.d.ts",
+  "version": "1.10.25"
+}

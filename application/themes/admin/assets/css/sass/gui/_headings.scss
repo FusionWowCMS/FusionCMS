@@ -1,0 +1,148 @@
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 200;
+	letter-spacing: -1px;
+}
+
+h1 {
+	font-size: 2.7em;
+	line-height: 44px;
+	font-weight: 500;
+}
+
+h2 {
+	font-size: 2.25em;
+	font-weight: 500;
+	line-height: 42px;
+}
+
+h3 {
+	font-size: 1.6em;
+	font-weight: 400;
+	line-height: 24px;
+}
+
+h4 {
+	font-size: 1.3em;
+	font-weight: 400;
+	line-height: 27px;
+}
+
+h5 {
+	font-size: 1.1em;
+	font-weight: 300;
+	line-height: 18px;
+}
+
+h6 {
+	font-size: 0.9em;
+	font-weight: 300;
+	line-height: 18px;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h4, .h4, h5, .h5, h6, .h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+	&.big {
+		font-size: 4.2em;
+		line-height: 54px;
+	}
+	&.small {
+		font-size: 2.2em;
+		line-height: 42px;
+		font-weight: 600;
+	}
+	&.short {
+		margin-bottom: 15px;
+	}
+}
+
+h2.short {
+	margin-bottom: 15px;
+}
+
+h3.short,
+h4.short,
+h5.short,
+h6.short {
+	margin-bottom: 9px;
+}
+
+h1.shorter,
+h2.shorter,
+h3.shorter,
+h4.shorter,
+h5.shorter,
+h6.shorter {
+	margin-bottom: 0;
+}
+
+h1.tall,
+h2.tall,
+h3.tall,
+h4.tall,
+h5.tall,
+h6.tall {
+	margin-bottom: 33px;
+}
+
+h1.taller,
+h2.taller,
+h3.taller,
+h4.taller,
+h5.taller,
+h6.taller {
+	margin-bottom: 44px;
+}
+
+h1.spaced,
+h2.spaced,
+h3.spaced,
+h4.spaced,
+h5.spaced,
+h6.spaced {
+	margin-top: 22px;
+}
+
+h1.more-spaced,
+h2.more-spaced,
+h3.more-spaced,
+h4.more-spaced,
+h5.more-spaced,
+h6.more-spaced {
+	margin-top: 44px;
+}
+
+h1.dark,
+h2.dark,
+h3.dark,
+h4.dark,
+h5.dark {
+	color: $color-dark;
+}
+
+h1.light,
+h2.light,
+h3.light,
+h4.light,
+h5.light,
+h6.light {
+	color: #FFF;
+}
+
+h1.text-shadow,
+h2.text-shadow,
+h3.text-shadow,
+h4.text-shadow,
+h5.text-shadow,
+h6.text-shadow {
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}

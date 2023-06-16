@@ -1,0 +1,600 @@
+/* Cards */
+.card#{if($admin-ext, '.card-admin', '')} {
+	background: transparent;
+	box-shadow: none;
+	border: none;
+}
+
+.card#{if($admin-ext, '.card-admin ', '')} + .card#{if($admin-ext, '.card-admin ', '')} {
+	margin-top: 2.2rem;
+}
+
+.card.card-admin {
+	margin-bottom: 3rem;
+}
+
+// CARD HEADING
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-header {
+	background: #f6f6f6;
+	border-radius: $border-radius $border-radius 0 0 !important;
+	border-bottom: 1px solid #DADADA;
+	padding: 18px;
+	position: relative;
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-header.bg-white {
+	background: #fff;
+	border-bottom: 0 none;
+	border-right: 0 none;
+}
+
+// CARD HEADING BGS
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-header {
+	@each $state in $states {
+		&.bg-#{nth($state,1)} {
+			background: #{nth($state,2)};
+			color: #{nth($state,3)};
+			border-bottom: 0 none;
+			border-right: 0 none;
+		}
+	}
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-header.bg-white {
+	background: #fff;
+	border-bottom: 0 none;
+	border-right: 0 none;
+}
+
+// CARD ACTIONS
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-actions {
+	right: 15px;
+	position: absolute;
+	top: 15px;
+
+	a,
+	.card-action {
+		background-color: transparent;
+		border-radius: 2px;
+		color: #B4B4B4;
+		font-size: 14px;
+		height: 24px;
+		line-height: 24px;
+		text-align: center;
+		width: 24px;
+
+		&:hover {
+			background-color: darken(#f6f6f6, 3%);
+			color: #B4B4B4;
+			text-decoration: none
+		}
+		&,
+		&:focus,
+		&:hover,
+		&:active,
+		&:visited {
+			outline: none !important;
+			text-decoration: none !important;
+		}
+	}
+}
+
+// CARD TITLE AND SUBTITLE
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-title {
+	color: #33353F;
+	font-size: 18px;
+	line-height: 18px;
+	padding: 0;
+	text-transform: none;
+	margin: 0;
+	font-weight: 600;
+	letter-spacing: -1px;
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-subtitle {
+	color: #808697;
+	font-size: 13px;
+	line-height: 1.2em;
+	margin: 7px 0 0;
+	padding: 0;
+}
+
+// CARD BODY
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-body {
+	background: #fdfdfd;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	border-radius: $border-radius;
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-body-nopadding {
+	padding: 0;
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-header + .card-body {
+	border-radius: 0 0 $border-radius $border-radius;
+}
+
+// CARD FOOTER
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-footer {
+	border-radius: 0 0 $border-radius $border-radius;
+	margin-top: -$border-radius;
+	background: #FFF;
+	@include clearfix();
+	.pager {
+		@include clearfix();
+		margin: 0;
+		padding: 5px 0;
+	}
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-footer-btn-group {
+	display: table;
+	width: 100%;
+	padding: 0;
+	border-radius: 0 0 5px 5px !important;
+	overflow: hidden;
+
+	a {
+		background-color: #f5f5f5;
+		display: table-cell;
+		border-left: 1px solid #ddd;
+		padding: 10px 15px;
+		text-decoration: none;
+
+		&:hover {
+			background-color: darken(#f5f5f5, 2%);
+			box-shadow: 0 0 7px rgba(0, 0, 0, 0.1) inset;
+		}
+
+		&:first-child {
+			border-left: none;
+		}
+	}
+}
+
+// CARD BODY BGS
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-body {
+	@each $state in $states {
+		&.bg-#{nth($state,1)} {
+			background: #{nth($state,2)};
+			color: #{nth($state,3)};
+		}
+	}
+}
+
+// CARD FEATURED
+// -----------------------------------------------------------------------------
+.card-featured#{if($admin-ext, '.card-admin', '')} {
+	border-top: 3px solid #33353F;
+
+	.card-header {
+		border-radius: 0;
+	}
+}
+
+@each $side in top, right, bottom, left {
+	.card-featured-#{nth($side,1)} {
+		border-#{nth($side,1)}: 3px solid $color-primary;
+	}
+}
+
+@each $state in $states {
+	.card-featured-#{nth($state,1)} {
+		border-color: #{nth($state,2)};
+
+		.card-title {
+			color: #{nth($state,2)};
+		}
+	}
+}
+
+// CARD HIGHLIGHT
+// -----------------------------------------------------------------------------
+.card-highlight#{if($admin-ext, '.card-admin', '')} {
+
+	.card-header {
+		background-color: $color-primary;
+		border-color: $color-primary;
+		color: #fff;
+	}
+
+	.card-title {
+		color: #fff;
+	}
+
+	.card-subtitle {
+		color: #fff;
+		color: rgba(255, 255, 255, 0.7);
+	}
+
+	.card-actions a {
+		background-color: rgba(0, 0, 0, 0.1);
+		color: #fff;
+	}
+
+	.card-body {
+		background-color: $color-primary;
+		color: #fff;
+	}
+
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-highlight-title {
+
+	.card-header {
+		background-color: #2BAAB1;
+	}
+
+	.card-title {
+		color: #fff;
+	}
+
+	.card-subtitle {
+		color: #fff;
+		color: rgba(255, 255, 255, 0.7);
+	}
+
+	.card-actions a {
+		background-color: rgba(0, 0, 0, 0.1);
+		color: #fff;
+	}
+
+}
+
+// CARD HEADING ICON
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-header-icon {
+	margin: 0 auto;
+	font-size: 2.8rem;
+	width: 90px;
+	height: 90px;
+	line-height: 90px;
+	text-align: center;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 55px;
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-header-icon {
+	@each $state in $states {
+		&.bg-#{nth($state,1)} {
+			background: #{nth($state,2)};
+			color: #{nth($state,3)};
+		}
+	}
+}
+
+// CARD HEADING PROFILE PICTURE
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-header-profile-picture {
+	img {
+		display: block;
+		margin: 0 auto;
+		width: 100px;
+		height: 100px;
+		border: 4px solid #fff;
+		border-radius: 50px;
+	}
+}
+
+// CARD ICON
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-icon {
+	color: #fff;
+	font-size: 42px;
+	float: left;
+
+	& ~ .card-title,
+	& ~ .card-subtitle {
+		margin-left: 64px;
+	}
+}
+
+// CARDS
+// -----------------------------------------------------------------------------
+/* Dark - Cards */
+html.dark {
+	#{if($admin-ext, '.card-admin ', '')}.card-header {
+		background: $dark-color-3;
+		border-bottom-color: darken( $dark-color-3, 5% );
+	}
+
+	#{if($admin-ext, '.card-admin ', '')}.card-actions {
+		a {
+			&:hover {
+				background-color: darken( $dark-color-3, 2% );
+			}
+		}
+	}
+
+	#{if($admin-ext, '.card-admin ', '')}.card-body {
+		background: $dark-color-4;
+	}
+
+	#{if($admin-ext, '.card-admin ', '')}.card-footer {
+		background: $dark-color-5;
+		border-top-color: darken( $dark-color-3, 7% );
+	}
+}
+
+// CONTEXTUAL ALTERNATIVE
+// -----------------------------------------------------------------------------
+@each $state in $states {
+	html {
+		.card-#{nth($state,1)} {
+
+			.card-header {
+				background: #{nth($state,2)};
+			}
+
+			.card-subtitle {
+				opacity: 0.8;
+				color: #{nth($state,3)};
+			}
+
+			.card-title {
+				color: #{nth($state,3)};
+			}
+
+			.card-actions a {
+				background-color: transparent !important;
+				color: #{nth($state,3)};
+			}
+		}
+	}
+}
+
+// CARD TRANSPARENT
+// -----------------------------------------------------------------------------
+@mixin card-header-transparent() {
+	background: none;
+	border: 0;
+	padding-left: 0;
+	padding-right: 0;
+	.card-actions {
+		right: 0;
+	}
+	+ .card-body {
+		border-radius: $border-radius;
+	}
+}
+
+html .card-transparent#{if($admin-ext, '.card-admin', '')} {
+	> .card-header {
+		@include card-header-transparent();
+	}
+	> .card-body {
+		padding: 0;
+		border-radius: 0;
+		background: transparent;
+		box-shadow: none;
+	}
+}
+
+html .card#{if($admin-ext, '.card-admin', '')} .card-header-transparent {
+	@include card-header-transparent();
+}
+
+// CARD HORIZONTAL
+// -----------------------------------------------------------------------------
+.card-horizontal#{if($admin-ext, '.card-admin', '')} {
+	display: table;
+	width: 100%;
+
+	.card-header,
+	.card-body,
+	.card-footer {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.card-header {
+		border-radius: $border-radius 0 0 $border-radius !important;
+	}
+
+	.card-header + .card-body {
+		border-radius: 0 $border-radius $border-radius 0 !important;
+	}
+
+	.card-footer {
+		border-radius: 0 $border-radius $border-radius 0 !important;
+		margin-top: 0;
+	}
+}
+
+// CARD MODERN
+// -----------------------------------------------------------------------------
+.card {
+	&.card-modern#{if($admin-ext, '.card-admin', '')} {
+		border-radius: 7px;
+	    box-shadow: 0px 0px 37px -36px rgba(0, 0, 0, 0.4);
+	    .card-header {
+	    	background: #FFF;
+		    border-bottom: 0;
+		    padding: 25px;
+		    .card-title {
+		    	font-size: 1.15rem;
+			    font-weight: 700;
+			    line-height: 1.2;
+		    }
+		    & + .card-body {
+		    	padding-top: 5px;
+		    }
+	    }
+
+	    .card-actions {
+	    	right: 20px;
+	    	top: 23px;
+	    	a, .card-action {
+				color: #717171;
+			    font-size: 10px;
+	    	}
+	    }
+
+	    .card-action-toggle:before {
+	    	content: "\f077";
+	    	font-family: "Font Awesome 5 Free";
+	    	font-weight: 900;
+	    }
+
+	    &.card-collapsed .card-action-toggle:before {
+	    	content: "\f078";
+	    }
+
+	    .card-body {
+	    	background: #FFF;
+	    	padding: 25px;
+	    	box-shadow: none;
+	    }
+
+	    .widget-user-info {
+	    	.widget-user-info-header {
+	    		border-radius: 7px 7px 0 0;
+	    	}
+	    	.widget-user-info-body {
+	    		border-radius: 0 0 7px 7px;
+	    	}
+	    }
+
+	    &.card-modern-table-over-header {
+	    	.datatables-header-footer-wrapper {
+	    		margin-top: -60px;
+	    		.datatable-header {
+    			    padding-right: 40px;
+	    		}
+	    	}
+	    }
+
+	    &.card-modern-alt-padding {
+	    	.card-body {
+	    		padding: 20px;
+	    	}
+	    }
+	}
+}
+
+@media(max-width: 767px) {
+	.card {
+		&.card-modern {
+			.card-actions {
+				position: absolute;
+			}
+		}
+	}
+}
+
+// CARD BIG INFO
+// -----------------------------------------------------------------------------
+.card {
+	&.card-big-info#{if($admin-ext, '.card-admin', '')} {
+		
+		.card-body {
+			padding: 0;
+			background: #FFF;
+			> .row {
+				margin-right: 0;
+				margin-left: 0;
+				> div[class*="col-"] {
+					padding: 2.5rem 2rem;
+					&:first-child {
+						background: #f9f9f9;
+						.card-big-info-title {
+						    color: #222529;
+						    font-size: 1.3rem;
+						    font-weight: 700;
+						    line-height: 1.2;
+						    margin: 0 0 10px;
+						}
+						.card-big-info-icon {
+						    position: relative;
+						    left: -6px;
+							color: #e7e7e7;
+						    font-size: 5.2rem;
+						    margin-bottom: 10px;
+						}
+					}
+				}
+			}
+		}
+
+	}
+}
+
+// ACTIONS
+// -----------------------------------------------------------------------------
+#{if($admin-ext, '.card-admin ', '')}.card-action-toggle,
+#{if($admin-ext, '.card-admin ', '')}.card-action-dismiss {
+	display: inline-block;
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-action-toggle {
+	&:before {
+		content: "\f0d7";
+	}
+
+	.card-collapsed & {
+		&:before {
+			content: "\f0d8";
+		}
+	}
+}
+
+#{if($admin-ext, '.card-admin ', '')}.card-action-dismiss {
+	&:before {
+		content: "\f00d";
+	}
+}
+
+// COLLAPSED
+// -----------------------------------------------------------------------------
+.card-collapsed {
+	.card-body,
+	.card-footer {
+		display: none;
+	}
+}
+
+// COLORS
+// -----------------------------------------------------------------------------
+@each $color in $colors-list {
+	html .card-#{nth($color,1)} {
+		.card-actions a,
+		.card-title {
+			color: #FFF;
+		}
+	}
+}
+
+// RESPONSIVE
+// -----------------------------------------------------------------------------
+@media only screen and (max-width: 767px) {
+	#{if($admin-ext, '.card-admin ', '')}.card-actions {
+		float: none;
+		margin-bottom: 15px;
+		position: static;
+		text-align: right;
+
+		a {
+			vertical-align: top;
+		}
+	}
+}
+
+@media (min-width: 576px) {
+	.card-group .card#{if($admin-ext, '.card-admin ', '')} + .card#{if($admin-ext, '.card-admin ', '')} {
+		border-left: 1px solid #DDD;
+	}
+}

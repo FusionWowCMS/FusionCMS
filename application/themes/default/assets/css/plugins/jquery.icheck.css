@@ -1,0 +1,48 @@
+/*-------------------------------------------------------------------------*/
+/* iCheck
+/*-------------------------------------------------------------------------*/
+.iradio,
+.icheckbox {
+	width: 28px;
+	height: 28px;
+	border: none;
+	cursor: pointer;
+	margin: 0 1rem 0 0;
+	padding: 0;
+	z-index: 9;
+	display: inline-block;
+	box-shadow: 1px 1px 1px 0 rgba(63, 167, 218, 0.05);
+	-moz-box-shadow: 1px 1px 1px 0 rgba(63, 167, 218, 0.05);
+	-webkit-box-shadow: 1px 1px 1px 0 rgba(63, 167, 218, 0.05);
+	vertical-align: middle;
+	background-color: transparent;
+	background-image: url('../../images/graphics/radio-checkbox.png');
+	background-repeat: no-repeat;
+}
+
+/* iCheck: Disabled
+/*---------------------------------------------------------------*/
+.iradio.disabled,
+.icheckbox.disabled {
+	cursor: default;
+}
+
+/* iCheck: Radio
+/*---------------------------------------------------------------*/
+.iradio {
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+} .iradio                  {background-position: 100% 0;}
+  .iradio.hover            {background-position: 100% -28px;}
+  .iradio.checked          {background-position: 100% -56px;}
+  .iradio.disabled         {background-position: 100% -84px;}
+  .iradio.checked.disabled {background-position: 100% -112px;}
+
+/* iCheck: Checkbox
+/*---------------------------------------------------------------*/
+.icheckbox                  {background-position: 0 0;}
+.icheckbox.hover            {background-position: 0 -28px;}
+.icheckbox.checked          {background-position: 0 -56px;}
+.icheckbox.disabled         {background-position: 0 -84px;}
+.icheckbox.checked.disabled {background-position: 0 -112px;}

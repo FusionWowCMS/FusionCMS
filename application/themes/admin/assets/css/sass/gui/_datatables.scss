@@ -1,0 +1,177 @@
+/* Data Tables */
+.dataTables_wrapper {
+	position: relative;
+	padding: 0;
+	margin: 0;
+
+	.DTTT_container {
+		margin-bottom: 5px;
+		.btn-group {
+			display: inline-block !important;
+		}
+		.btn {
+			margin-left: 5px;
+		}
+	}
+
+	.datatables-header {
+		margin-bottom: 15px;
+
+		label {
+			font-weight: normal;
+			margin: 0;
+		}
+	}
+
+	// prevent sort arrows to overlap text
+	table {
+		thead {
+			th {
+				padding-right: 21px !important;
+			}
+		}
+	}
+
+	table.dataTable {
+		border-collapse: collapse !important;
+		margin: 0 !important;
+		width: 100% !important;
+	}
+
+	div.dataTables_info {
+		font-size: 0.7rem;
+	}
+
+	.pagination {
+		margin-top: 20px !important;
+	}
+}
+
+// DATATABLES WITH CUSTOM HEADER AND FOOTER
+// -----------------------------------------------------------------------------
+.datatables-header-footer-wrapper {
+	.pagination {
+		margin-bottom: 0;
+	}
+}
+
+// PER PAGE
+// -----------------------------------------------------------------------------
+.dataTables_wrapper {
+	.select2-container {
+		display: inline-block;
+		margin-right: 10px;
+		width: 75px;
+	}
+}
+
+@media only screen and (max-width: 991px) {
+	.dataTables_wrapper {
+		.dataTables_length {
+			margin-bottom: 15px;
+
+			label {
+				float: none;
+				width: 100%;
+			}
+		}
+	}
+}
+
+// FILTER
+// -----------------------------------------------------------------------------
+/* Filter */
+.dataTables_wrapper {
+	.dataTables_filter {
+		label {
+			width: 50%;
+		}
+
+		input {
+			width: 100% !important;
+		}
+	}
+}
+
+@media only screen and (max-width: 991px) {
+	.dataTables_wrapper {
+		.dataTables_filter {
+			label {
+				width: 100% !important;
+			}
+		}
+	}
+}
+
+// DATATABLES EMPTY
+// -----------------------------------------------------------------------------
+/* Empty Row */
+.dataTables_wrapper {
+	.dataTables_empty {
+		padding: 50px 0;
+		text-align: center;
+	}
+}
+
+// DATATABLES LOADER
+// -----------------------------------------------------------------------------
+.dataTables_processing {
+	background: $color-primary;
+	border-radius: 100px;
+	box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.3);
+	color: #FFF;
+	left: 50%;
+	margin-left: -36px;
+	padding: 5px 10px;
+	position: absolute;
+	top: 3px;
+}
+
+@media only screen and (max-width: 991px) {
+	.dataTables_processing {
+		left: auto;
+		margin-left: 0;
+		right: 0;
+	}
+}
+
+// DATATABLES PRINT
+// -----------------------------------------------------------------------------
+.DTTT_Print {
+	&,
+	.inner-wrapper,
+	.content-body,
+	.card {
+		background: #FFF !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		top: 0 !important;
+	}
+
+	.dataTables_wrapper {
+		.DTTT.btn-group {
+			display: none !important;
+		}
+	}
+
+	.DTTT_print_info {
+		background: rgba(255, 255, 255, 0.9);
+		display: block;
+		left: 0;
+		height: 100px;
+		line-height: 100px;
+		position: fixed;
+		font-size: 14px;
+		text-align: center;
+		top: 0;
+		width: 100%;
+	}
+}
+
+// DARK - DATATABLES
+// -----------------------------------------------------------------------------
+html.dark {
+	div.DTTT_container .btn {
+		color: #EEE !important;
+	}
+}
