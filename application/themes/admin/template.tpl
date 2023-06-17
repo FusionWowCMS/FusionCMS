@@ -160,13 +160,10 @@
 	</head>
     <body class="">
         <div class="bg-muted-100 dark:bg-muted-900 pb-20">
-			<div class="dark:bg-muted-800 border-muted-200 dark:border-muted-700 fixed left-0 top-0 z-[60] flex h-full flex-col border-r bg-white transition-all duration-300 w-[280px] -translate-x-full lg:translate-x-0">
+			<div class="dark:bg-muted-800 border-muted-200 dark:border-muted-700 fixed left-0 top-0 z-[60] flex h-full flex-col border-r bg-white transition-all duration-300 w-[280px] lg:translate-x-0" __sidebar__>
 				<div class="flex h-16 w-full items-center justify-between px-6">
 					<img src="{$url}application/themes/admin/assets/images/fusion.svg" class="fusion-logo mt-4"/>
-					<button
-						type="button"
-						class="nui-mask nui-mask-blob hover:bg-muted-200 dark:hover:bg-muted-700/60 text-muted-500 dark:text-muted-400 hidden h-10 w-10 cursor-pointer items-center justify-center transition-colors duration-300 lg:flex"
-					>
+					<button type="button" class="nui-mask nui-mask-blob hover:bg-muted-200 dark:hover:bg-muted-700/60 text-muted-500 dark:text-muted-400 hidden h-10 w-10 cursor-pointer items-center justify-center transition-colors duration-300 lg:flex">
 						<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-4 w-4" width="1em" height="1em" viewBox="0 0 24 24">
 							<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
 								<circle cx="11" cy="11" r="8"></circle>
@@ -174,7 +171,7 @@
 							</g>
 						</svg>
 					</button>
-					<button type="button" class="nui-mask nui-mask-blob hover:bg-muted-200 dark:hover:bg-muted-800 text-muted-700 dark:text-muted-400 flex h-10 w-10 cursor-pointer items-center justify-center transition-colors duration-300 lg:hidden">
+					<button type="button" class="nui-mask nui-mask-blob hover:bg-muted-200 dark:hover:bg-muted-800 text-muted-700 dark:text-muted-400 flex h-10 w-10 cursor-pointer items-center justify-center transition-colors duration-300 lg:hidden" __sidebartogglermobile__>
 						<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" width="1em" height="1em" viewBox="0 0 24 24">
 							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7 7l-7-7l7-7"></path>
 						</svg>
@@ -193,26 +190,26 @@
 						{if count($group.links)}
 						<li>
 							<div class="group">
-								<button onclick="AdminMenu.openSection({$group.nr})" nr="{$group.nr}" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center rounded-lg py-3 transition-colors duration-300 gap-4 px-4">
-									<i class="fa-solid fa-{$group.icon} {if isset($group.active)}text-primary-500{/if}" aria-hidden="true"></i>
-									<span class="block whitespace-nowrap font-sans text-sm {if isset($group.active)}text-primary-500{/if} block">{$text}</span>
-									<span class="ms-auto items-center justify-center flex">
-										
-										<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-4 w-4 transition-transform duration-200 rotate-180" width="1em" height="1em" viewBox="0 0 24 24">
-											<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m18 15l-6-6l-6 6"></path>
-										</svg>
-									</span>
-								</button>
-								<ul class="border-muted-200 relative block ps-4 {if isset($group.active)}after:border-muted-200 max-h-max opacity-100 {else}max-h-0 overflow-hidden group-focus-within:max-h-max group-focus-within:overflow-visible group-focus-within:opacity-100{/if}" nr="{$group.nr}">
-									{foreach from=$group.links item=link}
-									<li class="border-muted-300 dark:border-muted-700 border-s-2 first:mt-2">
-										<a aria-current="page" href="{$url}{$link.module}/{$link.controller}" class="{if isset($link.active)}router-link-active !border-primary-500 !text-primary-500 dark:!text-primary-500 -left-0.5 {/if} nui-focus text-muted-500 hover:text-muted-600 dark:text-muted-400/80 dark:hover:text-muted-200 relative flex cursor-pointer items-center gap-2 border-s-2 border-transparent py-2 ps-4 transition-colors duration-300">
-											<i class="fa-solid fa-{$link.icon}"></i>
-											<span class="whitespace-nowrap font-sans text-[0.85rem] block">{$link.text}</span>
-										</a>
-									</li>
-									{/foreach}
-								</ul>
+                                <button onclick="AdminMenu.openSection({$group.nr})" nr="{$group.nr}" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center rounded-lg py-3 transition-colors duration-300 gap-4 px-4 {if isset($group.active)}open{/if}">
+                                    <i class="fa-solid fa-{$group.icon} {if isset($group.active)}text-primary-500{/if}" aria-hidden="true"></i>
+                                    <span class="block whitespace-nowrap font-sans text-sm {if isset($group.active)}text-primary-500{/if} block">{$text}</span>
+                                    <span class="ms-auto items-center justify-center flex">
+                                        
+                                        <svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-4 w-4 transition-transform duration-200 {if !isset($group.active)}rotate-180{/if}" width="1em" height="1em" viewBox="0 0 24 24">
+                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m18 15l-6-6l-6 6"></path>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <ul class="border-muted-200 relative block ps-4 after:border-muted-200 max-h-max opacity-100" nr="{$group.nr}" {if !isset($group.active)}style="display: none;"{/if}>
+                                    {foreach from=$group.links item=link}
+                                    <li class="border-muted-300 dark:border-muted-700 border-s-2 first:mt-2">
+                                        <a aria-current="page" href="{$url}{$link.module}/{$link.controller}" class="{if isset($link.active)}router-link-active !border-primary-500 !text-primary-500 dark:!text-primary-500 -left-0.5 {/if} nui-focus text-muted-500 hover:text-muted-600 dark:text-muted-400/80 dark:hover:text-muted-200 relative flex cursor-pointer items-center gap-2 border-s-2 border-transparent py-2 ps-4 transition-colors duration-300">
+                                            <i class="fa-solid fa-{$link.icon}"></i>
+                                            <span class="whitespace-nowrap font-sans text-[0.85rem] block">{$link.text}</span>
+                                        </a>
+                                    </li>
+                                    {/foreach}
+                                </ul>
 							</div>
 						</li>
 						{/if}
@@ -246,10 +243,10 @@
 				</div>
 			</div>
 
-            <div class="bg-muted-100 dark:bg-muted-900 relative min-h-screen w-full overflow-x-hidden px-4 transition-all duration-300 xl:px-10 xl:max-w-[calc(100%_-_300px)] xl:ms-[300px]">
+            <div class="bg-muted-100 dark:bg-muted-900 relative min-h-screen w-full overflow-x-hidden px-4 transition-all duration-300 xl:px-10 xl:max-w-[calc(100%_-_280px)] xl:ms-[280px]" __mainbar__>
                 <div class="mx-auto w-full max-w-7xl">
                     <div class="relative z-50 mb-5 flex h-16 items-center gap-2">
-                        <button type="button" class="flex h-10 w-10 items-center justify-center -ms-3">
+                        <button type="button" class="flex h-10 w-10 items-center justify-center -ms-3" __sidebartoggler__>
                             <div class="scale-90 relative h-5 w-5"><span class="-rotate-45 rtl:rotate-45 max-w-[75%] top-1 bg-primary-500 absolute block h-0.5 w-full transition-all duration-300"></span><span class="opacity-0 translate-x-4 bg-primary-500 absolute top-1/2 block h-0.5 w-full max-w-[50%] transition-all duration-300"></span><span class="rotate-45 rtl:-rotate-45 max-w-[75%] bottom-1 bg-primary-500 absolute block h-0.5 w-full transition-all duration-300"></span></div>
                         </button>
                         <h1 class="font-heading text-2xl font-light leading-normal leading-normal text-muted-800 dark:text-white md:block">
