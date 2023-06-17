@@ -314,6 +314,39 @@ class Character extends MX_Controller
             case "Pandaren":
                 return "wanderingisle";
             break;
+            case "Nightborne":
+                return "nightwell";
+            break;
+            case "Highmountain Tauren":
+                return "highmountain";
+            break;
+            case "Void elf":
+                return "telogrusrift";
+            break;
+            case "Lightforged Dranei":
+                return "vindicaar";
+            break;
+            case "Zandalari Troll":
+                return "zandalari";
+            break;
+            case "Kul Tiran":
+                return "boralus";
+            break;
+            case "Dark Iron Dwarf":
+                return "shadowforge";
+            break;
+            case "Vulpera":
+                return "voldun";
+            break;
+            case "Mag'har Orc":
+                return "orgrimmar2";
+            break;
+            case "Mechagnome":
+                return "mechagon";
+            break;
+            case "Dracthyr":
+                return "wakingshores";
+            break;
         }
     }
 
