@@ -53,11 +53,27 @@ class Theme extends MX_Controller
                 $manifest = json_decode(file_get_contents("application/themes/" . $value . "/manifest.json"), true);
                 $manifest['folderName'] = $value;
 
+				// Check if the module has any configs
+				if ($this->hasConfigs($value)) {
+					$manifest['has_configs'] = true;
+				} else {
+					$manifest['has_configs'] = false;
+				}
+
                 array_push($themesArr, $manifest);
             }
         }
 
         return $themesArr;
+    }
+
+    public function hasConfigs($theme)
+    {
+        if (file_exists("application/themes/" . $theme . "/config")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function set($theme = false)

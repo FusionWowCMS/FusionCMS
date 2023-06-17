@@ -1,4 +1,4 @@
-{include file="{$theme_path}config/global.tpl" scope="parent"}
+{include file="{$theme_path}configure/global.tpl" scope="parent"}
 {include file="{$theme_path}views/header.tpl" scope="parent"}
 
 <body class="gb ltr is-homepage is-compact is-fullwidth has-padding has-slider">

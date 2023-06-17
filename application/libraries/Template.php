@@ -27,6 +27,7 @@ class Template
     public $theme;
     public $page_url;
     public $theme_data;
+    public $theme_config;
     public $module_data;
     public $style_path;
     public $view_path;
@@ -91,6 +92,61 @@ class Template
 
         // Save the data
         $this->theme_data = $array;
+
+        // Check if the module has any configs
+        if ($this->hasConfigs($this->theme)) {
+            $this->loadConfigs();
+        }
+    }
+
+    public function hasConfigs($theme)
+    {
+        if (file_exists("application/themes/" . $theme . "/config")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Load the theme configs
+     */
+    private function loadConfigs()
+    {
+        foreach (glob("application/themes/" . $this->theme . "/config/*") as $file) {
+            $this->getConfig($file);
+        }
+    }
+
+    /**
+     * Load the config into the function variable scope and assign it to the configs array
+     */
+    private function getConfig($file)
+    {
+        include($file);
+
+        $this->theme_config[$this->getConfigName($file)] = $config;
+        $this->theme_config[$this->getConfigName($file)]['source'] = $this->getConfigSource($file);
+    }
+
+    private function getConfigSource($file)
+    {
+        $handle = fopen($file, "r");
+        $data = fread($handle, filesize($file));
+        fclose($handle);
+
+        return $data;
+    }
+
+    /**
+     * Get the config name out of the path
+     *
+     * @param  String $path
+     * @return String
+     */
+    private function getConfigName($path = "")
+    {
+        return preg_replace("/application\/themes\/" . $this->theme . "\/config\/([A-Za-z0-9_-]*)\.php/", "$1", $path);
     }
 
     /**
@@ -222,6 +278,7 @@ class Template
             "CI" => $this->CI,
             "image_path" => $this->image_path,
             "isOnline" => $this->CI->user->isOnline(),
+            "theme_configs" => $this->theme_config,
             "sideboxes" => $sideboxes
         );
 

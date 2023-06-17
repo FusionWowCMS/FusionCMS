@@ -534,6 +534,69 @@ var Settings = {
 		});
 	},
 
+	submitThemeConfig: function(form, themeName, configName)
+	{
+		var values = {csrf_token_name: Config.CSRF};
+		
+		$("input, select", $(form)).each(function(i, e)
+		{
+			if($(this).attr("type") != "submit")
+			{
+				values[$(this).attr("name")] = $(this).val();
+			}
+		});
+
+		$.post(Config.URL + "admin/theme/edit/save/" + themeName + "/" + configName, values, function(data)
+		{
+			if(data == "yes")
+			{
+				console.log(data);
+				Swal.fire({
+					icon: "success",
+					title: "Theme settings have been saved!",
+				});
+			}
+			else
+			{
+				console.log(data);
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: data,
+				})
+			}
+		});
+	},
+
+	submitThemeConfigSource: function(themeName, configName)
+	{
+		var values = {
+			csrf_token_name: Config.CSRF,
+			source: $("#source_" + configName).val()
+		};
+
+		$.post(Config.URL + "admin/theme/edit/saveSource/" + themeName + "/" + configName, values, function(data)
+		{
+			if(data == "yes")
+			{
+				console.log(data);
+				Swal.fire({
+					icon: "success",
+					title: "Theme settings have been saved!",
+				});
+			}
+			else
+			{
+				console.log(data);
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: data,
+				})
+			}
+		});
+	},
+
 	toggleSource: function(id, field)
 	{
 		if($("#advanced_" + id).is(":visible"))

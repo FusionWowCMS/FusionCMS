@@ -62,6 +62,9 @@ $route['item/(:num)/(:num)'] = "item/index/$1/$2";
 $route['admin/edit/save/(:any)'] = "admin/edit/save/$1";
 $route['admin/edit/saveSource/(:any)'] = "admin/edit/saveSource/$1";
 $route['admin/edit/(:any)'] = "admin/edit/index/$1";
+$route['admin/theme/edit/save/(:any)/(:any)'] = "admin/edittheme/save/$1/$2";
+$route['admin/theme/edit/saveSource/(:any)/(:any)'] = "admin/edittheme/saveSource/$1/$2";
+$route['admin/theme/edit/(:any)'] = "admin/edittheme/index/$1";
 
 // Vote
 $route['vote/callback/(:any)'] = "vote/callback/index/$1";
