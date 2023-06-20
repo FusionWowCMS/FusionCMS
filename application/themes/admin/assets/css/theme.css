@@ -21553,10 +21553,6 @@ html.dark .pagination > li.disabled > span {
 	border-color: #242830;
 }
 
-html.dark .dropdown-menu {
-	background-color: #282d36;
-}
-
 html.dark .dropdown-menu > li > a {
 	color: #EEE;
 }

@@ -310,9 +310,27 @@
                             </button>
                             <div class="group inline-flex items-center justify-center text-right">
                                 <div data-headlessui-state class="relative h-9 w-9 text-left">
-                                    <button class="group-hover:ring-primary-500 dark:ring-offset-muted-900 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-transparent transition-all duration-300 group-hover:ring-offset-4" id="headlessui-menu-button-37" aria-haspopup="menu" aria-expanded="false">
-                                        <div class="relative inline-flex h-9 w-9 items-center justify-center rounded-full"><img src="{$avatar}" class="max-w-full rounded-full object-cover shadow-sm dark:border-transparent" alt></div>
-                                    </button>
+									<a href="#" data-bs-toggle="dropdown">
+										<button class="group-hover:ring-primary-500 dark:ring-offset-muted-900 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-transparent transition-all duration-300 group-hover:ring-offset-4">
+											<div class="relative inline-flex h-9 w-9 items-center justify-center rounded-full"><img src="{$avatar}" class="max-w-full rounded-full object-cover shadow-sm dark:border-transparent" alt></div>
+										</button>
+									</a>
+									<div role="menu" tabindex="0" data-headlessui-state="open" class="dropdown-menu divide-muted-100 border-muted-200 dark:divide-muted-700 dark:border-muted-700 dark:bg-muted-800 absolute end-0 mt-2 w-64 origin-top-right divide-y rounded-md border bg-white shadow-lg focus:outline-none">
+										<div class="p-6 text-center" role="none">
+											<div class="relative mx-auto flex h-20 w-20 items-center justify-center rounded-full" role="none"><img src="{$avatar}" class="max-w-full rounded-full object-cover shadow-sm dark:border-transparent" alt="" role="none"></div>
+											<div class="mt-3" role="none">
+												<h6 class="font-heading text-muted-800 text-sm font-medium dark:text-white mb-2" role="none"> {$nickname} </h6>
+												<a href="{$url}mod" type="button" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md w-full" role="none"> Mod Panel </a>
+											</div>
+										</div>
+										<div class="px-6 py-1.5" role="none">
+											<a href="{$url}ucp" type="button" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md w-full mb-2" role="none"> UCP </a>
+											<a href="javascript:void(0)" type="button" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md w-full mb-2" onClick="Custom.destroySession()" role="none"> Lock Screen </a>
+										</div>
+										<div class="p-6" role="none">
+											<a href="{$url}logout" type="button" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md w-full" role="none"> Logout </a>
+										</div>
+									</div>
                                 </div>
                             </div>
                         </div>
