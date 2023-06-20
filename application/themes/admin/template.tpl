@@ -276,20 +276,20 @@
                             <button type="button" class="border-muted-200 hover:ring-muted-200 dark:hover:ring-muted-700 dark:border-muted-700 dark:bg-muted-800 dark:ring-offset-muted-900 flex h-9 w-9 items-center justify-center rounded-full border bg-white ring-1 ring-transparent transition-all duration-300 hover:ring-offset-4"><img class="h-7 w-7 rounded-full" src="{$url}application/images/flags/us.png" alt="flag icon"></button>
                             <div class="group inline-flex items-center justify-center text-right">
                                 <div data-headlessui-state class="relative h-9 w-9 text-left">
-                                    <div id="headlessui-menu-button-35" aria-haspopup="menu" aria-expanded="false" data-headlessui-state>
-                                        <button type="button" class="group-hover:ring-muted-200 dark:group-hover:ring-muted-700 dark:ring-offset-muted-900 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-transparent transition-all duration-300 group-hover:ring-offset-4" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                            <span class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 flex h-9 w-9 items-center justify-center rounded-full border bg-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
-                                                    <g fill="currentColor">
-                                                        <path d="M208 192H48a8 8 0 0 1-6.88-12C47.71 168.6 56 139.81 56 104a72 72 0 0 1 144 0c0 35.82 8.3 64.6 14.9 76a8 8 0 0 1-6.9 12Z" opacity=".2"/>
-                                                        <path d="M221.8 175.94c-5.55-9.56-13.8-36.61-13.8-71.94a80 80 0 1 0-160 0c0 35.34-8.26 62.38-13.81 71.94A16 16 0 0 0 48 200h40.81a40 40 0 0 0 78.38 0H208a16 16 0 0 0 13.8-24.06ZM128 216a24 24 0 0 1-22.62-16h45.24A24 24 0 0 1 128 216Zm-80-32c7.7-13.24 16-43.92 16-80a64 64 0 1 1 128 0c0 36.05 8.28 66.73 16 80Z"/>
-                                                    </g>
-                                                </svg>
-                                            </span>
+									<a href="#" data-bs-toggle="dropdown">
+										<button class="group-hover:ring-muted-200 dark:group-hover:ring-muted-700 dark:ring-offset-muted-900 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-transparent transition-all duration-300 group-hover:ring-offset-4">
+											<span class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 flex h-9 w-9 items-center justify-center rounded-full border bg-white">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
+													<g fill="currentColor">
+														<path d="M208 192H48a8 8 0 0 1-6.88-12C47.71 168.6 56 139.81 56 104a72 72 0 0 1 144 0c0 35.82 8.3 64.6 14.9 76a8 8 0 0 1-6.9 12Z" opacity=".2"/>
+														<path d="M221.8 175.94c-5.55-9.56-13.8-36.61-13.8-71.94a80 80 0 1 0-160 0c0 35.34-8.26 62.38-13.81 71.94A16 16 0 0 0 48 200h40.81a40 40 0 0 0 78.38 0H208a16 16 0 0 0 13.8-24.06ZM128 216a24 24 0 0 1-22.62-16h45.24A24 24 0 0 1 128 216Zm-80-32c7.7-13.24 16-43.92 16-80a64 64 0 1 1 128 0c0 36.05 8.28 66.73 16 80Z"/>
+													</g>
+												</svg>
+											</span>
 											<div id="notifications" class="hidden absolute -end-0.5 top-0.5"><span class="relative flex h-2 w-2"><span class="bg-primary-400 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span><span class="bg-primary-500 relative inline-flex h-2 w-2 rounded-full"></span></span></div>
-                                        </button>
-                                    </div>
-									<div aria-labelledby="headlessui-menu-button-3" id="headlessui-menu-items-4" role="menu" tabindex="0" data-headlessui-state="open" class="dropdown-menu divide-muted-100 border-muted-200 dark:divide-muted-700 dark:border-muted-700 dark:bg-muted-800 absolute end-0 mt-2 w-72 origin-top-right divide-y rounded-md border bg-white shadow-lg focus:outline-none">
+										</button>
+									</a>
+									<div role="menu" tabindex="0" data-headlessui-state="open" class="dropdown-menu divide-muted-100 border-muted-200 dark:divide-muted-700 dark:border-muted-700 dark:bg-muted-800 absolute end-0 mt-2 w-72 origin-top-right divide-y rounded-md border bg-white shadow-lg focus:outline-none">
 										<div class="p-4" role="none">
 											<div class="relative flex items-center justify-between" role="none">
 												<h4 class="font-heading text-muted-500 dark:text-muted-200 text-xs uppercase" role="none"> Notifications </h4>
