@@ -22,7 +22,7 @@
 		$document.on( 'idle.idleTimer', function() {
 			$.post(Config.URL + 'admin/destroySession', {csrf_token_name: Config.CSRF}, function(data)
 			{});
-			LockScreen.show();
+			window.location.replace(Config.URL + 'admin');
 		});
 	});
 
