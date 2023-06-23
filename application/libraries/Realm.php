@@ -250,6 +250,91 @@ class Realm
         return $this->emulator;
     }
 
+    public function getExpansionId()
+    {
+        return $this->getConfig('expansion');
+    }
+
+    public function getExpansionName()
+    {
+        return $this->getExpansionNameById($this->getConfig('expansion'));
+    }
+
+    public function getExpansionSmallName()
+    {
+        switch ($this->getConfig('expansion')){
+			case 0:
+				return 'classic';
+			break;
+			case 1:
+				return 'tbc';
+			break;
+			case 2:
+				return 'wotlk';
+			break;
+			case 3:
+				return 'cata';
+			break;
+			case 4:
+				return 'mop';
+			break;
+			case 5:
+				return 'wod';
+			break;
+			case 6:
+				return 'legion';
+			break;
+			case 7:
+				return 'bfa';
+			break;
+			case 8:
+				return 'sl';
+			break;
+			case 9:
+				return 'df';
+			break;
+			default:
+				return 'default';
+			break;
+		}
+    }
+
+    public function getExpansionNameById($id)
+    {
+        switch ($id){
+			case 0:
+				return 'Vanilla/Classic';
+			break;
+			case 1:
+				return 'The Burning Crusade';
+			break;
+			case 2:
+				return 'Wrath of The Lich King';
+			break;
+			case 3:
+				return 'Cataclysm';
+			break;
+			case 4:
+				return 'Mists of Pandaria';
+			break;
+			case 5:
+				return 'Warlods of Draenor';
+			break;
+			case 6:
+				return 'Legion';
+			break;
+			case 7:
+				return 'Battle for Azeroth';
+			break;
+			case 8:
+				return 'Shadowlands';
+			break;
+			case 9:
+				return 'Dragonflight';
+			break;
+		}
+    }
+
     /**
      * Check if the realm is up and running
      *
