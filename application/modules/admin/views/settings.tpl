@@ -265,6 +265,23 @@
 				</div>
 
 				<div class="form-group row">
+				<label class="col-sm-2 col-form-label" for="expansion">Expansion (Choose expansion of this realm)</label>
+				<div class="col-sm-10">
+				<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="expansion">
+					<option value="9">Dragonflight</option>
+					<option value="8">Shadowlands</option>
+					<option value="7">Battle for Azeroth</option>
+					<option value="6">Legion</option>
+					<option value="5">Warlords of Draenor</option>
+					<option value="4">Mists Of Pandaria</option>
+					<option value="3">Cataclysm</option>
+					<option value="2">Wrath of the Lich King</option>
+					<option value="1">The Burning Crusade</option>
+				</select>
+				</div>
+				</div>
+
+				<div class="form-group row">
 				<label class="col-sm-2 col-form-label" for="port">Realm port (cmangos: 8129, others: 8085)</label>
 				<div class="col-sm-10">
 					<div data-plugin-spinner data-plugin-options='{ "value": 0, "min": 0, "max": 65535 }'>

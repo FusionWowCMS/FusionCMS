@@ -281,9 +281,10 @@ $db["account"]["stricton"] = FALSE;';
 		{
 			foreach($realms as $realm)
 			{
-				$this->db->query("INSERT INTO realms(`emulator`, `cap`, `char_database`, `console_password`,	`console_port`,	`console_username`,	`hostname`,	`password`, `realm_port`, `realmName`, `username`, `world_database`, `override_port_world`, `override_port_char`)
+				$this->db->query("INSERT INTO realms(`emulator`, `cap`, `expansion`, `char_database`, `console_password`,	`console_port`,	`console_username`,	`hostname`,	`password`, `realm_port`, `realmName`, `username`, `world_database`, `override_port_world`, `override_port_char`)
 							VALUES('".$this->db->real_escape_string($realm['emulator'])."',
 									'".$this->db->real_escape_string($realm['cap'])."',
+									'".$this->db->real_escape_string($realm['expansion'])."',
 									'".$this->db->real_escape_string($realm['characters'])."',
 									'".$this->db->real_escape_string($realm['console_password'])."',
 									'".$this->db->real_escape_string($realm['console_port'])."',

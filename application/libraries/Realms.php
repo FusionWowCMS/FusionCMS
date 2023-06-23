@@ -59,6 +59,7 @@ class Realms
                     "console_username" => $realm['console_username'],
                     "console_password" => $realm['console_password'],
                     "console_port" => $realm['console_port'],
+                    "expansion" => $realm['expansion'],
 
                     "hostname" => $realm['hostname'],
                     "realm_port" => $realm['realm_port'],

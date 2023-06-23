@@ -74,6 +74,7 @@ class Realmmanager extends MX_Controller
         $data['char_database'] = $this->input->post('characters');
         $data['world_database'] = $this->input->post('world');
         $data['cap'] = $this->input->post('cap');
+        $data['expansion'] = $this->input->post('expansion');
         $data['realm_port'] = $this->input->post('port');
         $data['emulator'] = $this->input->post('emulator');
         $data['console_username'] = $this->input->post('console_username');
@@ -92,6 +93,10 @@ class Realmmanager extends MX_Controller
 
         if (!is_numeric($data['cap'])) {
             die('Cap must be a number');
+        }
+
+        if (!is_numeric($data['expansion'])) {
+            die('expansion must be a number');
         }
 
         if (!is_numeric($data['realm_port'])) {
@@ -124,6 +129,7 @@ class Realmmanager extends MX_Controller
         $data['char_database'] = $this->input->post('characters');
         $data['world_database'] = $this->input->post('world');
         $data['cap'] = $this->input->post('cap');
+        $data['expansion'] = $this->input->post('expansion');
         $data['realm_port'] = $this->input->post('port');
         $data['emulator'] = $this->input->post('emulator');
         $data['console_username'] = $this->input->post('console_username');
@@ -146,6 +152,10 @@ class Realmmanager extends MX_Controller
 
         if (!is_numeric($data['cap'])) {
             die('Cap must be a number');
+        }
+
+        if (!is_numeric($data['expansion'])) {
+            die('expansion must be a number');
         }
 
         if (!is_numeric($data['realm_port'])) {
