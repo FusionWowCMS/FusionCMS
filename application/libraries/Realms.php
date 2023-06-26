@@ -385,195 +385,78 @@ class Realms
         $class = (array_key_exists($character['class'], $classes)) ? $classes[$character['class']] : null;
         $race = (array_key_exists($character['race'], $races)) ? $races[$character['race']] : null;
 
+        $raceId = $character['race'];
+        $faction = null;
+
         $gender = ($character['gender']) ? "f" : "m";
 
-        if ($class == "Death knight") {
-            $level = 1;
-            $class = "Deathknight";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
-
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
-
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if ($class == "Demon Hunter") {
-            $level = 1;
+		if($class == "Death knight")
+		{
+			$level = 70;
+			$class = "Deathknight";
+		}
+        else if ($class == "Demon Hunter") {
+            $level = 70;
             $class = "Demonhunter";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
+		}
+		else if($class == "Monk")
+		{
+			$level = 70;
+		}
+		else if($race == "Pandaren")
+		{
+			$level = 70;
+			$class = null;
 
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
+			if ($raceId == 24)
+			    $faction = 'n';
+			else if ($raceId == 25)
+			    $faction = 'a';
+			else if ($raceId == 26)
+			    $faction = 'h';
+		}
+		else if($race == "Dracthyr")
+		{
+			$level = 70;
+			$class = null;
 
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if ($race == "Dark Iron Dwarf") {
-            $race = "darkirondwarf";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
+			if ($raceId == 52)
+			    $faction = 'a';
+			else if ($raceId == 70)
+			    $faction = 'h';
+		}
+		else if($race == "Worgen" || $race == "Goblin" || $race == "Dark Iron Dwarf" || $race == "Highmountain Tauren" || $race == "Lightforged Dranei" ||
+		        $race == "Mag'har Orc" || $race == "Mechagnome" || $race == "Kul Tiran" || $race == "Zandalari Troll" || $race == "Vuplera")
+		{
+			$level = 70;
+			$class = null;
+		}
+		else
+		{
+			// If character is below 30, use lv 1 image
+			if($character['level'] < 30)
+			{
+				$level = 1;
+			}
 
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
+			// If character is below 65, use lv 60 image
+			elseif($character['level'] < 65)
+			{
+				$level = 60;
+			}
 
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if ($race == "Highmountain Tauren") {
-            $race = "highmountain";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
+			// 65+, use lvl70 image
+			else
+			{
+				$level = 70;
+			}
+		}
 
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
-
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if ($race == "Lightforged Dranei") {
-            $race = "lightforged";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
-
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
-
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if ($race == "Mag'har Orc") {
-            $race = "maghar";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
-
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
-
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if ($race == "Mechagnome") {
-            $race = "mechagnome";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
-
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
-
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if ($race == "Kul Tiran") {
-            $race = "kultiran";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
-
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
-
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if ($race == "Zandalari Troll") {
-            $race = "ZandalariTroll";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
-
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
-
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if ($race == "Vuplera") {
-            $race = "vulpera";
-        } else {
-            // If character is below 30, use lv 1 image
-            if ($character['level'] < 30) {
-                $level = 1;
-            }
-
-            // If character is below 65, use lv 60 image
-            elseif ($character['level'] < 65) {
-                $level = 1;
-            }
-
-            // 65+, use lvl70 image
-            else {
-                $level = 1;
-            }
-        }
-        if (in_array($race, array("Blood elf", "Night elf", "Void elf"))) {
+        if (in_array($race, array("Blood elf", "Night elf", "Void elf", "Zandalari Troll", "Kul Tiran", "Mag'har Orc", "Lightforged Dranei", "Highmountain Tauren", "Dark Iron Dwarf"))) {
             $race = preg_replace("/ /", "", $race);
         }
 
-        $file = strtolower($race) . "-" . $gender . "-" . $level;
+        $file = ($class ? $class . "-" : '') . strtolower($race) . "-" . $gender . "-" . $level . ($faction ? "-" . $faction : '');
 
         if (!file_exists("application/images/avatars/" . $file . ".gif")) {
             return "default";
