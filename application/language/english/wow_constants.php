@@ -30,7 +30,9 @@ $lang['races'] = array(
     34 => "Dark Iron Dwarf",
     35 => "Vulpera",
     36 => "Mag'har Orc",
-    37 => "Mechagnome"
+    37 => "Mechagnome",
+    52 => "Dracthyr",
+    70 => "Dracthyr"
 );
 
 $lang['classes'] = array(
@@ -45,5 +47,6 @@ $lang['classes'] = array(
     9 => "Warlock",
     10 => "Monk",
     11 => "Druid",
-    12 => "Demon Hunter"
+    12 => "Demon Hunter",
+    13 => "Evoker"
 );
