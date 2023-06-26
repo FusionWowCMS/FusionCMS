@@ -245,6 +245,44 @@ class Realms
     }
 
     /**
+     * Get the name of a race
+     *
+     * @param  Int $id
+     * @return String
+     */
+    public function getRaceEN($id)
+    {
+        if (!($this->races_en)) {
+            $this->loadConstants();
+        }
+
+        if (array_key_exists($id, $this->races_en)) {
+            return $this->races_en[$id];
+        } else {
+            return "Unknown";
+        }
+    }
+
+    /**
+     * Get the name of a class
+     *
+     * @param  Int $id
+     * @return String
+     */
+    public function getClassEN($id)
+    {
+        if (!($this->classes_en)) {
+            $this->loadConstants();
+        }
+
+        if (array_key_exists($id, $this->classes_en)) {
+            return $this->classes_en[$id];
+        } else {
+            return "Unknown";
+        }
+    }
+
+    /**
      * Get the zone name by zone ID
      *
      * @param  Int $zoneId
