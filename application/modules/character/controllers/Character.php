@@ -142,10 +142,10 @@ class Character extends MX_Controller
                 $this->raceName = "Blood elf";
             }
         } else {
-            $this->raceName = $this->armory_model->realms->getRace($this->race);
+            $this->raceName = $this->armory_model->realms->getRaceEN($this->race);
         }
 
-        $this->className = $this->armory_model->realms->getClass($this->class);
+        $this->className = $this->armory_model->realms->getClassEN($this->class);
         $this->realmName = $this->armory_model->realm->getName();
 
         if ($this->realms->getRealm($this->realm)->getEmulator()->hasStats()) {
