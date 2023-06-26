@@ -21,6 +21,8 @@ class Character extends MX_Controller
 
     private $stats;
     private $items;
+    private $equippedItems;
+    private $equippedItemsDisplayId;
 
     public function __construct()
     {
@@ -36,6 +38,8 @@ class Character extends MX_Controller
 
         $this->canCache = true;
         $this->items = array();
+        $this->equippedItems = array();
+        $this->equippedItemsDisplayId = array();
     }
 
     /**
@@ -231,6 +235,8 @@ class Character extends MX_Controller
         if (is_array($items)) {
             // Loop through to assign the items
             foreach ($items as $item) {
+                $this->equippedItems[$item['slot']] = $item['itemEntry'];
+                $this->getDisplayId($item['slot'], $item['itemEntry']);
                 $this->items[$slots[$item['slot']]] = $this->getItem($item['itemEntry']);
             }
         }
@@ -386,6 +392,8 @@ class Character extends MX_Controller
                     "level" => $this->level,
                     "gender" => $this->gender,
                     "items" => $this->items,
+                    "equippedItems" => (!empty($this->equippedItems) ? $this->equippedItems : false),
+                    "equippedItemsDisplayId" => (!empty($this->equippedItemsDisplayId) ? $this->equippedItemsDisplayId : false),
                     "guild" => $this->guild,
                     "guildName" => $this->guildName,
                     "pvp" => $this->pvp,
@@ -455,5 +463,187 @@ class Character extends MX_Controller
         } else {
             $this->template->view($page);
         }
+    }
+
+    public function getDisplayId($slot, $id)
+    {
+        // Check if item ID
+        if ($id != false)
+        {
+            // check if item is in cache
+            $item_in_cache = $this->get_icon_cache($id);
+
+            if ($item_in_cache)
+            {
+                $displayId = $item_in_cache;
+            } else {
+                // check if item is in database
+                $item_in_db = $this->get_icon_db($id);
+
+                if ($item_in_db)
+                {
+                    $displayId = $item_in_db;
+                } else {
+                    // check if item is on Wowhead
+                    $item_wowhead = $this->get_icon_wowhead($id);
+
+                    if ($item_wowhead)
+                    {
+                        $displayId = $item_wowhead;
+                    } else {
+                        $displayId = null;
+                    }
+                }
+            }
+        }
+
+		if ($displayId == null || $displayId == '')
+			return;
+
+		switch ($slot)
+		{
+			case 0:
+				$this->equippedItemsDisplayId[1] = $displayId;
+			break;
+			case 2:
+				$this->equippedItemsDisplayId[3] = $displayId;
+			break;
+			case 3:
+				$this->equippedItemsDisplayId[4] = $displayId;
+			break;
+			case 4:
+				$this->equippedItemsDisplayId[5] = $displayId;
+			break;
+			case 5:
+				$this->equippedItemsDisplayId[6] = $displayId;
+			break;
+			case 6:
+				$this->equippedItemsDisplayId[7] = $displayId;
+			break;
+			case 7:
+				$this->equippedItemsDisplayId[8] = $displayId;
+			break;
+			case 8:
+				$this->equippedItemsDisplayId[9] = $displayId;
+			break;
+			case 9:
+				$this->equippedItemsDisplayId[10] = $displayId;
+			break;
+			case 14:
+				$this->equippedItemsDisplayId[16] = $displayId;
+			break;
+			case 15:
+				$this->equippedItemsDisplayId[21] = $displayId;
+			break;
+			case 16:
+				$this->equippedItemsDisplayId[14] = $displayId;
+			break;
+			case 18:
+				$this->equippedItemsDisplayId[19] = $displayId;
+			break;
+		}
+	}
+
+    /**
+     * Check if item icon name is in cache
+     *
+     * @param  Int $item
+     * @return String
+     */
+    private function get_icon_cache($item)
+    {
+        $cache = $this->cache->get("items/display_id_" . $item);
+
+        // can we use the cache?
+        if ($cache !== false)
+        {
+            $name = $cache;
+        }
+        else
+        {
+            return false;
+        }
+
+        return $name;
+    }
+
+    /**
+     * Check if item icon displayId is in database
+     *
+     * @param  Int $item
+     * @return String
+     */
+    private function get_icon_db($item)
+    {
+        // Get the item ID
+        $query = $this->db->query("SELECT displayid FROM item_display WHERE entry = ? LIMIT 1", [$item]);
+
+        // Check for results
+        if ($query->num_rows() > 0)
+        {
+            $row = $query->result_array();
+
+            $displayId = $row[0]['displayid'];
+
+            // save to cache
+            $this->cache->save("items/display_id_" . $item, $displayId);
+        }
+        else
+        {
+            return false;
+        }
+
+        return $displayId;
+    }
+
+    private function get_icon_wowhead($item)
+    {
+        // Get the item XML data
+        $xml = file_get_contents("https://www.wowhead.com/item=" . $item . "&xml");
+
+        $itemData = $this->xmlToArray($xml);
+
+        if (!isset($xml->error) && !isset($itemData['error']))
+        {
+            $xml = simplexml_load_string($xml);
+            $displayId = $xml->item[0]->icon['displayId'];
+
+            if (!is_array($displayId) && !empty($displayId))
+            {
+                // make sure its not in DB already
+                $result = $this->db->query("SELECT COUNT(*) as count FROM item_display WHERE entry = ?", [$item])->row();
+                if ($result->count == 0)
+                {
+                    // let the users fill the table themselves, optionally they can import item_template themselves
+                    $query = $this->db->query("INSERT INTO item_display (entry, displayid) VALUES (?, ?)", [$item, $displayId]);
+                }
+
+                // save to cache
+                $this->cache->save("items/display_id_" . $item, $displayId);
+            }
+            // return false in case of wowhead xml is broken (rare but it happens)
+            else {
+                return false;
+            }
+
+            return $displayId;
+        }
+
+        return false;
+    }
+
+    /**
+     * Convert XML data to an array
+     *
+     * @param  String $xml
+     * @return Array
+     */
+    private function xmlToArray($xml)
+    {
+        $xml = simplexml_load_string($xml);
+        $json = json_encode($xml);
+        $array = json_decode($json, true);
+
+        return $array;
     }
 }
