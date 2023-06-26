@@ -394,6 +394,7 @@ class Character extends MX_Controller
                     "items" => $this->items,
                     "equippedItems" => (!empty($this->equippedItems) ? $this->equippedItems : false),
                     "equippedItemsDisplayId" => (!empty($this->equippedItemsDisplayId) ? $this->equippedItemsDisplayId : false),
+                    "expansionId" => $this->realms->getRealm($this->realm)->getExpansionId(),
                     "guild" => $this->guild,
                     "guildName" => $this->guildName,
                     "pvp" => $this->pvp,
