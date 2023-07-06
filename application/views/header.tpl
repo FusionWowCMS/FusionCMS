@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 
 <!--
-This website is powered by FusionGEN
 
-https://github.com/FusionGen/FusionGen
+ This website is powered by
+  ______         _              _____ __  __  _____ 
+ |  ____|       (_)            / ____|  \/  |/ ____|
+ | |__ _   _ ___ _  ___  _ __ | |    | \  / | (___  
+ |  __| | | / __| |/ _ \| '_ \| |    | |\/| |\___ \ 
+ | |  | |_| \__ \ | (_) | | | | |____| |  | |____) |
+ |_|   \__,_|___/_|\___/|_| |_|\_____|_|  |_|_____/ 
+
+ https://github.com/FusionWowCMS/FusionCMS
+
 -->
 
 <html>
 	<head>
 		<title>{$title}</title>
-		
+
+		<link rel="stylesheet" href="{$path}css/default.css" type="text/css" />
+		<link rel="stylesheet" href="{$style_path}cms.css" type="text/css" />
+		<link rel="stylesheet" href="{$style_path}main.css" type="text/css" />
+
 		{if $extra_css}<link rel="stylesheet" href="{$path}{$extra_css}">{/if}
 		{*	{if !is_array($extra_css)}
 				<link rel="stylesheet" href="{$path}{$extra_css}">
