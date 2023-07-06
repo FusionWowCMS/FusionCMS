@@ -67,6 +67,7 @@ var Settings = {
 			characters: $("#characters").val(),
 			world: $("#world").val(),
 			cap: $("#cap").val(),
+			expansion: $("#expansion").val(),
 			port: $("#port").val(),
 			emulator: $("#emulator").val(),
 			console_username: $("#console_username").val(),
@@ -131,7 +132,12 @@ var Settings = {
 			}
 			else
 			{
-				UI.alert(id);
+				console.log(data);
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: id,
+				})
 			}
 		});
 	},
@@ -146,6 +152,7 @@ var Settings = {
 			characters: $("#characters").val(),
 			world: $("#world").val(),
 			cap: $("#cap").val(),
+			expansion: $("#expansion").val(),
 			port: $("#port").val(),
 			emulator: $("#emulator").val(),
 			console_username: $("#console_username").val(),
