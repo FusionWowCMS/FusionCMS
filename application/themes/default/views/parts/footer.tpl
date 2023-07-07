@@ -26,7 +26,7 @@
     </div>
     <div class="row row-3">
       <div class="col-sm-12">
-        <div class="footer-copyright">All rights Reserved © <strong>{$serverName}</strong>
+        <div class="footer-copyright">{lang("Copyright", "default")} © <strong>{$serverName}</strong>
         <div>Coded by <a href="skype:darkstriders?chat">E. Darksider</a>.</div>
         </div>
         <br>

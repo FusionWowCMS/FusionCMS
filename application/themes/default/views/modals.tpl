@@ -30,7 +30,7 @@
 		
 						<div class="form-floating ms-0 flex-grow-1">
 							<input type="text" class="form-control captcha-input2 border-0 rounded-0 rounded-bottom-end" id="floatingCaptcha2" placeholder="Captcha" aria-describedby="captcha">
-							<label for="floatingCaptcha2">Captcha</label>
+							<label for="floatingCaptcha2">{lang("Captcha", "default")}</label>
 						</div>
 					</div>
 		
@@ -41,17 +41,17 @@
 				<div class="card-links mt-3 d-flex justify-content-between">
 					<div class="form-check form-switch">
 						<input class="form-check-input remember-check2" type="checkbox" id="checkRemember2">
-						<label class="form-check-label" for="checkRemember2">Remember</label>
+						<label class="form-check-label" for="checkRemember2">{lang("Remember", "default")}</label>
 					</div>
 					
-					<a href="{$url}password_recovery" class="card-link">Forgot Password?</a>
+					<a href="{$url}password_recovery" class="card-link">{lang("ForgotPassword", "default")}</a>
 				</div>
 				
 			</div>
 			
 			<div class="form-group text-center mt-4">
 			<button class="card-footer nice_button">
-				Sign In
+				{lang("SignIn", "default")}
 			</button>
 			</div>
 		</form>
@@ -68,7 +68,7 @@
 
 	<div class="popup-links">
 		<a href="javascript:void(0)" id="confirm_button" class="popup-link nice_button"></a>
-		<a href="javascript:void(0)" id="confirm_hide" class="popup-link nice_button" onClick="UI.hidePopup()">Cancel</a>
+		<a href="javascript:void(0)" id="confirm_hide" class="popup-link nice_button" onClick="UI.hidePopup()">{lang("Cancel", "default")}</a>
 	</div>
 </div>
 
