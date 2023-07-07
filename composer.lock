@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9391843ef4a78c0894f1fd1c0dd48d8",
+    "content-hash": "f33e14677f7ecb5bb89bb175aa0db8f9",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -66,51 +66,6 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.16.0"
             },
             "time": "2022-09-18T07:06:19+00:00"
-        },
-        {
-            "name": "laizerox/php-wowemu-auth",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Laizerox/php-wowemu-auth.git",
-                "reference": "6fd4fb223b4b98c857864f9f9fd226ff9579ae0d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Laizerox/php-wowemu-auth/zipball/6fd4fb223b4b98c857864f9f9fd226ff9579ae0d",
-                "reference": "6fd4fb223b4b98c857864f9f9fd226ff9579ae0d",
-                "shasum": ""
-            },
-            "require": {
-                "ext-bcmath": "*",
-                "php": "^7.1",
-                "phpseclib/phpseclib": "^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laizerox\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Laizerox",
-                    "email": "dpetmanson@gmail.com"
-                }
-            ],
-            "description": "Wowemu compliant SRP6 auth implementation",
-            "support": {
-                "issues": "https://github.com/Laizerox/php-wowemu-auth/issues",
-                "source": "https://github.com/Laizerox/php-wowemu-auth/tree/1.0.0"
-            },
-            "time": "2019-07-26T21:52:49+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -213,6 +168,50 @@
                 }
             ],
             "time": "2023-02-06T13:44:46+00:00"
+        },
+        {
+            "name": "nightprince/php-wowemu-auth",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nightprince/php-wowemu-auth.git",
+                "reference": "9b58d85085fb581630ba433a074bb403a9db7c06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nightprince/php-wowemu-auth/zipball/9b58d85085fb581630ba433a074bb403a9db7c06",
+                "reference": "9b58d85085fb581630ba433a074bb403a9db7c06",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": "^7.4||^8.0",
+                "phpseclib/phpseclib": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laizerox\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Laizerox",
+                    "email": "dpetmanson@gmail.com"
+                }
+            ],
+            "description": "Wowemu compliant SRP6 auth implementation",
+            "support": {
+                "source": "https://github.com/Nightprince/php-wowemu-auth/tree/v1.0.1"
+            },
+            "time": "2023-07-07T08:26:48+00:00"
         },
         {
             "name": "paypal/rest-api-sdk-php",

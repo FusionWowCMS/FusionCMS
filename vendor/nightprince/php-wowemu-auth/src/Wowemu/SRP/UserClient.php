@@ -29,7 +29,7 @@ class UserClient extends Client
     }
 
     /**
-     * @param  string  $value
+     * @param string $value
      */
     public function setHostPublicEphemeralValue(string $value): void
     {
@@ -39,7 +39,7 @@ class UserClient extends Client
     /**
      * Generate verifier using username, password and existing salt
      *
-     * @param  string  $p  User's password in plaintext
+     * @param string $p User's password in plaintext
      *
      * @return string
      * @throws Exception
@@ -55,7 +55,7 @@ class UserClient extends Client
     /**
      * Computes private key using salt and identity which is derived from username and password
      *
-     * @param  string  $p  User's password in plaintext
+     * @param string $p User's password in plaintext
      *
      * @return BigInteger
      */
@@ -71,40 +71,12 @@ class UserClient extends Client
 
         $salt = $this->reverseHex($this->salt);
         $salt = hex2bin($salt);
-        $identity = hash('sha1', strtoupper($this->username.':'.$p), true);
+        $identity = hash('sha1', strtoupper($this->username . ':' . $p), true);
 
-        $sha = sha1($salt.$identity);
+        $sha = sha1($salt . $identity);
         $sha = $this->reverseHex($sha);
 
         return new BigInteger($sha, 16);
-    }
-
-    /**
-     * Reverses input hex
-     *
-     * @param  string  $string  Hex string to reverse
-     *
-     * @return string
-     */
-    private function reverseHex(string $string): string
-    {
-        for ($i = 0, $length = strlen($string); $i < $length; $i += 2) {
-            $bytes[] = substr($string, $i, 2);
-        }
-
-        return implode(array_reverse($bytes ?? []));
-    }
-
-    /**
-     * Computes verifier using private key
-     *
-     * @param  BigInteger  $x  Computed private key using identity and salt
-     *
-     * @return BigInteger
-     */
-    private function computeVerifier(BigInteger $x): BigInteger
-    {
-        return $this->g->modPow($x, $this->N);
     }
 
     /**
@@ -119,7 +91,7 @@ class UserClient extends Client
     }
 
     /**
-     * @param  BigInteger  $a  User's secret ephemeral value
+     * @param BigInteger $a User's secret ephemeral value
      *
      * @return BigInteger User's public ephemeral value
      */
@@ -129,7 +101,7 @@ class UserClient extends Client
     }
 
     /**
-     * @param  BigInteger  $x  Computed private key using identity and salt
+     * @param BigInteger $x Computed private key using identity and salt
      */
     public function calculateSessionKey(BigInteger $x): void
     {
@@ -150,5 +122,33 @@ class UserClient extends Client
     public function validateHostSessionKeyProof(string $M, $proof): bool
     {
         return $this->computeHostSessionKeyProof($M) === $proof;
+    }
+
+    /**
+     * Reverses input hex
+     *
+     * @param string $string Hex string to reverse
+     *
+     * @return string
+     */
+    private function reverseHex(string $string): string
+    {
+        for ($i = 0, $length = strlen($string); $i < $length; $i += 2) {
+            $bytes[] = substr($string, $i, 2);
+        }
+
+        return implode(array_reverse($bytes ?? []));
+    }
+
+    /**
+     * Computes verifier using private key
+     *
+     * @param BigInteger $x Computed private key using identity and salt
+     *
+     * @return BigInteger
+     */
+    private function computeVerifier(BigInteger $x): BigInteger
+    {
+        return $this->g->modPow($x, $this->N);
     }
 }

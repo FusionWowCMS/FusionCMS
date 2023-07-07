@@ -67,9 +67,9 @@ abstract class Client
     /**
      * SRP Client constructor.
      *
-     * @param  string  $identity  User's identity (username)
-     * @param  string|null  $salt  User's salt
-     * @param  array|null  $options  Various options for SRP Client
+     * @param string $identity    User's identity (username)
+     * @param string|null $salt   User's salt
+     * @param array|null $options Various options for SRP Client
      */
     public function __construct(string $identity, string $salt = null, array $options = null)
     {
@@ -86,7 +86,7 @@ abstract class Client
     /**
      * Sets user's salt
      *
-     * @param  string  $salt
+     * @param string $salt
      */
     public function setSalt(string $salt): void
     {
@@ -114,7 +114,7 @@ abstract class Client
      */
     public function computeRandomScramblingParameter(): BigInteger
     {
-        $hash = sha1($this->clientPublicEphemeralValue->toHex().$this->hostPublicEphemeralValue->toHex());
+        $hash = sha1($this->clientPublicEphemeralValue->toHex() . $this->hostPublicEphemeralValue->toHex());
 
         return new BigInteger($hash, 16);
     }
@@ -131,18 +131,41 @@ abstract class Client
         $Ng = sha1($this->N->toHex()) ^ sha1($this->g->toHex());
         $s = $this->salt;
 
-        return sha1($Ng.$I.$s.$A.$B.$K);
+        return sha1($Ng . $I . $s . $A . $B . $K);
     }
 
     /**
-     * @param  string  $M  User's calculated proof of session
+     * @param string $M User's calculated proof of session
      *
      * @return string
      */
     public function computeHostSessionKeyProof(string $M): string
     {
-        return sha1($this->clientPublicEphemeralValue->toHex().$M.$this->strongSessionKey);
+        return sha1($this->clientPublicEphemeralValue->toHex() . $M . $this->strongSessionKey);
     }
+
+    /**
+     * Returns hex of public ephemeral value
+     *
+     * @return string
+     */
+    abstract public function getPublicEphemeralValue(): string;
+
+    /**
+     * @return BigInteger
+     * @throws Exception
+     */
+    public function generateSecretEphemeralValue(): BigInteger
+    {
+        return new BigInteger($this->getRandomNumber(16), 16);
+    }
+
+    /**
+     * @param BigInteger $value Secret ephemeral value
+     *
+     * @return BigInteger Public ephemeral value
+     */
+    abstract public function computePublicEphemeralValue(BigInteger $value): BigInteger;
 
     /**
      * Generates both private and public ephemeral values but returns only public value
@@ -165,25 +188,9 @@ abstract class Client
     }
 
     /**
-     * Returns hex of public ephemeral value
-     *
-     * @return string
-     */
-    abstract public function getPublicEphemeralValue(): string;
-
-    /**
-     * @return BigInteger
-     * @throws Exception
-     */
-    public function generateSecretEphemeralValue(): BigInteger
-    {
-        return new BigInteger($this->getRandomNumber(16), 16);
-    }
-
-    /**
      * Generate hex string of defined length of random bytes
      *
-     * @param  int  $length
+     * @param int $length
      *
      * @return string
      * @throws Exception
@@ -192,11 +199,4 @@ abstract class Client
     {
         return bin2hex(random_bytes($length));
     }
-
-    /**
-     * @param  BigInteger  $value  Secret ephemeral value
-     *
-     * @return BigInteger Public ephemeral value
-     */
-    abstract public function computePublicEphemeralValue(BigInteger $value): BigInteger;
 }

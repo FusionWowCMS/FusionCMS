@@ -65,54 +65,6 @@
             "install-path": "../ezyang/htmlpurifier"
         },
         {
-            "name": "laizerox/php-wowemu-auth",
-            "version": "v1.0.0",
-            "version_normalized": "1.0.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Laizerox/php-wowemu-auth.git",
-                "reference": "6fd4fb223b4b98c857864f9f9fd226ff9579ae0d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Laizerox/php-wowemu-auth/zipball/6fd4fb223b4b98c857864f9f9fd226ff9579ae0d",
-                "reference": "6fd4fb223b4b98c857864f9f9fd226ff9579ae0d",
-                "shasum": ""
-            },
-            "require": {
-                "ext-bcmath": "*",
-                "php": "^7.1",
-                "phpseclib/phpseclib": "^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.5"
-            },
-            "time": "2019-07-26T21:52:49+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Laizerox\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Laizerox",
-                    "email": "dpetmanson@gmail.com"
-                }
-            ],
-            "description": "Wowemu compliant SRP6 auth implementation",
-            "support": {
-                "issues": "https://github.com/Laizerox/php-wowemu-auth/issues",
-                "source": "https://github.com/Laizerox/php-wowemu-auth/tree/1.0.0"
-            },
-            "install-path": "../laizerox/php-wowemu-auth"
-        },
-        {
             "name": "monolog/monolog",
             "version": "2.9.1",
             "version_normalized": "2.9.1.0",
@@ -218,6 +170,53 @@
             "install-path": "../monolog/monolog"
         },
         {
+            "name": "nightprince/php-wowemu-auth",
+            "version": "v1.0.1",
+            "version_normalized": "1.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nightprince/php-wowemu-auth.git",
+                "reference": "9b58d85085fb581630ba433a074bb403a9db7c06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nightprince/php-wowemu-auth/zipball/9b58d85085fb581630ba433a074bb403a9db7c06",
+                "reference": "9b58d85085fb581630ba433a074bb403a9db7c06",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": "^7.4||^8.0",
+                "phpseclib/phpseclib": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5"
+            },
+            "time": "2023-07-07T08:26:48+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Laizerox\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Laizerox",
+                    "email": "dpetmanson@gmail.com"
+                }
+            ],
+            "description": "Wowemu compliant SRP6 auth implementation",
+            "support": {
+                "source": "https://github.com/Nightprince/php-wowemu-auth/tree/v1.0.1"
+            },
+            "install-path": "../nightprince/php-wowemu-auth"
+        },
+        {
             "name": "paypal/rest-api-sdk-php",
             "version": "1.14.0",
             "version_normalized": "1.14.0.0",
@@ -276,17 +275,17 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.42",
-            "version_normalized": "2.0.42.0",
+            "version": "2.0.44",
+            "version_normalized": "2.0.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "665d289f59e646a259ebf13f29be7f6f54cab24b"
+                "reference": "149f608243f8133c61926aae26ce67d2b22b37e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/665d289f59e646a259ebf13f29be7f6f54cab24b",
-                "reference": "665d289f59e646a259ebf13f29be7f6f54cab24b",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/149f608243f8133c61926aae26ce67d2b22b37e5",
+                "reference": "149f608243f8133c61926aae26ce67d2b22b37e5",
                 "shasum": ""
             },
             "require": {
@@ -304,7 +303,7 @@
                 "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations.",
                 "ext-xml": "Install the XML extension to load XML formatted public keys."
             },
-            "time": "2023-03-06T12:45:53+00:00",
+            "time": "2023-06-13T08:41:47+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -369,7 +368,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.42"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.44"
             },
             "funding": [
                 {

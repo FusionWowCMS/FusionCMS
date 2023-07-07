@@ -22,11 +22,11 @@ class HostClient extends Client
     /**
      * HostClient constructor.
      *
-     * @param  string  $identity
-     * @param  string  $salt
-     * @param  string  $verifier
-     * @param  string  $clientPublicEphemeralValue
-     * @param  array|null  $options
+     * @param string $identity
+     * @param string $salt
+     * @param string $verifier
+     * @param string $clientPublicEphemeralValue
+     * @param array|null $options
      */
     public function __construct(
         string $identity,
@@ -71,7 +71,7 @@ class HostClient extends Client
     }
 
     /**
-     * @param  BigInteger  $b  Host's secret ephemeral value
+     * @param BigInteger $b Host's secret ephemeral value
      *
      * @return BigInteger Host's public ephemeral value
      */

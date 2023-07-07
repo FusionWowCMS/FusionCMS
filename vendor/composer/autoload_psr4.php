@@ -9,5 +9,5 @@ return array(
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'Laizerox\\' => array($vendorDir . '/laizerox/php-wowemu-auth/src'),
+    'Laizerox\\' => array($vendorDir . '/nightprince/php-wowemu-auth/src'),
 );

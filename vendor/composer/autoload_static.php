@@ -45,7 +45,7 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         ),
         'Laizerox\\' => 
         array (
-            0 => __DIR__ . '/..' . '/laizerox/php-wowemu-auth/src',
+            0 => __DIR__ . '/..' . '/nightprince/php-wowemu-auth/src',
         ),
     );
 

@@ -1,5 +1,5 @@
 {
-    "name": "laizerox/php-wowemu-auth",
+    "name": "nightprince/php-wowemu-auth",
     "type": "library",
     "description": "Wowemu compliant SRP6 auth implementation",
     "license": "GPL-3.0-or-later",
@@ -9,17 +9,20 @@
             "email": "dpetmanson@gmail.com"
         }
     ],
-    "require": {
-        "php": "^7.1",
-        "phpseclib/phpseclib": "^2.0",
-        "ext-bcmath": "*"
-    },
     "autoload": {
         "psr-4": {
             "Laizerox\\": "src/"
         }
     },
+    "require": {
+        "php": "^7.4||^8.0",
+        "phpseclib/phpseclib": "^2.0",
+        "ext-bcmath": "*"
+    },
     "require-dev": {
         "phpunit/phpunit": "^7.5"
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
