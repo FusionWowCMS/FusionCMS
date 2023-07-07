@@ -5,6 +5,7 @@
         "paypal/rest-api-sdk-php": "*",
         "psr/log": "^1.1",
         "phpseclib/phpseclib": "*",
-        "ezyang/htmlpurifier": "^4.16"
+        "ezyang/htmlpurifier": "^4.16",
+        "smarty/smarty": "^4.3"
     }
 }

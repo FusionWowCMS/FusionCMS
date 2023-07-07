@@ -14,7 +14,6 @@ if (!defined('BASEPATH')) {
  * @link    http://fusiongen.net
  */
  
-require_once APPPATH . 'third_party/Smarty/Smarty.class.php';
 
 class CI_Smarty extends Smarty
 {
