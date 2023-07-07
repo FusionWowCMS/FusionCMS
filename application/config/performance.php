@@ -15,3 +15,6 @@ if (! defined('BASEPATH')) {
 
 $config['disable_visitor_graph'] = false;
 $config['disable_realm_status'] = false;
+
+$config['enable_minify_js'] = true;
+$config['enable_minify_css'] = true;

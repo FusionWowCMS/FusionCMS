@@ -563,6 +563,24 @@
 			</select>
 			</div>
 			</div>
+			<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="enable_minify_js" data-toggle="tooltip" data-placement="bottom" title="If you have many visitors, the admin panel will become very slow because of the statistics graph - disabling it will help a lot">Enable minify javascript <a>(?)</a></label>
+			<div class="col-sm-10">
+			<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="disable_realm_status" id="disable_realm_status">
+				<option value="true" {if $config.enable_minify_js}selected{/if}>Yes</option>
+				<option value="false" {if !$config.enable_minify_js}selected{/if}>No</option>
+			</select>
+			</div>
+			</div>
+			<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="enable_minify_css" data-toggle="tooltip" data-placement="bottom" title="If you have many visitors, the admin panel will become very slow because of the statistics graph - disabling it will help a lot">Enable minify css <a>(?)</a></label>
+			<div class="col-sm-10">
+			<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="disable_realm_status" id="disable_realm_status">
+				<option value="true" {if $config.enable_minify_css}selected{/if}>Yes</option>
+				<option value="false" {if !$config.enable_minify_css}selected{/if}>No</option>
+			</select>
+			</div>
+			</div>
 			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
 		</form>
         </div>

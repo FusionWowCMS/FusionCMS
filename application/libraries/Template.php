@@ -440,6 +440,8 @@ class Template
             "menu_bottom" => $this->getMenu("bottom"),
             "path" => base_url() . APPPATH,
             "favicon" => $this->theme_data['favicon'],
+            "minify_js" => !$this->CI->config->item('enable_minify_js'),
+            "minify_css" => !$this->CI->config->item('enable_minify_css'),
             "extra_css" => $css,
             "extra_js" => $js,
             "analytics" => $this->CI->config->item('analytics'),

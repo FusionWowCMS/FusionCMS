@@ -42,6 +42,8 @@ class Settings extends MX_Controller
         $config['disable_visitor_graph'] = $this->config->item('disable_visitor_graph');
         $config['disable_realm_status'] = $this->config->item('disable_realm_status');
         $config['cache'] = $this->config->item('cache');
+        $config['enable_minify_js'] = $this->config->item('enable_minify_js');
+        $config['enable_minify_css'] = $this->config->item('enable_minify_css');
 
         // SMTP
         $config['use_own_smtp_settings'] = $this->config->item('use_own_smtp_settings');
@@ -128,6 +130,9 @@ class Settings extends MX_Controller
         $fusionConfig->set('disable_visitor_graph', $this->input->post('disable_visitor_graph'));
         $fusionConfig->set('disable_realm_status', $this->input->post('disable_realm_status'));
         $fusionConfig2->set('cache', $this->input->post('cache'));
+
+        $fusionConfig->set('enable_minify_js', $this->input->post('enable_minify_js'));
+        $fusionConfig->set('enable_minify_css', $this->input->post('enable_minify_css'));
 
         $fusionConfig->save();
         $fusionConfig2->save();
