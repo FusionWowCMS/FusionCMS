@@ -6,6 +6,7 @@
         "psr/log": "^1.1",
         "phpseclib/phpseclib": "*",
         "ezyang/htmlpurifier": "^4.16",
-        "smarty/smarty": "^4.3"
+        "smarty/smarty": "^4.3",
+        "matthiasmullie/minify": "^1.3"
     }
 }

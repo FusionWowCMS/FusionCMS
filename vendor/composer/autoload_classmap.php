@@ -6,7 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CSSmin' => $vendorDir . '/smarty/smarty/libs/plugins/minify/CSSmin.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'JSMin' => $vendorDir . '/smarty/smarty/libs/plugins/minify/JSmin.php',
+    'JSMinException' => $vendorDir . '/smarty/smarty/libs/plugins/minify/JSmin.php',
     'Smarty' => $vendorDir . '/smarty/smarty/libs/Smarty.class.php',
     'SmartyCompilerException' => $vendorDir . '/smarty/smarty/libs/sysplugins/smartycompilerexception.php',
     'SmartyException' => $vendorDir . '/smarty/smarty/libs/sysplugins/smartyexception.php',
