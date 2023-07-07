@@ -1,12 +1,13 @@
 <?php
 
 /**
- * @package FusionGen
+ * @package FusionCMS
  * @version 6.0
  * @author  Jesper Lindström
  * @author  Xavier Geerinck
- * @author  Err0r
- * @link    http://fusiongen.net
+ * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
+ * @author  Ehsan Zare (Darksider) <darksider.legend@gmail.com>
+ * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
 $config['use_own_smtp_settings'] = 0;

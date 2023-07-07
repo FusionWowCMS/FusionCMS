@@ -5,12 +5,13 @@ if (! defined('BASEPATH')) {
 }
 
 /**
- * @package FusionGen
+ * @package FusionCMS
  * @version 6.0
  * @author  Jesper Lindström
  * @author  Xavier Geerinck
- * @author  Err0r
- * @link    http://fusiongen.net
+ * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
+ * @author  Ehsan Zare (Darksider) <darksider.legend@gmail.com>
+ * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
 /*
@@ -18,7 +19,7 @@ if (! defined('BASEPATH')) {
 | CDN system
 |--------------------------------------------------------------------------
 |
-| If activated, static files (js/css/images) are loaded via the fusiongen CDN system
+| If activated, static files (js/css/images) are loaded via the FusionCMS CDN system
 | The geologically closest server to the player is selected for this
 | This should speed up the loading time of the website
 |
@@ -26,4 +27,4 @@ if (! defined('BASEPATH')) {
 */
 
 $config['cdn'] = false;
-$config['cdn_link'] = "https://cdn.fusiongen.net/";
+$config['cdn_link'] = "https://cdn.google.com/";

@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 
 <!--
-This website is powered by FusionGEN
 
-https://github.com/FusionGen/FusionGen
+ This website is powered by
+  ______         _              _____ __  __  _____ 
+ |  ____|       (_)            / ____|  \/  |/ ____|
+ | |__ _   _ ___ _  ___  _ __ | |    | \  / | (___  
+ |  __| | | / __| |/ _ \| '_ \| |    | |\/| |\___ \ 
+ | |  | |_| \__ \ | (_) | | | | |____| |  | |____) |
+ |_|   \__,_|___/_|\___/|_| |_|\_____|_|  |_|_____/ 
 
-Current FusionGEN Version: {$CI->config->item('FusionGENVersion')}
+ https://github.com/Yekta-Core/FusionCMS/
+
 -->
 
 <html lang="zxx">

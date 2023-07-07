@@ -160,7 +160,7 @@ var Router = {
 				if(Router.page == link)
 				{
 					$("body").css("cursor", "default");
-					$("title").html("FusionGEN");
+					$("title").html("FusionCMS");
 					UI.alert('Something went wrong! Attempting to load the page directly... <div class="lds-ring"><div></div><div></div><div></div><div></div></div>', 3000);
 
 					setTimeout(function()

@@ -5,12 +5,14 @@ if (!defined('BASEPATH')) {
 }
 
 /**
- * @package FusionGen
+ * @package FusionCMS
  * @author  Jesper Lindström
  * @author  Xavier Geerinck
  * @author  Elliott Robbins
  * @author  Err0r
- * @link    http://fusiongen.net
+ * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
+ * @author  Ehsan Zare (Darksider) <darksider.legend@gmail.com>
+ * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
 class Dbbackup

@@ -3,8 +3,8 @@
 	"version": "2.0.0",
 	"date": "2023-05-30",
 	"author": {
-		"name": "FusionGen",
-		"website": "http://fusiongen.net"
+		"name": "FusionCMS",
+		"website": "https://github.com/FusionWowCMS/FusionCMS"
 	},
 
 	"admin": [

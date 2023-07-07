@@ -1,9 +1,10 @@
 <?php
 
 /**
- * @package FusionGen
- * @author  Err0r
- * @link    https://fusiongen.net
+ * @package FusionCMS
+ * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
+ * @author  Ehsan Zare (Darksider) <darksider.legend@gmail.com>
+ * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
 class Login_model extends CI_Model

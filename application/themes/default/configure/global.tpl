@@ -31,7 +31,7 @@
 {$social['discord']['link']    = "https://discord.gg/"}
 
 {$social['teamspeak']['enabled'] = true}
-{$social['teamspeak']['link']    = "ts3server://ts.fusiongen.net"}
+{$social['teamspeak']['link']    = "ts3server://ts.teamspeak.com"}
 
 {$social['instagram']['enabled'] = true}
 {$social['instagram']['link']    = "https://instagram.com/"}
