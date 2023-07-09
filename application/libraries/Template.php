@@ -455,6 +455,8 @@ class Template
             "cdn_link" => $this->CI->config->item('cdn') === true ? $this->CI->config->item('cdn_link') : null,
             "recaptcha" => $this->CI->config->item('captcha_type') === 'recaptcha',
             "recaptcha_sitekey" => $this->CI->config->item('recaptcha_sitekey'),
+            "isOnline" => $this->CI->user->isOnline(),
+            "theme_configs" => $this->theme_config,
             "social_media" => array(
                 'facebook' => $this->CI->config->item('facebook'),
                 'twitter' => $this->CI->config->item('twitter'),
