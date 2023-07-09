@@ -19,3 +19,4 @@ $config['disable_realm_status'] = false;
 
 $config['enable_minify_js'] = true;
 $config['enable_minify_css'] = true;
+$config['minify_cache_time'] = 604800; // 7 day

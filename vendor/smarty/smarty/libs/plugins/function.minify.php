@@ -11,10 +11,10 @@
  *
  * Type:    function<br>
  * Name:    minify<br>
- * Date:    September 5, 2015
- * Purpose: Combine content from several JS or CSS files into one
+ * Date:    2023-07-09
+ * Purpose: minify content from several JS or CSS files into one
  * Input:   string to count
- * Example: {minify input=$array_of_files_to_minify output=$path_to_output_file use_true_path=true age=$seconds_to_try_reminify_file}
+ * Example: {minify input=$array_of_files_to_minify output=$path_to_output_file age=$seconds_to_try_reminify_file}
  *
  * @author Keramat Jokar
  * @version 1.0
@@ -24,10 +24,12 @@
  * @return string
  */
  
- use MatthiasMullie\Minify;
+use MatthiasMullie\Minify;
 
 function smarty_function_minify($params, &$smarty)
 {
+    $CI =& get_instance();
+
     /**
      * Build minified file
      *
@@ -37,21 +39,17 @@ function smarty_function_minify($params, &$smarty)
         function smarty_build_minify($params)
         {
             $filelist = array();
-            $lastest_mtime = 0;
+            $lastest_mtime = time();
 
-            foreach ($params['input'] as $item) {
-                $mtime = filemtime($params['file_path'] . $item);
-                $lastest_mtime = max($lastest_mtime, $mtime);
-                $filelist[] = array('name' => $item, 'time' => $mtime);
-            }
+            $filelist = $params['input'];
 
             if ($params['disable'] == true) {
                 $output_filename = '';
                 foreach ($filelist as $file) {
                     if ($params['type'] == 'js') {
-                        $output_filename .= '<script type="text/javascript" src="' . base_url() . $file['name'].'" charset="utf-8"></script>' . "\n";
+                        $output_filename .= '<script type="text/javascript" src="' . base_url() . $file.'" charset="utf-8"></script>' . "\n";
                     } elseif ($params['type'] == 'css') {
-                        $output_filename .= '<link type="text/css" rel="stylesheet" href="' . base_url() . $file['name'] . '" />' . "\n";
+                        $output_filename .= '<link type="text/css" rel="stylesheet" href="' . base_url() . $file . '" />' . "\n";
                     }
                 }
 
@@ -91,7 +89,10 @@ function smarty_function_minify($params, &$smarty)
                 }
 
                 foreach ($filelist as $file) {
-                    $min->add((filter_var($params['file_path'] . $file['name'], FILTER_VALIDATE_URL) !== FALSE) ? file_get_contents_curl($params['file_path'] . $file['name']) : $params['file_path'] . $file['name']);
+                    if (filter_var($file, FILTER_VALIDATE_URL) !== FALSE)
+                        $min->add(file_get_contents($file));
+                    else
+                        $min->add((filter_var($params['file_path'] . $file, FILTER_VALIDATE_URL) !== FALSE) ? file_get_contents($params['file_path'] . $file) : $params['file_path'] . $file);
                 }
 
 				$minifiedPath = $params['file_path'] . $output_filename;
@@ -120,64 +121,45 @@ function smarty_function_minify($params, &$smarty)
 
             $output_filename = preg_replace('/\.(js|css)$/i', date('_YmdHis.', $last_mtime) . '$1', $params['output']);
 
+			$url = substr(base_url(), 0, strlen(base_url()) -1);
+
             if ($params['type'] == 'js') {
-                echo '<script type="text/javascript" src="' . $output_filename . '" charset="utf-8"></script>';
+                echo '<script type="text/javascript" src="' . $url .  $output_filename . '" charset="utf-8"></script>';
             } elseif ($params['type'] == 'css') {
-                echo '<link type="text/css" rel="stylesheet" href="' . $output_filename . '" />';
+                echo '<link type="text/css" rel="stylesheet" href="' . $url .  $output_filename . '" />';
             } else {
                 echo $output_filename;
             }
         }
     }
 
-    /**
-     * This function gets the base url for the project where this plugin is used
-     * If this plugin is used within Code Igniter, the base_url() would have already been defined
-     */
-    if ( ! function_exists('base_url')) {
-        function base_url(){
-
-            return sprintf(
-                "%s://%s%s/",
-                isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
-                $_SERVER['HTTP_HOST'],
-                rtrim(dirname($_SERVER['PHP_SELF']), '/\\')
-            );
-        }
-    }
-
     // The new 'use_true_path' option that tells this plugin to use the path to the files as it is
-    if ( isset($params['use_true_path']) && !is_bool($params['use_true_path'])) {
+    if (isset($params['use_true_path']) && !is_bool($params['use_true_path'])) {
         trigger_error('use_true_path must be boolean', E_USER_NOTICE);
         return;
     }
 
-    if ( ! isset($params['use_true_path'])) {
+    if (!isset($params['use_true_path'])) {
         $params['use_true_path'] = false;
     }
 
     // use the relative path or the true path of the file based on the 'use_true_path' option passed in
     $params['file_path'] = ($params['use_true_path']) ? '' : getenv('DOCUMENT_ROOT');
 
-    if ( ! isset($params['input'])) {
+    if (!isset($params['input'])) {
         trigger_error('input cannot be empty', E_USER_NOTICE);
         return;
     }
 
-    if ( ! is_array($params['input']) || count($params['input']) < 1) {
+    if (!is_array($params['input']) || count($params['input']) < 1) {
         trigger_error('input must be array and have one item at least', E_USER_NOTICE);
         return;
     }
 
     foreach ($params['input'] as $file) {
-        if ( ! file_exists($params['file_path'] . $file)) {
-            trigger_error('File ' . $params['file_path'] . $file . ' does not exist!', E_USER_WARNING);
-            return;
-        }
-
         $ext = pathinfo($file, PATHINFO_EXTENSION);
 
-        if ( ! in_array($ext, array('js', 'css'))) {
+        if (!in_array($ext, array('js', 'css'))) {
             trigger_error('all input files must have js or css extension', E_USER_NOTICE);
             return;
         }
@@ -192,19 +174,19 @@ function smarty_function_minify($params, &$smarty)
 
     $params['type'] = $ext;
 
-    if ( ! isset($params['output'])) {
+    if (!isset($params['output'])) {
         $params['output'] = dirname($params['input'][0]) . '/minified.' . $ext;
     }
 
-    if ( ! isset($params['age'])) {
-        $params['age'] = 3600;
+    if (!isset($params['age'])) {
+        $params['age'] = $this->CI->config->item('minify_cache_time');
     }
 
-    if ( ! isset($params['cache_file_name'])) {
+    if (!isset($params['cache_file_name'])) {
         $params['cache_file_name'] = $params['output'] . '.cache';
     }
 
-    if ( ! isset($params['disable'])) {
+    if (!isset($params['disable'])) {
         $params['disable'] = false;
     }
 
