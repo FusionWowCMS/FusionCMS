@@ -85,4 +85,4 @@ This project exists thanks to:
 
 ## Links
 
-**[Discord](https://discord.gg/4Hz94RZn)**
+**[Discord](https://discord.gg/tnWTkZ7akZ)**
