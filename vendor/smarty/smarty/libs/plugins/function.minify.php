@@ -28,44 +28,28 @@ use MatthiasMullie\Minify;
 
 function smarty_function_minify($params, &$smarty)
 {
-    $CI =& get_instance();
-
     /**
      * Build minified file
      *
      * @param array $params
      */
-    if ( ! function_exists('smarty_build_minify')) {
+    if (!function_exists('smarty_build_minify')) {
         function smarty_build_minify($params)
         {
             $filelist = array();
             $lastest_mtime = time();
 
             $filelist = $params['input'];
-
-            if ($params['disable'] == true) {
-                $output_filename = '';
-                foreach ($filelist as $file) {
-                    if ($params['type'] == 'js') {
-                        $output_filename .= '<script type="text/javascript" src="' . base_url() . $file.'" charset="utf-8"></script>' . "\n";
-                    } elseif ($params['type'] == 'css') {
-                        $output_filename .= '<link type="text/css" rel="stylesheet" href="' . base_url() . $file . '" />' . "\n";
-                    }
-                }
-
-                echo $output_filename;
-                return;
-            }
+            $output_filename = preg_replace('/\.(js|css)$/i', '.$1', $params['output']);
 
             $last_cmtime = 0;
 
-            if (file_exists($params['file_path'] . $params['cache_file_name'])) {
-                $last_cmtime = file_get_contents($params['file_path'] . $params['cache_file_name']);
+            if (file_exists($params['file_path'] . $output_filename)) {
+                $last_cmtime = filemtime($params['file_path'] . $output_filename);
             }
 
             if ($lastest_mtime > $last_cmtime) {
-                $glob_mask = preg_replace('/\.(js|css)$/i', '_*.$1', $params['output']);
-                $files_to_cleanup = glob($params['file_path'] . $glob_mask);
+                $files_to_cleanup = glob($params['file_path'] . $output_filename);
 
                 foreach ($files_to_cleanup as $cfile) {
                     if (is_file($cfile) && file_exists($cfile)) {
@@ -73,11 +57,9 @@ function smarty_function_minify($params, &$smarty)
                     }
                 }
 
-                $output_filename = preg_replace('/\.(js|css)$/i', date('_YmdHis.', $lastest_mtime) . '$1', $params['output']);
-
                 $dirname = dirname($params['file_path'] . $output_filename);
 
-                if ( ! is_dir($dirname)) {
+                if (!is_dir($dirname)) {
                     mkdir($dirname, 0755, true);
                 }
 
@@ -95,12 +77,9 @@ function smarty_function_minify($params, &$smarty)
                         $min->add((filter_var($params['file_path'] . $file, FILTER_VALIDATE_URL) !== FALSE) ? file_get_contents($params['file_path'] . $file) : $params['file_path'] . $file);
                 }
 
-				$minifiedPath = $params['file_path'] . $output_filename;
-				$min->minify($minifiedPath);
-                file_put_contents($params['file_path'] . $params['cache_file_name'], $lastest_mtime, LOCK_EX);
+				$min->minify($params['file_path'] . $output_filename);
             }
 
-            touch($params['file_path'] . $params['cache_file_name']);
             smarty_print_out($params);
         }
     }
@@ -113,38 +92,39 @@ function smarty_function_minify($params, &$smarty)
     if ( ! function_exists('smarty_print_out')) {
         function smarty_print_out($params)
         {
-            $last_mtime = 0;
+            if ($params['disable'] == true) {
+                $output = '';
+                $filelist = $params['input'];
+                foreach ($filelist as $file) {
+                    if ($params['type'] == 'js') {
+                        $output .= '<script type="text/javascript" src="' . base_url() . $file.'" charset="utf-8"></script>' . "\n";
+                    } elseif ($params['type'] == 'css') {
+                        $output .= '<link type="text/css" rel="stylesheet" href="' . base_url() . $file . '" />' . "\n";
+                    }
+                }
 
-            if (file_exists($params['file_path'] . $params['cache_file_name'])) {
-                $last_mtime = file_get_contents($params['file_path'] . $params['cache_file_name']);
-            }
-
-            $output_filename = preg_replace('/\.(js|css)$/i', date('_YmdHis.', $last_mtime) . '$1', $params['output']);
-
-			$url = substr(base_url(), 0, strlen(base_url()) -1);
-
-            if ($params['type'] == 'js') {
-                echo '<script type="text/javascript" src="' . $url .  $output_filename . '" charset="utf-8"></script>';
-            } elseif ($params['type'] == 'css') {
-                echo '<link type="text/css" rel="stylesheet" href="' . $url .  $output_filename . '" />';
+                echo $output;
             } else {
-                echo $output_filename;
+                $last_mtime = 0;
+                $output_filename = preg_replace('/\.(js|css)$/i', '.$1', $params['output']);
+			    $url = base_url() . APPPATH;
+
+                if (file_exists($params['file_path'] . $output_filename)) {
+                    $last_mtime = filemtime($params['file_path'] . $output_filename);
+                }
+
+                if ($params['type'] == 'js') {
+                    echo '<script type="text/javascript" src="' . $url .  $output_filename . '" charset="utf-8"></script>';
+                } elseif ($params['type'] == 'css') {
+                    echo '<link type="text/css" rel="stylesheet" href="' . $url .  $output_filename . '" />';
+                } else {
+                    echo $output_filename;
+                }
             }
         }
     }
 
-    // The new 'use_true_path' option that tells this plugin to use the path to the files as it is
-    if (isset($params['use_true_path']) && !is_bool($params['use_true_path'])) {
-        trigger_error('use_true_path must be boolean', E_USER_NOTICE);
-        return;
-    }
-
-    if (!isset($params['use_true_path'])) {
-        $params['use_true_path'] = false;
-    }
-
-    // use the relative path or the true path of the file based on the 'use_true_path' option passed in
-    $params['file_path'] = ($params['use_true_path']) ? '' : getenv('DOCUMENT_ROOT');
+    $params['file_path'] = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, realpath(APPPATH). '/');
 
     if (!isset($params['input'])) {
         trigger_error('input cannot be empty', E_USER_NOTICE);
@@ -175,31 +155,26 @@ function smarty_function_minify($params, &$smarty)
     $params['type'] = $ext;
 
     if (!isset($params['output'])) {
-        $params['output'] = dirname($params['input'][0]) . '/minified.' . $ext;
+        trigger_error('output cannot be empty', E_USER_NOTICE);
     }
 
     if (!isset($params['age'])) {
-        $params['age'] = $this->CI->config->item('minify_cache_time');
-    }
-
-    if (!isset($params['cache_file_name'])) {
-        $params['cache_file_name'] = $params['output'] . '.cache';
+        $params['age'] = 60 * 60 * 24 * CI::$APP->config->item('minify_cache_time');
     }
 
     if (!isset($params['disable'])) {
         $params['disable'] = false;
     }
 
-    $cache_file_name = $params['cache_file_name'];
-
-    if ($params['disable'] == true || ! file_exists($params['file_path'] . $cache_file_name)) {
-        smarty_build_minify($params);
+    if ($params['disable'] == true) {
+        smarty_print_out($params);
         return;
     }
 
-    $cache_mtime = filemtime($params['file_path'] . $cache_file_name);
+    $output_filename = preg_replace('/\.(js|css)$/i', '.$1', $params['output']);
+    $cache_time = filemtime($params['file_path'] . $output_filename);
 
-    if ($cache_mtime + $params['age'] < time()) {
+    if (time() > $cache_time + $params['age']) {
         smarty_build_minify($params);
     } else {
         smarty_print_out($params);

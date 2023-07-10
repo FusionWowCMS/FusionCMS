@@ -39,7 +39,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-		{minify input=array("/application/css/default.css", "/application/css/tooltip.css", "/application/{$theme_path}vendor/Bootstrap/5.1.3/css/bootstrap.min.css", "/application/{$theme_path}vendor/Sweetalert2/11.4.8/css/sweetalert2.min.css", "/application/{$theme_path}vendor/AnimateCSS/4.1.1/animate.min.css", "/application/{$theme_path}vendor/OwlCarousel2/css/owl.carousel.min.css", "/application/{$theme_path}vendor/OwlCarousel2/css/owl.theme.default.min.css", "/application/{$theme_path}vendor/MagnificPopup/css/magnific-popup.css", "/application/{$theme_path}assets/css/style.css", "/application/{$theme_path}assets/css/custom.css") output='/application/cache/css/big.css' age='30' disable={$minify_css}}
+		{minify input=array("css/default.css", "css/tooltip.css", "{$theme_path}vendor/Bootstrap/5.1.3/css/bootstrap.min.css", "{$theme_path}vendor/Sweetalert2/11.4.8/css/sweetalert2.min.css", "{$theme_path}vendor/AnimateCSS/4.1.1/animate.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.carousel.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.theme.default.min.css", "{$theme_path}vendor/MagnificPopup/css/magnific-popup.css", "{$theme_path}assets/css/style.css", "{$theme_path}assets/css/custom.css") output='cache/css/big.css' disable={$minify_css}}
 		
 		{if $extra_css}<link rel="stylesheet" href="{$path}{$extra_css}" />{/if}
 		{*	{if !is_array($extra_css)}
@@ -56,7 +56,7 @@
 		<!-- Header CSS.End -->
 		
 		<!-- Header JS.Start -->
-		{minify input=array("/application/{$theme_path}assets/js/jquery-3.6.0.min.js", "/application/js/jquery.placeholder.min.js", "/application/js/jquery.sort.js", "/application/{$theme_path}vendor/Bootstrap/5.1.3/js/bootstrap.bundle.min.js", "/application/{$theme_path}vendor/Sweetalert2/11.4.8/js/sweetalert2.all.min.js", "/application/{$theme_path}vendor/Marquee/jquery.marquee.min.js", "/application/{$theme_path}vendor/OwlCarousel2/js/owl.carousel.js", "/application/{$theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "/application/{$theme_path}assets/js/main.js", "/application/{$theme_path}assets/js/cookie.js", "/application/{$theme_path}assets/js/slider.js", "/application/js/ui.js", "/application/js/language.js", "/application/js/tooltip.js") output='/application/cache/javascript/big.js' age='30' disable={$minify_js}}
+		{minify input=array("{$theme_path}assets/js/jquery-3.6.0.min.js", "js/jquery.placeholder.min.js", "js/jquery.sort.js", "{$theme_path}vendor/Bootstrap/5.1.3/js/bootstrap.bundle.min.js", "{$theme_path}vendor/Sweetalert2/11.4.8/js/sweetalert2.all.min.js", "{$theme_path}vendor/Marquee/jquery.marquee.min.js", "{$theme_path}vendor/OwlCarousel2/js/owl.carousel.js", "{$theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "{$theme_path}assets/js/main.js", "{$theme_path}assets/js/cookie.js", "{$theme_path}assets/js/slider.js", "js/ui.js", "js/language.js", "js/tooltip.js") output='cache/javascript/big.js' disable={$minify_js}}
 		
 		{if $extra_js}<script type="text/javascript" src="{$path}{$extra_js}"></script>{/if}
 		{*	{if !is_array($extra_js)}
