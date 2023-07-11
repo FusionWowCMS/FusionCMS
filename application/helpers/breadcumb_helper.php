@@ -16,5 +16,16 @@ function breadcumb($items)
         "url" => pageURL
     );
 
-    return $CI->smarty->view($CI->template->view_path . "breadcumb.tpl", $data, true);
+    $breadcumbView = "application/" . $CI->template->theme_path . "views/breadcumb.tpl";
+
+    // Check if this theme wants to replace our view with it's own
+    if (file_exists($breadcumbView))
+    {
+        return $CI->smarty->view($breadcumbView, $data, true);
+    }
+    else
+    {
+        // Load default
+        return $CI->smarty->view($CI->template->view_path . "breadcumb.tpl", $data, true);
+    }
 }
