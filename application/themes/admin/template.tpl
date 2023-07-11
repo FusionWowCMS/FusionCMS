@@ -436,5 +436,10 @@
 
 	<script type="text/javascript">const modeBtn=document.getElementById("mode");modeBtn.onchange=e=>{
 	"dark"==theme?Theme.Light():Theme.Dark()};</script>
+	<script type="text/javascript">
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
     </body>
 </html>
