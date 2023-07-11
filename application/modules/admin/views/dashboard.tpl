@@ -12,35 +12,43 @@
 											<h2 class="font-heading text-3xl font-bold leading-none ltablet:!text-2xl text-white"><span>Welcome back, {$nickname}.</span></h2>
 										</div>
 										<div class="flex h-full flex-1 flex-col px-4 sm:px-6">
-											<h2 class="font-heading text-base font-semibold leading-tight mb-1 text-white"><span>New Rookies</span></h2>
-											<p class="font-alt text-xs font-normal leading-tight mb-3"><span class="text-white"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praeclarae mortes. </span></p>
+											<h2 class="font-heading text-base font-semibold leading-tight mb-1 text-white"><span>Shortcuts</span></h2>
+											<p class="font-alt text-xs font-normal leading-tight mb-3"><span class="text-white"> Frequently used shortcuts: </span></p>
 											<div class="mt-auto flex gap-2">
 												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
-													<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-														<img src="/img/avatars/3.svg" class="max-h-full max-w-full object-cover shadow-sm dark:border-transparent h-10 w-10">
-													</div>
+												    <a href="{$url}changelog/admin" data-toggle="tooltip" data-placement="top" title="ChangeLog">
+														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
+															<i class="fa-solid fa-list-ul"></i>
+														</div>
+													</a>
 												</div>
 												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
-													<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-														<img src="/img/avatars/9.svg" class="max-h-full max-w-full object-cover shadow-sm dark:border-transparent h-10 w-10">
-													</div>
+												    <a href="{$url}admin/cachemanager" data-toggle="tooltip" data-placement="top" title="Manage cache">
+														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
+															<i class="fa-solid fa-box-archive"></i>
+														</div>
+													</a>
 												</div>
 												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
-													<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-														<img src="/img/avatars/5.svg" class="max-h-full max-w-full object-cover shadow-sm dark:border-transparent h-10 w-10">
-													</div>
+												    <a href="{$url}page/admin" data-toggle="tooltip" data-placement="top" title="Custom pages">
+														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
+															<i class="fa-solid fa-windows"></i>
+														</div>
+													</a>
 												</div>
-												<button type="button" class="disabled:opacity-60 disabled:cursor-not-allowed hover:shadow-none false false text-muted-700 bg-white border border-muted-300 dark:text-white dark:bg-muted-700 dark:hover:bg-muted-600 dark:border-muted-600 hover:bg-muted-50 rounded-md h-10 w-10 p-2 nui-focus relative inline-flex items-center justify-center space-x-1 font-sans text-sm font-normal leading-5 no-underline outline-none transition-all duration-300">
-													<svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-4 w-4" width="1em" height="1em" viewBox="0 0 24 24">
-														<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m-7-7h14"></path>
-													</svg>
-												</button>
+												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
+												    <a href="{$url}admin/modules" data-toggle="tooltip" data-placement="top" title="Modules">
+														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
+															<i class="fa-solid fa-sitemap"></i>
+														</div>
+													</a>
+												</div>
 											</div>
 										</div>
 										<div class="border-primary-300/60 flex h-full flex-1 flex-col px-4 sm:border-l sm:px-6">
-											<h2 class="font-heading text-base font-semibold leading-tight mb-1 text-white"><span>Job Feed</span></h2>
-											<p class="font-alt text-xs font-normal leading-tight mb-3"><span class="text-white"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praeclarae mortes. </span></p>
-											<div class="mt-auto"><button data-v-71bb21a6="" type="button" class="is-button rounded is-button-default w-full"><span>Manage Jobs</span></button></div>
+											<h2 class="font-heading text-base font-semibold leading-tight mb-1 text-white"><span>Articles</span></h2>
+											<p class="font-alt text-xs font-normal leading-tight mb-3"><span class="text-white"> Submit a new article to your users. </span></p>
+											<div class="mt-auto"><a href="{$url}news/admin" type="button" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right is-button rounded is-button-default w-full"><span>News articles</span></a></div>
 										</div>
 									</div>
 								</div>
@@ -411,7 +419,7 @@
                                             <div>
                                                 <ul class="space-y-3">
                                                     <li>
-                                                        <a aria-current="page" href="analytics.html#" class="router-link-active router-link-exact-active group flex items-center justify-between">
+                                                        <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
                                                                 <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> PHP version </span>
                                                             </p>
@@ -419,7 +427,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a aria-current="page" href="analytics.html#" class="router-link-active router-link-exact-active group flex items-center justify-between">
+                                                        <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
                                                                 <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> CodeIgniter version </span>
                                                             </p>
@@ -427,7 +435,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a aria-current="page" href="analytics.html#" class="router-link-active router-link-exact-active group flex items-center justify-between">
+                                                        <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
                                                                 <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> CMS version </span>
                                                             </p>
@@ -448,7 +456,7 @@
                                             <div>
                                                 <ul class="space-y-3">
                                                     <li>
-                                                        <a aria-current="page" href="analytics.html#" class="router-link-active router-link-exact-active group flex items-center justify-between">
+                                                        <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
                                                                 <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> Name </span>
                                                             </p>
@@ -456,7 +464,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a aria-current="page" href="analytics.html#" class="router-link-active router-link-exact-active group flex items-center justify-between">
+                                                        <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
                                                                 <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> Author </span>
                                                             </p>
