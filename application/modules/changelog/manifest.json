@@ -87,7 +87,7 @@
 				
 				{
 					"text":"Changelog",
-					"icon":"list-ul",
+					"icon":"hammer",
 					"controller":"admin",
 					"requirePermission":"canViewAdmin"
 				}

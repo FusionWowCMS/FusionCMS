@@ -27,7 +27,7 @@
 
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/animate/animate.compat.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+		<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/magnific-popup/magnific-popup.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css">
@@ -181,7 +181,7 @@
 					<ul id="sidebar-menu" class="space-y-2">
 						<li>
 							<a href="{$url}admin" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
-								<i class="fa-solid fa-home {if $current_page == "admin/"}text-primary-500{/if}"></i>
+								<i class="fa-duotone fa-home {if $current_page == "admin/"}text-primary-500{/if}"></i>
 								<span class="whitespace-nowrap font-sans text-sm block {if $current_page == "admin/"}text-primary-500{/if}">Dashboard</span>
 							</a>
 						</li>
@@ -191,7 +191,7 @@
 						<li>
 							<div class="group">
                                 <button onclick="AdminMenu.openSection({$group.nr})" nr="{$group.nr}" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center rounded-lg py-3 transition-colors duration-300 gap-4 px-4 {if isset($group.active)}open{/if}">
-                                    <i class="fa-solid fa-{$group.icon} {if isset($group.active)}text-primary-500{/if}" aria-hidden="true"></i>
+                                    <i class="fa-duotone fa-{$group.icon} {if isset($group.active)}text-primary-500{/if}" aria-hidden="true"></i>
                                     <span class="block whitespace-nowrap font-sans text-sm {if isset($group.active)}text-primary-500{/if} block">{$text}</span>
                                     <span class="ms-auto items-center justify-center flex">
                                         
@@ -204,7 +204,7 @@
                                     {foreach from=$group.links item=link}
                                     <li class="border-muted-300 dark:border-muted-700 border-s-2 first:mt-2">
                                         <a aria-current="page" href="{$url}{$link.module}/{$link.controller}" class="{if isset($link.active)}router-link-active !border-primary-500 !text-primary-500 dark:!text-primary-500 -left-0.5 {/if} nui-focus text-muted-500 hover:text-muted-600 dark:text-muted-400/80 dark:hover:text-muted-200 relative flex cursor-pointer items-center gap-2 border-s-2 border-transparent py-2 ps-4 transition-colors duration-300">
-                                            <i class="fa-solid fa-{$link.icon}"></i>
+                                            <i class="fa-duotone fa-{$link.icon}"></i>
                                             <span class="whitespace-nowrap font-sans text-[0.85rem] block">{$link.text}</span>
                                         </a>
                                     </li>
@@ -218,7 +218,7 @@
 						{if hasPermission("toggleModules", "admin")}
 						<li>
 							<a href="{$url}admin/modules" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
-								<i class="fa-solid fa-sitemap {if $current_page == "admin/modules"}text-primary-500{/if}"></i>
+								<i class="fa-duotone fa-sitemap {if $current_page == "admin/modules"}text-primary-500{/if}"></i>
 								<span class="whitespace-nowrap font-sans text-sm block {if $current_page == "admin/modules"}text-primary-500{/if}">Modules</span>
 							</a>
 						</li>
@@ -226,7 +226,7 @@
 						{if hasPermission("viewBackups", "admin")}
 						<li>
 							<a href="{$url}admin/backups" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
-								<i class="fa-solid fa-hard-drive {if $current_page == "admin/backups"}text-primary-500{/if}"></i>
+								<i class="fa-duotone fa-hard-drive {if $current_page == "admin/backups"}text-primary-500{/if}"></i>
 								<span class="whitespace-nowrap font-sans text-sm block {if $current_page == "admin/backups"}text-primary-500{/if}">Backups</span>
 							</a>
 						</li>
@@ -234,7 +234,7 @@
 						{if hasPermission("editSystemSettings", "admin")}
 						<li>
 							<a href="{$url}admin/settings" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
-								<i class="fa-solid fa-cog {if $current_page == "admin/settings"}text-primary-500{/if}"></i>
+								<i class="fa-duotone fa-cog {if $current_page == "admin/settings"}text-primary-500{/if}"></i>
 								<span class="whitespace-nowrap font-sans text-sm block {if $current_page == "admin/settings"}text-primary-500{/if}">Settings</span>
 							</a>
 						</li>

@@ -256,7 +256,7 @@
 
 				{
 					"text": "Sideboxes",
-					"icon": "database",
+					"icon": "sidebar",
 					"controller": "sidebox",
 					"requirePermission": "viewSideboxes"
 				},
@@ -270,21 +270,21 @@
 
 				{
 					"text": "Manage cache",
-					"icon": "power-off",
+					"icon": "box-archive",
 					"controller": "cachemanager",
 					"requirePermission": "viewCache"
 				},
 
 				{
 					"text": "Manage slider",
-					"icon": "windows",
+					"icon": "container-storage",
 					"controller": "slider",
 					"requirePermission": "viewSlider"
 				},
 
 				{
 					"text": "Languages",
-					"icon": "star",
+					"icon": "globe",
 					"controller": "languages",
 					"requirePermission": "viewLanguages"
 				}
@@ -311,7 +311,7 @@
 
 				{
 					"text": "Active sessions",
-					"icon": "list-ul",
+					"icon": "cloud-word",
 					"controller": "sessions",
 					"requirePermission": "viewSessions"
 				}
