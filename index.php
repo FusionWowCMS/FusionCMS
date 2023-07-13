@@ -54,9 +54,6 @@ if (defined('ENVIRONMENT'))
 	}
 }
 
-date_default_timezone_set("Europe/Amsterdam");
-
-
 /*
  *---------------------------------------------------------------
  * SYSTEM FOLDER NAME
