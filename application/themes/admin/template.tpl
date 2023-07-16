@@ -289,7 +289,7 @@
 												<div class="grid grid-cols-3 py-6">
 													{foreach from=$languages item=language key=flag}
 														<div class="relative my-4 flex items-center justify-center language-selector">
-															<a {if $currentFlag == $flag}href="#"{else}href="javascript:void(0)" onClick="setLanguage('{$language}', this)"{/if} class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"  disabled>
+															<a {if $currentFlag == $flag}href="#"{else}href="javascript:void(0)" onClick="setLanguage('{$language}', this)"{/if} class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300">
 																<div class="relative">
 																	<div class="border-muted-200 peer-checked:border-primary-500 dark:border-muted-600 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-300"><img class="h-10 w-10 rounded-full" src="{$url}application/images/flags2/{$flag}.svg" alt="{$flag} flag icon"></div>
 																	<div class="bg-primary-500 dark:border-muted-800 absolute -end-1 -top-1 h-7 w-7 items-center justify-center rounded-full border-4 text-white peer-checked:flex{if $currentFlag != $flag} hidden{/if}">
