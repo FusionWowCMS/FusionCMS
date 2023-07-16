@@ -277,7 +277,7 @@
                                 <div data-headlessui-state class="relative h-9 w-9 text-left">
 									<a href="#" data-bs-toggle="dropdown">
 										<button class="border-muted-200 hover:ring-muted-200 dark:hover:ring-muted-700 dark:border-muted-700 dark:bg-muted-800 dark:ring-offset-muted-900 flex h-9 w-9 items-center justify-center rounded-full border ring-1 ring-transparent transition-all duration-300 hover:ring-offset-4">
-											<div class="relative inline-flex h-9 w-9 items-center justify-center rounded-full"><img class="h-7 w-7 rounded-full" src="{$url}application/images/flags2/{$currentFlag}.svg" alt="flag icon"></div>
+											<div class="relative inline-flex h-9 w-9 items-center justify-center rounded-full"><img class="h-7 w-7 rounded-full" src="{$url}application/images/flags2/{$abbreviationLanguage}.svg" alt="flag icon"></div>
 										</button>
 									</a>
 									<div role="menu" tabindex="0" data-headlessui-state="open" class="dropdown-menu divide-muted-100 border-muted-200 dark:divide-muted-700 dark:border-muted-700 dark:bg-muted-800 absolute end-0 mt-2 w-64 origin-top-right divide-y rounded-md shadow-lg" id="language_picker">
@@ -289,10 +289,10 @@
 												<div class="grid grid-cols-3 py-6">
 													{foreach from=$languages item=language key=flag}
 														<div class="relative my-4 flex items-center justify-center language-selector">
-															<a {if $currentFlag == $flag}href="#"{else}href="javascript:void(0)" onClick="setLanguage('{$language}', this)"{/if} class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300">
+															<a {if $abbreviationLanguage == $flag}href="#"{else}href="javascript:void(0)" onClick="setLanguage('{$language}', this)"{/if} class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300">
 																<div class="relative">
 																	<div class="border-muted-200 peer-checked:border-primary-500 dark:border-muted-600 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-300"><img class="h-10 w-10 rounded-full" src="{$url}application/images/flags2/{$flag}.svg" alt="{$flag} flag icon"></div>
-																	<div class="bg-primary-500 dark:border-muted-800 absolute -end-1 -top-1 h-7 w-7 items-center justify-center rounded-full border-4 text-white peer-checked:flex{if $currentFlag != $flag} hidden{/if}">
+																	<div class="bg-primary-500 dark:border-muted-800 absolute -end-1 -top-1 h-7 w-7 items-center justify-center rounded-full border-4 text-white peer-checked:flex{if $abbreviationLanguage != $flag} hidden{/if}">
 																		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" class="icon h-3 w-5" width="1em" height="1em" viewBox="0 0 24 24">
 																			<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path>
 																		</svg>

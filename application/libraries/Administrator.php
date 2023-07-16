@@ -286,6 +286,7 @@ class Administrator
             "current_page" => $this->currentPage,
             "defaultLanguage" => $this->CI->config->item('language'),
             "languages" => $this->CI->language->getAllLanguages(),
+            "abbreviationLanguage" => $this->CI->language->getAbbreviationByLanguage($this->CI->language->getLanguage()),
             "serverName" => $this->CI->config->item('server_name'),
             "avatar"    => $this->CI->user->getAvatar($this->CI->user->getId()),
             "groups" => $this->CI->acl_model->getGroupsByUser(),
