@@ -273,7 +273,41 @@
 							   document.documentElement.classList.remove("dark"),document.documentElement.classList.add("light"),window.localStorage.setItem("mode","light"),Theme.moon.removeClass("-translate-y-1/2").addClass("translate-y-[-150%]").removeClass("opacity-100").addClass("opacity-0"),Theme.sun.removeClass("translate-y-[-150%]").addClass("-translate-y-1/2").removeClass("opacity-0"),theme="light"},Dark:function(){
 							   document.documentElement.classList.remove("light"),document.documentElement.classList.add("dark"),window.localStorage.setItem("mode","dark"),Theme.moon.addClass("-translate-y-1/2").removeClass("translate-y-[-150%]").addClass("opacity-100").removeClass("opacity-0"),Theme.sun.addClass("translate-y-[-150%]").removeClass("-translate-y-1/2").addClass("opacity-0"),theme="dark"}};"dark"==theme?Theme.Dark():Theme.Light();
 							</script>
-                            <button type="button" class="border-muted-200 hover:ring-muted-200 dark:hover:ring-muted-700 dark:border-muted-700 dark:bg-muted-800 dark:ring-offset-muted-900 flex h-9 w-9 items-center justify-center rounded-full border bg-white ring-1 ring-transparent transition-all duration-300 hover:ring-offset-4"><img class="h-7 w-7 rounded-full" src="{$url}application/images/flags/us.png" alt="flag icon"></button>
+                            <div class="group inline-flex items-center justify-center text-right">
+                                <div data-headlessui-state class="relative h-9 w-9 text-left">
+									<a href="#" data-bs-toggle="dropdown">
+										<button class="border-muted-200 hover:ring-muted-200 dark:hover:ring-muted-700 dark:border-muted-700 dark:bg-muted-800 dark:ring-offset-muted-900 flex h-9 w-9 items-center justify-center rounded-full border ring-1 ring-transparent transition-all duration-300 hover:ring-offset-4">
+											<div class="relative inline-flex h-9 w-9 items-center justify-center rounded-full"><img class="h-7 w-7 rounded-full" src="{$url}application/images/flags2/{$currentFlag}.svg" alt="flag icon"></div>
+										</button>
+									</a>
+									<div role="menu" tabindex="0" data-headlessui-state="open" class="dropdown-menu divide-muted-100 border-muted-200 dark:divide-muted-700 dark:border-muted-700 dark:bg-muted-800 absolute end-0 mt-2 w-64 origin-top-right divide-y rounded-md shadow-lg" id="language_picker">
+										<div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 border fixed top-0 z-[100] w-96 end-0">
+											<div class="flex h-16 w-full items-center justify-between px-10">
+												<h2 class="font-heading text-muted-700 text-lg font-semibold dark:text-white"> Select language </h2>
+											</div>
+											<div class="relative h-[calc(100%_-_64px)] w-full px-10">
+												<div class="grid grid-cols-3 py-6">
+													{foreach from=$languages item=language key=flag}
+														<div class="relative my-4 flex items-center justify-center language-selector">
+															<a {if $currentFlag == $flag}href="#"{else}href="javascript:void(0)" onClick="setLanguage('{$language}', this)"{/if} class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"  disabled>
+																<div class="relative">
+																	<div class="border-muted-200 peer-checked:border-primary-500 dark:border-muted-600 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-300"><img class="h-10 w-10 rounded-full" src="{$url}application/images/flags2/{$flag}.svg" alt="{$flag} flag icon"></div>
+																	<div class="bg-primary-500 dark:border-muted-800 absolute -end-1 -top-1 h-7 w-7 items-center justify-center rounded-full border-4 text-white peer-checked:flex{if $currentFlag != $flag} hidden{/if}">
+																		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" class="icon h-3 w-5" width="1em" height="1em" viewBox="0 0 24 24">
+																			<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path>
+																		</svg>
+																	</div>
+																</div>
+																{ucfirst($language)}
+															</a>
+														</div>
+													{/foreach}
+												</div>
+											</div>
+										</div>
+									</div>
+                                </div>
+                            </div>
                             <div class="group inline-flex items-center justify-center text-right">
                                 <div data-headlessui-state class="relative h-9 w-9 text-left">
 									<a href="#" data-bs-toggle="dropdown">
@@ -300,14 +334,6 @@
 									</div>
                                 </div>
                             </div>
-                            <button type="button" class="border-muted-200 hover:ring-muted-200 dark:hover:ring-muted-700 dark:border-muted-700 dark:bg-muted-800 dark:ring-offset-muted-900 flex h-9 w-9 items-center justify-center rounded-full border bg-white ring-1 ring-transparent transition-all duration-300 hover:ring-offset-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
-                                    <g fill="currentColor">
-                                        <path d="M112 80a32 32 0 1 1-32-32a32 32 0 0 1 32 32Zm64 32a32 32 0 1 0-32-32a32 32 0 0 0 32 32Zm-96 32a32 32 0 1 0 32 32a32 32 0 0 0-32-32Zm96 0a32 32 0 1 0 32 32a32 32 0 0 0-32-32Z" opacity=".2"/>
-                                        <path d="M80 40a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm96 16a40 40 0 1 0-40-40a40 40 0 0 0 40 40Zm0-64a24 24 0 1 1-24 24a24 24 0 0 1 24-24Zm-96 80a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm96-64a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Z"/>
-                                    </g>
-                                </svg>
-                            </button>
                             <div class="group inline-flex items-center justify-center text-right">
                                 <div data-headlessui-state class="relative h-9 w-9 text-left">
 									<a href="#" data-bs-toggle="dropdown">
@@ -440,6 +466,22 @@
 		$(function () {
 			$('[data-toggle="tooltip"]').tooltip()
 		})
+	</script>
+
+	<script type="text/javascript">
+		function setLanguage(language, field)
+		{
+			$("#language_picker").fadeOut(250, function()
+			{
+				$(this).html('<div class="fa-2x text-center text-white"><i class="fas fa-spinner fa-spin"></i></div>').fadeIn(250, function()
+				{
+					$.get(Config.URL + "sidebox_language_picker/language_picker/set/" + language, function()
+					{
+						window.location.reload(true);
+					});
+				});
+			})
+		}
 	</script>
     </body>
 </html>

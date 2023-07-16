@@ -57,6 +57,8 @@ class Admin extends MX_Controller
             "realm_status" => $this->config->item('disable_realm_status'),
             "realms" => $realms,
             "uptimes" => $uptimes,
+            "languages" => $this->language->getAllLanguages(),
+            "currentFlag" => $this->language->getAbbreviationByLanguage($this->language->getLanguage())
         );
 
         $output = $this->template->loadPage("dashboard.tpl", $data);
