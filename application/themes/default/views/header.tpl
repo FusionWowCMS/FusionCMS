@@ -10,7 +10,7 @@
  | |  | |_| \__ \ | (_) | | | | |____| |  | |____) |
  |_|   \__,_|___/_|\___/|_| |_|\_____|_|  |_|_____/ 
 
- https://github.com/Yekta-Core/FusionCMS/
+ https://github.com/FusionWowCMS/FusionCMS
 
 -->
 
@@ -39,8 +39,10 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-		{minify files=array("css/default.css", "css/tooltip.css", "{$theme_path}vendor/Bootstrap/5.1.3/css/bootstrap.min.css", "{$theme_path}vendor/Sweetalert2/11.4.8/css/sweetalert2.min.css", "{$theme_path}vendor/AnimateCSS/4.1.1/animate.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.carousel.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.theme.default.min.css", "{$theme_path}vendor/MagnificPopup/css/magnific-popup.css", "{$theme_path}assets/css/style.css", "{$theme_path}assets/css/custom.css") type='css' output='cache/data/all.min.css' disable={$minify_css}}
-		
+		{minify files=array("css/default.css", "css/tooltip.css", "vendor/node_modules/bootstrap/dist/css/bootstrap.min.css", "vendor/node_modules/sweetalert2/dist/sweetalert2.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.carousel.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.theme.default.min.css", "{$theme_path}vendor/MagnificPopup/css/magnific-popup.css", "{$theme_path}assets/css/style.css", "{$theme_path}assets/css/custom.css") type='css' output='cache/data/all.min.css' disable={$minify_css}}
+
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css">
+
 		{if $extra_css}<link rel="stylesheet" href="{$path}{$extra_css}" />{/if}
 		{*	{if !is_array($extra_css)}
 				<link rel="stylesheet" href="{$path}{$extra_css}">
@@ -52,12 +54,14 @@
 				{/strip}
 			{/if}
 		{/if} *}
-		
+
 		<!-- Header CSS.End -->
-		
+
 		<!-- Header JS.Start -->
-		{minify files=array("{$theme_path}assets/js/jquery-3.6.0.min.js", "js/jquery.placeholder.min.js", "js/jquery.sort.js", "{$theme_path}vendor/Bootstrap/5.1.3/js/bootstrap.bundle.min.js", "{$theme_path}vendor/Sweetalert2/11.4.8/js/sweetalert2.all.min.js", "{$theme_path}vendor/Marquee/jquery.marquee.min.js", "{$theme_path}vendor/OwlCarousel2/js/owl.carousel.js", "{$theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "{$theme_path}assets/js/main.js", "{$theme_path}assets/js/cookie.js", "{$theme_path}assets/js/slider.js", "js/ui.js", "js/language.js", "js/tooltip.js") type='js' output='cache/data/all.min.js' disable={$minify_js}}
-		
+		{minify files=array("{$theme_path}assets/js/jquery-3.6.0.min.js", "js/jquery.placeholder.min.js", "js/jquery.sort.js", "vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "{$theme_path}vendor/Marquee/jquery.marquee.min.js", "{$theme_path}vendor/OwlCarousel2/js/owl.carousel.js", "{$theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "js/main.js", "js/cookie.js", "slider.js", "js/ui.js", "js/language.js", "js/tooltip.js") type='js' output='cache/data/all.min.js' disable={$minify_js}}
+
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+
 		{if $extra_js}<script type="text/javascript" src="{$path}{$extra_js}"></script>{/if}
 		{*	{if !is_array($extra_js)}
 				<script type="text/javascript" src="{$path}{$extra_js}"></script>
@@ -71,10 +75,7 @@
 		{/if} *}
 		
 		<!-- Header JS.End -->
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css">
 
-		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
-		
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
