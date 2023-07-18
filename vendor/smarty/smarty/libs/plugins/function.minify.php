@@ -1,182 +1,215 @@
 <?php
 
-/**
- * Smarty plugin
- * @package Smarty
- * @subpackage plugins
- */
-
-/**
- * Smarty minify function plugin
- *
- * Type:    function<br>
- * Name:    minify<br>
- * Date:    2023-07-09
- * Purpose: minify content from several JS or CSS files into one
- * Input:   string to count
- * Example: {minify input=$array_of_files_to_minify output=$path_to_output_file age=$seconds_to_try_reminify_file}
- *
- * @author Keramat Jokar
- * @version 1.0
- * @param array
- * @param string
- * @param int
- * @return string
- */
- 
+# Import required classes
 use MatthiasMullie\Minify;
 
-function smarty_function_minify($params, &$smarty)
+/**
+ * Minify
+ *
+ * @param  array  $params
+ * @return object $smarty
+ */
+function smarty_function_minify($params = false, &$smarty)
 {
-    /**
-     * Build minified file
-     *
-     * @param array $params
-     */
-    if (!function_exists('smarty_build_minify')) {
-        function smarty_build_minify($params)
-        {
-            $filelist = array();
-            $lastest_mtime = time();
+    // Missing a parameter or two..
+    if(!is_array($params) || !isset($params['type']) || !isset($params['files']) || !isset($params['output']) || !isset($params['disable']))
+        return false;
 
-            $filelist = $params['input'];
-            $output_filename = preg_replace('/\.(js|css)$/i', '.$1', $params['output']);
+    // Define ROOTURL
+    if(!defined('ROOTURL'))
+        define('ROOTURL', rtrim(base_url(str_replace(['\\', DIRECTORY_SEPARATOR], '/', APPPATH)), '/') . '/');
 
-            $last_cmtime = 0;
+    // Define ROOTPATH
+    if(!defined('ROOTPATH'))
+        define('ROOTPATH', rtrim(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, realpath(APPPATH)), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
 
-            if (file_exists($params['file_path'] . $output_filename)) {
-                $last_cmtime = filemtime($params['file_path'] . $output_filename);
-            }
+    // Get parameters
+    $type    = strtolower($params['type']);
+    $files   = $params['files'];
+    $output  = $params['output'];
+    $disable = $params['disable'];
+    $age = 60 * 60 * 24 * CI::$APP->config->item('minify_cache_time');
 
-            if ($lastest_mtime > $last_cmtime) {
-                $files_to_cleanup = glob($params['file_path'] . $output_filename);
+    ####################################################################
 
-                foreach ($files_to_cleanup as $cfile) {
-                    if (is_file($cfile) && file_exists($cfile)) {
-                        unlink($cfile);
-                    }
-                }
+    # Validate type.Starts
 
-                $dirname = dirname($params['file_path'] . $output_filename);
+    if(!in_array($type, ['css', 'js']))
+        return false;
 
-                if (!is_dir($dirname)) {
-                    mkdir($dirname, 0755, true);
-                }
+    # Validate type.Ends
 
-                $min = null;
-                if ($params['type'] == 'js') {
-                    $min = new Minify\JS();
-                } elseif ($params['type'] == 'css') {
-                    $min = new Minify\CSS();
-                }
+    ####################################################################
 
-                foreach ($filelist as $file) {
-                    if (filter_var($file, FILTER_VALIDATE_URL) !== FALSE)
-                        $min->add(file_get_contents($file));
-                    else
-                        $min->add((filter_var($params['file_path'] . $file, FILTER_VALIDATE_URL) !== FALSE) ? file_get_contents($params['file_path'] . $file) : $params['file_path'] . $file);
-                }
+    # Validate files.Starts
 
-				$min->minify($params['file_path'] . $output_filename);
-            }
+    if(!$files)
+        return false;
 
-            smarty_print_out($params);
-        }
+    // Increase compatibility
+    if(!is_array($files))
+        $files = [$files];
+
+    // Format files array
+    foreach($files as $k => $file)
+    {
+        // File is url - no need to go any further
+        if(filter_var($files[$k], FILTER_VALIDATE_URL) !== FALSE)
+            continue;
+
+        // CSS import - no need to go any further
+        if(__minify_parse__($files[$k]))
+            continue;
+
+        // Add ROOTPATH to file.. if needed
+        if(strpos($files[$k], ROOTPATH) === false)
+            $files[$k] = ROOTPATH . str_replace(basename(ROOTPATH), '', $files[$k]);
+
+        // File exists - no need to go any further
+        if(file_exists($files[$k]))
+            continue;
+
+        // File doesn't exists
+        unset($files[$k]);
     }
 
-    /**
-     * Print filename
-     *
-     * @param string $params
-     */
-    if ( ! function_exists('smarty_print_out')) {
-        function smarty_print_out($params)
-        {
-            if ($params['disable'] == true) {
-                $output = '';
-                $filelist = $params['input'];
-                foreach ($filelist as $file) {
-                    if ($params['type'] == 'js') {
-                        $output .= '<script type="text/javascript" src="' . base_url() . $file.'" charset="utf-8"></script>' . "\n";
-                    } elseif ($params['type'] == 'css') {
-                        $output .= '<link type="text/css" rel="stylesheet" href="' . base_url() . $file . '" />' . "\n";
-                    }
-                }
+    # Validate files.Ends
 
-                echo $output;
-            } else {
-                $last_mtime = 0;
-                $output_filename = preg_replace('/\.(js|css)$/i', '.$1', $params['output']);
-			    $url = base_url() . APPPATH;
+    ####################################################################
 
-                if (file_exists($params['file_path'] . $output_filename)) {
-                    $last_mtime = filemtime($params['file_path'] . $output_filename);
-                }
+    # Validate output.Starts
 
-                if ($params['type'] == 'js') {
-                    echo '<script type="text/javascript" src="' . $url .  $output_filename . '" charset="utf-8"></script>';
-                } elseif ($params['type'] == 'css') {
-                    echo '<link type="text/css" rel="stylesheet" href="' . $url .  $output_filename . '" />';
-                } else {
-                    echo $output_filename;
-                }
-            }
-        }
+    if(!$output || strpos($output, $type) === false)
+        return false;
+
+    # Validate output.Ends
+
+    ####################################################################
+
+    # Validate disable.Starts
+
+    $disable = ($disable) ? true : false;
+
+    # Validate disable.Ends
+
+    ####################################################################
+
+    // No files left to minify
+    if(!count($files))
+        return false;
+
+    // Initialize http queries
+    $queries = false;
+
+    // Get http queries from output
+    if(parse_url($output, PHP_URL_QUERY))
+    {
+        $queries = '?' . parse_url($output, PHP_URL_QUERY);
+        $output  = str_replace($queries, '', $output);
     }
 
-    $params['file_path'] = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, realpath(APPPATH). '/');
+    // Minifier is disabled, print all files
+    if($disable)
+        return __minify_print__($type, $files, $queries);
 
-    if (!isset($params['input'])) {
-        trigger_error('input cannot be empty', E_USER_NOTICE);
-        return;
+    // Split file name from output path
+    $outputFILE = basename($output);
+    $outputPATH = str_replace($outputFILE, '', $output);
+
+    // Add ROOTPATH to output.. if needed
+    if(strpos($outputPATH, ROOTPATH) === false)
+        $outputPATH = ROOTPATH . str_replace(basename(ROOTPATH), '', $outputPATH);
+
+    // Create output directory
+    if(!file_exists($outputPATH))
+    {
+        mkdir($outputPATH);
+        chmod($outputPATH, 0755);
     }
 
-    if (!is_array($params['input']) || count($params['input']) < 1) {
-        trigger_error('input must be array and have one item at least', E_USER_NOTICE);
-        return;
+    // Initialize valid
+    $valid = true;
+
+    // Extra conditions here to check if cache file still valid...
+    if(file_exists($outputPATH . $outputFILE)) {
+        $cache_time = filemtime($outputPATH . $outputFILE);
+
+        if (time() > $cache_time + $age)
+            $valid = false;
+
+        // Minified file found - no need to go any further
+        if($valid)
+            return __minify_print__($type, [$outputPATH . $outputFILE], $queries);
     }
 
-    foreach ($params['input'] as $file) {
-        $ext = pathinfo($file, PATHINFO_EXTENSION);
+    // Create new object off `Minify`
+    $minifier = ($type === 'css') ? new Minify\CSS() : new Minify\JS();
 
-        if (!in_array($ext, array('js', 'css'))) {
-            trigger_error('all input files must have js or css extension', E_USER_NOTICE);
-            return;
-        }
+    // Loop through files and add them to minifier
+    foreach($files as $file)
+        $minifier->add((filter_var($file, FILTER_VALIDATE_URL) !== FALSE) ? file_get_contents($file) : $file);
 
-        $files_extensions[] = $ext;
+    // Save minified file
+    $minifier->minify($outputPATH . $outputFILE);
+
+    // Print minified file
+    return __minify_print__($type, [$outputPATH . $outputFILE], $queries);
+}
+
+/**
+ * Minify print
+ *
+ * @param  string $type
+ * @param  array  $files
+ * @param  string $queries
+ * @return string $output
+ */
+function __minify_print__($type, $files, $queries = false)
+{
+    // Initialize output
+    $output = '';
+
+    // Prepare tags
+    $tags = [
+        'js'         => '<script type="text/javascript" src="__file____query__"></script>',
+        'css'        => '<link type="text/css" rel="stylesheet" href="__file____query__" />',
+        'css_inline' => '<style type="text/css">__file__</style>'
+    ];
+
+    // Loop through files
+    foreach($files as $file)
+    {
+        // Backup type
+        $_type = $type;
+
+        // CSS import - switch type
+        if(__minify_parse__($file))
+            $_type = 'css_inline';
+
+        // Swap ROOTPATH with ROOTURL
+        $file = str_replace(ROOTPATH, ROOTURL, $file);
+
+        // Append to output
+        $output .= str_replace(['__file__', '__query__'], [$file, $queries], $tags[$_type]) . "\n";
     }
 
-    if (count(array_unique($files_extensions)) > 1) {
-        trigger_error('all input files must have the same extension', E_USER_NOTICE);
-        return;
-    }
+    return $output;
+}
 
-    $params['type'] = $ext;
+/**
+ * Minify parse
+ *
+ * @param  string $text
+ * @return array  $matches
+ */
+function __minify_parse__($text)
+{
+    // Parse @import rules
+    preg_match_all("/@import (url\(\"?)?(url\()?(\")?(.*?)(?(1)\")+(?(2)\))+(?(3)\")/i", $text, $matches);
 
-    if (!isset($params['output'])) {
-        trigger_error('output cannot be empty', E_USER_NOTICE);
-    }
+    // No match found
+    if(!isset($matches[0][0]))
+        return false;
 
-    if (!isset($params['age'])) {
-        $params['age'] = 60 * 60 * 24 * CI::$APP->config->item('minify_cache_time');
-    }
-
-    if (!isset($params['disable'])) {
-        $params['disable'] = false;
-    }
-
-    if ($params['disable'] == true) {
-        smarty_print_out($params);
-        return;
-    }
-
-    $output_filename = preg_replace('/\.(js|css)$/i', '.$1', $params['output']);
-    $cache_time = filemtime($params['file_path'] . $output_filename);
-
-    if (time() > $cache_time + $params['age']) {
-        smarty_build_minify($params);
-    } else {
-        smarty_print_out($params);
-    }
+    return $matches;
 }
