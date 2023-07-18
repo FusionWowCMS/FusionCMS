@@ -83,6 +83,7 @@ class News extends MX_Controller
                 $this->news_articles[$key]['comments_button_id'] = "id='comments_button_" . $article['id'] . "'";
                 $this->news_articles[$key]['tags'] = $this->news_model->getTags($id);
                 $this->news_articles[$key]['type_content'] = ($article['type'] == 2) ? $article['type_content'] : json_decode($article['type_content'], true);
+                $this->news_articles[$key]['avatar'] = false;
             }
 
             $content = $this->template->loadPage("articles.tpl", array("articles" => $this->news_articles, 'url' => $this->template->page_url, "pagination" => ''));
@@ -157,6 +158,7 @@ class News extends MX_Controller
             $this->news_articles[$key]['comments_button_id'] = "id='comments_button_" . $article['id'] . "'";
             $this->news_articles[$key]['tags'] = $this->news_model->getTags($article['id']);
             $this->news_articles[$key]['type_content'] = ($article['type'] == 2) ? $article['type_content'] : json_decode($article['type_content'], true);
+            $this->news_articles[$key]['avatar'] = false;
         }
     }
 
