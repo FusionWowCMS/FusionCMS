@@ -77,10 +77,7 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
     );
 
     public static $classMap = array (
-        'CSSmin' => __DIR__ . '/..' . '/smarty/smarty/libs/plugins/minify/CSSmin.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'JSMin' => __DIR__ . '/..' . '/smarty/smarty/libs/plugins/minify/JSmin.php',
-        'JSMinException' => __DIR__ . '/..' . '/smarty/smarty/libs/plugins/minify/JSmin.php',
         'Smarty' => __DIR__ . '/..' . '/smarty/smarty/libs/Smarty.class.php',
         'SmartyCompilerException' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smartycompilerexception.php',
         'SmartyException' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smartyexception.php',
