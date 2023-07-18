@@ -39,7 +39,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-		{minify files=array("css/default.css", "css/tooltip.css", "vendor/node_modules/bootstrap/dist/css/bootstrap.min.css", "vendor/node_modules/sweetalert2/dist/sweetalert2.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.carousel.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.theme.default.min.css", "{$theme_path}vendor/MagnificPopup/css/magnific-popup.css", "{$theme_path}assets/css/style.css", "{$theme_path}assets/css/custom.css") type='css' output='cache/data/all.min.css' disable={$minify_css}}
+		{minify files=array("css/default.css", "css/tooltip.css", "vendor/node_modules/bootstrap/dist/css/bootstrap.min.css", "vendor/node_modules/sweetalert2/dist/sweetalert2.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.carousel.min.css", "{$theme_path}vendor/OwlCarousel2/css/owl.theme.default.min.css", "{$theme_path}vendor/MagnificPopup/css/magnific-popup.css", "{$theme_path}assets/css/style.css", "{$theme_path}assets/css/custom.css") type='css' output='cache/data/minify/all.min.css' disable={$minify_css}}
 
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css">
 
@@ -58,7 +58,7 @@
 		<!-- Header CSS.End -->
 
 		<!-- Header JS.Start -->
-		{minify files=array("{$theme_path}assets/js/jquery-3.6.0.min.js", "js/jquery.placeholder.min.js", "js/jquery.sort.js", "vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "{$theme_path}vendor/Marquee/jquery.marquee.min.js", "{$theme_path}vendor/OwlCarousel2/js/owl.carousel.js", "{$theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "js/main.js", "js/cookie.js", "slider.js", "js/ui.js", "js/language.js", "js/tooltip.js") type='js' output='cache/data/all.min.js' disable={$minify_js}}
+		{minify files=array("{$theme_path}assets/js/jquery-3.6.0.min.js", "js/jquery.placeholder.min.js", "js/jquery.sort.js", "vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "{$theme_path}vendor/Marquee/jquery.marquee.min.js", "{$theme_path}vendor/OwlCarousel2/js/owl.carousel.js", "{$theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "js/main.js", "js/cookie.js", "slider.js", "js/ui.js", "js/language.js", "js/tooltip.js") type='js' output='cache/data/minify/all.min.js' disable={$minify_js}}
 
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
