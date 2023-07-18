@@ -88,6 +88,7 @@ class Theme extends MX_Controller
 
         $this->cache->delete('*.cache');
         $this->cache->delete('search/*.cache');
+        $this->cache->delete('minify/*');
 
         die('yes');
     }

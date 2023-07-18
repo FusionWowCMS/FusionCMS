@@ -16,7 +16,10 @@
 			<td>Website cache</td>
 			<td id="row_website">{$website.files} files ({$website.sizeString})</td>
 		</tr>
-
+		<tr>
+			<td>Theme minify cache</td>
+			<td id="row_theme">{$theme.files} files ({$theme.sizeString})</td>
+		</tr>
 		<tr>
 			<td><b>Total</b></td>
 			<td id="row_total"><b>{$total.files} files ({$total.size})</b></td>

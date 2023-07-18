@@ -53,6 +53,10 @@ var Fusion_Cache = {
 				$("#row_website").html('<div class="progress_bar"><a style="width:0%"></a></div>');
 			break;
 
+			case "theme":
+				$("#row_website").html('<div class="progress_bar"><a style="width:0%"></a></div>');
+			break;
+
 			case "all":
 				$("#row_website").html('<div class="progress_bar"><a style="width:0%"></a></div>');
 				$("#row_message").html('<div class="progress_bar"><a style="width:0%"></a></div>');
@@ -89,11 +93,6 @@ var Fusion_Cache = {
 					{
 						$("#row_website").html("0 files (0 B)");
 					});
-
-					$("#row_message .progress_bar a").animate({width:"100%"}, 200, function()
-					{
-						$("#row_message").html("0 files (0 B)");
-					});
 				break;
 
 				case "website":
@@ -103,15 +102,22 @@ var Fusion_Cache = {
 					});
 				break;
 
+				case "theme":
+					$("#row_theme .progress_bar a").animate({width:"100%"}, 200, function()
+					{
+						$("#row_theme").html("0 files (0 B)");
+					});
+				break;
+
 				case "all":
 					$("#row_website .progress_bar a").animate({width:"100%"}, 200, function()
 					{
 						$("#row_website").html("0 files (0 B)");
 					});
 
-					$("#row_message .progress_bar a").animate({width:"100%"}, 200, function()
+					$("#row_theme .progress_bar a").animate({width:"100%"}, 200, function()
 					{
-						$("#row_message").html("0 files (0 B)");
+						$("#row_theme").html("0 files (0 B)");
 					});
 
 					$("#row_item .progress_bar a").animate({width:"100%"}, 200, function()
@@ -141,8 +147,15 @@ var Fusion_Cache = {
 			size: Fusion_Cache.toBytes(websiteHTML[1])
 		};
 
-		var totalFiles = website.files + item.files,
-			totalSize = Fusion_Cache.formatSize(parseInt(website.size + item.size));
+		var themeHTML = $("#row_theme").html().replace(")", "").split(" files (");
+
+		var theme = {
+			files: parseInt(themeHTML[0]),
+			size: Fusion_Cache.toBytes(themeHTML[1])
+		};
+
+		var totalFiles = website.files + item.files + theme.files,
+			totalSize = Fusion_Cache.formatSize(parseInt(website.size + item.size + theme.size));
 
 		$("#row_total").html("<b>" + totalFiles + " files (" + totalSize + ")</b>")
 
