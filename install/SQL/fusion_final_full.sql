@@ -645,11 +645,11 @@ CREATE TABLE `image_slider`  (
 -- Records of image_slider
 -- ----------------------------
 INSERT INTO `image_slider` (`id`, `image`, `link`, `text`, `order`, `header`, `body`, `footer`) VALUES
-(1, NULL, '', '', 1, 'Header', 'Body', 'Footer'),
-(2, NULL, 'register', 'Join the battle today! Click here to sign up!', 2, 'Header', 'Body', 'Footer'),
-(3, NULL, 'vote', 'Vote and be rewarded', 3, 'Header', 'Body', 'Footer'),
-(4, NULL, '', '', 4, 'Header', 'Body', 'Footer'),
-(5, NULL, '', '', 5, 'Header', 'Body', 'Footer');
+(1, '{image_path}slides/1.jpg', '', '', 1, 'Header', 'Body', 'Footer'),
+(2, '{image_path}slides/1.jpg', 'register', 'Join the battle today! Click here to sign up!', 2, 'Header', 'Body', 'Footer'),
+(3, '{image_path}slides/1.jpg', 'vote', 'Vote and be rewarded', 3, 'Header', 'Body', 'Footer'),
+(4, '{image_path}slides/1.jpg', '', '', 4, 'Header', 'Body', 'Footer'),
+(5, '{image_path}slides/1.jpg', '', '', 5, 'Header', 'Body', 'Footer');
 
 -- ----------------------------
 -- Table structure for item_display
