@@ -19,11 +19,6 @@
 </div>
 
 {foreach from=$articles key=key item=article}
-	{* Check for read more *}
-	{if !$is_single && $article.content|count_characters >= 255}
-		{$article.readMore = true}
-	{/if}
-
 	<article class="pagebody news-article {if $is_single}is-single{/if} {if $article.comments != -1}has-comments{/if} {if $article.tags}has-tags{/if} {if key(reset($articles)) == $key}first-item{/if} {if !isset($articles[$key + 1])}last-item{/if}">
 		<div glow><div glow-lines></div></div>
 
@@ -62,7 +57,7 @@
 						<div class="article-content">{$article.summary}</div>
 					</div>
 
-					{if isset($article.readMore)}
+					{if $article.readMore}
 						<div class="article-foot">
 							<a href="{$url}news/view/{$article.id}" class="nice_button btn-readmore" title="{lang("read_more", "news")}">{lang("read_more", "news")} <i class="icon-readmore"></i></a>
 						</div>

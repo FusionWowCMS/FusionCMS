@@ -133,6 +133,8 @@ class News extends MX_Controller
             $this->startIndex = 0;
         }
 
+        $summary_character_limit = $this->config->item('summary_character_limit');
+
         // Get the articles with the lower and upper limit decided by our pagination.
         $this->news_articles = $this->news_model->getArticles((int)$this->startIndex, ((int)$this->startIndex + $config['per_page']));
 
@@ -148,9 +150,9 @@ class News extends MX_Controller
             }
 
             if (empty($article['content_' . $LangAbbr . ''])) {
-                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $DefaultLangAbbr . '']), 250));
+                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $DefaultLangAbbr . '']), $summary_character_limit));
             } else {
-                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $LangAbbr . '']), 250));
+                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $LangAbbr . '']), $summary_character_limit));
             }
 
             if (empty($article['content_' . $LangAbbr . ''])) {
@@ -166,6 +168,7 @@ class News extends MX_Controller
             $this->news_articles[$key]['tags'] = $this->news_model->getTags($article['id']);
             $this->news_articles[$key]['type_content'] = ($article['type'] == 2) ? $article['type_content'] : json_decode($article['type_content'], true);
             $this->news_articles[$key]['avatar'] = false;
+            $this->news_articles[$key]['readMore'] = strlen($this->news_articles[$key]['content']) > $summary_character_limit;
         }
     }
 
