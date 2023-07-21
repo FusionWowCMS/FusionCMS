@@ -59,7 +59,7 @@
 					{if $is_single}<div class="divider"></div>{/if}
 
 					<div class="article-body">
-						<div class="article-content">{$article.content}</div>
+						<div class="article-content">{$article.summary}</div>
 					</div>
 
 					{if isset($article.readMore)}

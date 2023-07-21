@@ -14,6 +14,7 @@ class News extends MX_Controller
         $this->load->library('pagination');
         $this->load->model('news_model');
         $this->load->model('comments_model');
+        $this->load->helper('htmlpurifier_helper');
     }
 
     public function sortByDate($a, $b)
@@ -147,9 +148,15 @@ class News extends MX_Controller
             }
 
             if (empty($article['content_' . $LangAbbr . ''])) {
-                $this->news_articles[$key]['content'] = character_limiter(langColumn($article['content_' . $DefaultLangAbbr . '']), 650);
+                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $DefaultLangAbbr . '']), 250));
             } else {
-                $this->news_articles[$key]['content'] = character_limiter(langColumn($article['content_' . $LangAbbr . '']), 650);
+                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $LangAbbr . '']), 250));
+            }
+
+            if (empty($article['content_' . $LangAbbr . ''])) {
+                $this->news_articles[$key]['content'] = langColumn($article['content_' . $DefaultLangAbbr . '']);
+            } else {
+                $this->news_articles[$key]['content'] = langColumn($article['content_' . $LangAbbr . '']);
             }
             $this->news_articles[$key]['date'] = date("Y/m/d", $article['timestamp']);
             $this->news_articles[$key]['author'] = ($article['author_id'] == 0) ? lang("system", "news") : $this->user->getNickname($article['author_id']) ;
