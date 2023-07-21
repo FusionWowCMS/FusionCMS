@@ -374,7 +374,7 @@
 	var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 	tinymce.init({
-		mode : "textareas",
+		selector : "textarea",
 
 		height: 400,
 
