@@ -17,3 +17,4 @@ uploads/*
 .php-cs-fixer.cache
 install/.lock
 /application/config/owner.php
+/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/
