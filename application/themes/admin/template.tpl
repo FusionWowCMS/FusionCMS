@@ -390,9 +390,7 @@
                             </span>
                         </label>
                     </div>
-                    
-                    <div class="translate-x-0 translate-y-0 absolute end-[0.2em] top-[0.2em] z-20 flex items-center justify-center transition-all duration-300"><button type="button" class="bg-primary-700 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300"><img class="h-7 w-7 rounded-full" src="../img/icons/flags/united-states-of-america.svg" alt="flag icon"></button></div>
-                    
+
                     <div class="translate-x-0 translate-y-0 absolute end-[0.2em] top-[0.2em] z-20 flex items-center justify-center transition-all duration-300">
                         <a aria-current="page" href="analytics.html#" class="router-link-active router-link-exact-active inline-flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300">
                             <span class="bg-primary-700 flex h-9 w-9 items-center justify-center rounded-full">
