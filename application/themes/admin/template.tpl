@@ -21,7 +21,7 @@
         <meta property="og:description" content="Admin Panel {$serverName}">
         <meta property="og:type" content="website">
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-        <meta property="og:title" content="Tairo">
+        <meta property="og:title" content="{$serverName}">
 		
 		<link rel="shortcut icon" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/fusionico.png">
 
