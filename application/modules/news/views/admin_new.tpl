@@ -11,6 +11,9 @@
 						<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl active" href="#article_en" data-bs-target="#article_en" data-bs-toggle="tab"> <img class="align-baseline" src="{$url}application/images/flags/en.png"> English</a>
 					</li>
 					<li class="nav-item mx-1">
+						<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl" href="#article_fa" data-bs-target="#article_fa" data-bs-toggle="tab"> <img class="align-baseline" src="{$url}application/images/flags/ir.png"> فارسی</a>
+					</li>
+					<li class="nav-item mx-1">
 						<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl" href="#article_de" data-bs-target="#article_de" data-bs-toggle="tab"> <img class="align-baseline" src="{$url}application/images/flags/de.png"> German</a>
 					</li>
 					<li class="nav-item mx-1">
@@ -53,6 +56,24 @@
 							<label class="col-sm-2 col-form-label" for="description_en">Content</label>
 							<div class="col-sm-10">
 								<textarea name="description_en" class="tinymce_en form-control max-h-52 nui-focus border-muted-300 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full border bg-white font-sans transition-all duration-300 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 min-h-[2.5rem] text-sm leading-[1.6] rounded-xl resize-none p-2" id="description_en" cols="30" rows="10"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<div class="tab-pane" id="article_fa">
+						<form role="form" onSubmit="News.send(); return false">
+						<div class="form-group row mb-3">
+						<label class="col-sm-2 col-form-label" for="headline_fa">Headline</label>
+						<div class="col-sm-10">
+							<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" id="headline_fa">
+						</div>
+						</div>
+						</form>
+
+						<div class="form-group row mb-3">
+							<label class="col-sm-2 col-form-label" for="description_fa">Content</label>
+							<div class="col-sm-10">
+								<textarea name="description_fa" class="tinymce_fa form-control max-h-52 nui-focus border-muted-300 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full border bg-white font-sans transition-all duration-300 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 min-h-[2.5rem] text-sm leading-[1.6] rounded-xl resize-none p-2" id="description_fa" cols="30" rows="10"></textarea>
 							</div>
 						</div>
 					</div>

@@ -95,6 +95,8 @@ var News = {
         fd.append("comments",        $("#comments").is(":checked"));
         fd.append("headline_en",     $("#headline_en").val());
         fd.append("content_en",      $("textarea.tinymce_en").val());
+        fd.append("headline_fa",     $("#headline_fa").val());
+        fd.append("content_fa",      $("textarea.tinymce_fa").val());
         fd.append("headline_de",     $("#headline_de").val());
         fd.append("content_de",      $("textarea.tinymce_de").val());
         fd.append("headline_es",     $("#headline_es").val());

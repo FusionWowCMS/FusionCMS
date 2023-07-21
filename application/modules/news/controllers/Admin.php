@@ -148,10 +148,12 @@ class Admin extends MX_Controller
 
         $type = $this->input->post('type');
         $comments = $this->input->post('comments');
-        $headline = $this->input->post('headline_' . $this->language->getLanguageAbbreviation() . '');
-        $content = $this->input->post('content_' . $this->language->getLanguageAbbreviation() . '', false);
+        $headline = $this->input->post('headline_' . $this->language->getLanguageAbbreviation());
+        $content = $this->input->post('content_' . $this->language->getLanguageAbbreviation(), false);
         $headline_en = $this->input->post('headline_en');
         $content_en = $this->input->post('content_en', false);
+        $headline_fa = $this->input->post('headline_fa');
+        $content_fa = $this->input->post('content_fa', false);
         $headline_de = $this->input->post('headline_de');
         $content_de = $this->input->post('content_de', false);
         $headline_es = $this->input->post('headline_es');
@@ -293,23 +295,23 @@ class Admin extends MX_Controller
                 $type_content = json_encode($type_content);
             }
 
-            $this->news_model->update($id, $type, $type_content, $comments, $headline_en, $content_en, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko);
+            $this->news_model->update($id, $type, $type_content, $comments, $headline_en, $content_en, $headline_fa, $content_fa, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko);
 
             // Add log
             $this->logger->createLog("admin", "edit", "Edited a news", ['news' => $headline]);
 
-            $this->plugins->onUpdate($id, $type, $type_content, $comments, $headline_en, $content_en, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko);
+            $this->plugins->onUpdate($id, $type, $type_content, $comments, $headline_en, $content_en, $headline_fa, $content_fa, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko);
         } else {
             if ($type == 1) {
                 $type_content = json_encode($type_content);
             }
 
-            $this->news_model->create($type, $type_content, $comments, $headline_en, $content_en, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko);
+            $this->news_model->create($type, $type_content, $comments, $headline_en, $content_en, $headline_fa, $content_fa, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko);
 
             // Add log
             $this->logger->createLog("admin", "add", "Created a news", ['news' => $headline]);
 
-            $this->plugins->onCreate($type, $type_content, $comments, $headline_en, $content_en, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko);
+            $this->plugins->onCreate($type, $type_content, $comments, $headline_en, $content_en, $headline_fa, $content_fa, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko);
         }
 
 

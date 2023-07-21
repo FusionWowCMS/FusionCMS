@@ -137,7 +137,7 @@ class News_model extends CI_Model
      * @param  $content
      * @return bool
      */
-    public function create($type, $type_content, $comments, $headline_en, $content_en, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko)
+    public function create($type, $type_content, $comments, $headline_en, $content_en, $headline_fa, $content_fa, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko)
     {
         $data = array(
             'type' => $type,
@@ -147,6 +147,8 @@ class News_model extends CI_Model
             'author_id' => $this->user->getId(),
             'headline_en'  => $headline_en,
             'content_en'   => $content_en,
+            'headline_fa'  => $headline_fa,
+            'content_fa'   => $content_fa,
             'headline_de'  => $headline_de,
             'content_de'   => $content_de,
             'headline_es'  => $headline_es,
@@ -181,7 +183,7 @@ class News_model extends CI_Model
      * @param  $content
      * @return bool
      */
-    public function update($id, $type, $type_content, $comments, $headline_en, $content_en, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko)
+    public function update($id, $type, $type_content, $comments, $headline_en, $content_en, $headline_fa, $content_fa, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko)
     {
         if (!is_numeric($id)) {
             return false;
@@ -193,6 +195,8 @@ class News_model extends CI_Model
             'comments'     => $comments,
             'headline_en'  => $headline_en,
             'content_en'   => $content_en,
+            'headline_fa'  => $headline_fa,
+            'content_fa'   => $content_fa,
             'headline_de'  => $headline_de,
             'content_de'   => $content_de,
             'headline_es'  => $headline_es,
