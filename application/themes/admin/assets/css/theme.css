@@ -16470,8 +16470,6 @@ html.dark .table .actions-hover a {
 	border-radius: 0 0 4px 4px;
 	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.04);
 	background-color: #FFF;
-	border: 1px solid #EEE;
-	border-top: 0;
 	padding: 15px;
 }
 
