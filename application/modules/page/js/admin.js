@@ -30,34 +30,31 @@ var Pages = {
 
 	send: function(id)
 	{
-		require([Config.URL + "application/js/tiny_mce/tinymce.min.js"], function () {
+		tinyMCE.triggerSave();
 
-			tinyMCE.triggerSave();
+		var data = {
+			name: $("#headline").val(),
+			identifier: $("#identifier").val(),
+			rank_needed: $("#rank_needed").val(),
+			content: $("textarea.tinymce").val(),
+			visibility: $("#visibility").val(),
+			csrf_token_name: Config.CSRF
+		};
 
-			var data = {
-				name: $("#headline").val(),
-				identifier: $("#identifier").val(),
-				rank_needed: $("#rank_needed").val(),
-				content: $("textarea.tinymce").val(),
-				visibility: $("#visibility").val(),
-				csrf_token_name: Config.CSRF
-			};
-	
-			$.post(Config.URL + "page/admin/create" + ((id) ? "/" + id : ""), data, function(response)
+		$.post(Config.URL + "page/admin/create" + ((id) ? "/" + id : ""), data, function(response)
+		{
+			if(response == "yes")
 			{
-				if(response == "yes")
-				{
-					window.location = Config.URL + "page/admin";
-				}
-				else
-				{
-					Swal.fire({
-					icon: 'error',
-					title: 'Oops...',
-					text: (response),
-					})
-				}
-			});
+				window.location = Config.URL + "page/admin";
+			}
+			else
+			{
+				Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: (response),
+				})
+			}
 		});
 	}
 }
