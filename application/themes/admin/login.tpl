@@ -18,7 +18,7 @@
     <meta property="og:locale" content="en">
     <meta property="og:type" content="website">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta property="og:title" content="{$serverName}">
+    <meta property="og:title" content="FusionCMS">
 
     <link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/layouts/layout.css">
 	<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/sweetalert2/css/sweetalert2-dark.css">

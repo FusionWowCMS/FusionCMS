@@ -226,10 +226,16 @@
 			<div class="form-group row mb-3">
 				<label class="col-sm-2 col-form-label" for="headline">Article settings</label>
 				<div class="col-sm-10">
-					<div class="checkbox-custom checkbox-default">
-						<input type="checkbox" class="custom-control-input" id="comments" {if $article.comments != -1}checked="yes"{/if} value="1"/>
-						<label for="comments" class="custom-control-label">Allow comments</label>
-					</div>
+					<label for="comments" class="flex cursor-pointer items-center">
+						<span class="relative block">
+							<input type="checkbox" id="comments" class="peer absolute z-0 h-full w-full cursor-pointer opacity-0" {if $article.comments != -1}checked="yes"{/if} value="1"><span class="border-muted-300 dark:border-muted-600 dark:bg-muted-700 absolute start-0.5 top-1/2 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border bg-white shadow transition focus:w-6 peer-checked:-translate-y-1/2 peer-checked:translate-x-full rtl:peer-checked:-translate-x-full"></span><span class="bg-muted-300 peer-focus:outline-muted-300 dark:bg-muted-600 dark:peer-focus:outline-muted-600 block h-6 w-11 rounded-full shadow-inner outline-1 outline-transparent transition-all duration-300 peer-focus:outline-dashed peer-focus:outline-offset-2 peer-focus:ring-0 peer-checked:bg-primary-400"></span>
+							<svg aria-hidden="true" viewBox="0 0 17 12" class="pointer-events-none absolute start-2 top-1/2 z-10 h-2.5 w-2.5 translate-y-0 fill-current text-white opacity-0 transition duration-300 peer-checked:-translate-y-1/2 peer-checked:opacity-100">
+								<path fill="currentColor" d="M16.576.414a1.386 1.386 0 0 1 0 1.996l-9.404 9.176A1.461 1.461 0 0 1 6.149 12c-.37 0-.74-.139-1.023-.414L.424 6.998a1.386 1.386 0 0 1 0-1.996 1.47 1.47 0 0 1 2.046 0l3.68 3.59L14.53.414a1.47 1.47 0 0 1 2.046 0z"></path>
+							</svg>
+						</span>
+						<span class="text-muted-400 relative ms-3 cursor-pointer select-none font-sans text-sm"></span>
+						Allow comments
+					</label>
 				</div>
 			</div>
 		</form>
