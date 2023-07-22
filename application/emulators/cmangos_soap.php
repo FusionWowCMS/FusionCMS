@@ -411,6 +411,19 @@ class Cmangos_soap implements Emulator
     }
 
     /**
+     * Send money via ingame mail to a specific character
+     *
+     * @param String $character
+     * @param String $subject
+     * @param String $text
+     * @param String $money
+     */
+    public function sendMoney($character, $subject, $text, $money)
+    {
+        $this->send(".send money " . $character . " \"" . $subject . "\" \"" . $text . "\" " . $money);
+    }
+
+    /**
      * Send console command
      *
      * @param String $command
