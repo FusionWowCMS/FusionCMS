@@ -585,13 +585,22 @@ class Template
             return $this->CI->smarty->view($this->theme_path . $page, $data, true, true);
         }
 
+        $isOldTheme = empty($this->theme_data['min_required_version']);
+
         // Consruct the path
-        $themeView = "application/" . $this->theme_path . "modules/" . $data['module'] . "/" . $page;
+        $oldThemeView = 'application/views/old/modules/' . $data['module'] . '/views/' . $page;
+
+        // Consruct the path
+        $themeView = 'application/' . $this->theme_path . 'modules/' . $data['module'] . '/' . $page;
         
         // Check if this theme wants to replace our view with it's own
         if (file_exists($themeView))
         {
             return $this->CI->smarty->view($themeView, $data, true);
+        }
+        else if ($isOldTheme && file_exists($oldThemeView))
+        {
+            return $this->CI->smarty->view($oldThemeView, $data, true);
         }
 
         return $this->CI->smarty->view('modules/' . $data['module'] . '/views/' . $page, $data, true);

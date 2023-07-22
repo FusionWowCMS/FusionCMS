@@ -5,6 +5,8 @@
 	"version": "1.0.0",
 	"date": "2023-01-01",
 	
+	"min_required_version": "8.0.0",
+
 	"favicon": "../assets/images/favicon.ico",
 
 	"normal_avatar": "avatars/0_normal.jpg",
