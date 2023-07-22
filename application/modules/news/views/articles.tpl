@@ -54,10 +54,10 @@
 					{if $is_single}<div class="divider"></div>{/if}
 
 					<div class="article-body">
-						<div class="article-content">{$article.summary}</div>
+						<div class="article-content">{if isset($article.summary) || !$is_single}{$article.summary}{else}{$article.content}{/if}</div>
 					</div>
 
-					{if $article.readMore}
+					{if isset($article.readMore) && $article.readMore}
 						<div class="article-foot">
 							<a href="{$url}news/view/{$article.id}" class="nice_button btn-readmore" title="{lang("read_more", "news")}">{lang("read_more", "news")} <i class="icon-readmore"></i></a>
 						</div>
