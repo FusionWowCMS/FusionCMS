@@ -83,6 +83,9 @@ class EditTheme extends MX_Controller
     private function loadConfigs()
     {
         foreach (glob("application/themes/" . $this->theme . "/config/*") as $file) {
+            if ($file == 'application/themes/' . $this->theme . '/config/' . 'template_vars.php' || $file == 'application/themes/' . $this->theme . '/config/' . 'base.php' || $file == 'application/themes/' . $this->theme . '/config/' . 'template_assets.php')
+                continue;
+
             $this->getConfig($file);
         }
     }
