@@ -280,6 +280,7 @@ class Template
             "image_path" => $this->image_path,
             "isOnline" => $this->CI->user->isOnline(),
             "theme_configs" => $this->theme_config,
+            "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
             "sideboxes" => $sideboxes
         );
 
@@ -457,6 +458,7 @@ class Template
             "recaptcha_sitekey" => $this->CI->config->item('recaptcha_sitekey'),
             "isOnline" => $this->CI->user->isOnline(),
             "theme_configs" => $this->theme_config,
+            "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
             "social_media" => array(
                 'facebook' => $this->CI->config->item('facebook'),
                 'twitter' => $this->CI->config->item('twitter'),
