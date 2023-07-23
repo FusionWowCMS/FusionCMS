@@ -1,15 +1,15 @@
-<form onSubmit="Auth.login(true); return false;">
+<form onSubmit="SideAuth.login(true); return false;">
     <div class="card-body">
-        <div class="alert alert-danger text-center error-feedback d-none" role="alert"></div>
+        <div class="alert alert-danger text-center side-error-feedback d-none" role="alert"></div>
 
         <div class="input-group p-0 flex-row">
             <label for="floatingUser" class="input-group-text" id="username" style="width:45px;"><i class="fas fa-user"></i></label>
-            <input type="text" class="form-control username-input border-0" id="floatingUser" placeholder="{lang('login_label_user', 'sidebox_info_login')}" aria-describedby="username">
+            <input type="text" class="form-control side-username-input border-0" id="floatingUser" placeholder="{lang('login_label_user', 'sidebox_info_login')}" aria-describedby="username">
         </div>
 
         <div class="input-group p-0 mt-3 flex-row">
-            <label class="input-group-text cursor-pointer" id="password" style="width:45px;" data-input-id="floatingPassword" data-show="false" onClick="Auth.showPassword(this);"><i class="fas fa-eye-slash"></i></label>
-            <input type="password" class="form-control password-input border-0" id="floatingPassword" placeholder="{lang('login_label_password', 'sidebox_info_login')}" aria-describedby="password">
+            <label class="input-group-text cursor-pointer" id="password" style="width:45px;" data-input-id="floatingPassword" data-show="false" onClick="SideAuth.showPassword(this);"><i class="fas fa-eye-slash"></i></label>
+            <input type="password" class="form-control side-password-input border-0" id="floatingPassword" placeholder="{lang('login_label_password', 'sidebox_info_login')}" aria-describedby="password">
         </div>
 
         <div class="captcha-field {if !$use_captcha}d-none{/if}">
@@ -18,12 +18,12 @@
                     <img src="{$url}auth/getCaptcha?{time()}" alt="captcha" width="150" height="30" id="captchaImage">
                 </label>
 
-                <span class="input-group-text cursor-pointer ms-0 rounded-0 rounded-bottom-start" id="captcha" style="width:40px;" data-captcha-id="captchaImage" onClick="Auth.refreshCaptcha(this);">
+                <span class="input-group-text cursor-pointer ms-0 rounded-0 rounded-bottom-start" id="captcha" style="width:40px;" data-captcha-id="captchaImage" onClick="SideAuth.refreshCaptcha(this);">
                     <i class="fas fa-rotate"></i>
                 </span>
 
                 <div class="form-floating ms-0 flex-grow-1">
-                    <input type="text" class="form-control captcha-input border-0 rounded-0 rounded-bottom-end" id="floatingCaptcha" placeholder="{lang('login_label_captcha', 'sidebox_info_login')}" aria-describedby="captcha">
+                    <input type="text" class="form-control side-captcha-input border-0 rounded-0 rounded-bottom-end" id="floatingCaptcha" placeholder="{lang('login_label_captcha', 'sidebox_info_login')}" aria-describedby="captcha">
                     <label for="floatingCaptcha">{lang("login_label_captcha", "sidebox_info_login")}</label>
                 </div>
             </div>
@@ -31,7 +31,7 @@
 
         <div class="card-links mt-3 d-flex justify-content-between">
             <div class="form-check form-switch">
-                <input class="form-check-input remember-check" type="checkbox" id="checkRemember">
+                <input class="form-check-input side-remember-check" type="checkbox" id="checkRemember">
                 <label class="form-check-label" for="checkRemember">{lang("login_label_remember", "sidebox_info_login")}</label>
             </div>
 
@@ -49,16 +49,16 @@
 </form>
 
 <script>
-var Auth = {
+var SideAuth = {
 	timeout: null,
 	useCaptcha: false,
 
 	login: function(submit = false) {
 		var postData = {
-			"username": $(".username-input").val(),
-			"password": $(".password-input").val(),
-			"remember": $(".remember-check").is(":checked"),
-			"captcha": $(".captcha-input").val(),
+			"username": $(".side-username-input").val(),
+			"password": $(".side-password-input").val(),
+			"remember": $(".side-remember-check").is(":checked"),
+			"captcha": $(".side-captcha-input").val(),
 			"submit": submit,
 			"csrf_token_name": Config.CSRF,
 			"token": Config.CSRF
@@ -68,14 +68,14 @@ var Auth = {
 			"username", "password"
 		];
 
-		if(Auth.useCaptcha) {
+		if(SideAuth.useCaptcha) {
 			fields.push("captcha");
 		}
 
 		console.log("fields", fields);
 
-		clearTimeout (Auth.timeout);
-		Auth.timeout = setTimeout (function()
+		clearTimeout (SideAuth.timeout);
+		SideAuth.timeout = setTimeout (function()
 		{
 			$.post(Config.URL + "auth/checkLogin", postData, function(data) {
 				try {
@@ -95,9 +95,9 @@ var Auth = {
                     {
 						if(data["messages"]["error"] != "")
                         {
-							$(".username-input, .password-input, .captcha-input").parents(".input-group").addClass("border border-danger");
-							$(".username-input, .password-input, .captcha-input").addClass("is-invalid");
-							$(".error-feedback").addClass("invalid-feedback d-block").removeClass("d-none").html(data["messages"]["error"]);
+							$(".side-username-input, .side-password-input, .captcha-input").parents(".input-group").addClass("border border-danger");
+							$(".side-username-input, .side-password-input, .captcha-input").addClass("is-invalid");
+							$(".side-error-feedback").addClass("invalid-feedback d-block").removeClass("d-none").html(data["messages"]["error"]);
 						}
 					}
 				} catch(e) {
@@ -127,8 +127,8 @@ var Auth = {
 	},
 
 	refreshCaptcha: function(ele) {
-		$(".captcha-input").val('');
-		$(".captcha-input").focus();
+		$(".side-captcha-input").val('');
+		$(".side-captcha-input").focus();
 		var captchaID = $(ele).data("captcha-id");
 		var imgField = $("img#"+ captchaID);
 		imgField.attr("src", imgField.attr("src") +"&d="+ new Date().getTime());
