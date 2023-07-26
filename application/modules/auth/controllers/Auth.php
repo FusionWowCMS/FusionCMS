@@ -10,6 +10,7 @@ class Auth extends MX_Controller
         $this->load->library('security');
         $this->load->library('form_validation');
         $this->load->library('captcha');
+        $this->load->library('recaptcha');
         $this->load->model('login_model');
 
         requirePermission("view");
@@ -34,13 +35,16 @@ class Auth extends MX_Controller
             redirect($this->template->page_url . "ucp");
         }
 
+        $use_captcha = $this->config->item('use_captcha');
+
         $data = array(
             "use_captcha" => false,
             "captcha_type" => $this->config->item('captcha_type'),
+            "recaptcha_html" => $this->recaptcha->getScriptTag() . $this->recaptcha->getWidget(),
             "has_smtp" => $this->config->item('has_smtp')
         );
 
-        if ($this->config->item("use_captcha") == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps')) {
+        if ($use_captcha || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps')) {
             $data["use_captcha"] = true;
         }
 
@@ -65,10 +69,14 @@ class Auth extends MX_Controller
 
     public function checkLogin()
     {
+        $use_captcha = $this->config->item('use_captcha');
+        $captcha_type = $this->config->item('captcha_type');
+        $show_captcha = $use_captcha == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps');
+
         $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[4]|max_length[24]|xss_clean|alpha_numeric');
         $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]|xss_clean');
 
-        if ($this->config->item("use_captcha") == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps'))
+        if ($show_captcha && $captcha_type == 'inbuilt')
         {
             $this->form_validation->set_rules('captcha', 'captcha', 'trim|required|exact_length[7]|alpha_numeric');
         }
@@ -100,19 +108,30 @@ class Auth extends MX_Controller
             }
 
             //Check if show captcha
-            if ($this->config->item("use_captcha") == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps'))
+            if ($show_captcha)
             {
                 $data['showCaptcha'] = true;
             }
 
             //Check captcha
-            if ($this->config->item("use_captcha") == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps'))
+            if ($show_captcha)
             {
-                if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha')))
-                {
-                    $this->increaseAttempts($ip_address);
-                    $data['messages']["error"] = lang("captcha_invalid", "auth");
-                    die(json_encode($data));
+                if ($captcha_type == 'inbuilt') {
+                    if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha')))
+                    {
+                        $this->increaseAttempts($ip_address);
+                        $data['messages']["error"] = lang("captcha_invalid", "auth");
+                        die(json_encode($data));
+                    }
+                } else if ($captcha_type == 'recaptcha') {
+                    $recaptcha = $this->input->post('recaptcha');
+                    $result = $this->recaptcha->verifyResponse($recaptcha)['success'];
+                    if (!$result)
+                    {
+                        $this->increaseAttempts($ip_address);
+                        $data['messages']["error"] = lang("captcha_invalid", "auth") . $result;
+                        die(json_encode($data));
+                    }
                 }
             }
 
@@ -130,7 +149,7 @@ class Auth extends MX_Controller
                         if (isset($_POST["submit"]) && $this->input->post("submit") == "true")
                         {
                             $this->increaseAttempts($ip_address);
-                            if ($this->config->item("use_captcha") == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps'))
+                            if ($show_captcha)
                             {
                                 $data["showCaptcha"] = true;
                             }
@@ -144,7 +163,7 @@ class Auth extends MX_Controller
             else
             {
                 $this->increaseAttempts($ip_address);
-                if ($this->config->item("use_captcha") == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps'))
+                if ($show_captcha)
                 {
                     $data["showCaptcha"] = true;
                 }

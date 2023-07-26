@@ -1,6 +1,7 @@
 var Auth = {
 	timeout: null,
 	useCaptcha: false,
+	useRecaptcha: false,
 
 	login: function(submit = false) {
 		var postData = {
@@ -19,6 +20,10 @@ var Auth = {
 
 		if(Auth.useCaptcha) {
 			fields.push("captcha");
+		}
+
+		if(Auth.useRecaptcha) {
+			postData["recaptcha"] = grecaptcha.getResponse();
 		}
 
 		console.log("fields", fields);
