@@ -248,7 +248,7 @@ class Language
         // No language file was found, and this is the default language
         elseif ($language == $this->defaultLanguage) {
             $this->data[$language][$file] = array();
-            show_error("Language file <b>" . $file . ".php</b> does not exist in application/language/" . $language . "/ or in application/modules/" . $this->CI->template->module_name . "/language/" . $language . "/");
+            show_error("Language file <b>" . $file . ".php</b> does not exist in application/language/" . $language . "/ or in application/modules/" . $this->CI->template->module_name . "/language/" . $language . "/ or in application/themes/" . $this->CI->template->theme . "/language/" . $language . "/");
         }
 
         // No language file was found, but it may exist for the default language
