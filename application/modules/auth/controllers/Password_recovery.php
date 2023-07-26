@@ -12,6 +12,8 @@ class Password_recovery extends MX_Controller
 
         $this->load->library('security');
         $this->load->library('form_validation');
+        $this->load->library('captcha');
+        $this->load->library('recaptcha');
 
         $this->user->guestArea();
 
@@ -29,7 +31,11 @@ class Password_recovery extends MX_Controller
 
         $this->template->setTitle(lang("password_recovery", "recovery"));
 
-        $data = [];
+        $data = array(
+            "use_captcha" => $this->config->item('use_captcha'),
+            "captcha_type" => $this->config->item('captcha_type'),
+            "recaptcha_html" => $this->recaptcha->getScriptTag() . $this->recaptcha->getWidget()
+        );
 
         $content = $this->template->loadPage("password_recovery.tpl", $data);
         $box = $this->template->box(lang("password_recovery", "recovery"), $content);
@@ -37,8 +43,16 @@ class Password_recovery extends MX_Controller
     }
 
     public function create_request()
-    {        
+    {
+        $use_captcha = $this->config->item('use_captcha');
+        $captcha_type = $this->config->item('captcha_type');
+
         $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email');
+
+        if ($use_captcha && $captcha_type == 'inbuilt')
+        {
+            $this->form_validation->set_rules('captcha', 'captcha', 'trim|required|exact_length[7]|alpha_numeric');
+        }
 
         $this->form_validation->set_error_delimiters('', '');
         
@@ -49,6 +63,28 @@ class Password_recovery extends MX_Controller
 
         if ($this->form_validation->run())
         {
+            //Check captcha
+            if ($use_captcha)
+            {
+                $data['showCaptcha'] = true;
+
+                if ($captcha_type == 'inbuilt') {
+                    if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha')))
+                    {
+                        $data['messages']["error"] = lang("captcha_invalid", "auth");
+                        die(json_encode($data));
+                    }
+                } else if ($captcha_type == 'recaptcha') {
+                    $recaptcha = $this->input->post('recaptcha');
+                    $result = $this->recaptcha->verifyResponse($recaptcha)['success'];
+                    if (!$result)
+                    {
+                        $data['messages']["error"] = lang("captcha_invalid", "auth") . $result;
+                        die(json_encode($data));
+                    }
+                }
+            }
+
             //Check csrf
             if ($this->input->post("token") != $this->security->get_csrf_hash())
             {

@@ -1,13 +1,27 @@
 var Recovery = {	
 	timeout: null,
 	useCaptcha: false,
+	useRecaptcha: false,
 
 	request: function() {
 		var postData = {
 			"email": $(".email-input").val(),
+			"captcha": $(".captcha-input").val(),
 			"csrf_token_name": Config.CSRF,
 			"token": Config.CSRF
 		};
+
+		var fields = [
+			"email"
+		];
+
+		if(Recovery.useCaptcha) {
+			fields.push("captcha");
+		}
+
+		if(Recovery.useRecaptcha) {
+			postData["recaptcha"] = grecaptcha.getResponse();
+		}
 
 		clearTimeout (Recovery.timeout);
 		Recovery.timeout = setTimeout (function()
@@ -16,6 +30,20 @@ var Recovery = {
 				try {
 					data = JSON.parse(data);
 					console.log(data);
+
+					if(data["showCaptcha"] === true) {
+						$(".captcha-field").removeClass("d-none");
+					}
+
+					for(var i = 0; i<fields.length;i++)
+                    {
+						if(data["messages"]["error"] != "")
+                        {
+							$(".email-input, .captcha-input").parents(".input-group").addClass("border border-danger");
+							$(".email-input, .captcha-input").addClass("is-invalid");
+							$(".error-feedback").addClass("invalid-feedback d-block").removeClass("d-none").html(data["messages"]["error"]);
+						}
+					}
 
 					if(data["messages"]["error"]) {
 						if($(".email-input").val() != "") {
@@ -77,5 +105,13 @@ var Recovery = {
 			console.log(postData);
 
 		}, 500);
+	},
+
+	refreshCaptcha: function(ele) {
+		$(".captcha-input").val('');
+		$(".captcha-input").focus();
+		var captchaID = $(ele).data("captcha-id");
+		var imgField = $("img#"+ captchaID);
+		imgField.attr("src", imgField.attr("src") +"&d="+ new Date().getTime());
 	}
 }
