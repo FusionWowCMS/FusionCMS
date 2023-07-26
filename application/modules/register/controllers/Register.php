@@ -16,6 +16,7 @@ class Register extends MX_Controller
 
         $this->load->helper(array('form', 'url', 'security'));
         $this->load->library('form_validation');
+        $this->load->library('recaptcha');
 
         $this->load->helper('email_helper');
 
@@ -44,20 +45,38 @@ class Register extends MX_Controller
 
         require_once('application/libraries/Captcha.php');
 
-        $captchaObj = new Captcha($this->config->item('use_captcha'));
+        $use_captcha = $this->config->item('use_captcha');
+        $captcha_type = $this->config->item('captcha_type');
+
+        $captchaObj = new Captcha($use_captcha);
+        $captcha = false;
+        $recaptcha = '';
 
         if (count($_POST)) {
             $emailAvailable = $this->email_check($this->input->post('register_email'));
             $usernameAvailable = $this->username_check($this->input->post('register_username'));
+
+            if ($captcha_type == 'recaptcha') {
+                if($this->recaptcha->getEnabledRecaptcha()) {
+                    $recaptcha = $this->input->post('g-recaptcha-response');
+                    $captcha = $this->recaptcha->verifyResponse($recaptcha)['success'];
+                }
+                else
+                    $recaptcha = 'disabled';
+            } else if ($captcha_type == 'inbuilt') {
+                $captcha = strtoupper($this->input->post('register_captcha')) == strtoupper($captchaObj->getValue());
+            }
+
         } else {
             $emailAvailable = false;
             $usernameAvailable = false;
+            $captcha = false;
         }
 
         //Check if everything went correct
         if (
             $this->form_validation->run() == false
-            || strtoupper($this->input->post('register_captcha')) != strtoupper($captchaObj->getValue())
+            || !$captcha
             || !count($_POST)
             || !$usernameAvailable
             || !$emailAvailable
@@ -71,6 +90,7 @@ class Register extends MX_Controller
                         "password_confirm_error" => "",
                         "use_captcha" => $this->config->item('use_captcha'),
                         "captcha_type" => $this->config->item('captcha_type'),
+                        "recaptcha_html" => $this->recaptcha->getScriptTag() . $this->recaptcha->getWidget(),
                         "captcha_error" => "",
                         "url" => $this->template->page_url
                     );
@@ -85,8 +105,14 @@ class Register extends MX_Controller
                     }
                 }
 
-                if ($this->input->post('register_captcha') != $captchaObj->getValue()) {
-                    $data['captcha_error'] = '<img src="' . $this->template->page_url . 'application/images/icons/exclamation.png" />';
+                if ($captcha_type == 'recaptcha') {
+                    if(!$captcha && !$recaptcha == 'disabled') {
+                        $data['captcha_error'] = true;
+                    }
+                } else if ($captcha_type == 'inbuilt') {
+                    if ($this->input->post('register_captcha') != $captchaObj->getValue()) {
+                        $data['captcha_error'] = '<img src="' . $this->template->page_url . 'application/images/icons/exclamation.png" />';
+                    }
                 }
             }
 

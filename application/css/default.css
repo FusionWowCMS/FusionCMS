@@ -715,3 +715,15 @@ input[type="radio"] {
 .online_realm_button, #ucp_characters h1 {
 	height: 40px !important;
 }
+
+
+/* Captcha*/
+.captcha{
+    margin: 5px;
+}
+.alert-captcha{
+    border: 2px solid #f00;
+    width: 308px;
+    height: 80px;
+    border-radius: 3px;
+}

@@ -28,11 +28,19 @@ input + span[id] {
                     <input class="form-control" type="password" name="register_password_confirm" autocomplete="new-password" id="register_password_confirm" value="{set_value('register_password_confirm')}" onChange="Validate.checkPasswordConfirm()"/>
                     <span id="password_confirm_error">{$password_confirm_error}</span>
                 </div>
-                {if $use_captcha && $captcha_type == 'inbuilt'}
-                <label for="captcha"><img src="{$url}register/getCaptcha?{time()}" /></label>
-                <input class="form-control" type="text" name="register_captcha" id="register_captcha"/>
-                <span id="captcha_error">{$captcha_error}</span>
+                <div class="mb-3">
+                {if $use_captcha}
+                    {if $captcha_type == 'inbuilt'}
+                        <label for="captcha"><img src="{$url}register/getCaptcha?{time()}" /></label>
+                        <input class="form-control" type="text" name="register_captcha" id="register_captcha"/>
+                        <span id="captcha_error">{$captcha_error}</span>
+                    {elseif $captcha_type == 'recaptcha'}
+                        <div class="captcha {if $captcha_error} alert-captcha {/if}">
+                            {$recaptcha_html}
+                        </div>
+                    {/if}
                 {/if}
+                </div>
                 <div class="form-group text-center mt-4">
                     <button class="card-footer nice_button" type="submit" name="login_submit">{lang("submit", "register")}</button>
                 </div>

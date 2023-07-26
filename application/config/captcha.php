@@ -11,7 +11,7 @@ $config['use_captcha'] = true;
  *
  * What type of captcha?
  *
- * 'recaptcha' = Google Recaptcha v2 | NOT WORKING ATM
+ * 'recaptcha' = Google Recaptcha v2
  * 'inbuilt'   = inbuilt captcha system
  *
  */
@@ -39,7 +39,7 @@ $config['block_duration'] = 15;
  * get site key @ www.google.com/recaptcha/admin
  *
  */
-$config["recaptcha_sitekey"] = "";
+$config["recaptcha_site_key"] = "";
 
 /**
  *
@@ -47,4 +47,7 @@ $config["recaptcha_sitekey"] = "";
  * get secret key @ www.google.com/recaptcha/admin
  *
  */
-$config["recaptcha_secretkey"] = "";
+$config["recaptcha_secret_key"] = "";
+
+// Theme
+$config['recaptcha_theme'] = 'dark'; // dark - light
