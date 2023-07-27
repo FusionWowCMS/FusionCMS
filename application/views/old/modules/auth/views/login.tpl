@@ -14,18 +14,24 @@
 
             <div class="captcha-field {if !$use_captcha}d-none{/if}">
                 <div class="input-group mt-3">
-                    <label for="floatingCaptcha" class="input-group-text w-100 rounded-0 rounded-top text-center d-block" id="captcha">
-                        <img src="{$url}auth/getCaptcha?{time()}" alt="captcha" width="150" height="30" id="captchaImage">
-                    </label>
+                    {if $captcha_type == 'inbuilt'}
+                        <label for="floatingCaptcha" class="input-group-text w-100 rounded-0 rounded-top text-center d-block" id="captcha">
+                            <img src="{$url}auth/getCaptcha?{time()}" alt="captcha" width="150" height="30" id="captchaImage">
+                        </label>
 
-                    <span class="input-group-text cursor-pointer ms-0 rounded-0 rounded-bottom-start" id="captcha" style="width:40px;" data-captcha-id="captchaImage" onClick="Auth.refreshCaptcha(this);">
-                        <i class="fas fa-rotate"></i>
-                    </span>
+                        <span class="input-group-text cursor-pointer ms-0 rounded-0 rounded-bottom-start" id="captcha" style="width:40px;" data-captcha-id="captchaImage" onClick="Auth.refreshCaptcha(this);">
+                            <i class="fas fa-rotate"></i>
+                        </span>
 
-                    <div class="form-floating ms-0 flex-grow-1">
-                        <input type="text" class="form-control captcha-input border-0 rounded-0 rounded-bottom-end" id="floatingCaptcha" placeholder="{lang('login_label_captcha', 'auth')}" aria-describedby="captcha">
-                        <label for="floatingCaptcha">{lang("login_label_captcha", "auth")}</label>
-                    </div>
+                        <div class="form-floating ms-0 flex-grow-1">
+                            <input type="text" class="form-control captcha-input border-0 rounded-0 rounded-bottom-end" id="floatingCaptcha" placeholder="{lang('login_label_captcha', 'auth')}" aria-describedby="captcha">
+                            <label for="floatingCaptcha">{lang("login_label_captcha", "auth")}</label>
+                        </div>
+                    {elseif $captcha_type == 'recaptcha'}
+                        <div class="captcha">
+                            {$recaptcha_html}
+                        </div>
+                    {/if}
                 </div>
             </div>
 
@@ -50,10 +56,18 @@
 </div>
 </div>
 
-{if $use_captcha && $captcha_type == 'inbuilt'}
-<script>
-    $(window).on("load", function() {
-        Auth.useCaptcha = true;
-    });
-</script>
+{if $use_captcha}
+    {if $captcha_type == 'inbuilt'}
+        <script>
+            $(window).on("load", function() {
+                Auth.useCaptcha = true;
+            });
+        </script>
+    {elseif $captcha_type == 'recaptcha'}
+        <script>
+            $(window).on("load", function() {
+                Auth.useRecaptcha = true;
+            });
+        </script>
+    {/if}
 {/if}
