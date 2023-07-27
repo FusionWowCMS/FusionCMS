@@ -280,6 +280,8 @@ var Settings = {
 		var data = {
 			disable_visitor_graph:$("#disable_visitor_graph").val(),
 			disable_realm_status:$("#disable_realm_status").val(),
+			enable_minify_js:$("#enable_minify_js").val(),
+			enable_minify_css:$("#enable_minify_css").val(),
 			cache:$("#cache").val(),
 			csrf_token_name: Config.CSRF
 		};
