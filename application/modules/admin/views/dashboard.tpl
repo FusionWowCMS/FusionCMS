@@ -57,7 +57,7 @@
                                         <div class="col-span-12 md:col-span-12">
                                             <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-6 mb-3 alert">
                                                 <div class="mb-4 flex items-center justify-between">
-                                                    <h3 class="font-heading text-sm font-semibold leading-tight text-muted-800 dark:text-white"><span>Important !</span><span class="badge bg-danger mx-2">New</span></h3>
+                                                    <h3 class="font-heading text-sm font-semibold leading-tight text-muted-800 dark:text-white"><span>{lang('important', 'dashboard')} !</span><span class="badge bg-danger mx-2">{lang('new', 'dashboard')}</span></h3>
                                                     <div class="relative">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-4 w-4" width="1em" height="1em" viewBox="0 0 24 24">
                                                         	<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9m4.3 13a1.94 1.94 0 0 0 3.4 0"></path>
@@ -65,7 +65,7 @@
                                                         <div class="absolute -end-0.5 top-0.5"><span class="relative flex h-2 w-2"><span class="bg-primary-400 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span><span class="bg-primary-500 relative inline-flex h-2 w-2 rounded-full"></span></span></div>
                                                     </div>
                                                 </div>
-                                                <p class="font-alt text-xs font-normal leading-normal leading-normal"><span class="text-muted-400">A new update is available.<br>You can download new version from <a href="https://github.com/FusionWowCMS/FusionCMS/releases" class="alert-link" target="_blank">here</a></span></p>
+                                                <p class="font-alt text-xs font-normal leading-normal leading-normal"><span class="text-muted-400">{lang('update_available', 'dashboard')}<br>{lang('update_download', 'dashboard')} <a href="https://github.com/FusionWowCMS/FusionCMS/releases" class="alert-link" target="_blank">{lang('here', 'dashboard')}</a></span></p>
                                             </div>
                                         </div>
 								    </div>
