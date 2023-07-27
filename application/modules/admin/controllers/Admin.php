@@ -58,6 +58,7 @@ class Admin extends MX_Controller
             'realms' => $realms,
             'uptimes' => $uptimes,
             'latestVersion' => $this->getLatestVersion(),
+            'isOldTheme' => empty($this->template->theme_data['min_required_version']),
         );
 
         $output = $this->template->loadPage("dashboard.tpl", $data);
