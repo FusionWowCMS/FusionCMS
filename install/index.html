@@ -351,9 +351,10 @@
 												<div class="grid grid-cols-12 gap-4">
 													<div class="col-span-12">
 														<div class="group/nui-input relative">
-															<select id="captcha" data-tip="{{enable_google_captcha}}" onChange="if(this.value == '1'){ $('#captcha_site_keys').fadeIn(150); } else { $('#captcha_site_keys').fadeOut(150); };if(this.value == '1'){ $('#captcha_secret_keys').fadeIn(150); } else { $('#captcha_secret_keys').fadeOut(150); }" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
-																<option value="1">{{yes}}</option>
-																<option value="0" selected>{{no}}</option>
+															<select id="captcha" data-tip="{{enable}} {{captcha}}" onChange="if(this.value == 'recaptcha'){ $('#captcha_site_keys').fadeIn(150); } else { $('#captcha_site_keys').fadeOut(150); };if(this.value == 'recaptcha'){ $('#captcha_secret_keys').fadeIn(150); } else { $('#captcha_secret_keys').fadeOut(150); }" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option value="recaptcha">{{google_captcha}}</option>
+																<option value="inbuilt">{{image_captcha}}</option>
+																<option value="disabled" selected>{{disable}}</option>
 															</select>
 														</div>
 													</div>
@@ -382,7 +383,7 @@
 														<div class="group/nui-input relative">
 															<select id="cdn" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
 																<option value="1">{{yes}}</option>
-																<option value="0">{{no}}</option>
+																<option value="0" selected>{{no}}</option>
 															</select>
 														</div>
 													</div>

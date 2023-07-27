@@ -139,7 +139,8 @@ class Install
 		$config = '../application/config/captcha.php';
 		$config = new ConfigEditor($config);
 
-		$data['use_captcha'] = ($_POST['captcha'] == '1') ? true : false;
+		$data['use_captcha'] = ($_POST['captcha'] == 'disabled') ? false : true;
+		$data['captcha_type'] = ($_POST['captcha'] == 'recaptcha') ? 'recaptcha' : 'inbuilt';
 		$data['recaptcha_site_key'] = $_POST['site_key'];
 		$data['recaptcha_secret_key'] = $_POST['secret_key'];
 
