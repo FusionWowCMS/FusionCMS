@@ -45,18 +45,19 @@ class Admin extends MX_Controller
             'views' => $this->getViews(),
             'income' => $this->getIncome(),
             'votes' => $this->getVotes(),
-            "nickname" => $this->user->getNickname(),
-            "avatar" => $this->user->getAvatar($this->user->getId()),
-            "groups" => $this->acl_model->getGroupsByUser($this->user->getId()),
-            "email" => $this->user->getEmail(),
-            "location" => $this->internal_user_model->getLocation(),
-            "register_date" => $this->user->getRegisterDate(),
+            'nickname' => $this->user->getNickname(),
+            'avatar' => $this->user->getAvatar($this->user->getId()),
+            'groups' => $this->acl_model->getGroupsByUser($this->user->getId()),
+            'email' => $this->user->getEmail(),
+            'location' => $this->internal_user_model->getLocation(),
+            'register_date' => $this->user->getRegisterDate(),
             'signups' => $this->getSignups(),
             'graphMonthly' => $this->graphMonthly(),
             'graphDaily' => $this->graphDaily(),
-            "realm_status" => $this->config->item('disable_realm_status'),
-            "realms" => $realms,
-            "uptimes" => $uptimes,
+            'realm_status' => $this->config->item('disable_realm_status'),
+            'realms' => $realms,
+            'uptimes' => $uptimes,
+            'latestVersion' => $this->getLatestVersion(),
         );
 
         $output = $this->template->loadPage("dashboard.tpl", $data);
@@ -366,4 +367,16 @@ class Admin extends MX_Controller
 
         return $result;
     }
+
+	private function getLatestVersion()
+	{
+		$content = @file_get_contents("https://raw.githubusercontent.com/FusionWowCMS/FusionCMS/master/application/config/version.php");
+		if ($content)
+		    $newVersion = substr($content, 37, 5);
+		else
+		    $newVersion = false;
+
+		if($this->template->compareVersions($newVersion, $this->config->item('FusionCMSVersion'), true))
+			return true;
+	}
 }
