@@ -67,6 +67,10 @@ class Settings extends MX_Controller
 		
         // Security
         $config['use_captcha'] = $this->config->item('use_captcha');
+        $config['captcha_type'] = $this->config->item('captcha_type');
+        $config['recaptcha_theme'] = $this->config->item('recaptcha_theme');
+        $config['recaptcha_site_key'] = $this->config->item('recaptcha_site_key');
+        $config['recaptcha_secret_key'] = $this->config->item('recaptcha_secret_key');
         $config['captcha_attemps'] = $this->config->item('captcha_attemps');
         $config['block_attemps'] = $this->config->item('block_attemps');
         $config['block_duration'] = $this->config->item('block_duration');
@@ -217,7 +221,11 @@ class Settings extends MX_Controller
     {
         $fusionConfig = new ConfigEditor("application/config/captcha.php");
 
-        $fusionConfig->set('use_captcha', $this->input->post('use_captcha'));
+        $fusionConfig->set('use_captcha', ($this->input->post('captcha') == 'disabled') ? false : true);
+        $fusionConfig->set('captcha_type', ($this->input->post('captcha') == 'recaptcha') ? 'recaptcha' : 'inbuilt');
+        $fusionConfig->set('recaptcha_theme', $this->input->post('recaptcha_theme'));
+        $fusionConfig->set('recaptcha_site_key', $this->input->post('recaptcha_site_key'));
+        $fusionConfig->set('recaptcha_secret_key', $this->input->post('recaptcha_secret_key'));
         $fusionConfig->set('captcha_attemps', $this->input->post('captcha_attemps'));
         $fusionConfig->set('block_attemps', $this->input->post('block_attemps'));
         $fusionConfig->set('block_duration', $this->input->post('block_duration'));

@@ -650,11 +650,33 @@
         <form role="form" onSubmit="Settings.saveSecurity(); return false">
 			<div class="form-group row">
 				<div class="col-sm-6 mb-3">
-					<label class="col-form-label" for="use_captcha">Use captcha? (Recommended: yes)</label>
-					<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="use_captcha">
-						<option value="true" {if $config.use_captcha == '1'}selected{/if}>Yes</option>
-						<option value="false" {if $config.use_captcha == '0'}selected{/if}>No</option>
+					<label class="col-form-label" for="captcha">Use captcha? (Recommended: yes), Enable <a href="http://www.google.com/recaptcha/admin" target="_blank">Google Captcha</a> (optional)</label>
+					<select onChange="if(this.value == 'recaptcha'){ $('#captcha_site_key').fadeIn(150); } else { $('#captcha_site_key').fadeOut(150); }if(this.value == 'recaptcha'){ $('#captcha_secret_key').fadeIn(150); } else { $('#captcha_secret_key').fadeOut(150); };if(this.value == 'recaptcha'){ $('#captcha_theme').fadeIn(150); } else { $('#captcha_theme').fadeOut(150); }" class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="captcha">
+						<option value="recaptcha" {if $config.captcha_type == 'recaptcha'}selected{/if}>Google Reaptcha v2</option>
+						<option value="inbuilt" {if $config.captcha_type == 'inbuilt'}selected{/if}>Image Captcha</option>
+						<option value="disabled" {if !$config.use_captcha}selected{/if}>Disable</option>
 					</select>
+				</div>
+				<div id="captcha_theme" class="col-sm-6 mb-3" {if $config.captcha_type != 'recaptcha'}style="display:none"{/if}>
+					<label class="col-form-label" for="recaptcha_theme">Recaptcha Theme</label>
+					<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="recaptcha_theme">
+						<option value="dark" {if $config.recaptcha_theme == 'dark'}selected{/if}>Dark</option>
+						<option value="light" {if $config.recaptcha_theme == 'light'}selected{/if}>Light</option>
+					</select>
+				</div>
+
+				<div id="captcha_site_key" class="col-sm-6 mb-3" {if $config.captcha_type != 'recaptcha'}style="display:none"{/if} data-toggle="tooltip" data-placement="bottom" data-bs-original-title="get site key www.google.com/recaptcha/admin">
+					<label class="col-form-label" for="recaptcha_site_key">Site key (?)</label>
+					<div class="input-group">
+						<input type="text" id="recaptcha_site_key" value="{$config.recaptcha_site_key}" class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded"/>
+					</div>
+				</div>
+
+				<div id="captcha_secret_key" class="col-sm-6 mb-3" {if $config.captcha_type != 'recaptcha'}style="display:none"{/if} data-toggle="tooltip" data-placement="bottom" data-bs-original-title="get secret key www.google.com/recaptcha/admin">
+					<label class="col-form-label" for="recaptcha_secret_key">Secret key (?)</label>
+					<div class="input-group">
+						<input type="text" id="recaptcha_secret_key" value="{$config.recaptcha_secret_key}" class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded"/>
+					</div>
 				</div>
 
 				<div class="col-sm-6 mb-3">

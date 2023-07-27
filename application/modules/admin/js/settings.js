@@ -372,7 +372,10 @@ var Settings = {
 	saveSecurity: function()
 	{
 		var values = {
-			use_captcha:$("#use_captcha").val(),
+			captcha:$("#captcha").val(),
+			recaptcha_theme:$("#recaptcha_theme").val(),
+			recaptcha_site_key:$("#recaptcha_site_key").val(),
+			recaptcha_secret_key:$("#recaptcha_secret_key").val(),
 			captcha_attemps:$("#captcha_attemps").val(),
 			block_attemps:$("#block_attemps").val(),
 			block_duration:$("#block_duration").val(),
