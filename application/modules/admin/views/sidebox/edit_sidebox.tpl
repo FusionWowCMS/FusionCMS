@@ -16,7 +16,7 @@
                 <div class="col-sm-10">
                     <select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="type" name="type" onChange="Sidebox.toggleCustom(this)">
                         {foreach from=$sideboxModules item=module key=name}
-                        <option value="{$name}">{$module.name}</option>
+                        <option value="{$name}" {if $sidebox.type == preg_replace("/sidebox_/", "", $name)}selected{/if}>{$module.name}</option>
                         {/foreach}
                     </select>
                 </div>
@@ -25,11 +25,11 @@
                 <label class="col-sm-2 col-form-label" for="visibility">Visibility mode</label>
                 <div class="col-sm-10">
                     <select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="visibility" id="visibility" onChange="if(this.value == 'group'){ $('#groups').fadeIn(300); } else { $('#groups').fadeOut(300); }">
-                        <option value="everyone" selected>Visible to everyone</option>
-                        <option value="group">Controlled per group</option>
+                        <option value="everyone" {if !$sidebox.permission}selected{/if}>Visible to everyone</option>
+                        <option value="group" {if $sidebox.permission}selected{/if}>Controlled per group</option>
                     </select>
                 </div>
-                <div style="display:none" id="groups">
+                <div {if !$sidebox.permission}style="display:none"{/if} id="groups">
                     Please manage the group visibility via <a href="{$url}admin/aclmanager/groups">the group manager</a> once you have created the sidebox
                 </div>
             </div>
@@ -37,9 +37,9 @@
                 <label class="col-sm-2 col-form-label" for="location">Location</label>
                 <div class="col-sm-10">
                     <select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="location" id="location">
-                        <option value="side" selected>Side</option>
-                        <option value="top">Top (Before the news)</option>
-                        <option value="bottom">Bottom (After the news)</option>
+                        <option value="side" {if $sidebox.location == 'side'}selected{/if}>Side</option>
+                        <option value="top" {if $sidebox.location == 'top'}selected{/if}>Top (Before the news)</option>
+                        <option value="bottom" {if $sidebox.location == 'bottom'}selected{/if}>Bottom (After the news)</option>
                     </select>
                 </div>
             </div>
