@@ -4,8 +4,164 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b2e7ec1cb8e621626b9edea79f717e7",
+    "content-hash": "c69349720a7efc4dcc8b09a3900d6a23",
     "packages": [
+        {
+            "name": "composer/semver",
+            "version": "3.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/semver.git",
+                "reference": "3953f23262f2bff1919fc82183ad9acb13ff62c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/semver/zipball/3953f23262f2bff1919fc82183ad9acb13ff62c9",
+                "reference": "3953f23262f2bff1919fc82183ad9acb13ff62c9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.2 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.4",
+                "symfony/phpunit-bridge": "^4.2 || ^5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Semver\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Adermann",
+                    "email": "naderman@naderman.de",
+                    "homepage": "http://www.naderman.de"
+                },
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                },
+                {
+                    "name": "Rob Bast",
+                    "email": "rob.bast@gmail.com",
+                    "homepage": "http://robbast.nl"
+                }
+            ],
+            "description": "Semver library that offers utilities, version constraint parsing and validation.",
+            "keywords": [
+                "semantic",
+                "semver",
+                "validation",
+                "versioning"
+            ],
+            "support": {
+                "irc": "irc://irc.freenode.org/composer",
+                "issues": "https://github.com/composer/semver/issues",
+                "source": "https://github.com/composer/semver/tree/3.3.2"
+            },
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-04-01T19:23:25+00:00"
+        },
+        {
+            "name": "desarrolla2/cache",
+            "version": "v3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/desarrolla2/Cache.git",
+                "reference": "0b8f985d09abfc04a2c1535943f6f07b7206161a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/desarrolla2/Cache/zipball/0b8f985d09abfc04a2c1535943f6f07b7206161a",
+                "reference": "0b8f985d09abfc04a2c1535943f6f07b7206161a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0",
+                "psr/simple-cache": "^1.0"
+            },
+            "provide": {
+                "psr/simple-cache-implementation": "1.0"
+            },
+            "require-dev": {
+                "cache/integration-tests": "dev-master",
+                "ext-apcu": "*",
+                "ext-json": "*",
+                "ext-memcached": "*",
+                "ext-mysqli": "*",
+                "mikey179/vfsstream": "v1.6.8",
+                "mongodb/mongodb": "^1.3",
+                "phpstan/phpstan": "^0.12.29",
+                "phpunit/phpunit": "^8.3 || ^9.0",
+                "predis/predis": "~1.0.0",
+                "symfony/phpunit-bridge": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Desarrolla2\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel González",
+                    "homepage": "http://desarrolla2.com/"
+                },
+                {
+                    "name": "Arnold Daniels",
+                    "homepage": "https://jasny.net/"
+                }
+            ],
+            "description": "Provides an cache interface for several adapters Apc, Apcu, File, Mongo, Memcache, Memcached, Mysql, Mongo, Redis is supported.",
+            "homepage": "https://github.com/desarrolla2/Cache/",
+            "keywords": [
+                "apc",
+                "apcu",
+                "cache",
+                "file",
+                "memcache",
+                "memcached",
+                "mongo",
+                "mysql",
+                "psr-16",
+                "redis",
+                "simple-cache"
+            ],
+            "support": {
+                "issues": "https://github.com/desarrolla2/Cache/issues",
+                "source": "https://github.com/desarrolla2/Cache/tree/v3.0.2"
+            },
+            "time": "2022-03-27T23:04:06+00:00"
+        },
         {
             "name": "ezyang/htmlpurifier",
             "version": "v4.16.0",
@@ -552,6 +708,57 @@
             "time": "2021-05-03T11:20:27+00:00"
         },
         {
+            "name": "psr/simple-cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/simple-cache/tree/master"
+            },
+            "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
             "name": "smarty/smarty",
             "version": "v4.3.2",
             "source": {
@@ -616,6 +823,57 @@
                 "source": "https://github.com/smarty-php/smarty/tree/v4.3.2"
             },
             "time": "2023-07-19T10:27:36+00:00"
+        },
+        {
+            "name": "visualappeal/php-auto-update",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VisualAppeal/PHP-Auto-Update.git",
+                "reference": "4454361a0fa346c7fb179deef11585c79715b645"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VisualAppeal/PHP-Auto-Update/zipball/4454361a0fa346c7fb179deef11585c79715b645",
+                "reference": "4454361a0fa346c7fb179deef11585c79715b645",
+                "shasum": ""
+            },
+            "require": {
+                "composer/semver": "^3.0",
+                "desarrolla2/cache": "^3.0",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-zip": "*",
+                "monolog/monolog": "^2.1",
+                "php": ">=7.2.0",
+                "psr/log": "1.1.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VisualAppeal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Helfensdörfer",
+                    "email": "tim@visualappeal.de"
+                }
+            ],
+            "description": "Autoupdater for PHP",
+            "support": {
+                "issues": "https://github.com/VisualAppeal/PHP-Auto-Update/issues",
+                "source": "https://github.com/VisualAppeal/PHP-Auto-Update/tree/1.0.2"
+            },
+            "time": "2021-11-27T22:39:05+00:00"
         }
     ],
     "packages-dev": [],

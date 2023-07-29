@@ -1,0 +1,37 @@
+{
+    "name": "visualappeal/php-auto-update",
+    "description": "Autoupdater for PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tim Helfensdörfer",
+            "email": "tim@visualappeal.de"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-zip": "*",
+        "php": ">=7.2.0",
+        "desarrolla2/cache": "^3.0",
+        "monolog/monolog": "^2.1",
+        "composer/semver": "^3.0",
+        "psr/log": "1.1.4"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "VisualAppeal\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit -c tests/UnitTests.xml"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

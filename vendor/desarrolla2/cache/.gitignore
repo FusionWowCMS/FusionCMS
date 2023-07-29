@@ -1,0 +1,9 @@
+/build
+/composer.lock
+/tests/config.json
+/vendor
+/.idea
+/TODO.md
+*~
+*.swp
+/.phpunit.result.cache
