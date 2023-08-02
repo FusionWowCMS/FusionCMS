@@ -55,7 +55,7 @@
 					<td>{$log.message}
 					{if $log.custom}
 						<span class="text-nowrap"><br>
-						{foreach $log.custom|json_decode as $key => $value}
+						{foreach $log.custom as $key => $value}
 							<b>{ucfirst($key)}</b>:
 							{foreach $value as $subKey => $subValue}
 								{if $subKey == 'old'}

@@ -24,6 +24,13 @@ class Logging extends MX_Controller
 
         $logs = $this->logger->getLogs("", 0, 10);
 
+        if ($logs)
+        {
+            foreach ($logs as $key => $value) {
+                $logs[$key]['custom'] = json_decode($logs[$key]['custom']);
+            }
+        }
+
         // Prepare my data
         $data = array(
             'logs' => $logs, // Get the logs from 0 till 10
@@ -51,6 +58,13 @@ class Logging extends MX_Controller
 
         // Validation, checking is done in the model.
         $logs = $this->logger->getLogs("", $offset, $count);
+
+        if ($logs)
+        {
+            foreach ($logs as $key => $value) {
+                $logs[$key]['custom'] = json_decode($logs[$key]['custom']);
+            }
+        }
 
         if ($logs) {
             // Prepare my data
@@ -80,6 +94,13 @@ class Logging extends MX_Controller
 
         // Validation, checking is done in the model.
         $logs = $this->logging_model->findLogs($search, $module);
+
+        if ($logs)
+        {
+            foreach ($logs as $key => $value) {
+                $logs[$key]['custom'] = json_decode($logs[$key]['custom']);
+            }
+        }
 
         if ($logs) {
             // Prepare my data
