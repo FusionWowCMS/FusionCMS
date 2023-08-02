@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header"><a href='{$url}store/admin_items' data-bs-toggle="tooltip" data-placement="top" title="Return to items">Items</a> &rarr; New item</div>
+    <div class="card-header"><a href='{$url}store/admin_items' data-bs-toggle="tooltip" data-placement="top" title="Return to items">Items</a> &rarr; Edit item</div>
     <div class="card-body">
         <form>
             <div class="form-group row mb-3">
@@ -146,7 +146,7 @@
         <div class="form-group row mb-3">
             <label class="col-sm-2 col-form-label" for="icon">Icon name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="icon" id="icon" value="{$item.icon}">
+                <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="icon" id="icon" value="{$item.icon}">
             </div>
         </div>
         <button type="submit" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md">Submit command</button>
@@ -155,13 +155,13 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="name">Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="name" id="name" value="{$item.name}">
+                <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="name" id="name" value="{$item.name}">
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="description">Description (very short; displayed below item name)</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="description" id="description" value="{$item.description}">
+                <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="description" id="description" value="{$item.description}">
             </div>
         </div>
         <div class="form-group row">
@@ -292,7 +292,7 @@
         <div class="form-group row mb-3">
             <label class="col-sm-2 col-form-label" for="icon">Icon name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="icon" id="icon" value="{$item.icon}">
+                <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="icon" id="icon" value="{$item.icon}">
             </div>
         </div>
         <button type="submit" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md">Submit query</button>
@@ -301,19 +301,19 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="name">Name (only required for multiple items)</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Will be added automatically if you only specify one item ID" value="{$item.name}">
+                <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="name" id="name" placeholder="Will be added automatically if you only specify one item ID" value="{$item.name}">
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="itemid">Item ID (tip: separate ids with , (comma) to add multiple as one)</label>
+            <label class="col-sm-2 col-form-label" for="itemid">Item ID (Tip: separate ids with , (comma) to add multiple as one)</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="itemid" id="itemid" placeholder="12345" value="{$item.itemid}">
+                <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="itemid" id="itemid" placeholder="12345" value="{$item.itemid}">
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="description">Description (very short; displayed below item name)</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="description" id="description" placeholder="For example, 'Head (Plate)'" value="{$item.description}">
+                <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="description" id="description" placeholder="For example, 'Head (Plate)'" value="{$item.description}">
             </div>
         </div>
         <div class="form-group row">
@@ -376,7 +376,7 @@
         <div class="form-group row mb-3">
             <label class="col-sm-2 col-form-label" for="icon">Icon name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="icon" id="icon" value="{$item.icon}" placeholder="Will be added automatically if you leave empty, and only specify one item ID">
+                <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="icon" id="icon" value="{$item.icon}" placeholder="Will be added automatically if you leave empty, and only specify one item ID">
             </div>
         </div>
         <button type="submit" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md">Submit item</button>
