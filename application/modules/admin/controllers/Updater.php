@@ -53,10 +53,11 @@ class Updater extends MX_Controller
         # Call `MX_Controller` construct
         parent::__construct();
 
+        # Make sure user has required permissions
+        requirePermission('updateCms');
+
         # Load libraries
         $this->load->library('administrator');
-
-        requirePermission("updateCms");
 
         # CMS version
         $this->version = $this->administrator->getVersion();
@@ -440,7 +441,7 @@ class Updater extends MX_Controller
             $line = realpath($this->update_path . str_replace(['\\', '/'], self::DS, trim($line)));
 
             // Make sure its valid path
-            if(!$line)
+            if(!$line || strpos($line, $this->update_path) === false)
                 continue;
 
             // Logger
