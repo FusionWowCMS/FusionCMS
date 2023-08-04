@@ -58,7 +58,7 @@
 		<!-- Header CSS.End -->
 
 		<!-- Header JS.Start -->
-		{minify files=array("{$theme_path}assets/js/jquery-3.6.0.min.js", "js/jquery.placeholder.min.js", "js/jquery.sort.js", "vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "vendor/node_modules/owl.carousel/dist/owl.carousel.min.js", "{$theme_path}vendor/Marquee/jquery.marquee.min.js", "{$theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "js/main.js", "js/cookie.js", "{$theme_path}assets/js/slider.js", "js/ui.js", "js/language.js", "js/tooltip.js") type='js' output='cache/data/minify/all.min.js' disable={$minify_js}}
+		{minify files=array("js/jquery-3.6.0.min.js", "js/jquery.placeholder.min.js", "js/jquery.sort.js", "vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "vendor/node_modules/owl.carousel/dist/owl.carousel.min.js", "{$theme_path}vendor/Marquee/jquery.marquee.min.js", "{$theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "js/main.js", "js/cookie.js", "{$theme_path}assets/js/slider.js", "js/ui.js", "js/language.js", "js/tooltip.js") type='js' output='cache/data/minify/all.min.js' disable={$minify_js}}
 
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
