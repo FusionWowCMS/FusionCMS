@@ -22,3 +22,12 @@
 	padding: 0.4rem 0.8rem;
     font-size: 1rem;
 }
+span.wh-icon-text {
+    margin: 20px 0px 0px -10px;
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: normal;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000, -2px 0 #000, -1px 0 #000, 0px 0 #000, 1px 0 0 #000;
+}

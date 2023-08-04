@@ -227,6 +227,7 @@ class Admin_items extends MX_Controller
     private function getItemData()
     {
         $data["itemid"] = $this->input->post("itemid");
+        $data["itemcount"] = $this->input->post("itemcount");
         $data["description"] = $this->input->post("description");
         $data["realm"] = $this->input->post("realm");
         $data["group"] = $this->input->post("group");
@@ -252,7 +253,7 @@ class Admin_items extends MX_Controller
         } else {
             $item_data = $this->realms->getRealm($data["realm"])->getWorld()->getItem($data["itemid"]);
 
-            if (!$item_data) {
+            if (!$item_data || empty($item_data) || is_null($item_data) || $item_data == 'empty') {
                 die("Invalid item");
             }
 

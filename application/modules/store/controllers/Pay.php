@@ -126,15 +126,22 @@ class Pay extends MX_Controller
                 // Check for multiple items
                 if (preg_match("/,/", $items[$item['id']]['itemid'])) {
                     // Split it per item ID
-                    $temp = explode(",", $items[$item['id']]['itemid']);
+                    $temp['id'] = explode(",", $items[$item['id']]['itemid']);
+                    $temp['count'] = explode(",", $items[$item['id']]['itemcount']);
 
                     // Loop through the item IDs
-                    foreach ($temp as $id) {
+                    foreach ($temp['id'] as $key => $id) {
                         // Add them individually to the array
-                        array_push($realmItems[$items[$item['id']]['realm']][$item['character']], array('id' => $id));
+                        $itemCount = isset($temp['count'][$key]) ? $temp['count'][$key] : 1;
+                        for($i = 0; $i < $itemCount; $i++) {
+                            array_push($realmItems[$items[$item['id']]['realm']][$item['character']], array('id' => $id));
+                        }
                     }
                 } else {
-                    array_push($realmItems[$items[$item['id']]['realm']][$item['character']], array('id' => $items[$item['id']]['itemid']));
+                    $itemCount = $items[$item['id']]['itemcount'];
+                    for($i = 0; $i < $itemCount; $i++) {
+                        array_push($realmItems[$items[$item['id']]['realm']][$item['character']], array('id' => $items[$item['id']]['itemid']));
+                    }
                 }
             } elseif (!empty($items[$item['id']]['command'])) {
                 // Make sure the realm actually supports console commands
