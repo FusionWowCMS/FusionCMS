@@ -6,6 +6,7 @@ $emulators = array(
     "trinity_rbac_soap"       => "(SRP6) TrinityCore (3.3.5a) with RBAC - connected through SOAP",
     "trinity_rbac_sl_soap"    => "(BNET) TrinityCore - Shadowlands (9.x.x) with RBAC - connected through SOAP",
     "trinity_legion_soap"     => "(SPH) TrinityCore - Legion (7.x.x) - connected through SOAP",
+    "trinity_cata_soap"       => "(SPH) TrinityCore - Cataclysm (4.3.4) - connected through SOAP",
     "cmangos_soap"            => "(HEX) CMangos (3.3.5a) - connected through SOAP",
     "skyfire_soap"            => "(SPH) Skyfire (5.4.8) - connected through SOAP",
     "mangos_zero_sph_soap"    => "(SPH) Mangos Zero (1.12.1) - connected through SOAP",
