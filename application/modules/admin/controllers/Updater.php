@@ -56,6 +56,8 @@ class Updater extends MX_Controller
         # Load libraries
         $this->load->library('administrator');
 
+        requirePermission("updateCms");
+
         # CMS version
         $this->version = $this->administrator->getVersion();
 

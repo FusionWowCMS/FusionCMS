@@ -229,6 +229,9 @@ class Administrator
                             case "modules":
                                 $this->currentPage = "admin/modules";
                                 break;
+                            case "updater":
+                                $this->currentPage = "admin/updater";
+                                break;
                         }
                     }
                 }

@@ -57,7 +57,9 @@
 		"viewBackups": { "default": false, "description": "Can view database backup page" },
 		"generateBackup": { "default": false, "description": "Can generate a backup manually" },
 		"editBackupSettings": { "default": false, "description": "Can edit backup settings" },
-		"executeBackupActions": { "default": false, "description": "Can execute backup actions" }
+		"executeBackupActions": { "default": false, "description": "Can execute backup actions" },
+
+		"updateCms": { "default": false, "description": "Can check and update CMS" }
 	},
 
 	"roles": {
@@ -151,7 +153,8 @@
 
 			"permissions": {
 				"viewMessage": true,
-				"toggleMessage": true
+				"toggleMessage": true,
+				"updateCms": true
 			}
 		},
 
