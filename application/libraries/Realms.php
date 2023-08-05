@@ -427,7 +427,7 @@ class Realms
 			    $faction = 'h';
 		}
 		else if($race == "Worgen" || $race == "Goblin" || $race == "Dark Iron Dwarf" || $race == "Highmountain Tauren" || $race == "Lightforged Dranei" ||
-		        $race == "Mag'har Orc" || $race == "Mechagnome" || $race == "Kul Tiran" || $race == "Zandalari Troll" || $race == "Vuplera")
+		        $race == "Mag'har Orc" || $race == "Mechagnome" || $race == "Kul Tiran" || $race == "Zandalari Troll" || $race == "Vulpera")
 		{
 			$level = 70;
 			$class = null;
