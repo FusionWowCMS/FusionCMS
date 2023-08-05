@@ -103,6 +103,8 @@ class Mangos_one_two_sph_soap implements Emulator
             "online"           => "online",
             "money"            => "money",
             "totalKills"       => "totalKills",
+            'todayKills'       => 'todayKills',
+            'yesterdayKills'   => 'yesterdayKills',
             "totalHonorPoints" => "totalHonorPoints",
             "position_x"       => "position_x",
             "position_y"       => "position_y",

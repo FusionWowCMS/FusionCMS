@@ -112,6 +112,8 @@ class Cmangos_soap implements Emulator
             'hairColor'        => 'hairColor',
             'facialStyle'      => 'facialStyle',
             'totalKills'       => 'totalKills',
+            'todayKills'       => 'todayKills',
+            'yesterdayKills'   => 'yesterdayKills',
             'arenaPoints'      => 'arenaPoints',
             'totalHonorPoints' => 'totalHonorPoints',
             'position_x'       => 'position_x',

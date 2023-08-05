@@ -104,6 +104,8 @@ class Azerothcore_soap implements Emulator
             'online'           => 'online',
             'money'            => 'money',
             'totalKills'       => 'totalKills',
+            'todayKills'       => 'todayKills',
+            'yesterdayKills'   => 'yesterdayKills',
             'arenaPoints'      => 'arenaPoints',
             'totalHonorPoints' => 'totalHonorPoints',
             'position_x'       => 'position_x',

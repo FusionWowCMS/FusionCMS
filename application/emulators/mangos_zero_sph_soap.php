@@ -101,6 +101,8 @@ class Mangos_zero_sph_soap implements Emulator
             "online"           => "online",
             "money"            => "money",
             "totalKills"       => "stored_honorable_kills",
+            'todayKills'       => 'stored_honorable_kills',
+            'yesterdayKills'   => 'stored_honorable_kills',
             "totalHonorPoints" => "stored_honor_rating",
             "position_x"       => "position_x",
             "position_y"       => "position_y",
