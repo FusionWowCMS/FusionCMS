@@ -5,6 +5,14 @@ class Tooltip extends MX_Controller
     private $id;
     private $realm;
     private $item;
+    private $htmlTooltip;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->library('wowheaditems');
+    }
 
     public function Index($realm = false, $id = false)
     {
@@ -26,13 +34,14 @@ class Tooltip extends MX_Controller
 
             $data = array(
                     'module' => 'tooltip',
-                    'item' => $this->item
+                    'item' => $this->item,
+                    'htmlTooltip' => $this->htmlTooltip
                 );
 
             $out = $this->template->loadPage("tooltip.tpl", $data);
 
             // Cache it
-            $this->cache->save("items/tooltip_" . $realm . "_" . $id . "_" . getLang(), $out);
+            $this->cache->save("items/tooltip_" . $this->realm . "_" . $id . "_" . getLang(), $out);
 
             die($out);
         }
@@ -43,74 +52,106 @@ class Tooltip extends MX_Controller
      */
     private function getItemData()
     {
-        // Load constants
-        $this->load->config("tooltip_constants");
-
-        // Assign them
-        $bind = $this->config->item("bind");
-        $slots = $this->config->item("slots");
-        $damages = $this->config->item("damages");
-
         // Load the realm
         $realmObj = $this->realms->getRealm($this->realm);
 
-        // Get the item SQL data
-        $item = $realmObj->getWorld()->getItem($this->id);
+        // In patch 6.x.x and higher, the item_template table has been removed.
+		if ($realmObj->getExpansionId() > 4)
+        {
+            // check if item is in cache
+            $item_in_cache = $this->wowheaditems->get_item_cache($this->id, $this->realm, 'htmlTooltip');
 
-        // No item was found
-        if (!$item || $item == "empty") {
-            die(lang("unknown_item", "tooltip"));
-        }
+            if ($item_in_cache)
+            {
+                $this->htmlTooltip = $item_in_cache;
+            } else {
+                // check if item is in database
+                $item_in_db = $this->wowheaditems->get_item_db($this->id, $this->realm, 'htmlTooltip');
 
-        $this->flags = $this->getFlags($item['Flags']);
+                if ($item_in_db)
+                {
+                    $this->htmlTooltip = $item_in_db;
+                } else {
+                    // check if item is on Wowhead
+                    $item_wowhead = $this->wowheaditems->get_item_wowhead($this->id, $this->realm, 'htmlTooltip');
 
-        $this->item['name'] = $item['name'];
-
-        // Support custom colors
-        if (preg_match("/\|cff/", $item['name'])) {
-            while (preg_match("/\|cff/", $this->item['name'])) {
-                $this->item['name'] = preg_replace("/\|cff([A-Za-z0-9]{6})(.*)(\|cff)?/", '<span style="color:#$1;">$2</span>', $this->item['name']);
+                    if ($item_wowhead)
+                    {
+                        $this->htmlTooltip = $item_wowhead;
+                    } else {
+                        $this->htmlTooltip = 'item data not found';
+                    }
+                }
             }
         }
+        else
+        {
+            // Load constants
+            $this->load->config("tooltip_constants");
 
-        $this->item['quality'] = $item['Quality'];
-        $this->item['bind'] = $bind[$item['bonding']];
-        $this->item['unique'] = ($this->hasFlag(524288)) ? "Unique-Equipped" : null;
-        $this->item['slot'] = $slots[$item['InventoryType']];
-        $this->item['durability'] = $item['MaxDurability'];
-        $this->item['armor'] = (array_key_exists("armor", $item)) ? $item['armor'] : false;
-        $this->item['required'] = $item['RequiredLevel'];
-        $this->item['level'] = $item['ItemLevel'];
-        $this->item['type'] = $this->getType($item['class'], $item['subclass']);
-        $this->item['damage_type'] = (array_key_exists("dmg_type1", $item)) ? $damages[$item['dmg_type1']] : false;
+            // Assign them
+            $bind = $this->config->item("bind");
+            $slots = $this->config->item("slots");
+            $damages = $this->config->item("damages");
 
-        if (array_key_exists("dmg_min1", $item)) {
-            $this->item['damage_min'] = $item['dmg_min1'];
-            $this->item['damage_max'] = $item['dmg_max1'];
+            // Get the item SQL data
+            $item = $realmObj->getWorld()->getItem($this->id);
+
+            // No item was found
+            if (!$item || $item == "empty") {
+                die(lang("unknown_item", "tooltip"));
+            }
+
+            $this->flags = $this->getFlags($item['Flags']);
+
+            $this->item['name'] = $item['name'];
+
+            // Support custom colors
+            if (preg_match("/\|cff/", $item['name'])) {
+                while (preg_match("/\|cff/", $this->item['name'])) {
+                    $this->item['name'] = preg_replace("/\|cff([A-Za-z0-9]{6})(.*)(\|cff)?/", '<span style="color:#$1;">$2</span>', $this->item['name']);
+                }
+            }
+
+            $this->item['quality'] = $item['Quality'];
+            $this->item['bind'] = $bind[$item['bonding']];
+            $this->item['unique'] = ($this->hasFlag(524288)) ? "Unique-Equipped" : null;
+            $this->item['slot'] = $slots[$item['InventoryType']];
+            $this->item['durability'] = $item['MaxDurability'];
+            $this->item['armor'] = (array_key_exists("armor", $item)) ? $item['armor'] : false;
+            $this->item['required'] = $item['RequiredLevel'];
+            $this->item['level'] = $item['ItemLevel'];
+            $this->item['type'] = $this->getType($item['class'], $item['subclass']);
+            $this->item['damage_type'] = (array_key_exists("dmg_type1", $item)) ? $damages[$item['dmg_type1']] : false;
+
+            if (array_key_exists("dmg_min1", $item)) {
+                $this->item['damage_min'] = $item['dmg_min1'];
+                $this->item['damage_max'] = $item['dmg_max1'];
+            }
+
+            // For SkyFire: calculate weapon damage manually
+            elseif ($item['class'] == 2) {
+                $dmg = $this->calculateDamage($item);
+	       
+                $this->item['damage_min'] = $dmg['min'];
+                $this->item['damage_max'] = $dmg['max'];
+            } else {
+                $this->item['damage_min'] = false;
+                $this->item['damage_max'] = false;
+            }
+
+            $this->item['spells'] = $this->getSpells($item);
+            $this->item['attributes'] = $this->getAttributes($item);
+            $this->item['holy_res'] = (array_key_exists("holy_res", $item)) ? $item['holy_res'] : $this->getAttributeById(53, $item);
+            $this->item['fire_res'] = (array_key_exists("fire_res", $item)) ? $item['fire_res'] : $this->getAttributeById(51, $item);
+            $this->item['nature_res'] = (array_key_exists("nature_res", $item)) ? $item['nature_res'] : $this->getAttributeById(55, $item);
+            $this->item['frost_res'] = (array_key_exists("frost_res", $item)) ? $item['frost_res'] : $this->getAttributeById(52, $item);
+            $this->item['shadow_res'] = (array_key_exists("shadow_res", $item)) ? $item['shadow_res'] : $this->getAttributeById(54, $item);
+            $this->item['arcane_res'] = (array_key_exists("arcane_res", $item)) ? $item['arcane_res'] : $this->getAttributeById(56, $item);
+            $this->item['speed'] = ($item['delay'] > 0) ? ($item['delay'] / 1000) . "0" : 0;
+            $this->item['dps'] = $this->getDPS($this->item['damage_min'], $this->item['damage_max'], $this->item['speed']);
+            $this->item['sockets'] = $this->getSockets($item);
         }
-
-        // For SkyFire: calculate weapon damage manually
-        elseif ($item['class'] == 2) {
-            $dmg = $this->calculateDamage($item);
-
-            $this->item['damage_min'] = $dmg['min'];
-            $this->item['damage_max'] = $dmg['max'];
-        } else {
-            $this->item['damage_min'] = false;
-            $this->item['damage_max'] = false;
-        }
-
-        $this->item['spells'] = $this->getSpells($item);
-        $this->item['attributes'] = $this->getAttributes($item);
-        $this->item['holy_res'] = (array_key_exists("holy_res", $item)) ? $item['holy_res'] : $this->getAttributeById(53, $item);
-        $this->item['fire_res'] = (array_key_exists("fire_res", $item)) ? $item['fire_res'] : $this->getAttributeById(51, $item);
-        $this->item['nature_res'] = (array_key_exists("nature_res", $item)) ? $item['nature_res'] : $this->getAttributeById(55, $item);
-        $this->item['frost_res'] = (array_key_exists("frost_res", $item)) ? $item['frost_res'] : $this->getAttributeById(52, $item);
-        $this->item['shadow_res'] = (array_key_exists("shadow_res", $item)) ? $item['shadow_res'] : $this->getAttributeById(54, $item);
-        $this->item['arcane_res'] = (array_key_exists("arcane_res", $item)) ? $item['arcane_res'] : $this->getAttributeById(56, $item);
-        $this->item['speed'] = ($item['delay'] > 0) ? ($item['delay'] / 1000) . "0" : 0;
-        $this->item['dps'] = $this->getDPS($this->item['damage_min'], $this->item['damage_max'], $this->item['speed']);
-        $this->item['sockets'] = $this->getSockets($item);
     }
 
     private function calculateDamage($item)

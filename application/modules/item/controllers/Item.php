@@ -2,6 +2,13 @@
 
 class Item extends MX_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->library('wowheaditems');
+    }
+
     private $realm;
 
     public function Index($realm = false, $id = false)
@@ -16,10 +23,10 @@ class Item extends MX_Controller
         $this->realm = $realm;
 
         $cache = $this->cache->get("items/tooltip_" . $realm . "_" . $id . "_" . getLang());
-        $cache2 = $this->cache->get("items/item_" . $realm . "_" . $id);
+        $cache2 = $this->wowheaditems->get_item_cache($id, $this->realm, 'name');
 
         if ($cache2 !== false) {
-            $itemName = $cache2['name'];
+            $itemName = $cache2;
         } else {
             $itemName = lang("view_item", "item");
         }
@@ -52,7 +59,7 @@ class Item extends MX_Controller
         $cache = $this->cache->get("items/item_" . $this->realm . "_" . $id);
 
         if ($cache !== false) {
-            $cache2 = $this->cache->get("items/display_iconname_" . $id);
+            $cache2 = $this->wowheaditems->get_item_cache($id, $this->realm);
 
             if ($cache2 != false) {
                 return "<div class='item'><a></a><img src='https://icons.wowdb.com/retail/large/" . $cache2 . ".jpg' /></div>";

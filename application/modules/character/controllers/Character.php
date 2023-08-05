@@ -34,6 +34,8 @@ class Character extends MX_Controller
         $this->js = "modules/character/js/character.js";
         $this->css = "modules/character/css/character.css";
 
+        $this->load->library('wowheaditems');
+
         $this->load->model("armory_model");
 
         $this->canCache = true;
@@ -67,7 +69,7 @@ class Character extends MX_Controller
             $cache = $this->cache->get("items/item_" . $this->realm . "_" . $id);
 
             if ($cache !== false) {
-                $cache2 = $this->cache->get("items/display_" . $cache['displayid']);
+                $cache2 = $this->wowheaditems->get_item_cache($id, $this->realm);
 
                 if ($cache2 != false) {
                     return "<a href='" . $this->template->page_url . "item/" . $this->realm . "/" . $id . "' rel='item=" . $id . "' data-realm='" . $this->realm . "'></a><img src='https://icons.wowdb.com/retail/large/" . $cache2 . ".jpg' />";
@@ -472,21 +474,21 @@ class Character extends MX_Controller
         if ($id != false)
         {
             // check if item is in cache
-            $item_in_cache = $this->get_icon_cache($id);
+            $item_in_cache = $this->wowheaditems->get_item_cache($id, $this->realm, 'displayId');
 
             if ($item_in_cache)
             {
                 $displayId = $item_in_cache;
             } else {
                 // check if item is in database
-                $item_in_db = $this->get_icon_db($id);
+                $item_in_db = $this->wowheaditems->get_item_db($id, $this->realm, 'displayId');
 
                 if ($item_in_db)
                 {
                     $displayId = $item_in_db;
                 } else {
                     // check if item is on Wowhead
-                    $item_wowhead = $this->get_icon_wowhead($id);
+                    $item_wowhead = $this->wowheaditems->get_item_wowhead($id, $this->realm, 'displayId');
 
                     if ($item_wowhead)
                     {
@@ -544,107 +546,4 @@ class Character extends MX_Controller
 			break;
 		}
 	}
-
-    /**
-     * Check if item icon name is in cache
-     *
-     * @param  Int $item
-     * @return String
-     */
-    private function get_icon_cache($item)
-    {
-        $cache = $this->cache->get("items/display_id_" . $item);
-
-        // can we use the cache?
-        if ($cache !== false)
-        {
-            $name = $cache;
-        }
-        else
-        {
-            return false;
-        }
-
-        return $name;
-    }
-
-    /**
-     * Check if item icon displayId is in database
-     *
-     * @param  Int $item
-     * @return String
-     */
-    private function get_icon_db($item)
-    {
-        // Get the item ID
-        $query = $this->db->query("SELECT displayid FROM item_display WHERE entry = ? LIMIT 1", [$item]);
-
-        // Check for results
-        if ($query->num_rows() > 0)
-        {
-            $row = $query->result_array();
-
-            $displayId = $row[0]['displayid'];
-
-            // save to cache
-            $this->cache->save("items/display_id_" . $item, $displayId);
-        }
-        else
-        {
-            return false;
-        }
-
-        return $displayId;
-    }
-
-    private function get_icon_wowhead($item)
-    {
-        // Get the item XML data
-        $xml = file_get_contents("https://www.wowhead.com/item=" . $item . "&xml");
-
-        $itemData = $this->xmlToArray($xml);
-
-        if (!isset($xml->error) && !isset($itemData['error']))
-        {
-            $xml = simplexml_load_string($xml);
-            $displayId = $xml->item[0]->icon['displayId'];
-
-            if (!is_array($displayId) && !empty($displayId))
-            {
-                // make sure its not in DB already
-                $result = $this->db->query("SELECT COUNT(*) as count FROM item_display WHERE entry = ?", [$item])->row();
-                if ($result->count == 0)
-                {
-                    // let the users fill the table themselves, optionally they can import item_template themselves
-                    $query = $this->db->query("INSERT INTO item_display (entry, displayid) VALUES (?, ?)", [$item, $displayId]);
-                }
-
-                // save to cache
-                $this->cache->save("items/display_id_" . $item, $displayId);
-            }
-            // return false in case of wowhead xml is broken (rare but it happens)
-            else {
-                return false;
-            }
-
-            return $displayId;
-        }
-
-        return false;
-    }
-
-    /**
-     * Convert XML data to an array
-     *
-     * @param  String $xml
-     * @return Array
-     */
-    private function xmlToArray($xml)
-    {
-        $xml = simplexml_load_string($xml);
-        $json = json_encode($xml);
-        $array = json_decode($json, true);
-
-        return $array;
-    }
 }

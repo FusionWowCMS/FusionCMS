@@ -1,4 +1,5 @@
 <div style="max-width:350px;">
+{if $item}
 <span class='q{$item.quality}' style='font-size: 16px'>{$item.name}</span><br />
 
 {if $item.bind}{$item.bind}<br />{/if}
@@ -52,5 +53,8 @@
 		</a>
 		<br />
 	{/foreach}
+{/if}
+{elseif $htmlTooltip}
+{$htmlTooltip}
 {/if}
 </div>
