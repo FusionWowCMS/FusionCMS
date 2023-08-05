@@ -404,10 +404,31 @@ class Realms
 		{
 			$level = 70;
 		}
-		else if($race == "Pandaren")
+		else
+		{
+			// If character is below 30, use lv 1 image
+			if($character['level'] < 30)
+			{
+				$level = 1;
+			}
+
+			// If character is below 65, use lv 60 image
+			elseif($character['level'] < 65)
+			{
+				$level = 60;
+			}
+
+			// 65+, use lvl70 image
+			else
+			{
+				$level = 70;
+			}
+		}
+
+		if($race == "Pandaren")
 		{
 			$level = 70;
-			$class = null;
+			$class = $class == "Monk" ? "Monk" : null;
 
 			if ($raceId == 24)
 			    $faction = 'n';
@@ -431,26 +452,6 @@ class Realms
 		{
 			$level = 70;
 			$class = null;
-		}
-		else
-		{
-			// If character is below 30, use lv 1 image
-			if($character['level'] < 30)
-			{
-				$level = 1;
-			}
-
-			// If character is below 65, use lv 60 image
-			elseif($character['level'] < 65)
-			{
-				$level = 60;
-			}
-
-			// 65+, use lvl70 image
-			else
-			{
-				$level = 70;
-			}
 		}
 
         if (in_array($race, array("Blood elf", "Night elf", "Void elf", "Zandalari Troll", "Kul Tiran", "Mag'har Orc", "Lightforged Dranei", "Highmountain Tauren", "Dark Iron Dwarf"))) {
