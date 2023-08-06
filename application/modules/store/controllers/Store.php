@@ -46,8 +46,17 @@ class Store extends MX_Controller
         // Load the content
         $content = $this->template->loadPage("store.tpl", $data);
 
-        // Put the content in a box
-        $page = $this->template->box("<span style='cursor:pointer;' onClick='window.location=\"" . $this->template->page_url . "ucp\"'>" . lang("ucp") . "</span> &rarr; " . lang("item_store", "store"), $content);
+        // Load the topsite page and format the page contents
+        $pageData = array(
+            "module" => "default",
+            "headline" => breadcumb(array(
+                            "ucp" => lang("ucp"),
+                            "store" => lang("item_store", "store")
+                        )),
+            "content" => $content
+        );
+
+        $page = $this->template->loadPage("page.tpl", $pageData);
 
         // Output the content
         $this->template->view($page, "modules/store/css/store.css", "modules/store/js/store.js");

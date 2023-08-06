@@ -47,7 +47,20 @@ class Donate extends MX_Controller
 
         $output = $this->template->loadPage("donate.tpl", $data);
 
-        $this->template->box("<span style='cursor:pointer;' onClick='window.location=\"" . $this->template->page_url . "ucp\"'>" . lang("ucp") . "</span> &rarr; " . lang("donate_panel", "donate"), $output, true, "modules/donate/css/donate.css", "modules/donate/js/donate.js");
+        // Load the topsite page and format the page contents
+        $pageData = array(
+            "module" => "default",
+            "headline" => breadcumb(array(
+                            "ucp" => lang("ucp"),
+                            "donate" => lang("donate_panel", "donate")
+                        )),
+            "content" => $output
+        );
+
+        $page = $this->template->loadPage("page.tpl", $pageData);
+
+        //Load the template form
+        $this->template->view($page, "modules/donate/css/donate.css", "modules/donate/js/donate.js");
     }
 
     public function canceled()

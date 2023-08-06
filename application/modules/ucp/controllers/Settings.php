@@ -52,7 +52,10 @@ class Settings extends MX_Controller
 
         $data = array(
             "module" => "default",
-            "headline" => lang("user_panel", "ucp"),
+            "headline" => breadcumb(array(
+                            "ucp" => lang("ucp"),
+                            "ucp/settings" => lang("settings", "ucp")
+                        )),
             "content" => $this->template->loadPage("settings.tpl", $settings_data)
         );
 

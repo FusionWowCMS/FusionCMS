@@ -43,7 +43,7 @@ class Vote extends MX_Controller
             "module" => "default",
             "headline" => breadcumb(array(
                             "ucp" => lang("ucp"),
-                            "ucp/avatar" => lang("vote_panel", "vote")
+                            "vote" => lang("vote_panel", "vote")
                         )),
             "content" => $output
         );
