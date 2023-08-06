@@ -137,8 +137,6 @@ class Trinity_cata_soap implements Emulator
             "maxpower3"     => "maxpower3",
             "maxpower4"     => "maxpower4",
             "maxpower5"     => "maxpower5",
-            "maxpower6"     => "maxpower6",
-            "maxpower7"     => "maxpower7",
             "strength"      => "strength",
             "agility"       => "agility",
             "stamina"       => "stamina",
