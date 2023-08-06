@@ -662,10 +662,11 @@ CREATE TABLE `item_template` (
 	`name` VARCHAR(255) NOT NULL COLLATE 'utf8_general_ci',
 	`displayid` MEDIUMINT(10) UNSIGNED NOT NULL DEFAULT '0',
 	`icon` VARCHAR(255) NOT NULL COLLATE 'utf8_general_ci',
-	`data` MEDIUMTEXT NOT NULL COLLATE 'utf8_general_ci',
+	`Quality` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+	`stackable` TINYINT(3) UNSIGNED NOT NULL DEFAULT '1',
+	`htmlTooltip` MEDIUMTEXT NOT NULL COLLATE 'utf8_general_ci',
 	PRIMARY KEY (`entry`) USING BTREE
-)
-COMMENT='Item System' COLLATE='utf8_general_ci' ENGINE=MyISAM ROW_FORMAT=DYNAMIC;
+) COMMENT='Item System' COLLATE='utf8_general_ci' ENGINE=MyISAM ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of item_template

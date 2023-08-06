@@ -7,13 +7,6 @@ class Tooltip extends MX_Controller
     private $item;
     private $htmlTooltip;
 
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->load->library('wowheaditems');
-    }
-
     public function Index($realm = false, $id = false)
     {
         // Make sure item and realm are set
@@ -33,10 +26,10 @@ class Tooltip extends MX_Controller
             $this->getItemData();
 
             $data = array(
-                    'module' => 'tooltip',
-                    'item' => $this->item,
-                    'htmlTooltip' => $this->htmlTooltip
-                );
+                'module' => 'tooltip',
+                'item' => $this->item,
+                'htmlTooltip' => $this->htmlTooltip
+            );
 
             $out = $this->template->loadPage("tooltip.tpl", $data);
 
@@ -56,36 +49,30 @@ class Tooltip extends MX_Controller
         $realmObj = $this->realms->getRealm($this->realm);
 
         // In patch 6.x.x and higher, the item_template table has been removed.
-		if ($realmObj->getExpansionId() > 4)
-        {
+        if ($realmObj->getExpansionId() > 4) {
             // check if item is in cache
-            $item_in_cache = $this->wowheaditems->get_item_cache($this->id, $this->realm, 'htmlTooltip');
+            $item_in_cache = $this->items->getItemCache($this->id, $this->realm, 'htmlTooltip');
 
-            if ($item_in_cache)
-            {
+            if ($item_in_cache) {
                 $this->htmlTooltip = $item_in_cache;
             } else {
                 // check if item is in database
-                $item_in_db = $this->wowheaditems->get_item_db($this->id, $this->realm, 'htmlTooltip');
+                $item_in_db = $this->items->getItemDB($this->id, $this->realm, 'htmlTooltip');
 
-                if ($item_in_db)
-                {
+                if ($item_in_db) {
                     $this->htmlTooltip = $item_in_db;
                 } else {
                     // check if item is on Wowhead
-                    $item_wowhead = $this->wowheaditems->get_item_wowhead($this->id, $this->realm, 'htmlTooltip');
+                    $item_wowhead = $this->items->getItemWowHead($this->id, $this->realm, 'htmlTooltip');
 
-                    if ($item_wowhead)
-                    {
+                    if ($item_wowhead) {
                         $this->htmlTooltip = $item_wowhead;
                     } else {
                         $this->htmlTooltip = 'item data not found';
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             // Load constants
             $this->load->config("tooltip_constants");
 
@@ -132,7 +119,7 @@ class Tooltip extends MX_Controller
             // For SkyFire: calculate weapon damage manually
             elseif ($item['class'] == 2) {
                 $dmg = $this->calculateDamage($item);
-	       
+
                 $this->item['damage_min'] = $dmg['min'];
                 $this->item['damage_max'] = $dmg['max'];
             } else {
@@ -235,18 +222,18 @@ class Tooltip extends MX_Controller
 
         $statCount = 10;
         $attributes = array(
-                "spells" => array(),
-                "regular" => array()
-            );
+            "spells" => array(),
+            "regular" => array()
+        );
 
         for ($i = 1; $i <= $statCount; $i++) {
             if (!empty($item['stat_value' . $i]) && array_key_exists($item['stat_type' . $i], $types)) {
                 $type = "spells";
 
                 // Mana/health
-                if (in_array($item['stat_type' . $i], array(42,46))) {
+                if (in_array($item['stat_type' . $i], array(42, 46))) {
                     $stat = "<span class='q2'>" . lang("restores", "tooltip") . " " . $item['stat_value' . $i] . " " . $types[$item['stat_type' . $i]] . "</span><br />";
-                } elseif ($item['stat_type' . $i] > 7 && !in_array($item['stat_type' . $i], array(42,46))) {
+                } elseif ($item['stat_type' . $i] > 7 && !in_array($item['stat_type' . $i], array(42, 46))) {
                     $stat = "<span class='q2'>" . lang("increases", "tooltip") . " " . $types[$item['stat_type' . $i]] . lang("by", "tooltip") . " " . $item['stat_value' . $i] . ".</span><br />";
                 } else {
                     if (array_key_exists($item['stat_type' . $i], $types)) {
@@ -297,10 +284,10 @@ class Tooltip extends MX_Controller
         for ($i = 0; $i < $spellCount; $i++) {
             if (!empty($item['spellid_' . $i])) {
                 $data = array(
-                        "id" => $item['spellid_' . $i],
-                        "trigger" => $spelltriggers[$item['spelltrigger_' . $i]],
-                        "text" => $this->getSpellText($item['spellid_' . $i])
-                    );
+                    "id" => $item['spellid_' . $i],
+                    "trigger" => $spelltriggers[$item['spelltrigger_' . $i]],
+                    "text" => $this->getSpellText($item['spellid_' . $i])
+                );
 
                 array_push($spells, $data);
             }

@@ -20,7 +20,7 @@ class Character extends MX_Controller
     private $gender;
 
     private $stats;
-    private $items;
+    private $slotsItems;
     private $equippedItems;
     private $equippedItemsDisplayId;
 
@@ -34,12 +34,10 @@ class Character extends MX_Controller
         $this->js = "modules/character/js/character.js";
         $this->css = "modules/character/css/character.css";
 
-        $this->load->library('wowheaditems');
-
         $this->load->model("armory_model");
 
         $this->canCache = true;
-        $this->items = array();
+        $this->slotsItems = array();
         $this->equippedItems = array();
         $this->equippedItemsDisplayId = array();
     }
@@ -69,13 +67,7 @@ class Character extends MX_Controller
             $cache = $this->cache->get("items/item_" . $this->realm . "_" . $id);
 
             if ($cache !== false) {
-                $cache2 = $this->wowheaditems->get_item_cache($id, $this->realm);
-
-                if ($cache2 != false) {
-                    return "<a href='" . $this->template->page_url . "item/" . $this->realm . "/" . $id . "' rel='item=" . $id . "' data-realm='" . $this->realm . "'></a><img src='https://icons.wowdb.com/retail/large/" . $cache2 . ".jpg' />";
-                } else {
-                    return "<a href='" . $this->template->page_url . "item/" . $this->realm . "/" . $id . "' rel='item=" . $id . "' data-realm='" . $this->realm . "'></a><img src='https://icons.wowdb.com/retail/large/inv_misc_questionmark.jpg' />";
-                }
+                return "<a href='" . $this->template->page_url . "item/" . $this->realm . "/" . $id . "' rel='item=" . $id . "' data-realm='" . $this->realm . "'></a><img src='https://icons.wowdb.com/retail/large/" . ($cache['icon'] != null ? $cache['icon'] : 'inv_misc_questionmark') . ".jpg' />";
             } else {
                 $this->canCache = false;
                 return $this->template->loadPage("icon_ajax.tpl", array('id' => $id, 'realm' => $this->realm, 'url' => $this->template->page_url));
@@ -137,7 +129,7 @@ class Character extends MX_Controller
         $this->guild = $this->armory_model->getGuild();
         $this->guildName = $this->armory_model->getGuildName($this->guild);
 
-        if (in_array($this->race, array(4,10))) {
+        if (in_array($this->race, array(4, 10))) {
             if ($this->race == 4) {
                 $this->raceName = "Night elf";
             } else {
@@ -209,43 +201,43 @@ class Character extends MX_Controller
         }
 
         // Load the items
-        $items = $this->armory_model->getItems();
+        $slotsItems = $this->armory_model->getItems();
 
         // Item slots
         $slots = array(
-                    0 => "head",
-                    1 => "neck",
-                    2 => "shoulders",
-                    3 => "body",
-                    4 => "chest",
-                    5 => "waist",
-                    6 => "legs",
-                    7 => "feet",
-                    8 => "wrists",
-                    9 => "hands",
-                    10 => "finger1",
-                    11 => "finger2",
-                    12 => "trinket1",
-                    13 => "trinket2",
-                    14 => "back",
-                    15 => "mainhand",
-                    16 => "offhand",
-                    17 => "ranged",
-                    18 => "tabard"
-                );
+            0 => "head",
+            1 => "neck",
+            2 => "shoulders",
+            3 => "body",
+            4 => "chest",
+            5 => "waist",
+            6 => "legs",
+            7 => "feet",
+            8 => "wrists",
+            9 => "hands",
+            10 => "finger1",
+            11 => "finger2",
+            12 => "trinket1",
+            13 => "trinket2",
+            14 => "back",
+            15 => "mainhand",
+            16 => "offhand",
+            17 => "ranged",
+            18 => "tabard"
+        );
 
-        if (is_array($items)) {
+        if (is_array($slotsItems)) {
             // Loop through to assign the items
-            foreach ($items as $item) {
+            foreach ($slotsItems as $item) {
                 $this->equippedItems[$item['slot']] = $item['itemEntry'];
+                $this->slotsItems[$slots[$item['slot']]] = $this->getItem($item['itemEntry']);
                 $this->getDisplayId($item['slot'], $item['itemEntry']);
-                $this->items[$slots[$item['slot']]] = $this->getItem($item['itemEntry']);
             }
         }
 
         // Loop through to make sure none are empty
         foreach ($slots as $key => $value) {
-            if (!array_key_exists($value, $this->items)) {
+            if (!array_key_exists($value, $this->slotsItems)) {
                 switch ($value) {
                     default:
                         $image = $value;
@@ -267,7 +259,7 @@ class Character extends MX_Controller
                         break;
                 }
 
-                $this->items[$value] = "<div class='item'><img src='" . $this->template->page_url . "application/images/armory/default/" . $image . ".gif' /></div>";
+                $this->slotsItems[$value] = "<div class='item'><img src='" . $this->template->page_url . "application/images/armory/default/" . $image . ".gif' /></div>";
             }
         }
     }
@@ -277,84 +269,84 @@ class Character extends MX_Controller
         switch ($this->className) {
             case "Demon Hunter":
                 return "mardum";
-            break;
+                break;
         }
         switch ($this->raceName) {
             default:
                 return "shattrath";
-            break;
+                break;
             case "Human":
                 return "stormwind";
-            break;
+                break;
             case "Blood elf":
                 return "silvermoon";
-            break;
+                break;
             case "Night elf":
                 return "darnassus";
-            break;
+                break;
             case "Dwarf":
                 return "ironforge";
-            break;
+                break;
             case "Gnome":
                 return "ironforge";
-            break;
+                break;
             case "Orc":
                 return "orgrimmar";
-            break;
+                break;
             case "Draenei":
                 return "theexodar";
-            break;
+                break;
             case "Tauren":
                 return "thunderbluff";
-            break;
+                break;
             case "Undead":
                 return "undercity";
-            break;
+                break;
             case "Troll":
                 return "orgrimmar";
-            break;
+                break;
             case "Goblin":
                 return "kezan";
-            break;
+                break;
             case "Worgen":
                 return "gilneas";
-            break;
+                break;
             case "Pandaren":
                 return "wanderingisle";
-            break;
+                break;
             case "Nightborne":
                 return "nightwell";
-            break;
+                break;
             case "Highmountain Tauren":
                 return "highmountain";
-            break;
+                break;
             case "Void elf":
                 return "telogrusrift";
-            break;
+                break;
             case "Lightforged Dranei":
                 return "vindicaar";
-            break;
+                break;
             case "Zandalari Troll":
                 return "zandalari";
-            break;
+                break;
             case "Kul Tiran":
                 return "boralus";
-            break;
+                break;
             case "Dark Iron Dwarf":
                 return "shadowforge";
-            break;
+                break;
             case "Vulpera":
                 return "voldun";
-            break;
+                break;
             case "Mag'har Orc":
                 return "orgrimmar2";
-            break;
+                break;
             case "Mechagnome":
                 return "mechagon";
-            break;
+                break;
             case "Dracthyr":
                 return "wakingshores";
-            break;
+                break;
         }
     }
 
@@ -393,7 +385,7 @@ class Character extends MX_Controller
                     "class" => $this->class,
                     "level" => $this->level,
                     "gender" => $this->gender,
-                    "items" => $this->items,
+                    "items" => $this->slotsItems,
                     "equippedItems" => (!empty($this->equippedItems) ? $this->equippedItems : false),
                     "equippedItemsDisplayId" => (!empty($this->equippedItemsDisplayId) ? $this->equippedItemsDisplayId : false),
                     "expansionId" => $this->realms->getRealm($this->realm)->getExpansionId(),
@@ -471,79 +463,60 @@ class Character extends MX_Controller
     public function getDisplayId($slot, $id)
     {
         // Check if item ID
-        if ($id != false)
-        {
-            // check if item is in cache
-            $item_in_cache = $this->wowheaditems->get_item_cache($id, $this->realm, 'displayId');
+        if ($id != false) {
+            // get item data
+            $item_in_cache = $this->items->getItem($id, $this->realm, 'displayid');
 
-            if ($item_in_cache)
-            {
+            if ($item_in_cache) {
                 $displayId = $item_in_cache;
             } else {
-                // check if item is in database
-                $item_in_db = $this->wowheaditems->get_item_db($id, $this->realm, 'displayId');
-
-                if ($item_in_db)
-                {
-                    $displayId = $item_in_db;
-                } else {
-                    // check if item is on Wowhead
-                    $item_wowhead = $this->wowheaditems->get_item_wowhead($id, $this->realm, 'displayId');
-
-                    if ($item_wowhead)
-                    {
-                        $displayId = $item_wowhead;
-                    } else {
-                        $displayId = null;
-                    }
-                }
+                $displayId = null;
             }
         }
 
-		if ($displayId == null || $displayId == '')
-			return;
+        if ($displayId == null || $displayId == '')
+            return;
 
-		switch ($slot)
-		{
-			case 0:
-				$this->equippedItemsDisplayId[1] = $displayId;
-			break;
-			case 2:
-				$this->equippedItemsDisplayId[3] = $displayId;
-			break;
-			case 3:
-				$this->equippedItemsDisplayId[4] = $displayId;
-			break;
-			case 4:
-				$this->equippedItemsDisplayId[5] = $displayId;
-			break;
-			case 5:
-				$this->equippedItemsDisplayId[6] = $displayId;
-			break;
-			case 6:
-				$this->equippedItemsDisplayId[7] = $displayId;
-			break;
-			case 7:
-				$this->equippedItemsDisplayId[8] = $displayId;
-			break;
-			case 8:
-				$this->equippedItemsDisplayId[9] = $displayId;
-			break;
-			case 9:
-				$this->equippedItemsDisplayId[10] = $displayId;
-			break;
-			case 14:
-				$this->equippedItemsDisplayId[16] = $displayId;
-			break;
-			case 15:
-				$this->equippedItemsDisplayId[21] = $displayId;
-			break;
-			case 16:
-				$this->equippedItemsDisplayId[14] = $displayId;
-			break;
-			case 18:
-				$this->equippedItemsDisplayId[19] = $displayId;
-			break;
-		}
-	}
+        switch ($slot) {
+            case 0:
+                $this->equippedItemsDisplayId[1] = $displayId;
+                break;
+            case 2:
+                $this->equippedItemsDisplayId[3] = $displayId;
+                break;
+            case 3:
+                $this->equippedItemsDisplayId[4] = $displayId;
+                break;
+            case 4:
+                $this->equippedItemsDisplayId[5] = $displayId;
+                break;
+            case 5:
+                $this->equippedItemsDisplayId[6] = $displayId;
+                break;
+            case 6:
+                $this->equippedItemsDisplayId[7] = $displayId;
+                break;
+            case 7:
+                $this->equippedItemsDisplayId[8] = $displayId;
+                break;
+            case 8:
+                $this->equippedItemsDisplayId[9] = $displayId;
+                break;
+            case 9:
+                $this->equippedItemsDisplayId[10] = $displayId;
+                break;
+            case 14:
+                $this->equippedItemsDisplayId[16] = $displayId;
+                break;
+            case 15:
+                $this->equippedItemsDisplayId[21] = $displayId;
+                break;
+            case 16:
+                $this->equippedItemsDisplayId[14] = $displayId;
+                break;
+            case 18:
+                $this->equippedItemsDisplayId[19] = $displayId;
+                break;
+        }
+    }
 }

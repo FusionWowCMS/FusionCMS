@@ -53,35 +53,6 @@ class World_model
      */
     public function getItem($id)
     {
-        $cache = $this->CI->cache->get("items/item_" . $this->realmId . "_" . $id);
-
-        if ($cache !== false) {
-            return $cache;
-        } else {
-            $this->connect();
-
-            $query = $this->db->query(query('get_item', $this->realmId), array($id));
-
-            if ($this->db->error()) {
-                $error = $this->db->error();
-                if ($error['code'] != 0) {
-                    die($error["message"]);
-                }
-            }
-
-            if ($query->num_rows() > 0) {
-                $row = $query->result_array();
-
-                // Cache it forever
-                $this->CI->cache->save("items/item_" . $this->realmId . "_" . $id, $row[0]);
-
-                return $row[0];
-            } else {
-                // Cache it for 24 hours
-                $this->CI->cache->save("items/item_" . $this->realmId . "_" . $id, 'empty', 60 * 60 * 24);
-
-                return false;
-            }
-        }
+        return $this->CI->items->getItem($id, $this->realmId);
     }
 }
