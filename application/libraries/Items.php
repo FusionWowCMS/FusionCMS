@@ -30,7 +30,8 @@ class Items
 		// Get the item XML data
 		$data = @file_get_contents("https://www.wowhead.com/item=" . $item . "&xml");
 
-		if (!isset($data))
+
+		if (!empty($data))
 			$data = $this->XMLtoArray($data);
 
 		if (is_array($data) && !isset($data['wowhead']['error'])) {
