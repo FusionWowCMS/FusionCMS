@@ -110,7 +110,9 @@ class Character extends MX_Controller
         }
 
         $this->pvp = array(
-            'kills' => (array_key_exists("totalKills", $character_data)) ? $character_data['totalKills'] : false,
+            'totalKills' => (array_key_exists("totalKills", $character_data)) ? $character_data['totalKills'] : false,
+            'todayKills' => (array_key_exists("todayKills", $character_data)) ? $character_data['todayKills'] : false,
+            'yesterdayKills' => (array_key_exists("yesterdayKills", $character_data)) ? $character_data['yesterdayKills'] : false,
             'honor' => (array_key_exists("totalHonorPoints", $character_data)) ? $character_data['totalHonorPoints'] : false,
             'arena' => (array_key_exists("arenaPoints", $character_data)) ? $character_data['arenaPoints'] : false
         );

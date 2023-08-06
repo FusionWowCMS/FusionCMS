@@ -180,10 +180,22 @@
 		<div class="section-header">{lang("pvp", "character")}</div>
 		<div class="section-body">
 			<table class="table table-hover table-striped">
-				{if $pvp.kills !== false}
+				{if $pvp.todayKills !== false}
+				<tr>
+					<td>{lang("todayKills", "character")}</td>
+					<td class="text-end">{if isset($pvp.todayKills)}{$pvp.todayKills}{else}{lang("unknown", "character")}{/if}</td>
+				</tr>
+				{/if}
+				{if $pvp.yesterdayKills !== false}
+				<tr>
+					<td>{lang("yesterdayKills", "character")}</td>
+					<td class="text-end">{if isset($pvp.yesterdayKills)}{$pvp.yesterdayKills}{else}{lang("unknown", "character")}{/if}</td>
+				</tr>
+				{/if}
+				{if $pvp.totalKills !== false}
 				<tr>
 					<td>{lang("kills", "character")}</td>
-					<td class="text-end">{if isset($pvp.kills)}{$pvp.kills}{else}{lang("unknown", "character")}{/if}</td>
+					<td class="text-end">{if isset($pvp.totalKills)}{$pvp.totalKills}{else}{lang("unknown", "character")}{/if}</td>
 				</tr>
 				{/if}
 				
