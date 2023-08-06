@@ -239,6 +239,10 @@ class Admin_items extends MX_Controller
             die("Invalid item ID");
         }
 
+		if ($data["itemcount"] == '' || empty($data["itemcount"]) || is_null($data["itemcount"])) {
+            $data["itemcount"] = 1;
+        }
+
 		if ($data["group"] == 0) {
             die("Group can't be empty");
         }
