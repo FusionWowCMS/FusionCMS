@@ -18,3 +18,4 @@ uploads/*
 install/.lock
 /application/config/owner.php
 /vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/
+/.idea/
