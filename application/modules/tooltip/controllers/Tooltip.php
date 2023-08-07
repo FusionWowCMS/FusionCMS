@@ -51,26 +51,12 @@ class Tooltip extends MX_Controller
         // In patch 6.x.x and higher, the item_template table has been removed.
         if ($realmObj->getExpansionId() > 4) {
             // check if item is in cache
-            $item_in_cache = $this->items->getItemCache($this->id, $this->realm, 'htmlTooltip');
+            $item_in_cache = $this->items->getItem($this->id, $this->realm, 'htmlTooltip');
 
             if ($item_in_cache) {
                 $this->htmlTooltip = $item_in_cache;
             } else {
-                // check if item is in database
-                $item_in_db = $this->items->getItemDB($this->id, $this->realm, 'htmlTooltip');
-
-                if ($item_in_db) {
-                    $this->htmlTooltip = $item_in_db;
-                } else {
-                    // check if item is on Wowhead
-                    $item_wowhead = $this->items->getItemWowHead($this->id, $this->realm, 'htmlTooltip');
-
-                    if ($item_wowhead) {
-                        $this->htmlTooltip = $item_wowhead;
-                    } else {
-                        $this->htmlTooltip = 'item data not found';
-                    }
-                }
+                $this->htmlTooltip = lang("unknown_item", "tooltip");
             }
         } else {
             // Load constants
