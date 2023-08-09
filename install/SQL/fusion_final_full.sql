@@ -7617,7 +7617,7 @@ DROP TABLE IF EXISTS `store_items`;
 CREATE TABLE `store_items`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `itemid` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `itemcount` TEXT NULL DEFAULT '1' COLLATE utf8mb4_unicode_ci,
+  `itemcount` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `quality` int(2) NULL DEFAULT NULL,
   `vp_price` int(4) NULL DEFAULT NULL,
