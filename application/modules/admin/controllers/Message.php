@@ -7,7 +7,7 @@ class Message extends MX_Controller
         // Make sure to load the administrator library!
         $this->load->library('administrator');
 
-        require_once('application/libraries/Configeditor.php');
+        require_once('application/libraries/ConfigEditor.php');
 
         parent::__construct();
 

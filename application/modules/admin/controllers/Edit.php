@@ -15,7 +15,7 @@ class Edit extends MX_Controller
 
         requirePermission("editModuleConfigs");
 
-        require_once('application/libraries/Configeditor.php');
+        require_once('application/libraries/ConfigEditor.php');
     }
 
     /**

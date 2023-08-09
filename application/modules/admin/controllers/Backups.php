@@ -14,7 +14,7 @@ class Backups extends MX_Controller
 
         $this->load->config('backups');
 
-        require_once('application/libraries/Configeditor.php');
+        require_once('application/libraries/ConfigEditor.php');
 
         requirePermission("viewBackups");
     }

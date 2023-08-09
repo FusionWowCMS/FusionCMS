@@ -15,7 +15,7 @@ class Settings extends MX_Controller
         $this->load->config('social_media');
         $this->load->config('cdn');
 
-        require_once('application/libraries/Configeditor.php');
+        require_once('application/libraries/ConfigEditor.php');
 
         requirePermission("editSystemSettings");
     }
