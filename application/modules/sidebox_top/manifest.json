@@ -1,0 +1,11 @@
+{
+	"name": "Sidebox Top",
+	"description": "Statistics about the top players; achievements and guilds in your realms.",
+	"version": "1.0.2",
+	"date": "2023-06-09",
+	"author": {
+		"name": "FusionCMS",
+		"website":"http:\/\/fusion-hub.com"
+	},
+	"enabled":true
+}
