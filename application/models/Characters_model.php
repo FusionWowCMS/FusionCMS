@@ -118,7 +118,6 @@ class Characters_model
 
             // Assign the online count
             $online = $row[0]['total'];
-            ;
         } else {
             $online = 0;
         }

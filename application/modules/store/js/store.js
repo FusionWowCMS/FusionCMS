@@ -656,7 +656,6 @@ var Store = {
 		 */
 		pay: function()
 		{
-			//UI.confirm(lang("want_to_buy", "store"), lang("yes", "store"), function()
 			Swal.fire({
 				title: lang("want_to_buy", "store"),
 				text: "You won't be able to revert this!",

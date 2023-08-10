@@ -113,7 +113,7 @@ function Tooltip()
 	 	/**
 	 	 * Runtime cache
 	 	 */
-	 	this.cache = new Array();
+	 	this.cache = [];
 
 	 	/**
 	 	 * The currently displayed item ID

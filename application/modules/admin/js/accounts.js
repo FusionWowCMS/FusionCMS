@@ -89,7 +89,7 @@ var Accounts = {
 
 		$.post(Config.URL + this.Links.loadMore + id, {offset: this.offset, count: this.loadMoreCount, show_more: this.logCount, csrf_token_name: Config.CSRF}, function(data)
 		{
-			$("#overview").append(data);;
+			$("#overview").append(data);
 		});
 		$("#show_more_count").append();
 	},
