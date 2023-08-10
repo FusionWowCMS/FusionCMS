@@ -160,15 +160,17 @@ class Pay extends MX_Controller
             }
         }
 
-        // Let the user pay before we start sending any items!
-        $this->subtractPoints();
-
-        $this->store_model->logOrder($this->vp, $this->dp, $cart);
-
         foreach ($cart as $item) {
             // Is it a query?
             if (!empty($items[$item['id']]['query'])) {
-                $this->handleQuery($items[$item['id']]['query'], $items[$item['id']]['query_database'], (isset($item['character']) ? $item['character'] : false), $items[$item['id']]['realm']);
+                $resultQuery = $this->handleQuery($items[$item['id']]['query'], $items[$item['id']]['query_database'], ($item['character'] ?? false), $items[$item['id']]['realm']);
+
+                // Make sure the character is offline, if this item requires it
+                if (!$resultQuery) {
+                    // Load the checkout view
+                    $output = $this->template->loadPage("failure.tpl", array('type' => 'query', 'url' => $this->template->page_url));
+                    die($output);
+                }
             }
             // Or a command?
             elseif (!empty($items[$item['id']]['command'])) {
@@ -182,6 +184,11 @@ class Pay extends MX_Controller
                 }
             }
         }
+
+        // Let the user pay before we start sending any items!
+        $this->subtractPoints();
+
+        $this->store_model->logOrder($this->vp, $this->dp, $cart);
 
         // Loop through all realms
         foreach ($realmItems as $realm => $characters) {
@@ -217,12 +224,13 @@ class Pay extends MX_Controller
     /**
      * Handle custom queries
      *
-     * @param String $query
+     * @param $query_raw
      * @param String $database
      * @param Int $character
      * @param Int $realm
+     * @return bool
      */
-    private function handleQuery($query_raw, $database, $character, $realm)
+    private function handleQuery($query_raw, string $database, int $character, int $realm): bool
     {
         $queries = explode(";", $query_raw);
 
@@ -282,8 +290,13 @@ class Pay extends MX_Controller
             $query = preg_replace("/\{CHARACTER\}/", "?", $query);
             $query = preg_replace("/\{REALM\}/", "?", $query);
 
+            $db->trans_start();
             $db->query($query, $data);
+            $db->trans_complete();
+            if ($db->trans_status() === FALSE)
+                return false;
         }
+        return true;
     }
 
     /**

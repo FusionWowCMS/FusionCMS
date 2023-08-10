@@ -21,6 +21,7 @@ $lang['error_character_exists'] = "The entered character does not exist.";
 $lang['error_character_not_mine'] = "The entered character does not belong to you.";
 $lang['error_character_not_offline'] = "The entered character is not offline. Please log the character out of game and try again.";
 $lang['error_no_console'] = "We're sorry, but the realm this item was designed for doesn't support console commands. Please report this to an administrator.";
+$lang['error_query'] = "We're sorry, but we cannot do this. Please report this to an administrator.";
 $lang['checkout'] = "Checkout";
 $lang['buying'] = "You are buying";
 $lang['total_of'] = "for a total of";

@@ -19,6 +19,8 @@
 	{lang("error_character_not_offline", "store")}
 {elseif $type == "no_console"}
 	{lang("error_no_console", "store")}
+{elseif $type == "query"}
+	{lang("error_query", "store")}
 {/if}
 
 <a href="javascript:window.location.reload(true)">{lang("go_back", "store")}</a>
