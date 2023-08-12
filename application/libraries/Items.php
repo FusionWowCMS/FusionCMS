@@ -26,9 +26,9 @@ class Items
      * @param $realm
      * @param String $type
      * @param bool $enableCache
-     * @return bool|string
+     * @return bool|string|array
      */
-    public function getItemWowHead(int $item, $realm, string $type, bool $enableCache = true): bool|string
+    public function getItemWowHead(int $item, $realm, string $type, bool $enableCache = true): bool|string|array
     {
         // Get the item XML data
         $data = @file_get_contents("https://www.wowhead.com/item=" . $item . "&xml");
@@ -89,9 +89,9 @@ class Items
      * @param Int $item
      * @param $realm
      * @param String $type
-     * @return bool|string
+     * @return bool|string|array
      */
-    public function getItemCache(int $item, $realm, string $type): bool|string
+    public function getItemCache(int $item, $realm, string $type): bool|string|array
     {
         // Get the item XML data
         $cache = $this->CI->cache->get('items/item_' . $realm . '_' . $item);
@@ -148,9 +148,9 @@ class Items
      * @param Int $item
      * @param $realm
      * @param String $type
-     * @return bool|string
+     * @return bool|string|array
      */
-    public function getItemDB(int $item, $realm, string $type): bool|string
+    public function getItemDB(int $item, $realm, string $type): bool|string|array
     {
         // Get the item ID
         $query = $this->CI->db->query("SELECT * FROM item_template WHERE entry = ? LIMIT 1", [$item]);
