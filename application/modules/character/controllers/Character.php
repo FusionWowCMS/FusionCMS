@@ -63,7 +63,7 @@ class Character extends MX_Controller
 
     public function getItem($id = false)
     {
-        if ($id != false) {
+        if ($id) {
             $cache = $this->cache->get("items/item_" . $this->realm . "_" . $id);
 
             if ($cache !== false) {
@@ -186,7 +186,6 @@ class Character extends MX_Controller
                         $this->secondBarValue = $this->stats['maxpower1'];
                     }
                     break;
-
                 case "Death knight":
                     if (isset($this->stats['maxpower7'])) {
                         $this->secondBar = "runic";
@@ -244,16 +243,12 @@ class Character extends MX_Controller
                     default:
                         $image = $value;
                         break;
+                    case "trinket2":
                     case "trinket1":
                         $image = "trinket";
                         break;
-                    case "trinket2":
-                        $image = "trinket";
-                        break;
-                    case "finger1":
-                        $image = "finger";
-                        break;
                     case "finger2":
+                    case "finger1":
                         $image = "finger";
                         break;
                     case "back":
@@ -266,89 +261,60 @@ class Character extends MX_Controller
         }
     }
 
-    private function getBackground()
+    private function getBackground(): string
     {
-        switch ($this->className) {
-            case "Demon Hunter":
-                return "mardum";
-                break;
+        if ($this->className == "Demon Hunter") {
+            return "mardum";
         }
         switch ($this->raceName) {
             default:
                 return "shattrath";
-                break;
             case "Human":
                 return "stormwind";
-                break;
             case "Blood elf":
                 return "silvermoon";
-                break;
             case "Night elf":
                 return "darnassus";
-                break;
+            case "Gnome":
             case "Dwarf":
                 return "ironforge";
-                break;
-            case "Gnome":
-                return "ironforge";
-                break;
+            case "Troll":
             case "Orc":
                 return "orgrimmar";
-                break;
             case "Draenei":
                 return "theexodar";
-                break;
             case "Tauren":
                 return "thunderbluff";
-                break;
             case "Undead":
                 return "undercity";
-                break;
-            case "Troll":
-                return "orgrimmar";
-                break;
             case "Goblin":
                 return "kezan";
-                break;
             case "Worgen":
                 return "gilneas";
-                break;
             case "Pandaren":
                 return "wanderingisle";
-                break;
             case "Nightborne":
                 return "nightwell";
-                break;
             case "Highmountain Tauren":
                 return "highmountain";
-                break;
             case "Void elf":
                 return "telogrusrift";
-                break;
             case "Lightforged Dranei":
                 return "vindicaar";
-                break;
             case "Zandalari Troll":
                 return "zandalari";
-                break;
             case "Kul Tiran":
                 return "boralus";
-                break;
             case "Dark Iron Dwarf":
                 return "shadowforge";
-                break;
             case "Vulpera":
                 return "voldun";
-                break;
             case "Mag'har Orc":
                 return "orgrimmar2";
-                break;
             case "Mechagnome":
                 return "mechagon";
-                break;
             case "Dracthyr":
                 return "wakingshores";
-                break;
         }
     }
 
@@ -465,7 +431,7 @@ class Character extends MX_Controller
     public function getDisplayId($slot, $id)
     {
         // Check if item ID
-        if ($id != false) {
+        if ($id) {
             // get item data
             $item_in_cache = $this->items->getItem($id, $this->realm, 'displayid');
 

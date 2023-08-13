@@ -18,7 +18,7 @@
 <!-- Character Top.End -->
 <hr class="my-5" />
 <!-- Character Main.Start -->
-<div class="row {if $faction == 1}bg-faction alliance{else if $faction == 2}bg-faction horde{/if}">
+<div class="row {if $faction == 1}bg-faction alliance{elseif $faction == 2}bg-faction horde{/if}">
 	<div class="col-items">
 		<div class="item"><a></a>{$items.head}</div>
 		<div class="item"><a></a>{$items.neck}</div>
