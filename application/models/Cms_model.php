@@ -97,15 +97,15 @@ class Cms_model extends CI_Model
     /**
      * Get the links of one direction
      *
-     * @param  Int $side ID of the specific menu
-     * @return Array
+     * @param string $type ID of the specific menu
+     * @return array|null
      */
-    public function getLinks($side = "top")
+    public function getLinks(string $type = "top"): ?array
     {
-        if (in_array($side, array("top", "side", "bottom"))) {
-            $query = $this->db->query("SELECT * FROM menu WHERE side = ? ORDER BY `order` ASC", array($side));
+        if (in_array($type, array("top", "side", "bottom"))) {
+            $query = $this->db->query("SELECT * FROM menu WHERE type = ? ORDER BY `order` ASC", array($type));
         } else {
-            $query = $this->db->query("SELECT * FROM menu ORDER BY `order` ASC", array($side));
+            $query = $this->db->query("SELECT * FROM menu ORDER BY `order` ASC", array($type));
         }
 
         if ($query->num_rows() > 0) {

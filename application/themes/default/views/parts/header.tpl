@@ -23,14 +23,14 @@
 					<div class="navbar-collapse collapse" collapse="navbar-top">
 					<ul class="navbar-nav ms-auto">
 						{foreach from=$menu_top item=menu}
-							{if $menu.dropdown_id != 0}{continue}{/if}
-							{if $menu.lrd == "D"}
+							{if $menu.parent_id != 0}{continue}{/if}
+							{if $menu.dropdown}
 								<li class="nav-item dropdown" data-dropdown-initialized="false">
 									<a href="#" id="dropdown_2" class="nav-link dropdown-toggle" title="{$menu.name}" data-bs-toggle="dropdown">{$menu.name}</a>
 	
 									<ul class="dropdown-menu" aria-labelledby="dropdown_2">
 										{foreach from=$menu_top item=d_menu}
-											{if $d_menu.dropdown_id != $menu.id}{continue}{/if}
+											{if $d_menu.parent_id != $menu.id}{continue}{/if}
 											<li><a {$d_menu.link} class="dropdown-item" title="{$d_menu.name}" data-hasevent="1">{$d_menu.name}</a></li>
 										{/foreach}
 									</ul>

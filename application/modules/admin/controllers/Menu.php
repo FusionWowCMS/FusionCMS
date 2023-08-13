@@ -74,9 +74,10 @@ class Menu extends MX_Controller
 
         $name = $this->input->post('name');
         $link = $this->input->post('link');
+        $type = $this->input->post('type');
         $side = $this->input->post('side');
-        $lrd = $this->input->post('lrd');
-        $dropdown_id = $this->input->post('dropdown_id');
+        $dropdown = $this->input->post('dropdown');
+        $parent_id = $this->input->post('parent_id');
 
 		$array = json_decode($name, true);
 
@@ -92,7 +93,7 @@ class Menu extends MX_Controller
             die("Link can't be empty");
         }
 
-        $id = $this->menu_model->add($name, $link, $side, $lrd, $dropdown_id);
+        $id = $this->menu_model->add($name, $link, $type, $side, $dropdown, $parent_id);
 
         if ($this->input->post('visibility') == "group") {
             $this->menu_model->setPermission($id);
@@ -186,9 +187,10 @@ class Menu extends MX_Controller
 
         $data['name'] = $this->input->post('name');
         $data['link'] = $this->input->post('link');
+        $data['type'] = $this->input->post('type');
         $data['side'] = $this->input->post('side');
-        $data['lrd'] = $this->input->post('lrd');
-        $data['dropdown_id'] = $this->input->post('dropdown_id');
+        $data['dropdown'] = $this->input->post('dropdown');
+        $data['parent_id'] = $this->input->post('parent_id');
 
         $this->menu_model->edit($id, $data);
 

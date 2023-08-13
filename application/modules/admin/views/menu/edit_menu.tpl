@@ -18,34 +18,42 @@
 		</div>
 
 		<div class="form-group row">
-		<label class="col-sm-2 col-form-label" for="side">Menu location</label>
+		<label class="col-sm-2 col-form-label" for="type">Menu location</label>
 		<div class="col-sm-10">
-		<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="side" id="side">
-			<option value="top" {if $link.side == "top"}selected{/if}>Top</option>
-			<option value="side" {if $link.side == "side"}selected{/if}>Side</option>
-			<option value="bottom" {if $link.side == "bottom"}selected{/if}>Bottom</option>
+		<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="type" id="type">
+			<option value="top" {if $link.type == "top"}selected{/if}>Top</option>
+			<option value="side" {if $link.type == "side"}selected{/if}>Side</option>
+			<option value="bottom" {if $link.type == "bottom"}selected{/if}>Bottom</option>
 		</select>
 		</div>
 		</div>
 
 		<div class="form-group row">
-		<label class="col-sm-2 col-form-label" for="lrd">LRD <a data-toggle="tooltip" data-placement="bottom" title="Left, Right or Dropdown?">(?)</a></label>
+		<label class="col-sm-2 col-form-label" for="side">Side <a data-toggle="tooltip" data-placement="bottom" title="Left, Right?">(?)</a></label>
 		<div class="col-sm-10">
-		<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="lrd" id="lrd">
-			<option value="L" {if $link.lrd == "L"}selected{/if}>Left</option>
-			<option value="R" {if $link.lrd == "R"}selected{/if}>Right</option>
-			<option value="D" {if $link.lrd == "D"}selected{/if}>Dropdown</option>
+		<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="side" id="side">
+			<option value="L" {if $link.side == "L"}selected{/if}>Left</option>
+			<option value="R" {if $link.side == "R"}selected{/if}>Right</option>
 		</select>
 		</div>
 		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="dropdown">Dropdown <a data-toggle="tooltip" data-placement="bottom" title="is a dropdown?">(?)</a></label>
+			<div class="col-sm-10">
+				<select onChange="if(this.value == '0'){ $('#parent_name').fadeIn(150); } else { $('#parent_name').fadeOut(150); }" class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="dropdown" id="dropdown">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</select>
+			</div>
+		</div>
 		
 		<div class="form-group row">
-		<label class="col-sm-2 col-form-label" for="dropdown_id">Dropdown  <a data-toggle="tooltip" data-placement="bottom" title="The Name from the dropdown">(?)</a></label>
+		<label class="col-sm-2 col-form-label" for="parent_id">Parent <a data-toggle="tooltip" data-placement="bottom" title="Name of parent dropdown">(?)</a></label>
 		<div class="col-sm-10">
-		<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="dropdown_id" id="dropdown_id">
+		<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" name="parent_id" id="parent_id">
 			<option value="0">-</option>
 			{foreach from=$links item=menu}
-				{if $menu.lrd == "D"}<option {if $menu.id == $link.dropdown_id}selected{/if} value="{$menu.id}">{langColumn($menu.name)}</option>{/if}
+				{if $menu.dropdown}<option {if $menu.id == $link.parent_id}selected{/if} value="{$menu.id}">{langColumn($menu.name)}</option>{/if}
 			{/foreach}
 		</select>
 		</div>

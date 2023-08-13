@@ -703,13 +703,14 @@ CREATE TABLE `menu`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '#',
-  `side` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'top',
+  `type` varchar(255) CHARACTER SET utf8mb4 COMMENT 'top, side, bottom' COLLATE utf8mb4_unicode_ci NULL DEFAULT 'top',
   `rank` int(11) NOT NULL,
   `specific_rank` tinyint(1) NOT NULL DEFAULT 0,
   `order` int(11) NULL DEFAULT NULL,
   `permission` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `lrd` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `dropdown_id` int(11) NULL DEFAULT NULL,
+  `side` varchar(11) CHARACTER SET utf8mb4 COMMENT 'L = left, R = right' COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `dropdown` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 = Default, 1 = Dropdown',
+  `parent_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_menu_ranks`(`rank`) USING BTREE,
   CONSTRAINT `FK_menu_ranks` FOREIGN KEY (`rank`) REFERENCES `ranks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -718,26 +719,26 @@ CREATE TABLE `menu`  (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (1, 'Home', 'news', 'top', 1, 0, 1, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (2, 'Register', 'register', 'top', 1, 1, 2, '2', NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (3, '{"english":"How to connect"}', 'page/connect', 'top', 1, 0, 3, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (4, 'Forum', 'forum', 'top', 1, 0, 4, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (16, 'Online players', 'online', 'top', 1, 0, 5, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (5, 'Sign in', 'login', 'top', 1, 1, 6, '5', NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (6, 'User panel', 'ucp', 'top', 2, 0, 7, '6', NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (7, 'Home', 'news', 'side', 1, 0, 8, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (8, 'Register', 'register', 'side', 1, 1, 9, '8', NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (9, 'How to connect', 'page/connect', 'side', 1, 0, 10, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (10, 'Forum', 'forum', 'side', 1, 0, 11, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (11, 'Sign in', 'login', 'side', 1, 1, 13, '11', NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (13, 'User panel', 'ucp', 'side', 2, 0, 16, '13', NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (17, 'Online players', 'online', 'side', 1, 0, 17, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (21, 'Admin panel', 'admin', 'side', 5, 0, 18, '21', NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (18, 'Armory', 'armory', 'side', 1, 0, 19, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (20, 'Changelog', 'changelog', 'side', 1, 0, 21, NULL, NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (100, 'Log out', 'logout', 'side', 2, 0, 100, '100', NULL, NULL);
-INSERT INTO `menu` (`id`, `name`, `link`, `side`, `rank`, `specific_rank`, `order`, `permission`, `lrd`, `dropdown_id`) VALUES (101, 'Log out', 'logout', 'top', 2, 0, 101, '101', NULL, NULL);
-
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (1, 'Home', 'news', 'top', 1, 0, 1, NULL, NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (2, 'Register', 'register', 'top', 1, 1, 2, '2', NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (3, 'How to connect', 'page/connect', 'top', 1, 0, 1, NULL, 'L', 0, 12);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (4, 'Forum', 'forum', 'top', 1, 0, 3, NULL, NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (5, 'Sign in', 'login', 'top', 1, 1, 6, '5', NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (6, 'User panel', 'ucp', 'top', 2, 0, 7, '6', NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (7, 'Home', 'news', 'side', 1, 0, 8, NULL, NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (8, 'Register', 'register', 'side', 1, 1, 9, '8', NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (9, 'How to connect', 'page/connect', 'side', 1, 0, 10, NULL, '', 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (10, 'Forum', 'forum', 'side', 1, 0, 11, NULL, NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (11, 'Sign in', 'login', 'side', 1, 1, 13, '11', NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (12, 'Support', '#', 'top', 1, 0, 5, NULL, 'L', 1, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (13, 'User panel', 'ucp', 'side', 2, 0, 16, '13', NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (16, 'Online players', 'online', 'top', 1, 0, 4, NULL, NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (17, 'Online players', 'online', 'side', 1, 0, 17, NULL, NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (18, 'Armory', 'armory', 'side', 1, 0, 19, NULL, NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (20, 'Changelog', 'changelog', 'side', 1, 0, 21, NULL, NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (21, 'Admin panel', 'admin', 'side', 5, 0, 18, '21', NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (100, 'Log out', 'logout', 'side', 2, 0, 100, '100', NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (101, 'Log out', 'logout', 'top', 2, 0, 101, '101', NULL, 0, 0);
 
 -- ----------------------------
 -- Table structure for mod_logs

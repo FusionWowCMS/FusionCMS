@@ -29,7 +29,7 @@ class Menu_model extends CI_Model
     {
         $this->deletePermission($id);
 
-        if ($this->db->query("DELETE FROM menu WHERE id = ? OR dropdown_id = ?", array($id, $id))) {
+        if ($this->db->query("DELETE FROM menu WHERE id = ? OR parent_id = ?", array($id, $id))) {
             return true;
         } else {
             return false;
@@ -42,14 +42,15 @@ class Menu_model extends CI_Model
         $this->db->update('menu', $data);
     }
 
-    public function add($name, $link, $side, $lrd, $dropdown_id)
+    public function add($name, $link, $type, $side, $dropdown, $parent_id)
     {
         $data = array(
             "name" => $name,
             "link" => $link,
+            "type" => $type,
             "side" => $side,
-            "lrd" => $lrd,
-            "dropdown_id" => $dropdown_id,
+            "dropdown" => $dropdown,
+            "parent_id" => $parent_id,
             "rank" => $this->cms_model->getAnyOldRank()
         );
 
