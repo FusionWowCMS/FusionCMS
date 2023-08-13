@@ -472,19 +472,19 @@ input[type="radio"] {
 }
 
 /*Class colors*/
-.color-c1 { color: #C69B6D ! important; } /* Warrior */
-.color-c2 { color: #F48CBA ! important; } /* Paladin */
-.color-c3 { color: #AAD372 ! important; } /* Hunter */
-.color-c4 { color: #FFF468 ! important; } /* Rogue */
-.color-c5 { color: #FFFFFF ! important; } /* Priest */
-.color-c6 { color: #C41E3A ! important; } /* Death Knight */
-.color-c7 { color: #0070DD ! important; } /* Shaman */
-.color-c8 { color: #3FC7EB ! important; } /* Mage */
-.color-c9 { color: #8788EE ! important; } /* Warlock */
-.color-c10 { color: #00FF98 ! important; } /* Monk */
-.color-c11 { color: #FF7C0A ! important; } /* Druid */
-.color-c12 { color: #A330C9 ! important; } /* Demon Hunter */
-.color-c13 { color: #33937F ! important; } /* Evoker */
+.color-c1, .wowhead-tooltip-item-classes .c1 { color: #C69B6D ! important; } /* Warrior */
+.color-c2, .wowhead-tooltip-item-classes .c2 { color: #F48CBA ! important; } /* Paladin */
+.color-c3, .wowhead-tooltip-item-classes .c3 { color: #AAD372 ! important; } /* Hunter */
+.color-c4, .wowhead-tooltip-item-classes .c4 { color: #FFF468 ! important; } /* Rogue */
+.color-c5, .wowhead-tooltip-item-classes .c5 { color: #FFFFFF ! important; } /* Priest */
+.color-c6, .wowhead-tooltip-item-classes .c6 { color: #C41E3A ! important; } /* Death Knight */
+.color-c7, .wowhead-tooltip-item-classes .c7 { color: #0070DD ! important; } /* Shaman */
+.color-c8, .wowhead-tooltip-item-classes .c8 { color: #3FC7EB ! important; } /* Mage */
+.color-c9, .wowhead-tooltip-item-classes .c9 { color: #8788EE ! important; } /* Warlock */
+.color-c10, .wowhead-tooltip-item-classes .c10 { color: #00FF98 ! important; } /* Monk */
+.color-c11, .wowhead-tooltip-item-classes .c11 { color: #FF7C0A ! important; } /* Druid */
+.color-c12, .wowhead-tooltip-item-classes .c12 { color: #A330C9 ! important; } /* Demon Hunter */
+.color-c13, .wowhead-tooltip-item-classes .c13 { color: #33937F ! important; } /* Evoker */
 
 /* Item quality colors */
 .q  { color: #ffd100 ! important; } /* Default (yellow) */
@@ -499,6 +499,16 @@ input[type="radio"] {
 .q8, .q8 a { color: #ffff98 ! important; } /* Light yellow (item set bonuses) */
 .q9, .q9 a { color: #71D5FF ! important; } /* Light blue (glyph type) */
 .q10, .q10 a { color: #ff4040 ! important; } /* Red (requirement not met, error) */
+
+/* Gems colors */
+.gem1 {color: #9d9d9d !important}
+.gem2 {color: #e60c0b !important}
+.gem4 {color: #ffff35 !important}
+.gem6 {color: #f48905 !important}
+.gem8 {color: #295df1 !important}
+.gem10 {color: #b957fc !important}
+.gem12 {color: #22c516 !important}
+.gem14 {color: #fff !important}
 
 /* Sockets */
 .socket-meta   { padding-left: 20px; background: url(../images/misc/socket_meta.gif) no-repeat left center; }
