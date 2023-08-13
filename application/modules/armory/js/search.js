@@ -20,7 +20,7 @@ var Search = {
                 Search.show_characters();
             }
         }
-        else
+        else if (search.length > 0)
         {
             Swal.fire({
                 icon: 'error',
@@ -212,7 +212,7 @@ var Search = {
                 Search.show_characters();
             }
         }
-        else
+        else if (search.length > 0)
         {
             Swal.fire({
                 icon: 'error',
