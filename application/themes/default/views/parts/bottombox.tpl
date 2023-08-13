@@ -1,9 +1,8 @@
 <section class="section section-widgets" widgets="" home_page_only=""><div separator="" separator-arrow-down=""><span separator-arrow=""></span></div>
 	<div class="container">
 		<div class="row g-4 justify-content-center">
-		{if $sideboxes}
-		{foreach from=$sideboxes item=$sidebox}
-			{if $sidebox.location == 'bottom'}
+		{if $sideboxes_bottom}
+		{foreach from=$sideboxes_bottom item=$sidebox}
 			<div class="col-md-12 col-lg-4" widget="{$sidebox.type}">
 				<section class="sidebox sidebox-{$sidebox.type} {if $sidebox@last}last-row{/if}">
 				
@@ -23,7 +22,6 @@
 					</div>
 				</section>
 			</div>
-			{/if}
 		{/foreach}
 		{/if}
 		</div>

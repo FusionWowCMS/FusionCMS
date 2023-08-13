@@ -71,9 +71,13 @@ class Cms_model extends CI_Model
         return null;
     }
 
-    public function getSideboxes()
+    public function getSideboxes(string $type = "side")
     {
-        $query = $this->db->query("SELECT * FROM sideboxes ORDER BY `order` ASC");
+        if (in_array($type, array("top", "side", "bottom"))) {
+            $query = $this->db->query("SELECT * FROM sideboxes WHERE location = ? ORDER BY `order` ASC", array($type));
+        } else {
+            $query = $this->db->query("SELECT * FROM sideboxes ORDER BY `order` ASC", array($type));
+        }
 
         return $query->result_array();
     }

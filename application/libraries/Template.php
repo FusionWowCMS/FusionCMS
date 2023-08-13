@@ -253,9 +253,11 @@ class Template
     private function handleNormalPage($content, $css, $js)
     {
         //Load the sideboxes
-        $sideboxes = $this->loadSideboxes();
-        $header    = $this->getHeader($css, $js);
-        $modals    = $this->getModals();
+        $sideboxes        = $this->loadSideboxes();
+        $sideboxes_top    = $this->loadSideboxes('top');
+        $sideboxes_bottom = $this->loadSideboxes('bottom');
+        $header           = $this->getHeader($css, $js);
+        $modals           = $this->getModals();
 
         $url = $this->CI->router->fetch_class();
 
@@ -281,7 +283,9 @@ class Template
             "isOnline" => $this->CI->user->isOnline(),
             "theme_configs" => $this->theme_config,
             "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
-            "sideboxes" => $sideboxes
+            "sideboxes" => $sideboxes,
+            "sideboxes_top" => $sideboxes_top,
+            "sideboxes_bottom" => $sideboxes_bottom
         );
 
         // Load the main template
@@ -501,55 +505,50 @@ class Template
     /**
      * Loads the sideboxes, and returns the result
      *
+     * @param string $location
      * @return array
      */
-    public function loadSideboxes()
+    public function loadSideboxes(string $location = 'side'): array
     {
         require_once("application/interfaces/sidebox.php");
 
         $out = array();
 
-        $sideboxes_db = $this->CI->cms_model->getSideboxes();
+        $sideBoxes_db = $this->CI->cms_model->getSideboxes($location);
 
         // If we got sideboxes
-        if ($sideboxes_db)
+        if ($sideBoxes_db)
         {
             // Go through them all and add them to the output.
-            foreach ($sideboxes_db as $sidebox)
+            foreach ($sideBoxes_db as $sideBox)
             {
-                if ($sidebox['permission'] && !hasViewPermission($sidebox['permission'], "--SIDEBOX--"))
-                {
+                if ($sideBox['permission'] && !hasViewPermission($sideBox['permission'], "--SIDEBOX--"))
                     continue;
-                }
 
-                $fileLocation = 'application/modules/sidebox_' . $sidebox['type'] . '/controllers/' . ucfirst($sidebox['type']) . '.php';
+                $fileLocation = 'application/modules/sidebox_' . $sideBox['type'] . '/controllers/' . ucfirst($sideBox['type']) . '.php';
 
                 if (file_exists($fileLocation))
                 {
                     require_once($fileLocation);
 
-                    if ($sidebox['type'] == 'custom')
-                    {
-                        $object = new $sidebox['type']($sidebox['id']);
-                    }
+                    if ($sideBox['type'] == 'custom')
+                        $object = new $sideBox['type']($sideBox['id']);
                     else
-                    {
-                        $object = new $sidebox['type']();
-                    }
+                        $object = new $sideBox['type']();
 
-                    array_push($out, array(
-                        'name' => langColumn($sidebox['displayName']),
-                        'location' => $sidebox['location'],
+                    $out[] = array(
+                        'name' => langColumn($sideBox['displayName']),
+                        'location' => $sideBox['location'],
                         'data' => $object->view(),
-                        'type' => $sidebox['type']
-                    ));
+                        'type' => $sideBox['type']
+                    );
                 }
                 else
                 {
-                    array_push($out, array(
+                    $out[] = array(
                         'name' => "Oops, something went wrong",
-                        'data' => 'The following sidebox module is missing or contains an invalid module structure: <b>sidebox_' . $sidebox['type'] . '</b>'
-                    ));
+                        'data' => 'The following sideBox module is missing or contains an invalid module structure: <b>sidebox_' . $sideBox['type'] . '</b>'
+                    );
                 }
             }
         }
