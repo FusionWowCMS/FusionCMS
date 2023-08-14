@@ -2,6 +2,13 @@
 
 class Sidebox_model extends CI_Model
 {
+    public function getSideboxes(string $type = "side")
+    {
+        $query = $this->db->query("SELECT * FROM sideboxes ORDER BY `order` ASC");
+
+        return $query->result_array();
+    }
+
     public function add($data)
     {
         if (isset($data["content"])) {

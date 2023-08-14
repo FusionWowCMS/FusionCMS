@@ -23,7 +23,7 @@ class Sidebox extends MX_Controller
         // Change the title
         $this->administrator->setTitle("Sideboxes");
 
-        $sideboxes = $this->cms_model->getSideboxes();
+        $sideboxes = $this->sidebox_model->getSideboxes();
 
         if ($sideboxes)
         {
