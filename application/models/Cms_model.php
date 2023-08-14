@@ -76,7 +76,7 @@ class Cms_model extends CI_Model
         if (in_array($type, array("top", "side", "bottom"))) {
             $query = $this->db->query("SELECT * FROM sideboxes WHERE location = ? ORDER BY `order` ASC", array($type));
         } else {
-            $query = $this->db->query("SELECT * FROM sideboxes ORDER BY `order` ASC", array($type));
+            $query = $this->db->query("SELECT * FROM sideboxes ORDER BY `order` ASC");
         }
 
         return $query->result_array();
@@ -109,7 +109,7 @@ class Cms_model extends CI_Model
         if (in_array($type, array("top", "side", "bottom"))) {
             $query = $this->db->query("SELECT * FROM menu WHERE type = ? ORDER BY `order` ASC", array($type));
         } else {
-            $query = $this->db->query("SELECT * FROM menu ORDER BY `order` ASC", array($type));
+            $query = $this->db->query("SELECT * FROM menu ORDER BY `order` ASC");
         }
 
         if ($query->num_rows() > 0) {
