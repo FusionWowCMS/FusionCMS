@@ -185,9 +185,9 @@ class Items
      * @param Int $item
      * @param Int $realm
      * @param String $type
-     * @return bool|array|string
+     * @return bool|string|array|null
      */
-    public function getItem(int $item, int $realm, string $type = 'all'): bool|string|array
+    public function getItem(int $item, int $realm, string $type = 'all'): bool|string|array|null
     {
         $cache = $this->CI->cache->get("items/item_" . $realm . "_" . $item);
 
@@ -257,7 +257,7 @@ class Items
                         'displayid' => $row[0]['displayid'],
                         'htmlTooltip' => $row[0]['htmlTooltip'],
                         'name' => $row[0]['name'],
-                        'icon' => $row[0]['icon'],
+                        'icon' => isset($row[0]['icon']) ? $row[0]['icon'] : 'inv_misc_questionmark',
                         default => $row[0],
                     };
                 } else {
