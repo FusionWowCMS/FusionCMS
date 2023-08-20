@@ -66,16 +66,16 @@ class News extends MX_Controller
 
             // For each key we need to add the special values that we want to print
             foreach ($this->news_articles as $key => $article) {
-                if (empty($article['headline_' . $LangAbbr . ''])) {
-                    $this->news_articles[$key]['headline'] = $article['headline_' . $DefaultLangAbbr . ''];
+                if (empty($article['headline_' . $LangAbbr])) {
+                    $this->news_articles[$key]['headline'] = $article['headline_' . $DefaultLangAbbr];
                 } else {
-                    $this->news_articles[$key]['headline'] = $article['headline_' . $LangAbbr . ''];
+                    $this->news_articles[$key]['headline'] = $article['headline_' . $LangAbbr];
                 }
 
-                if (empty($article['content_' . $LangAbbr . ''])) {
-                    $this->news_articles[$key]['content'] = langColumn($article['content_' . $DefaultLangAbbr . '']);
+                if (empty($article['content_' . $LangAbbr])) {
+                    $this->news_articles[$key]['content'] = langColumn($article['content_' . $DefaultLangAbbr]);
                 } else {
-                    $this->news_articles[$key]['content'] = langColumn($article['content_' . $LangAbbr . '']);
+                    $this->news_articles[$key]['content'] = langColumn($article['content_' . $LangAbbr]);
                 }
                 $this->news_articles[$key]['date'] = date("Y/m/d", $article['timestamp']);
                 $this->news_articles[$key]['author'] = $this->user->getNickname($article['author_id']);
@@ -143,22 +143,22 @@ class News extends MX_Controller
 
         // For each key we need to add the special values that we want to print
         foreach ($this->news_articles as $key => $article) {
-            if (empty($article['headline_' . $LangAbbr . ''])) {
-                $this->news_articles[$key]['headline'] = $article['headline_' . $DefaultLangAbbr . ''];
+            if (empty($article['headline_' . $LangAbbr])) {
+                $this->news_articles[$key]['headline'] = $article['headline_' . $DefaultLangAbbr];
             } else {
-                $this->news_articles[$key]['headline'] = $article['headline_' . $LangAbbr . ''];
+                $this->news_articles[$key]['headline'] = $article['headline_' . $LangAbbr];
             }
 
-            if (empty($article['content_' . $LangAbbr . ''])) {
-                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $DefaultLangAbbr . '']), $summary_character_limit));
+            if (empty($article['content_' . $LangAbbr])) {
+                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $DefaultLangAbbr]), $summary_character_limit));
             } else {
-                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $LangAbbr . '']), $summary_character_limit));
+                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $LangAbbr]), $summary_character_limit));
             }
 
-            if (empty($article['content_' . $LangAbbr . ''])) {
-                $this->news_articles[$key]['content'] = langColumn($article['content_' . $DefaultLangAbbr . '']);
+            if (empty($article['content_' . $LangAbbr])) {
+                $this->news_articles[$key]['content'] = langColumn($article['content_' . $DefaultLangAbbr]);
             } else {
-                $this->news_articles[$key]['content'] = langColumn($article['content_' . $LangAbbr . '']);
+                $this->news_articles[$key]['content'] = langColumn($article['content_' . $LangAbbr]);
             }
             $this->news_articles[$key]['date'] = date("Y/m/d", $article['timestamp']);
             $this->news_articles[$key]['author'] = ($article['author_id'] == 0) ? lang("system", "news") : $this->user->getNickname($article['author_id']) ;
