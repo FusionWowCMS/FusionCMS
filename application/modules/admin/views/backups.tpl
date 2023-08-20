@@ -21,8 +21,8 @@
 							<label class="col-sm-4 col-form-label align-self-center" for="auto_backups">Auto generate?</label>
 							<div class="col-sm-8">
 								<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="auto_backups" name="auto_backups" {if !hasPermission("editBackupSettings", "admin")}disabled{/if}>
-									<option value="1" {if $config.auto_backups}selected{/if}>Yes</option>
-									<option value="0" {if !$config.auto_backups}selected{/if}>No</option>
+									<option value="true" {if $config.auto_backups}selected{/if}>Yes</option>
+									<option value="false" {if !$config.auto_backups}selected{/if}>No</option>
 								</select>
 							</div>
 						</div>

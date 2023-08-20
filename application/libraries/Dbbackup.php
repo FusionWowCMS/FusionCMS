@@ -24,17 +24,22 @@ class Dbbackup
         $this->CI->load->model('cms_model');
         $this->CI->load->dbutil();
 
-        $this->FCPATH = FCPATH;
+        $this->CI->load->config('backups');
+
+        if ($this->CI->config->item('auto_backups'))
+        {
+            $this->backup();
+        }
     }
 
-    public function backup($trigger = false)
+    public function backup($trigger = false): void
     {
         $db_backup_path = 'backups/';
         $max_files = $this->CI->config->item('backups_max_keep');
         $backups_interval = $this->CI->config->item('backups_interval');
         $backups_time = $this->CI->config->item('backups_time');
 
-        $date_ref = date("Y-m-d H:i:s", strtotime('-' . $backups_interval . $backups_time . ''));
+        $date_ref = date("Y-m-d H:i:s", strtotime('-' . $backups_interval . $backups_time));
         $this->CI->db->where('created_date >', $date_ref);
         $this->CI->db->order_by('created_date', 'DESC');
         $this->CI->db->limit(1);
@@ -43,11 +48,11 @@ class Dbbackup
         if (!$row || $trigger) {
             if (!is_dir($db_backup_path) && $trigger) {
                 mkdir($db_backup_path, 0777);
-                log_message('info', '' . $db_backup_path . ' did not exist. Created!');
+                log_message('info', $db_backup_path . ' did not exist. Created!');
             }
 
             if (!is_writeable($db_backup_path) && $trigger) {
-                log_message('error', '' . $db_backup_path . ' not writeable!');
+                log_message('error', $db_backup_path . ' not writeable!');
                 die("Backup folder not writeable");
             }
 
