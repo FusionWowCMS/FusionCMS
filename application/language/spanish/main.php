@@ -61,7 +61,7 @@ $lang['store'] = "Tienda";
 $lang['account_settings'] = "Configuracion de la cuenta";
 $lang['teleport_hub'] = "Centro de Teletransporte";
 
-$lang['mod_panel'] = "Panel de Mods";
+$lang['gm_panel'] = "Panel de GMs";
 $lang['admin_panel'] = "Panel de Admins";
 
 $lang['login'] = "Ingresar";

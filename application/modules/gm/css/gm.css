@@ -1,0 +1,35 @@
+#gm .gm_ticket {
+	margin-bottom:20px;
+}
+
+#gm .gm_ticket_text {
+	padding:20px;
+	padding-top:5px;
+}
+
+#gm .gm_ticket_info_full {
+	display:none;
+}
+
+.gm_tools {
+	display:none;
+	margin:20px;
+	margin-top:5px;
+}
+
+#gm #top_tools {
+	padding-bottom: 20px;
+}
+
+div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=left] {
+	top: -1.3em !important;
+	left: -1.2em !important;
+}
+
+div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=right] {
+	top: -1.3em !important;
+	left: 2.55em !important;
+}
+div:where(.swal2-icon).swal2-success .swal2-success-fix {
+	display: none !important;
+}

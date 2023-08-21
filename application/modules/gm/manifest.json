@@ -1,0 +1,65 @@
+{
+	"name":"GM panel",
+	"description":"Provides web tools for game masters",
+	"version": "2.1.0",
+	"date": "2023-05-30",
+	"author":
+	{
+		"name":"FusionCMS",
+		"website":"https://fusion-hub.com"
+	},
+
+	"permissions": {
+		"view": { "default": false, "description": "View the GM panel. Required for all GM-tools." },
+		"sendItem": { "default": false, "description": "Send items to players" },
+		"unstuck": { "default": false, "description": "Use the unstuck tool on players" },
+		"answer": { "default": false, "description": "Answer tickets" },
+		"kick": { "default": false, "description": "Kick players" },
+		"ban": { "default": false, "description": "Ban players" },
+		"unban": { "default": false, "description": "UnBan players" },
+		"history": { "default": false, "description": "View GM actions" }
+	},
+
+	"roles": {
+		"manageTickets": {
+			"description": "View the GM panel. Required for all GM-tools.",
+			"dangerLevel": 1,
+
+			"permissions": {
+				"view": true,
+				"unstuck": true,
+				"answer": true,
+				"kick": true,
+				"ban": true
+			}
+		},
+		"manageBans": {
+			"description": "View the account and ip banned in GM panel.",
+			"dangerLevel": 2,
+
+			"permissions": {
+				"view": true,
+				"ban": true,
+				"unban": true
+			}
+		},
+		"sendItems": {
+			"description": "Send items to players",
+			"dangerLevel": 3,
+
+			"permissions": {
+				"sendItem": true
+			}
+		},
+		"viewHistory": {
+			"description": "View GM actions",
+			"dangerLevel": 2,
+
+			"permissions": {
+				"history": true
+			}
+		}
+	},
+
+	"enabled": true
+}

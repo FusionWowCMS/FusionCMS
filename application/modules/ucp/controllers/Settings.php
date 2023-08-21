@@ -42,7 +42,7 @@ class Settings extends MX_Controller
                 "settings" => $this->config->item('ucp_settings'),
                 "teleport" => $this->config->item('ucp_teleport'),
                 "admin" => $this->config->item('ucp_admin'),
-                "mod" => $this->config->item('ucp_mod')
+                "gm" => $this->config->item('ucp_mod')
             )
         );
 

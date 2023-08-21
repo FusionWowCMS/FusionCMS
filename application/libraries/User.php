@@ -128,7 +128,7 @@ class User
     public function isGm($id = false)
     {
         $id = $id != false ? $id : $this->id;
-        return hasPermission("view", "mod", $id);
+        return hasPermission("view", "gm", $id);
     }
 
     /**
@@ -141,7 +141,7 @@ class User
     public function isDev($id = false)
     {
         $id = $id != false ? $id : $this->id;
-        return hasPermission("view", "mod", $id);
+        return hasPermission("view", "gm", $id);
     }
 
     /**

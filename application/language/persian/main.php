@@ -61,7 +61,7 @@ $lang['store'] = "فروشگاه";
 $lang['account_settings'] = "تنظیمات حساب";
 $lang['teleport_hub'] = "تلپورتر";
 
-$lang['mod_panel'] = "پنل مدیریت";
+$lang['gm_panel'] = "پنل GM";
 $lang['admin_panel'] = "پنل ادمین";
 
 $lang['login'] = "ورود";

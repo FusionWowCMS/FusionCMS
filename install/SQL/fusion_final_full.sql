@@ -324,7 +324,23 @@ INSERT INTO `acl_group_roles` (`group_id`, `role_name`, `module`) VALUES
 (8, 'viewCharInfos', 'profile'),
 (8, 'viewLanguage', 'admin'),
 (8, 'viewLogs', 'admin'),
-(8, 'viewSessions', 'admin');
+(8, 'viewSessions', 'admin'),
+(3, 'manageTickets', 'gm'),
+(4, 'manageBans', 'gm'),
+(4, 'manageTickets', 'gm'),
+(6, 'manageBans', 'gm'),
+(6, 'manageTickets', 'gm'),
+(6, 'sendItems', 'gm'),
+(6, 'viewHistory', 'gm'),
+(7, 'manageBans', 'gm'),
+(7, 'manageTickets', 'gm'),
+(7, 'sendItems', 'gm'),
+(7, 'viewHistory', 'gm'),
+(8, 'manageBans', 'gm'),
+(8, 'manageTickets', 'gm'),
+(8, 'sendItems', 'gm'),
+(8, 'viewHistory', 'gm');
+
 
 -- ----------------------------
 -- Table structure for acl_groups
@@ -741,23 +757,24 @@ INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `orde
 INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (101, 'Log out', 'logout', 'top', 2, 0, 101, '101', NULL, 0, 0);
 
 -- ----------------------------
--- Table structure for mod_logs
+-- Table structure for gm_log
 -- ----------------------------
-DROP TABLE IF EXISTS `mod_logs`;
-CREATE TABLE `mod_logs`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `action` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mod` int(11) UNSIGNED NULL DEFAULT NULL,
-  `affected` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `ip` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `time` int(11) NOT NULL,
-  `isAcc` int(1) NOT NULL,
-  `realm` int(1) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+DROP TABLE IF EXISTS `gm_log`;
+CREATE TABLE `gm_log` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`action` TEXT NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`gm_id` INT(11) UNSIGNED NULL DEFAULT NULL,
+	`affected` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`ip` VARCHAR(45) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`type` MEDIUMTEXT NOT NULL COMMENT 'ticket, characters, account, ...' COLLATE 'utf8mb4_unicode_ci',
+	`realm` INT(1) NOT NULL,
+	`time` INT(11) NOT NULL,
+	PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=Dynamic;
 
+
 -- ----------------------------
--- Records of mod_logs
+-- Records of gm_log
 -- ----------------------------
 
 -- ----------------------------

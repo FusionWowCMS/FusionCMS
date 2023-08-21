@@ -10,5 +10,5 @@ $config['ucp_donate'] = "donate";
 $config['ucp_store'] = "store";
 $config['ucp_settings'] = "ucp/settings";
 $config['ucp_teleport'] = "teleport";
-$config['ucp_mod'] = "mod";
+$config['ucp_mod'] = "gm";
 $config['ucp_admin'] = "admin";

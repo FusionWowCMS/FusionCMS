@@ -96,7 +96,7 @@
 		<a href="{$url}{$config.teleport}" style="background-image:url({$url}application/modules/ucp/images/teleport_hub.jpg)"></a>
 	{/if}
 
-	{if hasPermission('view', "mod") && $config['mod']}
+	{if hasPermission('view', "gm") && $config['gm']}
 		<a href="{$url}{$config.mod}" style="background-image:url({$url}application/modules/ucp/images/gm_panel.jpg)"></a>
 	{/if}
 

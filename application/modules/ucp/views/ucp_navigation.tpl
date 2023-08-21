@@ -65,7 +65,7 @@
 		</div>
 		
 		<div class="list-group mt-3">
-			{if hasPermission('view', "mod")}<a href="{$url}mod" class="list-group-item list-group-item-action">{lang("mod_panel", "main")}</a>{/if}
+			{if hasPermission('view', "gm")}<a href="{$url}gm" class="list-group-item list-group-item-action">{lang("gm_panel", "main")}</a>{/if}
 			{if hasPermission('view', "admin")}<a href="{$url}admin" class="list-group-item list-group-item-action">{lang("admin_panel", "main")}</a>{/if}
 		</div>
 	</div>

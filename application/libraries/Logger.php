@@ -36,45 +36,27 @@ class Logger
     /**
      * Get all the logs by type and limit
      *
-     * @param  null $type
-     * @param  int $limit
+     * @param string|null $type
+     * @param int $offset
+     * @param int $limit
      * @return mixed
      */
-    public function getLogs($type = "", $offset = 0, $limit = 0)
+    public function getLogs(?string $type = "", int $offset = 0, int $limit = 0): mixed
     {
         return $this->CI->logger_model->getLogsDb($type, $offset, $limit);
-    }
-
-    public function getModLogs()
-    {
-        $modLogs = $this->CI->logger_model->getModLogsDb();
-
-        //Get Characters name if isAcc = 0
-        for ($i = 0; $i < count((array)$modLogs); $i++) {
-            if ($modLogs[$i]["isAcc"] == false)
-            {
-                $realm = $this->CI->realms->getRealm($modLogs[$i]["realm"]);
-                $characters = $realm->getCharacters();
-                $charId = $modLogs[$i]["affected"];
-
-                $modLogs[$i]["charName"] = $characters->characterExists($charId) ? $characters->getNameByGuid($charId) : "Char doesn't exists";
-            }
-        }
-
-        return $modLogs;
     }
 
     /**
      * Create a new log with the given data
      *
-     * @param $message
+     * @param $type
      * @param string $event
      * @param string $message
+     * @param array|string $custom
      * @param string $status
-     * @param string $custom
-     * @param int $user
+     * @param int|null $user
      */
-    public function createLog($type, $event, $message, $custom = [], $status = self::STATUS_SUCCEED, $user = null)
+    public function createLog($type, string $event, string $message, array|string $custom = [], string $status = self::STATUS_SUCCEED, int $user = null): void
     {
         // Module name
         $module = $this->CI->template->getModuleName();
@@ -88,26 +70,44 @@ class Logger
         $this->CI->logger_model->createLogDb($module, $user, $type, $event, $message, $status, json_encode($custom), $this->CI->input->ip_address());
     }
 
-    public function createModLog($action, $affected, $isAcc, $realmId)
-    {
-        $modId = 0;
-
-        if ($this->CI->user->isOnline())
-        {
-            $modId = $this->CI->user->getId();
-        }
-
-        // Call our model and add to the db.
-        $this->CI->logger_model->createModLogDb($action, $modId, $affected, $this->CI->input->ip_address(), $isAcc, $realmId);
-    }
-
     /**
      * Get the number of logs.
      *
      * @return mixed
      */
-    public function getLogCount()
+    public function getLogCount(): mixed
     {
         return $this->CI->logger_model->getLogCount();
+    }
+
+    public function getGMLogs()
+    {
+        $gmLogs = $this->CI->logger_model->getGMLogsDb();
+
+        for ($i = 0; $i < count((array)$gmLogs); $i++) {
+            if ($gmLogs[$i]["type"] == 'characters')
+            {
+                $realm = $this->CI->realms->getRealm($gmLogs[$i]["realm"]);
+                $characters = $realm->getCharacters();
+                $charId = $gmLogs[$i]["affected"];
+
+                $gmLogs[$i]["charName"] = $characters->characterExists($charId) ? $characters->getNameByGuid($charId) : "Character not found";
+            }
+        }
+
+        return $gmLogs;
+    }
+
+    public function createGMLog($action, $affected, $type, $realmId): void
+    {
+        $gmId = 0;
+
+        if ($this->CI->user->isOnline())
+        {
+            $gmId = $this->CI->user->getId();
+        }
+
+        // Call our model and add to the db.
+        $this->CI->logger_model->createGMLogDb($action, $gmId, $affected, $this->CI->input->ip_address(), $type, $realmId);
     }
 }

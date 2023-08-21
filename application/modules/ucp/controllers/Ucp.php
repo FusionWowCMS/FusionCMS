@@ -38,7 +38,7 @@ class Ucp extends MX_Controller
                 "expansion" => $this->config->item('ucp_expansion'),
                 "teleport" => $this->config->item('ucp_teleport'),
                 "admin" => $this->config->item('ucp_admin'),
-                "mod" => $this->config->item('ucp_mod')
+                "gm" => $this->config->item('ucp_mod')
             ),
 
             "characters" => $this->realms->getTotalCharacters(),
@@ -77,7 +77,7 @@ class Ucp extends MX_Controller
                 "expansion" => $this->config->item('ucp_expansion'),
                 "teleport" => $this->config->item('ucp_teleport'),
                 "admin" => $this->config->item('ucp_admin'),
-                "mod" => $this->config->item('ucp_mod')
+                "gm" => $this->config->item('ucp_mod')
             )
         );
 

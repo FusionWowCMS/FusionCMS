@@ -10,7 +10,7 @@
 
 class Logger_model extends CI_Model
 {
-    public function getLogsDb($logType = "", $offset = 0, $limit = 0)
+    public function getLogsDb(string $logType = "", int $offset = 0, int $limit = 0): ?array
     {
         if (($logType != "" && !is_string($logType)) || !is_numeric($limit) || !is_numeric($offset)) {
             return null;
@@ -37,20 +37,6 @@ class Logger_model extends CI_Model
         }
     }
 
-    public function getModLogsDb()
-    {
-        $this->db->select('*');
-        $this->db->order_by('time', 'DESC');
-        $query = $this->db->get('mod_logs');
-
-        // Get the results
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        } else {
-            return null;
-        }
-    }
-
     public function getLogCount()
     {
         $this->db->select("COUNT(id) 'count'");
@@ -60,15 +46,40 @@ class Logger_model extends CI_Model
             $result = $query->result_array();
             return $result[0]['count'];
         }
+
+        return null;
     }
 
-    public function createLogDb($module, $user, $type, $event, $message, $status, $custom, $ip)
+    public function createLogDb($module, $user, $type, $event, $message, $status, $custom, $ip): void
     {
         $this->db->query("INSERT INTO `logs` (`module`, `user_id`, `type`, `event`, `message`, `status`, `custom`, `ip`, `time`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", array($module, $user, $type, $event, $message, $status, $custom, $ip, time()));
     }
 
-    public function createModLogDb($action, $mod, $affected, $ip, $isAcc, $realmId)
+    public function getGMLogsDb(string $logType = "", int $offset = 0, int $limit = 0): ?array
     {
-        $this->db->query("INSERT INTO `mod_logs` (`action`, `mod`, `affected`, `ip`, `time`, `isAcc`, `realm`) VALUES (?, ?, ?, ?, ?, ?, ?)", array($action, $mod, $affected, $ip, time(), $isAcc, $realmId));
+        $this->db->select('*');
+        if ($logType != "") {
+            $this->db->where('type', $logType);
+        }
+        $this->db->order_by('time', 'DESC');
+        if ($limit > 0 && $offset == 0) {
+            $this->db->limit($limit);
+        }
+        if ($limit > 0 && $offset > 0) {
+            $this->db->limit($limit, $offset);
+        }
+        $query = $this->db->get('gm_log');
+
+        // Get the results
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return null;
+        }
+    }
+
+    public function createGMLogDb($action, $gm_id, $affected, $ip, $type, $realmId): void
+    {
+        $this->db->query("INSERT INTO `gm_log` (`action`, `gm_id`, `affected`, `ip`, `type`, `realm`, `time`) VALUES (?, ?, ?, ?, ?, ?, ?)", array($action, $gm_id, $affected, $ip, $type, $realmId, time()));
     }
 }
