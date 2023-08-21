@@ -4,7 +4,6 @@ $lang['invalid'] = "Invalid values";
 $lang['message_too_long'] = "Message is too long. Must be under 8000 characters.";
 $lang['kick'] = "Kick a player";
 $lang['ban'] = "Ban an account";
-$lang['ban_ip'] = "Ban an account";
 $lang['ticket'] = "Ticket";
 $lang['time'] = "Time";
 $lang['message'] = "Message";
