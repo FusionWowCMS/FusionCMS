@@ -11,7 +11,7 @@
  *
  * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
  */
-$lang['abbreviation'] = "fa";
+$lang['abbreviation'] = "ir";
 
 // User panel abbreviation
 $lang['ucp'] = "UCP";

@@ -71,6 +71,20 @@ var News = {
 	{
 		tinyMCE.triggerSave();
 
+		let headlineData = {};
+		const $headlines = document.querySelectorAll('[__headline__]');
+
+		[...$headlines].map((item, index) => {
+			headlineData[item.getAttribute('__headline__')] = item.value;
+		});
+
+		let contentData = {};
+		const $contents = document.querySelectorAll('[__content__]');
+
+		[...$contents].map((item, index) => {
+			contentData[item.getAttribute('__content__')] = item.value;
+		});
+
 		var files =  News.imagesloader.data('format.imagesloader').AttachmentArray;
 		var il =  News.imagesloader.data('format.imagesloader');
 		var fd = new FormData();
@@ -93,28 +107,8 @@ var News = {
         fd.append("type",            $("#type").val());
         fd.append("avatar",          $("#avatar").is(":checked"));
         fd.append("comments",        $("#comments").is(":checked"));
-        fd.append("headline_en",     $("#headline_en").val());
-        fd.append("content_en",      $("textarea.tinymce_en").val());
-        fd.append("headline_fa",     $("#headline_fa").val());
-        fd.append("content_fa",      $("textarea.tinymce_fa").val());
-        fd.append("headline_de",     $("#headline_de").val());
-        fd.append("content_de",      $("textarea.tinymce_de").val());
-        fd.append("headline_es",     $("#headline_es").val());
-        fd.append("content_es",      $("textarea.tinymce_es").val());
-        fd.append("headline_fr",     $("#headline_fr").val());
-        fd.append("content_fr",      $("textarea.tinymce_fr").val());
-        fd.append("headline_no",     $("#headline_no").val());
-        fd.append("content_no",      $("textarea.tinymce_no").val());
-        fd.append("headline_ro",     $("#headline_ro").val());
-        fd.append("content_ro",      $("textarea.tinymce_ro").val());
-        fd.append("headline_se",     $("#headline_se").val());
-        fd.append("content_se",      $("textarea.tinymce_se").val());
-        fd.append("headline_ru",     $("#headline_ru").val());
-        fd.append("content_ru",      $("textarea.tinymce_ru").val());
-        fd.append("headline_zh",     $("#headline_zh").val());
-        fd.append("content_zh",      $("textarea.tinymce_zh").val());
-        fd.append("headline_ko",     $("#headline_ko").val());
-        fd.append("content_ko",      $("textarea.tinymce_ko").val());
+        fd.append("headline",     	JSON.stringify(headlineData));
+        fd.append("content",      	JSON.stringify(contentData));
         fd.append("csrf_token_name", Config.CSRF);
         fd.append("type_content",    "");
         fd.append("type_video",      $('#type_video').val());

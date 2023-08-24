@@ -20,8 +20,7 @@
 		{if $news}
 		{foreach from=$news item=article}
 			<tr>
-				{$defaultLang='headline_'|cat:$lang}  
-				<td width="30%"><b>{$article.$defaultLang}</b></td>
+				<td width="30%"><b>{$article.headline}</b></td>
 				<td width="10%">{$article.nickname}</td>
 				<td width="10%">{date("Y/m/d", $article.timestamp)}</td>
 				<td width="5%">{if $article.comments != -1}{$article.comments}{else}Off{/if}</td>

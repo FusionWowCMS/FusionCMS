@@ -15,7 +15,6 @@ class Character extends MX_Controller
     private $race;
     private $raceName;
     private $level;
-    private $accountId;
     private $account;
     private $gender;
 

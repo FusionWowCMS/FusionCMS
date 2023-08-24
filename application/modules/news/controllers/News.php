@@ -61,22 +61,10 @@ class News extends MX_Controller
             // Get the article passed
             $this->news_articles = $this->template->format(array($this->news_model->getArticle($id)));
 
-            $LangAbbr = $this->language->getLanguageAbbreviation();
-            $DefaultLangAbbr = $this->language->getAbbreviationByLanguage($this->language->getDefaultLanguage());
-
             // For each key we need to add the special values that we want to print
             foreach ($this->news_articles as $key => $article) {
-                if (empty($article['headline_' . $LangAbbr])) {
-                    $this->news_articles[$key]['headline'] = $article['headline_' . $DefaultLangAbbr];
-                } else {
-                    $this->news_articles[$key]['headline'] = $article['headline_' . $LangAbbr];
-                }
-
-                if (empty($article['content_' . $LangAbbr])) {
-                    $this->news_articles[$key]['content'] = langColumn($article['content_' . $DefaultLangAbbr]);
-                } else {
-                    $this->news_articles[$key]['content'] = langColumn($article['content_' . $LangAbbr]);
-                }
+                $this->news_articles[$key]['headline'] = langColumn($article['headline']);
+                $this->news_articles[$key]['content'] = langColumn($article['content']);
                 $this->news_articles[$key]['date'] = date("Y/m/d", $article['timestamp']);
                 $this->news_articles[$key]['author'] = $this->user->getNickname($article['author_id']);
                 $this->news_articles[$key]['link'] = ($article['comments'] == -1) ? '' : "href='javascript:void(0)' onClick='Ajax.showComments(" . $article['id'] . ")'";
@@ -138,28 +126,11 @@ class News extends MX_Controller
         // Get the articles with the lower and upper limit decided by our pagination.
         $this->news_articles = $this->news_model->getArticles((int)$this->startIndex, ((int)$this->startIndex + $config['per_page']));
 
-        $LangAbbr = $this->language->getLanguageAbbreviation();
-        $DefaultLangAbbr = $this->language->getAbbreviationByLanguage($this->language->getDefaultLanguage());
-
         // For each key we need to add the special values that we want to print
         foreach ($this->news_articles as $key => $article) {
-            if (empty($article['headline_' . $LangAbbr])) {
-                $this->news_articles[$key]['headline'] = $article['headline_' . $DefaultLangAbbr];
-            } else {
-                $this->news_articles[$key]['headline'] = $article['headline_' . $LangAbbr];
-            }
-
-            if (empty($article['content_' . $LangAbbr])) {
-                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $DefaultLangAbbr]), $summary_character_limit));
-            } else {
-                $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content_' . $LangAbbr]), $summary_character_limit));
-            }
-
-            if (empty($article['content_' . $LangAbbr])) {
-                $this->news_articles[$key]['content'] = langColumn($article['content_' . $DefaultLangAbbr]);
-            } else {
-                $this->news_articles[$key]['content'] = langColumn($article['content_' . $LangAbbr]);
-            }
+            $this->news_articles[$key]['headline'] = langColumn($article['headline']);
+            $this->news_articles[$key]['summary'] = html_purify(character_limiter(langColumn($article['content']), $summary_character_limit));
+            $this->news_articles[$key]['content'] = langColumn($article['content']);
             $this->news_articles[$key]['date'] = date("Y/m/d", $article['timestamp']);
             $this->news_articles[$key]['author'] = ($article['author_id'] == 0) ? lang("system", "news") : $this->user->getNickname($article['author_id']) ;
             $this->news_articles[$key]['link'] = ($article['comments'] == -1) ? '' : "href='javascript:void(0)' onClick='Ajax.showComments(" . $article['id'] . ")'";

@@ -36,8 +36,8 @@ class News_model extends CI_Model
             return array(
                         array(
                             'id'                             => 0,
-                            'headline_' . $default_lang . '' => 'Welcome to your new FusionCMS powered website!',
-                            'content_' . $default_lang . ''  => 'Your website has been successfully installed and we, the FusionCMS team, sincerely hope that you will have a nice time using it.<div><br></div><div>To proceed, log into the administrator panel using an administrator account and the security code you specified during the installation.</div><div><br></div><br><div>Best regards,</div><div>the FusionCMS team</div>',
+                            'headline'                       => 'Welcome to your new FusionCMS powered website!',
+                            'content'                        => 'Your website has been successfully installed and we, the FusionCMS team, sincerely hope that you will have a nice time using it.<div><br></div><div>To proceed, log into the administrator panel using an administrator account and the security code you specified during the installation.</div><div><br></div><br><div>Best regards,</div><div>the FusionCMS team</div>',
                             'author_id'                      => 0,
                             'timestamp'                      => time(),
                             'type'                           => 0,
@@ -132,12 +132,14 @@ class News_model extends CI_Model
     /**
      * Create a news article
      *
-     * @param  $headline
+     * @param $type
+     * @param $type_content
      * @param  $comments
+     * @param  $headline
      * @param  $content
      * @return bool
      */
-    public function create($type, $type_content, $comments, $headline_en, $content_en, $headline_fa, $content_fa, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko)
+    public function create($type, $type_content, $comments, $headline, $content)
     {
         $data = array(
             'type' => $type,
@@ -145,28 +147,8 @@ class News_model extends CI_Model
             'comments' => $comments,
             'timestamp' => time(),
             'author_id' => $this->user->getId(),
-            'headline_en'  => $headline_en,
-            'content_en'   => $content_en,
-            'headline_fa'  => $headline_fa,
-            'content_fa'   => $content_fa,
-            'headline_de'  => $headline_de,
-            'content_de'   => $content_de,
-            'headline_es'  => $headline_es,
-            'content_es'   => $content_es,
-            'headline_fr'  => $headline_fr,
-            'content_fr'   => $content_fr,
-            'headline_no'  => $headline_no,
-            'content_no'   => $content_no,
-            'headline_ro'  => $headline_ro,
-            'content_ro'   => $content_ro,
-            'headline_se'  => $headline_se,
-            'content_se'   => $content_se,
-            'headline_ru'  => $headline_ru,
-            'content_ru'   => $content_ru,
-            'headline_zh'  => $headline_zh,
-            'content_zh'   => $content_zh,
-            'headline_ko'  => $headline_ko,
-            'content_ko'   => $content_ko,
+            'headline'  => $headline,
+            'content'   => $content,
         );
 
         $this->db->insert("articles", $data);
@@ -178,12 +160,14 @@ class News_model extends CI_Model
      * Update the article with the given id
      *
      * @param  $id
-     * @param  $headline
+     * @param $type
+     * @param $type_content
      * @param  $comments
+     * @param  $headline
      * @param  $content
      * @return bool
      */
-    public function update($id, $type, $type_content, $comments, $headline_en, $content_en, $headline_fa, $content_fa, $headline_de, $content_de, $headline_es, $content_es, $headline_fr, $content_fr, $headline_no, $content_no, $headline_ro, $content_ro, $headline_se, $content_se, $headline_ru, $content_ru, $headline_zh, $content_zh, $headline_ko, $content_ko)
+    public function update($id, $type, $type_content, $comments, $headline, $content)
     {
         if (!is_numeric($id)) {
             return false;
@@ -193,28 +177,8 @@ class News_model extends CI_Model
             'type'         => $type,
             'type_content' => $type_content,
             'comments'     => $comments,
-            'headline_en'  => $headline_en,
-            'content_en'   => $content_en,
-            'headline_fa'  => $headline_fa,
-            'content_fa'   => $content_fa,
-            'headline_de'  => $headline_de,
-            'content_de'   => $content_de,
-            'headline_es'  => $headline_es,
-            'content_es'   => $content_es,
-            'headline_fr'  => $headline_fr,
-            'content_fr'   => $content_fr,
-            'headline_no'  => $headline_no,
-            'content_no'   => $content_no,
-            'headline_ro'  => $headline_ro,
-            'content_ro'   => $content_ro,
-            'headline_se'  => $headline_se,
-            'content_se'   => $content_se,
-            'headline_ru'  => $headline_ru,
-            'content_ru'   => $content_ru,
-            'headline_zh'  => $headline_zh,
-            'content_zh'   => $content_zh,
-            'headline_ko'  => $headline_ko,
-            'content_ko'   => $content_ko,
+            'headline'     => $headline,
+            'content'      => $content,
         );
 
         if ($data['comments'] == 0) {
