@@ -162,7 +162,7 @@ class Admin extends MX_Controller
         $headline = $this->input->post('headline');
         $content = $this->input->post('content');
 
-        if (strlen($headline) > 70 || empty($headline)) {
+        if (strlen(langColumn($headline)) > 70 || empty(langColumn($headline))) {
             die("The headline for the default language must be between 1-70 characters long");
         }
 
