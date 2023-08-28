@@ -106,7 +106,7 @@ class Cms_model extends CI_Model
     public function getLinks(string $type = "top"): ?array
     {
         if (in_array($type, array("top", "side", "bottom"))) {
-            $query = $this->db->query("SELECT * FROM menu WHERE type = ? ORDER BY `order` ASC", array($type));
+            $query = $this->db->query("SELECT * FROM menu WHERE type = ? ORDER BY `parent_id` ASC, `order` ASC", array($type));
         } else {
             $query = $this->db->query("SELECT * FROM menu ORDER BY `order` ASC");
         }
