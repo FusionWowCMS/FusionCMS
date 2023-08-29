@@ -215,7 +215,7 @@ class Slider extends MX_Controller
 
         $this->slider_model->edit($id, $data);
 
-        die('window.location="' . $this->template->page_url . 'admin/slider"');
+        die("yes");
     }
 
     public function delete($id = false)

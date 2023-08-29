@@ -118,7 +118,19 @@ var Slider = {
 
 		$.post(Config.URL + this.Links.save + id, values, function(data)
 		{
-			console.log(data);
+			if(data == "yes")
+			{
+				window.location = Config.URL + "admin/slider";
+			}
+			else
+			{
+				console.log(data);
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: data,
+				})
+			}
 		});
 	},
 
