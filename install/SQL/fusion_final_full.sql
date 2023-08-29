@@ -641,11 +641,9 @@ CREATE TABLE `image_slider`  (
 -- Records of image_slider
 -- ----------------------------
 INSERT INTO `image_slider` (`id`, `image`, `link`, `text`, `order`, `header`, `body`, `footer`) VALUES
-(1, '{image_path}slides/1.jpg', '', '', 1, 'Header', 'Body', 'Footer'),
-(2, '{image_path}slides/1.jpg', 'register', 'Join the battle today! Click here to sign up!', 2, 'Header', 'Body', 'Footer'),
-(3, '{image_path}slides/1.jpg', 'vote', 'Vote and be rewarded', 3, 'Header', 'Body', 'Footer'),
-(4, '{image_path}slides/1.jpg', '', '', 4, 'Header', 'Body', 'Footer'),
-(5, '{image_path}slides/1.jpg', '', '', 5, 'Header', 'Body', 'Footer');
+(1, '{image_path}slides/slide-01.jpg', '', 'Welcome to FusionCMS', 1, 'Welcome to FusionCMS', 'Private Community', 'Join today!'),
+(2, '{image_path}slides/slide-01.jpg', 'register', 'Join the battle today! Click here to sign up!', 2, 'Join the battle today!', 'Click here to sign up!', ''),
+(3, '{image_path}slides/slide-01.jpg', 'vote', 'Vote and be rewarded', 3, 'Vote and be rewarded', '', '');
 
 -- ----------------------------
 -- Table structure for item_template
@@ -713,26 +711,31 @@ CREATE TABLE `menu`  (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (1, 'Home', 'news', 'top', 1, 0, 1, NULL, NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (2, 'Register', 'register', 'top', 1, 1, 2, '2', NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (3, 'How to connect', 'page/connect', 'top', 1, 0, 1, NULL, 'L', 0, 12);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (4, 'Forum', 'forum', 'top', 1, 0, 3, NULL, NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (5, 'Sign in', 'login', 'top', 1, 1, 6, '5', NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (6, 'User panel', 'ucp', 'top', 2, 0, 7, '6', NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (7, 'Home', 'news', 'side', 1, 0, 8, NULL, NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (8, 'Register', 'register', 'side', 1, 1, 9, '8', NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (9, 'How to connect', 'page/connect', 'side', 1, 0, 10, NULL, '', 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (10, 'Forum', 'forum', 'side', 1, 0, 11, NULL, NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (11, 'Sign in', 'login', 'side', 1, 1, 13, '11', NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (12, 'Support', '#', 'top', 1, 0, 5, NULL, 'L', 1, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (13, 'User panel', 'ucp', 'side', 2, 0, 16, '13', NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (16, 'Online players', 'online', 'top', 1, 0, 4, NULL, NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (17, 'Online players', 'online', 'side', 1, 0, 17, NULL, NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (18, 'Armory', 'armory', 'side', 1, 0, 19, NULL, NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (20, 'Changelog', 'changelog', 'side', 1, 0, 21, NULL, NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (21, 'Admin panel', 'admin', 'side', 5, 0, 18, '21', NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (100, 'Log out', 'logout', 'side', 2, 0, 100, '100', NULL, 0, 0);
-INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES (101, 'Log out', 'logout', 'top', 2, 0, 101, '101', NULL, 0, 0);
+INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES
+(1, 'Home', 'news', 'top', 1, 0, 1, NULL, NULL, 0, 0),
+(3, 'Features', '#', 'top', 1, 0, 4, NULL, NULL, 1, 0),
+(4, 'Forum', 'forum', 'top', 1, 0, 3, NULL, NULL, 0, 0),
+(7, 'Home', 'news', 'side', 1, 0, 8, NULL, NULL, 0, 0),
+(9, 'How to connect', 'page/connect', 'top', 1, 0, 1, NULL, 'L', 0, 12),
+(10, 'Forum', 'forum', 'side', 1, 0, 11, NULL, NULL, 0, 0),
+(11, 'Sign in', 'login', 'side', 1, 1, 13, '11', NULL, 0, 0),
+(12, 'Support', '#', 'top', 1, 0, 6, NULL, 'L', 1, 0),
+(13, 'User panel', 'ucp', 'side', 2, 0, 16, '13', NULL, 0, 0),
+(14, 'Online players', 'online', 'top', 1, 0, 5, NULL, NULL, 0, 0),
+(15, 'Armory', 'armory', 'top', 1, 0, 1, NULL, NULL, 0, 3),
+(16, 'PvP Statistics', 'pvp_statistics', 'top', 1, 0, 3, NULL, NULL, 0, 3),
+(17, 'Changelog', 'changelog', 'top', 1, 0, 4, NULL, NULL, 0, 3),
+(18, 'Armory', 'armory', 'side', 1, 0, 19, NULL, NULL, 0, 0),
+(19, 'Online players', 'online', 'side', 1, 0, 14, NULL, NULL, 0, 0),
+(20, 'Changelog', 'changelog', 'side', 1, 0, 21, NULL, NULL, 0, 0),
+(21, 'Admin panel', 'admin', 'side', 5, 0, 18, '21', NULL, 0, 0),
+(22, 'Home', 'news', 'bottom', 1, 0, 10, NULL, NULL, 0, 0),
+(23, 'Forums', 'forums', 'bottom', 1, 0, 11, NULL, NULL, 0, 0),
+(24, 'Store', 'store', 'bottom', 1, 0, 13, NULL, NULL, 0, 0),
+(25, 'How to connect', 'page/connect', 'bottom', 1, 0, 12, NULL, NULL, 0, 0),
+(26, 'Vote', 'vote', 'bottom', 1, 0, 14, NULL, NULL, 0, 0),
+(27, 'Donate', 'donate', 'bottom', 1, 0, 15, NULL, NULL, 0, 0),
+(100, 'Log out', 'logout', 'side', 2, 0, 100, '100', NULL, 0, 0);
 
 -- ----------------------------
 -- Table structure for gm_log
@@ -1008,10 +1011,11 @@ CREATE TABLE `sideboxes`  (
 -- ----------------------------
 -- Records of sideboxes
 -- ----------------------------
-INSERT INTO `sideboxes` (`id`, `type`, `displayName`, `rank_needed`, `order`, `permission`) VALUES
-(1, 'online_players_extended', 'Server status', 1, 3, NULL),
-(3, 'language_picker', '{\"english\":\"Lang\"}', 1, 1, NULL),
-(4, 'toppvp', 'PvP statistics', 1, 100, NULL);
+INSERT INTO `sideboxes` (`id`, `type`, `displayName`, `rank_needed`, `order`, `location`, `permission`) VALUES
+(1, 'status', '{"english":"Server status"}', 1, 0, 'side', NULL),
+(2, 'language_picker', '{"english":"Language"}', 1, 3, 'side', NULL),
+(3, 'top', '', 1, 1, 'top', NULL),
+(4, 'info_login', '{"english":"User area"}', 1, 2, 'side', NULL);
 
 -- ----------------------------
 -- Table structure for sideboxes_custom

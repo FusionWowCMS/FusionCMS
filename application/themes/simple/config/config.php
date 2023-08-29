@@ -41,7 +41,7 @@ $config = [
      * -----------------------------------------------------------
      */
     'sidebox_menu' => [
-        'order'      => 0,
+        'order'      => 1,
         'enabled'    => true,
         'visibility' => 'always' # always|home
     ]
