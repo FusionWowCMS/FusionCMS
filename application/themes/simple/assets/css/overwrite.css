@@ -67,6 +67,7 @@
 /* [Popup] SweetAlert
 /*-------------------------------------------------------------------------*/
 .swal2-container {
+	z-index: 9999999999;
 	background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
