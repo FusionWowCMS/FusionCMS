@@ -220,6 +220,7 @@ class Sidebox extends MX_Controller
 
         $data["type"] = preg_replace("/sidebox_/", "", $this->input->post("type"));
         $data["displayName"] = $this->input->post("displayName");
+        $data['location'] = $this->input->post('location');
 
         foreach ($data as $value)
         {
