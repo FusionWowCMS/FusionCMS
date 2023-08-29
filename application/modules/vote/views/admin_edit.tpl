@@ -6,21 +6,21 @@
 	<div class="form-group row">
 		<label class="col-lg-3 col-form-label form-control-label" for="vote_url">Your vote link</label>
 		<div class="col-lg-9">
-		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="url" name="vote_url" id="vote_url" placeholder="http://" onChange="Topsites.check(this)" value="{$topsite.vote_url}" {if isset($topsite.votelink_format)}data-format="{$topsite.votelink_format}"{/if} />
+		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="url" name="vote_url" id="vote_url" placeholder="http://" onChange="Topsites.check(this)" value="{$topsite.vote_url}" {if isset($topsite.votelink_format)}data-format="{$topsite.votelink_format}"{/if} />
 		</div>
 	</div>
 
 	<div class="form-group row">
 		<label class="col-lg-3 col-form-label form-control-label" for="vote_sitename">Site title</label>
 		<div class="col-lg-9">
-		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="vote_sitename" id="vote_sitename" value="{$topsite.vote_sitename}"/>
+		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="vote_sitename" id="vote_sitename" value="{$topsite.vote_sitename}"/>
 		</div>
 	</div>
 
 	<div class="form-group row">
 		<label class="col-lg-3 col-form-label form-control-label" for="vote_image">Vote site image (will be auto-completed if URL is recognized)</label>
 		<div class="col-lg-9">
-		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="vote_image" id="vote_image" placeholder="(optional)" value="{$topsite.vote_image}" onChange="Topsites.updateImagePreview(this.value)"/>
+		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="vote_image" id="vote_image" placeholder="(optional)" value="{$topsite.vote_image}" onChange="Topsites.updateImagePreview(this.value)"/>
 
 		<div id="vote_image_preview" {if ! $topsite.vote_image}style="display:none"{/if}>
 			<small>Preview:</small><br/>
@@ -34,7 +34,7 @@
 	<div class="col-lg-9">
 	<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 9999 }'>
 		<div class="input-group">
-			<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="hour_interval" id="hour_interval" value="{$topsite.hour_interval}"/>
+			<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="hour_interval" id="hour_interval" value="{$topsite.hour_interval}"/>
 			<div class="spinner-buttons input-group-btn btn-group-vertical">
 				<button type="button" class="btn spinner-up btn-xs btn-default">
 					<i class="fas fa-angle-up"></i>
@@ -53,7 +53,7 @@
 	<div class="col-lg-9">
 	<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 9999 }'>
 		<div class="input-group">
-			<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-sans transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="points_per_vote" id="points_per_vote" value="{$topsite.points_per_vote}"/>
+			<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="points_per_vote" id="points_per_vote" value="{$topsite.points_per_vote}"/>
 			<div class="spinner-buttons input-group-btn btn-group-vertical">
 				<button type="button" class="btn spinner-up btn-xs btn-default">
 					<i class="fas fa-angle-up"></i>
