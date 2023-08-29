@@ -718,10 +718,6 @@ input[type="radio"] {
     word-wrap: break-word;
 }
 
-.nice_button, input[type="submit"] {
-	height: 36px !important;
-}
-
 .online_realm_button, #ucp_characters h1 {
 	height: 40px !important;
 }
