@@ -1,0 +1,44 @@
+/*-------------------------------------------------------------------------*/
+/* Fonts
+/*-------------------------------------------------------------------------*/
+@font-face {
+	font-family: 'Arial';
+	src: url('../../fonts/Arial/Regular/ArialMT.eot');
+	src: local('Arial'), local('ArialMT'),
+		 url('../../fonts/Arial/Regular/ArialMT.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/Arial/Regular/ArialMT.woff2') format('woff2'),
+		 url('../../fonts/Arial/Regular/ArialMT.woff') format('woff'),
+		 url('../../fonts/Arial/Regular/ArialMT.ttf') format('truetype'),
+		 url('../../fonts/Arial/Regular/ArialMT.svg#ArialMT') format('svg');
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Calibri';
+	src: url('../../fonts/Calibri/Regular/Calibri.eot');
+	src: local('Calibri'),
+		 url('../../fonts/Calibri/Regular/Calibri.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/Calibri/Regular/Calibri.woff2') format('woff2'),
+		 url('../../fonts/Calibri/Regular/Calibri.woff') format('woff'),
+		 url('../../fonts/Calibri/Regular/Calibri.ttf') format('truetype'),
+		 url('../../fonts/Calibri/Regular/Calibri.svg#Calibri') format('svg');
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Calibri';
+	src: url('../../fonts/Calibri/Bold/Calibri-Bold.eot');
+	src: local('Calibri Bold'), local('Calibri-Bold'),
+		 url('../../fonts/Calibri/Bold/Calibri-Bold.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/Calibri/Bold/Calibri-Bold.woff2') format('woff2'),
+		 url('../../fonts/Calibri/Bold/Calibri-Bold.woff') format('woff'),
+		 url('../../fonts/Calibri/Bold/Calibri-Bold.ttf') format('truetype'),
+		 url('../../fonts/Calibri/Bold/Calibri-Bold.svg#Calibri-Bold') format('svg');
+	font-style: normal;
+	font-weight: bold;
+	font-display: swap;
+}

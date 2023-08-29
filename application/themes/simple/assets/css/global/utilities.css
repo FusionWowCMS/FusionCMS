@@ -1,0 +1,98 @@
+/*-------------------------------------------------------------------------*/
+/* Utilities
+/*-------------------------------------------------------------------------*/
+[hidden] {
+	display: none !important;
+}
+
+/* Utilities: Clear
+/*---------------------------------------------------------------*/
+.clear {
+	clear: both;
+}
+
+.clear-self::after {
+	width: 100%;
+	height: 0;
+
+	clear: both;
+	content: '';
+	display: block;
+	font-size: 0;
+	visibility: hidden;
+}
+
+/* Utilities: Anti blur
+/*---------------------------------------------------------------*/
+.anti-blur,
+.anti-blur * {
+	-webkit-transform: translateZ(0px);
+}
+
+/* Utilities: Text align
+/*---------------------------------------------------------------*/
+.text-left   {text-align: left;}
+.text-right  {text-align: right;}
+.text-center {text-align: center;}
+
+[dir=rtl] .text-left  {text-align: right;}
+[dir=rtl] .text-right {text-align: left;}
+
+/* Utilities: Margin
+/*---------------------------------------------------------------*/
+.mt-auto {margin-top: auto;}
+.ml-auto {margin-left: auto;}
+.mr-auto {margin-right: auto;}
+.mb-auto {margin-bottom: auto;}
+.my-auto {margin-top: auto; margin-bottom: auto;}
+.mx-auto {margin-left: auto; margin-right: auto;}
+
+/* Utilities: Text ellipsis
+/*---------------------------------------------------------------*/
+.text-ellipsis,
+.text-ellipsis * {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	vertical-align: inherit;
+}
+
+/* Utilities: Force ltr (input)
+/*---------------------------------------------------------------*/
+[dir=rtl] .force-ltr {
+	direction: ltr;
+	text-align: left;
+}
+
+[dir=rtl] .force-ltr:-moz-placeholder           {direction: rtl; text-align: right;}
+[dir=rtl] .force-ltr:input-placeholder          {direction: rtl; text-align: right;}
+[dir=rtl] .force-ltr:-o-input-placeholder       {direction: rtl; text-align: right;}
+[dir=rtl] .force-ltr:-ms-input-placeholder      {direction: rtl; text-align: right;}
+[dir=rtl] .force-ltr::-webkit-input-placeholder {direction: rtl; text-align: right;}
+
+/* Utilities: Vertical center
+/*---------------------------------------------------------------*/
+.v-center {
+	top: 50%;
+
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+/* Utilities: Print
+/*---------------------------------------------------------------*/
+@media print {
+	html,
+	body {
+		background-image: none !important;
+		background-color: transparent !important;
+	}
+
+	.no-print,
+	.no-print * {
+		display: none !important;
+	}
+}

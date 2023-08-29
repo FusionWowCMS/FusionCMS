@@ -1,0 +1,154 @@
+/*-------------------------------------------------------------------------*/
+/* Table
+/*-------------------------------------------------------------------------*/
+table {
+	border-spacing: 0 !important;
+	border-collapse: collapse;
+}
+
+table thead {}
+
+table thead tr {}
+
+table thead tr th {
+	vertical-align: middle;
+}
+
+table tbody {}
+
+table tbody tr {}
+
+table tbody tr td {
+	vertical-align: middle;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Nice table
+/*-------------------------------------------------------------------------*/
+.nice_table {
+	/* Colors */
+	--table-head-color: var(--color-primary);
+	--table-body-color: var(--color-secondary);
+
+	/* Paddings */
+	--table-padding-x: 1rem;
+	--table-padding-y: 0.5rem;
+
+	/* Font */
+	--table-font-style: initial;
+	--table-font-weight: 100;
+	--table-head-font-size: 1rem;
+	--table-body-font-size: 1.125rem;
+
+	/* Backgrounds */
+	--table-background-idle: rgba(255, 255, 255, 0.02);
+	--table-background-hover: rgba(255, 255, 255, 0.03);
+
+	--table-background-light: rgba(255, 255, 255, 0.1);
+	--table-background-shadow: transparent;
+
+	width: 100%;
+	height: auto;
+
+	border: 1px solid var(--table-background-idle);
+
+	background-color: var(--table-background-idle);
+}
+
+/* Nice table: Separator
+/*---------------------------------------------------------------*/
+.nice_table tr::after {
+	width: -webkit-calc(100% - (var(--table-padding-x) * 2));
+	width: -moz-calc(100% - (var(--table-padding-x) * 2));
+	width: calc(100% - (var(--table-padding-x) * 2));
+
+	height: 1px;
+
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	margin: 0 auto;
+	content: '';
+	position: absolute;
+
+	background: var(--table-background-light);
+	background: -moz-linear-gradient(left, var(--table-background-light) 0%, var(--table-background-shadow) 100%);
+	background: -webkit-linear-gradient(left, var(--table-background-light) 0%, var(--table-background-shadow) 100%);
+	background: linear-gradient(to right, var(--table-background-light) 0%, var(--table-background-shadow) 100%);
+}
+
+.nice_table thead tr::after {
+	width: 100%;
+}
+
+.nice_table tbody tr:first-child::after {
+	width: 100%;
+}
+
+.nice_table thead + tbody tr:first-child::after {
+	width: -webkit-calc(100% - (var(--table-padding-x) * 2));
+	width: -moz-calc(100% - (var(--table-padding-x) * 2));
+	width: calc(100% - (var(--table-padding-x) * 2));
+}
+
+.nice_table tbody tr:last-child::after {
+	display: none;
+}
+
+/* Nice table: Head
+/*---------------------------------------------------------------*/
+.nice_table thead {}
+
+.nice_table thead tr {}
+
+.nice_table thead tr th,
+.nice_table tbody tr:first-child td {
+	color: var(--table-head-color);
+	padding: var(--table-padding-y) var(--table-padding-x) !important;
+
+	font-size: var(--table-head-font-size) !important;
+	font-style: var(--table-font-style);
+	font-weight: var(--table-font-weight) !important;
+	font-family: var(--font-family-primary);
+
+	text-transform: uppercase;
+}
+
+/* Nice table: Body
+/*---------------------------------------------------------------*/
+.nice_table tbody {}
+
+.nice_table tbody tr {
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+.nice_table tbody tr:nth-child(odd)       {background-color: transparent;}
+.nice_table tbody tr:nth-child(odd):hover {background-color: transparent;}
+
+.nice_table tbody tr:nth-child(even)       {background-color: var(--table-background-idle);}
+.nice_table tbody tr:nth-child(even):hover {background-color: var(--table-background-hover);}
+
+.nice_table thead + tbody tr:nth-child(odd)       {background-color: var(--table-background-idle);}
+.nice_table thead + tbody tr:nth-child(odd):hover {background-color: var(--table-background-hover);}
+
+.nice_table thead + tbody tr:nth-child(even)       {background-color: transparent;}
+.nice_table thead + tbody tr:nth-child(even):hover {background-color: transparent;}
+
+.nice_table thead + tbody tr:first-child       {background-color: var(--table-background-idle) !important;}
+.nice_table thead + tbody tr:first-child:hover {background-color: var(--table-background-hover) !important;}
+
+.nice_table tbody tr td,
+.nice_table thead + tbody tr:first-child td {
+	color: var(--table-body-color);
+	padding: var(--table-padding-y) var(--table-padding-x) !important;
+
+	font-size: var(--table-body-font-size) !important;
+	font-style: var(--table-font-style);
+	font-weight: var(--table-font-weight) !important;
+	font-family: var(--font-family-primary);
+
+	text-transform: inherit;
+}

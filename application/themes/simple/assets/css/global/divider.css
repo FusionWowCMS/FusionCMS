@@ -1,0 +1,80 @@
+/*-------------------------------------------------------------------------*/
+/* Divider
+/*-------------------------------------------------------------------------*/
+.divider,
+.ucp_divider,
+.side_divider,
+.vertical_divider {
+	--divider-bg: #ffffff;
+	--divider-thickness: 2px;
+	--divider-icon-size: 16px;
+
+	width: 100%;
+	height: var(--divider-thickness);
+
+	margin: 1rem 0;
+	opacity: 0.1;
+
+	background: -moz-linear-gradient(left, transparent 0%, var(--divider-bg) 50%, transparent 100%);
+	background: -webkit-linear-gradient(left, transparent 0%, var(--divider-bg) 50%, transparent 100%);
+	background: linear-gradient(to right, transparent 0%, var(--divider-bg) 50%, transparent 100%);
+}
+
+.divider.divider-xl,
+.ucp_divider.divider-xl,
+.side_divider.divider-xl,
+.vertical_divider.divider-xl {
+	--divider-icon-size: 32px;
+}
+
+.divider::before,
+.ucp_divider::before,
+.side_divider::before,
+.vertical_divider::before {
+	width: var(--divider-icon-size);
+	height: var(--divider-icon-size);
+
+	top: -webkit-calc((var(--divider-icon-size) / 2) * -1 + (var(--divider-thickness) / 2));
+	top: -moz-calc((var(--divider-icon-size) / 2) * -1 + (var(--divider-thickness) / 2));
+	top: calc((var(--divider-icon-size) / 2) * -1 + (var(--divider-thickness) / 2));
+
+	left: 0;
+	right: 0;
+
+	margin: 0 auto;
+
+	content: '';
+	position: absolute;
+
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+
+	background-color: var(--divider-bg);
+}
+
+/* Divider: Vertical
+/*---------------------------------------------------------------*/
+.vertical_divider {
+	width: var(--divider-thickness);
+	height: 30vw;
+
+	margin: 0 1rem;
+
+	background: -moz-linear-gradient(top, transparent 0%, var(--divider-bg) 50%, transparent 100%);
+	background: -webkit-linear-gradient(top, transparent 0%, var(--divider-bg) 50%, transparent 100%);
+	background: linear-gradient(to bottom, transparent 0%, var(--divider-bg) 50%, transparent 100%);
+}
+
+.vertical_divider::before {
+	top: 0;
+
+	left: -webkit-calc((var(--divider-icon-size) / 2) * -1 + (var(--divider-thickness) / 2));
+	left: -moz-calc((var(--divider-icon-size) / 2) * -1 + (var(--divider-thickness) / 2));
+	left: calc((var(--divider-icon-size) / 2) * -1 + (var(--divider-thickness) / 2));
+
+	right: auto;
+	bottom: 0;
+
+	margin: auto 0;
+}

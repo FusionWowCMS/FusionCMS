@@ -1,0 +1,164 @@
+/*-------------------------------------------------------------------------*/
+/* [Sidebox] Menu
+/*-------------------------------------------------------------------------*/
+.box.type-menu {
+	--box-padding: 0;
+
+	--menu-navbar-link-height: 50px;
+	--menu-navbar-link-padding: 0.5rem;
+
+	--menu-navbar-link-dot-size: 18px;
+
+	--menu-navbar-link-color-idle: #686258;
+	--menu-navbar-link-color-active: #5b82a1;
+
+	--menu-navbar-link-text-shadow: 0 0 7px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+/* [Sidebox] Menu: Navbar
+/*---------------------------------------------------------------*/
+.box.type-menu .navbar {
+	--borderRadius-primary: 13px;
+
+	width: 100%;
+	height: auto;
+
+	padding: 0;
+}
+
+.box.type-menu .navbar .navbar-nav {
+	width: 100%;
+	height: auto;
+}
+
+.box.type-menu .navbar .navbar-nav .nav-item {}
+
+/* Navbar: Link (idle) */
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link {
+	width: 100%;
+	height: var(--menu-navbar-link-height);
+
+	color: var(--menu-navbar-link-color-idle);
+
+	padding: 0 var(--menu-navbar-link-padding) 0 -webkit-calc((var(--menu-navbar-link-padding) * 2) + var(--menu-navbar-link-dot-size));
+	padding: 0 var(--menu-navbar-link-padding) 0 -moz-calc((var(--menu-navbar-link-padding) * 2) + var(--menu-navbar-link-dot-size));
+	padding: 0 var(--menu-navbar-link-padding) 0 calc((var(--menu-navbar-link-padding) * 2) + var(--menu-navbar-link-dot-size));
+
+	font-size: 1rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: var(--menu-navbar-link-height);
+
+	text-shadow: var(--menu-navbar-link-text-shadow);
+	text-overflow: ellipsis;
+
+	background-size: 100% var(--menu-navbar-link-height);
+	background-color: transparent;
+	background-image: url('../../../assets/images/menu/menu-bg-idle.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link::before {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	opacity: 0;
+	content: '';
+	position: absolute;
+
+	background-size: 100% var(--menu-navbar-link-height);
+	background-color: transparent;
+	background-image: url('../../../assets/images/menu/menu-bg-hover.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link .dot {
+	width: var(--menu-navbar-link-dot-size);
+	height: var(--menu-navbar-link-dot-size);
+
+	top: -webkit-calc((var(--menu-navbar-link-height) - var(--menu-navbar-link-dot-size)) / 2);
+	top: -moz-calc((var(--menu-navbar-link-height) - var(--menu-navbar-link-dot-size)) / 2);
+	top: calc((var(--menu-navbar-link-height) - var(--menu-navbar-link-dot-size)) / 2);
+
+	left: var(--menu-navbar-link-padding);
+
+	position: absolute;
+
+	background-color: transparent;
+	background-image: url('../../../assets/images/menu/menu-dot.png');
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link .dot::before {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	opacity: 0;
+	content: '';
+	position: absolute;
+
+	background-color: transparent;
+	background-image: url('../../../assets/images/menu/menu-dot.png');
+	background-repeat: no-repeat;
+	background-position: bottom center;
+
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link span {
+	vertical-align: text-bottom;
+}
+
+/* Navbar: Link (active) */
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link:hover,
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link:active,
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link.active {
+	color: var(--menu-navbar-link-color-active);
+}
+
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link:hover::before,
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link:active::before,
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link.active::before {
+	opacity: 1;
+}
+
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link:hover .dot::Before,
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link:active .dot::Before,
+.box.type-menu .navbar .navbar-nav .nav-item .nav-link.active .dot::Before {
+	opacity: 1;
+}
+
+/* Navbar: Link (radius) */
+.box.type-menu .navbar .navbar-nav .nav-item:first-child .nav-link,
+.box.type-menu .navbar .navbar-nav .nav-item:first-child .nav-link::before {
+	-webkit-border-radius: var(--borderRadius-primary) var(--borderRadius-primary) 0 0;
+	border-radius: var(--borderRadius-primary) var(--borderRadius-primary) 0 0;
+}
+
+.box.type-menu .navbar .navbar-nav .nav-item:last-child .nav-link,
+.box.type-menu .navbar .navbar-nav .nav-item:last-child .nav-link::before {
+	-webkit-border-radius: 0 0 var(--borderRadius-primary) var(--borderRadius-primary);
+	border-radius: 0 0 var(--borderRadius-primary) var(--borderRadius-primary);
+}

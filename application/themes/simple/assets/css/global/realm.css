@@ -1,0 +1,132 @@
+/*-------------------------------------------------------------------------*/
+/* Realm
+/*-------------------------------------------------------------------------*/
+.realm {
+	margin: 0;
+	font-size: 1rem;
+}
+
+.realm .realm_online {}
+
+/*-------------------------------------------------------------------------*/
+/* Realm bar
+/*-------------------------------------------------------------------------*/
+.poll_bar,
+.realm_bar {
+	--borderRadius-primary: 4px;
+
+	width: 100%;
+	height: 20px;
+
+	margin: 0.75rem 0 0 0;
+	padding: 2px;
+
+	-webkit-box-shadow: var(--progressBar-box-shadow);
+	box-shadow: var(--progressBar-box-shadow);
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-color: var(--progressBar-background-color);
+}
+
+.poll_bar::before,
+.realm_bar::before {
+	width: 99.5%;
+	height: 50%;
+
+	top: 0;
+	left: 0;
+	right: 0;
+
+	margin: 0 auto;
+
+	z-index: 9;
+	content: '';
+	opacity: 0.1;
+	position: absolute;
+
+	-webkit-border-radius: var(--borderRadius-primary) var(--borderRadius-primary) 0 0;
+	border-radius: var(--borderRadius-primary) var(--borderRadius-primary) 0 0;
+
+	background: -moz-linear-gradient(top, transparent 0%, var(--progressBar-glow) 100%);
+	background: -webkit-linear-gradient(top, transparent 0%, var(--progressBar-glow) 100%);
+	background: linear-gradient(to bottom, transparent 0%, var(--progressBar-glow) 100%);
+}
+
+.poll_bar .poll_bar_fill,
+.realm_bar .realm_bar_fill {
+	width: auto;
+	height: 100%;
+
+	opacity: 0.9;
+	overflow: hidden;
+
+	-webkit-box-shadow: var(--progressBar-fill-box-shadow);
+	box-shadow: var(--progressBar-fill-box-shadow);
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background: var(--progressBar-fill-background-start);
+	background: -moz-linear-gradient(top, var(--progressBar-fill-background-start) 0%, var(--progressBar-fill-background-end) 100%);
+	background: -webkit-linear-gradient(top, var(--progressBar-fill-background-start) 0%, var(--progressBar-fill-background-end) 100%);
+	background: linear-gradient(to bottom, var(--progressBar-fill-background-start) 0%, var(--progressBar-fill-background-end) 100%);
+}
+
+/*-------------------------------------------------------------------------*/
+/* Online realm bar
+/*-------------------------------------------------------------------------*/
+#ucp_characters h1,
+.online_realm_button {
+	color: var(--link-primary-idle);
+
+	padding: 0.9375rem;
+
+	font-size: 0.875rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+
+	text-align: center;
+	text-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 5px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.7);
+
+	-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	text-transform: uppercase;
+
+	background-color: rgba(255, 255, 255, 0.02);
+
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+#ucp_characters h1:hover,
+#ucp_characters h1:active,
+.online_realm_button:hover,
+.online_realm_button:active {
+	color: var(--link-primary-active);
+
+	-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+
+	background-color: rgba(255, 255, 255, 0.03);
+}
+
+#ucp_characters h1::before,
+.online_realm_button::before {
+	width: 100%;
+	height: 50%;
+
+	left: 0;
+	bottom: 0;
+
+	content: '';
+	position: absolute;
+
+	background-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,387 @@
+/*-------------------------------------------------------------------------*/
+/* Owl Carousel (custom)
+/*-------------------------------------------------------------------------*/
+.owl-carousel {}
+
+.owl-carousel.owl-dots-inside\[pos\:top\] .owl-dots,
+.owl-carousel.owl-dots-inside\[pos\:bottom\] .owl-dots {
+	width: 100%;
+	height: auto;
+	position: absolute;
+}
+
+.owl-carousel.owl-dots-inside\[pos\:top\] .owl-dots    {top: 0;}
+.owl-carousel.owl-dots-inside\[pos\:bottom\] .owl-dots {bottom: 0;}
+
+.owl-carousel .owl-dots .owl-dot {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+/*-------------------------------------------------------------------------*/
+/* News
+/*-------------------------------------------------------------------------*/
+.box.type-news {
+	/* News */
+	--news-metadata-gap: 0;
+	--news-metadata-padding: 0;
+	--news-metadata-b-radius: 0;
+	--news-metadata-bg-height: auto;
+	--news-metadata-text-shadow: 0 0 5px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(0, 0, 0, 0.35);
+	--news-metadata-comment-margin: 0;
+
+	--news-thumbnail-outer-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3), 0 1px 1px 0 rgba(0, 0, 0, 0.35);
+
+	/* Box */
+	--box-head-text-shadow: 0 0 5px rgba(0, 0, 0, 0.25), 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* News: Title
+/*---------------------------------------------------------------*/
+.box.type-news .news-title {
+	width: 100%;
+	height: 100%;
+
+	color: var(--link-secondary-idle);
+
+	display: block;
+
+	line-height: var(--box-head-height);
+
+	text-transform: initial;
+
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+.box.type-news .news-title:hover,
+.box.type-news .news-title:active {
+	color: var(--link-secondary-active);
+}
+
+/* News: Thumbnail
+/*---------------------------------------------------------------*/
+.box.type-news .news-thumbnail {
+	width: 100%;
+	height: auto;
+}
+
+.box.type-news .news-thumbnail .thumbnail-item {
+	width: 100%;
+	height: 98px;
+
+	display: block;
+
+	-webkit-box-shadow: var(--news-thumbnail-outer-shadow);
+	box-shadow: var(--news-thumbnail-outer-shadow);
+
+	background-size: cover;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+/* News: Content
+/*---------------------------------------------------------------*/
+.box.type-news .news-content {
+	width: 100%;
+	height: auto;
+
+	color: var(--color-primary);
+
+	font-size: 0.8125rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+
+	line-height: 100%;
+}
+
+.box.type-news .news-thumbnail + .news-content {
+	margin: -webkit-calc(var(--margin-primary) * 2) 0 0 0;
+	margin: -moz-calc(var(--margin-primary) * 2) 0 0 0;
+	margin: calc(var(--margin-primary) * 2) 0 0 0;
+}
+
+/* News: Buttons
+/*---------------------------------------------------------------*/
+.box.type-news .news-buttons {
+	width: 100%;
+	height: auto;
+
+	gap: var(--margin-primary);
+
+	margin: -webkit-calc(var(--margin-primary) * 2) 0 0 0;
+	margin: -moz-calc(var(--margin-primary) * 2) 0 0 0;
+	margin: calc(var(--margin-primary) * 2) 0 0 0;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+/* News: Metadata
+/*---------------------------------------------------------------*/
+.box.type-news .news-metadata {
+	width: 100%;
+	height: auto;
+
+	gap: var(--news-metadata-gap);
+
+	color: var(--box-color-06);
+
+	margin: -webkit-calc(var(--margin-primary) * 2) 0 0 0;
+	margin: -moz-calc(var(--margin-primary) * 2) 0 0 0;
+	margin: calc(var(--margin-primary) * 2) 0 0 0;
+
+	padding: var(--news-metadata-padding);
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+
+	font-size: 0.75rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+
+	min-height: var(--news-metadata-bg-height);
+
+	text-shadow: var(--news-metadata-text-shadow);
+
+	-webkit-border-radius: 0 0 var(--news-metadata-b-radius) var(--news-metadata-b-radius);
+	border-radius: 0 0 var(--news-metadata-b-radius) var(--news-metadata-b-radius);
+}
+
+.box.type-news .news-metadata .metadata-col {
+	width: auto;
+	height: auto;
+} .box.type-news .news-metadata .metadata-col + .metadata-col {margin: var(--news-metadata-comment-margin);}
+
+.box.type-news .news-metadata .metadata-col a {
+	color: var(--link-tertiary-idle);
+}
+
+.box.type-news .news-metadata .metadata-col a:hover,
+.box.type-news .news-metadata .metadata-col a:active {
+	color: var(--link-tertiary-active);
+}
+
+/* News: Responsive
+/*---------------------------------------------------------------*/
+@media screen and (min-width: 992px) { /* Desktop */
+	.box.type-news {
+		--news-metadata-gap: var(--margin-primary);
+		--news-metadata-padding: 0 1.5rem;
+		--news-metadata-b-radius: 20px;
+		--news-metadata-bg-height: 55px;
+		--news-metadata-comment-margin: 0 0 0 auto;
+	}
+
+	/* News: Metadata
+	/*---------------------------------------------------------------*/
+	.box.type-news .news-metadata {
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: row;
+		flex-direction: row;
+
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+
+		background-size: 104% var(--news-metadata-bg-height);
+		background-color: transparent;
+		background-image: url('../../../assets/images/shadows/shadow-01.png');
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+}
+
+/*-------------------------------------------------------------------------*/
+/* Comments
+/*-------------------------------------------------------------------------*/
+.news-comments {
+	width: 100%;
+	height: auto;
+}
+
+/* Comments: Area
+/*---------------------------------------------------------------*/
+.news-comments .comments_area {
+	width: 100%;
+	height: auto;
+
+	margin: var(--margin-primary) 0 0 0;
+}
+
+.news-comments .comments_area .comments {
+	width: 100%;
+	height: auto;
+
+	display: block;
+}
+
+/* Area: Flex
+/*-----------------------------------------------------*/
+.news-comments .comments_area .row {
+	gap: var(--margin-primary);
+}
+
+.news-comments .comments_area .row .col-md-12 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0;
+	flex: 0;
+}
+
+.news-comments .comments_area .row .col-md-12 + .col-md-12 {
+	-webkit-box-flex: 10;
+	-ms-flex: 10;
+	flex: 10;
+}
+
+/* Area: Comment
+/*-----------------------------------------------------*/
+.news-comments .comments_area .comments .comment {
+	width: 100%;
+	height: auto;
+
+	color: var(--color-primary);
+
+	margin: var(--margin-primary) 0 0 0 !important;
+	padding: 1rem;
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+}
+
+.news-comments .comments_area .comments .comment::before {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	content: '';
+	opacity: 0.1;
+	position: absolute;
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-color: var(--button-background-end);
+}
+
+.news-comments .comments_area .comments .comment p {
+	margin: 0;
+}
+
+.news-comments .comments_area .comments .comment i,
+.news-comments .comments_area .comments .comment img,
+.news-comments .comments_area .comments .comment svg {
+	vertical-align: middle;
+}
+
+.news-comments .comments_area .comments .comment strong a {
+	color: var(--link-primary-idle);
+	vertical-align: text-top;
+}
+
+.news-comments .comments_area .comments .comment strong a:hover,
+.news-comments .comments_area .comments .comment strong a:active {
+	color: var(--link-primary-active);
+}
+
+.news-comments .comments_area .comments .comment .avatar {
+	width: 80px;
+	height: 80px;
+
+	float: none;
+	margin: 0;
+}
+
+/* Area: Staff comment
+/*-----------------------------------------------------*/
+.news-comments .comments_area .comments .staff_comment {
+	--color-primary: #00aeff;
+	--link-primary-idle: rgba(255, 255, 255, 0.8);
+	--link-primary-active: #fff;
+}
+
+/* Comments: Form
+/*---------------------------------------------------------------*/
+.news-comments form {
+	margin: var(--margin-primary) 0 0 0;
+	text-align: right;
+}
+
+/* Form: RESET
+/*-----------------------------------------------------*/
+.news-comments form > div[class] {
+	padding: 0 !important;
+}
+
+/* Form: Textarea
+/*-----------------------------------------------------*/
+.news-comments form textarea {
+	width: 100%;
+	min-height: 100px;
+
+	display: block;
+}
+
+/* Form: Characters remaining
+/*-----------------------------------------------------*/
+.news-comments form textarea + div {
+	top: auto;
+	right: 0;
+
+	color: var(--field-color-placeholder);
+
+	margin: -23px var(--field-padding-x) 0 0;
+
+	position: absolute;
+
+	font-size: var(--field-font-size);
+	font-weight: var(--field-font-weight);
+	font-family: var(--font-family-secondary);
+}
+
+/* Form: Button
+/*-----------------------------------------------------*/
+.news-comments form .nice_button {
+	margin: var(--margin-primary) 0 0 0;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Pagination
+/*-------------------------------------------------------------------------*/
+.news-pagination {
+	width: 100%;
+	height: auto;
+
+	margin: var(--margin-primary) 0 0 0;
+
+	-webkit-box-pack: end;
+	-ms-flex-pack: end;
+	justify-content: end;
+}
+
+.news-pagination .page-link {
+	padding: 0;
+}
+
+.news-pagination .page-link a {
+	color: inherit;
+	display: block;
+	padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+}
+
+.news-pagination .page-link a:hover,
+.news-pagination .page-link a:active {
+	color: inherit;
+}

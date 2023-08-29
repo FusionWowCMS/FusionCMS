@@ -1,0 +1,145 @@
+/*-------------------------------------------------------------------------*/
+/* [Sidebox] Top PvP
+/*-------------------------------------------------------------------------*/
+.box.type-toppvp {}
+
+.box.type-toppvp #toppvp {}
+
+.box.type-toppvp #toppvp .realm {}
+
+/* [Sidebox] Top PvP: Realm name
+/*---------------------------------------------------------------*/
+.box.type-toppvp #toppvp .realm .realm-name {
+	gap: var(--margin-primary);
+
+	color: var(--box-color-02);
+
+	margin: 0 0 var(--margin-primary) 0;
+	padding: 0 0 var(--margin-primary) 0;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+
+	font-size: 0.9375rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+}
+
+.box.type-toppvp #toppvp .realm .realm-name::after {
+	width: 100%;
+	height: 1px;
+
+	left: 0;
+	bottom: 0;
+
+	content: '';
+	opacity: 0.1;
+	position: absolute;
+
+	background-color: var(--button-background-start);
+}
+
+.box.type-toppvp #toppvp .realm .realm-name a,
+.box.type-toppvp #toppvp .realm .realm-name a * {
+	float: none;
+	display: block;
+	vertical-align: middle;
+}
+
+/* [Sidebox] Top PvP: Table
+/*---------------------------------------------------------------*/
+.box.type-toppvp #toppvp .realm table {
+	width: 100%;
+}
+
+.box.type-toppvp #toppvp .realm table tbody {}
+
+.box.type-toppvp #toppvp .realm table tbody tr {}
+
+.box.type-toppvp #toppvp .realm table tbody tr td {
+	padding: 0.3rem;
+}
+
+.box.type-toppvp #toppvp .realm table tbody tr td.col-1 {width: 5%;}
+.box.type-toppvp #toppvp .realm table tbody tr td.col-2 {width: 15%; padding: 0;}
+.box.type-toppvp #toppvp .realm table tbody tr td.col-3 {width: 40%;}
+.box.type-toppvp #toppvp .realm table tbody tr td.col-4 {width: 40%;}
+
+/* Table: Rank */
+.box.type-toppvp #toppvp .realm table tbody tr td .char-rank {
+	color: var(--box-color-03);
+
+	font-size: 1rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+
+	vertical-align: text-bottom;
+}
+
+/* Table: Race/Class */
+.box.type-toppvp #toppvp .realm table tbody tr td .char-raceclass {
+	width: 100%;
+	height: auto;
+
+	display: inline-block;
+	text-align: center;
+	white-space: nowrap;
+
+	vertical-align: text-bottom;
+}
+
+.box.type-toppvp #toppvp .realm table tbody tr td .char-raceclass img {
+	width: 16px;
+	height: 16px;
+
+	margin: 0 3px;
+	border: 1px solid var(--button-background-start);
+
+	display: inline-block;
+
+	vertical-align: text-bottom;
+}
+
+/* Table: Name */
+.box.type-toppvp #toppvp .realm table tbody tr td .char-name {
+	color: var(--link-tertiary-idle);
+
+	font-size: 0.9375rem;
+	font-family: var(--font-family-primary);
+
+	vertical-align: text-bottom;
+}
+
+.box.type-toppvp #toppvp .realm table tbody tr td .char-name:hover,
+.box.type-toppvp #toppvp .realm table tbody tr td .char-name:active {
+	color: var(--link-tertiary-active);
+}
+
+/* Table: Kills */
+.box.type-toppvp #toppvp .realm table tbody tr td .char-kills {
+	color: var(--box-color-04);
+
+	font-size: 0.9375rem;
+	font-family: var(--font-family-primary);
+
+	vertical-align: text-bottom;
+}
+
+.box.type-toppvp #toppvp .realm table tbody tr td .char-kills i {
+	color: var(--box-color-05);
+	font-style: inherit;
+}

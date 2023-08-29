@@ -1,0 +1,264 @@
+/*-------------------------------------------------------------------------*/
+/* Box
+/*-------------------------------------------------------------------------*/
+.box {
+	--box-color-01: #5a5449;
+	--box-color-02: #736d62;
+	--box-color-03: #42403c;
+	--box-color-04: #33312d;
+	--box-color-05: #4c4943;
+	--box-color-06: #211f1c;
+
+	--box-shadow: inset 0 0 0 1px rgba(255, 255, 190, 0.01), 0 0 5px 0 rgba(0, 0, 0, 0.21), 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+
+	--box-head-text-shadow: 0 0 6px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(0, 0, 0, 0.35);
+
+	--box-background-main: rgba(13, 13, 12, 0.65);
+	--box-background-overlay: rgba(7, 59, 97, 0.04);
+
+	width: 100%;
+	height: auto;
+
+	margin: var(--margin-primary) 0 0 0;
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-color: var(--box-background-main);
+}
+
+.box:first-child {
+	margin: 0;
+}
+
+/* Box: Art
+/*---------------------------------------------------------------*/
+.box::before {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	z-index: 7;
+
+	content: '';
+	position: absolute;
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-size: 100% var(--box-background-top-height);
+	background-color: transparent;
+	background-image: var(--box-background-top);
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+
+.box::after {
+	width: 100%;
+	height: 100%;
+
+	left: 0;
+	bottom: 2px;
+
+	z-index: 7;
+
+	content: '';
+	position: absolute;
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-size: 100% var(--box-background-bottom-height);
+	background-color: transparent;
+	background-image: var(--box-background-bottom);
+	background-repeat: no-repeat;
+	background-position: bottom center;
+}
+
+.box [box-overlay] {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	z-index: 8;
+
+	position: absolute;
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+}
+
+.box [box-overlay][with-head] {
+	background-size: 100% var(--box-background-head-height);
+	background-color: transparent;
+	background-image: var(--box-background-head);
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+
+.box [box-overlay]::after {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	content: '';
+	position: absolute;
+
+	-webkit-box-shadow: var(--box-shadow);
+	box-shadow: var(--box-shadow);
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-color: var(--box-background-overlay);
+}
+
+/* Box: Head
+/*---------------------------------------------------------------*/
+.box .box-head {
+	width: var(--box-head-width);
+	height: var(--box-head-height);
+
+	color: var(--box-color-01);
+
+	z-index: 9;
+	padding: 0 var(--box-padding);
+
+	font-size: 1rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+
+	line-height: var(--box-head-height);
+
+	text-shadow: var(--box-head-text-shadow);
+	text-transform: uppercase;
+}
+
+.box .box-head nav[aria-label='breadcrumb'] {
+	width: 100%;
+	height: 100%;
+}
+
+.box .box-head nav[aria-label='breadcrumb'] .breadcrumb {
+	width: 100%;
+	height: 100%;
+
+	margin: 0;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+/* Box: Body
+/*---------------------------------------------------------------*/
+.box .box-body {
+	width: var(--box-body-width);
+	height: var(--box-body-height);
+
+	color: var(--color-primary);
+
+	z-index: 9;
+	padding: var(--box-padding);
+}
+
+.box .box-body iframe {
+	width: 100%;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Box: lg (main)
+/*-------------------------------------------------------------------------*/
+.box.box-lg {
+	--box-padding: 1.5rem;
+
+	--box-head-width: 100%;
+	--box-head-height: 53px;
+
+	--box-body-width: 100%;
+	--box-body-height: auto;
+
+	--box-background-top: url('../../images/box/box-01-top.png');
+	--box-background-head: url('../../images/box/box-01-head.png');
+	--box-background-bottom: url('../../images/box/box-01-bottom.png');
+
+	--box-background-top-height: 392px;
+	--box-background-head-height: 61px;
+	--box-background-bottom-height: 392px;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Box: sm (side)
+/*-------------------------------------------------------------------------*/
+.box.box-sm {
+	--box-padding: 1.5rem;
+
+	--box-head-width: 100%;
+	--box-head-height: 48px;
+
+	--box-body-width: 100%;
+	--box-body-height: auto;
+
+	--box-background-top: url('../../images/box/box-02-top.png');
+	--box-background-head: url('../../images/box/box-02-head.png');
+	--box-background-bottom: url('../../images/box/box-02-bottom.png');
+
+	--box-background-top-height: 284px;
+	--box-background-head-height: 56px;
+	--box-background-bottom-height: 284px;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Box: Widget (side)
+/*-------------------------------------------------------------------------*/
+.box[widget='side'] {}
+
+/*-------------------------------------------------------------------------*/
+/* Box: Widget (top)
+/*-------------------------------------------------------------------------*/
+.box[widget='top'] {
+	z-index: 9;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Box: Widget (bottom)
+/*-------------------------------------------------------------------------*/
+.box[widget='bottom'] {
+	--box-body-height: auto;
+	--box-padding-backup: var(--box-padding);
+}
+
+.box[widget='bottom'] .box-body {
+	--box-padding: 0;
+}
+
+.box[widget='bottom'] .box-head + .box-body {
+	padding: var(--box-padding-backup);
+}
+
+/* Box: Widget (bottom): Responsive
+/*---------------------------------------------------------------*/
+@media screen and (min-width: 992px) { /* Desktop */
+	.box[widget='bottom'] {
+		--box-body-height: 450px;
+		--box-body-height-backup: var(--box-body-height);
+
+		overflow: hidden;
+	}
+
+	.box[widget='bottom'] .box-head + .box-body {
+		--box-body-height: -webkit-calc(var(--box-body-height-backup) - var(--box-head-height));
+		--box-body-height: -moz-calc(var(--box-body-height-backup) - var(--box-head-height));
+		--box-body-height: calc(var(--box-body-height-backup) - var(--box-head-height));
+	}
+
+	.box[widget='bottom'] .box-body iframe {
+		height: var(--box-body-height);
+	}
+}

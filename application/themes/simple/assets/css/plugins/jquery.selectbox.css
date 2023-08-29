@@ -1,0 +1,307 @@
+/*-------------------------------------------------------------------------*/
+/* Selectbox
+/*-------------------------------------------------------------------------*/
+.sbHolder {
+	--sbHolder-toggle-size: 12px;
+	--sbHolder-toggle-width: 43px;
+	--sbHolder-toggle-rotate: rotate(45deg);
+	--sbHolder-toggle-border-size: 4px;
+
+	width: 100%;
+	height: auto;
+
+	border: none;
+	cursor: pointer;
+
+	padding: var(--field-padding-y) var(--field-padding-x);
+
+	display: inline-block;
+	position: relative;
+
+	font-size: var(--field-font-size);
+	font-weight: var(--field-font-weight);
+
+	text-align: left;
+
+	-webkit-border-radius: var(--field-border-radius) !important;
+	border-radius: var(--field-border-radius) !important;
+
+	vertical-align: middle;
+
+	background-image: none;
+	background-color: transparent;
+}
+
+.sbHolder::before {
+	color: transparent;
+	display: block;
+	content: 'SB';
+	position: relative;
+	text-indent: -999999px;
+}
+
+.sbHolder a {
+	float: none !important;
+	margin: 0 !important;
+}
+
+/* Selectbox: Disabled
+/*---------------------------------------------------------------*/
+.sbHolder.sbHolderDisabled {
+	cursor: not-allowed;
+	opacity: 0.8;
+}
+
+/* Selectbox: Arrow
+/*---------------------------------------------------------------*/
+.sbHolder .sbToggle {
+	width: var(--sbHolder-toggle-width);
+	height: 100%;
+
+	top: 0;
+	right: 0;
+
+	z-index: 1;
+
+	position: absolute;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.sbHolder .sbToggle::before {
+	width: var(--sbHolder-toggle-size);
+	height: var(--sbHolder-toggle-size);
+
+	margin: -webkit-calc(var(--sbHolder-toggle-size) / 2 * -1) 0 0 0;
+	margin: -moz-calc(var(--sbHolder-toggle-size) / 2 * -1) 0 0 0;
+	margin: calc(var(--sbHolder-toggle-size) / 2 * -1) 0 0 0;
+
+	content: '';
+	position: absolute;
+
+	border-style: solid;
+	border-color: var(--link-primary-idle);
+	border-width: 0 var(--sbHolder-toggle-border-size) var(--sbHolder-toggle-border-size) 0;
+
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+
+	-webkit-transform: var(--sbHolder-toggle-rotate);
+	-ms-transform: var(--sbHolder-toggle-rotate);
+	transform: var(--sbHolder-toggle-rotate);
+}
+
+.sbHolder .sbToggle.sbToggleOpen {
+	--link-primary-idle: var(--link-primary-active);
+	--sbHolder-toggle-rotate: rotate(225deg);
+}
+
+.sbHolder .sbToggle.sbToggleOpen::before {
+	margin: -webkit-calc(var(--sbHolder-toggle-size) / 2) 0 0 0;
+	margin: -moz-calc(var(--sbHolder-toggle-size) / 2) 0 0 0;
+	margin: calc(var(--sbHolder-toggle-size) / 2) 0 0 0;
+}
+
+/* Selectbox: Field
+/*---------------------------------------------------------------*/
+.sbHolder .sbSelector {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	color: var(--field-color-primary) !important;
+
+	border: none;
+
+	display: -webkit-box !important;
+	display: -ms-flexbox !important;
+	display: flex !important;
+
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+
+	padding: 0 var(--sbHolder-toggle-width) 0 var(--field-padding-x);
+
+	overflow: hidden;
+	position: absolute;
+
+	font-size: var(--field-font-size);
+	font-weight: var(--field-font-weight);
+	font-family: var(--font-family-secondary);
+
+	-webkit-box-shadow: var(--field-box-shadow);
+	box-shadow: var(--field-box-shadow);
+
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+
+	white-space: nowrap;
+
+	text-shadow: var(--field-text-shadow);
+	text-overflow: ellipsis;
+
+	background-size: 100% 100%;
+	background-color: var(--field-background-color);
+	background-image: var(--field-background-image);
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+.sbHolder .sbToggle.sbToggleOpen + .sbSelector {
+	-webkit-filter: var(--brighten);
+	filter: var(--brighten);
+}
+
+/* Selectbox: Dropdown
+/*---------------------------------------------------------------*/
+.sbHolder .sbOptions {
+	width: 100%;
+	height: auto;
+
+	top: 100% !important;
+	left: 0;
+
+	margin: 0;
+	padding: 0;
+
+	border: none;
+	cursor: default;
+
+	z-index: 2;
+
+	position: absolute;
+
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	max-height: 123px !important;
+
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+
+	background-color: var(--field-background-color);
+}
+
+.sbHolder .sbOptions li {
+	width: 100%;
+	height: auto;
+}
+
+/* Dropdown: Items
+/*-----------------------------------------------------*/
+.sbHolder .sbOptions li a,
+.sbHolder .sbOptions li .sbGroup,
+.sbHolder .sbOptions li .sbDisabled {
+	width: 100%;
+	height: auto;
+
+	color: var(--field-color-primary);
+	display: block;
+
+	padding: -webkit-calc(var(--field-padding-y) / 1.25) var(--field-padding-x);
+	padding: -moz-calc(var(--field-padding-y) / 1.25) var(--field-padding-x);
+	padding: calc(var(--field-padding-y) / 1.25) var(--field-padding-x);
+
+	font-size: var(--field-font-size);
+	font-weight: var(--field-font-weight);
+	font-family: var(--font-family-secondary);
+
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+
+	background-color: rgba(17, 17, 17, 0.4);
+
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+/* Dropdown: Sep
+/*-----------------------------------------------------*/
+.sbHolder .sbOptions li a::after,
+.sbHolder .sbOptions li .sbGroup::after,
+.sbHolder .sbOptions li .sbDisabled::after {
+	--border-primary: rgba(255, 255, 255, 0.03);
+	--border-secondary: transparent;
+
+	width: -webkit-calc(100% - (var(--field-padding-x) * 2));
+	width: -moz-calc(100% - (var(--field-padding-x) * 2));
+	width: calc(100% - (var(--field-padding-x) * 2));
+
+	height: 1px;
+
+	left: 0;
+	right: 0;
+	bottom: -0.5px;
+
+	margin: 0 auto;
+
+	z-index: 9;
+
+	content: '';
+	position: absolute;
+
+	background: var(--border-primary);
+	background: -moz-linear-gradient(left, var(--border-primary) 0%, var(--border-secondary) 100%);
+	background: -webkit-linear-gradient(left, var(--border-primary) 0%, var(--border-secondary) 100%);
+	background: linear-gradient(to right, var(--border-primary) 0%, var(--border-secondary) 100%);
+}
+
+.sbHolder .sbOptions li:last-child a::after,
+.sbHolder .sbOptions li:last-child .sbGroup::after,
+.sbHolder .sbOptions li:last-child .sbDisabled::after {
+	display: none;
+}
+
+/* Dropdown: Hover
+/*-----------------------------------------------------*/
+.sbHolder .sbOptions li a:hover,
+.sbHolder .sbOptions li a:active,
+.sbHolder .sbOptions li .sbFocus {
+	-webkit-filter: var(--brighten);
+	filter: var(--brighten);
+}
+
+/* Dropdown: sbGroup
+/*-----------------------------------------------------*/
+.sbHolder .sbOptions li .sbGroup {
+	color: var(--color-secondary);
+	font-style: italic;
+	background-color: rgba(255, 255, 255, 0.04);
+}
+
+.sbHolder .sbOptions li .sbSub {
+	text-indent: var(--field-padding-x);
+}
+
+/* Dropdown: sbDisabled
+/*-----------------------------------------------------*/
+.sbHolder .sbOptions li .sbDisabled {
+	color: var(--color-secondary);
+	font-style: italic;
+}

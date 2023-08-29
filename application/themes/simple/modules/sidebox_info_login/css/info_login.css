@@ -1,0 +1,83 @@
+/*-------------------------------------------------------------------------*/
+/* [Sidebox] Info_login
+/*-------------------------------------------------------------------------*/
+.box.type-info_login {}
+
+/* [Sidebox] Info_login: Info
+/*---------------------------------------------------------------*/
+.box.type-info_login .sidebox_info {
+	padding: 0;
+}
+
+.box.type-info_login .sidebox_info center {
+	padding-bottom: 0;
+}
+
+/* [Sidebox] Info_login: Login
+/*---------------------------------------------------------------*/
+.box.type-info_login .card-body {
+	padding: 0;
+}
+
+.box.type-info_login .card-body .form-switch {
+	margin: 0;
+	padding: 0;
+}
+
+.box.type-info_login .card-body .input-group {
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+.box.type-info_login .card-body .input-group .input-group-text {
+	width: 45px !important;
+	padding: 0;
+
+	-webkit-border-radius: 0.25rem 0 0 0.25rem !important;
+	border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+.box.type-info_login .card-body .input-group .form-control {
+	-webkit-border-top-left-radius: 0 !important;
+	-moz-border-top-left-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+
+	-webkit-border-bottom-left-radius: 0 !important;
+	-moz-border-bottom-left-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+}
+
+.box.type-info_login .card-body .input-group #captcha[for='floatingCaptcha'] {
+	width: 150px !important;
+	height: 34px !important;
+
+	top: 0;
+	right: 0;
+
+	padding: 0;
+	z-index: 9;
+
+	overflow: hidden;
+	position: absolute;
+
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+.box.type-info_login .card-body .input-group #captcha[for='floatingCaptcha'] img {
+	width: 100%;
+	height: 100%;
+
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+.box.type-info_login .card-body .input-group .captcha-input {
+	height: auto;
+	min-height: auto;
+	line-height: 1.5;
+}
+
+.box.type-info_login .card-body .input-group .captcha-input + label {
+	display: none;
+}

@@ -1,0 +1,424 @@
+/*-------------------------------------------------------------------------*/
+/* Form labels
+/*-------------------------------------------------------------------------*/
+label {
+	color: var(--color-primary);
+
+	font-size: var(--field-font-size);
+	font-weight: var(--field-font-weight);
+	font-family: var(--font-family-secondary);
+
+	text-transform: uppercase;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Form fields
+/*-------------------------------------------------------------------------*/
+select,
+textarea,
+input[type='tel'],
+input[type='url'],
+input[type='date'],
+input[type='file'],
+input[type='text'],
+input[type='time'],
+input[type='week'],
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='search'],
+input[type='password'],
+input[type='datetime-local'] {
+	width: 100%;
+	height: auto;
+
+	color: var(--field-color-primary) !important;
+
+	border: none !important;
+
+	padding: var(--field-padding-y) var(--field-padding-x) !important;
+
+	font-size: var(--field-font-size) !important;
+	font-weight: var(--field-font-weight) !important;
+	font-family: var(--font-family-secondary) !important;
+
+	-webkit-box-shadow: var(--field-box-shadow) !important;
+	box-shadow: var(--field-box-shadow) !important;
+
+	text-shadow: var(--field-text-shadow);
+
+	-webkit-border-radius: var(--field-border-radius) !important;
+	border-radius: var(--field-border-radius) !important;
+
+	background-size: 100% 100%;
+	background-color: var(--field-background-color) !important;
+	background-image: var(--field-background-image);
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	-webkit-transition: var(--transition-primary) !important;
+	-o-transition: var(--transition-primary) !important;
+	transition: var(--transition-primary) !important;
+}
+
+/* Fields: Focus
+/*---------------------------------------------------------------*/
+select:focus,
+textarea:focus,
+input[type='tel']:focus,
+input[type='url']:focus,
+input[type='date']:focus,
+input[type='file']:focus,
+input[type='text']:focus,
+input[type='time']:focus,
+input[type='week']:focus,
+input[type='email']:focus,
+input[type='month']:focus,
+input[type='number']:focus,
+input[type='search']:focus,
+input[type='password']:focus,
+input[type='datetime-local']:focus {
+	-webkit-filter: var(--brighten);
+	filter: var(--brighten);
+}
+
+/* Fields: Disabled
+/*---------------------------------------------------------------*/
+select[disabled],
+textarea[disabled],
+input[type='tel'][disabled],
+input[type='url'][disabled],
+input[type='date'][disabled],
+input[type='file'][disabled],
+input[type='text'][disabled],
+input[type='time'][disabled],
+input[type='week'][disabled],
+input[type='email'][disabled],
+input[type='month'][disabled],
+input[type='number'][disabled],
+input[type='search'][disabled],
+input[type='password'][disabled],
+input[type='datetime-local'][disabled] {
+	cursor: not-allowed;
+	opacity: 0.8;
+}
+
+/* Fields: Textarea
+/*---------------------------------------------------------------*/
+textarea {
+	width: auto;
+	resize: vertical !important;
+	background-image: none;
+}
+
+/* Fields: Select
+/*---------------------------------------------------------------*/
+select {
+	cursor: pointer;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	-webkit-appearance: none; /* Removes default Chrome and Safari style */
+	-moz-appearance: none;    /* Removes Default Firefox style */
+	appearance: none;         /* Removes Default style */
+}
+
+select option,
+select optgroup {
+	color: var(--field-color-primary);
+	text-transform: capitalize;
+	background-color: var(--field-background-color);
+}
+
+/* Fields: Placeholder
+/*---------------------------------------------------------------*/
+::-webkit-input-placeholder {color: var(--field-color-placeholder) !important;}
+:-moz-placeholder           {color: var(--field-color-placeholder) !important;}
+::-moz-placeholder          {color: var(--field-color-placeholder) !important;}
+:-ms-input-placeholder      {color: var(--field-color-placeholder) !important;}
+::-ms-input-placeholder     {color: var(--field-color-placeholder) !important;}
+::placeholder               {color: var(--field-color-placeholder) !important;}
+
+input::-webkit-input-placeholder {color: var(--field-color-placeholder) !important;}
+input:-moz-placeholder           {color: var(--field-color-placeholder) !important;}
+input::-moz-placeholder          {color: var(--field-color-placeholder) !important;}
+input:-ms-input-placeholder      {color: var(--field-color-placeholder) !important;}
+input::-ms-input-placeholder     {color: var(--field-color-placeholder) !important;}
+input::placeholder               {color: var(--field-color-placeholder) !important;}
+
+/* Fields: Autofill
+/*---------------------------------------------------------------*/
+input:-webkit-autofill,
+input:autofill {
+	--field-box-shadow: inset 0 0 0 100px var(--field-background-color) !important;
+
+	color: var(--field-color-primary) !important;
+	caret-color: var(--field-color-primary) !important;
+	-webkit-text-fill-color: var(--field-color-primary) !important;
+
+	border: none !important;
+
+	-webkit-box-shadow: var(--field-box-shadow) !important;
+	box-shadow: var(--field-box-shadow) !important;
+
+	-webkit-border-radius: var(--field-border-radius) !important;
+	border-radius: var(--field-border-radius) !important;
+
+	background-color: var(--field-background-color) !important;
+
+	-webkit-background-clip: text;
+}
+
+/* Fields: Error
+/*---------------------------------------------------------------*/
+input + span[id] {
+	top: 0 !important;
+	right: 0 !important;
+	position: absolute;
+}
+
+input + span[id] img {
+	display: block;
+	vertical-align: middle;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Form buttons
+/*-------------------------------------------------------------------------*/
+button,
+input[type='reset'],
+input[type='button'],
+input[type='submit'] {}
+
+/* Buttons: Hover
+/*---------------------------------------------------------------*/
+button:hover,
+input[type='reset']:hover,
+input[type='button']:hover,
+input[type='submit']:hover,
+
+button:active,
+input[type='reset']:active,
+input[type='button']:active,
+input[type='submit']:active {}
+
+/* Buttons: Disabled
+/*---------------------------------------------------------------*/
+button[disabled],
+input[type='reset'][disabled],
+input[type='button'][disabled],
+input[type='submit'][disabled] {
+	cursor: not-allowed;
+	opacity: 0.8;
+}
+
+/* Buttons: Icon
+/*---------------------------------------------------------------*/
+button i {
+	vertical-align: middle;
+}
+
+/* Buttons: Nice button
+/*---------------------------------------------------------------*/
+.nice_button {
+	width: auto;
+	height: auto;
+
+	color: var(--link-secondary-idle);
+
+	border: none;
+	cursor: pointer;
+	display: inline-block;
+
+	padding: var(--button-padding-y) var(--button-padding-x);
+
+	font-size: var(--button-font-size);
+	font-weight: var(--button-font-weight);
+	font-family: var(--font-family-primary);
+
+	-webkit-box-shadow: var(--button-box-shadow);
+	box-shadow: var(--button-box-shadow);
+
+	text-align: center;
+	text-shadow: var(--button-text-shadow);
+
+	-webkit-border-radius: var(--button-border-radius) !important;
+	border-radius: var(--button-border-radius) !important;
+
+	background: var(--button-background-start);
+	background: -moz-linear-gradient(top, var(--button-background-start) 0%, var(--button-background-end) 100%);
+	background: -webkit-linear-gradient(top, var(--button-background-start) 0%, var(--button-background-end) 100%);
+	background: linear-gradient(to bottom, var(--button-background-start) 0%, var(--button-background-end) 100%);
+
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+/* Buttons: Nice button: Hover
+/*-----------------------------------------------------*/
+.nice_button:hover,
+.nice_button:active {
+	color: var(--link-secondary-active);
+
+	-webkit-filter: var(--brighten);
+	filter: var(--brighten);
+}
+
+/* Buttons: Nice button: Disabled
+/*-----------------------------------------------------*/
+.nice_button[disabled] {
+	cursor: not-allowed;
+	opacity: 0.8;
+}
+
+/* Buttons: Nice button: Icon
+/*-----------------------------------------------------*/
+.nice_button i {
+	vertical-align: middle;
+}
+
+/* Buttons: Nice button: Nice active
+/*-----------------------------------------------------*/
+.nice_button.nice_active,
+.nice_button.nice_active:hover,
+.nice_button.nice_active:active {
+	color: var(--link-secondary-active);
+
+	-webkit-filter: var(--brighten);
+	filter: var(--brighten);
+}
+
+.nice_button.nice_active::after {
+	width: 0;
+	height: 0;
+
+	left: 0;
+	right: 0;
+	bottom: -16px;
+
+	margin: 0 auto;
+
+	content: '';
+	position: absolute;
+
+	border-width: 9px;
+	border-style: solid;
+	border-color: var(--button-background-end) transparent transparent transparent;
+}
+
+/* Buttons: Nice button: Special
+/*-----------------------------------------------------*/
+.nice_button.type-special {
+	--button-box-shadow: inset 0 -2px 1px 0 rgba(251, 244, 218, 0.07), 0 0 7px 0 rgba(0, 0, 0, 0.7), 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+	--button-text-shadow: 0 0 7px rgba(28, 24, 20, 0.3), 0 1px 1px rgba(0, 0, 0, 0.45);
+
+	--button-background-start: #264a4e;
+	--button-background-end: #1c3940;
+
+	color: var(--button-color-idle);
+	opacity: 0.88;
+	text-transform: uppercase;
+}
+
+.nice_button.type-special:hover,
+.nice_button.type-special:active {
+	color: var(--button-color-active);
+}
+
+.nice_button.type-special::before {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	content: '';
+	opacity: 0.02;
+	position: absolute;
+
+	-webkit-border-radius: var(--button-border-radius);
+	border-radius: var(--button-border-radius);
+
+	background-color: transparent;
+	background-image: url('../../images/textures/texture-03.jpg');
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+.nice_button.type-special::after {
+	width: 100%;
+	height: 50%;
+
+	left: 0;
+	bottom: 2px;
+
+	content: '';
+	opacity: 0.25;
+	position: absolute;
+
+	-webkit-border-radius: var(--button-border-radius);
+	border-radius: var(--button-border-radius);
+
+	background: -moz-linear-gradient(top, transparent 0%, var(--button-glow) 100%);
+	background: -webkit-linear-gradient(top, transparent 0%, var(--button-glow) 100%);
+	background: linear-gradient(to bottom, transparent 0%, var(--button-glow) 100%);
+}
+
+/*-------------------------------------------------------------------------*/
+/* Page form
+/*-------------------------------------------------------------------------*/
+.page_form {
+	width: 100%;
+	height: auto;
+}
+
+.is-fullwidth .page_form {
+	max-width: 100%;
+
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+/* Page form: Label
+/*---------------------------------------------------------------*/
+.page_form label {
+	margin: 0;
+	vertical-align: middle;
+}
+
+/* Page form: Flex
+/*---------------------------------------------------------------*/
+.page_form > .row {}
+
+.page_form > .row + .row {
+	margin-top: 1rem;
+}
+
+.page_form > .row label {
+	margin: 0;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+
+.page_form > .row + .nice_button {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	margin-left: auto;
+}

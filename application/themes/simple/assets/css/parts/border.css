@@ -1,0 +1,30 @@
+/*-------------------------------------------------------------------------*/
+/* Border (simple)
+/*-------------------------------------------------------------------------*/
+.simple_border {
+	--border-height: 15px;
+
+	width: 100%;
+	height: var(--border-height);
+
+	clear: both;
+	margin: var(--margin-primary) 0 0 0;
+	display: block;
+
+	background-size: 100% var(--border-height);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+/* Border (simple): Type 01
+/*---------------------------------------------------------------*/
+.simple_border.type-1 {
+	background-image: url('../../images/borders/border-01.png');
+}
+
+/* Border (simple): Type 02
+/*---------------------------------------------------------------*/
+.simple_border.type-2 {
+	background-image: url('../../images/borders/border-02.png');
+}

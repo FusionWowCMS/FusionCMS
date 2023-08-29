@@ -1,0 +1,68 @@
+/*-------------------------------------------------------------------------*/
+/* iCheck
+/*-------------------------------------------------------------------------*/
+@import url('../../node_modules/icheck/skins/futurico/futurico.css');
+
+.iradio_futurico,
+.icheckbox_futurico {
+	--icheck-hue: 110deg;
+	--icheck-glow: rgba(255, 255, 255, 0.1);
+
+	width: 16px;
+	height: 17px;
+
+	border: none;
+	cursor: pointer;
+
+	margin: 0;
+	padding: 0;
+
+	z-index: 9;
+	display: inline-block;
+
+	-webkit-filter: hue-rotate(var(--icheck-hue));
+	filter: hue-rotate(var(--icheck-hue));
+
+	-webkit-box-shadow: 0 0 10px 0 var(--icheck-glow);
+	box-shadow: 0 0 10px 0 var(--icheck-glow);
+
+	-webkit-border-radius: var(--icheck-borderRadius);
+	border-radius: var(--icheck-borderRadius);
+
+	vertical-align: middle;
+
+	background-image: url('../../node_modules/icheck/skins/futurico/futurico.png');
+}
+
+.iradio_futurico + label,
+.icheckbox_futurico + label {
+	margin-left: 0.5rem !important;
+}
+
+/* iCheck: Radio
+/*---------------------------------------------------------------*/
+.iradio_futurico {
+	--icheck-borderRadius: 50%;
+}
+
+/* iCheck: Checkbox
+/*---------------------------------------------------------------*/
+.icheckbox_futurico {
+	--icheck-borderRadius: 3px;
+}
+
+/* iCheck: Disabled
+/*---------------------------------------------------------------*/
+.iradio_futurico.disabled,
+.icheckbox_futurico.disabled {
+	cursor: default;
+}
+
+/* iCheck: HiDPI support
+/*---------------------------------------------------------------*/
+@media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+	.iradio_futurico,
+	.icheckbox_futurico {
+		background-image: url('../../node_modules/icheck/skins/futurico/futurico@2x.png');
+	}
+}

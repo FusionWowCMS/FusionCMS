@@ -1,0 +1,1 @@
+<div __realmStatusAjax__><img width="24" height="24" alt="{lang('global_loading', 'theme')}" src="{$MY_image_path}ajax.gif" /></div>

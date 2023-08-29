@@ -1,0 +1,1 @@
+{foreach from=$MY_sideboxes.top item=item}{$item}{/foreach}

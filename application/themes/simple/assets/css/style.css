@@ -1,0 +1,50 @@
+/*
+	@Theme Name  : Simple
+	@Theme URI   : -
+	@Author      : Darksider <darksider.legend@gmail.com>
+	@Author URI  : https://d4rksider.deviantart.com
+	@Description : -
+	@Version     : 1.0.0
+	@License     : Proprietary software License
+	@License URI : https://en.wikipedia.org/wiki/Proprietary_software
+
+-------------------------------------------------------------------------
+
+	01. Import parts
+*/
+
+/*-------------------------------------------------------------------------*/
+/* 01. Import parts
+/*-------------------------------------------------------------------------*/
+@charset "UTF-8";
+
+/* Theme fonts */
+@import url('./fonts/fonts.css');
+
+/* Theme plugins */
+@import url('./plugins/jquery.icheck.css');
+@import url('./plugins/jquery.selectbox.css');
+
+/* Theme globals */
+@import url('./global/form.css');
+@import url('./global/popup.css');
+@import url('./global/realm.css');
+@import url('./global/tables.css');
+@import url('./global/divider.css');
+@import url('./global/general.css');
+@import url('./global/utilities.css');
+
+/* Theme parts */
+@import url('./parts/box.css');
+@import url('./parts/border.css');
+@import url('./parts/footer.css');
+@import url('./parts/header.css');
+@import url('./parts/slider.css');
+@import url('./parts/banners.css');
+@import url('./parts/content.css');
+
+/* Theme overwrite stylesheets */
+@import url('./overwrite.css');
+
+/* Theme custom stylesheets */
+@import url('./custom.css');

@@ -1,0 +1,99 @@
+/*-------------------------------------------------------------------------*/
+/* [Sidebox] Status
+/*-------------------------------------------------------------------------*/
+.box.type-status {
+	--status-realm-padding: var(--box-padding);
+	--status-realm-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+
+	--status-realm-list-box-shadow: inset 0 3px 1px 0 rgba(0, 0, 0, 0.5), inset 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 1px 0 0 rgba(255, 255, 255, 0.02);
+	--status-realm-list-text-shadow: 0 2px 1px #000;
+	--status-realm-list-background-color: rgba(0, 0, 0, 0.4);
+}
+
+.box.type-status .box-body {
+	--box-padding: 0;
+	--box-padding-backup: 0;
+}
+
+/* [Sidebox] Status: Loading
+/*---------------------------------------------------------------*/
+.box.type-status [__realmStatusAjax__] {
+	width: 100%;
+	height: auto;
+
+	padding: 4.901rem 0;
+}
+
+.box.type-status [__realmStatusAjax__] img {
+	margin: 0 auto;
+	display: block;
+	vertical-align: middle;
+}
+
+/* [Sidebox] Status: Realm
+/*---------------------------------------------------------------*/
+.box.type-status .realm {
+	width: 100%;
+	height: auto;
+
+	padding: var(--status-realm-padding);
+}
+
+.box.type-status .realm.type-status {
+	background-size: 100% 100%;
+	background-color: transparent;
+	background-image: url('../../../assets/images/textures/texture-04.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.box.type-status .realm .realm-name {
+	color: var(--box-color-02);
+
+	font-size: 0.9375rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+
+	text-shadow: var(--status-realm-text-shadow);
+}
+
+.box.type-status .realm .realm-status {
+	color: var(--box-color-03);
+
+	font-size: 0.8125rem;
+	font-family: var(--font-family-primary);
+
+	text-shadow: var(--status-realm-text-shadow);
+}
+
+.box.type-status .realm .realm_bar {
+	margin: 0;
+}
+
+.box.type-status .realm .realm-list {
+	width: 100%;
+	height: auto;
+
+	color: var(--box-color-04);
+
+	margin: 0 auto;
+	padding: 0.7rem;
+
+	font-size: 0.75rem;
+	font-family: var(--font-family-secondary);
+
+	-webkit-box-shadow: var(--status-realm-list-box-shadow);
+	box-shadow: var(--status-realm-list-box-shadow);
+
+	text-align: center;
+	text-shadow: var(--status-realm-list-text-shadow);
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-color: var(--status-realm-list-background-color);
+}
+
+.box.type-status .realm .realm-list span {
+	color: var(--box-color-05);
+}

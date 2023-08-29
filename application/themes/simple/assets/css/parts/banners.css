@@ -1,0 +1,316 @@
+/*-------------------------------------------------------------------------*/
+/* Banners
+/*-------------------------------------------------------------------------*/
+.banners {
+	--banners-glow: rgba(255, 255, 255, 0.03);
+
+	--banners-color-01: #a7936d;
+	--banners-color-02: #ccbb9d;
+	--banners-color-03: #837966;
+	--banners-color-04: #827355;
+	--banners-color-05: #ffffff;
+
+	--banners-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45), 0 1px 1px 0 rgba(0, 0, 0, 0.35);
+	--banners-text-shadow: 0 0 4px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(0, 0, 0, 0.35);
+
+	width: 100%;
+	height: auto;
+
+	gap: var(--margin-primary);
+
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: stretch;
+	-ms-flex-align: stretch;
+	align-items: stretch;
+
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+
+/* Banners: Flex
+/*---------------------------------------------------------------*/
+.banners .flex-row {
+	width: 100%;
+	height: auto;
+
+	gap: var(--banner-row-gap);
+
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+
+	-webkit-box-pack: var(--banner-row-justify);
+	-ms-flex-pack: var(--banner-row-justify);
+	justify-content: var(--banner-row-justify);
+
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+
+.banners .flex-row .flex-col {
+	width: auto;
+	height: auto;
+}
+
+/* Banners: Border (simple)
+/*---------------------------------------------------------------*/
+.banners .simple_border {
+	margin: 0;
+}
+
+/* Banners: Banner
+/*---------------------------------------------------------------*/
+.banners .banner {
+	width: var(--banner-width);
+	height: var(--banner-height);
+
+	gap: var(--banner-gap);
+
+	padding: var(--banner-padding);
+
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 auto;
+	flex: 0 0 auto;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: start;
+	-ms-flex-align: start;
+	align-items: start;
+
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+
+	-webkit-box-shadow: var(--banners-box-shadow);
+	box-shadow: var(--banners-box-shadow);
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-size: cover;
+	background-color: transparent;
+	background-image: var(--banner-background);
+	background-repeat: no-repeat;
+	background-position: center right;
+
+	-webkit-transition: var(--transition-primary);
+	-o-transition: var(--transition-primary);
+	transition: var(--transition-primary);
+}
+
+/* Banners: Banner: Hover
+/*-----------------------------------------------------*/
+.banners .banner:hover,
+.banners .banner:active {
+	-webkit-filter: var(--brighten);
+	filter: var(--brighten);
+}
+
+/* Banners: Banner: Glow
+/*-----------------------------------------------------*/
+.banners .banner::before {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	border: 1px solid var(--banners-glow);
+
+	content: '';
+	position: absolute;
+
+	-webkit-box-shadow: inset 0 0 18px 0 var(--banners-glow);
+	box-shadow: inset 0 0 18px 0 var(--banners-glow);
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+}
+
+/* Banners: Banner: Text
+/*-----------------------------------------------------*/
+.banners .banner .banner-text {
+	font-size: 1rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+
+	line-height: 90%;
+
+	text-shadow: var(--banners-text-shadow);
+	text-transform: uppercase;
+}
+
+.banners .banner .banner-text * {
+	line-height: 90%;
+}
+
+/* Banners: Banner: Link
+/*-----------------------------------------------------*/
+.banners .banner .banner-link {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	position: absolute;
+}
+
+/* Banners: Banner 01
+/*---------------------------------------------------------------*/
+.banners .banner-1 {
+	--banner-width: 100%;
+	--banner-height: auto;
+
+	--banner-gap: var(--margin-primary);
+	--banner-padding: 1rem;
+
+	--banner-background: url('../../images/banners/banner-01.jpg');
+
+	--banner-row-gap: 1rem;
+	--banner-row-justify: start;
+}
+
+.banners .banner-1 .banner-text-1 {
+	color: var(--banners-color-01);
+}
+
+.banners .banner-1 .banner-text-1 strong {
+	color: var(--banners-color-02);
+	display: block;
+	font-size: 1.5rem;
+}
+
+.banners .banner-1 .banner-text-2 {
+	--banners-text-shadow: 0 0 4px rgba(0, 0, 0, 0.35), 1px 1px 0 rgba(0, 0, 0, 0.55);
+
+	color: var(--banners-color-03);
+
+	font-size: 0.6875rem;
+
+	font-weight: normal;
+	font-family: var(--font-family-secondary);
+
+	text-transform: inherit;
+}
+
+/* Banners: Banner 02
+/*---------------------------------------------------------------*/
+.banners .banner-2 {
+	--banner-width: 100%;
+	--banner-height: auto;
+
+	--banner-gap: 0;
+	--banner-padding: 1rem;
+
+	--banner-background: url('../../images/banners/banner-02.jpg');
+
+	--banner-row-gap: 1rem;
+	--banner-row-justify: center;
+}
+
+.banners .banner-2 .flex-row-4 {
+	width: auto;
+
+	left: var(--margin-primary);
+	bottom: var(--margin-primary);
+
+	display: block;
+	position: absolute;
+}
+
+.banners .banner-2 .banner-text-1 {
+	color: var(--banners-color-01);
+	text-align: center;
+}
+
+.banners .banner-2 .banner-text-2 {
+	color: var(--banners-color-02);
+	font-size: 1.75rem;
+	text-align: center;
+}
+
+.banners .banner-2 .banner-text-3 {
+	color: var(--banners-color-04);
+	text-align: center;
+}
+
+.banners .banner-2 .banner-text-4 {
+	--banners-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.69);
+
+	color: var(--banners-color-05);
+	opacity: 0.15;
+	font-size: 0.6875rem;
+	line-height: 50%;
+
+	text-transform: inherit;
+}
+
+/* Banners: Responsive
+/*---------------------------------------------------------------*/
+@media screen and (min-width: 992px) { /* Desktop */
+	.banners {}
+
+	/* Banners: Banner
+	/*---------------------------------------------------------------*/
+	.banners .banner {
+		width: -webkit-calc(var(--banner-width) - (var(--margin-primary) / 2));
+		width: -moz-calc(var(--banner-width) - (var(--margin-primary) / 2));
+		width: calc(var(--banner-width) - (var(--margin-primary) / 2));
+	}
+
+	/* Banners: Banner 01
+	/*---------------------------------------------------------------*/
+	.banners .banner-1 {
+		--banner-width: 60%;
+		--banner-height: 114px;
+	}
+
+	/* Banners: Banner 02
+	/*---------------------------------------------------------------*/
+	.banners .banner-2 {
+		--banner-width: 40%;
+		--banner-height: 114px;
+	}
+}
+
+@media screen and (min-width: 1200px) { /* Desktop */
+	.banners {}
+
+	/* Banners: Banner 01
+	/*---------------------------------------------------------------*/
+	.banners .banner-1 {
+		--banner-padding: 1rem 10rem 1rem 1rem;
+	}
+
+	/* Banners: Banner 02
+	/*---------------------------------------------------------------*/
+	.banners .banner-2 {
+		--banner-padding: 1rem 7rem 1rem 1rem;
+	}
+}

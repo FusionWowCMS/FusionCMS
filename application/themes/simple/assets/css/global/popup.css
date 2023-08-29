@@ -1,0 +1,100 @@
+/*-------------------------------------------------------------------------*/
+/* Popup box
+/*-------------------------------------------------------------------------*/
+.popup-box {
+	width: 90% !important;
+	height: auto;
+
+	left: 0;
+	right: 0;
+
+	border: 1px solid var(--glassmorphism-outline-color);
+
+	margin: 0 auto;
+	padding: 1.25rem;
+
+	z-index: 999999;
+
+	position: fixed;
+	overflow: hidden;
+
+	max-width: 450px;
+
+	-webkit-box-shadow: 0 4px 30px 0 var(--glassmorphism-outline-shadow);
+	box-shadow: 0 4px 30px 0 var(--glassmorphism-outline-shadow);
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	-webkit-backdrop-filter: var(--glassmorphism-filter);
+	backdrop-filter: var(--glassmorphism-filter);
+
+	background-color: var(--glassmorphism-background-color);
+}
+
+.popup-box::before {
+	width: 80%;
+	height: 1px;
+
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	margin: 0 auto;
+
+	content: '';
+	position: absolute;
+
+	background: -moz-linear-gradient(left, transparent 0%, var(--glassmorphism-glow) 50%, transparent 100%);
+	background: -webkit-linear-gradient(left, transparent 0%, var(--glassmorphism-glow) 50%, transparent 100%);
+	background: linear-gradient(to right, transparent 0%, var(--glassmorphism-glow) 50%, transparent 100%);
+}
+
+.popup-box::after {
+	width: 50%;
+	height: 20px;
+
+	left: 0;
+	right: 0;
+	bottom: -20px;
+
+	margin: 0 auto;
+
+	content: '';
+	position: absolute;
+
+	-webkit-box-shadow: 0 0 70px 15px var(--glassmorphism-glow);
+	box-shadow: 0 0 70px 15px var(--glassmorphism-glow);
+}
+
+/* Popup box: Content
+/*---------------------------------------------------------------*/
+.popup-box .popup-content {
+	color: var(--glassmorphism-color);
+
+	margin: 0 !important;
+
+	font-size: 1.125rem;
+	font-weight: bold;
+	font-family: var(--font-family-primary);
+
+	text-align: center;
+	text-shadow: 0 0 10px var(--glassmorphism-glow);
+}
+
+/* Popup box: Buttons
+/*---------------------------------------------------------------*/
+.popup-box .popup-buttons {
+	margin: 1rem 0 0 0;
+	text-align: center;
+}
+
+.popup-box .popup-buttons .popup-button {
+	--button-background-start: rgba(0, 0, 0, 0.2);
+
+	width: auto !important;
+	margin: 0 0.5rem !important;
+}
+
+.popup-box .popup-buttons .popup-button.type-action {}
+.popup-box .popup-buttons .popup-button.type-cancel {opacity: 0.8;}
