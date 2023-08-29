@@ -14,7 +14,7 @@
   </p>
 </p>
 
-![Downloads](https://img.shields.io/github/downloads/FusionWowCMS/FusionCMS/total) ![Contributors](https://img.shields.io/github/contributors/FusionWowCMS/FusionCMS?color=dark-green) ![Issues](https://img.shields.io/github/issues/FusionWowCMS/FusionCMS) [![Discord](https://img.shields.io/discord/1116706973828775976.svg)](https://discord.gg/tnWTkZ7akZ "Our community hub on Discord") 
+[![Downloads](https://img.shields.io/github/downloads/FusionWowCMS/FusionCMS/total)](https://github.com/FusionWowCMS/FusionCMS/releases "Releases") ![Contributors](https://img.shields.io/github/contributors/FusionWowCMS/FusionCMS?color=dark-green) ![Issues](https://img.shields.io/github/issues/FusionWowCMS/FusionCMS) [![Discord](https://img.shields.io/discord/1116706973828775976.svg)](https://discord.gg/tnWTkZ7akZ "Our community hub on Discord") 
 
 ## Table Of Contents
 
