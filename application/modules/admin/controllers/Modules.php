@@ -91,7 +91,7 @@ class Modules extends MX_Controller
                 $_FILES['file']['size'] = $_FILES['module']['size'];
 
                 // Set preference
-                $config['upload_path'] = FCPATH . '/uploads/modules';
+                $config['upload_path'] = FCPATH . 'uploads/modules';
                 $config['allowed_types'] = 'zip';
                 $config['overwrite'] = true;
                 $config['max_size'] = '1000000';
@@ -105,40 +105,72 @@ class Modules extends MX_Controller
 
                 // File upload
                 if (!$this->upload->do_upload('file')) {
-                    die(json_encode(array('status' => 'error', "message" => $this->upload->display_errors())));
+                    die(json_encode(array('status' => 'error', 'message' => $this->upload->display_errors())));
                 } else {
                     $m_data = $this->upload->data();
                     $filename = $m_data['file_name'];
 
                     ## Extract the zip file
                     $zip = new ZipArchive();
-                    $res = $zip->open($config['upload_path'] . "/" . $filename);
+                    $res = $zip->open($config['upload_path'] . '/' . $filename);
                     if ($res === true) {
                         // Extract file
-                        $zip->extractTo(FCPATH . '');
-                        $zip->close();
-                        if (!unlink($config['upload_path'] . "/" . $filename)) {
-                            die(json_encode(array('status' => 'error', 'message' => 'Failed to delete uploaded zip file, but extraction worked')));
-                        }
+                        $zip->extractTo(FCPATH . 'temp/modules/');
+                        register_shutdown_function(function() { $this->removeDir(FCPATH . 'temp'); });
 
-                        foreach (glob(FCPATH . '/temp/modules/' . "*.sql") as $filename) {
-                            if (file_exists($filename)) {
-                                $lines = file($filename);
-                                $statement = '';
-                                foreach ($lines as $line) {
-                                    $statement .= $line;
-                                    if (substr(trim($line), -1) === ';') {
-                                        try {
-                                            $this->db->query($statement);
-                                            $statement = '';
-                                        } catch (Throwable $t) {
-                                            unlink($filename);
-                                            die(json_encode(array('status' => 'error', 'message' => 'SQL import failed')));
+                        $modules = array();
+
+                        foreach (glob(FCPATH . 'temp/modules/*') as $file)
+                        {
+                            if(!is_dir($file))
+                            {
+                                unlink($file);
+                                continue;
+                            }
+
+                            $name = preg_replace('/temp\/modules\//', '', $file);
+
+                            if (!file_exists($file . '/manifest.json')) {
+                                die(json_encode(array('status' => 'error', 'message' => 'The module <b>' . $name . '</b> is missing manifest.json')));
+                            }
+
+                            if (!is_dir($file . '/controllers')) {
+                                die(json_encode(array('status' => 'error', 'message' => 'The module <b>' . $name . '</b> is missing controllers')));
+                            }
+
+                            $modules[] = basename($name);
+
+                            foreach (glob(FCPATH . 'temp/modules/' . basename($name) . '/sql/*.sql') as $sqlname) {
+                                if (file_exists($sqlname)) {
+                                    $lines = file($sqlname);
+                                    $statement = '';
+                                    foreach ($lines as $line) {
+                                        $statement .= $line;
+                                        if (str_ends_with(trim($line), ';')) {
+                                            try {
+                                                $this->db->query($statement);
+                                                $statement = '';
+                                            } catch (Throwable $t) {
+                                                unlink($sqlname);
+                                                die(json_encode(array('status' => 'error', 'message' => 'SQL import failed')));
+                                            }
                                         }
                                     }
+                                    unlink($sqlname);
                                 }
-                                unlink($filename);
                             }
+                            register_shutdown_function(function() use ($name) { $this->removeDir(FCPATH . 'application/modules/' . basename($name) . '/sql'); });
+                        }
+
+                        if(!is_array($modules) || !count($modules))
+                            die(json_encode(array('status' => 'error', 'message' => 'The module is not valid')));
+
+                        // Extract file
+                        $zip->extractTo(FCPATH . 'application/modules/');
+                        $zip->close();
+
+                        if (!unlink($config['upload_path'] . '/' . $filename)) {
+                            die(json_encode(array('status' => 'error', 'message' => 'Failed to delete uploaded zip file, but extraction worked')));
                         }
 
                         die(json_encode(array('status' => 'success', 'message' => 'Module successfully uploaded')));
@@ -148,5 +180,28 @@ class Modules extends MX_Controller
                 }
             }
         }
+    }
+
+    /**
+     * Remove dir
+     * Destroys a directory
+     *
+     * @param string $dir
+     * @return void
+     */
+    private function removeDir(string $dir): void
+    {
+        if(!is_dir($dir))
+            return;
+
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach($files as $file)
+            ($file->isDir()) ? rmdir($file->getRealPath()) : unlink($file->getRealPath());
+
+        rmdir($dir);
     }
 }

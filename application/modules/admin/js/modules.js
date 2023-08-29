@@ -67,8 +67,8 @@ var Modules = {
 	}
 }
 
-var FGEN = FGEN || {};
-    FGEN = {
+var UploaderModule = UploaderModule || {};
+	UploaderModule = {
         init: function ()
 		{
             var self = this,
@@ -99,14 +99,14 @@ var FGEN = FGEN || {};
             },
             initFileUploader: function (base, target)
 			{
-                var previewNode = document.querySelector('#FGEN-dropzone-template');
+                var previewNode = document.querySelector('#UploaderModule-dropzone-template');
 
                 previewNode.id = '';
 
                 var previewTemplate = previewNode.parentNode.innerHTML;
                 previewNode.parentNode.removeChild(previewNode);
 
-                var FGENDropzone = new Dropzone(target, {
+                var UploaderModuleDropzone = new Dropzone(target, {
                     url: 'modules/upload',
                     maxFiles: 99,
                     maxFilesize: 2,
@@ -141,13 +141,13 @@ var FGEN = FGEN || {};
                     dictFileSizeUnits: { tb: 'TB', gb: 'GB', mb: 'MB', kb: 'KB', b: 'b' }
                 });
 
-                FGENDropzone.on('addedfile', function (file)
+                UploaderModuleDropzone.on('addedfile', function (file)
 				{
                     $('.preview-container').css('visibility', 'visible');
                     file.previewElement.classList.add('type-' + base.fileType(file.name));
                 });
 
-                FGENDropzone.on('totaluploadprogress', function (progress)
+                UploaderModuleDropzone.on('totaluploadprogress', function (progress)
 				{
                     var progr = document.querySelector('.progress .determinate');
 
@@ -156,27 +156,27 @@ var FGEN = FGEN || {};
                     progr.style.width = progress + '%';
                 });
 
-                FGENDropzone.on('dragenter', function ()
+                UploaderModuleDropzone.on('dragenter', function ()
 				{
                     $(target).addClass('hover');
                 });
 
-                FGENDropzone.on('dragleave', function ()
+                UploaderModuleDropzone.on('dragleave', function ()
 				{
                     $(target).removeClass('hover');
                 });
 
-                FGENDropzone.on('drop', function ()
+                UploaderModuleDropzone.on('drop', function ()
 				{
                     $(target).removeClass('hover');
                 });
 
-                FGENDropzone.on('addedfile', function ()
+                UploaderModuleDropzone.on('addedfile', function ()
 				{
                     $('.no-files-uploaded').slideUp('easeInExpo');
                 });
 
-                FGENDropzone.on('success', function (file, response)
+                UploaderModuleDropzone.on('success', function (file, response)
 				{
                     var data = JSON.parse(response);
 
@@ -187,20 +187,20 @@ var FGEN = FGEN || {};
 					else
 					{
 						Swal.fire('', data["message"], 'error')
-						FGENDropzone.removeFile(file);
+						UploaderModuleDropzone.removeFile(file);
 					}
 					console.log(data["message"]);
 
-					//FGENDropzone.removeFile(file);
+					//UploaderModuleDropzone.removeFile(file);
                 });
 
-				FGENDropzone.on("error", function (file, message)
+				UploaderModuleDropzone.on("error", function (file, message)
 				{
 					Swal.fire('', message, 'error')
-                    FGENDropzone.removeFile(file);
+                    UploaderModuleDropzone.removeFile(file);
                 });
 
-				FGENDropzone.on("sending", function (file, xhr, formData)
+				UploaderModuleDropzone.on("sending", function (file, xhr, formData)
 				{
 					formData.append("csrf_token_name", Config.CSRF);
 					formData.append("module", file);

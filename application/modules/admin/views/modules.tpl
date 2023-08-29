@@ -10,15 +10,16 @@
 					</div>
 				</form>
 
-				<span>Only ZIP file type is supported.</span>
+				<p><span>Only ZIP file type is supported.</span></p>
+				<p><span>The module in zip must have a folder, and if it has SQL, it must have a folder called sql inside the module folder and be placed inside it.</span></p>
 
 				<h4 class="section-sub-title"><span>Uploaded</span> module</h4>
 				<span class="no-files-uploaded">No modules uploaded yet.</span>
 
 				<div class="preview-container dz-preview uploaded-files">
 					<div id="previews">
-						<div id="FGEN-dropzone-template">
-							<div class="FGEN-dropzone-info">
+						<div id="UploaderModule-dropzone-template">
+							<div class="UploaderModule-dropzone-info">
 								<div class="details">
 									<div>
 										<span data-dz-name></span> <span data-dz-size></span>
@@ -57,7 +58,7 @@
 <script>
     Dropzone.autoDiscover = false;
 	$(window).on('load', function() {
-		FGEN.init();
+		UploaderModule.init();
 	});
 </script>
 

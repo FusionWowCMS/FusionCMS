@@ -142,27 +142,27 @@ span.tittle {
     position: relative;
     visibility: hidden;
 }
-.preview-container #previews .FGEN-dropzone-info {
+.preview-container #previews .UploaderModule-dropzone-info {
     flex-wrap: nowrap;
     padding-top: 15px;
     width: 100%;
 }
-.preview-container #previews .FGEN-dropzone-info > .thumb-container {
+.preview-container #previews .UploaderModule-dropzone-info > .thumb-container {
     flex: 0 0 50px;
 
     border-radius: 10px;
     overflow: hidden;
     margin-right: 17px;
 }
-.preview-container #previews .FGEN-dropzone-info img {
+.preview-container #previews .UploaderModule-dropzone-info img {
     max-width: 100%;
     height: auto;
 }
-.preview-container #previews .FGEN-dropzone-info > .details {
+.preview-container #previews .UploaderModule-dropzone-info > .details {
     position: relative;
     max-width: 100%;
 }
-.preview-container #previews .FGEN-dropzone-info .actions {
+.preview-container #previews .UploaderModule-dropzone-info .actions {
     position: absolute;
     right: 0;
     line-height: 1;
