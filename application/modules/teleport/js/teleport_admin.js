@@ -6,11 +6,6 @@ var Teleport = {
 	identifier: "teleport",
 
 	/**
-	 * The ID of the fusionEditor (like "#news_content"), if any, otherwise put false
-	 */
-	fusionEditor: false,
-
-	/**
 	 * Links for the ajax requests
 	 */
 	Links: {

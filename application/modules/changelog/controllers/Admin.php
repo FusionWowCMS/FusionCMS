@@ -6,7 +6,6 @@ class Admin extends MX_Controller
     {
         // Make sure to load the administrator library!
         $this->load->library('administrator');
-        $this->load->library('fusioneditor');
         $this->load->model('changelog_model');
 
         parent::__construct();
@@ -33,7 +32,6 @@ class Admin extends MX_Controller
         $data = array(
             'url' => $this->template->page_url,
             'changes' => $changes,
-            'fusionEditor' => $this->fusioneditor->create("text"),
             'categories' => $this->changelog_model->getCategories()
         );
 
@@ -101,12 +99,9 @@ class Admin extends MX_Controller
         // Change the title
         $this->administrator->setTitle("Change #" . $id);
 
-        $fusionEditor = $this->fusioneditor->create("text", false, 250, $change['changelog']);
-
         // Prepare my data
         $data = array(
             'url' => $this->template->page_url,
-            'fusionEditor' => $fusionEditor,
             'changelog' => $change
         );
 

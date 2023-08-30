@@ -6,11 +6,6 @@ var Ranks = {
 	identifier: "ranks",
 
 	/**
-	 * The ID of the fusionEditor (like "#news_content"), if any, otherwise put false
-	 */
-	fusionEditor: false,
-
-	/**
 	 * Links for the ajax requests
 	 */
 	Links: {
@@ -100,11 +95,6 @@ var Ranks = {
 			}
 		});
 
-		if(this.fusionEditor != false)
-		{
-			values[this.fusionEditor.replace("#", "")] = $(this.fusionEditor).html();
-		}
-
 		$.post(Config.URL + this.Links.create, values, function(data)
 		{
 			console.log(data);
@@ -134,11 +124,6 @@ var Ranks = {
 				}
 			}
 		});
-
-		if(this.fusionEditor != false)
-		{
-			values[this.fusionEditor.replace("#", "")] = $(this.fusionEditor).html();
-		}
 
 		$.post(Config.URL + this.Links.save + id, values, function(data)
 		{

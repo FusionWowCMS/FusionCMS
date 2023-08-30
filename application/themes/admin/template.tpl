@@ -132,9 +132,7 @@
 	<script type="text/javascript">
 		var scripts = [
 			"{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/js/jquery.placeholder.min.js",
-			"{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/js/jquery.transit.min.js",
-
-			"{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/js/fusioneditor.js"
+			"{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/js/jquery.transit.min.js"
 			{if $extra_js},"{$url}application/{$extra_js}"{/if}
 		];
 			require(scripts, function()

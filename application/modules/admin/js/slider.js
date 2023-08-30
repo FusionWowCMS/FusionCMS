@@ -6,11 +6,6 @@ var Slider = {
 	identifier: "slider",
 
 	/**
-	 * The ID of the fusionEditor (like "#news_content"), if any, otherwise put false
-	 */
-	fusionEditor: false,
-
-	/**
 	 * Links for the ajax requests
 	 */
 	Links: {
@@ -72,11 +67,6 @@ var Slider = {
 			}
 		});
 
-		if(this.fusionEditor != false)
-		{
-			values[this.fusionEditor.replace("#", "")] = $(this.fusionEditor).html();
-		}
-
 		$.post(Config.URL + this.Links.create, values, function(data)
 		{
 			if(data == "yes")
@@ -110,11 +100,6 @@ var Slider = {
 				values[$(this).attr("name")] = $(this).val();
 			}
 		});
-
-		if(this.fusionEditor != false)
-		{
-			values[this.fusionEditor.replace("#", "")] = $(this.fusionEditor).html();
-		}
 
 		$.post(Config.URL + this.Links.save + id, values, function(data)
 		{
