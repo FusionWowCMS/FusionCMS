@@ -27,7 +27,7 @@
 
 {if $item.id}
 	<li {if !$item.isChild || $item.classes}class="{if !$item.isChild}nav-item {if $item.isDropdown}dropdown{/if}{/if} {if $item.classes}{(is_array($item.classes)) ? implode(' ', $item.classes) : $item.classes}{/if}"{/if}>
-		<a {if $item.isDropdown}href="#"{else}{if $item.link}{$item.link}{/if}{/if} class="{if $item.isChild}dropdown-item{else}nav-link{/if} {if $item.isDropdown}dropdown-toggle [active-{$item.id}]{/if} {if $item.active}active{/if} anti-blur" title="{$item.name}" {if $item.isDropdown}role="button" data-bs-toggle="dropdown" aria-expanded="false"{/if} {if $item.active}aria-current="page"{/if}>
+		<a {if $item.isDropdown}href="#"{else}{if $item.link}{$item.link}{/if}{/if} class="{if $item.isChild}dropdown-item{else}nav-link{/if} {if $item.isDropdown}dropdown-toggle [active-{$item.id}]{/if} {if $item.active}active{/if}" title="{$item.name}" {if $item.isDropdown}role="button" data-bs-toggle="dropdown" aria-expanded="false"{/if} {if $item.active}aria-current="page"{/if}>
 			{* Item: icon *}
 			{if $item.icon}<i class="{$item.icon}"></i>{/if}
 

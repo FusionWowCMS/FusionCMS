@@ -31,6 +31,17 @@
 	margin: 0;
 }
 
+/* Box: Anti-flicker
+/*---------------------------------------------------------------*/
+.box,
+.box::before,
+.box::after,
+.box [box-overlay],
+.box [box-overlay]::before,
+.box [box-overlay]::after {
+	-webkit-transform: translate3d(0, 0, 0);
+}
+
 /* Box: Art
 /*---------------------------------------------------------------*/
 .box::before {
