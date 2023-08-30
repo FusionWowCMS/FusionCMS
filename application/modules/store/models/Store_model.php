@@ -9,7 +9,7 @@ class Store_model extends CI_Model
 									INNER JOIN store_groups ON store_items.group = store_groups.id
 									WHERE store_items.realm = ?
 									GROUP BY store_items.id
-									ORDER BY store_groups.orderNumber ASC, store_items.id ASC;", array($realm));
+									ORDER BY store_groups.orderNumber ASC, store_items.group ASC, store_items.id ASC;", array($realm));
 
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
