@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		
+
 		{$link_active = "store"}
 		{include file="../../ucp/views/ucp_navigation.tpl"}
 		
@@ -60,22 +60,18 @@
 							<input class="form-control" type="text" id="filter_name" placeholder="{lang("filter", "store")}" onKeyUp="Store.Filter.setName(this.value)">
 						</div>
 						<div class="col-sm-3">
-							<a href="javascript:void(0)" onClick="Store.Filter.toggleVote(this)" class="nice_button">
+							<a href="javascript:void(0)" onClick="Store.Filter.toggleVote(this)" class="nice_button nice_active">
 								<img src="{$url}application/images/icons/lightning.png" align="absmiddle"> {lang("vp", "store")}
 							</a>
 
-							<a href="javascript:void(0)" onClick="Store.Filter.toggleDonate(this)" class="nice_button">
+							<a href="javascript:void(0)" onClick="Store.Filter.toggleDonate(this)" class="nice_button nice_active">
 								<img src="{$url}application/images/icons/coins.png" align="absmiddle"> {lang("dp", "store")}
 							</a>
 						</div>
 						</div>
-
 					</form>
 
-
 					<div id="store_content">
-						
-
 						<div id="store_realms">
 							{foreach from=$data item=realm key=realmId}
 							<div class="accordion mb-3" id="realm_parent_{$realmId}">
@@ -92,7 +88,7 @@
 												<div class="accordion mb-3" id="group_parent_{$group.id}_{$realmId}">
 													<div class="accordion-item">
 														<h2 class="accordion-header" id="group_{$group.id}">
-														<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#group_{$group.id}_realm_{$realmId}" aria-expanded="true" aria-controls="group_{$group.id}_realm_{$realmId}">
+														<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#group_{$group.id}_realm_{$realmId}" aria-expanded="true" aria-controls="group_{$group.id}_realm_{$realmId}">
 															{$group.title}
 														</button>
 														</h2>
