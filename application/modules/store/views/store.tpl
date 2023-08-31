@@ -99,7 +99,7 @@
 																<div class="col-md-1 mt-1">
 																	<img class="item_icon img-responsive rounded" src="https://icons.wowdb.com/retail/medium/{$item.icon}.jpg" align="absmiddle" {if $item.tooltip}data-realm="{$item.realm}" rel="item={$item.itemid}"{/if}>{if $item.itemcount > 1 && !preg_match("/,/", $item.itemcount)}<span class="wh-icon-text" data-type="number">{$item.itemcount}</span>{/if}
 																</div>
-																<div class="col-md-8 mt-1">
+																<div class="col-md-5 mt-1">
 																	<a {if $item.tooltip}href="{$url}item/{$item.realm}/{$item.itemid}" data-realm="{$item.realm}" rel="item={$item.itemid}"{/if} class="item_name q{$item.quality} align-self-center">
 																		{character_limiter($item.name, 20)}
 																	</a>
@@ -107,7 +107,7 @@
 																	{character_limiter($item.description, 25)}
 																</p>
 																</div>
-																<div class="store_buttons align-items-center align-content-center col-md-3 border-left mt-1">
+																<div class="store_buttons align-items-center align-content-center col-md-6 border-left mt-1">
 																		{if $item.vp_price}
 																		<a href="javascript:void(0)" onClick="Store.Cart.add({$item.id}, '{$item.itemid}', '{addslashes($item.name)}', {$item.vp_price}, 'vp', '{addslashes($realm.name)}', {$realmId}, {$item.quality}, {$item.tooltip})" class="nice_button vp_button">
 																			<img src="{$url}application/images/icons/lightning.png" align="absmiddle"> <span class="vp_price_value">{$item.vp_price}</span> {lang("vp", "store")}

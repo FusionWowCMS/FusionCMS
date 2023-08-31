@@ -50,11 +50,11 @@
 					<td>{if array_key_exists("title", $item) && $item.title}{$item.title}{/if}</td>
 					<td>
 						{if $item.vp_price}
-							<img src="{$url}application/images/icons/lightning.png" style="opacity:1;margin-top:3px;position:absolute;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$item.vp_price} VP
+							<img src="{$url}application/images/icons/lightning.png" style="opacity:1;margin-top:3px;position:absolute;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$item.vp_price} {lang("vp", "store")}
 						{/if}
 						{if $item.dp_price}
 							<img src="{$url}application/images/icons/coins.png" style="opacity:1;margin-top:3px;position:absolute;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							{$item.dp_price} DP
+							{$item.dp_price} {lang("dp", "store")}
 						{/if}
 					</td>
 					<td style="text-align:center;">
