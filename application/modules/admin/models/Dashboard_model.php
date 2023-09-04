@@ -123,13 +123,13 @@ class Dashboard_model extends CI_Model
         }
     }
 
-    public function getGraph($daily = false)
+    public function getGraph($daily = false, $ago = 0)
     {
         if ($daily)
         {
-            $query = $this->db->query("SELECT date, COUNT(DISTINCT ip) ipCount FROM visitor_log WHERE YEAR(date) = YEAR(CURRENT_DATE()) AND MONTH(date) = MONTH(CURRENT_DATE()) GROUP BY date");
+            $query = $this->db->query("SELECT date, COUNT(DISTINCT ip) ipCount FROM visitor_log WHERE YEAR(date) = YEAR(CURRENT_DATE()) AND MONTH(date) = MONTH(CURRENT_DATE()) - $ago GROUP BY date");
         } else {
-            $query = $this->db->query("SELECT date, COUNT(DISTINCT ip) ipCount FROM visitor_log GROUP BY date");
+            $query = $this->db->query("SELECT date, COUNT(DISTINCT ip) ipCount FROM visitor_log WHERE YEAR(date) = YEAR(CURRENT_DATE()) - $ago GROUP BY date");
             
         }
 

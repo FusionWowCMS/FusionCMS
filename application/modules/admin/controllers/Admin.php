@@ -52,8 +52,8 @@ class Admin extends MX_Controller
             'location' => $this->internal_user_model->getLocation(),
             'register_date' => $this->user->getRegisterDate(),
             'signups' => $this->getSignups(),
-            'graphMonthly' => $this->graphMonthly(),
-            'graphDaily' => $this->graphDaily(),
+            'graphMonthly' => array($this->graphMonthly(), $this->graphMonthly(1)),
+            'graphDaily' => array($this->graphDaily(), $this->graphDaily(1), $this->graphDaily(2)),
             'realm_status' => $this->config->item('disable_realm_status'),
             'realms' => $realms,
             'uptimes' => $uptimes,
@@ -123,20 +123,23 @@ class Admin extends MX_Controller
         return $data;
     }
 
-    private function graphMonthly()
+    private function graphMonthly($ago = 0)
     {
         if ($this->config->item('disable_visitor_graph'))
         {
             return false;
         }
 
-        $cache = $this->cache->get("dashboard_monthly");
+        if ($ago == 0)
+            $cache = $this->cache->get("dashboard_monthly");
+        else
+            $cache = $this->cache->get('dashboard_monthly_'.$ago.'_year_ago');
 
         if ($cache !== false)
         {
             $data = $cache;
         } else {
-            $rows = $this->dashboard_model->getGraph();
+            $rows = $this->dashboard_model->getGraph(false, $ago);
             $fullGraph = array();
 
             foreach ($rows as $row)
@@ -177,63 +180,74 @@ class Admin extends MX_Controller
 
             $data = $fullGraph;
 
-            $this->cache->save("dashboard_monthly", $data, 60 * 60 * 24);
+            if ($ago == 0)
+                $this->cache->save('dashboard_monthly', $data, 60 * 60 * 24);
+            else
+                $this->cache->save('dashboard_monthly_'.$ago.'_year_ago', $data, 60 * 60 * 24);
         }
 
         return $data;
     }
     
-    private function graphDaily()
+    private function graphDaily($ago = 0)
     {
         if ($this->config->item('disable_visitor_graph'))
         {
             return false;
         }
-    
-        $cache = $this->cache->get("dashboard_daily");
+
+        if ($ago == 0)
+            $cache = $this->cache->get("dashboard_daily");
+        else
+            $cache = $this->cache->get('dashboard_daily_'.$ago.'_month_ago');
     
         if ($cache !== false)
         {
             $data = $cache;
         } else {
-            $rows = $this->dashboard_model->getGraph(true);
+            $rows = $this->dashboard_model->getGraph(true, $ago);
     
             $fullMonth = array();
-    
-            foreach ($rows as $row)
-            {
-                $expld = explode("-", $row["date"]);
-    
-                $year = $expld[0];
-                $month = $expld[1];
-                $day = $expld[2];
-    
-                $date = new DateTime();
+
+            if ($rows) {
+                foreach ($rows as $row)
+                {
+                    $expld = explode("-", $row["date"]);
+
+                    $year = $expld[0];
+                    $month = $expld[1];
+                    $day = $expld[2];
+
+                    $date = new DateTime();
+                    $fullDays = array();
+                    for ($i = 1; $i <= 31; $i++)
+                    {
+                        $fullDays[($i < 10 ? "0" : "") . $i] = 0;
+                    }
+
+                    if (!isset($fullMonth[$year]["day"]))
+                    {
+                        $fullMonth[$year]["day"] = $fullDays;
+                    }
+
+                    if (isset($fullMonth[$year]["day"][$day]))
+                    {
+                        $fullMonth[$year]["day"][$day] += $row["ipCount"];
+                    }
+                }
+            } else {
                 $fullDays = array();
                 for ($i = 1; $i <= 31; $i++)
                 {
-                    if ($date->format("Y") == $year && $date->format("m") == $month && $i > $date->format("d"))
-                    {
-                        continue;
-                    }
-    
                     $fullDays[($i < 10 ? "0" : "") . $i] = 0;
                 }
-    
-                if (!isset($fullMonth[$year]["day"]))
-                {
-                    $fullMonth[$year]["day"] = $fullDays;
-                }
-    
-                if (isset($fullMonth[$year]["day"][$day]))
-                {
-                    $fullMonth[$year]["day"][$day] += $row["ipCount"];
-                }
+                $year = date('Y');
+                $fullMonth[$year]["day"] = $fullDays;
             }
-    
+
             $currentYear = date('Y');
             $currentMonth = date('m');
-    
+
             $data = $fullMonth[$currentYear]["day"];
 
             if (!isset($data))
@@ -241,7 +255,10 @@ class Admin extends MX_Controller
                 $data = array();
             }
 
-            $this->cache->save("dashboard_daily", $data, 60 * 60 * 24);
+            if ($ago == 0)
+                $this->cache->save('dashboard_daily', $data, 60 * 60 * 24);
+            else
+                $this->cache->save('dashboard_daily_'.$ago.'_month_ago', $data, 60 * 60 * 24);
         }
 
         return $data;

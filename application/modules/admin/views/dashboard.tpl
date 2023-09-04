@@ -245,151 +245,132 @@
                                                 Visitors:
                                                 <small class="float-end">
                                                     <select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="graphSelector">
-                                                        <option value="Monthly" selected>Monthly</option>
-                                                        <option value="Daily">Daily</option>
+                                                        <option value="Monthly">Monthly</option>
+                                                        <option value="Daily" selected>Daily</option>
                                                     </select>
                                                 </small>
                                             </h2>
 		                                
                                             <div id="visitorsSelectorItems" class="chart-data-selector-items mt-3">
-                                                <div class="chart chart-sm chart-active" data-graph-rel="Monthly" id="graphData1" style="height: 200px;"></div>
-                                                <script>
-                                                    var monthNames = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                                                    var monthlyData = [{
-                                                        data: [
-                                                            {foreach from=$graphMonthly item=data key=key}
-                                                                {if isset($data["month"])}
-                                                                    {foreach from=$data["month"] item=month key=keyMonth}
-                                                                        ["{$key}-" + monthNames[{$keyMonth}], {$month}],
-                                                                    {/foreach}
-                                                                {else}
-                                                                    ["{$key}-" + monthNames[{$keyMonth}], {$month}],
-                                                                {/if}
-                                                            {/foreach}
-                                                        ],
-                                                        color: "#0088cc"
-                                                    }];
-                                                </script>
-		                                
-                                                <div class="chart chart-sm chart-hidden" data-graph-rel="Daily" id="graphData2" style="height: 200px;"></div>
-		                                
-                                                <script>
-                                                    var dailyData = [{
-                                                        data: [
-                                                            {foreach from=$graphDaily item=day key=key}
-                                                                ["{$key}", {$day}],
-                                                            {/foreach}
-                                                        ],
-                                                        color: "#0088cc"
-                                                    }];
-                                                </script>
+                                                <div class="chart chart-sm chart-hidden" data-graph-rel="Monthly" id="graphMonthly" style="height: 200px;">
+                                                    <apexchart type="area" height="350" :options="chartOptions" :series="series"></apexchart>
+                                                </div>
+                                                <div class="chart chart-sm chart-active" data-graph-rel="Daily" id="graphDaily" style="height: 200px;"></div>
                                             </div>
                                         </div>
 <script>
     (function($) {
-
     'use strict';
-
     $('#graphSelector').themePluginMultiSelect().on('change', function() {
         var rel = $(this).val();
         $('#visitorsSelectorItems .chart').removeClass('chart-active').addClass('chart-hidden');
         $('#visitorsSelectorItems .chart[data-graph-rel="' + rel + '"]').addClass('chart-active').removeClass('chart-hidden');
     });
-
     $('#graphSelector').trigger('change');
-
     $('#graphSelectorWrapper').addClass('ready');
-
-    if( $('#graphData1').get(0) )
-    {
-        var graphData1 = $.plot('#graphData1', monthlyData, {
-            series: {
-                lines: {
-                    show: true,
-                    lineWidth: 2
-                },
-                points: {
-                    show: true
-                },
-                shadowSize: 0
-            },
-            grid: {
-                hoverable: true,
-                clickable: true,
-                borderColor: 'rgba(0,0,0,0.1)',
-                borderWidth: 1,
-                labelMargin: 15,
-                backgroundColor: 'transparent'
-            },
-            yaxis: {
-                min: 0,
-                color: 'rgba(0,0,0,0.1)'
-            },
-            xaxis: {
-                mode: 'categories',
-                color: 'rgba(0,0,0,0)'
-            },
-            legend: {
-                show: false
-            },
-            tooltip: true,
-            tooltipOpts: {
-                content: '%x: %y',
-                shifts: {
-                    x: -30,
-                    y: 25
-                },
-                defaultTheme: false
-            }
-        });
-
-    }
-
-    if( $('#graphData2').get(0) )
-    {
-        var graphData2 = $.plot('#graphData2', dailyData, {
-            series: {
-                lines: {
-                    show: true,
-                    lineWidth: 2
-                },
-                points: {
-                    show: true
-                },
-                shadowSize: 0
-            },
-            grid: {
-                hoverable: true,
-                clickable: true,
-                borderColor: 'rgba(0,0,0,0.1)',
-                borderWidth: 1,
-                labelMargin: 15,
-                backgroundColor: 'transparent'
-            },
-            yaxis: {
-                min: 0,
-                color: 'rgba(0,0,0,0.1)',
-                tickDecimals: 0
-            },
-            xaxis: {
-                mode: 'categories',
-                color: 'rgba(0,0,0,0)'
-            },
-            legend: {
-                show: false
-            },
-            tooltip: true,
-            tooltipOpts: {
-                content: '%x: %y',
-                shifts: {
-                    x: -30,
-                    y: 25
-                },
-                defaultTheme: false
-            }
-        });
-    }
 }).apply(this, [jQuery]);
+
+    const thisYearMonthlyData = [
+        {foreach from=$graphMonthly[0] item=data key=key}
+        {if isset($data["month"])}
+        {foreach from=$data["month"] item=month key=keyMonth}
+        {$month},
+        {/foreach}
+        {else}
+        {$month},
+        {/if}
+        {/foreach}];
+    const lastYearMonthData = [
+        {foreach from=$graphMonthly[1] item=data key=key}
+        {if isset($data["month"])}
+        {foreach from=$data["month"] item=month key=keyMonth}
+        {$month},
+        {/foreach}
+        {else}
+        {$month},
+        {/if}
+        {/foreach}];
+    const options = {
+        series: [{
+            name: 'Views of this year',
+            data: thisYearMonthlyData
+        },{
+            name: 'Views of last year',
+            data: lastYearMonthData
+        }],
+        chart: {
+            height: 350,
+            type: 'area'
+        },
+        yaxis: {
+            min: 0,
+            floating: false,
+            decimalsInFloat: false,
+            tickAmount: 6,
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        },
+        legend: {
+            position: 'top'
+        }
+    };
+
+    const thisMonthDailyData = [
+        {foreach from=$graphDaily[0]  item=day key=key}
+        [{$key}, {$day}],
+        {/foreach}];
+    const lastMonthDailyData = [
+        {foreach from=$graphDaily[1]  item=day key=key}
+        [{$key}, {$day}],
+        {/foreach}];
+    const twoMonthAgoDailyData = [
+        {foreach from=$graphDaily[2]  item=day key=key}
+        [{$key}, {$day}],
+        {/foreach}];
+    const chart = new ApexCharts(document.querySelector("#graphMonthly"), options);
+    chart.render();
+
+    const options2 = {
+        series: [{
+            name: 'Views of this month',
+            data: thisMonthDailyData
+        },{
+            name: 'Views of last month',
+            data: lastMonthDailyData
+        },{
+            name: 'Views of two month ago',
+            data: twoMonthAgoDailyData
+        }],
+        colors: ['#8b5cf6', '#0ea5e9', '#14b8a6'],
+        chart: {
+            height: 350,
+            type: 'area'
+        },
+        yaxis: {
+            min: 0,
+            type: 'numeric'
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        legend: {
+            position: 'top'
+        }
+    };
+
+    const chart2 = new ApexCharts(document.querySelector("#graphDaily"), options2);
+    chart2.render();
+
 </script>
                                     </div>
 									{/if}
