@@ -248,6 +248,8 @@ class Items
                         $row[0]['icon'] = $item_wowhead['icon'];
                         $row[0]['displayId'] = $item_wowhead['displayid'];
                         $row[0]['htmlTooltip'] = $item_wowhead['htmlTooltip'];
+                    } else {
+                        $row[0]['icon'] = 'inv_misc_questionmark';
                     }
 
                     // Cache it forever
