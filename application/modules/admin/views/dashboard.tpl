@@ -65,7 +65,7 @@
                                                         <div class="absolute -end-0.5 top-0.5"><span class="relative flex h-2 w-2"><span class="bg-primary-400 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span><span class="bg-primary-500 relative inline-flex h-2 w-2 rounded-full"></span></span></div>
                                                     </div>
                                                 </div>
-                                                <p class="font-alt text-xs font-normal leading-normal leading-normal"><span class="text-muted-400">{lang('update_available', 'dashboard')}<br>{lang('update_download', 'dashboard')} <a href="https://github.com/FusionWowCMS/FusionCMS/releases" class="alert-link" target="_blank">{lang('here', 'dashboard')}</a></span></p>
+                                                <p class="font-alt text-xs font-normal leading-normal leading-normal"><span class="text-muted-400">{lang('update_available', 'dashboard')}<br>{lang('update_download', 'dashboard')} <a href="{$url}admin/updater" class="alert-link">{lang('here', 'dashboard')}</a></span></p>
                                             </div>
                                         </div>
 								    </div>
