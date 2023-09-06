@@ -252,9 +252,7 @@
                                             </h2>
 		                                
                                             <div id="visitorsSelectorItems" class="chart-data-selector-items mt-3">
-                                                <div class="chart chart-sm chart-hidden" data-graph-rel="Monthly" id="graphMonthly" style="height: 200px;">
-                                                    <apexchart type="area" height="350" :options="chartOptions" :series="series"></apexchart>
-                                                </div>
+                                                <div class="chart chart-sm chart-hidden" data-graph-rel="Monthly" id="graphMonthly" style="height: 200px;"></div>
                                                 <div class="chart chart-sm chart-active" data-graph-rel="Daily" id="graphDaily" style="height: 200px;"></div>
                                             </div>
                                         </div>
