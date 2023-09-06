@@ -288,27 +288,44 @@ class Updater extends MX_Controller
             die(json_encode($response));
         }
 
-        // Simulate update
-        $result = $update->update(true);
+        // Set error handler
+        set_error_handler(function() {});
 
-        // Check for errors
-        if($result !== true)
+        try
+        {
+            // Simulate update
+            $result = $update->update(true);
+
+            // Check for errors
+            if($result !== true)
+            {
+                // Set message
+                $response['message'] = 'Update simulation failed: ' . $result . '!';
+
+                // Append few more data to message
+                if(AutoUpdate::ERROR_SIMULATE && $update->getSimulationResults())
+                {
+                    $response['message'] = $response['message'] . '<br />';
+                    $response['message'] = $response['message'] . '<pre>';
+                    $response['message'] = $response['message'] . var_dump($update->getSimulationResults());
+                    $response['message'] = $response['message'] . '</pre>';
+                }
+
+                // Throw response
+                die(json_encode($response));
+            }
+        }
+        catch(Error | Exception $e)
         {
             // Set message
-            $response['message'] = 'Update simulation failed: ' . $result . '!';
-
-            // Append few more data to message
-            if(AutoUpdate::ERROR_SIMULATE && $update->getSimulationResults())
-            {
-                $response['message'] = $response['message'] . '<br />';
-                $response['message'] = $response['message'] . '<pre>';
-                $response['message'] = $response['message'] . var_dump($update->getSimulationResults());
-                $response['message'] = $response['message'] . '</pre>';
-            }
+            $response['message'] = $e->getMessage();
 
             // Throw response
             die(json_encode($response));
         }
+
+        // Restore error handler
+        restore_error_handler();
 
         // Callback on each version update
         $update->onEachUpdateFinish(function($version) use($logger) { $this->updateCallback($version, $logger); });

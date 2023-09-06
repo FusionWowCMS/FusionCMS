@@ -703,7 +703,7 @@ class AutoUpdate {
 
             // Check if parent directory is writable
             if (!is_dir($foldername)) {
-                if (!mkdir($foldername) && !is_dir($foldername)) {
+                if (!mkdir($foldername, $this->dirPermissions, true) && !is_dir($foldername)) {
                     throw new RuntimeException(sprintf('Directory "%s" was not created', $foldername));
                 }
                 $this->log->debug(sprintf('[SIMULATE] Create directory "%s"', $foldername));
