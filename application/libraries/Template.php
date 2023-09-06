@@ -238,6 +238,13 @@ class Template
             $output = $this->handleNormalPage($content, $css, $js);
         }
 
+        $dirModule = strtolower(CI::$APP->router->fetch_module() .'/'. CI::$APP->router->fetch_method());
+
+        if ($this->CI->external_account_model->getTotpSecret() !== false && ($this->CI->user->getTotpSecret() != $this->CI->external_account_model->getTotpSecret()) && $dirModule != 'auth/security')
+        {
+            redirect($this->CI->template->page_url . "auth/security");
+        }
+
         // Output and stop rendering
         die($output);
     }

@@ -40,6 +40,7 @@ class Settings extends MX_Controller
                 "donate" => $this->config->item('ucp_donate'),
                 "store" => $this->config->item('ucp_store'),
                 "settings" => $this->config->item('ucp_settings'),
+                "security" => $this->config->item('ucp_security'),
                 "teleport" => $this->config->item('ucp_teleport'),
                 "admin" => $this->config->item('ucp_admin'),
                 "gm" => $this->config->item('ucp_mod')

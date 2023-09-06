@@ -59,6 +59,7 @@ $lang['vote'] = "Vote";
 $lang['donate'] = "Donate";
 $lang['store'] = "Store";
 $lang['account_settings'] = "Account Settings";
+$lang['account_security'] = "Account Security";
 $lang['teleport_hub'] = "Teleport Hub";
 
 $lang['gm_panel'] = "GM Panel";

@@ -30,6 +30,7 @@ class User
     private $register_date;
     private $last_ip;
     private $nickname;
+    private $totp_secret;
 
     public function __construct()
     {
@@ -309,6 +310,7 @@ class User
             $this->online = true;
             $this->register_date = $this->CI->session->userdata('register_date');
             $this->last_ip = $this->CI->session->userdata('last_ip');
+            $this->totp_secret = $this->CI->session->userdata('totp_secret');
             $this->nickname = $this->CI->session->userdata('nickname');
             $this->vp = false;
             $this->dp = false;
@@ -327,6 +329,7 @@ class User
             $this->dp = 0;
             $this->register_date = null;
             $this->last_ip = null;
+            $this->totp_secret = null;
             $this->nickname = null;
             $this->language = ($this->CI->session->userdata('language')) ? $this->CI->session->userdata('language') : $this->CI->config->item('language');
 
@@ -556,6 +559,31 @@ class User
     public function getLastIP()
     {
         return $this->last_ip;
+    }
+
+    /**
+     * Get the Totp secret
+     *
+     * @return string|null
+     */
+    public function getTotpSecret(): string | null
+    {
+        return $this->totp_secret;
+    }
+
+    /**
+     * Set the Totp secret
+     *
+     * @param string $secret
+     * @param int $userId
+     * @return void
+     */
+    public function setTotpSecret(string $secret, int $userId = 0): void
+    {
+        if ($userId)
+            $this->CI->realms->getEmulator()->setTotp($userId, $secret);
+
+        $this->CI->session->set_userdata('totp_secret', $secret);
     }
 
     /*

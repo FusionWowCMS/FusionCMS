@@ -20,6 +20,7 @@ class External_account_model extends CI_Model
     private $last_login;
     private $expansion;
     private $account_cache;
+    private $totp_secret;
 
     public function __construct()
     {
@@ -38,6 +39,7 @@ class External_account_model extends CI_Model
             $this->expansion = 0;
             $this->last_ip =  "";
             $this->last_login = "";
+            $this->totp_secret = "";
         }
     }
 
@@ -77,6 +79,7 @@ class External_account_model extends CI_Model
             $this->expansion = $result["expansion"];
             $this->last_ip = $result["last_ip"];
             $this->last_login = $result["last_login"];
+            $this->totp_secret = $result["totp_secret"] ?? '';
 
             return true;
         } else {
@@ -88,6 +91,7 @@ class External_account_model extends CI_Model
             $this->expansion = 0;
             $this->last_ip =  "";
             $this->last_login = "";
+            $this->totp_secret = "";
 
             return false;
         }
@@ -574,5 +578,10 @@ class External_account_model extends CI_Model
     public function getExpansion()
     {
         return $this->expansion;
+    }
+
+    public function getTotpSecret()
+    {
+        return $this->totp_secret;
     }
 }

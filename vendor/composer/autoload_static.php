@@ -16,6 +16,11 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         array (
             'phpseclib\\' => 10,
         ),
+        'c' => 
+        array (
+            'chillerlan\\Settings\\' => 20,
+            'chillerlan\\QRCode\\' => 18,
+        ),
         'V' => 
         array (
             'VisualAppeal\\' => 13,
@@ -49,6 +54,14 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'phpseclib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+        ),
+        'chillerlan\\Settings\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-settings-container/src',
+        ),
+        'chillerlan\\QRCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
         ),
         'VisualAppeal\\' => 
         array (

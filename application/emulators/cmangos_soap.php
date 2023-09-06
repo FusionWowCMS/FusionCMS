@@ -32,6 +32,11 @@ class Cmangos_soap implements Emulator
     protected $battlenet = false;
 
     /**
+     * Emulator support Totp
+     */
+    protected $hasTotp = false;
+
+    /**
      * Array of expansion ids and their corresponding names
      */
     protected $expansions = array(

@@ -8,6 +8,8 @@
         "ezyang/htmlpurifier": "^4.16",
         "smarty/smarty": "^4.3",
         "matthiasmullie/minify": "^1.3",
-        "visualappeal/php-auto-update": "^1.0"
+        "visualappeal/php-auto-update": "^1.0",
+        "chillerlan/php-qrcode": "^4.3",
+        "ext-zip": "*"
     }
 }

@@ -36,6 +36,11 @@ class Trinity_rbac_soap implements Emulator
     protected $battlenet = false;
 
     /**
+     * Emulator support Totp
+     */
+    protected $hasTotp = true;
+
+    /**
      * SRP6
      */
     protected $SRP6 = true;
@@ -79,7 +84,8 @@ class Trinity_rbac_soap implements Emulator
             'joindate'   => 'joindate',
             'last_ip'    => 'last_ip',
             'last_login' => 'last_login',
-            'expansion'  => 'expansion'
+            'expansion'  => 'expansion',
+            "totp_secret"  => "totp_secret"
         ),
 
         'account_access' => array(
@@ -195,8 +201,8 @@ class Trinity_rbac_soap implements Emulator
         'get_item'                  => 'SELECT entry, Flags, name, Quality, bonding, InventoryType, MaxDurability, armor, RequiredLevel, ItemLevel, class, subclass, dmg_min1, dmg_max1, dmg_type1, holy_res, fire_res, nature_res, frost_res, shadow_res, arcane_res, delay, socketColor_1, socketColor_2, socketColor_3, spellid_1, spellid_2, spellid_3, spellid_4, spellid_5, spelltrigger_1, spelltrigger_2, spelltrigger_3, spelltrigger_4, spelltrigger_5, displayid, stat_type1, stat_value1, stat_type2, stat_value2, stat_type3, stat_value3, stat_type4, stat_value4, stat_type5, stat_value5, stat_type6, stat_value6, stat_type7, stat_value7, stat_type8, stat_value8, stat_type9, stat_value9, stat_type10, stat_value10, stackable FROM item_template WHERE entry=?',
         'get_rank'                  => 'SELECT AccountId id, SecurityLevel gmlevel, RealmID RealmID FROM account_access WHERE AccountId=?',
         'get_banned'                => 'SELECT id id, bandate bandate, bannedby bannedby, banreason banreason, active active FROM account_banned WHERE id=? AND active=1',
-        'get_account_id'            => 'SELECT id id, username username, verifier password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion FROM account WHERE id = ?',
-        'get_account'               => 'SELECT id id, username username, verifier password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion FROM account WHERE username = ?',
+        'get_account_id'            => 'SELECT id id, username username, verifier password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion, totp_secret totp_secret FROM account WHERE id = ?',
+        'get_account'               => 'SELECT id id, username username, verifier password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion, totp_secret totp_secret FROM account WHERE username = ?',
         'get_charactername_by_guid' => 'SELECT name name FROM characters WHERE guid = ?',
         'find_guilds'               => 'SELECT g.guildid guildid, g.name name, COUNT(g_m.guid) GuildMemberCount, g.leaderguid leaderguid, c.name leaderName FROM guild g, guild_member g_m, characters c WHERE g.leaderguid = c.guid AND g_m.guildid = g.guildid AND g.name LIKE ? GROUP BY g.guildid',
         'get_inventory_item'        => 'SELECT slot slot, item item, itemEntry itemEntry FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0',
@@ -344,6 +350,16 @@ class Trinity_rbac_soap implements Emulator
     public function hasStats()
     {
         return $this->hasStats;
+    }
+
+    /**
+     * Emulator support Totp
+     *
+     * @return Boolean
+     */
+    public function hasTotp()
+    {
+        return $this->hasTotp;
     }
 
     /**
@@ -570,5 +586,16 @@ $2    \$password = urldecode(preg_replace('%.(?:fcms_password=([^;]+))?%', '\\$1
         }
 
         file_put_contents(APPPATH . 'cache/data/srp6_account_model.cache', null);
+    }
+
+    /**
+     * set secret totp
+     *
+     * @param $account_id
+     * @param $secret
+     */
+    public function setTotp($account_id, $secret): void
+    {
+        \CI::$APP->external_account_model->getConnection()->query('UPDATE '.table('account').' SET '.column('account', 'totp_secret').' = ? WHERE id = ?', array($secret, $account_id));
     }
 }

@@ -61,3 +61,19 @@ $lang['nickname_taken'] = "نام مستعار قبلاً گرفته شده اس
 $lang['invalid_language'] = "زبان نامعتبر است";
 
 $lang['change_information'] = "تغییر اطلاعات";
+
+// Security
+$lang['account_security'] = "امنیت اکانت";
+$lang['save_changes'] = "ذخیره تغییرات";
+$lang['two_factor'] = "احراز ورود دو مرحله ای";
+$lang['two_factor_description'] = "احراز هویت دو مرحله ای با افزودن یک لایه امنیتی اضافی به محافظت از حساب شما در برابر دسترسی غیرمجاز کمک می کند.";
+$lang['two_factor_help'] = "برنامه Google Authenticator را از Google Play یا App Store دانلود کنید. برنامه را اجرا کنید و از دوربین گوشی خود برای اسکن بارکد زیر استفاده کنید. کد تأیید 6 رقمی ایجاد شده توسط برنامه Authenticator را وارد کنید.";
+$lang['qr_code'] = "Qr کد";
+$lang['qr_code_help_1'] = "نمی توانید Qrcode را اسکن کنید؟ همچنین می توانید کلید";
+$lang['qr_code_help_2'] = "را به صورت دستی وارد کنید.";
+$lang['select_authentication'] = "روش احراز هویت را انتخاب کنید";
+$lang['disabled'] = "غیرفعال";
+$lang['google_authenticator'] = "Google Authenticator";
+$lang['six_digit_auth_code'] = "کد 6 رقمی احراز ورود";
+$lang['six_digit_not_empty'] = "کد احراز ورود 6 رقمی نمی تواند خالی باشد";
+$lang['six_digit_not_true'] = "کد احراز صحیح نیست";

@@ -8,6 +8,7 @@ interface Emulator
     public function sendCommand($command);
     public function hasConsole();
     public function hasStats();
+    public function hasTotp();
     public function sendItems($character, $subject, $body, $items);
     public function sendMail($character, $subject, $body);
     public function getTable($name);

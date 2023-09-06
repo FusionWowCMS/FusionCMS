@@ -11,6 +11,7 @@ class Auth extends MX_Controller
         $this->load->library('form_validation');
         $this->load->library('captcha');
         $this->load->library('recaptcha');
+        $this->load->library('GoogleAuthenticator');
         $this->load->model('login_model');
 
         requirePermission("view");
@@ -264,5 +265,52 @@ class Auth extends MX_Controller
 
             $this->login_model->updateIP($ip_address, $block_data);
         }
+    }
+
+    //Two-Factor page
+    public function security()
+    {
+        if ($this->external_account_model->getTotpSecret() == null || ($this->user->getTotpSecret() == $this->external_account_model->getTotpSecret()))
+        {
+            redirect($this->template->page_url . "ucp");
+        }
+
+        clientLang("six_digit_not_empty", "security");
+
+        $data = array(
+            "module" => "default",
+            "headline" => lang("two_factor", "security"),
+            "class" => array("class" => "page_form"),
+            "content" => $this->template->loadPage("security.tpl")
+        );
+
+        $this->template->view($this->template->loadPage("page.tpl", $data), "modules/auth/css/security.css", "modules/auth/js/security.js");
+    }
+
+    //Two-Factor page
+    public function checkTotp()
+    {
+        if (!$this->input->is_ajax_request())
+            exit('No direct script access allowed');
+
+        $digit = $this->input->post('digit');
+
+        $secret = $this->external_account_model->getTotpSecret();
+
+        $googleObj = new GoogleAuthenticator();
+
+        $result = $googleObj->verifyCode($secret, $digit);
+
+        if ($result)
+            $this->user->setTotpSecret($secret); // save to session
+
+
+        $data = [
+            'status' => $result,
+            'icon' => ($result) ? 'success' : 'error',
+            'text' => ($result) ? lang("changes_saved", "security") : lang('six_digit_not_true', 'security')
+        ];
+
+        die(json_encode($data));
     }
 }

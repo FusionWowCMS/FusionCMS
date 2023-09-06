@@ -1,0 +1,14 @@
+.otp > input {
+    --otp-size: 40px;
+
+    width: var(--otp-size);
+    height: var(--otp-size);
+
+    margin: 0 3px;
+    padding: 0 !important;
+
+    text-align: center;
+    font-size: 1.3rem !important;
+
+    line-height: var(--otp-size);
+}
