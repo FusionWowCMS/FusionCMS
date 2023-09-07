@@ -32,7 +32,7 @@ class Skyfire_rbac_soap implements Emulator
     /**
      * Emulator support Totp
      */
-    protected $hasTotp = false;
+    protected $hasTotp = true;
 
     /**
      * Array of expansion ids and their corresponding names
