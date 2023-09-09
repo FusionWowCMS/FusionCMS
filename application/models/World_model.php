@@ -47,11 +47,10 @@ class World_model
     /**
      * Get a specific item row
      *
-     * @param  Int $realm
-     * @param  Int $id
-     * @return Array
+     * @param Int $id
+     * @return mixed
      */
-    public function getItem($id)
+    public function getItem(int $id)
     {
         return $this->CI->items->getItem($id, $this->realmId);
     }
