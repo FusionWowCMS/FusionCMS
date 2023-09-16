@@ -142,39 +142,42 @@ class Admin extends MX_Controller
             $rows = $this->dashboard_model->getGraph(false, $ago);
             $fullGraph = array();
 
-            foreach ($rows as $row)
+            if($rows)
             {
-                $expld = explode("-", $row["date"]);
-
-                $year = $expld[0];
-                $month = $expld[1];
-                $date = $expld[2];
-
-                $date = new DateTime();
-                $fullYear = array();
-                for ($i = 1; $i <= 12; $i++)
+                foreach ($rows as $row)
                 {
-                    if ($date->format("Y") == $year && $i > $date->format("m"))
+                    $expld = explode("-", $row["date"]);
+
+                    $year = $expld[0];
+                    $month = $expld[1];
+                    $date = $expld[2];
+
+                    $date = new DateTime();
+                    $fullYear = array();
+                    for ($i = 1; $i <= 12; $i++)
                     {
-                        continue;
+                        if ($date->format("Y") == $year && $i > $date->format("m"))
+                        {
+                            continue;
+                        }
+
+                        if ($date->format("Y") != $year && $i < $date->format("m"))
+                        {
+                            continue;
+                        }
+
+                        $fullYear[($i < 10 ? "0" : "") . $i] = 0;
                     }
 
-                    if ($date->format("Y") != $year && $i < $date->format("m"))
+                    if (!isset($fullGraph[$year]["month"]))
                     {
-                        continue;
+                        $fullGraph[$year]["month"] = $fullYear;
                     }
 
-                    $fullYear[($i < 10 ? "0" : "") . $i] = 0;
-                }
-
-                if (!isset($fullGraph[$year]["month"]))
-                {
-                    $fullGraph[$year]["month"] = $fullYear;
-                }
-
-                if (isset($fullGraph[$year]["month"][$month]))
-                {
-                    $fullGraph[$year]["month"][$month] = $fullGraph[$year]["month"][$month] + $row["ipCount"];
+                    if (isset($fullGraph[$year]["month"][$month]))
+                    {
+                        $fullGraph[$year]["month"][$month] = $fullGraph[$year]["month"][$month] + $row["ipCount"];
+                    }
                 }
             }
 

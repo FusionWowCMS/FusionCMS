@@ -21,6 +21,7 @@ $config = [
         'character'      => ['index'],
         'donate'         => ['index'],
         'errors'         => ['index'],
+        'forum'          => ['index', 'subforum', 'create', 'topic'],
         'gm'             => ['index'],
         'guild'          => ['index'],
         'item'           => ['index'],
