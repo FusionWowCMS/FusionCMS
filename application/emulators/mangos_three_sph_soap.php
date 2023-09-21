@@ -327,6 +327,16 @@ class Mangos_three_sph_soap implements Emulator
     }
 
     /**
+     * Emulator support Totp
+     *
+     * @return Boolean
+     */
+    public function hasTotp()
+    {
+        return $this->hasTotp;
+    }
+
+    /**
      * Password encryption
      */
     public function encrypt($username, $password)
