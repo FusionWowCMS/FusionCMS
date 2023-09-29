@@ -107,6 +107,12 @@
 					<td>{lang("sta", "character")}</td>
 					<td class="text-end">{if isset($stats.stamina)}{$stats.stamina}{else}{lang("unknown", "character")}{/if}</td>
 				</tr>
+				{if $stats && array_key_exists("agility", $stats)}
+				<tr>
+					<td>{lang("agi", "character")}</td>
+					<td class="text-end">{if isset($stats.agility)}{$stats.agility}{else}{lang("unknown", "character")}{/if}</td>
+				</tr>
+				{/if}
 				<tr>
 					<td>{lang("int", "character")}</td>
 					<td class="text-end">{if isset($stats.intellect)}{$stats.intellect}{else}{lang("unknown", "character")}{/if}</td>

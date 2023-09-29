@@ -20,6 +20,7 @@ $lang['attributes'] = "Atributos";
 $lang['pvp'] = "Jugador contra jugador";
 $lang['str'] = "Fuerza";
 $lang['sta'] = "Aguante";
+$lang['agi'] = "Agilidad";
 $lang['int'] = "Intelecto";
 $lang['sp'] = "Poder con hechizos";
 $lang['ap'] = "Poder de ataque";

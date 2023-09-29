@@ -20,6 +20,7 @@ $lang['attributes'] = "Attributes";
 $lang['pvp'] = "Player vs Player";
 $lang['str'] = "Strength";
 $lang['sta'] = "Stamina";
+$lang['agi'] = "Agility";
 $lang['int'] = "Intellect";
 $lang['sp'] = "Spell power";
 $lang['ap'] = "Attack power";
