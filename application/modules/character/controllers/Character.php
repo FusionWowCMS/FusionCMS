@@ -204,12 +204,22 @@ class Character extends MX_Controller
                     }
                     break;
                 case "Monk":
-                    if ($this->stats['maxpower2']) {
-                        $this->secondBar = "Energy";
-                        $this->secondBarValue = $this->stats['maxpower2'];
+                    if ($this->realms->getRealm($this->realm)->getExpansionId() > 8) {
+                        if ($this->stats['maxpower2']) {
+                            $this->secondBar = "Energy";
+                            $this->secondBarValue = $this->stats['maxpower2'];
+                        } else {
+                            $this->secondBar = "Mana";
+                            $this->secondBarValue = $this->stats['maxpower1'];
+                        }
                     } else {
-                        $this->secondBar = "Mana";
-                        $this->secondBarValue = $this->stats['maxpower1'];
+                        if ($this->stats['maxpower4']) {
+                            $this->secondBar = "Energy";
+                            $this->secondBarValue = $this->stats['maxpower4'];
+                        } else {
+                            $this->secondBar = "Mana";
+                            $this->secondBarValue = $this->stats['maxpower1'];
+                        }
                     }
                     break;
             }
