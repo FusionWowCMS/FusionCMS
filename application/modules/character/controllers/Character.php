@@ -148,49 +148,49 @@ class Character extends MX_Controller
             switch ($this->className) {
                 default:
                     if (isset($this->stats['maxpower4'])) {
-                        $this->secondBar = "mana";
+                        $this->secondBar = "Mana";
                         $this->secondBarValue = $this->stats['maxpower1'];
                     } else {
-                        $this->secondBar = "mana";
+                        $this->secondBar = "Mana";
                         $this->secondBarValue = "Unknown";
                     }
                     break;
 
                 case "Warrior":
                     if (isset($this->stats['maxpower4'])) {
-                        $this->secondBar = "rage";
+                        $this->secondBar = "Rage";
                         $this->secondBarValue = $this->stats['maxpower2'] / 10;
                     } else {
-                        $this->secondBar = "rage";
+                        $this->secondBar = "Rage";
                         $this->secondBarValue = "Unknown";
                     }
                     break;
 
                 case "Rogue":
                     if (isset($this->stats['maxpower4'])) {
-                        $this->secondBar = "energy";
+                        $this->secondBar = "Energy";
                         $this->secondBarValue = $this->stats['maxpower4'];
                     } else {
-                        $this->secondBar = "energy";
+                        $this->secondBar = "Energy";
                         $this->secondBarValue = "Unknown";
                     }
                     break;
 
                 case "Hunter":
                     if ($this->stats['maxpower3']) {
-                        $this->secondBar = "focus";
+                        $this->secondBar = "Focus";
                         $this->secondBarValue = $this->stats['maxpower3'];
                     } else {
-                        $this->secondBar = "mana";
+                        $this->secondBar = "Mana";
                         $this->secondBarValue = $this->stats['maxpower1'];
                     }
                     break;
                 case "Death knight":
                     if (isset($this->stats['maxpower7'])) {
-                        $this->secondBar = "runic";
+                        $this->secondBar = "Runic";
                         $this->secondBarValue = $this->stats['maxpower7'] / 10;
                     } else {
-                        $this->secondBar = "runic";
+                        $this->secondBar = "Runic";
                         $this->secondBarValue = "Unknown";
                     }
                     break;
@@ -201,6 +201,15 @@ class Character extends MX_Controller
                     } else {
                         $this->secondBar = "Fury";
                         $this->secondBarValue = "Unknown";
+                    }
+                    break;
+                case "Monk":
+                    if ($this->stats['maxpower2']) {
+                        $this->secondBar = "Energy";
+                        $this->secondBarValue = $this->stats['maxpower2'];
+                    } else {
+                        $this->secondBar = "Mana";
+                        $this->secondBarValue = $this->stats['maxpower1'];
                     }
                     break;
             }
