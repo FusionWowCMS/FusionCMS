@@ -194,6 +194,15 @@ class Character extends MX_Controller
                         $this->secondBarValue = "Unknown";
                     }
                     break;
+                case "Demon Hunter":
+                    if ($this->stats['maxpower2']) {
+                        $this->secondBar = "Fury";
+                        $this->secondBarValue = $this->stats['maxpower2'];
+                    } else {
+                        $this->secondBar = "Fury";
+                        $this->secondBarValue = "Unknown";
+                    }
+                    break;
             }
         } else {
             $this->secondBar = "mana";
