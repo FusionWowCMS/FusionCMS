@@ -1,7 +1,7 @@
 <br/>
 <p align="center">
   <a href="https://github.com/FusionWowCMS/FusionCMS">
-    <img src="https://avatars.githubusercontent.com/u/135007438?s=200&v=4" alt="Logo" width="80" height="80">
+    <img src="https://github.com/FusionWowCMS/FusionCMS/assets/12217476/e17a9db8-30dd-41bc-b4e9-30b66b55bc4f" alt="Logo">
   </a>
 
   <h3 align="center">FusionCMS</h3>
