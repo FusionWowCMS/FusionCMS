@@ -83,6 +83,10 @@ This project exists thanks to:
 - **[Jesper Lindström](https://github.com/jesperlindstrom)** (FusionCMS)
 - **[FusionGen](https://github.com/FusionGen/FusionGEN)**
 
+<a href="https://github.com/FusionWowCMS/FusionCMS/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=FusionWowCMS/FusionCMS" />
+</a>
+
 ## Links
 
 **[Discord](https://discord.gg/tnWTkZ7akZ)**
