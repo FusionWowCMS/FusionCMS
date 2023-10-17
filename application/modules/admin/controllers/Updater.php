@@ -91,8 +91,15 @@ class Updater extends MX_Controller
         {
             if(!file_exists($path))
             {
-                mkdir($path);
-                chmod($path, 0755);
+                try
+                {
+                    mkdir($path);
+                    chmod($path, 0755);
+                }
+                catch(Error | Exception $e)
+                {
+                    show_error($e->getMessage());
+                }
             }
         }
     }
@@ -243,8 +250,19 @@ class Updater extends MX_Controller
         // Create extract path if not exists
         if(!file_exists($this->extract_path))
         {
-            mkdir($this->extract_path);
-            chmod($this->extract_path, 0755);
+            try
+            {
+                mkdir($this->extract_path);
+                chmod($this->extract_path, 0755);
+            }
+            catch(Error | Exception $e)
+            {
+                // Set message
+                $response['message'] = $e->getMessage();
+
+                // Throw response
+                die(json_encode($response));
+            }
         }
 
         // Remove extract path (we no longer need them)
