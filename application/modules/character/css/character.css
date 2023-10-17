@@ -62,12 +62,12 @@
 
 .border-start {border-color:#1b1d29 !important;}
 
-.bg-health {background-color:#27cc4e;}
-.bg-mana {background-color:#1c8aff;}
-.bg-rage {background-color:#ab0000;}
-.bg-focus {background-color:#d45719;}
-.bg-energy {background-color:#cb9501;}
-.bg-runic {background-color:#00bcde;}
+.bg-health {background:#27cc4e !important;}
+.bg-mana {background:#1c8aff !important;}
+.bg-rage {background:#ab0000 !important;}
+.bg-focus {background:#d45719 !important;}
+.bg-energy {background:#cb9501 !important;}
+.bg-runic {background:#00bcde !important;}
 
 .item {
 	width:70px;
