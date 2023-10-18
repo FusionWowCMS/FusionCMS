@@ -54,6 +54,7 @@ var Theme = {
 								//Add to button disabled state and current Text
 								$("#btn-"+ name).attr("disabled", "true");
 								$("#btn-"+ name).text("Current");
+								window.location.reload();
 							});
 						} else {
 							Swal.fire(data, '', 'info');
