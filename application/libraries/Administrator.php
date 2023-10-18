@@ -229,6 +229,12 @@ class Administrator
                             case "modules":
                                 $this->currentPage = "admin/modules";
                                 break;
+                            case "theme":
+                                $this->currentPage = "admin/theme";
+                                break;
+                            case "edittheme":
+                                $this->currentPage = "admin/theme/edit";
+                                break;
                             case "updater":
                                 $this->currentPage = "admin/updater";
                                 break;

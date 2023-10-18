@@ -26,9 +26,11 @@ class EditTheme extends MX_Controller
     public function index($theme = false)
     {
         // Make sure the theme exists and has configs
-        if (
-            !$theme
-            || !file_exists("application/themes/" . $theme . "/")
+        if (!$theme) {
+            $theme = $this->config->item('theme');
+        }
+        // Make sure the theme exists and has configs
+        if (!file_exists("application/themes/" . $theme . "/")
             || !$this->hasConfigs($theme)
         ) {
             die();
