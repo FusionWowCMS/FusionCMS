@@ -120,11 +120,9 @@ class External_account_model extends CI_Model
             column("account", "joindate") => date("Y-m-d H:i:s")
         );
 
-        if ($encryption == 'SRP6' || $encryption == 'HEX') {
-            $data[column("account", "password")] = $hash["verifier"];
+        $data[column("account", "password")] = $hash["verifier"];
+        if ($encryption == 'SRP6') {
             $data[column("account", "salt")] = $hash["salt"];
-        } else {
-            $data[column("account", "password")] = $hash["verifier"];
         }
 
         if (!preg_match("/^cmangos/i", get_class($this->realms->getEmulator())))

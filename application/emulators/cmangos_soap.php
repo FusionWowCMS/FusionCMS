@@ -28,7 +28,7 @@ class Cmangos_soap implements Emulator
     /**
     * Encryption
     */
-    protected $encryption = 'HEX';
+    protected $encryption = 'SRP6';
     protected $battlenet = false;
 
     /**
