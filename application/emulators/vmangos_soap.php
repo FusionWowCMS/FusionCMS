@@ -6,7 +6,7 @@ use Laizerox\Wowemu\SRP\UserClient;
  * Abstraction layer for supporting different emulators
  */
 
-class Vmangos_sph_soap implements Emulator
+class Vmangos_soap implements Emulator
 {
     protected $config;
 
