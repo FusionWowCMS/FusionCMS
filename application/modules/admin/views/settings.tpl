@@ -277,6 +277,7 @@
 					<option value="3">Cataclysm</option>
 					<option value="2">Wrath of the Lich King</option>
 					<option value="1">The Burning Crusade</option>
+					<option value="0">Vanilla</option>
 				</select>
 				</div>
 				</div>
