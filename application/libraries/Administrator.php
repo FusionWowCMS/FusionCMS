@@ -216,29 +216,7 @@ class Administrator
 
                     // Work-around to highlight dashboard - since it is not in the manifest
                     if (empty($this->currentPage) && $this->CI->router->fetch_module() == "admin") {
-                        switch ($this->CI->router->fetch_class()) {
-                            case "admin":
-                                $this->currentPage = "admin/";
-                                break;
-                            case "settings":
-                                $this->currentPage = "admin/settings";
-                                break;
-                            case "backups":
-                                $this->currentPage = "admin/backups";
-                                break;
-                            case "modules":
-                                $this->currentPage = "admin/modules";
-                                break;
-                            case "theme":
-                                $this->currentPage = "admin/theme";
-                                break;
-                            case "edittheme":
-                                $this->currentPage = "admin/theme/edit";
-                                break;
-                            case "updater":
-                                $this->currentPage = "admin/updater";
-                                break;
-                        }
+                        $this->currentPage = $this->CI->router->fetch_class();
                     }
                 }
             }
