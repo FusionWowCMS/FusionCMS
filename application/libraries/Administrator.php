@@ -16,11 +16,10 @@ if (!defined('BASEPATH')) {
 class Administrator
 {
     protected $CI;
-    private $theme_path;
-    private $menu;
-    private $title;
-    private $currentPage;
-    private $version;
+    private string $theme_path;
+    private array $menu;
+    private string $title;
+    private string $currentPage;
 
     /**
      * Define our paths and objects
@@ -30,6 +29,8 @@ class Administrator
         $this->CI = &get_instance();
         $this->theme_path = "application/themes/admin/";
         $this->menu = array();
+        $this->title = '';
+        $this->currentPage = '';
 
         if (!$this->CI->user->isStaff()) {
             show_404();
@@ -69,7 +70,7 @@ class Administrator
      *
      * @param String $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title . " - ";
     }
@@ -77,9 +78,9 @@ class Administrator
     /**
      * Get the modules and their manifests as an array
      *
-     * @return Array
+     * @return mixed
      */
-    public function getModules()
+    public function getModules(): mixed
     {
         $this->loadModules();
 
@@ -88,9 +89,9 @@ class Administrator
 
 
     /**
-     * Load and read all module manifests
+     * Load and read all modules manifest
      */
-    public function loadModules()
+    public function loadModules(): void
     {
         if (empty($this->modules)) {
             foreach (glob("application/modules/*") as $file) {
@@ -134,10 +135,10 @@ class Administrator
     /**
      * Get the module name out of the path
      *
-     * @param  String $path
+     * @param String $path
      * @return String
      */
-    private function getModuleName($path = "")
+    private function getModuleName(string $path = ""): string
     {
         return preg_replace("/application\/modules\//", "", $path);
     }
@@ -145,10 +146,10 @@ class Administrator
     /**
      * Check if the module has any configs
      *
-     * @param  String $moduleName
+     * @param String $moduleName
      * @return Boolean
      */
-    public function hasConfigs($moduleName)
+    public function hasConfigs(string $moduleName): bool
     {
         if (file_exists("application/modules/" . $moduleName . "/config")) {
             return true;
@@ -160,16 +161,16 @@ class Administrator
     /**
      * Get the menu of tools
      *
-     * @return Array
+     * @return void
      */
-    private function getMenuLinks()
+    private function getMenuLinks(): void
     {
         // Loop through all modules that have manifests
         foreach ($this->modules as $module => $manifest) {
             // Check if the admin and group keys exist
             if (
                 array_key_exists("enabled", $manifest)
-                && $manifest['enabled'] == true
+                && $manifest['enabled']
                 && array_key_exists("admin", $manifest)
             ) {
                 if (array_key_exists("group", $manifest['admin'])) {
@@ -210,7 +211,7 @@ class Administrator
                             }
 
                             // Add them to the array
-                            array_push($this->menu[$menuGroup['text']]['links'], $menuGroup['links'][$key]);
+                            $this->menu[$menuGroup['text']]['links'][] = $menuGroup['links'][$key];
                         }
                     }
 
@@ -227,10 +228,10 @@ class Administrator
      * Loads the template
      *
      * @param String $content The page content
-     * @param String $css Full path to your css file
-     * @param String $js Full path to your js file
+     * @param false|String $css Full path to your css file
+     * @param false|String $js Full path to your js file
      */
-    public function view($content, $css = false, $js = false)
+    public function view(string $content, false|string $css = false, false|string $js = false)
     {
         if ($this->CI->input->is_ajax_request() && isset($_GET['is_json_ajax']) && $_GET['is_json_ajax'] == 1) {
             $array = array(
@@ -290,12 +291,14 @@ class Administrator
     /**
      * Shorthand for loading a content box
      *
-     * @param  String $title
-     * @param  String $body
-     * @param  Boolean $full
+     * @param String $title
+     * @param String $body
+     * @param Boolean $full
+     * @param false|String $css
+     * @param false|String $js
      * @return String
      */
-    public function box($title, $body, $full = false, $css = false, $js = false)
+    public function box(string $title, string $body, bool $full = false, false|string $css = false, false|string $js = false)
     {
         $data = array(
             "headline" => $title,
@@ -314,9 +317,9 @@ class Administrator
     /**
      * Get the FusionCMS version
      *
-     * @return Float
+     * @return String
      */
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->CI->config->item('FusionCMSVersion');
     }
@@ -324,14 +327,15 @@ class Administrator
     /**
      * Get if the module is enabled or not
      *
+     * @param $moduleName
      * @return Boolean
      */
-    public function isEnabled($moduleName)
+    public function isEnabled($moduleName): mixed
     {
         return $this->modules[$moduleName]["enabled"];
     }
 
-    public function getEnabledModules()
+    public function getEnabledModules(): array
     {
         $enabled = array();
 
@@ -344,7 +348,7 @@ class Administrator
         return $enabled;
     }
 
-    public function getDisabledModules()
+    public function getDisabledModules(): array
     {
         $disabled = array();
 
