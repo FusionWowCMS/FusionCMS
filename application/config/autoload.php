@@ -56,7 +56,7 @@ $autoload['packages'] = array();
 |   $autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('security', 'cache', 'database', 'session', 'ci_smarty' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'logger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items');
+$autoload['libraries'] = array('security', 'cache', 'database', 'session', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'logger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items');
 
 /*
 | -------------------------------------------------------------------

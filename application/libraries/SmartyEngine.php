@@ -1,22 +1,18 @@
 <?php
 
-
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
 /**
- * @package FusionCMS
- * @author  Jesper Lindström
- * @author  Xavier Geerinck
- * @author  Elliott Robbins
- * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
- * @author  Ehsan Zare (Darksider) <darksider.legend@gmail.com>
- * @link    https://github.com/FusionWowCMS/FusionCMS
+ * @package    CodeIgniter
+ * @subpackage Libraries
+ * @category   Smarty
+ * @author     Kepler Gelotte
+ * @link       http://www.coolphptools.com/codeigniter-smarty
  */
- 
 
-class CI_Smarty extends Smarty
+class SmartyEngine extends Smarty
 {
     public function __construct()
     {
