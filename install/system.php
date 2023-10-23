@@ -272,37 +272,67 @@ $db["account"]["stricton"] = FALSE;';
 		return false;
 	}
 
-	private function realms()
-	{
-		$this->connect();
+    private function realms()
+    {
+        // Connect to CMS db
+        $this->connect();
 
-		$realms = json_decode(stripslashes($_POST['realms']), true);
-		
-		if(is_array($realms))
-		{
-			foreach($realms as $realm)
-			{
-				$this->db->query("INSERT INTO realms(`emulator`, `cap`, `expansion`, `char_database`, `console_password`,	`console_port`,	`console_username`,	`hostname`,	`password`, `realm_port`, `realmName`, `username`, `world_database`, `override_port_world`, `override_port_char`)
-							VALUES('".$this->db->real_escape_string($realm['emulator'])."',
-									'".$this->db->real_escape_string($realm['cap'])."',
-									'".$this->db->real_escape_string($realm['realm_expansion'])."',
-									'".$this->db->real_escape_string($realm['characters'])."',
-									'".$this->db->real_escape_string($realm['console_password'])."',
-									'".$this->db->real_escape_string($realm['console_port'])."',
-									'".$this->db->real_escape_string($realm['console_username'])."',
-									'".$this->db->real_escape_string($realm['hostname'])."',
-									'".$this->db->real_escape_string($realm['password'])."',
-									'".$this->db->real_escape_string($realm['port'])."',
-									'".$this->db->real_escape_string($realm['realmName'])."',
-									'".$this->db->real_escape_string($realm['username'])."',
-									'".$this->db->real_escape_string($realm['world'])."',
-									'".$this->db->real_escape_string($realm['db_port'])."',
-									'".$this->db->real_escape_string($realm['db_port'])."')");
-			}
-		}
+        // Get realms
+        $realms = json_decode(stripslashes($_POST['realms']), true);
 
-		die('1');
-	}
+        // Check if there is any realm
+        if(!$realms || !is_array($realms))
+            die('You must add at least one realm.');
+
+        // Fields
+        $fields = ['hostname', 'username', 'password', 'characters', 'world', 'cap', 'realm_expansion', 'realmName', 'console_username', 'console_password', 'console_port', 'emulator', 'port', 'db_port'];
+
+        foreach($realms as $realm)
+        {
+            // Make sure all fields exists in realm array
+            foreach($fields as $field)
+                if(!isset($realm[$field]) || !$realm[$field] || empty($realm[$field]))
+                    die('Field `' . $field . '` can\'t be empty.');
+
+            // Connect to characters and world database
+            @$connection = [
+                'characters' => new mysqli($realm['hostname'], $realm['username'], $realm['password'], $realm['characters'], $realm['db_port']),
+                'world'      => new mysqli($realm['hostname'], $realm['username'], $realm['password'], $realm['world'], $realm['db_port'])
+            ];
+
+            // Make sure database connection is secure
+            foreach($connection as $db)
+                if($db->connect_errno)
+                    die('Failed to connect to MySQL: ' . $db->connect_error);
+
+            // Prepare query statement
+            $statement = "INSERT INTO `realms` (`hostname`, `username`, `password`, `char_database`, `world_database`, `cap`, `expansion`, `realmName`, `console_username`, `console_password`, `console_port`, `emulator`, `realm_port`, `override_port_world`, `override_port_char`) VALUES (':hostname', ':username', ':password', ':char_database', ':world_database', ':cap', ':expansion', ':realmName', ':console_username', ':console_password', ':console_port', ':emulator', ':realm_port', ':override_port_world', ':override_port_char')";
+
+            // Prepare query data
+            $data = [
+                ':hostname'            => $this->db->real_escape_string($realm['hostname']),
+                ':username'            => $this->db->real_escape_string($realm['username']),
+                ':password'            => $this->db->real_escape_string($realm['password']),
+                ':char_database'       => $this->db->real_escape_string($realm['characters']),
+                ':world_database'      => $this->db->real_escape_string($realm['world']),
+                ':cap'                 => $this->db->real_escape_string($realm['cap']),
+                ':expansion'           => $this->db->real_escape_string($realm['realm_expansion']),
+                ':realmName'           => $this->db->real_escape_string($realm['realmName']),
+                ':console_username'    => $this->db->real_escape_string($realm['console_username']),
+                ':console_password'    => $this->db->real_escape_string($realm['console_password']),
+                ':console_port'        => $this->db->real_escape_string($realm['console_port']),
+                ':emulator'            => $this->db->real_escape_string($realm['emulator']),
+                ':realm_port'          => $this->db->real_escape_string($realm['port']),
+                ':override_port_world' => $this->db->real_escape_string($realm['db_port']),
+                ':override_port_char'  => $this->db->real_escape_string($realm['db_port'])
+            ];
+
+            // Everything is correct.. insert realm
+            $this->db->query(str_replace(array_keys($data), array_values($data), $statement));
+        }
+
+        die('1');
+    }
 	
 	private function finalStep()
 	{
