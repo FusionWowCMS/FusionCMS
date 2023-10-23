@@ -37,27 +37,31 @@ class top extends MX_Controller
 
     private function getData()
     {
-        $data = array();
-        $limit = $this->config->item('top_players_limit');
+        if (count($this->realms->getRealms()) == 0) {
+            return "This module has not been configured";
+        } else {
+            $data = array();
+            $limit = $this->config->item('top_players_limit');
 
-        foreach ($this->realms->getRealms() as $realm) {
-            $data[$realm->getId()]['name'] = $realm->getName();
-            $data[$realm->getId()]['id'] = $realm->getId();
+            foreach ($this->realms->getRealms() as $realm) {
+                $data[$realm->getId()]['name'] = $realm->getName();
+                $data[$realm->getId()]['id'] = $realm->getId();
 
-            $this->top_model->setRealm($realm->getId());
+                $this->top_model->setRealm($realm->getId());
 
-            $data[$realm->getId()]['todayKills'] = $this->top_model->getKillTodayPlayers($limit);
+                $data[$realm->getId()]['todayKills'] = $this->top_model->getKillTodayPlayers($limit);
 
-            $data[$realm->getId()]['yesterdayKills'] = $this->top_model->getYesterdayPlayers($limit);
+                $data[$realm->getId()]['yesterdayKills'] = $this->top_model->getYesterdayPlayers($limit);
 
-            $data[$realm->getId()]['totalKills'] = $this->top_model->getTotalPlayers($limit);
+                $data[$realm->getId()]['totalKills'] = $this->top_model->getTotalPlayers($limit);
 
-            $data[$realm->getId()]['achivements'] = $this->top_model->getTopAchievementPlayers($limit);
+                $data[$realm->getId()]['achivements'] = $this->top_model->getTopAchievementPlayers($limit);
 
-            $data[$realm->getId()]['guilds'] = $this->top_model->getTopGuild($limit);
+                $data[$realm->getId()]['guilds'] = $this->top_model->getTopGuild($limit);
+            }
+
+            return $data;
         }
-
-        return $data;
     }
 
 
