@@ -17,21 +17,20 @@ if (!defined('BASEPATH'))
 class Template
 {
     private $CI;
-    private $title;
-    private $custom_description;
-    private $custom_keywords;
-    private $custom_page;
-    public $theme_path;
-    public $page_path;
-    public $full_theme_path;
-    public $image_path;
-    public $theme;
-    public $page_url;
-    public $theme_data;
-    public $theme_config;
-    public $module_data;
-    public $style_path;
-    public $view_path;
+    private string $title;
+    private false|string $custom_description;
+    private false|string $custom_keywords;
+    private false|string $custom_page;
+    public string $theme_path;
+    public string $full_theme_path;
+    public string $image_path;
+    public ?string $theme;
+    public string $page_url;
+    public mixed $theme_data;
+    public mixed $theme_config;
+    public mixed $module_data;
+    public string $style_path;
+    public string $view_path;
     public $module_name;
 
     /**
@@ -56,6 +55,8 @@ class Template
         $this->loadModuleManifest();
         $this->title       = "";
         $this->custom_page = false;
+        $this->custom_keywords = false;
+        $this->custom_description = false;
 
         if (!defined("pageURL"))
         {
@@ -66,7 +67,7 @@ class Template
     /**
      * Loads the current theme values
      */
-    private function loadManifest()
+    private function loadManifest(): void
     {
         if (!file_exists(APPPATH . $this->theme_path))
         {
@@ -100,7 +101,7 @@ class Template
         }
     }
 
-    public function hasConfigs($theme)
+    public function hasConfigs($theme): bool
     {
         if (file_exists("application/themes/" . $theme . "/config")) {
             return true;
@@ -112,7 +113,7 @@ class Template
     /**
      * Load the theme configs
      */
-    private function loadConfigs()
+    private function loadConfigs(): void
     {
         foreach (glob("application/themes/" . $this->theme . "/config/*") as $file) {
             $this->getConfig($file);
@@ -120,9 +121,9 @@ class Template
     }
 
     /**
-     * Load the config into the function variable scope and assign it to the configs array
+     * Load the config into the function variable scope and assign it to the config array
      */
-    private function getConfig($file)
+    private function getConfig($file): void
     {
         include($file);
 
@@ -130,7 +131,7 @@ class Template
         $this->theme_config[$this->getConfigName($file)]['source'] = $this->getConfigSource($file);
     }
 
-    private function getConfigSource($file)
+    private function getConfigSource($file): false|string
     {
         $handle = fopen($file, "r");
         $data = fread($handle, filesize($file));
@@ -142,10 +143,10 @@ class Template
     /**
      * Get the config name out of the path
      *
-     * @param  String $path
+     * @param String $path
      * @return String
      */
-    private function getConfigName($path = "")
+    private function getConfigName(string $path = ""): string
     {
         return preg_replace("/application\/themes\/" . $this->theme . "\/config\/([A-Za-z0-9_-]*)\.php/", "$1", $path);
     }
@@ -153,7 +154,7 @@ class Template
     /**
      * Loads the current module values
      */
-    private function loadModuleManifest()
+    private function loadModuleManifest(): void
     {
         if (!file_exists(APPPATH . "modules/" . strtolower($this->getModuleName())))
         {
@@ -184,12 +185,12 @@ class Template
      *
      * @return bool
      */
-    private function isSliderShown()
+    private function isSliderShown(): bool
     {
         // Is it enabled?
         if ($this->CI->config->item('slider'))
         {
-            // Only on news page?, if yes make sure we are on the news page, then show it
+            // Only on news page?, if yes, make sure we are on the news page, then show it
             if ($this->CI->config->item('slider_home') && $this->CI->router->class == "news")
             {
                 return true;
@@ -211,16 +212,16 @@ class Template
      * Loads the template
      *
      * @param String $content The page content
-     * @param String $css Full path to your css file
-     * @param String $js Full path to your js file
+     * @param false|String $css Full path to your css file
+     * @param false|String $js Full path to your js file
      */
-    public function view($content, $css = false, $js = false)
+    public function view(string $content, false|string $css = false, false|string $js = false)
     {
         // Avoid loading the main site in the ACP layout
         if ($this->CI->input->get('is_acp'))
         {
             $this->CI->load->library('administrator');
-            $this->CI->administrator->view('<script>window.location.reload(true)</script>');
+            $this->CI->administrator->view('<script>window.location.reload()</script>');
         }
 
         $output = "";
@@ -257,7 +258,7 @@ class Template
      * @param  $js
      * @return mixed
      */
-    private function handleNormalPage($content, $css, $js)
+    private function handleNormalPage($content, $css, $js): mixed
     {
         //Load the sideboxes
         $sideboxes        = $this->loadSideboxes();
@@ -300,14 +301,14 @@ class Template
     }
 
     /**
-     * When an ajax request is made to a page it calls this.
+     * When an ajax request is made to a page, it calls this.
      *
-     * @param  string $content
-     * @param  string $css
-     * @param  string $js
+     * @param string $content
+     * @param string $css
+     * @param string $js
      * @return string
      */
-    private function handleAjaxRequest($content = "", $css = "", $js = "")
+    private function handleAjaxRequest(string $content = "", string $css = "", string $js = ""): string
     {
         $array = array(
             "title" => $this->title . $this->CI->config->item('title'),
@@ -325,7 +326,7 @@ class Template
     /**
      * Display the global announcement message
      */
-    private function handleAnnouncement()
+    private function handleAnnouncement(): string
     {
         $data = array(
             'module' => 'default',
@@ -335,9 +336,7 @@ class Template
             'size' => $this->CI->config->item('message_headline_size')
         );
 
-        $output = $this->loadPage("message.tpl", $data);
-
-        return $output;
+        return $this->loadPage("message.tpl", $data);
     }
 
     /**
@@ -345,7 +344,7 @@ class Template
      *
      * @return mixed
      */
-    private function getModals()
+    private function getModals(): mixed
     {
         $modal_data = array(
             'url' => $this->page_url,
@@ -354,18 +353,16 @@ class Template
         );
 
         // Load the modals
-        $modals = $this->CI->smarty->view($this->theme_path . "views/modals.tpl", $modal_data, true);
-
-        return $modals;
+        return $this->CI->smarty->view($this->theme_path . "views/modals.tpl", $modal_data, true);
     }
 
     /**
      * Handle CSS or JS files
      *
-     * @param  array $files
+     * @param array $files
      * @return array
      */
-    private function handleFiles($files = array())
+    private function handleFiles(array $files = array()): array
     {
         $existsTypes = array(
             "css",
@@ -373,13 +370,13 @@ class Template
         );
         $returnFiles = array();
 
-        //If $files is not an array, then definied it to an array
+        //If $files is not an array, then defined it to an array
         if (!is_array($files))
         {
             $oldFiles = $files;
             $files    = array();
 
-            //if $oldFiles is an string, than push it to the array
+            //if $oldFiles is a string, then push it to the array
             if (is_string($oldFiles))
             {
                 array_push($files, $oldFiles);
@@ -424,11 +421,11 @@ class Template
     /**
      * Gets the header completely loaded.
      *
-     * @param  string $css
-     * @param  string $js
+     * @param false|string $css
+     * @param false|string $js
      * @return mixed
      */
-    private function getHeader($css = false, $js = false)
+    private function getHeader(false|string $css = false, false|string $js = false): mixed
     {
         header('X-XSS-Protection: 1; mode=block');
         header('X-Frame-Options: SAMEORIGIN');
@@ -480,7 +477,7 @@ class Template
 
         $headerView = "application/" . $this->theme_path . "views/header.tpl";
 
-        // Check if this theme wants to replace our view with it's own
+        // Check if this theme wants to replace our view with its own
         if (file_exists($headerView))
         {
             return $this->CI->smarty->view($headerView, $header_data, true);
@@ -495,9 +492,9 @@ class Template
     /**
      * Determinate whether or not we should show the vote reminder popup
      *
-     * @return String
+     * @return bool|string
      */
-    private function voteReminder()
+    private function voteReminder(): bool|string
     {
         if ($this->CI->config->item('vote_reminder') && !$this->CI->input->cookie("vote_reminder"))
         {
@@ -566,11 +563,11 @@ class Template
     /**
      * Load a page template
      *
-     * @param  String $page Filename
-     * @param  Array $data Array of additional template data
+     * @param String $page Filename
+     * @param Array $data Array of additional template data
      * @return String
      */
-    public function loadPage($page, $data = array())
+    public function loadPage(string $page, array $data = array()): string
     {
         // Get the module, we need to check if it's enabled first
         $data['module'] = array_key_exists("module", $data) ? $data['module'] : $this->module_name;
@@ -593,13 +590,13 @@ class Template
 
         $isOldTheme = empty($this->theme_data['min_required_version']);
 
-        // Consruct the path
+        // Construct the path
         $oldThemeView = 'application/views/old/modules/' . $data['module'] . '/views/' . $page;
 
-        // Consruct the path
+        // Construct the path
         $themeView = 'application/' . $this->theme_path . 'modules/' . $data['module'] . '/' . $page;
         
-        // Check if this theme wants to replace our view with it's own
+        // Check if this theme wants to replace our view with its own
         if (file_exists($themeView))
         {
             return $this->CI->smarty->view($themeView, $data, true);
@@ -615,12 +612,14 @@ class Template
     /**
      * Shorthand for loading a content box
      *
-     * @param  String $title
-     * @param  String $body
-     * @param  Boolean $full
+     * @param String $title
+     * @param String $body
+     * @param Boolean $full
+     * @param false|string $css
+     * @param false|string $js
      * @return String
      */
-    public function box($title, $body, $full = false, $css = false, $js = false)
+    public function box(string $title, string $body, bool $full = false, false|string $css = false, false|string $js = false): string
     {
         $data = array(
             "module" => "default",
@@ -642,9 +641,9 @@ class Template
     /**
      * Get the menu links
      *
-     * @param Int $side ID of the specific menu
+     * @param Int|string $side ID of the specific menu
      */
-    public function getMenu($side = "top")
+    public function getMenu(int|string $side = "top"): array
     {
         $result = array();
 
@@ -740,9 +739,9 @@ class Template
     /**
      * Show an error message
      *
-     * @param String $error
+     * @param false|String $error
      */
-    public function showError($error = false)
+    public function showError(false|string $error = false)
     {
         $message = $this->loadPage("error.tpl", array(
             'module' => 'errors',
@@ -756,12 +755,12 @@ class Template
     /**
      * Returns true if $a >= $b
      *
-     * @param  String $a
-     * @param  String $b
-     * @param  Boolean $notEqual
+     * @param String $a
+     * @param String $b
+     * @param Boolean $notEqual
      * @return Boolean
      */
-    public function compareVersions($a, $b, $notEqual = false)
+    public function compareVersions(string $a, string $b, bool $notEqual = false): bool
     {
         $maxLength = 4;
 
@@ -802,12 +801,13 @@ class Template
      * @param String $text
      * @param Boolean $nl2br
      * @param Boolean $xss
-     * @param Mixed $break
+     * @param false|null $break
+     * @return string
      */
-    public function format($text, $nl2br = false, $xss = true, $break = false)
+    public function format(string $text, bool $nl2br = false, bool $xss = true, false|null $break = false): string
     {
-        // Prevent Cross Site Scripting
-        if ($xss && is_string($text))
+        // Prevent Cross-Site Scripting
+        if ($xss)
         {
             $text = $this->CI->security->xss_clean($text);
             $text = htmlspecialchars($text);
@@ -831,10 +831,10 @@ class Template
     /**
      * Format time as "XX days/hours/minutes/seconds"
      *
-     * @param  Int $time
+     * @param Int $time
      * @return String
      */
-    public function formatTime($time)
+    public function formatTime(int $time): string
     {
         if (!is_numeric($time))
         {
@@ -860,14 +860,16 @@ class Template
                 return $r . ' ' . ($r > 1 ? lang($str . 's') : lang($str));
             }
         }
+
+        return '';
     }
 
     /**
      * Gets the domain name we are on
      *
-     * @return mixed
+     * @return string|array|null
      */
-    public function getDomainName()
+    public function getDomainName(): string|array|null
     {
         return preg_replace("/^[\w]{2,6}:\/\/([\w\d\.\-]+).*$/", "$1", $this->CI->config->slash_item('base_url'));
     }
@@ -877,7 +879,7 @@ class Template
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -887,7 +889,7 @@ class Template
      *
      * @param String $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title . " - ";
     }
@@ -897,7 +899,7 @@ class Template
      *
      * @param String $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->custom_description = $description;
     }
@@ -907,7 +909,7 @@ class Template
      *
      * @param String $keywords
      */
-    public function setKeywords($keywords)
+    public function setKeywords(string $keywords): void
     {
         $this->custom_keywords = $keywords;
     }
@@ -917,7 +919,7 @@ class Template
      *
      * @return string
      */
-    public function getModuleName()
+    public function getModuleName(): string
     {
         return $this->module_name;
     }
@@ -930,9 +932,10 @@ class Template
     /**
      * Set the custom page
      *
-     * @return string
+     * @param $page
+     * @return void
      */
-    public function setCustomPage($page)
+    public function setCustomPage($page): void
     {
         $this->custom_page = $page;
     }
