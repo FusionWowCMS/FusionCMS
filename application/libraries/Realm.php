@@ -17,21 +17,21 @@ if (!defined('BASEPATH')) {
 class Realm
 {
     // Config
-    private $id;
-    private $name;
-    private $playerCap;
-    private $config;
+    private int $id;
+    private string $name;
+    private int $playerCap;
+    private array $config;
 
     // Objects
     private $CI;
-    private $characters;
-    private $world;
-    private $emulator;
+    private Characters_model $characters;
+    private World_model $world;
+    private mixed $emulator;
 
     // Runtime values
-    private $online;
-    private $onlineFaction;
-    private $isOnline;
+    private int $online;
+    private array $onlineFaction;
+    private mixed $isOnline;
 
     /**
      * Initialize the realm
@@ -40,8 +40,9 @@ class Realm
      * @param String $name
      * @param Int $playerCap
      * @param Array $config
+     * @param $emulator
      */
-    public function __construct($id, $name, $playerCap, $config, $emulator)
+    public function __construct(int $id, string $name, int $playerCap, array $config, $emulator)
     {
         // Assign the values
         $this->id = $id;
@@ -67,7 +68,7 @@ class Realm
         $this->config['characters_database'] = $this->config['characters']['database'];
         $this->config['world_database'] = $this->config['world']['database'];
 
-        // Get the CodeIgniter instance
+        // Get the Codeigniter instance
         $this->CI = &get_instance();
 
         // Load the objects
@@ -91,12 +92,12 @@ class Realm
     }
 
     /**
-     * Get the amount of online players
+     * Get the number of online players
      *
-     * @param  String $faction horde/alliance
+     * @param false|String $faction horde/alliance
      * @return Int
      */
-    public function getOnline($faction = false)
+    public function getOnline(false|string $faction = false): int
     {
         if (!$faction) {
             if (!empty($this->online)) {
@@ -141,12 +142,12 @@ class Realm
     }
 
     /**
-     * Get the amount of characters that belongs to a certain account
+     * Get the number of characters that belongs to a certain account
      *
-     * @param  Int $account
+     * @param false|Int $account
      * @return Int
      */
-    public function getCharacterCount($account = false)
+    public function getCharacterCount(false|int $account = false): int
     {
         // Default to the current user
         if (!$account) {
@@ -172,38 +173,26 @@ class Realm
     /**
      * Get the percentage of online/cap
      *
-     * @param  String $faction horde/alliance
+     * @param false|String $faction horde/alliance
      * @return Int
      */
-    public function getPercentage($faction = false)
+    public function getPercentage(false|string $faction = false): int
     {
-        if (!$faction) {
-            $online = $this->getOnline();
-            $cap = $this->getCap();
-        } else {
-            $online = $this->getOnline($faction);
-            $cap = $this->getOnline();
-        }
+        $online = $faction ? $this->getOnline($faction) : $this->getOnline();
+        $cap = $faction ? $this->getOnline() : $this->getCap();
 
         // Prevent division by zero
-        if (
-            $online == 0
-            || $cap == 0
-        ) {
+        if ($online == 0 || $cap == 0) {
             return 0;
         }
 
         // Make sure 100 is the max percentage they can get
-        elseif ($online > $cap) {
+        if ($online > $cap) {
             return 100;
         }
 
         // Calculate percentage
-        else {
-            $percentage = round(($online / $cap) * 100);
-        }
-
-        return $percentage;
+        return round(($online / $cap) * 100);
     }
 
     /**
@@ -211,7 +200,7 @@ class Realm
      *
      * @return String
      */
-    public function getName()
+    public function getName(): string
     {
         return addslashes($this->name);
     }
@@ -221,7 +210,7 @@ class Realm
      *
      * @return Int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -231,17 +220,17 @@ class Realm
      *
      * @return Int
      */
-    public function getCap()
+    public function getCap(): int
     {
         return $this->playerCap;
     }
 
-    public function getWorld()
+    public function getWorld(): World_model
     {
         return $this->world;
     }
 
-    public function getCharacters()
+    public function getCharacters(): Characters_model
     {
         return $this->characters;
     }
@@ -251,107 +240,64 @@ class Realm
         return $this->emulator;
     }
 
-    public function getExpansionId()
+    public function getExpansionId(): false|int|string
     {
         return $this->getConfig('expansion');
     }
 
-    public function getExpansionName()
+    public function getExpansionName(): string
     {
         return $this->getExpansionNameById($this->getConfig('expansion'));
     }
 
-    public function getExpansionSmallName()
+    public function getExpansionSmallName(): string
     {
-        switch ($this->getConfig('expansion')){
-			case 0:
-				return 'classic';
-			break;
-			case 1:
-				return 'tbc';
-			break;
-			case 2:
-				return 'wotlk';
-			break;
-			case 3:
-				return 'cata';
-			break;
-			case 4:
-				return 'mop';
-			break;
-			case 5:
-				return 'wod';
-			break;
-			case 6:
-				return 'legion';
-			break;
-			case 7:
-				return 'bfa';
-			break;
-			case 8:
-				return 'sl';
-			break;
-			case 9:
-				return 'df';
-			break;
-			default:
-				return 'default';
-			break;
-		}
+        return match ($this->getConfig('expansion')) {
+            0 => 'classic',
+            1 => 'tbc',
+            2 => 'wotlk',
+            3 => 'cata',
+            4 => 'mop',
+            5 => 'wod',
+            6 => 'legion',
+            7 => 'bfa',
+            8 => 'sl',
+            9 => 'df',
+            default => 'default',
+        };
     }
 
-    public function getExpansionNameById($id)
+    public function getExpansionNameById($id): string
     {
-        switch ($id){
-			case 0:
-				return 'Vanilla/Classic';
-			break;
-			case 1:
-				return 'The Burning Crusade';
-			break;
-			case 2:
-				return 'Wrath of The Lich King';
-			break;
-			case 3:
-				return 'Cataclysm';
-			break;
-			case 4:
-				return 'Mists of Pandaria';
-			break;
-			case 5:
-				return 'Warlods of Draenor';
-			break;
-			case 6:
-				return 'Legion';
-			break;
-			case 7:
-				return 'Battle for Azeroth';
-			break;
-			case 8:
-				return 'Shadowlands';
-			break;
-			case 9:
-				return 'Dragonflight';
-			break;
-		}
+        return match ($id) {
+            0 => 'Vanilla/Classic',
+            1 => 'The Burning Crusade',
+            2 => 'Wrath of The Lich King',
+            3 => 'Cataclysm',
+            4 => 'Mists of Pandaria',
+            5 => 'Warlods of Draenor',
+            6 => 'Legion',
+            7 => 'Battle for Azeroth',
+            8 => 'Shadowlands',
+            9 => 'Dragon Flight',
+            default => 'default',
+        };
     }
 
     /**
      * Check if the realm is up and running
      *
-     * @param  Boolean $realtime
-     * @return Boolean
+     * @param Boolean $realtime
+     * @return bool|null
      */
-    public function isOnline($realtime = false)
+    public function isOnline(bool $realtime = false): ?bool
     {
-        if ($this->isOnline != null) {
-            return $this->isOnline;
-        } else {
+        if ($this->isOnline == null) {
             if (!$realtime) {
                 $data = $this->CI->cache->get("isOnline_" . $this->getId());
 
                 if ($data !== false) {
-                    return ($data == "yes") ? true : false;
+                    return $data == "yes";
                 }
             }
 
@@ -363,17 +309,17 @@ class Realm
 
             $this->CI->cache->save("isOnline_" . $this->getId(), ($this->isOnline) ? "yes" : "no", 60 * 5);
 
-            return $this->isOnline;
         }
+        return $this->isOnline;
     }
 
     /**
      * Get config value
      *
-     * @param  String $key
-     * @return String
+     * @param String $key
+     * @return false|string|int
      */
-    public function getConfig($key)
+    public function getConfig(string $key): false|string|int
     {
         if (array_key_exists($key, $this->config)) {
             return $this->config[$key];
