@@ -1,5 +1,11 @@
 <?php (! defined('BASEPATH')) and exit('No direct script access allowed');
 
+/**
+ * @package FusionCMS
+ * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
+ * @link    https://github.com/FusionWowCMS/FusionCMS
+ */
+
 class Recaptcha
 {
     /**
@@ -7,6 +13,12 @@ class Recaptcha
      *
      */
     private $CI;
+
+    private ?string $siteKey;
+    private ?string $secretKey;
+    private ?string $language;
+    private ?string $theme;
+
     /**
      * reCAPTCHA site up, verify and api url.
      *
@@ -14,10 +26,10 @@ class Recaptcha
     const sign_up_url = 'https://www.google.com/recaptcha/admin';
     const site_verify_url = 'https://www.google.com/recaptcha/api/siteverify';
     const api_url = 'https://www.google.com/recaptcha/api.js';
+
     /**
      * constructor
      *
-     * @param string $config
      */
     public function __construct()
     {
@@ -27,6 +39,7 @@ class Recaptcha
         $this->secretKey = $this->CI->config->item('recaptcha_secret_key');
         $this->language = $this->CI->language->getLanguageAbbreviation();
         $this->theme = $this->CI->config->item('recaptcha_theme');
+
         if ($this->getEnabledRecaptcha() && (empty($this->siteKey) or empty($this->secretKey))) {
             die("To use reCAPTCHA you must get an API key from <a href='"
                 .self::sign_up_url."'>".self::sign_up_url."</a> and add in application\config\\captcha.php or disable Captcha");
@@ -37,24 +50,23 @@ class Recaptcha
      *
      * @param array $data array of parameters to be sent.
      *
-     * @return array response
+     * @return false|string response
      */
-    private function _submitHTTPGet($data)
+    private function _submitHTTPGet(array $data): false|string
     {
         $url = self::site_verify_url.'?'.http_build_query($data);
-        $response = file_get_contents($url);
-        return $response;
+        return file_get_contents($url);
     }
     /**
-     * Calls the reCAPTCHA siteverify API to verify whether the user passes
+     * Calls the reCAPTCHA site-verify API to verify whether the user passes
      * CAPTCHA test.
      *
      * @param string $response response string from recaptcha verification.
-     * @param string $remoteIp IP address of end user.
+     * @param string|null $remoteIp IP address of end user.
      *
-     * @return ReCaptchaResponse
+     * @return array
      */
-    public function verifyResponse($response, $remoteIp = null)
+    public function verifyResponse(string $response, string $remoteIp = null): array
     {
         $remoteIp = (!empty($remoteIp)) ? $remoteIp : $this->CI->input->ip_address();
         // Discard empty solution submissions
@@ -73,7 +85,7 @@ class Recaptcha
         );
         // get reCAPTCHA server response
         $responses = json_decode($getResponse, true);
-        if (isset($responses['success']) and $responses['success'] == true) {
+        if (isset($responses['success']) and $responses['success']) {
             $status = true;
         } else {
             $status = false;
@@ -88,25 +100,24 @@ class Recaptcha
     /**
      * Render Script Tag
      *
-     * onload: Optional.
-     * render: [explicit|onload] Optional.
-     * hl: Optional.
-     * see: https://developers.google.com/recaptcha/docs/display
+     * Onload: Optional.
+     * Render: [explicit|onload] Optional.
+     * Hl: Optional.
+     * See: https://developers.google.com/recaptcha/docs/display
      *
-     * @param array parameters.
+     * @param array $parameters.
      *
-     * @return scripts
+     * @return string
      */
-    public function getScriptTag(array $parameters = array())
+    public function getScriptTag(array $parameters = array()): string
     {
         $default = array(
             'render' => 'onload',
             'hl' => $this->language,
         );
         $result = array_merge($default, $parameters);
-        $scripts = sprintf('<script type="text/javascript" src="%s?%s" async defer></script>',
+        return sprintf('<script type="text/javascript" src="%s?%s" async defer></script>',
             self::api_url, http_build_query($result));
-        return $scripts;
     }
     /**
      * render the reCAPTCHA widget
@@ -114,11 +125,11 @@ class Recaptcha
      * data-theme: dark|light
      * data-type: audio|image
      *
-     * @param array parameters.
+     * @param array $parameters.
      *
-     * @return scripts
+     * @return string
      */
-    public function getWidget(array $parameters = array())
+    public function getWidget(array $parameters = array()): string
     {
         $default = array(
             'data-sitekey' => $this->siteKey,
@@ -136,7 +147,7 @@ class Recaptcha
     /**
      * Render enable use Recaptcha
      */
-    public function getEnabledRecaptcha()
+    public function getEnabledRecaptcha(): bool
     {
         return $this->CI->config->item('use_captcha') && $this->CI->config->item('captcha_type') == 'recaptcha';
     }
