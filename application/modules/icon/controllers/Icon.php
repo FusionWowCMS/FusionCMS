@@ -5,24 +5,22 @@ class Icon extends MX_Controller
     /**
      * Get an item's icon display name
      *
-     * @param  Int $realm
-     * @param  Int $item
+     * @param false|Int $realm
+     * @param false|Int $item
      * @return String
      */
-    public function get($realm = false, $item = false)
+    public function get(false|int $realm = false, false|int $item = false): string
     {
         // Check if item ID and realm is valid
-        if ($item != false && is_numeric($item) && $realm != false) {
+        if ($item && is_numeric($item) && $realm) {
             // get item data
             $item_in_cache = $this->items->getItem($item, $realm, 'icon');
 
             if ($item_in_cache) {
-                $icon = $item_in_cache;
-                die($icon);
-            } else {
-                $icon = "inv_misc_questionmark";
-                die($icon);
+                die($item_in_cache);
             }
         }
+
+        return 'inv_misc_questionmark';
     }
 }
