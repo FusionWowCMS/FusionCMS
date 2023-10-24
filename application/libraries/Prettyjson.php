@@ -16,14 +16,14 @@ if (!defined('BASEPATH')) {
 
 class PrettyJSON
 {
-    private $json;
+    private string|false $json;
 
     /**
      * Initialize the processing
      *
      * @param Mixed $raw
      */
-    public function __construct($raw)
+    public function __construct(mixed $raw)
     {
         $this->json = json_encode($raw);
 
@@ -33,7 +33,7 @@ class PrettyJSON
     /**
      * Add new lines
      */
-    private function main()
+    private function main(): void
     {
         // Add new line to { }
         $this->json = preg_replace("/\{/", "\n{\n", $this->json);
@@ -54,7 +54,7 @@ class PrettyJSON
     /**
      * Loop through all lines and add indentation
      */
-    private function indent()
+    private function indent(): void
     {
         $lines = explode("\n", $this->json);
 
@@ -64,52 +64,32 @@ class PrettyJSON
             $lines[$key] = $this->getIndent($indent) . $line;
 
             switch ($line) {
+                case "[":
                 case "{":
                     $indent++;
                     break;
 
+                case "}":
+                case "],":
+                case "]":
                 case "},":
                     $indent--;
                     $lines[$key] = $this->getIndent($indent) . $line;
                     break;
 
-                case "}":
-                    $indent--;
-                    $lines[$key] = $this->getIndent($indent) . $line;
-                    break;
-
-                case "[":
-                    $indent++;
-                    break;
-
-                case "],":
-                    $indent--;
-                    $lines[$key] = $this->getIndent($indent) . $line;
-                    break;
-
-                case "]":
-                    $indent--;
-                    $lines[$key] = $this->getIndent($indent) . $line;
-                    break;
             }
         }
 
         $this->json = implode("\n", $lines);
     }
 
-    private function getIndent($count)
+    private function getIndent($count): string
     {
         if (!$count) {
             return "";
         }
 
-        $string = "";
-
-        for ($i = 0; $i < $count; $i++) {
-            $string .= "	";
-        }
-
-        return $string;
+        return str_repeat("	", $count);
     }
 
     /**
@@ -117,7 +97,7 @@ class PrettyJSON
      *
      * @return String
      */
-    public function get()
+    public function get(): string
     {
         return $this->json;
     }
