@@ -17,19 +17,19 @@ if (!defined('BASEPATH')) {
 class Realms
 {
     // Objects
-    private $realms;
+    private array $realms;
     private $CI;
 
     // Runtime values
-    private $races;
-    private $classes;
+    private array $races;
+    private array $classes;
     private $races_en;
     private $classes_en;
-    private $zones;
-    private $hordeRaces;
-    private $allianceRaces;
+    private array $zones;
+    private array $hordeRaces;
+    private array $allianceRaces;
 
-    private $defaultEmulator = "trinity_rbac_soap";
+    private string $defaultEmulator = "trinity_rbac_soap";
 
     public function __construct()
     {
@@ -51,7 +51,7 @@ class Realms
 
         $realms = $this->CI->cms_model->getRealms();
 
-        if ($realms != false) {
+        if ($realms) {
             foreach ($realms as $realm) {
                 // Prepare the database Config
                 $config = array(
@@ -88,7 +88,7 @@ class Realms
                 );
 
                 // Initialize the realm object
-                array_push($this->realms, new Realm($realm['id'], $realm['realmName'], $realm['cap'], $config, $realm['emulator']));
+                $this->realms[] = new Realm($realm['id'], $realm['realmName'], $realm['cap'], $config, $realm['emulator']);
             }
         }
     }
@@ -98,7 +98,7 @@ class Realms
      *
      * @return Array
      */
-    public function getRealms()
+    public function getRealms(): array
     {
         return $this->realms;
     }
@@ -106,9 +106,10 @@ class Realms
     /**
      * Get one specific realm object
      *
-     * @return Object
+     * @param $id
+     * @return Object|null
      */
-    public function getRealm($id)
+    public function getRealm($id): ?object
     {
         foreach ($this->realms as $key => $realm) {
             if ($realm->getId() == $id) {
@@ -117,14 +118,16 @@ class Realms
         }
 
         show_error("There is no realm with ID " . $id);
+        return null;
     }
 
     /**
      * Check if there's a realm with the specified ID
      *
+     * @param $id
      * @return Boolean
      */
-    public function realmExists($id)
+    public function realmExists($id): bool
     {
         foreach ($this->realms as $key => $realm) {
             if ($realm->getId() == $id) {
@@ -136,9 +139,9 @@ class Realms
     }
 
     /**
-     * Get the total amount of characters owned by one account
+     * Get the total number of characters owned by one account
      */
-    public function getTotalCharacters($account = false)
+    public function getTotalCharacters($account = false): int
     {
         if (!$account) {
             $account = $this->CI->user->getId();
@@ -156,7 +159,7 @@ class Realms
     /**
      * Load the wow_constants config and populate the arrays
      */
-    private function loadConstants()
+    private function loadConstants(): void
     {
         $this->CI->config->load('wow_constants');
 
@@ -172,7 +175,7 @@ class Realms
     /**
      * Load the wow_zones config and populate the zones array
      */
-    private function loadZones()
+    private function loadZones(): void
     {
         $this->CI->config->load('wow_zones');
 
@@ -184,7 +187,7 @@ class Realms
      *
      * @return Array
      */
-    public function getAllianceRaces()
+    public function getAllianceRaces(): array
     {
         if (!($this->allianceRaces)) {
             $this->loadConstants();
@@ -198,7 +201,7 @@ class Realms
      *
      * @return Array
      */
-    public function getHordeRaces()
+    public function getHordeRaces(): array
     {
         if (!($this->hordeRaces)) {
             $this->loadConstants();
@@ -210,10 +213,10 @@ class Realms
     /**
      * Get the name of a race
      *
-     * @param  Int $id
+     * @param Int $id
      * @return String
      */
-    public function getRace($id)
+    public function getRace(int $id): string
     {
         if (!($this->races)) {
             $this->loadConstants();
@@ -229,10 +232,10 @@ class Realms
     /**
      * Get the name of a class
      *
-     * @param  Int $id
+     * @param Int $id
      * @return String
      */
-    public function getClass($id)
+    public function getClass(int $id): string
     {
         if (!($this->classes)) {
             $this->loadConstants();
@@ -248,10 +251,10 @@ class Realms
     /**
      * Get the name of a race
      *
-     * @param  Int $id
+     * @param Int $id
      * @return String
      */
-    public function getRaceEN($id)
+    public function getRaceEN(int $id): string
     {
         if (!($this->races_en)) {
             $this->loadConstants();
@@ -267,10 +270,10 @@ class Realms
     /**
      * Get the name of a class
      *
-     * @param  Int $id
+     * @param Int $id
      * @return String
      */
-    public function getClassEN($id)
+    public function getClassEN(int $id): string
     {
         if (!($this->classes_en)) {
             $this->loadConstants();
@@ -286,10 +289,10 @@ class Realms
     /**
      * Get the zone name by zone ID
      *
-     * @param  Int $zoneId
+     * @param Int $zoneId
      * @return String
      */
-    public function getZone($zoneId)
+    public function getZone(int $zoneId): string
     {
         if (!($this->zones)) {
             $this->loadZones();
@@ -322,15 +325,13 @@ class Realms
         $config['id'] = 1;
 
         // Initialize the objects
-        $emulator = new $this->defaultEmulator($config);
-
-        return $emulator;
+        return new $this->defaultEmulator($config);
     }
 
     /**
      * Get enabled expansions
      */
-    public function getExpansions()
+    public function getExpansions(): array
     {
         $expansions = $this->getEmulator()->getExpansions();
         $return = array();
@@ -344,11 +345,12 @@ class Realms
     }
 
     /**
-    * Format character money
+     * Format character money
      *
-    * @return Array
-    */
-    public function formatMoney($money = false)
+     * @param bool $money
+     * @return array|false
+     */
+    public function formatMoney(bool $money = false): array|false
     {
         if ($money) {
             $gold = array(
@@ -369,11 +371,12 @@ class Realms
     }
 
     /**
-    * Format an avatar path as in Class-Race-Gender-Level
+     * Format an avatar path as in Class-Race-Gender-Level
      *
-    * @return String
-    */
-    public function formatAvatarPath($character)
+     * @param $character
+     * @return String
+     */
+    public function formatAvatarPath($character): string
     {
         if (!isset($this->races_en)) {
             $this->loadConstants();
@@ -383,8 +386,8 @@ class Realms
         $races = $this->races_en;
 
         // Prevent errors
-        $class = (array_key_exists($character['class'], $classes)) ? $classes[$character['class']] : null;
-        $race = (array_key_exists($character['race'], $races)) ? $races[$character['race']] : null;
+        $class = $classes[$character['class']] ?? null;
+        $race = $races[$character['race']] ?? null;
 
         $raceId = $character['race'];
         $faction = null;
