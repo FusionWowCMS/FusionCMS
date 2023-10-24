@@ -19,18 +19,18 @@ class User
     private $CI;
 
     // User details
-    private $id;
-    private $username;
-    private $password;
-    private $email;
-    private $expansion;
-    private $online;
-    private $vp;
-    private $dp;
+    private int $id;
+    private string $username;
+    private string $password;
+    private mixed $email;
+    private int $expansion;
+    private bool $online;
+    private int $vp;
+    private int $dp;
     private $register_date;
-    private $last_ip;
-    private $nickname;
-    private $totp_secret;
+    private string $last_ip;
+    private string $nickname;
+    private ?string $totp_secret;
 
     public function __construct()
     {
@@ -42,13 +42,13 @@ class User
     }
 
     /**
-     * When they log in this should be called to set all the user details.
+     * When they log in, this should be called to set all the user details.
      *
-     * @param  String $username
-     * @param  String $sha_pass_hash
+     * @param String $username
+     * @param String $sha_pass_hash
      * @return Int
      */
-    public function setUserDetails($username, $sha_pass_hash)
+    public function setUserDetails(string $username, string $sha_pass_hash): int
     {
         $check = $this->CI->external_account_model->initialize($username);
 
@@ -87,11 +87,11 @@ class User
     /**
      * Creates a hash of the password we enter
      *
-     * @param  String $username
-     * @param  String $password in plain text
+     * @param String $username
+     * @param String $password in plain text
      * @return String hashed password
      */
-    public function createHash($username = "", $password = "")
+    public function createHash(string $username = "", string $password = ""): string
     {
         return $this->CI->realms->getEmulator()->encrypt($username, $password);
     }
@@ -102,7 +102,7 @@ class User
      * @param String $password in plain text
      * @return String hashed password
      */
-    public function createHash2($email = "", $password = "")
+    public function createHash2(string $email = "", string $password = ""): string
     {
         return $this->CI->realms->getEmulator()->encrypt2($email, $password);
     }
@@ -110,12 +110,13 @@ class User
     /**
      * Check if the user rank has any staff permissions
      *
-     * @deprecated 6.1
+     * @param bool $id
      * @return     Boolean
+     * @deprecated 6.1
      */
-    public function isStaff($id = false)
+    public function isStaff(bool $id = false): bool
     {
-        $id = $id != false ? $id : $this->id;
+        $id = $id ? $id : $this->id;
         return ($this->isGm($id) || $this->isDev($id) || $this->isAdmin($id) || $this->isOwner($id));
     }
 
@@ -123,12 +124,13 @@ class User
      * Check if the user has the mod permission
      * Uses [view, mod] ACL permission as of 6.1, for backwards compatibility
      *
-     * @deprecated 6.1
+     * @param bool $id
      * @return     Boolean
+     * @deprecated 6.1
      */
-    public function isGm($id = false)
+    public function isGm(bool $id = false): bool
     {
-        $id = $id != false ? $id : $this->id;
+        $id = $id ? $id : $this->id;
         return hasPermission("view", "gm", $id);
     }
 
@@ -136,12 +138,13 @@ class User
      * Check if the user has the developer permission
      * Uses [view, mod] ACL permission as of 6.1, for backwards compatibility
      *
-     * @deprecated 6.1
+     * @param bool $id
      * @return     Boolean
+     * @deprecated 6.1
      */
-    public function isDev($id = false)
+    public function isDev(bool $id = false): bool
     {
-        $id = $id != false ? $id : $this->id;
+        $id = $id ? $id : $this->id;
         return hasPermission("view", "gm", $id);
     }
 
@@ -149,12 +152,13 @@ class User
      * Check if the user has the admin permission
      * Uses [view, admin] ACL permission as of 6.1, for backwards compatibility
      *
-     * @deprecated 6.1
+     * @param bool $id
      * @return     Boolean
+     * @deprecated 6.1
      */
-    public function isAdmin($id = false)
+    public function isAdmin(bool $id = false): bool
     {
-        $id = $id != false ? $id : $this->id;
+        $id = $id ? $id : $this->id;
         return hasPermission("view", "admin", $id);
     }
 
@@ -162,21 +166,22 @@ class User
      * Check if the user has the owner permission
      * Uses [view, admin] ACL permission as of 6.1, for backwards compatibility
      *
-     * @deprecated 6.1
+     * @param bool $id
      * @return     Boolean
+     * @deprecated 6.1
      */
-    public function isOwner($id = false)
+    public function isOwner(bool $id = false): bool
     {
-        $id = $id != false ? $id : $this->id;
+        $id = $id ? $id : $this->id;
         return hasPermission("view", "admin", $id);
     }
 
     /**
      * Require the user to be signed in to proceed
      */
-    public function userArea()
+    public function userArea(): void
     {
-        //A check so it requires you to be logged in.
+        //A check, so it requires you to be logged in.
         if (!$this->online) {
             $this->CI->template->view($this->CI->template->loadPage("page.tpl", array(
                 "module" => "default",
@@ -191,9 +196,9 @@ class User
     /**
      * Require the user to be signed out to proceed
      */
-    public function guestArea()
+    public function guestArea(): void
     {
-        //A check so it requires you to be logged out.
+        //A check, so it requires you to be logged out.
         if ($this->online) {
             $this->CI->template->view($this->CI->template->loadPage("page.tpl", array(
                 "module" => "default",
@@ -210,7 +215,7 @@ class User
      *
      * @deprecated 6.05
      */
-    public function is_logged_in()
+    public function is_logged_in(): void
     {
         $this->userArea();
     }
@@ -220,7 +225,7 @@ class User
      *
      * @deprecated 6.05
      */
-    public function is_not_logged_in()
+    public function is_not_logged_in(): void
     {
         $this->guestArea();
     }
@@ -230,7 +235,7 @@ class User
      *
      * @return Boolean
      */
-    public function isOnline()
+    public function isOnline(): bool
     {
         return $this->online;
     }
@@ -244,7 +249,7 @@ class User
      * @param  Mixed $b
      * @return Boolean
      */
-    private function rankBiggerThan($a, $b)
+    private function rankBiggerThan(mixed $a, mixed $b): bool
     {
         $a = ($a == "") ? 0 : $a;
         $b = ($b == "") ? 0 : $b;
@@ -298,10 +303,10 @@ class User
     | -------------------------------------------------------------------
     */
 
-    public function getUserData()
+    public function getUserData(): void
     {
         // If they are logged in sync the settings with our object
-        if ($this->CI->session->userdata('online') == true) {
+        if ($this->CI->session->userdata('online')) {
             $this->id = $this->CI->session->userdata('uid');
             $this->username = $this->CI->session->userdata('username');
             $this->password = $this->CI->session->userdata('password');
@@ -314,10 +319,6 @@ class User
             $this->nickname = $this->CI->session->userdata('nickname');
             $this->vp = false;
             $this->dp = false;
-
-            $language = ($this->CI->session->userdata('language')) ? $this->CI->session->userdata('language') : $this->CI->config->item('language');
-
-            $this->CI->language->setLanguage($language);
         } else {
             $this->id = 0;
             $this->username =  0;
@@ -331,10 +332,10 @@ class User
             $this->last_ip = null;
             $this->totp_secret = null;
             $this->nickname = null;
-            $this->language = ($this->CI->session->userdata('language')) ? $this->CI->session->userdata('language') : $this->CI->config->item('language');
 
-            $this->CI->language->setLanguage($this->language);
         }
+
+        $this->CI->language->setLanguage($this->CI->session->userdata('language') ? $this->CI->session->userdata('language') : $this->CI->config->item('language'));
 
         // Load acl
         //$this->CI->load->library('acl');
@@ -344,11 +345,12 @@ class User
     /**
      * Check if the account is banned or active
      *
+     * @param bool $id
      * @return String
      */
-    public function getAccountStatus($id = false)
+    public function getAccountStatus(bool $id = false): string
     {
-        if ($id == false) {
+        if (!$id) {
             $id = $this->id;
         }
 
@@ -368,19 +370,20 @@ class User
     /**
      * Get the nickname
      *
-     * @param  Int $id
+     * @param false|Int $id
      * @return String
      */
-    public function getNickname($id = false)
+    public function getNickname(false|int $id = false): string
     {
         return $this->CI->internal_user_model->getNickname($id);
     }
 
     /**
      * Get the user's avatar
-     * @param Int $id
+     * @param false|Int $id
+     * @return string
      */
-    public function getAvatar($id = false)
+    public function getAvatar(false|int $id = false): string
     {
         return base_url().APPPATH . "images/avatar/". $this->CI->internal_user_model->getAvatar($id);
     }
@@ -396,17 +399,17 @@ class User
     /**
      * get the user it's characters, returns array with realmnames and character names and character id when specified realm is -1 or the default
      *
-     * @param  int $userId
-     * @param  int $realmId
-     * @return Array
+     * @param int $userId
+     * @param int $realmId
+     * @return false|array
      */
-    public function getCharacters($userId, $realmId = -1)
+    public function getCharacters(int $userId, int $realmId = -1): false|array
     {
         if ($realmId && $userId) {
             $out = array(); //Init the return param
 
             if ($realmId == -1) { //Get all characters
-                //Get the realms
+                //to Get the realms
                 $realms = $this->CI->realms->getRealms();
 
                 foreach ($realms as $realm) {
@@ -416,12 +419,12 @@ class User
                     //Open the connection to the databases
                     $character->connect();
 
-                    //Excute queries on it by getting the connection
+                    //Execute queries on it by getting the connection
                     $characters = $character->getCharactersByAccount($this->id);
 
                     $character_data = array('realmId' => $realm->getId(),'realmName' => $realm->getName(), 'characters' => $characters);
 
-                    array_push($out, $character_data);
+                    $out[] = $character_data;
                 }
 
                 return $out;
@@ -433,12 +436,10 @@ class User
                 //Open the connection to the databases
                 $character->connect();
 
-                //Excute queries on it by getting the connection
+                //Execute queries on it by getting the connection
                 $characters = $character->getCharactersByAccount($this->id);
 
-                $character_data = array('realmId' => $realm->getId(),'realmName' => $realm->getName(), 'characters' => $characters);
-
-                return $character_data;
+                return array('realmId' => $realm->getId(),'realmName' => $realm->getName(), 'characters' => $characters);
             }
         } else {
             return false;
@@ -448,10 +449,10 @@ class User
     /**
      * Get the userId from the current User or the given Username
      *
-     * @param  bool $username
+     * @param bool $username
      * @return int
      */
-    public function getId($username = false)
+    public function getId(bool $username = false): int
     {
         if (!$username) {
             return $this->id;
@@ -463,10 +464,10 @@ class User
     /**
      * Get the username of the current user or the given id.
      *
-     * @param  bool $id
+     * @param bool $id
      * @return String
      */
-    public function getUsername($id = false)
+    public function getUsername(bool $id = false): string
     {
         return $this->CI->external_account_model->getUsername($id);
     }
@@ -476,7 +477,7 @@ class User
      *
      * @return String
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         $this->getUserData();
         return $this->password;
@@ -487,7 +488,7 @@ class User
      *
      * @return mixed
      */
-    public function getEmail()
+    public function getEmail(): mixed
     {
         return $this->email;
     }
@@ -497,7 +498,7 @@ class User
      *
      * @return int
      */
-    public function getExpansion()
+    public function getExpansion(): int
     {
         $this->getUserData();
         return $this->expansion;
@@ -508,7 +509,7 @@ class User
      *
      * @return boolean
      */
-    public function getOnline()
+    public function getOnline(): bool
     {
         return $this->online;
     }
@@ -528,7 +529,7 @@ class User
      *
      * @return int
      */
-    public function getVp()
+    public function getVp(): int
     {
         if ($this->vp === false) {
             $this->vp = $this->CI->internal_user_model->getVp();
@@ -542,7 +543,7 @@ class User
      *
      * @return int
      */
-    public function getDp()
+    public function getDp(): int
     {
         if ($this->dp === false) {
             $this->dp = $this->CI->internal_user_model->getDp();
@@ -556,7 +557,7 @@ class User
      *
      * @return string
      */
-    public function getLastIP()
+    public function getLastIP(): string
     {
         return $this->last_ip;
     }
@@ -597,7 +598,7 @@ class User
      *
      * @param $newUsername
      */
-    public function setUsername($newUsername)
+    public function setUsername($newUsername): void
     {
         if (!$newUsername) {
             return;
@@ -611,7 +612,7 @@ class User
      *
      * @param $newLanguage
      */
-    public function setLanguage($newLanguage)
+    public function setLanguage($newLanguage): void
     {
         if (!$newLanguage) {
             return;
@@ -625,7 +626,7 @@ class User
      *
      * @param $newPassword
      */
-    public function setPassword($newPassword)
+    public function setPassword($newPassword): void
     {
         if (!$newPassword) {
             return;
@@ -639,7 +640,7 @@ class User
      *
      * @param $newEmail
      */
-    public function setEmail($newEmail)
+    public function setEmail($newEmail): void
     {
         if (!$newEmail) {
             return;
@@ -653,7 +654,7 @@ class User
      *
      * @param $newExpansion
      */
-    public function setExpansion($newExpansion)
+    public function setExpansion($newExpansion): void
     {
         $this->CI->external_account_model->setExpansion($newExpansion, $this->username);
         $this->CI->session->set_userdata('expansion', $newExpansion);
@@ -664,7 +665,7 @@ class User
      *
      * @param $newVp
      */
-    public function setVp($newVp)
+    public function setVp($newVp): void
     {
         $this->vp = $newVp;
         $this->CI->internal_user_model->setVp($this->id, $newVp);
@@ -675,7 +676,7 @@ class User
      *
      * @param $newDp
      */
-    public function setDp($newDp)
+    public function setDp($newDp): void
     {
         $this->dp = $newDp;
         $this->CI->internal_user_model->setDp($this->id, $newDp);
@@ -686,7 +687,7 @@ class User
      *
      * @param $newRoleId
      */
-    public function setRoleId($newRoleId)
+    public function setRoleId($newRoleId): void
     {
         $this->role = $newRoleId;
         $this->CI->internal_user_model->setRoleId($this->id, $newRoleId);
@@ -696,8 +697,8 @@ class User
 	 * Set the avatar id of the user
 	 * @param $newAvatarId
 	 */
-	public function setAvatar($newAvatarId)
-	{
+	public function setAvatar($newAvatarId): void
+    {
 		$this->avatarId = $newAvatarId;
 		$this->CI->internal_user_model->setAvatar($this->id, $newAvatarId);
 	}
