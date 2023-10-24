@@ -144,9 +144,11 @@ class Admin_items extends MX_Controller
         // Check for the permission
         requirePermission("canAddItems");
 
-        if ($this->input->post("query")) {
+        $type = $this->input->post('item_type');
+
+        if ($type == 'query') {
             $data = $this->getQueryData();
-        } elseif ($this->input->post("command")) {
+        } elseif ($type == 'command') {
             $data = $this->getCommandData();
         } else {
             $data = $this->getItemData();
