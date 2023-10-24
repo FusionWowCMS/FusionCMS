@@ -357,68 +357,6 @@ class Template
     }
 
     /**
-     * Handle CSS or JS files
-     *
-     * @param array $files
-     * @return array
-     */
-    private function handleFiles(array $files = array()): array
-    {
-        $existsTypes = array(
-            "css",
-            "js"
-        );
-        $returnFiles = array();
-
-        //If $files is not an array, then defined it to an array
-        if (!is_array($files))
-        {
-            $oldFiles = $files;
-            $files    = array();
-
-            //if $oldFiles is a string, then push it to the array
-            if (is_string($oldFiles))
-            {
-                array_push($files, $oldFiles);
-            }
-
-            //Unset $oldFiles variable
-            unset($oldFiles);
-        }
-
-        foreach ($files as $file)
-        {
-            $expldFile = explode(".", $file);
-            $fileType  = isset($expldFile[count($expldFile) - 1]) ? $expldFile[count($expldFile) - 1] : "undefined";
-            if (in_array($fileType, $existsTypes))
-            {
-                //Check if URL and valid URL
-                if (substr($file, 0, 4) == "http" && filter_var($file, FILTER_VALIDATE_URL) !== false)
-                {
-                    array_push($returnFiles, $file);
-                }
-                else
-                {
-                    //Check if asset file exists
-                    if (file_exists(APPPATH . $file))
-                    {
-                        array_push($returnFiles, $file);
-                    }
-                    else
-                    {
-                        show_error("This file doesn't exists. ('" . $file . "'')");
-                    }
-                }
-            }
-            else
-            {
-                show_error("This type is not supported yet ('" . $fileType . "' in '" . $file . "')");
-            }
-        }
-        return $returnFiles;
-    }
-
-    /**
      * Gets the header completely loaded.
      *
      * @param false|string $css
@@ -649,39 +587,38 @@ class Template
 
         // Get the database values
         $links = $this->CI->cms_model->getLinks($side);
+        $moduleName = $this->getModuleName();
 
         foreach ((array) $links as $key => $item)
         {
-            if (!hasViewPermission($links[$key]['permission'], "--MENU--") && $links[$key]['permission'])
-            {
+            if (!hasViewPermission($item['permission'], "--MENU--") && $item['permission'])
                 continue;
-            }
 
             // Xss protect out names
-            $links[$key]['name']   = $this->format(langColumn($links[$key]['name']), false, false);
-            $links[$key]['active'] = false;
+            $item['name']   = $this->format(langColumn($item['name']), false, false);
+            $item['active'] = false;
 
-            if (!preg_match("/^\/|[a-z][a-z0-9+\-.]*:/i", $links[$key]['link']))
+            if (!preg_match("/^\/|[a-z][a-z0-9+\-.]*:/i", $item['link']))
             {
-                if ($this->getModuleName() == $links[$key]['link'])
+                if ($moduleName == $item['link'])
                 {
-                    $links[$key]['active'] = true;
+                    $item['active'] = true;
                 }
-                elseif ($this->getModuleName() == "page")
+                elseif ($moduleName == "page")
                 {
-                    if ($this->getModuleName() . "/" . $this->custom_page == $links[$key]['link'])
+                    if ($moduleName . "/" . $this->custom_page == $item['link'])
                     {
-                        $links[$key]['active'] = true;
+                        $item['active'] = true;
                     }
                 }
 
-                $links[$key]['link'] = $this->page_url . $links[$key]['link'];
+                $item['link'] = $this->page_url . $item['link'];
             }
 
             // Append if it's a direct link or not
-            $links[$key]['link'] = 'href="' . $links[$key]['link'] . '"';
+            $item['link'] = 'href="' . $item['link'] . '"';
 
-            array_push($result, $links[$key]);
+            $result[] = $item;
         }
 
         return $result;
@@ -764,26 +701,8 @@ class Template
     {
         $maxLength = 4;
 
-        $a = preg_replace("/\./", "", $a);
-        $b = preg_replace("/\./", "", $b);
-        
-        // Add ending zeros if necessary
-        if (strlen($a) < $maxLength)
-        {
-            for ($i = 0; $i <= ($maxLength - strlen($a)); $i++)
-            {
-                $a .= "0";
-            }
-        }
-
-        // Add ending zeros if necessary
-        if (strlen($b) < $maxLength)
-        {
-            for ($i = 0; $i <= ($maxLength - strlen($b)); $i++)
-            {
-                $b .= "0";
-            }
-        }
+        $a = str_pad(preg_replace("/\./", "", $a), $maxLength, "0", STR_PAD_RIGHT);
+        $b = str_pad(preg_replace("/\./", "", $b), $maxLength, "0", STR_PAD_RIGHT);
 
         if ($notEqual)
         {
