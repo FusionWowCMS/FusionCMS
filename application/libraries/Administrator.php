@@ -167,58 +167,41 @@ class Administrator
     {
         // Loop through all modules that have manifests
         foreach ($this->modules as $module => $manifest) {
-            // Check if the admin and group keys exist
-            if (
-                array_key_exists("enabled", $manifest)
-                && $manifest['enabled']
-                && array_key_exists("admin", $manifest)
-            ) {
-                if (array_key_exists("group", $manifest['admin'])) {
-                    $manifest['admin'] = array($manifest['admin']['group']);
+            if (empty($manifest['enabled']) || empty($manifest['admin'])) {
+                continue;
+            }
+
+            $adminManifests = isset($manifest['admin']['group']) ? array($manifest['admin']) : $manifest['admin'];
+
+            foreach ($adminManifests as $menuGroup) {
+                if (!isset($this->menu[$menuGroup['text']])) {
+                    $this->menu[$menuGroup['text']] = array(
+                        'links' => array(),
+                        'icon' => $menuGroup['icon']
+                    );
                 }
 
-                foreach ($manifest['admin'] as $menuGroup) {
-                    // Check if the group name doesn't exist
-                    if (!array_key_exists($menuGroup['text'], $this->menu)) {
-                        // Create a new entry and populate it with the icon and an empty array for the links
-                        $this->menu[$menuGroup['text']] = array(
-                            'links' => array(),
-                            'icon' => $menuGroup['icon']
-                        );
+                foreach ($menuGroup['links'] as $key => $link) {
+                    if (!empty($link['requirePermission']) && !hasPermission($link['requirePermission'], $module)) {
+                        continue;
                     }
 
-                    // Loop through all links
-                    foreach ($menuGroup['links'] as $key => $link) {
-                        if (
-                            !array_key_exists("requirePermission", $link)
-                            || hasPermission($link['requirePermission'], $module)
-                        ) {
-                            $menuGroup['links'][$key]['module'] = $module;
+                    $menuGroup['links'][$key]['module'] = $module;
 
-                            // Find out if this is the current link
-                            if ($module == $this->CI->router->fetch_module()) {
-                                $url = $this->CI->router->fetch_class();
+                    if ($module == $this->CI->router->fetch_module()) {
+                        $url = $this->CI->router->fetch_class() . ($this->CI->router->fetch_method() != "index" ? "/" . $this->CI->router->fetch_method() : "");
 
-
-                                if ($this->CI->router->fetch_method() != "index") {
-                                    $url .= "/" . $this->CI->router->fetch_method();
-                                }
-
-                                if ($url == $menuGroup['links'][$key]['controller']) {
-                                    $menuGroup['links'][$key]['active'] = true;
-                                    $this->currentPage = $module . "/" . $menuGroup['links'][$key]['controller'];
-                                }
-                            }
-
-                            // Add them to the array
-                            $this->menu[$menuGroup['text']]['links'][] = $menuGroup['links'][$key];
+                        if ($url == $menuGroup['links'][$key]['controller']) {
+                            $menuGroup['links'][$key]['active'] = true;
+                            $this->currentPage = "$module/" . $menuGroup['links'][$key]['controller'];
                         }
                     }
 
-                    // Work-around to highlight dashboard - since it is not in the manifest
-                    if (empty($this->currentPage) && $this->CI->router->fetch_module() == "admin") {
-                        $this->currentPage = $this->CI->router->fetch_class();
-                    }
+                    $this->menu[$menuGroup['text']]['links'][] = $menuGroup['links'][$key];
+                }
+
+                if (empty($this->currentPage) && $this->CI->router->fetch_module() == "admin") {
+                    $this->currentPage = $this->CI->router->fetch_class();
                 }
             }
         }
@@ -247,17 +230,17 @@ class Administrator
         $menu = $this->menu;
         if ($menu) {
             $menui = 1;
-            foreach ($menu as $key => $value) {
-                $menu[$key]['nr'] = $menui;
-                $menui++;
-                foreach ($menu[$key]['links'] as $lkey => $lvalue) {
-                    if (isset($menu[$key]['links'][$lkey]['active'])) {
-                        $menu[$key]['active'] = true;
+            array_walk($menu, function (&$value) use (&$menui) {
+                $value['nr'] = $menui++;
+                foreach ($value['links'] as $lvalue) {
+                    if (isset($lvalue['active'])) {
+                        $value['active'] = true;
                         break;
                     }
                 }
-            }
+            });
         }
+
 
         $notifications = $this->CI->cms_model->getNotifications($this->CI->user->getId(), true);
         //var_dump($notifications);
