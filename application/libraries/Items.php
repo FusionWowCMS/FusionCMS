@@ -33,51 +33,43 @@ class Items
         // Get the item XML data
         $data = @file_get_contents("https://www.wowhead.com/item=" . $item . "&xml");
 
-
-        if (!empty($data))
+        if (!empty($data)) {
             $data = $this->XMLtoArray($data);
 
-        if (is_array($data) && !isset($data['wowhead']['error'])) {
-            $cacheData['entry'] = $item;
-            $cacheData['name'] = $data['wowhead']['item']['name'];
-            $cacheData['icon'] = $data['wowhead']['item']['icon']['_value'];
-            $cacheData['Quality'] = $data['wowhead']['item']['quality']['@attributes']['id'];
-            $cacheData['displayid'] = $data['wowhead']['item']['icon']['@attributes']['displayId'];
-            $cacheData['htmlTooltip'] = $data['wowhead']['item']['htmlTooltip'];
-            $cacheData['stackable'] = $this->findStack($data['wowhead']['item']['htmlTooltip'], 'whtt-maxstack');
+            if (is_array($data) && !isset($data['wowhead']['error'])) {
+                $cacheData = [
+                    'entry' => $item,
+                    'name' => $data['wowhead']['item']['name'],
+                    'icon' => $data['wowhead']['item']['icon']['_value'],
+                    'Quality' => $data['wowhead']['item']['quality']['@attributes']['id'],
+                    'displayid' => $data['wowhead']['item']['icon']['@attributes']['displayId'],
+                    'htmlTooltip' => $data['wowhead']['item']['htmlTooltip'],
+                    'stackable' => $this->findStack($data['wowhead']['item']['htmlTooltip'], 'whtt-maxstack')
+                ];
 
-            if (!is_array($cacheData['icon'])) {
-                // make sure It's not in DB already
-                $result = $this->CI->db->query("SELECT COUNT(*) as count FROM item_template WHERE entry = ?", [$item])->row();
-                if ($result->count == 0) {
-                    $data = array(
-                        'entry' => $cacheData['entry'],
-                        'name' => $cacheData['name'],
-                        'displayid' => $cacheData['displayid'],
-                        'icon' => $cacheData['icon'],
-                        'quality' => $cacheData['Quality'],
-                        'stackable' => $cacheData['stackable'],
-                        'htmlTooltip' => $cacheData['htmlTooltip']
-                    );
+                if (!is_array($cacheData['icon'])) {
+                    // make sure It's not in DB already
+                    $result = $this->CI->db->query("SELECT COUNT(*) as count FROM item_template WHERE entry = ?", [$item])->row();
+                    if ($result->count == 0) {
+                        $this->CI->db->insert('item_template', $cacheData);
+                    }
 
-                    $this->CI->db->insert('item_template', $data);
+                    // save to cache
+                    if ($enableCache)
+                        $this->CI->cache->save('items/item_' . $realm . '_' . $item, $cacheData);
+                } // return false in case of wowhead xml is broken (rare, but it happens)
+                else {
+                    return false;
                 }
 
-                // save to cache
-                if ($enableCache)
-                    $this->CI->cache->save('items/item_' . $realm . '_' . $item, $cacheData);
-            } // return false in case of wowhead xml is broken (rare, but it happens)
-            else {
-                return false;
+                return match ($type) {
+                    'displayid' => $cacheData['displayid'],
+                    'htmlTooltip' => $cacheData['htmlTooltip'],
+                    'name' => $cacheData['name'],
+                    'icon' => $cacheData['icon'],
+                    default => $cacheData,
+                };
             }
-
-            return match ($type) {
-                'displayid' => $cacheData['displayid'],
-                'htmlTooltip' => $cacheData['htmlTooltip'],
-                'name' => $cacheData['name'],
-                'icon' => $cacheData['icon'],
-                default => $cacheData,
-            };
         }
 
         return false;
@@ -97,46 +89,16 @@ class Items
         $cache = $this->CI->cache->get('items/item_' . $realm . '_' . $item);
         // can we use the cache?
         if ($cache !== false) {
-            $icon = $cache['icon'];
-            $name = $cache['name'];
-            $displayId = $cache['displayid'];
-            $htmlTooltip = $cache['htmlTooltip'];
+            $iconIsArray = is_array($cache['icon']);
+            $nameIsArray = is_array($cache['name']);
 
-            switch ($type) {
-                case 'displayid':
-                {
-                    if (!is_array($displayId) && !empty($displayId)) {
-                        return $displayId;
-                    } else {
-                        return false;
-                    }
-                }
-                case 'htmlTooltip':
-                {
-                    return $htmlTooltip;
-                }
-                case 'name':
-                {
-                    if (!is_array($name)) {
-                        return $name;
-                    } else {
-                        return false;
-                    }
-                }
-                case 'icon':
-                {
-                    if (!is_array($icon)) {
-                        return $icon;
-                    } else {
-                        return false;
-                    }
-                }
-                case 'all':
-                default:
-                {
-                    return $cache;
-                }
-            }
+            return match ($type) {
+                'displayid' => (!empty($cache['displayid']) ? $cache['displayid'] : false),
+                'htmlTooltip' => $cache['htmlTooltip'],
+                'name' => (!$nameIsArray ? $cache['name'] : false),
+                'icon' => (!$iconIsArray ? $cache['icon'] : false),
+                default => $cache,
+            };
         }
 
         return false;
@@ -157,26 +119,21 @@ class Items
 
         // Check for results
         if ($query->num_rows() > 0) {
-            $row = $query->result_array();
-
-            $displayId = $row[0]['displayid'];
-            $icon = $row[0]['icon'];
-            $name = $row[0]['name'];
-            $htmlTooltip = $row[0]['htmlTooltip'];
+            $row = $query->result_array()[0];
 
             // save to cache
-            $this->CI->cache->save('items/item_' . $realm . '_' . $item, $row[0]);
-        } else {
-            return false;
+            $this->CI->cache->save('items/item_' . $realm . '_' . $item, $row);
+
+            return match ($type) {
+                'displayid' => $row['displayid'],
+                'htmlTooltip' => $row['htmlTooltip'],
+                'name' => $row['name'],
+                'icon' => $row['icon'],
+                default => $row,
+            };
         }
 
-        return match ($type) {
-            'displayid' => $displayId,
-            'htmlTooltip' => $htmlTooltip,
-            'name' => $name,
-            'icon' => $icon,
-            default => $row[0],
-        };
+        return false;
     }
 
     /**
@@ -218,13 +175,7 @@ class Items
                         return $item_in_db;
                     } else {
                         // check if item is on Wowhead
-                        $item_wowhead = $this->getItemWowHead($item, $realm, $type);
-
-                        if ($item_wowhead) {
-                            return $item_wowhead;
-                        } else {
-                            return false;
-                        }
+                        return $this->getItemWowHead($item, $realm, $type);
                     }
                 }
             } else {
@@ -239,28 +190,28 @@ class Items
                 }
 
                 if ($query->num_rows() > 0) {
-                    $row = $query->result_array();
+                    $row = $query->result_array()[0];
 
                     // check if item is on Wowhead
                     $item_wowhead = $this->getItemWowHead($item, $realm, 'all', false);
 
                     if ($item_wowhead) {
-                        $row[0]['icon'] = $item_wowhead['icon'];
-                        $row[0]['displayId'] = $item_wowhead['displayid'];
-                        $row[0]['htmlTooltip'] = $item_wowhead['htmlTooltip'];
+                        $row['icon'] = $item_wowhead['icon'];
+                        $row['displayId'] = $item_wowhead['displayid'];
+                        $row['htmlTooltip'] = $item_wowhead['htmlTooltip'];
                     } else {
-                        $row[0]['icon'] = 'inv_misc_questionmark';
+                        $row['icon'] = 'inv_misc_questionmark';
                     }
 
                     // Cache it forever
-                    $this->CI->cache->save("items/item_" . $realm . "_" . $item, $row[0]);
+                    $this->CI->cache->save("items/item_" . $realm . "_" . $item, $row);
 
                     return match ($type) {
-                        'displayid' => $row[0]['displayid'],
-                        'htmlTooltip' => $row[0]['htmlTooltip'],
-                        'name' => $row[0]['name'],
-                        'icon' => isset($row[0]['icon']) ? $row[0]['icon'] : 'inv_misc_questionmark',
-                        default => $row[0],
+                        'displayid' => $row['displayid'],
+                        'htmlTooltip' => $row['htmlTooltip'],
+                        'name' => $row['name'],
+                        'icon' => isset($row['icon']) ? $row['icon'] : 'inv_misc_questionmark',
+                        default => $row,
                     };
                 } else {
                     // Cache it for 24 hours
