@@ -12,7 +12,7 @@ if (!defined('BASEPATH')) {
  * @link       http://www.coolphptools.com/codeigniter-smarty
  */
 
-class SmartyEngine extends Smarty
+class Smartyengine extends Smarty
 {
     public function __construct()
     {
