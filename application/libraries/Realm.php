@@ -319,7 +319,7 @@ class Realm
      * @param String $key
      * @return false|string|int
      */
-    public function getConfig(string $key): false|string|int
+    public function getConfig(string $key): mixed
     {
         if (array_key_exists($key, $this->config)) {
             return $this->config[$key];
