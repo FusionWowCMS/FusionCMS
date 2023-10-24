@@ -24,12 +24,12 @@ class User
     private string $password;
     private mixed $email;
     private int $expansion;
-    private bool $online;
+    private ?bool $online;
     private int $vp;
     private int $dp;
-    private $register_date;
-    private string $last_ip;
-    private string $nickname;
+    private ?string $register_date;
+    private ?string $last_ip;
+    private ?string $nickname;
     private ?string $totp_secret;
 
     public function __construct()
