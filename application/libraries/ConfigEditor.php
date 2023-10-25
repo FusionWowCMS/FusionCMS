@@ -12,15 +12,15 @@
 
 class ConfigEditor
 {
-    private $file;
-    private $data;
+    private string $file;
+    private mixed $data;
 
     /**
      * Initialize the config editor and load the file
      *
      * @param String $file
      */
-    public function __construct($file)
+    public function __construct(string $file)
     {
         $this->data = "";
         $this->file = $file;
@@ -37,10 +37,10 @@ class ConfigEditor
     /**
      * Change a config value
      *
-     * @param String $key
-     * @param String $value
+     * @param mixed $key
+     * @param mixed $value
      */
-    public function set($key, $value)
+    public function set(mixed $key, mixed $value): void
     {
         // Create an array
         if (is_array($value)) {
@@ -95,7 +95,7 @@ class ConfigEditor
     /**
      * Save the edited config file
      */
-    public function save()
+    public function save(): void
     {
         $file = fopen($this->file, "w");
         fwrite($file, $this->data);
@@ -105,9 +105,9 @@ class ConfigEditor
     /**
      * Get the edited config content
      *
-     * @return String
+     * @return mixed
      */
-    public function get()
+    public function get(): mixed
     {
         return $this->data;
     }
