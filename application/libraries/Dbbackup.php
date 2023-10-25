@@ -20,7 +20,7 @@ class Dbbackup
     public function __construct()
     {
         $this->CI = &get_instance();
-        $this->CI->load->helper('file', 'text', 'form', 'string');
+        $this->CI->load->helper(['file', 'text', 'form', 'string']);
         $this->CI->load->model('cms_model');
         $this->CI->load->dbutil();
 
@@ -32,7 +32,11 @@ class Dbbackup
         }
     }
 
-    public function backup($trigger = false): void
+    /**
+     * @param bool $trigger
+     * @return void
+     */
+    public function backup(bool $trigger = false): void
     {
         $db_backup_path = 'backups/';
         $max_files = $this->CI->config->item('backups_max_keep');
@@ -47,7 +51,7 @@ class Dbbackup
 
         if (!$row || $trigger) {
             if (!is_dir($db_backup_path) && $trigger) {
-                mkdir($db_backup_path, 0777);
+                mkdir($db_backup_path);
                 log_message('info', $db_backup_path . ' did not exist. Created!');
             }
 
@@ -83,9 +87,9 @@ class Dbbackup
                 if ($n_row > $max_files) {
                     $this->CI->db->limit($n_row - $max_files);
                     $this->CI->db->order_by('created_date', 'ASC');
-                    $todelete = $this->CI->db->get('backup')->result();
+                    $result = $this->CI->db->get('backup')->result();
 
-                    foreach ($todelete as $to_delete) {
+                    foreach ($result as $to_delete) {
                         //delete row from db table
                         $this->CI->db->where('id', $to_delete->id);
                         $this->CI->db->delete('backup');
@@ -106,11 +110,6 @@ class Dbbackup
                 if ($trigger) {
                     die('Backup failed');
                 }
-            }
-        } else {
-            if ($trigger) {
-                log_message('error', 'Backup creation failed. Function not executed.');
-                die('Backup creation failed. Function not executed.');
             }
         }
     }
