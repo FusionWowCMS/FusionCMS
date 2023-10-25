@@ -1,6 +1,5 @@
 /**
  * Client side language layer
- * @author Jesper Lindström
  * @package FusionCMS
  * @version 6.0
  */

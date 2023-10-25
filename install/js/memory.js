@@ -1,7 +1,6 @@
 /**
  * The installer now has a memory - it remembers your previous
  * configuration attempts to save you some keystrokes :-)
- * @author Jesper Lindström
  * @package FusionCMS
  * @version 6.1
  */

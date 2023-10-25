@@ -81,6 +81,7 @@ The FusionCMS source is released under the [GNU AGPL v3](https://github.com/Fusi
 This project exists thanks to:
 
 - **[Jesper Lindström](https://github.com/jesperlindstrom)** (FusionCMS)
+- **[Xavier Geernick](https://github.com/XavierGeerinck)**
 - **[FusionGen](https://github.com/FusionGen/FusionGEN)**
 
 <a href="https://github.com/FusionWowCMS/FusionCMS/graphs/contributors">

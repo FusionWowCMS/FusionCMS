@@ -2,11 +2,6 @@
 
 /**
  * @package FusionCMS
- * @author  Jesper Lindström
- * @author  Xavier Geerinck
- * @author  Elliott Robbins
- * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
- * @author  Ehsan Zare (Darksider) <darksider.legend@gmail.com>
  * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 

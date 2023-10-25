@@ -2,8 +2,6 @@
 
 /**
  * English language support
- *
- * @author Jesper Lindström
  */
 
 /**

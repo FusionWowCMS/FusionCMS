@@ -2,7 +2,6 @@
  * [MLI] MultiLanguageInput
  * @package FusionGen
  * @version 6.1
- * @author Jesper Lindström
  * @link https://fusiongen.net
  */
 

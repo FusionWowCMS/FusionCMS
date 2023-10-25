@@ -2,8 +2,6 @@
 
 /**
  * English language support - spanish language support: Ruben Roa
- *
- * @author Jesper Lindström 
  */
 
 /**

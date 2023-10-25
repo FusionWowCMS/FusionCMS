@@ -1,7 +1,6 @@
 /**
  * Validation object for the registration page
  * @package FusionCMS
- * @author Jesper Lindström
  */
 var Validate = {
 	/**
