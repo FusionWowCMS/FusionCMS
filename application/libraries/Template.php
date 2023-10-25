@@ -289,7 +289,7 @@ class Template
             "CI" => $this->CI,
             "image_path" => $this->image_path,
             "isOnline" => $this->CI->user->isOnline(),
-            "theme_configs" => $this->theme_config,
+            "theme_configs" => $this->theme_config ?? null,
             "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
             "sideboxes" => $sideboxes,
             "sideboxes_top" => $sideboxes_top,
@@ -401,7 +401,7 @@ class Template
             "activeLanguage" => $this->CI->language->getLanguage(),
             "cdn_link" => $this->CI->config->item('cdn') === true ? $this->CI->config->item('cdn_link') : null,
             "isOnline" => $this->CI->user->isOnline(),
-            "theme_configs" => $this->theme_config,
+            "theme_configs" => $this->theme_config ?? null,
             "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
             "social_media" => array(
                 'facebook' => $this->CI->config->item('facebook'),
@@ -717,16 +717,16 @@ class Template
     /**
      * Format text
      *
-     * @param String $text
+     * @param Mixed $text
      * @param Boolean $nl2br
      * @param Boolean $xss
      * @param false|null $break
      * @return string
      */
-    public function format(string $text, bool $nl2br = false, bool $xss = true, false|null $break = false): string
+    public function format(mixed $text, bool $nl2br = false, bool $xss = true, false|null $break = false): string
     {
         // Prevent Cross-Site Scripting
-        if ($xss)
+        if ($xss && is_string($text))
         {
             $text = $this->CI->security->xss_clean($text);
             $text = htmlspecialchars($text);
