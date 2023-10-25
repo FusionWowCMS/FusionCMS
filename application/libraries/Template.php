@@ -591,7 +591,7 @@ class Template
 
         foreach ((array) $links as $key => $item)
         {
-            if (!hasViewPermission($item['permission'], "--MENU--") && $item['permission'])
+            if ($item['permission'] && !hasViewPermission($item['permission'], "--MENU--"))
                 continue;
 
             // Xss protect out names

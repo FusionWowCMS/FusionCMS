@@ -17,8 +17,8 @@ if (!defined('BASEPATH')) {
 class Acl
 {
     private $CI;
-    private $modules;
-    private $runtimeCache;
+    private array $modules;
+    private array $runtimeCache;
 
     public function __construct()
     {
@@ -31,23 +31,27 @@ class Acl
      * Require the user to have a specific permission
      *
      * @param String $permissionName
-     * @param String $moduleName
+     * @param false|String $moduleName
+     * @return bool
      */
-    public function requirePermission($permissionName, $moduleName = false)
+    public function requirePermission(string $permissionName, false|string $moduleName = false): bool
     {
         if (!$this->hasPermission($permissionName, $moduleName)) {
             $this->CI->template->showError(lang("permission_denied", "error"));
+            return false;
         }
+
+        return true;
     }
 
     /**
      * Check if the user has a specific permission to view a certain item
      *
-     * @param  String $permissionName
-     * @param  String $moduleName
-     * @return Boolean
+     * @param String $permissionName
+     * @param String $moduleName
+     * @return bool|null
      */
-    public function hasViewPermission($permissionName, $moduleName)
+    public function hasViewPermission(string $permissionName, string $moduleName): bool|null
     {
         $userId = false;
 
@@ -81,12 +85,12 @@ class Acl
     /**
      * Check if the user has a specific permission
      *
-     * @param  String $permissionName
-     * @param  String $moduleName
-     * @param  Int $userId
+     * @param String $permissionName
+     * @param false|String $moduleName
+     * @param false|Int $userId
      * @return Boolean
      */
-    public function hasPermission($permissionName, $moduleName = false, $userId = false)
+    public function hasPermission(string $permissionName, false|string $moduleName = false, false|int $userId = false): bool
     {
         // Default to the current module
         if (!$moduleName) {
@@ -133,11 +137,11 @@ class Acl
     /**
      * Get the permission information
      *
-     * @param  String $permissionName
-     * @param  String $moduleName
+     * @param String $permissionName
+     * @param String $moduleName
      * @return Array
      */
-    public function getPermission($permissionName, $moduleName)
+    public function getPermission(string $permissionName, string $moduleName): array
     {
         if (!array_key_exists($moduleName, $this->modules)) {
             $this->loadManifest($moduleName);
@@ -149,16 +153,18 @@ class Acl
         } else {
             show_error("The permission <b>" . $permissionName . "</b> does not exist in <b>" . $moduleName . "</b>");
         }
+
+        return array();
     }
 
     /**
      * Get the role
      *
-     * @param  String $roleName
-     * @param  String $moduleName
-     * @return Array
+     * @param String $roleName
+     * @param String $moduleName
+     * @return false|array
      */
-    public function getManifestRole($roleName, $moduleName)
+    public function getManifestRole(string $roleName, string $moduleName): false|array
     {
         if (!array_key_exists($moduleName, $this->modules)) {
             $this->loadManifest($moduleName);
@@ -177,7 +183,7 @@ class Acl
      *
      * @param String $moduleName
      */
-    private function loadManifest($moduleName)
+    private function loadManifest(string $moduleName): void
     {
         if (!file_exists("application/modules/" . $moduleName . "/manifest.json")) {
             show_error("The manifest.json file for <b>" . strtolower($moduleName) . "</b> does not exist");
