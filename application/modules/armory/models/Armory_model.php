@@ -14,6 +14,11 @@ class Armory_model extends CI_Model
     {        
         //Connect to the world database
         $realm = $this->realms->getRealm($realmId);
+
+        // In patch 6.x.x and higher, the item_template table has been removed.
+        if ($realm->getExpansionId() > 4)
+            return false;
+
         $realm->getWorld()->connect();
         $this->w_connection = $realm->getWorld()->getConnection();
 
@@ -33,6 +38,11 @@ class Armory_model extends CI_Model
     public function get_items_count($string, $realmId)
     {
         $realm = $this->realms->getRealm($realmId);
+
+        // In patch 6.x.x and higher, the item_template table has been removed.
+        if ($realm->getExpansionId() > 4)
+            return 0;
+
         $realm->getWorld()->connect();
         $this->w_connection = $realm->getWorld()->getConnection();
         
