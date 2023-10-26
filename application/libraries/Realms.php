@@ -39,6 +39,8 @@ class Realms
         $this->classes = array();
         $this->zones = array();
         $this->realms = array();
+        $this->hordeRaces = array();
+        $this->allianceRaces = array();
 
         // Load the realm object
         require_once('application/libraries/Realm.php');
