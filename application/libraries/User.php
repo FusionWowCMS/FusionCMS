@@ -89,9 +89,9 @@ class User
      *
      * @param String $username
      * @param String $password in plain text
-     * @return String hashed password
+     * @return string|array hashed password
      */
-    public function createHash(string $username = "", string $password = ""): string
+    public function createHash(string $username = "", string $password = ""): string|array
     {
         return $this->CI->realms->getEmulator()->encrypt($username, $password);
     }
@@ -449,10 +449,10 @@ class User
     /**
      * Get the userId from the current User or the given Username
      *
-     * @param bool $username
+     * @param bool|string $username
      * @return int
      */
-    public function getId(bool $username = false): int
+    public function getId(string|bool $username = false): int
     {
         if (!$username) {
             return $this->id;
@@ -464,10 +464,10 @@ class User
     /**
      * Get the username of the current user or the given id.
      *
-     * @param bool $id
+     * @param int|bool $id
      * @return String
      */
-    public function getUsername(bool $id = false): string
+    public function getUsername(int|bool $id = false): string
     {
         return $this->CI->external_account_model->getUsername($id);
     }
