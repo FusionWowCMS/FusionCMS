@@ -720,10 +720,10 @@ class Template
      * @param Mixed $text
      * @param Boolean $nl2br
      * @param Boolean $xss
-     * @param false|null $break
+     * @param Boolean $break
      * @return string
      */
-    public function format(mixed $text, bool $nl2br = false, bool $xss = true, false|null $break = false): mixed
+    public function format(mixed $text, bool $nl2br = false, bool $xss = true, bool $break = false): mixed
     {
         // Prevent Cross-Site Scripting
         if ($xss && is_string($text))
