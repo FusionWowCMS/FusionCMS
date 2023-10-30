@@ -110,11 +110,11 @@ class User
     /**
      * Check if the user rank has any staff permissions
      *
-     * @param bool $id
+     * @param int|bool $id
      * @return     Boolean
      * @deprecated 6.1
      */
-    public function isStaff(bool $id = false): bool
+    public function isStaff(int|bool $id = false): bool
     {
         $id = $id ? $id : $this->id;
         return ($this->isGm($id) || $this->isDev($id) || $this->isAdmin($id) || $this->isOwner($id));
@@ -124,11 +124,11 @@ class User
      * Check if the user has the mod permission
      * Uses [view, mod] ACL permission as of 6.1, for backwards compatibility
      *
-     * @param bool $id
+     * @param int|bool $id
      * @return     Boolean
      * @deprecated 6.1
      */
-    public function isGm(bool $id = false): bool
+    public function isGm(int|bool $id = false): bool
     {
         $id = $id ? $id : $this->id;
         return hasPermission("view", "gm", $id);
@@ -138,11 +138,11 @@ class User
      * Check if the user has the developer permission
      * Uses [view, mod] ACL permission as of 6.1, for backwards compatibility
      *
-     * @param bool $id
+     * @param int|bool $id
      * @return     Boolean
      * @deprecated 6.1
      */
-    public function isDev(bool $id = false): bool
+    public function isDev(int|bool $id = false): bool
     {
         $id = $id ? $id : $this->id;
         return hasPermission("view", "gm", $id);
@@ -152,11 +152,11 @@ class User
      * Check if the user has the admin permission
      * Uses [view, admin] ACL permission as of 6.1, for backwards compatibility
      *
-     * @param bool $id
+     * @param int|bool $id
      * @return     Boolean
      * @deprecated 6.1
      */
-    public function isAdmin(bool $id = false): bool
+    public function isAdmin(int|bool $id = false): bool
     {
         $id = $id ? $id : $this->id;
         return hasPermission("view", "admin", $id);
@@ -166,11 +166,11 @@ class User
      * Check if the user has the owner permission
      * Uses [view, admin] ACL permission as of 6.1, for backwards compatibility
      *
-     * @param bool $id
+     * @param int|bool $id
      * @return     Boolean
      * @deprecated 6.1
      */
-    public function isOwner(bool $id = false): bool
+    public function isOwner(int|bool $id = false): bool
     {
         $id = $id ? $id : $this->id;
         return hasPermission("view", "admin", $id);
