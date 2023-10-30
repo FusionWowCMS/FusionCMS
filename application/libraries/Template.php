@@ -723,7 +723,7 @@ class Template
      * @param false|null $break
      * @return string
      */
-    public function format(mixed $text, bool $nl2br = false, bool $xss = true, false|null $break = false): string
+    public function format(mixed $text, bool $nl2br = false, bool $xss = true, false|null $break = false): mixed
     {
         // Prevent Cross-Site Scripting
         if ($xss && is_string($text))
