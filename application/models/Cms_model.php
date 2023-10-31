@@ -331,4 +331,9 @@ class Cms_model extends CI_Model
             return false;
         }
     }
+
+    public function getMessagesCount(): int
+    {
+        return 0;
+    }
 }

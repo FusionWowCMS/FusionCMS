@@ -97,7 +97,7 @@
 	{/if}
 
 	{if hasPermission('view', "gm") && $config['gm']}
-		<a href="{$url}{$config.mod}" style="background-image:url({$url}application/modules/ucp/images/gm_panel.jpg)"></a>
+		<a href="{$url}{$config.gm}" style="background-image:url({$url}application/modules/ucp/images/gm_panel.jpg)"></a>
 	{/if}
 
 	{if hasPermission('view', "admin") && $config['admin']}
