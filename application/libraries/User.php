@@ -25,8 +25,8 @@ class User
     private mixed $email;
     private int $expansion;
     private ?bool $online;
-    private int $vp;
-    private int $dp;
+    private mixed $vp;
+    private mixed $dp;
     private ?string $register_date;
     private ?string $last_ip;
     private ?string $nickname;
