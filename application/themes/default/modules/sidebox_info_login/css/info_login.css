@@ -54,6 +54,8 @@
 	top: 0;
 	right: 0;
 
+	border: none;
+
 	padding: 0;
 	z-index: 9;
 
@@ -62,6 +64,8 @@
 
 	-webkit-border-radius: var(--field-border-radius);
 	border-radius: var(--field-border-radius);
+
+	background-color: transparent;
 }
 
 .box.type-info_login .card-body .input-group #captcha[for='floatingCaptcha'] img {
@@ -72,12 +76,12 @@
 	border-radius: var(--field-border-radius);
 }
 
-.box.type-info_login .card-body .input-group .captcha-input {
+.box.type-info_login .card-body .input-group .side-captcha-input {
 	height: auto;
 	min-height: auto;
 	line-height: 1.5;
 }
 
-.box.type-info_login .card-body .input-group .captcha-input + label {
+.box.type-info_login .card-body .input-group .side-captcha-input + label {
 	display: none;
 }
