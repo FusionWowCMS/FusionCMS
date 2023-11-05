@@ -1,0 +1,200 @@
+/*-------------------------------------------------------------------------*/
+/* Footer
+/*-------------------------------------------------------------------------*/
+.footer {
+	--colorLight: #6c99ff;
+
+	width: 100%;
+	height: auto;
+
+	padding: 5rem 0;
+
+	background-color: var(--background-shadow);
+}
+
+/* Footer: Copyright
+/*---------------------------------------------------------------*/
+.footer .footer-copyright {
+	color: var(--color-inactive);
+
+	font-size: 0.75rem;
+	font-family: var(--font-family-quaternary);
+
+	text-align: center;
+}
+
+.footer .footer-copyright span {
+	display: block;
+
+	font-size: 1rem;
+	font-weight: bold;
+
+	text-transform: uppercase;
+}
+
+.footer .footer-copyright span i {
+	font-style: initial;
+}
+
+.footer .footer-copyright span strong {
+	color: var(--colorLight);
+}
+
+/* Footer: Credits
+/*---------------------------------------------------------------*/
+.footer .footer-credits {
+	color: var(--color-inactive);
+
+	margin: var(--bs-gutter-y) 0 0 0;
+
+	font-size: 1rem;
+	font-weight: bold;
+	font-family: var(--font-family-quaternary);
+
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.footer .footer-credits span {
+	color: var(--colorLight);
+}
+
+.footer .footer-credits i {
+	color: var(--color-idle);
+
+	font-style: initial;
+}
+
+/* Footer: Navbar
+/*---------------------------------------------------------------*/
+.footer .footer-navbar {}
+
+.footer .footer-navbar .navbar-nav {
+	margin: -0.3rem;
+	display: block;
+	text-align: center;
+}
+
+.footer .footer-navbar .navbar-nav .nav-item {
+	display: inline-block;
+}
+
+.footer .footer-navbar .navbar-nav .nav-item .nav-link {
+	color: var(--color-inactive);
+
+	padding: 0.3rem;
+
+	font-size: 1rem;
+	font-weight: bold;
+	font-family: var(--font-family-quaternary);
+
+	text-transform: uppercase;
+}
+
+.footer .footer-navbar .navbar-nav .nav-item:hover .nav-link,
+.footer .footer-navbar .navbar-nav .nav-item .nav-link:hover,
+.footer .footer-navbar .navbar-nav .nav-item .nav-link:active,
+.footer .footer-navbar .navbar-nav .nav-item .nav-link.active {
+	color: var(--color-active);
+}
+
+/* Footer: Brand
+/*---------------------------------------------------------------*/
+.footer .footer-brand {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+
+.footer .footer-brand img {
+	display: block;
+}
+
+.footer .footer-brand span {
+	margin: 0 0 0 1rem;
+	font-family: var(--font-family-quaternary);
+	text-transform: uppercase;
+}
+
+.footer .footer-brand span b {
+	color: var(--color-idle);
+	display: block;
+	font-size: 0.833125rem;
+	line-height: 100%;
+}
+
+.footer .footer-brand span i {
+	color: #6498ff;
+
+	display: block;
+
+	font-size: 0.5rem;
+	font-style: initial;
+}
+
+/* Footer: Responsive
+/*---------------------------------------------------------------*/
+@media screen and (min-width: 1200px) { /* xl */
+	/* Footer: Copyright
+	/*---------------------------------------------------------------*/
+	.footer .footer-copyright {
+		text-align: left;
+	}
+
+	/* Footer: Credits
+	/*---------------------------------------------------------------*/
+	.footer .footer-credits {
+		text-align: left;
+	}
+
+	/* Footer: Navbar
+	/*---------------------------------------------------------------*/
+	.footer .footer-navbar {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+
+		-ms-flex-wrap: nowrap;
+		flex-wrap: nowrap;
+
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: row;
+		flex-direction: row;
+	}
+
+	.footer .footer-navbar .navbar-nav {
+		width: 50%;
+		height: auto;
+
+		text-align: left;
+
+		-webkit-box-flex: 0;
+		-ms-flex: 0 0 50%;
+		flex: 0 0 50%;
+	}
+
+	.footer .footer-navbar .navbar-nav .nav-item {
+		display: block;
+	}
+}

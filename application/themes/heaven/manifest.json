@@ -1,0 +1,22 @@
+{
+    "date": "2023-09-20",
+    "name": "Heaven",
+    "author": "Veins, Darksider <darksider.legend@gmail.com>",
+    "version": "1.0.0",
+    "website": "https://code-path.com/",
+    "min_required_version": "8.0.0",
+
+    "favicon": "../assets/images/favicon.png",
+
+    "small_avatar": "../assets/images/avatars/0_small.jpg",
+    "normal_avatar": "../assets/images/avatars/0_normal.jpg",
+
+    "slider_text": {
+        "next": "",
+        "previous": ""
+    },
+
+    "slider_id": "section-slider",
+    "screenshot": "assets/images/screenshot.jpg",
+    "blank_header": ""
+}

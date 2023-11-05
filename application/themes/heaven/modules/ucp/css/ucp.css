@@ -1,0 +1,29 @@
+/*-------------------------------------------------------------------------*/
+/* UCP
+/*-------------------------------------------------------------------------*/
+.page-ucp {
+	--color-gold: goldenrod;
+	--color-silver: silver;
+	--color-copper: #b87333;
+}
+
+/* UCP: Points
+/*---------------------------------------------------------------*/
+.page-ucp .gold-points   > i {color: var(--color-gold);   margin: 0 0 0 0.5rem;}
+.page-ucp .silver-points > i {color: var(--color-silver); margin: 0 0 0 0.5rem;}
+.page-ucp .copper-points > i {color: var(--color-copper); margin: 0 0 0 0.5rem;}
+
+.page-ucp .vote-points     > i {color: var(--color-silver);}
+.page-ucp .donation-points > i {color: var(--color-gold);}
+
+/* UCP: Avatar
+/*---------------------------------------------------------------*/
+.page-ucp .avatars {
+	padding: 0;
+}
+
+.page-ucp .avatars .my_avatar {}
+
+.page-ucp .avatars .my_avatar.avatar_current {
+	border-color: #75ceee;
+}

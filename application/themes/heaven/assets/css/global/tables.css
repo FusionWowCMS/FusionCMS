@@ -1,0 +1,157 @@
+/*-------------------------------------------------------------------------*/
+/* Table
+/*-------------------------------------------------------------------------*/
+table {
+	border-spacing: 0 !important;
+	border-collapse: collapse;
+}
+
+/* Table: Head
+/*---------------------------------------------------------------*/
+table thead {}
+
+table thead tr {}
+
+table thead tr th {
+	vertical-align: middle;
+}
+
+/* Table: Body
+/*---------------------------------------------------------------*/
+table tbody {}
+
+table tbody tr {}
+
+table tbody tr td {
+	vertical-align: middle;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Nice table
+/*-------------------------------------------------------------------------*/
+.nice_table {
+	--color-idle: #39465b;
+	--color-active: #61779c;
+
+	/* Colors */
+	--table-head-color: #3d4b62;
+	--table-body-color: #576c8d;
+
+	/* Paddings */
+	--table-padding-x: 0.8rem;
+	--table-padding-y: 0.8rem;
+
+	/* Font */
+	--table-font-style: initial;
+	--table-font-weight: bold;
+	--table-head-font-size: 1.2rem;
+	--table-body-font-size: 1.125rem;
+
+	/* Backgrounds */
+	--table-background-idle: rgba(0, 0, 0, 0.01);
+	--table-background-hover: rgba(0, 0, 0, 0.02);
+
+	width: 100%;
+	height: auto;
+}
+
+/* Nice table: Separator
+/*---------------------------------------------------------------*/
+.nice_table tr::after {
+	--table-sep-start: #293248;
+	--table-sep-end: #293248;
+
+	width: 100%;
+	height: 1px;
+
+	left: 0;
+	bottom: 0;
+
+	content: '';
+	position: absolute;
+
+	background: var(--table-sep-start);
+	background: -moz-linear-gradient(left, var(--table-sep-start) 0%, var(--table-sep-end) 100%);
+	background: -webkit-linear-gradient(left, var(--table-sep-start) 0%, var(--table-sep-end) 100%);
+	background: linear-gradient(to right, var(--table-sep-start) 0%, var(--table-sep-end) 100%);
+}
+
+.nice_table thead tr::after {
+	--table-sep-start: #303c58;
+	--table-sep-end: #303c58;
+
+	height: 2px;
+}
+
+.nice_table tbody tr:first-child::after {
+	--table-sep-start: #303c58;
+	--table-sep-end: #303c58;
+
+	height: 2px;
+}
+
+.nice_table thead + tbody tr:first-child::after {
+	--table-sep-start: #293248;
+	--table-sep-end: #293248;
+
+	height: 1px;
+}
+
+/* Nice table: Head
+/*---------------------------------------------------------------*/
+.nice_table thead {}
+
+.nice_table thead tr {}
+
+.nice_table thead tr th,
+.nice_table tbody tr:first-child td {
+	color: var(--table-head-color);
+
+	padding: var(--table-padding-y) var(--table-padding-x) !important;
+
+	font-size: var(--table-head-font-size) !important;
+	font-style: var(--table-font-style);
+	font-weight: var(--table-font-weight) !important;
+	font-family: var(--font-family-tertiary);
+
+	text-transform: uppercase;
+}
+
+/* Nice table: Body
+/*---------------------------------------------------------------*/
+.nice_table tbody {}
+
+.nice_table tbody tr {
+	-webkit-transition: all 300ms ease-in-out;
+	-o-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
+}
+
+.nice_table tbody tr:nth-child(odd)       {background-color: transparent;}
+.nice_table tbody tr:nth-child(odd):hover {background-color: transparent;}
+
+.nice_table tbody tr:nth-child(even)       {background-color: var(--table-background-idle);}
+.nice_table tbody tr:nth-child(even):hover {background-color: var(--table-background-hover);}
+
+.nice_table thead + tbody tr:nth-child(odd)       {background-color: var(--table-background-idle);}
+.nice_table thead + tbody tr:nth-child(odd):hover {background-color: var(--table-background-hover);}
+
+.nice_table thead + tbody tr:nth-child(even)       {background-color: transparent;}
+.nice_table thead + tbody tr:nth-child(even):hover {background-color: transparent;}
+
+.nice_table thead + tbody tr:first-child       {background-color: var(--table-background-idle) !important;}
+.nice_table thead + tbody tr:first-child:hover {background-color: var(--table-background-hover) !important;}
+
+.nice_table tbody tr td,
+.nice_table thead + tbody tr:first-child td {
+	color: var(--table-body-color);
+
+	padding: var(--table-padding-y) var(--table-padding-x) !important;
+
+	font-size: var(--table-body-font-size) !important;
+	font-style: var(--table-font-style);
+	font-weight: var(--table-font-weight) !important;
+	font-family: var(--font-family-tertiary);
+
+	text-transform: uppercase;
+}

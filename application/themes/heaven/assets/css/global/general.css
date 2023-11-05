@@ -1,0 +1,172 @@
+/*-------------------------------------------------------------------------*/
+/* Define variables
+/*-------------------------------------------------------------------------*/
+:root {
+	/* Radius */
+	--borderRadius-primary: 5px;
+
+	/* Margins */
+	--margin-primary: 8px;
+
+	/* Fonts */
+	--font-family-primary: 'BlizQuadrata Web', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-family-secondary: 'Friz Quadrata Std', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-family-tertiary: 'Roboto', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-family-quaternary: 'Arial', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	/* Colors */
+	--color-base: #8288b5;
+
+	--color-idle: #ffffff;
+	--color-active: #75a4ff;
+	--color-inactive: #434961;
+
+	--color-primary: #ffffff;
+	--color-secondary: #4699fe;
+
+	/* Backgrounds */
+	--background-base: #1f222d;
+	--background-light: #2f3b58;
+	--background-shade: #28324b;
+	--background-shadow: #20242f;
+
+	/* Field */
+	--field-padding: 0.8rem;
+	--field-font-size: 0.75rem;
+	--field-font-weight: 300;
+	--field-border-width: 0px;
+	--field-border-radius: 5px;
+	--field-transition-delay: 300ms;
+
+	/* Glassmorphism */
+	--glassmorphism-glow: #000;
+	--glassmorphism-color: #fff;
+	--glassmorphism-filter: blur(10px);
+	--glassmorphism-outline-color: rgba(255, 255, 255, 0.2);
+	--glassmorphism-outline-shadow: rgba(0, 0, 0, 0.1);
+	--glassmorphism-background-color: rgba(255, 255, 255, 0.1);
+
+	/* Breakpoints */
+	--breakpoint-xs: 0;
+	--breakpoint-sm: 576px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 992px;
+	--breakpoint-xl: 1200px;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Browser reset
+/*-------------------------------------------------------------------------*/
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+
+	outline: none !important;
+	position: relative;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	line-height: 1.5;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+} *:focus {outline: none;}
+
+ul {
+	list-style: none;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Globally applied styles
+/*-------------------------------------------------------------------------*/
+html,
+body {
+	color: var(--color-base);
+
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	font-size: 1rem;
+	font-weight: 400;
+	font-family: var(--font-family-primary);
+
+	line-height: 1.5;
+
+	background-color: var(--background-base);
+}
+
+body {
+	width: 100%;
+	height: auto;
+	min-height: 100vh;
+
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+
+	background-color: var(--background-base);
+	background-image: url('../../images/graphics/background.jpg');
+	background-repeat: no-repeat;
+	background-position: top center;
+} @media screen and (min-width: 1920px) {body {background-size: 100% auto;}}
+
+/* Global: Hyperlink
+/*---------------------------------------------------------------*/
+a {
+	color: var(--color-idle);
+	text-decoration: none !important;
+} a:hover {color: var(--color-active);}
+
+/* Global: Image
+/*---------------------------------------------------------------*/
+img {
+	border: none;
+	vertical-align: middle;
+	background-color: transparent;
+}
+
+/* Global: Selection
+/*---------------------------------------------------------------*/
+::selection {
+	color: var(--color-base);
+	background-color: var(--background-light);
+}
+
+::-moz-selection {
+	color: var(--color-base);
+	background-color: var(--background-light);
+}
+
+/* Global: Scrollbar
+/*---------------------------------------------------------------*/
+::-webkit-scrollbar {
+	max-width: 10px;
+	max-height: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: var(--background-shade);
+}
+
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+	cursor: pointer;
+
+	border: 3px solid var(--background-shade);
+
+	background-color: var(--background-base);
+}

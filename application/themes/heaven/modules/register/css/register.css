@@ -1,0 +1,143 @@
+/*-------------------------------------------------------------------------*/
+/* Register
+/*-------------------------------------------------------------------------*/
+.page-register {
+	width: 100%;
+	height: auto;
+
+	margin: 0 auto;
+	border: 1px solid #323648;
+
+	overflow: hidden;
+	max-width: 800px;
+
+	-webkit-box-shadow: 0 0 20px 0 rgba(45, 49, 65, 0.5);
+	box-shadow: 0 0 20px 0 rgba(45, 49, 65, 0.5);
+
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+
+	background-color: #1f222d;
+}
+
+/* Register: Page head
+/*---------------------------------------------------------------*/
+.page-register .page-head {
+	display: none;
+}
+
+/* Register: Banner
+/*---------------------------------------------------------------*/
+.page-register .register-banner {
+	width: 100%;
+	height: 100%;
+
+	display: block;
+
+	min-height: 400px;
+
+	text-align: center;
+
+	background-size: cover;
+	background-color: transparent;
+	background-image: url('../../../assets/images/banners/banner-register.jpg');
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+
+.page-register .register-banner::before {
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	content: '';
+	position: absolute;
+
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(31, 34, 45, 0.65)));
+	background: -o-linear-gradient(top, transparent 0%, rgba(31, 34, 45, 0.65) 100%);
+	background: linear-gradient(to bottom, transparent 0%, rgba(31, 34, 45, 0.65) 100%);
+}
+
+.page-register .register-banner .btn-gray {
+	width: 100%;
+	height: auto;
+
+	top: 60%;
+
+	margin: 0 auto;
+
+	max-width: 180px;
+}
+
+/* Register: Content
+/*---------------------------------------------------------------*/
+.page-register .register-content {
+	padding: 3rem;
+}
+
+/* Register: Content: Title
+/*-----------------------------------------------------*/
+.page-register .register-content .register-title {
+	color: #47475e;
+
+	margin: 0;
+
+	text-align: center;
+
+	font-weight: 900;
+	font-family: var(--font-family-tertiary);
+}
+
+/* Register: Content: Form
+/*-----------------------------------------------------*/
+.page-register .register-content form {
+	margin: 3rem 0 0 0;
+}
+
+.page-register .register-content form .form-group {}
+
+.page-register .register-content form .form-group input {}
+
+/* Form (captcha) */
+.page-register .register-content form .form-group input + img {
+	width: 180px !important;
+	height: 100% !important;
+
+	top: 0;
+	right: 0;
+
+	-webkit-filter: grayscale(0.8);
+	filter: grayscale(0.8);
+
+	padding: 0;
+	z-index: 8;
+	opacity: 0.5;
+
+	overflow: hidden;
+	position: absolute;
+
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+/* Form (error) */
+.page-register .register-content form .form-group input + span,
+.page-register .register-content form .form-group input + img + span {
+	top: 50% !important;
+	right: var(--field-padding) !important;
+
+	z-index: 9;
+	position: absolute;
+
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.page-register .register-content form .form-group input + span img,
+.page-register .register-content form .form-group input + img + span img {
+	display: block;
+	vertical-align: middle;
+}

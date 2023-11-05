@@ -1,0 +1,114 @@
+/*-------------------------------------------------------------------------*/
+/* Fonts
+/*-------------------------------------------------------------------------*/
+@font-face {
+	font-family: 'Arial';
+	src: url('../../fonts/Arial/Regular/ArialMT.eot');
+	src: local('Arial'), local('ArialMT'),
+		 url('../../fonts/Arial/Regular/ArialMT.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/Arial/Regular/ArialMT.woff2') format('woff2'),
+		 url('../../fonts/Arial/Regular/ArialMT.woff') format('woff'),
+		 url('../../fonts/Arial/Regular/ArialMT.ttf') format('truetype'),
+		 url('../../fonts/Arial/Regular/ArialMT.svg#ArialMT') format('svg');
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Arial';
+	src: url('../../fonts/Arial/Bold/Arial-BoldMT.eot');
+	src: local('Arial Bold'), local('Arial-BoldMT'),
+		 url('../../fonts/Arial/Bold/Arial-BoldMT.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/Arial/Bold/Arial-BoldMT.woff2') format('woff2'),
+		 url('../../fonts/Arial/Bold/Arial-BoldMT.woff') format('woff'),
+		 url('../../fonts/Arial/Bold/Arial-BoldMT.ttf') format('truetype'),
+		 url('../../fonts/Arial/Bold/Arial-BoldMT.svg#Arial-BoldMT') format('svg');
+	font-style: normal;
+	font-weight: bold;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'BlizQuadrata Web';
+	src: url('../../fonts/BlizQuadrataWeb/Regular/BlizQuadrataWeb.eot');
+	src: local('BlizQuadrata Web'), local('BlizQuadrataWeb'),
+		 url('../../fonts/BlizQuadrataWeb/Regular/BlizQuadrataWeb.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/BlizQuadrataWeb/Regular/BlizQuadrataWeb.woff2') format('woff2'),
+		 url('../../fonts/BlizQuadrataWeb/Regular/BlizQuadrataWeb.woff') format('woff'),
+		 url('../../fonts/BlizQuadrataWeb/Regular/BlizQuadrataWeb.ttf') format('truetype'),
+		 url('../../fonts/BlizQuadrataWeb/Regular/BlizQuadrataWeb.svg#BlizQuadrataWeb') format('svg');
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Friz Quadrata Std';
+	src: url('../../fonts/FrizQuadrataStd/Regular/FrizQuadrataStd-Regular.eot');
+	src: local('Friz Quadrata Std Regular'), local('FrizQuadrataStd-Regular'),
+		 url('../../fonts/FrizQuadrataStd/Regular/FrizQuadrataStd-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/FrizQuadrataStd/Regular/FrizQuadrataStd-Regular.woff2') format('woff2'),
+		 url('../../fonts/FrizQuadrataStd/Regular/FrizQuadrataStd-Regular.woff') format('woff'),
+		 url('../../fonts/FrizQuadrataStd/Regular/FrizQuadrataStd-Regular.ttf') format('truetype'),
+		 url('../../fonts/FrizQuadrataStd/Regular/FrizQuadrataStd-Regular.svg#FrizQuadrataStd-Regular') format('svg');
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../../fonts/Roboto/Light/Roboto-Light.eot');
+	src: local('Roboto Light'), local('Roboto-Light'),
+		 url('../../fonts/Roboto/Light/Roboto-Light.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/Roboto/Light/Roboto-Light.woff2') format('woff2'),
+		 url('../../fonts/Roboto/Light/Roboto-Light.woff') format('woff'),
+		 url('../../fonts/Roboto/Light/Roboto-Light.ttf') format('truetype'),
+		 url('../../fonts/Roboto/Light/Roboto-Light.svg#Roboto-Light') format('svg');
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../../fonts/Roboto/Black/Roboto-Black.eot');
+	src: local('Roboto Black'), local('Roboto-Black'),
+		 url('../../fonts/Roboto/Black/Roboto-Black.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/Roboto/Black/Roboto-Black.woff2') format('woff2'),
+		 url('../../fonts/Roboto/Black/Roboto-Black.woff') format('woff'),
+		 url('../../fonts/Roboto/Black/Roboto-Black.ttf') format('truetype'),
+		 url('../../fonts/Roboto/Black/Roboto-Black.svg#Roboto-Black') format('svg');
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../../fonts/Roboto/Medium/Roboto-Medium.eot');
+	src: local('Roboto Medium'), local('Roboto-Medium'),
+		 url('../../fonts/Roboto/Medium/Roboto-Medium.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/Roboto/Medium/Roboto-Medium.woff2') format('woff2'),
+		 url('../../fonts/Roboto/Medium/Roboto-Medium.woff') format('woff'),
+		 url('../../fonts/Roboto/Medium/Roboto-Medium.ttf') format('truetype'),
+		 url('../../fonts/Roboto/Medium/Roboto-Medium.svg#Roboto-Medium') format('svg');
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../../fonts/Roboto/Bold/Roboto-Bold.eot');
+	src: local('Roboto Bold'), local('Roboto-Bold'),
+		 url('../../fonts/Roboto/Bold/Roboto-Bold.eot?#iefix') format('embedded-opentype'),
+		 url('../../fonts/Roboto/Bold/Roboto-Bold.woff2') format('woff2'),
+		 url('../../fonts/Roboto/Bold/Roboto-Bold.woff') format('woff'),
+		 url('../../fonts/Roboto/Bold/Roboto-Bold.ttf') format('truetype'),
+		 url('../../fonts/Roboto/Bold/Roboto-Bold.svg#Roboto-Bold') format('svg');
+	font-style: normal;
+	font-weight: bold;
+	font-display: swap;
+}

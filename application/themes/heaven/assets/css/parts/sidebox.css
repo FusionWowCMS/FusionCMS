@@ -1,0 +1,74 @@
+/*-------------------------------------------------------------------------*/
+/* Sidebox
+/*-------------------------------------------------------------------------*/
+.sidebox {
+	width: 100%;
+	height: auto;
+
+	overflow: hidden;
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-color: var(--background-shade);
+}
+
+/* Sidebox: Head
+/*---------------------------------------------------------------*/
+.sidebox .sidebox-head {
+	width: 100%;
+	height: auto;
+
+	color: var(--color-primary);
+
+	margin: 0;
+	padding: 0.5rem 1rem;
+
+	font-size: 1.25rem;
+	font-family: var(--font-family-secondary);
+
+	line-height: 1.5;
+
+	text-align: center;
+	text-transform: uppercase;
+
+	background-color: var(--background-light);
+}
+
+.sidebox .sidebox-head span {
+	color: var(--color-secondary);
+}
+
+/* Sidebox: Body
+/*---------------------------------------------------------------*/
+.sidebox .sidebox-body {
+	width: 100%;
+	height: auto;
+
+	padding: 1rem;
+}
+
+.sidebox .sidebox-body iframe {
+	width: 100%;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Sidebox (widget top)
+/*-------------------------------------------------------------------------*/
+.sidebox[widget='top'] {}
+
+/*-------------------------------------------------------------------------*/
+/* Sidebox (widget side)
+/*-------------------------------------------------------------------------*/
+.sidebox[widget='side'] {
+	margin: var(--bs-gutter-y) 0 0 0;
+}
+
+.sidebox[widget='side']:first-child {
+	margin: 0;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Sidebox (widget bottom)
+/*-------------------------------------------------------------------------*/
+.sidebox[widget='bottom'] {}

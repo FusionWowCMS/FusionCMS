@@ -1,0 +1,202 @@
+/*-------------------------------------------------------------------------*/
+/* Page
+/*-------------------------------------------------------------------------*/
+.section-page {
+	--textColor: #475872;
+	--borderColor: #38465a;
+	--backgroundColor: #1a1e28;
+	--backgroundActive: #232936;
+
+	width: 100%;
+	height: auto;
+
+	display: block;
+	padding: 15rem 0;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+}
+
+.section-wall + .section-page {
+	padding: 5rem 0;
+}
+
+.is-subpage .section-page {
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(31, 34, 45, 0.9)));
+	background: -o-linear-gradient(top, transparent 0%, rgba(31, 34, 45, 0.9) 100%);
+	background: linear-gradient(to bottom, transparent 0%, rgba(31, 34, 45, 0.9) 100%);
+}
+
+/* Page: Head
+/*---------------------------------------------------------------*/
+.section-page .page-head {
+	--bs-gutter-y: 1rem;
+
+	color: var(--color-primary);
+	margin: 0 0 var(--bs-gutter-y) 0;
+	line-height: 1.5;
+	text-transform: uppercase;
+}
+
+/* Page: Head (Breadcrumb) */
+.section-page .page-head nav[aria-label='breadcrumb'] {
+	width: 100%;
+	height: 100%;
+}
+
+.section-page .page-head nav[aria-label='breadcrumb'] .breadcrumb {
+	width: 100%;
+	height: 100%;
+
+	margin: 0;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+/* Page: Head (Home) */
+.section-page .page-head.-type-home {
+	font-size: 1.875rem;
+	font-family: var(--font-family-secondary);
+}
+
+.section-page .page-head.-type-home span {
+	color: var(--color-secondary);
+}
+
+/* Page: Head (Subpage) */
+.section-page .page-head.-type-page {
+	font-size: 1.25rem;
+	font-weight: bold;
+	font-family: var(--font-family-tertiary);
+}
+
+/* Page: Body
+/*---------------------------------------------------------------*/
+.section-page .page-body {
+	width: 100%;
+	height: auto;
+}
+
+.section-page .page-body iframe {
+	width: 100%;
+}
+
+/* Page: Responsive
+/*---------------------------------------------------------------*/
+@media screen and (min-width: 1200px) { /* xl */
+	/* Page: Head
+	/*---------------------------------------------------------------*/
+	.section-page .page-head.-type-page {
+		font-size: 1.75rem;
+	}
+}
+
+/*-------------------------------------------------------------------------*/
+/* [COMPONENT] Content ajax
+/*-------------------------------------------------------------------------*/
+#content_ajax {
+	width: 100%;
+	height: auto;
+
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+/*-------------------------------------------------------------------------*/
+/* [COMPONENT] Page sub body
+/*-------------------------------------------------------------------------*/
+.page-subbody {
+	width: 100%;
+	height: auto;
+}
+
+/*-------------------------------------------------------------------------*/
+/* [COMPONENT] Section header
+/*-------------------------------------------------------------------------*/
+.section-header {
+	margin: 0 0 1rem 0;
+	padding: 0 0 0.5rem 0;
+
+	font-size: 1.3rem;
+}
+
+.section-header::after {
+	width: 100%;
+	height: 1px;
+
+	left: 0;
+	bottom: 0;
+
+	content: '';
+	position: absolute;
+
+	background-color: var(--borderColor);
+}
+
+/*-------------------------------------------------------------------------*/
+/* [COMPONENT] Section header (lg)
+/*-------------------------------------------------------------------------*/
+.col-lg-8 .section-header {
+	color: var(--textColor);
+
+	margin: 0;
+	padding: 1.6rem 0.8rem;
+
+	display: block;
+
+	font-size: 1.125rem;
+	font-weight: bold;
+	font-family: var(--font-family-tertiary);
+
+	line-height: 100%;
+
+	border-style: solid;
+	border-width: 1px 1px 0 1px;
+	border-color: var(--borderColor);
+
+	text-transform: uppercase;
+
+	background-color: var(--backgroundActive);
+}
+
+.col-lg-8 .section-header span {
+	line-height: 100%;
+}
+
+.col-lg-8 .section-body + .section-header {
+	margin: 1rem 0 0 0;
+}
+
+/*-------------------------------------------------------------------------*/
+/* [COMPONENT] Section body (lg)
+/*-------------------------------------------------------------------------*/
+.col-lg-8 .section-body {
+	padding: 2rem;
+
+	border-width: 1px;
+	border-style: solid;
+	border-color: var(--borderColor);
+
+	background-color: var(--backgroundColor);
+}
+
+.col-lg-8 .section-body table {
+	margin: 0;
+}

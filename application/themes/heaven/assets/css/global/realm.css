@@ -1,0 +1,78 @@
+/*-------------------------------------------------------------------------*/
+/* Realm
+/*-------------------------------------------------------------------------*/
+.realm {
+	margin: 0;
+	font-size: 1rem;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Realm bar
+/*-------------------------------------------------------------------------*/
+.poll_bar,
+.realm_bar {
+	width: 100%;
+	height: 20px;
+
+	margin: 0.75rem 0 0 0;
+	padding: 2px;
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-color: var(--background-light);
+}
+
+/* Realm bar: Fill
+/*---------------------------------------------------------------*/
+.poll_bar .poll_bar_fill,
+.realm_bar .realm_bar_fill {
+	width: auto;
+	height: 100%;
+
+	opacity: 0.9;
+	overflow: hidden;
+
+	-webkit-filter: brightness(1.5);
+	filter: brightness(1.5);
+
+	-webkit-border-radius: var(--borderRadius-primary);
+	border-radius: var(--borderRadius-primary);
+
+	background-color: var(--background-light);
+}
+
+/*-------------------------------------------------------------------------*/
+/* Online realm bar
+/*-------------------------------------------------------------------------*/
+#ucp_characters h1,
+.online_realm_button {
+	width: 100%;
+	height: auto;
+
+	color: var(--textColor);
+
+	border: 1px solid var(--borderColor);
+
+	display: block;
+	padding: 0.8rem;
+
+	font-size: 1.125rem;
+	font-weight: bold;
+	font-family: var(--font-family-tertiary);
+
+	text-align: center;
+	text-shadow: none;
+	text-transform: uppercase;
+
+	background-color: var(--backgroundActive);
+}
+
+/* Online realm bar: Active
+/*---------------------------------------------------------------*/
+#ucp_characters h1:hover,
+#ucp_characters h1:active,
+.online_realm_button:hover,
+.online_realm_button:active {
+	color: var(--textColor);
+}
