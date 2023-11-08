@@ -217,11 +217,11 @@ class External_account_model extends CI_Model
     /**
      * Get the rank
      *
-     * @param  String $value
-     * @param  Boolean $isUsername
+     * @param false|String $value
+     * @param Boolean $isUsername
      * @return int
      */
-    public function getRank($value = false, $isUsername = false)
+    public function getRank(false|string $value = false, bool $isUsername = false)
     {
         $this->connect();
 
@@ -236,19 +236,11 @@ class External_account_model extends CI_Model
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
 
-            if (preg_match("/^trinity/i", get_class($this->realms->getEmulator()))) {
-                if ($row[0]["SecurityLevel"] == "") {
-                    $row[0]["SecurityLevel"] = 0;
-                }
-
-                return $row[0]["SecurityLevel"];
-            } else {
-                if ($row[0]["gmlevel"] == "") {
-                    $row[0]["gmlevel"] = 0;
-                }
-
-                return $row[0]["gmlevel"];
+            if ($row[0]["gmlevel"] == "") {
+                $row[0]["gmlevel"] = 0;
             }
+
+            return $row[0]["gmlevel"];
         } else {
             return 0;
         }

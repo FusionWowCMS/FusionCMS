@@ -22,7 +22,7 @@
                   </tr>
                </thead>
                <tbody>
-                  {foreach from=$realm->getCharacters()->getOnlinePlayers() item=character}
+                  {foreach from=$realm->getCharacters()->getOnlinePlayers($hide_gms) item=character}
                   <tr>
                      <td><a data-tip="{lang("view_profile", "online")}" href="{$url}character/{$realm->getId()}/{$character.guid}">{$character.name}</a></td>
                      <td>{$character.level}</td>

@@ -2,6 +2,12 @@
 
 class Online_refresh extends MX_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->config('online');
+    }
     public function index()
     {
         $cache = $this->cache->get("online_module");
@@ -12,6 +18,7 @@ class Online_refresh extends MX_Controller
             $online_data = array(
                 "realms" => $this->realms->getRealms(),
                 "url" => $this->template->page_url,
+                "hide_gms" => $this->config->item('hide_gms'),
                 "realmsObj" => $this->realms
             );
 

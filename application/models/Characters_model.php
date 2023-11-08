@@ -46,11 +46,12 @@ class Characters_model
     /**
      * Get characters
      *
-     * @param  String $fields
-     * @param  Array $where
+     * @param String $fields
+     * @param Array $where
+     * @param bool $removeGMs
      * @return Mixed
      */
-    public function getCharacters($fields, $where)
+    public function getCharacters(string $fields, array $where, bool $removeGMs = false): mixed
     {
         // Make sure we're connected
         $this->connect();
@@ -65,8 +66,16 @@ class Characters_model
             }
         }
 
+        $rows = $query->result_array();
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            if($removeGMs) {
+                foreach ($rows as $key => $character) {
+                    if (\CI::$APP->external_account_model->getRank($character['account']) > 0) {
+                        unset($rows[$key]);
+                    }
+                }
+            }
+            return $rows;
         } else {
             return false;
         }
@@ -75,11 +84,12 @@ class Characters_model
     /**
      * Get the online players
      *
-     * @return Array
+     * @param bool $removeGMs
+     * @return false|array
      */
-    public function getOnlinePlayers()
+    public function getOnlinePlayers(bool $removeGMs = false): false|array
     {
-        return $this->getCharacters(columns("characters", array("guid", "account", "name", "race", "class", "gender", "level", "zone"), $this->realmId), array(column("characters", "online", false, $this->realmId) => 1));
+        return $this->getCharacters(columns("characters", array("guid", "account", "name", "race", "class", "gender", "level", "zone"), $this->realmId), array(column("characters", "online", false, $this->realmId) => 1), $removeGMs);
     }
 
     /**
