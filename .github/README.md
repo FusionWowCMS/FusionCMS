@@ -89,5 +89,6 @@ This project exists thanks to:
 </a>
 
 ## Links
-
-**[Discord](https://discord.gg/tnWTkZ7akZ)**
+<a href="https://discord.gg/tnWTkZ7akZ">
+    <img src="https://discord.com/api/guilds/1116706973828775976/widget.png?style=banner2" alt="Discord">
+</a>
