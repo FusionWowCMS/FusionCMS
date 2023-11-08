@@ -472,7 +472,7 @@ class Skyfire_rbac_soap implements Emulator
      * Send a console command
      *
      * @param  String $command
-     * @return Array
+     * @return void
      */
     public function send($command)
     {
@@ -487,7 +487,7 @@ class Skyfire_rbac_soap implements Emulator
         );
 
         try {
-            $result = $client->executeCommand(new SoapParam($command, "command"));
+            $client->executeCommand(new SoapParam($command, "command"));
         } catch (Exception $e) {
             die("Something went wrong! An administrator has been noticed and will send your order as soon as possible.<br /><br /><b>Error:</b> <br />" . $e->getMessage());
         }
