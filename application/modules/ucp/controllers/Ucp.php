@@ -92,7 +92,7 @@ class Ucp extends MX_Controller
         $mail_parts = explode("@", $email);
         $len = strlen($mail_parts[0]);
 
-        $mail_parts[0] = substr($mail_parts[0], 0, 2).str_repeat('*', $len - 2).substr($mail_parts[0], $len - 1, 2); // show first 2 letters and last 1 letter
+        $mail_parts[0] = substr($mail_parts[0], 0, 2).str_repeat('*', 5).substr($mail_parts[0], $len - 1, 2); // show first 2 letters and last 1 letter
 
         return implode("@", $mail_parts);
     }
