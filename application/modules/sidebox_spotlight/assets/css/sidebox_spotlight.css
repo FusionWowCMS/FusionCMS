@@ -1,0 +1,168 @@
+/**
+ * @package    FusionCMS
+ * @subpackage Spotlight/CSS
+ * @since      1.0.0
+ * @version    1.0.0
+ * @author     Nightprince
+ * @link       https://www.yekta-core.ir
+ * @copyright  (c) 2023 FusionWowCMS/FusionCMS web developing team
+ */
+
+/*-------------------------------------------------------------------------*/
+/* Define variables
+/*-------------------------------------------------------------------------*/
+:root {
+	--spotlight-gap: 0.3rem;
+
+	--spotlight-border-radius: 3px;
+
+	--spotlight-border-primary: #5a5449;
+
+	--spotlight-pagination-idle: #3a3730;
+	--spotlight-pagination-active: #797367;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Spotlight
+/*-------------------------------------------------------------------------*/
+.spotlight {
+	width: 100%;
+	height: auto;
+}
+
+/* Spotlight: Pagination
+/*---------------------------------------------------------------*/
+.spotlight .spotlight-pagination {
+	width: 100%;
+	height: auto;
+
+	gap: var(--spotlight-gap);
+
+	margin: 1rem 0 0 0;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+
+	-webkit-box-align: stretch;
+	-ms-flex-align: stretch;
+	align-items: stretch;
+
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+
+/* Pagination: Idle
+/*-----------------------------------------------------*/
+.spotlight .spotlight-pagination a {
+	width: 13px;
+	height: 13px;
+
+	display: block;
+
+	-webkit-border-radius: var(--spotlight-border-radius);
+	border-radius: var(--spotlight-border-radius);
+
+	background-color: var(--spotlight-pagination-idle);
+
+	-webkit-transition: all 300ms ease-in-out;
+	-o-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out
+}
+
+/* Pagination: Active
+/*-----------------------------------------------------*/
+.spotlight .spotlight-pagination a:hover,
+.spotlight .spotlight-pagination a:active,
+.spotlight .spotlight-pagination a.is-active {
+	background-color: var(--spotlight-pagination-active);
+}
+
+/* Spotlight: Item
+/*---------------------------------------------------------------*/
+.spotlight .spotlight-item {
+	width: 100%;
+	height: auto;
+
+	gap: var(--spotlight-gap);
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: stretch;
+	-ms-flex-align: stretch;
+	align-items: stretch;
+
+	-webkit-box-pack: stretch;
+	-ms-flex-pack: stretch;
+	justify-content: stretch;
+
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+/* Item: Image
+/*-----------------------------------------------------*/
+.spotlight .spotlight-item .item-image {
+	width: 100%;
+	height: 100px;
+
+	border: 1px solid var(--spotlight-border-primary);
+
+	-webkit-box-shadow: 0 0 7px 0 var(--spotlight-border-primary);
+	box-shadow: 0 0 7px 0 var(--spotlight-border-primary);
+
+	-webkit-border-radius: var(--spotlight-border-radius);
+	border-radius: var(--spotlight-border-radius);
+
+	background-size: cover;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+/* Item: Title
+/*-----------------------------------------------------*/
+.spotlight .spotlight-item .item-title {
+	width: 100%;
+	height: auto;
+
+	color: inherit;
+
+	overflow: hidden;
+	white-space: nowrap;
+
+	font-size: 1rem;
+	font-weight: bold;
+
+	text-overflow: ellipsis;
+	text-transform: uppercase;
+}
+
+/* Item: Contents
+/*-----------------------------------------------------*/
+.spotlight .spotlight-item .item-contents {
+	width: 100%;
+	height: auto;
+
+	color: inherit;
+
+	opacity: 0.5;
+
+	font-size: 0.9rem;
+	font-style: italic;
+
+	line-height: 100%;
+}

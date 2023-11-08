@@ -1,0 +1,41 @@
+{
+	"name": "Sidebox: spotlight",
+	"version": "1.2.0",
+	"description": "Displays a spotlight",
+	"author": {
+		"name": "FusionCMS",
+		"website": "https://github.com/FusionWowCMS/FusionCMS"
+	},
+	"admin": [
+		{
+			"text": "Website",
+			"icon": "cursor",
+			"links": [
+				{
+					"text": "Manage Spotlight",
+					"icon": "sidebar-flip",
+					"controller": "admin",
+					"requirePermission": "canViewAdmin"
+				}
+			]
+
+		}
+	],
+	"permissions": {
+		"canViewAdmin": {
+			"default": false,
+			"description": "View the admin section of the spotlight sidebox"
+		}
+	},
+	"roles": {
+		"manage": {
+			"description": "Manage the spotlight sidebox. <font style='color:red;'>Admin-tool<\/font>",
+			"dangerLevel": 2,
+			"permissions": {
+				"canViewAdmin": true
+			}
+		}
+	},
+
+	"enabled": true
+}

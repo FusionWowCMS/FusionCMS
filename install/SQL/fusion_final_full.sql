@@ -113,7 +113,6 @@ INSERT INTO `acl_group_roles` (`group_id`, `role_name`, `module`) VALUES
 (2, 'use', 'news'),
 (2, 'use', 'sidebox_language_picker'),
 (2, 'use', 'sidebox_poll'),
-(2, 'use', 'sidebox_shoutbox'),
 (2, 'view', 'armory'),
 (2, 'view', 'changelog'),
 (2, 'view', 'character'),
@@ -154,13 +153,11 @@ INSERT INTO `acl_group_roles` (`group_id`, `role_name`, `module`) VALUES
 (4, '19', '--MENU--'),
 (4, '6', '--MENU--'),
 (4, 'moderate', 'news'),
-(4, 'moderate', 'sidebox_shoutbox'),
 (4, 'updateAccount', 'ucp'),
 (4, 'use', 'messages'),
 (4, 'use', 'news'),
 (4, 'use', 'sidebox_language_picker'),
 (4, 'use', 'sidebox_poll'),
-(4, 'use', 'sidebox_shoutbox'),
 (4, 'view', 'armory'),
 (4, 'view', 'changelog'),
 (4, 'view', 'donate'),
@@ -187,7 +184,6 @@ INSERT INTO `acl_group_roles` (`group_id`, `role_name`, `module`) VALUES
 (5, 'use', 'news'),
 (5, 'use', 'sidebox_language_picker'),
 (5, 'use', 'sidebox_poll'),
-(5, 'use', 'sidebox_shoutbox'),
 (5, 'view', 'armory'),
 (5, 'view', 'changelog'),
 (5, 'view', 'character'),
@@ -213,13 +209,11 @@ INSERT INTO `acl_group_roles` (`group_id`, `role_name`, `module`) VALUES
 (6, 'manageBans', 'gm'),
 (6, 'sendItems', 'gm'),
 (6, 'viewHistory', 'gm'),
-(6, 'moderate', 'sidebox_shoutbox'),
 (6, 'updateAccount', 'ucp'),
 (6, 'use', 'messages'),
 (6, 'use', 'news'),
 (6, 'use', 'sidebox_language_picker'),
 (6, 'use', 'sidebox_poll'),
-(6, 'use', 'sidebox_shoutbox'),
 (6, 'view', 'armory'),
 (6, 'view', 'changelog'),
 (6, 'view', 'character'),
@@ -246,6 +240,7 @@ INSERT INTO `acl_group_roles` (`group_id`, `role_name`, `module`) VALUES
 (7, 'manage', 'news'),
 (7, 'manage', 'page'),
 (7, 'manage', 'sidebox_poll'),
+(7, 'manage', 'sidebox_spotlight'),
 (7, 'manage', 'store'),
 (7, 'manage', 'teleport'),
 (7, 'manage', 'vote'),
@@ -258,14 +253,12 @@ INSERT INTO `acl_group_roles` (`group_id`, `role_name`, `module`) VALUES
 (7, 'sendItems', 'gm'),
 (7, 'viewHistory', 'gm'),
 (7, 'moderate', 'news'),
-(7, 'moderate', 'sidebox_shoutbox'),
 (7, 'moderate', 'store'),
 (7, 'updateAccount', 'ucp'),
 (7, 'use', 'messages'),
 (7, 'use', 'news'),
 (7, 'use', 'sidebox_language_picker'),
 (7, 'use', 'sidebox_poll'),
-(7, 'use', 'sidebox_shoutbox'),
 (7, 'view', 'admin'),
 (7, 'view', 'armory'),
 (7, 'view', 'changelog'),
@@ -295,6 +288,7 @@ INSERT INTO `acl_group_roles` (`group_id`, `role_name`, `module`) VALUES
 (8, 'manage', 'news'),
 (8, 'manage', 'page'),
 (8, 'manage', 'sidebox_poll'),
+(8, 'manage', 'sidebox_spotlight'),
 (8, 'manage', 'store'),
 (8, 'manage', 'teleport'),
 (8, 'manage', 'vote'),
@@ -7735,6 +7729,23 @@ CREATE TABLE `vote_sites`  (
 
 -- ----------------------------
 -- Records of vote_sites
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sideboxes_spotlight
+-- ----------------------------
+DROP TABLE IF EXISTS `sideboxes_spotlight`;
+CREATE TABLE `sideboxes_spotlight` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `contents` varchar(255) DEFAULT NULL,
+  `order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of sideboxes_spotlight
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS=1;
