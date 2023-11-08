@@ -1,0 +1,12 @@
+{
+	"name":"Sidebox: Discord",
+	"description":"Allows you to create sideboxes Dicsord",
+	"version": "1.0.0",
+	"date": "2023-11-08",
+	"author":
+	{
+		"name":"FusionCMS",
+		"website":"http:\/\/github.com\/FusionWowCMS\/FusionCMS"
+	},
+	"enabled":true
+}

@@ -1009,7 +1009,8 @@ INSERT INTO `sideboxes` (`id`, `type`, `displayName`, `rank_needed`, `order`, `l
 (1, 'status', '{"english":"Server status"}', 1, 0, 'side', NULL),
 (2, 'language_picker', '{"english":"Language"}', 1, 3, 'side', NULL),
 (3, 'top', '', 1, 1, 'top', NULL),
-(4, 'info_login', '{"english":"User area"}', 1, 2, 'side', NULL);
+(4, 'info_login', '{"english":"User area"}', 1, 2, 'side', NULL),
+(5, 'discord', '{"english":"Discord"}', 1, 4, 'side', NULL);
 
 -- ----------------------------
 -- Table structure for sideboxes_custom
