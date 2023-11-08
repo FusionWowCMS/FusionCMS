@@ -84,7 +84,7 @@ var Router = {
 			$.get(link, { is_json_ajax: "1" }, function(data, textStatus, response)
 			{
 				// Full page response? Redirect instead
-				if(/^<!DOCTYPE html\>/.test(data))
+				if(/^<!DOCTYPE html>/.test(data))
 				{
 					window.location.reload(true);
 
