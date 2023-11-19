@@ -84,6 +84,41 @@ class News extends MX_Controller
         }
     }
 
+    public function rss()
+    {
+        requirePermission("view");
+
+        // HACK FIX: Wipe the output buffer, because something is placing a tab in it.
+        ob_end_clean();
+
+        // Load the XML helper
+        $this->load->helper('xml');
+
+        // Get the articles with the upper limit decided by our config.
+        $this->news_articles = $this->news_model->getArticles(0, $this->config->item('news_limit'));
+
+        // For each key we need to add the special values that we want to print
+        foreach($this->news_articles as $key => $article)
+        {
+            $this->news_articles[$key]['title'] = xml_convert(langColumn($article['headline']));
+            $this->news_articles[$key]['content'] = xml_convert(langColumn($article['content']));
+            $this->news_articles[$key]['link'] = base_url().'news/view/'.$article['id'];
+            $this->news_articles[$key]['date'] = date(DATE_RSS, $article['timestamp']);
+            $this->news_articles[$key]['author'] = $this->user->getNickname($article['author_id']);
+            $this->news_articles[$key]['tags'] = $this->news_model->getTags($article['id']);
+        }
+
+        $data['link'] = $this->config->site_url();
+        $data['domain'] = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+        $data['feed_url'] = base_url().'news/rss';
+        $data['page_description'] = $this->config->item('rss_description');
+        $data['page_language'] = $this->config->item('rss_lang');
+        $data['articles'] = $this->news_articles;
+
+        header('Content-Type: text/xml; charset=UTF-8');
+        echo $this->template->loadPage('rss.tpl', $data);
+    }
+
     private function displayPage()
     {
         // Get the cache
