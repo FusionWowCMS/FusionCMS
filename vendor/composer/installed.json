@@ -375,6 +375,67 @@
             "install-path": "../ezyang/htmlpurifier"
         },
         {
+            "name": "fusion-cms/auto-updater",
+            "version": "1.0.3",
+            "version_normalized": "1.0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FusionWowCMS/AutoUpdater.git",
+                "reference": "2f6a537bbf2f8e80b2cf7d70b55b4c202d748792"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FusionWowCMS/AutoUpdater/zipball/2f6a537bbf2f8e80b2cf7d70b55b4c202d748792",
+                "reference": "2f6a537bbf2f8e80b2cf7d70b55b4c202d748792",
+                "shasum": ""
+            },
+            "require": {
+                "composer/semver": "^3.0",
+                "desarrolla2/cache": "^3.0",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-zip": "*",
+                "monolog/monolog": "^2.1",
+                "php": ">=7.2.0",
+                "psr/log": "1.1.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "roave/security-advisories": "dev-master"
+            },
+            "time": "2023-11-19T18:32:38+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "VisualAppeal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Helfensdörfer",
+                    "email": "tim@visualappeal.de"
+                },
+                {
+                    "name": "Darksider"
+                },
+                {
+                    "name": "Keramat Jokar",
+                    "email": "keramatjokar8855@gmail.com"
+                }
+            ],
+            "description": "Autoupdater for PHP",
+            "support": {
+                "issues": "https://github.com/FusionWowCMS/AutoUpdater/issues",
+                "source": "https://github.com/FusionWowCMS/AutoUpdater/tree/1.0.3"
+            },
+            "install-path": "../fusion-cms/auto-updater"
+        },
+        {
             "name": "matthiasmullie/minify",
             "version": "1.3.71",
             "version_normalized": "1.3.71.0",
@@ -1001,60 +1062,6 @@
                 "source": "https://github.com/smarty-php/smarty/tree/v4.3.4"
             },
             "install-path": "../smarty/smarty"
-        },
-        {
-            "name": "visualappeal/php-auto-update",
-            "version": "1.0.2",
-            "version_normalized": "1.0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VisualAppeal/PHP-Auto-Update.git",
-                "reference": "4454361a0fa346c7fb179deef11585c79715b645"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VisualAppeal/PHP-Auto-Update/zipball/4454361a0fa346c7fb179deef11585c79715b645",
-                "reference": "4454361a0fa346c7fb179deef11585c79715b645",
-                "shasum": ""
-            },
-            "require": {
-                "composer/semver": "^3.0",
-                "desarrolla2/cache": "^3.0",
-                "ext-curl": "*",
-                "ext-json": "*",
-                "ext-zip": "*",
-                "monolog/monolog": "^2.1",
-                "php": ">=7.2.0",
-                "psr/log": "1.1.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5",
-                "roave/security-advisories": "dev-master"
-            },
-            "time": "2021-11-27T22:39:05+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "VisualAppeal\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tim Helfensdörfer",
-                    "email": "tim@visualappeal.de"
-                }
-            ],
-            "description": "Autoupdater for PHP",
-            "support": {
-                "issues": "https://github.com/VisualAppeal/PHP-Auto-Update/issues",
-                "source": "https://github.com/VisualAppeal/PHP-Auto-Update/tree/1.0.2"
-            },
-            "install-path": "../visualappeal/php-auto-update"
         }
     ],
     "dev": true,

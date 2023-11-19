@@ -1,11 +1,19 @@
 {
-    "name": "visualappeal/php-auto-update",
+    "name": "FusionCMS/AutoUpdater",
     "description": "Autoupdater for PHP",
     "license": "MIT",
     "authors": [
         {
             "name": "Tim Helfensdörfer",
             "email": "tim@visualappeal.de"
+        },
+        {
+            "name": "Darksider",
+            "email": ""
+        },
+        {
+            "name": "Keramat Jokar",
+            "email": "keramatjokar8855@gmail.com"
         }
     ],
     "minimum-stability": "stable",

@@ -625,11 +625,11 @@ class AutoUpdate {
      * @throws DownloadException
      * @throws Exception
      */
-    protected function downloadUpdate(string $updateUrl, string $updateFile): bool
+    protected function downloadUpdate(string $updateUrl, string $updateFile, int $timeout): bool
     {
         $this->log->info(sprintf('Downloading update "%s" to "%s"', $updateUrl, $updateFile));
         if (function_exists('curl_version') && $this->isValidUrl($updateUrl)) {
-            $update = $this->downloadCurl($updateUrl);
+            $update = $this->downloadCurl($updateUrl, $timeout);
             if ($update === false) {
                 return false;
             }
@@ -862,7 +862,7 @@ class AutoUpdate {
      * @throws ParserException
      * @throws InvalidArgumentException
      */
-    public function update(bool $simulateInstall = true, bool $deleteDownload = true)
+    public function update(bool $simulateInstall = true, bool $deleteDownload = true, int $timeout = 60)
     {
         $this->log->info('Trying to perform update');
 
@@ -907,7 +907,7 @@ class AutoUpdate {
 
             // Download update
             if (!is_file($updateFile)) {
-                if (!$this->downloadUpdate($update['url'], $updateFile)) {
+                if (!$this->downloadUpdate($update['url'], $updateFile, $timeout)) {
                     $this->log->critical(sprintf('Failed to download update from "%s" to "%s"!', $update['url'],
                         $updateFile));
 
