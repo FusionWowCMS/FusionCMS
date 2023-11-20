@@ -1,10 +1,12 @@
 .store_buttons {
 	text-align: right;
 }
+
 .store_item {
 	border: 1px solid #10181f !important;
 	background-color: rgba(0, 0, 0, 0.1);
 }
+
 .sort {
 	padding-right: 0px;
 }
@@ -17,17 +19,40 @@
 	background: #13151e;
 	padding: 1rem;
 }
+
 .vp_button,
 .dp_button {
 	padding: 0.4rem 0.8rem;
-    font-size: 1rem;
+	font-size: 1rem;
 }
+
 span.wh-icon-text {
-    margin: 20px 0px 0px -10px;
-    position: absolute;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: normal;
-    color: #fff;
-    text-shadow: 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000, -2px 0 #000, -1px 0 #000, 0px 0 #000, 1px 0 0 #000;
+	color: #fff;
+
+	right: 0;
+	bottom: 0;
+
+	position: absolute;
+
+	font-size: 16px;
+	font-weight: bold;
+
+	line-height: 0;
+
+	text-shadow: 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000, -2px 0 #000, -1px 0 #000, 0px 0 #000, 1px 0 0 #000;
+}
+
+#store > form[onsubmit="return false"] {}
+
+#store > form[onsubmit="return false"] > div {}
+
+#store > form[onsubmit="return false"] > div > label {}
+
+#store > form[onsubmit="return false"] > div > div {
+	font-size: 0;
+	white-space: nowrap;
+}
+
+#store > form[onsubmit="return false"] > div > div .nice_button {
+	width: 50%;
 }
