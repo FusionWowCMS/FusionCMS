@@ -68,7 +68,7 @@ class Install
     
     private function checkApacheModules()
     {
-        $req = array('mod_rewrite', 'mod_headers', 'mod_expires', 'mod_deflate');
+        $req = array('mod_rewrite', 'mod_headers', 'mod_expires', 'mod_deflate', 'mod_filter');
         $loaded = apache_get_modules();
         $errors = array();
         
