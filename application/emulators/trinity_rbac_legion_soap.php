@@ -10,7 +10,7 @@ defined('BASEPATH') or die('Silence is golden.');
 /**
  * Abstraction layer for supporting different emulators
  */
-class Trinity_legion_soap implements Emulator
+class Trinity_rbac_legion_soap implements Emulator
 {
     protected $config;
 
