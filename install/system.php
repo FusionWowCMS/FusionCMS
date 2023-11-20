@@ -55,7 +55,7 @@ class Install
     
     private function checkPhpExtensions()
     {
-        $req = array('mysqli', 'curl', 'openssl', 'soap', 'gd', 'mbstring', 'json', 'xml', 'zip');
+        $req = array('mysqli', 'curl', 'openssl', 'soap', 'gd', 'gmp', 'mbstring', 'json', 'xml', 'zip');
         $loaded = get_loaded_extensions();
         $errors = array();
         
