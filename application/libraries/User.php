@@ -371,9 +371,9 @@ class User
      * Get the nickname
      *
      * @param false|Int $id
-     * @return String
+     * @return string|null
      */
-    public function getNickname(false|int $id = false): string
+    public function getNickname(false|int $id = false): string | null
     {
         return $this->CI->internal_user_model->getNickname($id);
     }
@@ -517,9 +517,9 @@ class User
     /**
      * Get the register date
      *
-     * @return timestamp
+     * @return string|null
      */
-    public function getRegisterDate()
+    public function getRegisterDate(): string|null
     {
         return $this->register_date;
     }
@@ -555,9 +555,9 @@ class User
     /**
      * Get the last ip
      *
-     * @return string
+     * @return string|null
      */
-    public function getLastIP(): string
+    public function getLastIP(): string | null
     {
         return $this->last_ip;
     }
