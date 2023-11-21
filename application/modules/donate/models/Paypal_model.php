@@ -65,10 +65,9 @@ class Paypal_model extends CI_Model
         $this->db->where('token', $token)->update('paypal_logs', $data);
     }
     
-    private function update_payment($payment_id, $payment_data): true
+    private function update_payment($payment_id, $payment_data): void
     {
         $this->db->where('payment_id', $payment_id);
         $this->db->update('paypal_logs', $payment_data);
-        return true;
     }
 }

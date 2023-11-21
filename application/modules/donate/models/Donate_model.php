@@ -89,34 +89,6 @@ class Donate_model extends CI_Model
         }
     }
 
-    public function findByMessageId($type, $string)
-    {
-        $query = $this->db->query("SELECT * FROM " . $type . "_logs WHERE `message_id`=?", array($string));
-
-        if ($query->num_rows())
-        {
-            $row = $query->result_array();
-
-            return $row;
-        } else {
-            return false;
-        }
-    }
-
-    public function findByNumber($type, $string)
-    {
-        $query = $this->db->query("SELECT * FROM " . $type . "_logs WHERE `sender`=?", array($string));
-
-        if ($query->num_rows())
-        {
-            $row = $query->result_array();
-
-            return $row;
-        } else {
-            return false;
-        }
-    }
-
     public function updatePayPal($id, $data)
     {
         $this->db->where('id', $id);
