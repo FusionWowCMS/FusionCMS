@@ -852,28 +852,30 @@ CREATE TABLE `password_recovery_key`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for paygol_logs
+-- Table structure for pay_custom_gateway_logs
 -- ----------------------------
-DROP TABLE IF EXISTS `paygol_logs`;
-CREATE TABLE `paygol_logs`  (
-  `message_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `service_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `shortcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `keyword` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `message` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `sender` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `operator` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `country` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `custom` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+DROP TABLE IF EXISTS `pay_custom_gateway_logs`;
+CREATE TABLE `pay_custom_gateway_logs`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `payment_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `hash` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `total` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `points` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `price` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `create_time` int(11) NULL DEFAULT NULL,
   `currency` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `timestamp` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
+  `error` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `invoice_number` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '',
+  `payer_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '',
+  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '',
+  `transactions_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `gateway_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of paygol_logs
+-- Records of pay_custom_gateway_logs
 -- ----------------------------
 
 -- ----------------------------
