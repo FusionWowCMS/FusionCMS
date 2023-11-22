@@ -52,6 +52,8 @@ var Ajax = {
 		{
 			UI.confirm('Are you sure?', 'Yes', function() {
 				$(img).parents('.realmHeader, .realmHeader + div.realmForm').fadeOut(200, function() {
+					$(img).parent('.realmHeader').next('.realmForm').remove();
+					$(img).parent('.realmHeader').remove();
 					Ajax.Realms.saveAll();
 				});
 			});
