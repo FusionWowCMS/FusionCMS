@@ -69,8 +69,9 @@ var UI = {
                 else {
                     // check Apache Modules
                     Ajax.checkApacheModules(function(result) {
-                        if (result != '1') 
-						{
+                        if (result == '2') {
+                            notifyResult(false, 'Unable to check Apache Modules, make sure required modules are enabled.');
+                        } else if (result != '1') {
                             notifyResult(false, 'Please enable all required Apache modules to continue.');
                         }
                     });

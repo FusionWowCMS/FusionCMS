@@ -181,13 +181,15 @@ var Ajax = {
     checkApacheModules: function(onComplete) {
         $.get("system.php?step=checkApacheModules", function(data) {
             
-            if (data != '1') {
-                $("#apache-modules-missing .modules").text(data).parent().show();
-				$('.apache-modules .check-result').hide();
-            }
-            else {
-                $('#apache-modules-missing').hide();
+            if (data == '1') {
+				$('#apache-modules-missing').hide();
 				$('.apache-modules .check-result').css('color', 'green').html('OK!').show();
+            } else if (data == '2') {
+				$("#apache-modules-missing .modules").text('Unable to check Apache Modules, make sure required modules are enabled.').parent().show();
+				$('.apache-modules .check-result').hide();
+            } else {
+				$("#apache-modules-missing .modules").text(data).parent().show();
+				$('.apache-modules .check-result').hide();
             }
             
             if (onComplete !== undefined)

@@ -72,7 +72,7 @@ class Install
         $loaded = function_exists('apache_get_modules') ? apache_get_modules() : false;
 
         if(is_bool($loaded) && !$loaded)
-            die("Apache server modules disabled!");
+            die('2');
 
         $errors = array();
         
