@@ -69,11 +69,15 @@ class Install
     private function checkApacheModules()
     {
         $req = array('mod_rewrite', 'mod_headers', 'mod_expires', 'mod_deflate', 'mod_filter');
-        $loaded = apache_get_modules();
+        $loaded = function_exists('apache_get_modules') ? apache_get_modules() : false;
+
+        if(is_bool($loaded) && !$loaded)
+            die("Apache server modules disabled!");
+
         $errors = array();
         
         foreach ($req as $ext)
-            if ( ! in_array($ext, $loaded))
+            if (!in_array($ext, $loaded))
                 $errors[] = $ext;
         
         die( $errors ? join(', ', $errors) : '1' );
