@@ -67,6 +67,9 @@ class External_account_model extends CI_Model
             $query = $this->connection->query(query("get_account"), array($where));
         }
 
+        if (!$query)
+            show_error("Database Error occurs: " . $this->connection->error()['message'] . "<br/>Please check website database `realms.emulator` in 'field list' <b>(make sure you selected right emulator.)</b>");
+
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
             $result = $result[0];
