@@ -280,6 +280,9 @@ $db["account"]["stricton"] = FALSE;';
         // Get realms
         $realms = json_decode(stripslashes($_POST['realms']), true);
 
+        // Check for insert
+        $insert = (isset($_POST['insert']) && $_POST['insert'] == 'false') ? false : true;
+
         // Check if there is any realm
         if(!$realms || !is_array($realms))
             die('You must add at least one realm.');
@@ -304,6 +307,10 @@ $db["account"]["stricton"] = FALSE;';
             foreach($connection as $db)
                 if($db->connect_errno)
                     die('Failed to connect to MySQL: ' . $db->connect_error);
+
+            // Skip
+            if(!$insert)
+                continue;
 
             // Prepare query statement
             $statement = "INSERT INTO `realms` (`hostname`, `username`, `password`, `char_database`, `world_database`, `cap`, `expansion`, `realmName`, `console_username`, `console_password`, `console_port`, `emulator`, `realm_port`, `override_port_world`, `override_port_char`) VALUES (':hostname', ':username', ':password', ':char_database', ':world_database', ':cap', ':expansion', ':realmName', ':console_username', ':console_password', ':console_port', ':emulator', ':realm_port', ':override_port_world', ':override_port_char')";
