@@ -95,9 +95,14 @@ class Template
         // Save the data
         $this->theme_data = $array;
 
-        // Check if the module has any configs
-        if ($this->hasConfigs($this->theme)) {
+        // Check if the theme has any configs
+        if($this->hasConfigs($this->theme))
+        {
+            // Load the theme configs
             $this->loadConfigs();
+
+            // Assign theme configs to smarty template
+            $this->CI->smarty->assign('theme_configs', $this->theme_config ?? null);
         }
     }
 
@@ -289,7 +294,6 @@ class Template
             "CI" => $this->CI,
             "image_path" => $this->image_path,
             "isOnline" => $this->CI->user->isOnline(),
-            "theme_configs" => $this->theme_config ?? null,
             "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
             "sideboxes" => $sideboxes,
             "sideboxes_top" => $sideboxes_top,
@@ -401,7 +405,6 @@ class Template
             "activeLanguage" => $this->CI->language->getLanguage(),
             "cdn_link" => $this->CI->config->item('cdn') === true ? $this->CI->config->item('cdn_link') : null,
             "isOnline" => $this->CI->user->isOnline(),
-            "theme_configs" => $this->theme_config ?? null,
             "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
             "social_media" => array(
                 'facebook' => $this->CI->config->item('facebook'),
