@@ -278,14 +278,15 @@ $db["account"]["stricton"] = FALSE;';
 
     private function realms()
     {
+        // Check for insert
+        $insert = (isset($_POST['insert']) && $_POST['insert'] == 'false') ? false : true;
+
         // Connect to CMS db
-        $this->connect();
+        if($insert)
+            $this->connect();
 
         // Get realms
         $realms = json_decode(stripslashes($_POST['realms']), true);
-
-        // Check for insert
-        $insert = (isset($_POST['insert']) && $_POST['insert'] == 'false') ? false : true;
 
         // Check if there is any realm
         if(!$realms || !is_array($realms))
