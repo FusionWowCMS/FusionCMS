@@ -236,6 +236,9 @@
 .box[widget='top'] {
 	z-index: 10;
 }
+.box[widget='top'].box-sm.type-top {
+	z-index: 11;
+}
 
 /*-------------------------------------------------------------------------*/
 /* Box: Widget (bottom)
