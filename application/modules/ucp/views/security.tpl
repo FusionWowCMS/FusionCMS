@@ -10,7 +10,7 @@
 				{if $security_enabled == false}
 					<div class="row g-2 mt-2 align-items-center" id="security_help" style="display: none;">
 						<p>{lang("two_factor_help", "ucp")}</p>
-						<div class="col-md-12 text-center"><img class="mx-auto bg-light" src="{$qr_code}" alt="{lang("qr_code", "ucp")}"></div>
+						<div class="col-md-12 text-center"><img class="mx-auto bg-light qr-two-factor" src="{$qr_code}" alt="{lang("qr_code", "ucp")}"></div>
 						<div class="col-md-12"><p class="text-center">{lang("qr_code_help_1", "ucp")} {$secret_key} {lang("qr_code_help_2", "ucp")}</p></div>
 					</div>
 				{/if}

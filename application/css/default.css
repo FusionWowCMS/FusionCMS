@@ -4,7 +4,6 @@
     width: 23px;
 }
 
-
 /* Image slider background element */
 
 #slider_wrapper {
@@ -623,4 +622,10 @@ input[type="radio"] {
     width: 308px;
     height: 80px;
     border-radius: 3px;
+}
+
+/* Two factor authentication*/
+img.qr-two-factor {
+    height: auto;
+    width: 300px;
 }
