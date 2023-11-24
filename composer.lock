@@ -102,25 +102,27 @@
         },
         {
             "name": "chillerlan/php-settings-container",
-            "version": "2.1.4",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chillerlan/php-settings-container.git",
-                "reference": "1beb7df3c14346d4344b0b2e12f6f9a74feabd4a"
+                "reference": "4d02944424fa1f48abca96353257c93cbac856c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chillerlan/php-settings-container/zipball/1beb7df3c14346d4344b0b2e12f6f9a74feabd4a",
-                "reference": "1beb7df3c14346d4344b0b2e12f6f9a74feabd4a",
+                "url": "https://api.github.com/repos/chillerlan/php-settings-container/zipball/4d02944424fa1f48abca96353257c93cbac856c1",
+                "reference": "4d02944424fa1f48abca96353257c93cbac856c1",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.4 || ^8.0"
+                "php": "^8.1"
             },
             "require-dev": {
-                "phan/phan": "^5.3",
-                "phpunit/phpunit": "^9.5"
+                "phan/phan": "^5.4",
+                "phpmd/phpmd": "^2.13",
+                "phpunit/phpunit": "^10.2",
+                "squizlabs/php_codesniffer": "^3.7"
             },
             "type": "library",
             "autoload": {
@@ -139,10 +141,9 @@
                     "homepage": "https://github.com/codemasher"
                 }
             ],
-            "description": "A container class for immutable settings objects. Not a DI container. PHP 7.4+",
+            "description": "A container class for immutable settings objects. Not a DI container.",
             "homepage": "https://github.com/chillerlan/php-settings-container",
             "keywords": [
-                "PHP7",
                 "Settings",
                 "configuration",
                 "container",
@@ -162,7 +163,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2022-07-05T22:32:14+00:00"
+            "time": "2023-07-17T20:46:37+00:00"
         },
         {
             "name": "composer/semver",
@@ -1051,5 +1052,5 @@
         "ext-zip": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
