@@ -2,9 +2,7 @@
 /**
  * Class QROptionsTest
  *
- * @filesource   QROptionsTest.php
  * @created      08.11.2018
- * @package      chillerlan\QRCodeTest
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
@@ -14,25 +12,24 @@
 
 namespace chillerlan\QRCodeTest;
 
-use chillerlan\QRCode\{QRCode, QRCodeException, QROptions};
+use chillerlan\QRCode\QROptions;
+use chillerlan\QRCode\Common\Version;
 use PHPUnit\Framework\TestCase;
 
 /**
  * QROptions test
  */
-class QROptionsTest extends TestCase{
+final class QROptionsTest extends TestCase{
 
 	/**
-	 * @see testVersionClamp()
 	 * @return int[][]
-	 * @internal
 	 */
-	public function VersionProvider():array{
+	public static function VersionProvider():array{
 		return [
 			'values > 40 should be clamped to 40'        => [42, 40],
 			'values < 1 should be clamped to 1'          => [-42, 1],
 			'values in between shold not be touched'     => [21, 21],
-			'value -1 should be treated as is (default)' => [QRCode::VERSION_AUTO, -1],
+			'value -1 should be treated as is (default)' => [Version::AUTO, -1],
 		];
 	}
 
@@ -48,11 +45,9 @@ class QROptionsTest extends TestCase{
 	}
 
 	/**
-	 * @see testVersionMinMaxClamp()
 	 * @return int[][]
-	 * @internal
 	 */
-	public function VersionMinMaxProvider():array{
+	public static function VersionMinMaxProvider():array{
 		return [
 			'normal clamp'         => [5, 10, 5, 10],
 			'exceeding values'     => [-42, 42, 1, 40],
@@ -74,45 +69,9 @@ class QROptionsTest extends TestCase{
 	}
 
 	/**
-	 * @see testMaskPatternClamp()
-	 * @return int[][]
-	 * @internal
-	 */
-	public function MaskPatternProvider():array{
-		return [
-			'exceed max'   => [42, 7,],
-			'exceed min'   => [-42, 0],
-			'default (-1)' => [QRCode::MASK_PATTERN_AUTO, -1],
-		];
-	}
-
-	/**
-	 * Tests the $maskPattern clamping
-	 *
-	 * @dataProvider MaskPatternProvider
-	 */
-	public function testMaskPatternClamp(int $maskPattern, int $expected):void{
-		$o = new QROptions(['maskPattern' => $maskPattern]);
-
-		$this::assertSame($expected, $o->maskPattern);
-	}
-
-	/**
-	 * Tests if an exception is thrown on an incorrect ECC level
-	 */
-	public function testInvalidEccLevelException():void{
-		$this->expectException(QRCodeException::class);
-		$this->expectExceptionMessage('Invalid error correct level: 42');
-
-		$o = new QROptions(['eccLevel' => 42]);
-	}
-
-	/**
-	 * @see testClampRGBValues()
 	 * @return int[][][]
-	 * @internal
 	 */
-	public function RGBProvider():array{
+	public static function RGBProvider():array{
 		return [
 			'exceeding values' => [[-1, 0, 999], [0, 0 ,255]],
 			'too few values'   => [[1, 2], [255, 255, 255]],
@@ -121,24 +80,72 @@ class QROptionsTest extends TestCase{
 	}
 
 	/**
-	 * Tests clamping of the RGB values for $imageTransparencyBG
-	 *
-	 * @dataProvider RGBProvider
+	 * @return int[][]
 	 */
-	public function testClampRGBValues(array $rgb, array $expected):void{
-		$o = new QROptions(['imageTransparencyBG' => $rgb]);
-
-		$this::assertSame($expected, $o->imageTransparencyBG);
+	public static function logoSpaceValueProvider():array{
+		return [
+			'negative' => [ -1,   0],
+			'zero'     => [  0,   0],
+			'normal'   => [ 69,  69],
+			'max'      => [177, 177],
+			'exceed'   => [178, 177],
+		];
 	}
 
 	/**
-	 * Tests if an exception is thrown when a non-numeric RGB value was encoutered
+	 * Tests the clamping (between 0 and 177) of the logo space values
+	 *
+	 * @dataProvider logoSpaceValueProvider
 	 */
-	public function testInvalidRGBValueException():void{
-		$this->expectException(QRCodeException::class);
-		$this->expectExceptionMessage('Invalid RGB value.');
+	public function testClampLogoSpaceValue(int $value, int $expected):void{
+		$o = new QROptions;
 
-		$o = new QROptions(['imageTransparencyBG' => ['r', 'g', 'b']]);
+		foreach(['logoSpaceWidth', 'logoSpaceHeight', 'logoSpaceStartX', 'logoSpaceStartY'] as $prop){
+			$o->{$prop} = $value;
+			$this::assertSame($expected, $o->{$prop});
+		}
+
+	}
+
+	/**
+	 * Tests if the optional logo space start values are nullable
+	 */
+	public function testLogoSpaceStartNullable():void{
+		$o = new QROptions([
+			'logoSpaceStartX' => 42,
+			'logoSpaceStartY' => 69,
+		]);
+
+		$this::assertSame(42, $o->logoSpaceStartX);
+		$this::assertSame(69, $o->logoSpaceStartY);
+
+		$o->logoSpaceStartX = null;
+		$o->logoSpaceStartY = null;
+
+		$this::assertNull($o->logoSpaceStartX);
+		$this::assertNull($o->logoSpaceStartY);
+	}
+
+	/**
+	 * @return float[][]
+	 */
+	public static function circleRadiusProvider():array{
+		return [
+			[0.0, 0.1],
+			[0.5, 0.5],
+			[1.5, 0.75],
+		];
+	}
+
+	/**
+	 * Tests clamping of the circle radius
+	 *
+	 * @dataProvider circleRadiusProvider
+	 */
+	public function testClampCircleRadius(float $value, float $expected):void{
+		$o = new QROptions(['circleRadius' => $value]);
+
+		$this::assertSame($expected, $o->circleRadius);
 	}
 
 }

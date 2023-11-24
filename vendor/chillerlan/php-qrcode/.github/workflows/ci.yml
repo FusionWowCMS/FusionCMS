@@ -1,0 +1,163 @@
+# https://help.github.com/en/categories/automating-your-workflow-with-github-actions
+# https://github.com/sebastianbergmann/phpunit/blob/master/.github/workflows/ci.yml
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+name: "Continuous Integration"
+
+jobs:
+
+  static-code-analysis:
+    name: "Static Code Analysis"
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php-version:
+          - "7.4"
+          - "8.0"
+          - "8.1"
+          - "8.2"
+          - "8.3"
+
+    env:
+      PHAN_ALLOW_XDEBUG: 0
+      PHAN_DISABLE_XDEBUG_WARN: 1
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          tools: pecl
+          extensions: ast, fileinfo, gd, imagick, json, mbstring
+
+      - name: "Update dependencies with composer"
+        uses: ramsey/composer-install@v2
+
+      - name: "Run phan"
+        run: php vendor/bin/phan --target-php-version=${{ matrix.php-version }}
+
+
+  tests:
+    name: "Unit Tests"
+    needs: static-code-analysis
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+        php-version:
+          - "7.4"
+          - "8.0"
+          - "8.1"
+          - "8.2"
+          - "8.3"
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Install PHP with extensions"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: pcov
+          tools: pecl
+          extensions: fileinfo, gd, imagick, json, mbstring
+
+      - name: "Install dependencies with composer"
+        uses: ramsey/composer-install@v2
+
+      - name: "Run tests with phpunit"
+        run: php vendor/bin/phpunit --colors=always --configuration=phpunit.xml.dist
+
+      - name: "Send code coverage report to Codecov.io"
+        uses: codecov/codecov-action@v3
+        with:
+         files: .build/coverage/clover.xml
+
+      - name: "Send code coverage report to Codacy"
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: .build/coverage/clover.xml
+
+
+  build-docs:
+    name: "Build and publish API docs"
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout sources"
+        uses: actions/checkout@v3
+
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          coverage: none
+          tools: phpDocumentor
+          extensions: fileinfo, gd, imagick, json, mbstring
+
+      - name: "Build API docs"
+        run: phpdoc --config=phpdoc.xml.dist
+
+      - name: "Publish API docs to branch gh-pages"
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: .build/phpdocs
+          clean: true
+
+
+  build-manual:
+    name: "Build and publish user manual"
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout sources"
+        uses: actions/checkout@v3
+
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          coverage: none
+
+      - name: "Install Sphinx"
+        run: pip install sphinx myst-parser sphinx-rtd-theme
+
+      - name: "Install dependencies with composer"
+        uses: ramsey/composer-install@v2
+
+      - name: "Build QROptions doc"
+        run: php docs/qroptions-doc.php
+
+      - name: "Build manual"
+        run: |
+          cd docs
+          make html
+
+      - name: "Publish user manual to branch readthedocs"
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: readthedocs
+          folder: .build/sphinx/html
+          clean: true

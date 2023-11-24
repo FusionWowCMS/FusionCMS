@@ -2,9 +2,7 @@
 /**
  * Class QRFpdfTest
  *
- * @filesource   QRFpdfTest.php
  * @created      03.06.2020
- * @package      chillerlan\QRCodeTest\Output
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2020 smiley
  * @license      MIT
@@ -13,47 +11,39 @@
 namespace chillerlan\QRCodeTest\Output;
 
 use FPDF;
+use chillerlan\QRCode\Data\QRMatrix;
 use chillerlan\QRCode\Output\{QRFpdf, QROutputInterface};
-use chillerlan\QRCode\{QRCode, QROptions};
 
-use function class_exists, substr;
+use function class_exists;
 
 /**
  * Tests the QRFpdf output module
  */
-class QRFpdfTest extends QROutputTestAbstract{
+final class QRFpdfTest extends QROutputTestAbstract{
+
+	protected string $FQN  = QRFpdf::class;
+	protected string $type = QROutputInterface::FPDF;
 
 	/**
 	 * @inheritDoc
-	 * @internal
 	 */
-	public function setUp():void{
+	protected function setUp():void{
 
 		if(!class_exists(FPDF::class)){
-			$this->markTestSkipped('FPDF not available');
-
-			/** @noinspection PhpUnreachableStatementInspection */
-			return;
+			$this::markTestSkipped('FPDF not available');
 		}
 
 		parent::setUp();
 	}
 
-	/**
-	 * @inheritDoc
-	 * @internal
-	 */
-	protected function getOutputInterface(QROptions $options):QROutputInterface{
-		return new QRFpdf($options, $this->matrix);
-	}
-
-	/**
-	 * @inheritDoc
-	 * @internal
-	 */
-	public function types():array{
+	public static function moduleValueProvider():array{
 		return [
-			'fpdf' => [QRCode::OUTPUT_FPDF],
+			'valid: int'                     => [[123, 123, 123], true],
+			'valid: w/invalid extra element' => [[123, 123, 123, 'abc'], true],
+			'valid: numeric string'          => [['123', '123', '123'], true],
+			'invalid: wrong type'            => ['foo', false],
+			'invalid: array too short'       => [[1, 2], false],
+			'invalid: contains non-number'   => [[1, 'b', 3], false],
 		];
 	}
 
@@ -64,34 +54,19 @@ class QRFpdfTest extends QROutputTestAbstract{
 
 		$this->options->moduleValues = [
 			// data
-			1024 => [0, 0, 0],
-			4    => [255, 255, 255],
+			QRMatrix::M_DATA_DARK => [0, 0, 0],
+			QRMatrix::M_DATA      => [255, 255, 255],
 		];
 
-		$this->outputInterface = $this->getOutputInterface($this->options);
+		$this->outputInterface = new $this->FQN($this->options, $this->matrix);
 		$this->outputInterface->dump();
 
 		$this::assertTrue(true); // tricking the code coverage
 	}
 
-	/**
-	 * @inheritDoc
-	 * @dataProvider types
-	 */
-	public function testRenderImage(string $type):void{
-		$this->options->outputType  = $type;
-		$this->options->imageBase64 = false;
-
-		// substr() to avoid CreationDate
-		$expected = substr(file_get_contents(__DIR__.'/samples/'.$type), 0, 2500);
-		$actual   = substr((new QRCode($this->options))->render('test'), 0, 2500);
-
-		$this::assertSame($expected, $actual);
-	}
-
 	public function testOutputGetResource():void{
 		$this->options->returnResource = true;
-		$this->outputInterface         = $this->getOutputInterface($this->options);
+		$this->outputInterface         = new $this->FQN($this->options, $this->matrix);
 
 		$this::assertInstanceOf(FPDF::class, $this->outputInterface->dump());
 	}

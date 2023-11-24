@@ -2,9 +2,7 @@
 /**
  * Class QROutputTestAbstract
  *
- * @filesource   QROutputTestAbstract.php
  * @created      24.12.2017
- * @package      chillerlan\QRCodeTest\Output
  * @author       Smiley <smiley@chillerlan.net>
  * @copyright    2017 Smiley
  * @license      MIT
@@ -12,14 +10,13 @@
 
 namespace chillerlan\QRCodeTest\Output;
 
-use chillerlan\QRCode\{QRCode, QROptions};
-use chillerlan\QRCode\Data\{Byte, QRMatrix};
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
+use chillerlan\QRCode\Data\QRMatrix;
 use chillerlan\QRCode\Output\{QRCodeOutputException, QROutputInterface};
 use PHPUnit\Framework\TestCase;
 
-use function file_exists, in_array, mkdir;
-
-use const PHP_OS_FAMILY, PHP_VERSION_ID;
+use function file_exists, mkdir;
 
 /**
  * Test abstract for the several (built-in) output modules,
@@ -27,19 +24,16 @@ use const PHP_OS_FAMILY, PHP_VERSION_ID;
  */
 abstract class QROutputTestAbstract extends TestCase{
 
-	/** @internal  */
-	protected string $builddir = __DIR__.'/../../.build/output_test';
-	/** @internal  */
+	/** @var \chillerlan\QRCode\QROptions|\chillerlan\Settings\SettingsContainerInterface */
+	protected QROptions         $options;
 	protected QROutputInterface $outputInterface;
-	/** @internal  */
-	protected QROptions $options;
-	/** @internal  */
-	protected QRMatrix $matrix;
+	protected QRMatrix          $matrix;
+	protected string            $builddir = __DIR__.'/../../.build/output_test';
+	protected string            $FQN;
+	protected string            $type;
 
 	/**
 	 * Attempts to create a directory under /.build and instances several required objects
-	 *
-	 * @internal
 	 */
 	protected function setUp():void{
 
@@ -47,17 +41,11 @@ abstract class QROutputTestAbstract extends TestCase{
 			mkdir($this->builddir, 0777, true);
 		}
 
-		$this->options         = new QROptions;
-		$this->matrix          = (new Byte($this->options, 'testdata'))->initMatrix(0);
-		$this->outputInterface = $this->getOutputInterface($this->options);
+		$this->options             = new QROptions;
+		$this->options->outputType = $this->type;
+		$this->matrix              = (new QRCode($this->options))->addByteSegment('testdata')->getQRMatrix();
+		$this->outputInterface     = new $this->FQN($this->options, $this->matrix);
 	}
-
-	/**
-	 * Returns a QROutputInterface instance with the given options and using $this->matrix
-	 *
-	 * @internal
-	 */
-	abstract protected function getOutputInterface(QROptions $options):QROutputInterface;
 
 	/**
 	 * Validate the instance of the interface
@@ -71,70 +59,45 @@ abstract class QROutputTestAbstract extends TestCase{
 	 */
 	public function testSaveException():void{
 		$this->expectException(QRCodeOutputException::class);
-		$this->expectExceptionMessage('Could not write data to cache file: /foo/bar.test');
+		$this->expectExceptionMessage('Cannot write data to cache file: /foo/bar.test');
 
-		$this->options->cachefile = '/foo/bar.test';
-		$this->outputInterface = $this->getOutputInterface($this->options);
-		$this->outputInterface->dump();
+		$this->outputInterface = new $this->FQN($this->options, $this->matrix);
+		$this->outputInterface->dump('/foo/bar.test');
 	}
 
+	abstract public static function moduleValueProvider():array;
+
 	/**
-	 * covers the module values settings
+	 * @param mixed $value
+	 * @param bool  $expected
+	 *
+	 * @dataProvider moduleValueProvider
 	 */
-	abstract public function testSetModuleValues():void;
+	public function testValidateModuleValues($value, bool $expected):void{
+		/** @noinspection PhpUndefinedMethodInspection */
+		$this::assertSame($expected, $this->FQN::moduleValueIsValid($value));
+	}
 
 	/*
 	 * additional, non-essential, potentially inaccurate coverage tests
 	 */
 
 	/**
-	 * @see testStringOutput()
-	 * @return string[][]
-	 * @internal
+	 * covers the module values settings
 	 */
-	abstract public function types():array;
+	abstract public function testSetModuleValues():void;
 
 	/**
 	 * coverage of the built-in output modules
-	 *
-	 * @dataProvider types
 	 */
-	public function testStringOutput(string $type):void{
-		$this->options->outputType  = $type;
-		$this->options->cachefile   = $this->builddir.'/test.'.$type;
-		$this->options->imageBase64 = false;
+	public function testRenderToCacheFile():void{
+		$this->options->outputBase64 = false;
+		$this->outputInterface       = new $this->FQN($this->options, $this->matrix);
+		// create the cache file
+		$file = $this->builddir.'/test.output.'.$this->type;
+		$data = $this->outputInterface->dump($file);
 
-		$this->outputInterface     = $this->getOutputInterface($this->options);
-		$data                      = $this->outputInterface->dump(); // creates the cache file
-
-		$this::assertSame($data, file_get_contents($this->options->cachefile));
-	}
-
-	/**
-	 * covers the built-in output modules, tests against pre-rendered data
-	 *
-	 * @dataProvider types
-	 */
-	public function testRenderImage(string $type):void{
-
-		// may fail on CI, different PHP (platform) versions produce different output
-		// the samples were generated on php-7.4.3-Win32-vc15-x64
-		if(
-			(PHP_OS_FAMILY !== 'Windows' || PHP_VERSION_ID >= 80100)
-			&& in_array($type, [QRCode::OUTPUT_IMAGE_JPG, QRCode::OUTPUT_IMAGICK, QRCode::OUTPUT_MARKUP_SVG])
-		){
-			$this::markTestSkipped('may fail on CI');
-
-			/** @noinspection PhpUnreachableStatementInspection */
-			return;
-		}
-
-		$this->options->outputType = $type;
-
-		$this::assertSame(
-			trim(file_get_contents(__DIR__.'/samples/'.$type)),
-			trim((new QRCode($this->options))->render('test'))
-		);
+		$this::assertSame($data, file_get_contents($file));
 	}
 
 }

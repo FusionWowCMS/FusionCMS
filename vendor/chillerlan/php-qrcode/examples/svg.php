@@ -1,78 +1,75 @@
 <?php
 /**
+ * SVG output example
  *
- * @filesource   svg.php
  * @created      21.12.2017
  * @author       Smiley <smiley@chillerlan.net>
  * @copyright    2017 Smiley
  * @license      MIT
+ *
+ * @noinspection PhpComposerExtensionStubsInspection
  */
 
-namespace chillerlan\QRCodeExamples;
-
 use chillerlan\QRCode\{QRCode, QROptions};
+use chillerlan\QRCode\Data\QRMatrix;
+use chillerlan\QRCode\Output\QROutputInterface;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$data = 'https://www.youtube.com/watch?v=DLzxrzFCyOs&t=43s';
-$gzip = true;
+$options = new QROptions;
 
-$options = new QROptions([
-	'version'      => 7,
-	'outputType'   => QRCode::OUTPUT_MARKUP_SVG,
-	'imageBase64'  => false,
-	'eccLevel'     => QRCode::ECC_L,
-	'svgViewBoxSize' => 530,
-	'addQuietzone' => true,
-	'cssClass'     => 'my-css-class',
-	'svgOpacity'   => 1.0,
-	'svgDefs'      => '
-		<linearGradient id="g2">
-			<stop offset="0%" stop-color="#39F" />
-			<stop offset="100%" stop-color="#F3F" />
-		</linearGradient>
-		<linearGradient id="g1">
-			<stop offset="0%" stop-color="#F3F" />
-			<stop offset="100%" stop-color="#39F" />
-		</linearGradient>
-		<style>rect{shape-rendering:crispEdges}</style>',
-	'moduleValues' => [
-		// finder
-		1536 => 'url(#g1)', // dark (true)
-		6    => '#fff', // light (false)
-		// alignment
-		2560 => 'url(#g1)',
-		10   => '#fff',
-		// timing
-		3072 => 'url(#g1)',
-		12   => '#fff',
-		// format
-		3584 => 'url(#g1)',
-		14   => '#fff',
-		// version
-		4096 => 'url(#g1)',
-		16   => '#fff',
-		// data
-		1024 => 'url(#g2)',
-		4    => '#fff',
-		// darkmodule
-		512  => 'url(#g1)',
-		// separator
-		8    => '#fff',
-		// quietzone
-		18   => '#fff',
-	],
-]);
+$options->version              = 7;
+$options->outputType           = QROutputInterface::MARKUP_SVG;
+$options->outputBase64         = false;
+// if set to false, the light modules won't be rendered
+$options->drawLightModules     = true;
+$options->svgUseFillAttributes = false;
+// draw the modules as circles isntead of squares
+$options->drawCircularModules  = true;
+$options->circleRadius         = 0.4;
+// connect paths
+$options->connectPaths         = true;
+// keep modules of these types as square
+$options->keepAsSquare         = [
+	QRMatrix::M_FINDER_DARK,
+	QRMatrix::M_FINDER_DOT,
+	QRMatrix::M_ALIGNMENT_DARK,
+];
+// https://developer.mozilla.org/en-US/docs/Web/SVG/Element/linearGradient
+$options->svgDefs             = '
+	<linearGradient id="rainbow" x1="1" y2="1">
+		<stop stop-color="#e2453c" offset="0"/>
+		<stop stop-color="#e07e39" offset="0.2"/>
+		<stop stop-color="#e5d667" offset="0.4"/>
+		<stop stop-color="#51b95b" offset="0.6"/>
+		<stop stop-color="#1e72b7" offset="0.8"/>
+		<stop stop-color="#6f5ba7" offset="1"/>
+	</linearGradient>
+	<style><![CDATA[
+		.dark{fill: url(#rainbow);}
+		.light{fill: #eee;}
+	]]></style>';
 
-$qrcode = (new QRCode($options))->render($data);
 
-header('Content-type: image/svg+xml');
-
-if($gzip === true){
-	header('Vary: Accept-Encoding');
-	header('Content-Encoding: gzip');
-	$qrcode = gzencode($qrcode ,9);
+try{
+	$out = (new QRCode($options))->render('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 }
-echo $qrcode;
+catch(Throwable $e){
+	// handle the exception in whatever way you need
+	exit($e->getMessage());
+}
 
 
+if(php_sapi_name() !== 'cli'){
+	header('Content-type: image/svg+xml');
+
+	if(extension_loaded('zlib')){
+		header('Vary: Accept-Encoding');
+		header('Content-Encoding: gzip');
+		$out = gzencode($out, 9);
+	}
+}
+
+echo $out;
+
+exit;

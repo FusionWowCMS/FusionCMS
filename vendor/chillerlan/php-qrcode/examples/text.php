@@ -1,68 +1,49 @@
 <?php
 /**
+ * String output example (console QR Codes for Lynx users!)
  *
- * @filesource   text.php
  * @created      21.12.2017
  * @author       Smiley <smiley@chillerlan.net>
  * @copyright    2017 Smiley
  * @license      MIT
  */
 
-namespace chillerlan\QRCodeExamples;
-
 use chillerlan\QRCode\{QRCode, QROptions};
+use chillerlan\QRCode\Data\QRMatrix;
+use chillerlan\QRCode\Output\{QROutputInterface, QRStringText};
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$data = 'https://www.youtube.com/watch?v=DLzxrzFCyOs&t=43s';
+$options = new QROptions;
 
-$options = new QROptions([
-	'version'      => 5,
-	'outputType'   => QRCode::OUTPUT_STRING_TEXT,
-	'eccLevel'     => QRCode::ECC_L,
-]);
-
-// <pre> to view it in a browser
-echo '<pre style="font-size: 75%; line-height: 1;">'.(new QRCode($options))->render($data).'</pre>';
-
-
-// custom values
-$options = new QROptions([
-	'version'      => 5,
-	'outputType'   => QRCode::OUTPUT_STRING_TEXT,
-	'eccLevel'     => QRCode::ECC_L,
-	'moduleValues' => [
-		// finder
-		1536 => 'A', // dark (true)
-		6    => 'a', // light (false)
-		// alignment
-		2560 => 'B',
-		10   => 'b',
-		// timing
-		3072 => 'C',
-		12   => 'c',
-		// format
-		3584 => 'D',
-		14   => 'd',
-		// version
-		4096 => 'E',
-		16   => 'e',
-		// data
-		1024 => 'F',
-		4    => 'f',
-		// darkmodule
-		512  => 'G',
-		// separator
-		8    => 'h',
-		// quietzone
-		18   => 'i',
-	],
-]);
-
-// <pre> to view it in a browser
-echo '<pre style="font-size: 75%; line-height: 1;">'.(new QRCode($options))->render($data).'</pre>';
+$options->version       = 3;
+$options->quietzoneSize = 2;
+$options->outputType    = QROutputInterface::STRING_TEXT;
+$options->eol           = "\n";
+$options->textLineStart = str_repeat(' ', 6);
+$options->moduleValues  = [
+	QRMatrix::M_FINDER_DARK    => QRStringText::ansi8('██', 124),
+	QRMatrix::M_FINDER         => QRStringText::ansi8('░░', 124),
+	QRMatrix::M_FINDER_DOT     => QRStringText::ansi8('██', 124),
+	QRMatrix::M_ALIGNMENT_DARK => QRStringText::ansi8('██', 2),
+	QRMatrix::M_ALIGNMENT      => QRStringText::ansi8('░░', 2),
+	QRMatrix::M_TIMING_DARK    => QRStringText::ansi8('██', 184),
+	QRMatrix::M_TIMING         => QRStringText::ansi8('░░', 184),
+	QRMatrix::M_FORMAT_DARK    => QRStringText::ansi8('██', 200),
+	QRMatrix::M_FORMAT         => QRStringText::ansi8('░░', 200),
+	QRMatrix::M_VERSION_DARK   => QRStringText::ansi8('██', 21),
+	QRMatrix::M_VERSION        => QRStringText::ansi8('░░', 21),
+	QRMatrix::M_DARKMODULE     => QRStringText::ansi8('██', 53),
+	QRMatrix::M_DATA_DARK      => QRStringText::ansi8('██', 166),
+	QRMatrix::M_DATA           => QRStringText::ansi8('░░', 166),
+	QRMatrix::M_QUIETZONE      => QRStringText::ansi8('░░', 253),
+	QRMatrix::M_SEPARATOR      => QRStringText::ansi8('░░', 253),
+];
 
 
+$out  = (new QRCode($options))->render('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 
 
+printf("\n\n\n%s\n\n\n", $out);
 
+exit;

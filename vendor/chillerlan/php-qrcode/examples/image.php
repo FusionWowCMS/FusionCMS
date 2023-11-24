@@ -1,63 +1,71 @@
 <?php
 /**
+ * GdImage output example
  *
- * @filesource   image.php
  * @created      24.12.2017
  * @author       Smiley <smiley@chillerlan.net>
  * @copyright    2017 Smiley
  * @license      MIT
  */
 
-namespace chillerlan\QRCodeExamples;
-
 use chillerlan\QRCode\{QRCode, QROptions};
+use chillerlan\QRCode\Data\QRMatrix;
+use chillerlan\QRCode\Output\QROutputInterface;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$data = 'https://www.youtube.com/watch?v=DLzxrzFCyOs&t=43s';
+$options = new QROptions;
 
-$options = new QROptions([
-	'version'      => 10,
-	'outputType'   => QRCode::OUTPUT_IMAGE_PNG,
-	'eccLevel'     => QRCode::ECC_H,
-	'scale'        => 5,
-	'imageBase64'  => false,
-	'moduleValues' => [
-		// finder
-		1536 => [0, 63, 255], // dark (true)
-		6    => [255, 255, 255], // light (false), white is the transparency color and is enabled by default
-		5632 => [241, 28, 163], // finder dot, dark (true)
-		// alignment
-		2560 => [255, 0, 255],
-		10   => [255, 255, 255],
-		// timing
-		3072 => [255, 0, 0],
-		12   => [255, 255, 255],
-		// format
-		3584 => [67, 99, 84],
-		14   => [255, 255, 255],
-		// version
-		4096 => [62, 174, 190],
-		16   => [255, 255, 255],
-		// data
-		1024 => [0, 0, 0],
-		4    => [255, 255, 255],
-		// darkmodule
-		512  => [0, 0, 0],
-		// separator
-		8    => [255, 255, 255],
-		// quietzone
-		18   => [255, 255, 255],
-		// logo (requires a call to QRMatrix::setLogoSpace())
-		20    => [255, 255, 255],
-	],
-]);
+$options->version             = 7;
+$options->outputType          = QROutputInterface::GDIMAGE_PNG;
+$options->scale               = 20;
+$options->outputBase64        = false;
+$options->bgColor             = [200, 150, 200];
+$options->imageTransparent    = true;
+#$options->transparencyColor   = [233, 233, 233];
+$options->drawCircularModules = true;
+$options->drawLightModules    = true;
+$options->circleRadius        = 0.4;
+$options->keepAsSquare        = [
+	QRMatrix::M_FINDER_DARK,
+	QRMatrix::M_FINDER_DOT,
+	QRMatrix::M_ALIGNMENT_DARK,
+];
+$options->moduleValues        = [
+	// finder
+	QRMatrix::M_FINDER_DARK    => [0, 63, 255], // dark (true)
+	QRMatrix::M_FINDER_DOT     => [0, 63, 255], // finder dot, dark (true)
+	QRMatrix::M_FINDER         => [233, 233, 233], // light (false), white is the transparency color and is enabled by default
+	// alignment
+	QRMatrix::M_ALIGNMENT_DARK => [255, 0, 255],
+	QRMatrix::M_ALIGNMENT      => [233, 233, 233],
+	// timing
+	QRMatrix::M_TIMING_DARK    => [255, 0, 0],
+	QRMatrix::M_TIMING         => [233, 233, 233],
+	// format
+	QRMatrix::M_FORMAT_DARK    => [67, 159, 84],
+	QRMatrix::M_FORMAT         => [233, 233, 233],
+	// version
+	QRMatrix::M_VERSION_DARK   => [62, 174, 190],
+	QRMatrix::M_VERSION        => [233, 233, 233],
+	// data
+	QRMatrix::M_DATA_DARK      => [0, 0, 0],
+	QRMatrix::M_DATA           => [233, 233, 233],
+	// darkmodule
+	QRMatrix::M_DARKMODULE     => [0, 0, 0],
+	// separator
+	QRMatrix::M_SEPARATOR      => [233, 233, 233],
+	// quietzone
+	QRMatrix::M_QUIETZONE      => [233, 233, 233],
+	// logo (requires a call to QRMatrix::setLogoSpace()), see QRImageWithLogo
+	QRMatrix::M_LOGO           => [233, 233, 233],
+];
+
+
+$out = (new QRCode($options))->render('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 
 header('Content-type: image/png');
 
-echo (new QRCode($options))->render($data);
+echo $out;
 
-
-
-
-
+exit;

@@ -30,7 +30,7 @@ trait TestOptionsTrait{
 		$this->testConstruct = 'success';
 	}
 
-	protected function set_test5($value):void{
+	protected function set_test5(string $value):void{
 		$this->test5 = $value.'_test5';
 	}
 

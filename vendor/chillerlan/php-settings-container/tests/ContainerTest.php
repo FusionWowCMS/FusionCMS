@@ -16,7 +16,7 @@ use function sha1;
 
 class ContainerTest extends TestCase{
 
-	public function testConstruct(){
+	public function testConstruct():void{
 		$container = new TestContainer([
 			'test1' => 'test1',
 			'test2' => true,
@@ -32,7 +32,7 @@ class ContainerTest extends TestCase{
 		$this::assertSame('success', $container->testConstruct);
 	}
 
-	public function testGet(){
+	public function testGet():void{
 		$container = new TestContainer;
 
 		$this::assertSame('foo', $container->test1);
@@ -57,7 +57,7 @@ class ContainerTest extends TestCase{
 		$this::assertSame('null', $container->test6);
 	}
 
-	public function testSet(){
+	public function testSet():void{
 		$container = new TestContainer;
 		$container->test1 = 'bar';
 		$container->test2 = false;
@@ -76,7 +76,7 @@ class ContainerTest extends TestCase{
 		$this::assertSame('bar_test5', $container->test5);
 	}
 
-	public function testToArray(){
+	public function testToArray():void{
 		$container = new TestContainer([
 			'test1'         => 'no',
 			'test2'         => true,
@@ -89,11 +89,11 @@ class ContainerTest extends TestCase{
 			'testConstruct' => 'success',
 			'test4'         => null,
 			'test5'         => null,
-			'test6'         => null
+			'test6'         => null,
 		], $container->toArray());
 	}
 
-	public function testToJSON(){
+	public function testToJSON():void{
 		$container = (new TestContainer)->fromJSON('{"test1":"no","test2":true,"testConstruct":"success"}');
 
 		$expected  = '{"test1":"no","test2":true,"testConstruct":"success","test4":null,"test5":null,"test6":null}';
@@ -102,12 +102,13 @@ class ContainerTest extends TestCase{
 		$this::assertSame($expected, (string)$container);
 	}
 
-	public function testFromJsonException(){
+	public function testFromJsonException():void{
 		$this->expectException(JsonException::class);
 		(new TestContainer)->fromJSON('-');
 
 	}
-	public function testFromJsonTypeError(){
+
+	public function testFromJsonTypeError():void{
 		$this->expectException(TypeError::class);
 		(new TestContainer)->fromJSON('2');
 	}
