@@ -12,7 +12,7 @@ class Paypal_model extends CI_Model
         parent::__construct();
     }
 
-    public function getSpecifyDonate($id): array|false
+    public function getSpecifyDonate($id): array|bool
     {
         $query = $this->db->select("*")->where("id", $id)->get("paypal_donate");
 
@@ -24,7 +24,7 @@ class Paypal_model extends CI_Model
         return false;
     }
 
-    public function getDonations(): array|false
+    public function getDonations(): array|bool
     {
         $query = $this->db->select("*")->get("paypal_donate");
 
@@ -35,7 +35,7 @@ class Paypal_model extends CI_Model
         return false;
     }
 
-    public function getStatus($id): array|false
+    public function getStatus($id): array|bool|string
     {
         $query = $this->db->select("*")->where("payment_id", $id)->get("paypal_logs");
 
