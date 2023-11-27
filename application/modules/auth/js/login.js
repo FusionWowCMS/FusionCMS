@@ -10,8 +10,6 @@ var Auth = {
 			"remember": $(".remember-check").is(":checked"),
 			"captcha": $(".captcha-input").val(),
 			"submit": submit,
-			"csrf_token_name": Config.CSRF,
-			"token": Config.CSRF
 		};
 
 		var fields = [
@@ -34,7 +32,6 @@ var Auth = {
 			$.post(Config.URL + "auth/checkLogin", postData, function(data) {
 				try {
 					data = JSON.parse(data);
-					console.log(data);
 
 					if(data["redirect"] === true) {
 						window.location.href = Config.URL + "ucp";

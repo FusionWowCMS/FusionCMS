@@ -7,8 +7,6 @@ var Recovery = {
 		var postData = {
 			"email": $(".email-input").val(),
 			"captcha": $(".captcha-input").val(),
-			"csrf_token_name": Config.CSRF,
-			"token": Config.CSRF
 		};
 
 		var fields = [
@@ -29,7 +27,6 @@ var Recovery = {
 			$.post(Config.URL + "password_recovery/create_request", postData, function(data) {
 				try {
 					data = JSON.parse(data);
-					console.log(data);
 
 					if(data["showCaptcha"] === true) {
 						$(".captcha-field").removeClass("d-none");

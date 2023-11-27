@@ -70,6 +70,10 @@ class Auth extends MX_Controller
 
     public function checkLogin()
     {
+        if (!$this->input->is_ajax_request()) {
+            die('No direct script access allowed');
+        }
+
         $use_captcha = $this->config->item('use_captcha');
         $captcha_type = $this->config->item('captcha_type');
         $show_captcha = $use_captcha == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps');
@@ -89,7 +93,7 @@ class Auth extends MX_Controller
             "messages" => false
         );
 
-        if (isset($_POST["submit"]) && $this->form_validation->run())
+        if ($this->form_validation->run())
         {
             //Get the players IP address
             $ip_address = $this->input->ip_address();
@@ -97,127 +101,71 @@ class Auth extends MX_Controller
             //Check if the IP address has been blocked
             $find = $this->login_model->getIP($ip_address);
 
-            if ($find)
-            {
-                if (time() < $find['block_until'])
-                {
-                    // The IP address is blocked, calculate remaining minutes
-                    $remaining_minutes = round(($find['block_until'] - time()) / 60);
-                    $data["messages"]["error"] = lang("ip_blocked", "auth") . "<br>" . lang("try_again", "auth") . " " . $remaining_minutes . " " . lang("minutes", "auth");
-                    die(json_encode($data));
-                }
-            }
+            // Check attempts
+            $this->increaseAttempts($ip_address);
 
-            //Check if show captcha
-            if ($show_captcha)
+            if ($find && (time() < $find['block_until']))
             {
-                $data['showCaptcha'] = true;
+                // The IP address is blocked, calculate remaining minutes
+                $remaining_minutes = round(($find['block_until'] - time()) / 60);
+                $data["messages"]["error"] = lang("ip_blocked", "auth") . "<br>" . lang("try_again", "auth") . " " . $remaining_minutes . " " . lang("minutes", "auth");
+                die(json_encode($data));
             }
 
             //Check captcha
             if ($show_captcha)
             {
+                $data['showCaptcha'] = true;
                 if ($captcha_type == 'inbuilt') {
                     if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha')))
-                    {
-                        $this->increaseAttempts($ip_address);
                         $data['messages']["error"] = lang("captcha_invalid", "auth");
-                        die(json_encode($data));
-                    }
                 } else if ($captcha_type == 'recaptcha') {
                     $recaptcha = $this->input->post('recaptcha');
                     $result = $this->recaptcha->verifyResponse($recaptcha)['success'];
                     if (!$result)
-                    {
-                        $this->increaseAttempts($ip_address);
                         $data['messages']["error"] = lang("captcha_invalid", "auth") . $result;
-                        die(json_encode($data));
-                    }
                 }
-            }
-
-            //Check password
-            $existsUser = $this->external_account_model->usernameExists($this->input->post("username"));
-            if ($existsUser)
-            {
-                if ($this->input->post("password") != "")
-                {
-                    $userId = $this->user->getId($this->input->post("username"));
-                    $sha_pass_hash = $this->user->createHash($this->input->post("username"), $this->input->post("password"));
-
-                    if (strtoupper($this->external_account_model->getInfo($userId, "password")["password"]) != strtoupper($sha_pass_hash["verifier"]))
-                    {
-                        if (isset($_POST["submit"]) && $this->input->post("submit") == "true")
-                        {
-                            $this->increaseAttempts($ip_address);
-                            if ($show_captcha)
-                            {
-                                $data["showCaptcha"] = true;
-                            }
-                            $this->logger->createLog("user", "login", "Login", [], Logger::STATUS_FAILED, $this->user->getId($this->input->post("username")));
-                            $data["messages"]["error"] = lang("error", "auth");
-                            die(json_encode($data));
-                        }
-                    }
-                }
-            }
-            else
-            {
-                $this->increaseAttempts($ip_address);
-                if ($show_captcha)
-                {
-                    $data["showCaptcha"] = true;
-                }
-                $data["messages"]["error"] = lang("error", "auth");
-                die(json_encode($data));
-            }
-
-            //Check csrf
-            if ($this->input->post("token") != $this->security->get_csrf_hash())
-            {
-                $this->increaseAttempts($ip_address);
-                $data["messages"]["error"] = "";
                 die(json_encode($data));
             }
 
             //Login
-            if ($this->input->post("submit") == "true")
+            $sha_pass_hash = $this->user->createHash($this->input->post('username'), $this->input->post('password'));
+            $check = $this->user->setUserDetails($this->input->post('username'), $sha_pass_hash["verifier"]);
+
+            //if no errors, login
+            if ($check == 0)
             {
-                $sha_pass_hash = $this->user->createHash($this->input->post('username'), $this->input->post('password'));
-                $check = $this->user->setUserDetails($this->input->post('username'), $sha_pass_hash["verifier"]);
+                $data["redirect"] = true;
 
-                //if no errors, login
-                if ($check == 0)
+                unset($_SESSION['captcha']);
+                $this->session->unset_userdata('attempts');
+
+                // Remember me
+                if (isset($_POST["remember"]))
                 {
-                    $data["redirect"] = true;
-
-                    unset($_SESSION['captcha']);
-                    $this->session->unset_userdata('attempts');
-
-                    // Remember me
-                    if (isset($_POST["remember"]))
+                    if($this->input->post("remember") == "true")
                     {
-                        if($this->input->post("remember") == "true")
-                        {
-                            $this->input->set_cookie("fcms_username", $this->input->post('username'), 60 * 60 * 24 * 365);
-                            $this->input->set_cookie("fcms_password", $sha_pass_hash["verifier"], 60 * 60 * 24 * 365);
-                        }
+                        $this->input->set_cookie("fcms_username", $this->input->post('username'), 60 * 60 * 24 * 365);
+                        $this->input->set_cookie("fcms_password", $sha_pass_hash["verifier"], 60 * 60 * 24 * 365);
                     }
-
-                    $this->external_account_model->setLastIp($this->user->getId(), $this->input->ip_address());
-                    $this->plugins->onLogin($this->input->post('username'));
-                    $this->login_model->deleteIP($ip_address);
-                    $this->logger->createLog("user", "login", "Login");
-
-                    die(json_encode($data));
                 }
+
+                $this->external_account_model->setLastIp($this->user->getId(), $this->input->ip_address());
+                $this->plugins->onLogin($this->input->post('username'));
+                $this->login_model->deleteIP($ip_address);
+                $this->logger->createLog("user", "login", "Login");
+            }
+            else
+            {
+                $this->logger->createLog("user", "login", "Login", [], Logger::STATUS_FAILED, $this->user->getId($this->input->post("username")));
+                $data["messages"]["error"] = lang("error", "auth");
             }
         }
         else
         {
             $data['messages']["error"] = validation_errors();
-            die(json_encode($data));
         }
+        die(json_encode($data));
     }
 
     public function getCaptcha()

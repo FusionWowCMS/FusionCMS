@@ -70,25 +70,13 @@ class Password_recovery extends MX_Controller
 
                 if ($captcha_type == 'inbuilt') {
                     if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha')))
-                    {
                         $data['messages']["error"] = lang("captcha_invalid", "auth");
-                        die(json_encode($data));
-                    }
                 } else if ($captcha_type == 'recaptcha') {
                     $recaptcha = $this->input->post('recaptcha');
                     $result = $this->recaptcha->verifyResponse($recaptcha)['success'];
                     if (!$result)
-                    {
                         $data['messages']["error"] = lang("captcha_invalid", "auth") . $result;
-                        die(json_encode($data));
-                    }
                 }
-            }
-
-            //Check csrf
-            if ($this->input->post("token") != $this->security->get_csrf_hash())
-            {
-                $data['messages']["error"] = 'Something went wrong. Please reload the page.';
                 die(json_encode($data));
             }
             
@@ -107,13 +95,12 @@ class Password_recovery extends MX_Controller
             }
             
             $data['messages']["success"] = lang("email_sent", "recovery");
-            die(json_encode($data));
         }
         else
         {
             $data['messages']["error"] = validation_errors();
-            die(json_encode($data));
         }
+        die(json_encode($data));
     }
 
     public function reset_password()

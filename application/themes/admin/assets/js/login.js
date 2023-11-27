@@ -64,3 +64,17 @@ var Login = {
 		   });
 	}
 };
+
+$.ajaxSetup({ beforeSend: function(jqXHR, settings) {
+		settings.data += (settings.data ? '&' : '') + 'csrf_token_name' + '=' + getCookie('csrf_cookie_name');
+	} }); // adds CSRF token to posts actions, automatically
+
+$.ajaxPrefilter(function(options) {
+	if(typeof options.forceCrossDomain === 'undefined' || (typeof options.forceCrossDomain !== 'undefined' && !options.forceCrossDomain))
+		options.crossDomain = false;
+}); // increases the compatibility
+
+$(document).ajaxComplete(function(event, jqXHR, settings) {
+	if(settings.data && settings.data.indexOf('csrf_token_name') >= 0 && $('input[name="' + 'csrf_token_name' + '"]').length)
+		$('input[name="' + 'csrf_token_name' + '"]').val(getCookie('csrf_cookie_name'));
+}); // renew CSRF field value, automatically
