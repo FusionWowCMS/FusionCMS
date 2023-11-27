@@ -174,7 +174,7 @@ const Gm = {
 
     sendItem: function (realm, id, field) {
         Swal.fire({
-            title: 'Ban',
+            title: 'Send Item',
             html: '<input type="text" id="item_id" placeholder="Item ID" value=""/>'
         }).then(function (result) {
             if (result.isConfirmed) {
