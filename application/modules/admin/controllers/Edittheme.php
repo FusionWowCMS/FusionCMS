@@ -100,6 +100,10 @@ class EditTheme extends MX_Controller
     {
         include($file);
 
+        // Skip! don't list this file
+        if(isset($config) && isset($config['force_hidden']) && $config['force_hidden'])
+            return;
+
         $this->configs[$this->getConfigName($file)] = $config;
         $this->configs[$this->getConfigName($file)]['source'] = $this->getConfigSource($file);
     }
