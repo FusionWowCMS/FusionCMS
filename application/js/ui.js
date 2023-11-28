@@ -33,7 +33,8 @@ function UI()
 		}); // increases the compatibility
 
 		$(document).ajaxComplete(function(event, jqXHR, settings) {
-			if(settings.data && settings.data.indexOf('csrf_token_name') >= 0 && $('input[name="' + 'csrf_token_name' + '"]').length)
+			if((settings.data && typeof settings.data === 'string' && settings.data.indexOf('csrf_token_name') >= 0 && $('input[name="' + 'csrf_token_name' + '"]').length)
+				|| (settings.data && typeof settings.data === 'object' && 'csrf_token_name' in settings.data && $('input[name="' + 'csrf_token_name' + '"]').length))
 				$('input[name="' + 'csrf_token_name' + '"]').val(getCookie('csrf_cookie_name'));
 		}); // renew CSRF field value, automatically
 	}
