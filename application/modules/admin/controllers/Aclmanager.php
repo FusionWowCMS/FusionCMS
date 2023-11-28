@@ -149,6 +149,7 @@ class Aclmanager extends MX_Controller
 
         $name = $this->input->post('name');
         $color = $this->input->post('color');
+        $priority = $this->input->post('priority');
         $description = $this->input->post('description');
         $roles = array();
 
@@ -167,7 +168,14 @@ class Aclmanager extends MX_Controller
             }
         }
 
-        $id = $this->acl_model->createGroup($name, $color, $description);
+        $data = array(
+            'name' => $name,
+            'color' => $color,
+            'priority' => $priority,
+            'description' => $description
+        );
+
+        $id = $this->acl_model->createGroup($data);
 
         foreach ($roles as $role) {
             // Handle visibility permissions
@@ -208,6 +216,7 @@ class Aclmanager extends MX_Controller
 
         $name = $this->input->post('name');
         $color = $this->input->post('color');
+        $priority = $this->input->post('priority');
         $description = $this->input->post('description');
         $roles = array();
 
@@ -226,7 +235,7 @@ class Aclmanager extends MX_Controller
             }
         }
 
-        $this->acl_model->saveGroup($id, array('name' => $name, 'color' => $color, 'description' => $description));
+        $this->acl_model->saveGroup($id, array('name' => $name, 'priority' => $priority, 'color' => $color, 'description' => $description));
 
         $this->acl_model->deleteAllRoleFromGroup($id);
 

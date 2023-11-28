@@ -285,10 +285,10 @@ class Acl_model extends CI_Model
             $accountId = $this->user->getId();
         }
 
-        $this->db->select("ag.id, ag.name, ag.color, ag.color");
+        $this->db->select("ag.id, ag.priority, ag.name, ag.color, ag.color");
         $this->db->where("aag.account_id", $accountId);
         $this->db->where("aag.group_id = ag.id");
-        $this->db->order_by("ag.id", "DESC");
+        $this->db->order_by("ag.priority", "DESC");
         $query = $this->db->get("acl_account_groups aag, acl_groups ag");
 
         if ($query->num_rows() > 0) {
@@ -306,7 +306,7 @@ class Acl_model extends CI_Model
      */
     public function getGroups()
     {
-        $this->db->select('ag.id, ag.name, ag.color, ag.description');
+        $this->db->select('ag.id, ag.priority, ag.name, ag.color, ag.description');
         $query = $this->db->get('acl_groups ag');
 
         if ($query->num_rows() > 0) {
@@ -365,7 +365,7 @@ class Acl_model extends CI_Model
      */
     public function getGroup($groupId)
     {
-        $this->db->select('id, name, color, description');
+        $this->db->select('id, priority, name, color, description');
         $this->db->where('id', $groupId);
         $query = $this->db->get('acl_groups');
 
@@ -386,7 +386,7 @@ class Acl_model extends CI_Model
      */
     public function getGroupByName($groupName)
     {
-        $this->db->select('id, name, color, description');
+        $this->db->select('id, priority, name, color, description');
         $this->db->where('name', $groupName);
         $query = $this->db->get('acl_groups');
 
@@ -534,18 +534,11 @@ class Acl_model extends CI_Model
     /**
      * Create a group
      *
-     * @param String $name
-     * @param String $color
-     * @param String $description
+     * @param $data
+     * @return int
      */
-    public function createGroup($name, $color = '', $description = '')
+    public function createGroup($data)
     {
-        $data = array(
-            'name' => $name,
-            'color' => $color,
-            'description' => $description
-        );
-
         $this->db->insert('acl_groups', $data);
 
         return $this->db->insert_id();

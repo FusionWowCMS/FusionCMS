@@ -8,8 +8,9 @@
 		<table class="table table-responsive-md table-hover">
 		<thead>
 			<tr>
-				<th>Name</th>
 				<th>ID</th>
+				<th>Name</th>
+				<th>Priority</th>
 				<th>Members</th>
 				<th style="text-align: center;">Action</th>
 			</tr>
@@ -17,8 +18,9 @@
 		<tbody>
 			{foreach from=$groups item=group}
 				<tr>
-					<td data-toggle="tooltip" data-placement="bottom" title="{$group.description}"><b style="color:{$group.color} !important;">{$group.name}</b></td>
 					<td> {$group.id}</td>
+					<td data-toggle="tooltip" data-placement="bottom" title="{$group.description}"><b style="color:{$group.color} !important;">{$group.name}</b></td>
+					<td> {$group.priority}</td>
 					<td>{if $group.memberCount}{$group.memberCount} {($group.memberCount == 1) ? "member" : "members"}{/if}</td>
 					<td style="text-align:center;">
 						{if hasPermission("editPermissions")}
@@ -50,6 +52,13 @@
 		<label class="col-sm-2 col-form-label" for="name">Group name</label>
 		<div class="col-sm-10">
 		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="name" id="name"/>
+		</div>
+        </div>
+
+		<div class="form-group row">
+		<label class="col-sm-2 col-form-label" for="priority">Priority</label>
+		<div class="col-sm-10">
+		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="number" name="priority" id="priority" value="1"/>
 		</div>
         </div>
 
