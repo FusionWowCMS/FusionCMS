@@ -39,7 +39,7 @@
 								{/if}
 
 								<td>Lv{$character.level}</td>
-								<td class="col-6"><a href="{$url}character/{$realm->getId()}/{$character.name}">View</a></td>
+								<td class="col-6"><a href="{$url}character/{$realm->getId()}/{$character.guid}">View</a></td>
 							</tr>
 						{/foreach}
 					</tbody>

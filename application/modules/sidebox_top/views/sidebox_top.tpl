@@ -137,7 +137,7 @@
                                                 </td>
 
                                                 <td class="col-3">
-                                                    <a href="{$url}character/{$realm.id}/{$character.name}/"
+                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/"
                                                        data-character-tip="{$character.name}" data-realm="{$realm.id}">
                                                         {$character.name}
                                                     </a>
@@ -178,7 +178,7 @@
                                                 </td>
 
                                                 <td class="col-3">
-                                                    <a href="{$url}character/{$realm.id}/{$character.name}/"
+                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/"
                                                        data-character-tip="{$character.name}" data-realm="{$realm.id}">
                                                         {$character.name}
                                                     </a>
@@ -220,7 +220,7 @@
                                                 </td>
 
                                                 <td class="col-3">
-                                                    <a href="{$url}character/{$realm.id}/{$character.name}/"
+                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/"
                                                        data-character-tip="{$character.name}" data-realm="{$realm.id}">
                                                         {$character.name}
                                                     </a>
@@ -275,7 +275,7 @@
                                                 </td>
 
                                                 <td class="col-3">
-                                                    <a href="{$url}character/{$realm.id}/{$character.name}/"
+                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/"
                                                        data-character-tip="{$character.name}" data-realm="{$realm.id}">
                                                         {$character.name}
                                                     </a>
