@@ -177,12 +177,15 @@ class Character extends MX_Controller
                     break;
 
                 case "Hunter":
-                    if ($this->stats['maxpower3']) {
+                    if (isset($this->stats['maxpower3'])) {
                         $this->secondBar = "Focus";
                         $this->secondBarValue = $this->stats['maxpower3'];
-                    } else {
+                    } else if (isset($this->stats['maxpower1'])) {
                         $this->secondBar = "Mana";
                         $this->secondBarValue = $this->stats['maxpower1'];
+                    } else {
+                        $this->secondBar = "Mana";
+                        $this->secondBarValue = "Unknown";
                     }
                     break;
                 case "Death knight":
@@ -195,7 +198,7 @@ class Character extends MX_Controller
                     }
                     break;
                 case "Demon Hunter":
-                    if ($this->stats['maxpower2']) {
+                    if (isset($this->stats['maxpower2'])) {
                         $this->secondBar = "Fury";
                         $this->secondBarValue = $this->stats['maxpower2'];
                     } else {
@@ -205,20 +208,26 @@ class Character extends MX_Controller
                     break;
                 case "Monk":
                     if ($this->realms->getRealm($this->realm)->getExpansionId() > 8) {
-                        if ($this->stats['maxpower2']) {
+                        if (isset($this->stats['maxpower2'])) {
                             $this->secondBar = "Energy";
                             $this->secondBarValue = $this->stats['maxpower2'];
-                        } else {
+                        } else if (isset($this->stats['maxpower1'])) {
                             $this->secondBar = "Mana";
                             $this->secondBarValue = $this->stats['maxpower1'];
+                        } else {
+                            $this->secondBar = "Mana";
+                            $this->secondBarValue = "Unknown";
                         }
                     } else {
                         if ($this->stats['maxpower4']) {
                             $this->secondBar = "Energy";
                             $this->secondBarValue = $this->stats['maxpower4'];
-                        } else {
+                        } else if (isset($this->stats['maxpower1'])) {
                             $this->secondBar = "Mana";
                             $this->secondBarValue = $this->stats['maxpower1'];
+                        } else {
+                            $this->secondBar = "Mana";
+                            $this->secondBarValue = "Unknown";
                         }
                     }
                     break;
