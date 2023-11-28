@@ -28,8 +28,8 @@
                         <tr>
                             <td>
                                 {if hasPermission("editMenuLinks")}
-                                <a href="javascript:void(0)" onClick="Menu.move('up', {$link.id}, this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Move up"><i class="fas fa-chevron-circle-up"></i></a>
-                                <a href="javascript:void(0)" onClick="Menu.move('down', {$link.id}, this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Move down"><i class="fas fa-chevron-circle-down"></i></a>
+                                <a href="javascript:void(0)" onClick="Menu.move('up', {$link.id}, this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Move up"><i class="fa-duotone fa-up-from-bracket"></i></a>
+                                <a href="javascript:void(0)" onClick="Menu.move('down', {$link.id}, this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Move down"><i class="fa-duotone fa-down-to-bracket"></i></a>
                                 {/if}
                             </td>
                             <td>{$link.type}</td>

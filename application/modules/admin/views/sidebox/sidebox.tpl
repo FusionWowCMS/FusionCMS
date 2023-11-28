@@ -20,8 +20,8 @@
 		{foreach from=$sideboxes item=sidebox}
 			<tr>
 				<td>
-					<a href="javascript:void(0)" onClick="Sidebox.move('up', {$sidebox.id}, this)" data-bs-toggle="tooltip" data-placement="bottom" title="Move up"><i class="fas fa-chevron-circle-up"></i></a>
-					<a href="javascript:void(0)" onClick="Sidebox.move('down', {$sidebox.id}, this)" data-bs-toggle="tooltip" data-placement="bottom" title="Move down"><i class="fas fa-chevron-circle-down"></i></a></td>
+					<a href="javascript:void(0)" onClick="Sidebox.move('up', {$sidebox.id}, this)" data-bs-toggle="tooltip" data-placement="bottom" title="Move up"><i class="fa-duotone fa-up-from-bracket"></i></a>
+					<a href="javascript:void(0)" onClick="Sidebox.move('down', {$sidebox.id}, this)" data-bs-toggle="tooltip" data-placement="bottom" title="Move down"><i class="fa-duotone fa-down-to-bracket"></i></a></td>
 				<td><b>{langColumn($sidebox.displayName)}</b></td>
 				<td>{$sidebox.name}</td>
 				<td>{if $sidebox.permission}Controlled per group{else}Visible to everyone{/if}</td>

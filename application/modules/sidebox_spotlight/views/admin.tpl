@@ -18,8 +18,8 @@
                 {foreach from=$spotlights item=row}
                     <tr>
                         <td>
-                            <a href="javascript:void(0)" onClick="Spotlight.move('up', {$row.id}, this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Move up"><i class="fas fa-chevron-circle-up"></i></a>
-                            <a href="javascript:void(0)" onClick="Spotlight.move('down', {$row.id}, this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Move down"><i class="fas fa-chevron-circle-down"></i></a>
+                            <a href="javascript:void(0)" onClick="Spotlight.move('up', {$row.id}, this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Move up"><i class="fa-duotone fa-up-from-bracket"></i></a>
+                            <a href="javascript:void(0)" onClick="Spotlight.move('down', {$row.id}, this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Move down"><i class="fa-duotone fa-down-to-bracket"></i></a>
                         </td>
 
                         <td>{$row.title}</td>
