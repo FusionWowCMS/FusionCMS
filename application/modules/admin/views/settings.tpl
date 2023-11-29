@@ -747,7 +747,7 @@
 					<div class="col-sm-10">
 						<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="api_item_icons" onChange="Settings.toggleWowDB(this)">
 							<option disabled>Select a Wow database</option>
-							{foreach from=$config.wow_db key=name item=item}
+							{foreach from=$config.wow_db item=item}
 								<option value="{$item.link}" {if ($item.link == $config.api_item_icons) || ($item.link == 'custom' && $config.api_item_custom)}selected{/if}>{$item.name}</option>
 							{/foreach}
 						</select>
