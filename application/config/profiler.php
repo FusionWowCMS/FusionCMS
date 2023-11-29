@@ -1,11 +1,12 @@
 <?php
 
  if (! defined('BASEPATH')) {
-    exit('No direct script access allowed');
+     exit('No direct script access allowed');
+ }
 
 /**
  * @package FusionCMS
- * @version 6.0
+ * @version 8.2
  * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
