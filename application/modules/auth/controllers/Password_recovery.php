@@ -120,12 +120,6 @@ class Password_recovery extends MX_Controller
                 $token = $this->input->post('token');
                 $token_data = $this->password_recovery_model->get_token($token);
 
-                if ($this->input->post("csrf_token") != $this->security->get_csrf_hash())
-                {
-                    $data['messages']["error"] = 'Something went wrong. Please reload the page.';
-                    die(json_encode($data));
-                }
-
                 if (!$token_data)
                 {
                     $data['messages']["error"] = lang('invalid', 'recovery');
