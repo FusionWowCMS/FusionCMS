@@ -13,6 +13,7 @@ class Settings extends MX_Controller
         $this->load->config('smtp');
         $this->load->config('performance');
         $this->load->config('social_media');
+        $this->load->config('wow_db');
         $this->load->config('cdn');
 
         require_once('application/libraries/ConfigEditor.php');
@@ -74,6 +75,11 @@ class Settings extends MX_Controller
         $config['captcha_attemps'] = $this->config->item('captcha_attemps');
         $config['block_attemps'] = $this->config->item('block_attemps');
         $config['block_duration'] = $this->config->item('block_duration');
+
+        // API link to get item icons
+        $config['api_item_icons'] = $this->config->item('api_item_icons');
+        $config['api_item_custom'] = $this->config->item('api_item_custom');
+        $config['wow_db'] = $this->config->item('wow_db');
 
         // Prepare my data
         $data = array(
@@ -199,6 +205,24 @@ class Settings extends MX_Controller
 		$fusionConfig->set('twitter', $this->input->post('twitter_link'));
 		$fusionConfig->set('youtube', $this->input->post('yt_link'));
 		$fusionConfig->set('discord', $this->input->post('discord_link'));
+
+        $fusionConfig->save();
+
+        die('yes');
+    }
+
+    public function saveWowDatabase()
+    {
+        $fusionConfig = new ConfigEditor("application/config/wow_db.php");
+
+        $api_item_icons = $this->input->post('api_item_icons');
+        $custom_link = $this->input->post('custom_link');
+
+        $fusionConfig->set('api_item_custom', $api_item_icons == 'custom');
+        $fusionConfig->set('api_item_icons', $api_item_icons == 'custom' ? $custom_link : $api_item_icons);
+
+        if ((empty($api_item_icons) && empty($custom_link)) || ($api_item_icons == 'custom') && empty($custom_link))
+            die('The link cannot be empty');
 
         $fusionConfig->save();
 

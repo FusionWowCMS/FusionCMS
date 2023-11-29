@@ -12,7 +12,7 @@
 	{
 		if(typeof Character != "undefined")
 		{
-			Character.getIcon({$id}, {$realm});
+			Character.getIcon({$id}, {$realm}, '{$CI->config->item('api_item_icons')}');
 		}
 		else
 		{

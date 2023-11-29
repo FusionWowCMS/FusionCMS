@@ -406,6 +406,33 @@ var Settings = {
 		});
 	},
 
+	saveWowDatabase: function()
+	{
+		var values = {
+			api_item_icons:$("#api_item_icons").val(),
+			custom_link:$("#custom_link").val()
+		};
+
+		$.post(Config.URL + "admin/settings/saveWowDatabase", values, function(response)
+		{
+			if(response == "yes")
+			{
+				Swal.fire({
+					icon: "success",
+					title: "Wow Database configs have been saved!",
+				});
+			}
+			else
+			{
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: response,
+				})
+			}
+		});
+	},
+
 	mailDebug: function()
 	{
 		var values = {csrf_token_name: Config.CSRF};
@@ -745,5 +772,13 @@ var Settings = {
 			allowOutsideClick: false,
 			showCancelButton: false,
 		})
-	}
+	},
+
+	toggleWowDB: function(object)
+	{
+		if(object.value === 'custom')
+			$('#toggle_wowdb').fadeIn(300);
+		else
+			$('#toggle_wowdb').fadeOut(300);
+	},
 }

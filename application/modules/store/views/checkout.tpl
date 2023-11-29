@@ -21,7 +21,7 @@
 			<div class="row store_item" id="checkout_item_{$item.id}">
 
 				<div class="col-md-1 mt-1">
-				<img class="item_icon" src="https://icons.wowdb.com/retail/medium/{$item.icon}.jpg" align="absmiddle" {if $item.tooltip}data-realm="{$item.realm}" rel="item={$item.itemid}"{/if}>{if $item.itemcount > 1 && !preg_match("/,/", $item.itemcount)}<span class="wh-icon-text" data-type="number">{$item.itemcount}</span>{/if}
+				<img class="item_icon" src="{$CI->config->item('api_item_icons')}/medium/{$item.icon}.jpg" align="absmiddle" {if $item.tooltip}data-realm="{$item.realm}" rel="item={$item.itemid}"{/if}>{if $item.itemcount > 1 && !preg_match("/,/", $item.itemcount)}<span class="wh-icon-text" data-type="number">{$item.itemcount}</span>{/if}
 				</div>
 				<div class="col-md-8 mt-1">
 				<a {if $item.tooltip}href="{$url}item/{$item.realm}/{$item.itemid}" data-realm="{$item.realm}" rel="item={$item.itemid}"{/if} class="item_name q{$item.quality}">

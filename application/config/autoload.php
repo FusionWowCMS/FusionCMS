@@ -99,7 +99,7 @@ $autoload['helper'] = array('url', 'emulator', 'form', 'text', 'lang', 'breadcum
 |
 */
 
-$autoload['config'] = array('language', 'version', 'acl_defaults', 'fusion', 'message', 'backups', 'cdn', 'captcha', 'social_media', 'performance');
+$autoload['config'] = array('language', 'version', 'acl_defaults', 'fusion', 'message', 'backups', 'cdn', 'captcha', 'social_media', 'performance', 'wow_db');
 
 
 /*

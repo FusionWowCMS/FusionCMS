@@ -20,7 +20,7 @@ class Item extends MX_Controller
         if ($cache !== false) {
             $itemName = $cache['name'];
             $displayId = $cache['displayid'];
-            $icon = "<div class='item'><a></a><img src='https://icons.wowdb.com/retail/large/" . ($cache['icon'] != null ? $cache['icon'] : 'inv_misc_questionmark') . ".jpg' /></div>";
+            $icon = str_replace(['_baseURL_', '_icon_'], [$this->config->item('api_item_icons'), ($cache['icon'] != null ? $cache['icon'] : 'inv_misc_questionmark')], '<div class="item"><a></a><img src="_baseURL_/large/_icon_.jpg" /></div>');
             $item = $cache['htmlTooltip'];
         } else {
             $itemName = lang("view_item", "item");

@@ -155,9 +155,9 @@ class Armory extends MX_Controller
             $cache2 = $this->cache->get("items/display_iconname_" . $id);
 
             if ($cache2 != false) {
-                return '<img src="https://icons.wowdb.com/retail/small/' . $cache2 . '.jpg" align="absmiddle" />';
+                return '<img src="' . $this->config->item('api_item_icons') . '/small/' . $cache2 . '.jpg" align="absmiddle" />';
             } else {
-                return '<img src="https://icons.wowdb.com/retail/small/inv_misc_questionmark.jpg" align="absmiddle" />';
+                return '<img src="' . $this->config->item('api_item_icons') . '/small/inv_misc_questionmark.jpg" align="absmiddle" />';
             }
         } else {
             return $this->template->loadPage("icon_ajax.tpl", array('id' => $id, 'realm' => $realm, 'url' => $this->template->page_url));

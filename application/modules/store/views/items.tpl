@@ -44,7 +44,7 @@
 			<tbody id="ItemTableResult">
 			{foreach from=$items item=item}
 				<tr>
-					<td><img style="opacity:1;" src="https://icons.wowdb.com/retail/small/{$item.icon}.jpg" /></td>
+					<td><img style="opacity:1;" src="{$CI->config->item('api_item_icons')}/small/{$item.icon}.jpg" /></td>
 					<td data-bs-toggle="tooltip" data-placement="top" data-html="true" title="{$item.name}"><b class="q{$item.quality}">{character_limiter($item.name, 30)}</b></td>
 					<td data-bs-toggle="tooltip" data-placement="top" data-html="true" title="{$item.description}">{character_limiter($item.description, 20)}</td>
 					<td>{if array_key_exists("title", $item) && $item.title}{$item.title}{/if}</td>
