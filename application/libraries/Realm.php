@@ -240,19 +240,19 @@ class Realm
         return $this->emulator;
     }
 
-    public function getExpansionId(): false|int|string
+    public function getExpansionId(): bool|int
     {
         return $this->getConfig('expansion');
     }
 
     public function getExpansionName(): string
     {
-        return $this->getExpansionNameById($this->getConfig('expansion'));
+        return $this->getExpansionNameById($this->getExpansionId());
     }
 
     public function getExpansionSmallName(): string
     {
-        return match ($this->getConfig('expansion')) {
+        return match ($this->getExpansionId()) {
             0 => 'classic',
             1 => 'tbc',
             2 => 'wotlk',
