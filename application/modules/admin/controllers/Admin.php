@@ -184,9 +184,9 @@ class Admin extends MX_Controller
             $data = $fullGraph;
 
             if ($ago == 0)
-                $this->cache->save('dashboard_monthly', $data, 60 * 60 * 24);
+                $this->cache->save('dashboard_monthly', $data, 60 * 60 * 24 * 15); // Every two weeks
             else
-                $this->cache->save('dashboard_monthly_'.$ago.'_year_ago', $data, 60 * 60 * 24);
+                $this->cache->save('dashboard_monthly_'.$ago.'_year_ago', $data, 60 * 60 * 24 * 9 * 30); // every 9 months
         }
 
         return $data;
