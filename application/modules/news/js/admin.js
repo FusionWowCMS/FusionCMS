@@ -107,8 +107,8 @@ var News = {
         fd.append("type",            $("#type").val());
         fd.append("avatar",          $("#avatar").is(":checked"));
         fd.append("comments",        $("#comments").is(":checked"));
-        fd.append("headline",     	JSON.stringify(headlineData));
-        fd.append("content",      	JSON.stringify(contentData));
+        fd.append("headline",        JSON.stringify(headlineData));
+        fd.append("content",         JSON.stringify(contentData));
         fd.append("csrf_token_name", Config.CSRF);
         fd.append("type_content",    "");
         fd.append("type_video",      $('#type_video').val());
