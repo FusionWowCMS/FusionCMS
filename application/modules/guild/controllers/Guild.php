@@ -43,7 +43,7 @@ class Guild extends MX_Controller
                 'url' => $this->template->page_url
             );
             if ($this->guild) {
-                $guild_data['guildMotd'] = $this->template->format($this->guild['motd'], false, true, false);
+                $guild_data['guildMotd'] = $this->template->format($this->guild['motd']);
             }
 
             $content = $this->template->loadPage("guild.tpl", $guild_data);

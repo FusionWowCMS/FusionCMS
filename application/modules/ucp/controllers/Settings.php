@@ -108,8 +108,8 @@ class Settings extends MX_Controller
 
         $values = array(
             // Update sanitization according to CMS standards.
-            'nickname' => $this->template->format($nickname, false, true, false),
-            'location' => $this->template->format($location, false, true, false),
+            'nickname' => $this->template->format($nickname),
+            'location' => $this->template->format($location),
         );
 
         // Change language
