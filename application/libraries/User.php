@@ -683,17 +683,6 @@ class User
     }
 
     /**
-     * Set the role id of the user
-     *
-     * @param $newRoleId
-     */
-    public function setRoleId($newRoleId): void
-    {
-        $this->role = $newRoleId;
-        $this->CI->internal_user_model->setRoleId($this->id, $newRoleId);
-    }
-
-    /**
 	 * Set the avatar id of the user
 	 * @param $newAvatarId
 	 */

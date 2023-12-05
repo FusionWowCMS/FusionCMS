@@ -17,7 +17,6 @@ class Avatar extends MX_Controller
         // Prepare data
         $data = array(
             'isStaff'	=> $this->user->isStaff(),
-            'avatar' 	=> $this->user->getAvatar($this->user->getId()),
             'avatarId'	=> $this->user->getAvatarId($this->user->getId()),
             'avatars'	=> $this->settings_model->get_all_avatars()
         );

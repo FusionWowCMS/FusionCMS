@@ -12,7 +12,7 @@
                     </div>
                 {/if}
             {/foreach}
-        
+
             {if $isStaff}
                 <div class="divider"></div>
                 <div class="col-sm-12 mb-4">
