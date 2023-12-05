@@ -467,7 +467,8 @@ INSERT INTO `avatars` (`id`, `avatar`, `staff`) VALUES
 (21, 'staff_11.jpg', 1),
 (22, 'staff_12.jpg', 1),
 (23, 'staff_13.jpg', 1),
-(24, 'staff_14.jpg', 1);
+(24, 'staff_14.jpg', 1),
+(25, 'staff_15.gif', 1);
 
 -- ----------------------------
 -- Table structure for backup
