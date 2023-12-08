@@ -76,8 +76,8 @@ class Admin extends MX_Controller
                 if (!$target) {
                     die();
                 } else {
-                    $this->menu_model->spotlight_model($id, $target['order']);
-                    $this->menu_model->spotlight_model($target['id'], $order);
+                    $this->spotlight_model->setOrder($id, $target['order']);
+                    $this->spotlight_model->setOrder($target['id'], $order);
                 }
             }
         }
