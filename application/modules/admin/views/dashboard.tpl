@@ -372,7 +372,10 @@
 </script>
                                     </div>
 									{/if}
+                                    <div id="soapcheck" class="col-span-12 md:col-span-12">
+                                    </div>
                                 </div>
+
                             </div>
                             <div class="ltablet:col-span-3 col-span-12 lg:col-span-3">
                                 <div class="ptablet:grid-cols-2 ltablet:flex ltablet:flex-col grid gap-4 lg:flex lg:flex-col">
@@ -533,20 +536,13 @@
                             </div>
                         </div>
 
-
-<div class="row">
-
-<div id="soapcheck"></div>
-
-</div>
-
 <script type="text/javascript">
     var checkSoap = {
         check: function() {
             $.get(Config.URL + "admin/checkSoap", function(data) {        
                 try {
                     if(data.includes("Something")) {
-                        $("#soapcheck").html('<div class="alert alert-danger alert-dismissible fade show text-center" role="alert"><a href="'+ Config.URL +'admin/checkSoap" class="alert-link"><strong>Oh no!</strong> Looks like a realm has a soap problem!</a></div>');
+                        $("#soapcheck").html('<div class="relative"><div class="nui-card nui-card-curved nui-card-white p-6"><div class="flex w-full flex-col gap-4 sm:flex-row"><svg data-v-26e5b7b0="" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="icon h-10 w-10 shrink-0" width="1em" height="1em" viewBox="0 0 256 256"><defs><linearGradient id="iconifyVue0" x1="99.687%" x2="39.836%" y1="15.801%" y2="97.438%"><stop offset="0%" stop-color="#0052CC"></stop><stop offset="92.3%" stop-color="#2684FF"></stop></linearGradient></defs><path fill="url(#iconifyVue0)" d="M75.793 117.95c-3.82-4.08-9.77-3.85-12.367 1.342L.791 244.565a7.488 7.488 0 0 0 6.697 10.838h87.228a7.22 7.22 0 0 0 6.699-4.14c18.808-38.89 7.413-98.018-25.622-133.314Z"></path><path fill="#2681FF" d="M121.756 4.011c-35.033 55.505-32.721 116.979-9.646 163.13l42.06 84.121a7.488 7.488 0 0 0 6.697 4.14h87.227a7.488 7.488 0 0 0 6.697-10.838S137.445 9.837 134.493 3.964c-2.64-5.258-9.344-5.33-12.737.047Z"></path></svg><div><h4 class="nui-heading nui-heading-md nui-weight-semibold nui-lead-tight after:text-muted-800 mb-4 dark:text-white"><span class="text-danger-500">Soap Checker</span></h4><p class="nui-paragraph nui-paragraph-sm nui-weight-normal nui-lead-normal"><span class="text-danger-500 line-clamp-4"><strong>Oh no!</strong><br/> Looks like a realm has a soap problem!</span></p><div class="flex items-center justify-between pt-4"><div class="flex gap-2"><a href="'+ Config.URL +'admin/checkSoap" class="router-link-active router-link-exact-active bg-muted-100 hover:bg-muted-200 dark:bg-muted-700 dark:hover:bg-muted-900 text-primary-500 rounded-lg px-4 py-2 font-sans text-sm font-medium underline-offset-4 transition-colors duration-300 hover:underline"> Details </a></div></div></div></div></div></div>');
                     }
                 } catch(e) {
                     console.log(e);

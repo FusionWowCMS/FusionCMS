@@ -5,7 +5,7 @@ interface Emulator
     public function getExpansions();
     public function getExpansionName($id);
     public function getExpansionId($name);
-    public function sendCommand($command);
+    public function sendCommand($command, $realm = false);
     public function hasConsole();
     public function hasStats();
     public function hasTotp();

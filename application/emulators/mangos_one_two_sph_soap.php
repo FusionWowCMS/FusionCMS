@@ -385,9 +385,9 @@ class Mangos_one_two_sph_soap implements Emulator
      *
      * @param String $command
      */
-    public function sendCommand($command)
+    public function sendCommand($command, $realm = false)
     {
-        $this->send($command);
+        $this->send($command, $realm);
     }
 
     /**
@@ -468,7 +468,7 @@ class Mangos_one_two_sph_soap implements Emulator
      * @param  String $command
      * @return void
      */
-    public function send($command)
+    public function send($command, $realm = false)
     {
         $client = new SoapClient(
             null,
@@ -483,7 +483,7 @@ class Mangos_one_two_sph_soap implements Emulator
         try {
             $client->executeCommand(new SoapParam($command, "command"));
         } catch (Exception $e) {
-            die("Something went wrong! An administrator has been noticed and will send your order as soon as possible.<br /><br /><b>Error:</b> <br />" . $e->getMessage());
+            die("Something went wrong! An administrator has been noticed and will send your order as soon as possible.<br /><br /><b>Error:</b> <br />" . $e->getMessage() . ($realm ? '<br/><br/><b>Realm:</b> <br />' . $realm->getName() : ''));
         }
     }
 }

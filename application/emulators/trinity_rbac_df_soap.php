@@ -461,9 +461,9 @@ class Trinity_rbac_df_soap implements Emulator
      *
      * @param String $command
      */
-    public function sendCommand($command)
+    public function sendCommand($command, $realm = false)
     {
-        $this->send($command);
+        $this->send($command, $realm);
     }
 
     /**
@@ -569,22 +569,23 @@ class Trinity_rbac_df_soap implements Emulator
      * Send a console command
      *
      * @param  String $command
-     * @return Array
+     * @return void
      */
-    public function send($command)
+    public function send($command, $realm = false)
     {
-        $client = new SoapClient(null, array(
-            'location' => 'http://' . $this->config['hostname'] . ':' . $this->config['console_port'],
-            'uri'      => 'urn:TC',
-            'login'    => $this->config['console_username'],
-            'password' => $this->config['console_password'],
-        )); // ..opens a new socket to the server using the initial configs
+        $client = new SoapClient(null,
+            array(
+                'location' => 'http://' . $this->config['hostname'] . ':' . $this->config['console_port'],
+                'uri'      => 'urn:TC',
+                'login'    => $this->config['console_username'],
+                'password' => $this->config['console_password'],
+            )
+        );
 
         try {
             $client->executeCommand(new SoapParam($command, 'command'));
         } catch (Exception $e) {
-            die('Something went wrong! An administrator has been noticed and will send your order as soon as possible.<br/><br/>
-                <b>Error:</b> <br/>' . $e->getMessage()); // @note this isn't dev friendly and make impossible to catch errors
+            die("Something went wrong! An administrator has been noticed and will send your order as soon as possible.<br /><br /><b>Error:</b> <br />" . $e->getMessage() . ($realm ? '<br/><br/><b>Realm:</b> <br />' . $realm->getName() : ''));
         }
     }
 

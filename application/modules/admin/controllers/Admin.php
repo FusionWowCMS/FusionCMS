@@ -280,7 +280,7 @@ class Admin extends MX_Controller
         {
             if ($realm->isOnline(true))
             {
-                $this->realms->getRealm($realm->getId())->getEmulator()->sendCommand('.server info');
+                $this->realms->getRealm($realm->getId())->getEmulator()->sendCommand('.server info', $realm);
             }
         }
     }

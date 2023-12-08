@@ -46,3 +46,31 @@ html.dark .btn-default {
 .apexcharts-canvas > svg {
     width: 100% !important;
 }
+
+.nui-card {
+    position: relative;
+    transition-duration: .3s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    width: 100%;
+}
+
+:is(.dark .nui-card.nui-card-white) {
+    --tw-border-opacity: 1;
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--color-muted-800)/1);
+    background-color: rgb(var(--color-muted-800)/var(--tw-bg-opacity));
+    border-color: rgb(var(--color-muted-700)/var(--tw-border-opacity));
+}
+.nui-card.nui-card-curved {
+    border-radius: 0.75rem;
+}
+.nui-card.nui-card-white {
+    --tw-border-opacity: 1;
+    --tw-bg-opacity: 1;
+    background-color: #fff;
+    background-color: rgb(255 255 255/var(--tw-bg-opacity));
+    border-color: rgb(var(--color-muted-200)/var(--tw-border-opacity));
+    border-width: 1px;
+}
+

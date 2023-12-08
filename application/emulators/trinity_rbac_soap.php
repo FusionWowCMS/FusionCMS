@@ -431,9 +431,9 @@ class Trinity_rbac_soap implements Emulator
      *
      * @param String $command
      */
-    public function sendCommand($command)
+    public function sendCommand($command, $realm = false)
     {
-        $this->send($command);
+        $this->send($command, $realm);
     }
 
     /**
@@ -541,7 +541,7 @@ class Trinity_rbac_soap implements Emulator
      * @param  String $command
      * @return Array
      */
-    public function send($command)
+    public function send($command, $realm = false)
     {
         $client = new SoapClient(null, array(
             'location' => 'http://' . $this->config['hostname'] . ':' . $this->config['console_port'],
