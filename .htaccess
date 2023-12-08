@@ -140,19 +140,39 @@ ModPagespeedEnableFilters collapse_whitespace,remove_comments
     ExpiresByType video/quicktime "now plus 1 month"
     ExpiresByType video/x-la-asf "now plus 1 month"
     ExpiresByType video/x-ms-asf "now plus 1 month"
+
+    # Fonts
+    ExpiresByType font/ttf "now plus 1 year"
+    ExpiresByType font/otf "now plus 1 year"
+    ExpiresByType font/woff "now plus 1 year"
+    ExpiresByType font/woff2 "now plus 1 year"
+    ExpiresByType application/font-woff "now plus 1 year"
 </IfModule>
 ##### Optimize default expiration time - END
 
 ##### Compress resources start
 <IfModule mod_deflate.c>
+    # Compress HTML, CSS, JavaScript, Text, XML and fonts
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
     AddOutputFilterByType DEFLATE text/xml
     AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/ttf
     AddOutputFilterByType DEFLATE application/xml
     AddOutputFilterByType DEFLATE application/xhtml+xml
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/x-font
+    AddOutputFilterByType DEFLATE application/x-font-opentype
+    AddOutputFilterByType DEFLATE application/x-font-otf
+    AddOutputFilterByType DEFLATE application/x-font-truetype
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
 </IfModule>
 ##### Compress resources end
