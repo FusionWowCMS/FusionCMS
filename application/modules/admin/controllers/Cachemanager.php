@@ -180,12 +180,12 @@ class Cachemanager extends MX_Controller
     {
         requirePermission("emptyCache");
 
-        if (!$type || !in_array($type, array('all_but_item', 'website', 'theme', 'all'))) {
+        if (!$type || !in_array($type, array('item', 'website', 'theme', 'all'))) {
             die();
         } else {
             switch ($type) {
-                case "all_but_item":
-                    foreach ($this->websiteMatches as $match) {
+                case "item":
+                    foreach ($this->itemMatches as $match) {
                         $this->cache->delete($match);
                     }
                     break;
@@ -203,7 +203,15 @@ class Cachemanager extends MX_Controller
                     break;
 
                 case "all":
-                    $this->cache->deleteAll();
+                    foreach ($this->itemMatches as $match) {
+                        $this->cache->delete($match);
+                    }
+                    foreach ($this->minifyMatches as $match) {
+                        $this->cache->delete($match);
+                    }
+                    foreach ($this->minifyMatches as $match) {
+                        $this->cache->delete($match);
+                    }
                     break;
             }
 
