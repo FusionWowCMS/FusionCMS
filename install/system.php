@@ -279,7 +279,7 @@ $db["account"]["stricton"] = FALSE;';
     private function realms()
     {
         // Check for insert
-        $insert = (isset($_POST['insert']) && $_POST['insert'] == 'false') ? false : true;
+        $insert = !((isset($_POST['insert']) && $_POST['insert'] == 'false'));
 
         // Connect to CMS db
         if($insert)
@@ -298,9 +298,10 @@ $db["account"]["stricton"] = FALSE;';
         foreach($realms as $realm)
         {
             // Make sure all fields exists in realm array
-            foreach($fields as $field)
-                if(!isset($realm[$field]) || !$realm[$field] || empty($realm[$field]))
+            foreach($fields as $field) {
+                if (empty($realm[$field]) && $field != 'realm_expansion')
                     die('Field `' . $field . '` can\'t be empty.');
+            }
 
             // Connect to characters and world database
             @$connection = [
