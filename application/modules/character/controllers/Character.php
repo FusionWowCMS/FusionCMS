@@ -147,7 +147,7 @@ class Character extends MX_Controller
             // Find out which power field to use
             switch ($this->className) {
                 default:
-                    if (isset($this->stats['maxpower4'])) {
+                    if (isset($this->stats['maxpower1'])) {
                         $this->secondBar = "Mana";
                         $this->secondBarValue = $this->stats['maxpower1'];
                     } else {
@@ -157,7 +157,7 @@ class Character extends MX_Controller
                     break;
 
                 case "Warrior":
-                    if (isset($this->stats['maxpower4'])) {
+                    if (isset($this->stats['maxpower2'])) {
                         $this->secondBar = "Rage";
                         $this->secondBarValue = $this->stats['maxpower2'] / 10;
                     } else {
