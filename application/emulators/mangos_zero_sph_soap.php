@@ -35,13 +35,6 @@ class Mangos_zero_sph_soap implements Emulator
     protected $hasTotp = false;
 
     /**
-     * Array of expansion ids and their corresponding names
-     */
-    protected $expansions = array(
-        0 => "None"
-    );
-
-    /**
      * Array of table names
      */
     protected $tables = array(
@@ -245,42 +238,6 @@ class Mangos_zero_sph_soap implements Emulator
     {
         if (array_key_exists($name, $this->queries)) {
             return $this->queries[$name];
-        }
-    }
-
-    /**
-     * Expansion getter
-     *
-     * @return Array
-     */
-    public function getExpansions()
-    {
-        return $this->expansions;
-    }
-
-    /**
-     * Get the name of an expansion by the id
-     *
-     * @param  Int $id
-     * @return String
-     */
-    public function getExpansionName($id)
-    {
-        if (array_key_exists($id, $this->expansions)) {
-            return $this->expansions[$id];
-        }
-    }
-
-    /**
-     * Get the name of an expansion by the name
-     *
-     * @param  String $name
-     * @return Int
-     */
-    public function getExpansionId($name)
-    {
-        if (in_array($name, $this->expansions)) {
-            return array_search($name, $this->expansions);
         }
     }
 

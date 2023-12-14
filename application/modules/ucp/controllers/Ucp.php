@@ -19,7 +19,6 @@ class Ucp extends MX_Controller
 
         $data = array(
             "username" => $this->user->getNickname(),
-            "expansion" => $this->realms->getEmulator()->getExpansionName($this->external_account_model->getExpansion()),
             "vp" => $this->internal_user_model->getVp(),
             "dp" => $this->internal_user_model->getDp(),
             "url" => $this->template->page_url,
@@ -36,7 +35,6 @@ class Ucp extends MX_Controller
                 "store" => $this->config->item('ucp_store'),
                 "settings" => $this->config->item('ucp_settings'),
                 "security" => $this->config->item('ucp_security'),
-                "expansion" => $this->config->item('ucp_expansion'),
                 "teleport" => $this->config->item('ucp_teleport'),
                 "admin" => $this->config->item('ucp_admin'),
                 "gm" => $this->config->item('ucp_mod')
@@ -76,7 +74,6 @@ class Ucp extends MX_Controller
                 "store" => $this->config->item('ucp_store'),
                 "settings" => $this->config->item('ucp_settings'),
                 "security" => $this->config->item('ucp_security'),
-                "expansion" => $this->config->item('ucp_expansion'),
                 "teleport" => $this->config->item('ucp_teleport'),
                 "admin" => $this->config->item('ucp_admin'),
                 "gm" => $this->config->item('ucp_mod')

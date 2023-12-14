@@ -36,7 +36,8 @@ class Realmmanager extends MX_Controller
             'username_world' => ($realm->getConfig('override_username_world')) ? $realm->getConfig('override_username_world') : $realm->getConfig('username'),
             'password_world' => ($realm->getConfig('override_password_world')) ? $realm->getConfig('override_password_world') : $realm->getConfig('password'),
             'port_world' => ($realm->getConfig('override_port_world')) ? $realm->getConfig('override_port_world') : 3306,
-            'emulators' => $this->getEmulators()
+            'emulators' => $this->getEmulators(),
+            'expansions' => $this->realms->getExpansions()
         );
 
         // Load my view

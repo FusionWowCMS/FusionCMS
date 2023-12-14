@@ -88,10 +88,6 @@
 		<a href="{$url}{$config.settings}" style="background-image:url({$url}application/modules/ucp/images/account_settings.jpg)"></a>
 	{/if}
 
-	{if hasPermission('canChangeExpansion', "ucp") && $config['expansion']}
-        <a href="{$url}{$config.expansion}" style="background-image:url({$url}application/modules/ucp/images/change_expansion.jpg)"></a>
-	{/if}
-
 	{if hasPermission('view', "teleport") && $config['teleport']}
 		<a href="{$url}{$config.teleport}" style="background-image:url({$url}application/modules/ucp/images/teleport_hub.jpg)"></a>
 	{/if}

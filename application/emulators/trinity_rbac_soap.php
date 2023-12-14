@@ -41,20 +41,6 @@ class Trinity_rbac_soap implements Emulator
     protected $hasTotp = true;
 
     /**
-     * SRP6
-     */
-    protected $SRP6 = true;
-
-    /**
-     * Array of expansion ids and their corresponding names
-     */
-    protected $expansions = array(
-        2 => 'WotLK',
-        1 => 'TBC',
-        0 => 'None'
-    );
-
-    /**
      * Array of table names
      */
     protected $tables = array(
@@ -275,41 +261,6 @@ class Trinity_rbac_soap implements Emulator
             return null;
         }
         return $this->queries[$name];
-    }
-
-    /**
-     * Expansion getter
-     *
-     * @return Array
-     */
-    public function getExpansions()
-    {
-        return $this->expansions;
-    }
-
-    /**
-     * Get the name of an expansion by the id
-     *
-     * @param  Int $id
-     * @return String
-     */
-    public function getExpansionName($id)
-    {
-        if (!isset($this->expansions[$id])) {
-            return null;
-        }
-        return $this->expansions[$id];
-    }
-
-    /**
-     * Get the name of an expansion by the name
-     *
-     * @param  String $name
-     * @return Int
-     */
-    public function getExpansionId($name)
-    {
-        return array_search($name, $this->expansions) ?: null;
     }
 
     /**

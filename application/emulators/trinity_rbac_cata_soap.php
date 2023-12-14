@@ -35,16 +35,6 @@ class Trinity_rbac_cata_soap implements Emulator
     protected $hasTotp = true;
 
     /**
-     * Array of expansion ids and their corresponding names
-     */
-    protected $expansions = array(
-        3 => "Cataclysm",
-        2 => "WotLK",
-        1 => "TBC",
-        0 => "None"
-    );
-
-    /**
      * Array of table names
      */
     protected $tables = array(
@@ -253,42 +243,6 @@ class Trinity_rbac_cata_soap implements Emulator
     {
         if (array_key_exists($name, $this->queries)) {
             return $this->queries[$name];
-        }
-    }
-
-    /**
-     * Expansion getter
-     *
-     * @return Array
-     */
-    public function getExpansions()
-    {
-        return $this->expansions;
-    }
-
-    /**
-     * Get the name of an expansion by the id
-     *
-     * @param  Int $id
-     * @return String
-     */
-    public function getExpansionName($id)
-    {
-        if (array_key_exists($id, $this->expansions)) {
-            return $this->expansions[$id];
-        }
-    }
-
-    /**
-     * Get the name of an expansion by the name
-     *
-     * @param  String $name
-     * @return Int
-     */
-    public function getExpansionId($name)
-    {
-        if (in_array($name, $this->expansions)) {
-            return array_search($name, $this->expansions);
         }
     }
 

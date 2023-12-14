@@ -335,7 +335,7 @@ class Realms
      */
     public function getExpansions(): array
     {
-        $expansions = $this->getEmulator()->getExpansions();
+        $expansions = $this->CI->config->item('expansions_name_en');
         $return = array();
 
         foreach ($expansions as $key => $value)

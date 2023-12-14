@@ -251,42 +251,6 @@ class Vmangos_soap implements Emulator
     }
 
     /**
-     * Expansion getter
-     *
-     * @return Array
-     */
-    public function getExpansions()
-    {
-        return $this->expansions;
-    }
-
-    /**
-     * Get the name of an expansion by the id
-     *
-     * @param  Int $id
-     * @return String
-     */
-    public function getExpansionName($id)
-    {
-        if (array_key_exists($id, $this->expansions)) {
-            return $this->expansions[$id];
-        }
-    }
-
-    /**
-     * Get the name of an expansion by the name
-     *
-     * @param  String $name
-     * @return Int
-     */
-    public function getExpansionId($name)
-    {
-        if (in_array($name, $this->expansions)) {
-            return array_search($name, $this->expansions);
-        }
-    }
-
-    /**
      * Whether or not console actions are enabled for this emulator
      *
      * @return Boolean

@@ -86,6 +86,7 @@ class Settings extends MX_Controller
             'url' => $this->template->page_url,
             'realms' => $this->realms->getRealms(),
             'emulators' => $this->getEmulators(),
+            'expansions' => $this->realms->getExpansions(),
             'config' => $config
         );
 

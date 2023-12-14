@@ -252,36 +252,14 @@ class Realm
 
     public function getExpansionSmallName(): string
     {
-        return match ($this->getExpansionId()) {
-            0 => 'classic',
-            1 => 'tbc',
-            2 => 'wotlk',
-            3 => 'cata',
-            4 => 'mop',
-            5 => 'wod',
-            6 => 'legion',
-            7 => 'bfa',
-            8 => 'sl',
-            9 => 'df',
-            default => 'default',
-        };
+        $expansions = $this->CI->config->item('expansions_small_name_en');
+        return array_key_exists($this->getExpansionId(), $expansions) ? $expansions[$this->getExpansionId()] : 'default';
     }
 
     public function getExpansionNameById($id): string
     {
-        return match ($id) {
-            0 => 'Vanilla/Classic',
-            1 => 'The Burning Crusade',
-            2 => 'Wrath of The Lich King',
-            3 => 'Cataclysm',
-            4 => 'Mists of Pandaria',
-            5 => 'Warlods of Draenor',
-            6 => 'Legion',
-            7 => 'Battle for Azeroth',
-            8 => 'Shadowlands',
-            9 => 'Dragon Flight',
-            default => 'default',
-        };
+        $expansions = $this->CI->config->item('expansions_name_en');
+        return array_key_exists($id, $expansions) ? $expansions[$id] : 'default';
     }
 
     /**
