@@ -89,7 +89,8 @@ class News extends MX_Controller
         requirePermission("view");
 
         // HACK FIX: Wipe the output buffer, because something is placing a tab in it.
-        ob_end_clean();
+        if (ob_get_contents())
+            ob_end_clean();
 
         // Load the XML helper
         $this->load->helper('xml');
