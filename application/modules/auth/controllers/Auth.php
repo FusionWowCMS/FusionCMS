@@ -117,15 +117,18 @@ class Auth extends MX_Controller
             {
                 $data['showCaptcha'] = true;
                 if ($captcha_type == 'inbuilt') {
-                    if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha')))
+                    if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha'))) {
                         $data['messages']["error"] = lang("captcha_invalid", "auth");
+                        die(json_encode($data));
+                    }
                 } else if ($captcha_type == 'recaptcha') {
                     $recaptcha = $this->input->post('recaptcha');
                     $result = $this->recaptcha->verifyResponse($recaptcha)['success'];
-                    if (!$result)
+                    if (!$result) {
                         $data['messages']["error"] = lang("captcha_invalid", "auth") . $result;
+                        die(json_encode($data));
+                    }
                 }
-                die(json_encode($data));
             }
 
             //Login
