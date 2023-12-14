@@ -38,7 +38,7 @@ FusionCMS is a free, open-source content management system. Server owners all ar
 | Requirements | Description                                                                                                           |
 | --- |-----------------------------------------------------------------------------------------------------------------------|
 | PHP 8.1.0 or above | (enable Extensions: php_mysqli, php_curl, php_openssl, php_soap, php_mbstring, php_json, php_zip, php_gd and php_gmp) |
-| Apache / Nginx | (enable modules: mod_rewrite, mod_headers, mod_deflate, mod_filter)                                                                         |
+| Apache / Nginx | (enable modules: mod_rewrite, mod_headers, mod_expires, mod_deflate, mod_filter)                                                                         |
 | Pre installed World of Warcraft Server | (with the databases of: Auth, Characters and World)                                                                   |
 | MySQL / Mariadb Server | >= 5.6 / 10.3                                                                                                         |
 
