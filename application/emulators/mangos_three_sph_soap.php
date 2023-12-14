@@ -469,6 +469,13 @@ class Mangos_three_sph_soap implements Emulator
      */
     public function send($command, $realm = false)
     {
+        $blacklistCommands = array('account set', 'server shutdown', 'server exit', 'server restart', 'disable add', 'disable remove');
+
+        foreach ($blacklistCommands as $blacklist) {
+            if (strpos($command, $blacklist))
+                die("Something went wrong! There is no access to execute this command." . ($realm ? '<br/><br/><b>Realm:</b> <br />' . $realm->getName() : ''));
+        }
+
         $client = new SoapClient(
             null,
             array(
