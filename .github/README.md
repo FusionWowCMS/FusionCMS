@@ -21,6 +21,7 @@
 * [About the Project](#about-the-project)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
+  * [Security Tips](#security-tips)
   * [Installation](#installation)
 * [Contributing](#contributing)
 * [License](#license)
@@ -41,6 +42,11 @@ FusionCMS is a free, open-source content management system. Server owners all ar
 | Apache / Nginx | (enable modules: mod_rewrite, mod_headers, mod_expires, mod_deflate, mod_filter)                                                                         |
 | Pre installed World of Warcraft Server | (with the databases of: Auth, Characters and World)                                                                   |
 | MySQL / Mariadb Server | >= 5.6 / 10.3                                                                                                         |
+
+### Security Tips
+
+Read the [Security Tips](SECURITY.md).
+
 
 ### Installation
 
