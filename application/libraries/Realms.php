@@ -349,10 +349,10 @@ class Realms
     /**
      * Format character money
      *
-     * @param bool $money
+     * @param bool|int $money
      * @return array|false
      */
-    public function formatMoney(bool $money = false): array|false
+    public function formatMoney(bool|int $money = false): array|false
     {
         if ($money) {
             $gold = array(
