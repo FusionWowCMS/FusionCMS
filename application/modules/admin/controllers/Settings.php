@@ -173,27 +173,29 @@ class Settings extends MX_Controller
     {
         error_reporting(E_ERROR | E_PARSE);
 
-        $config = array(
-            'protocol'    => $this->input->post('protocol'),
-            'smtp_host'   => $this->input->post('host'),
-            'smtp_user'   => $this->input->post('user'),
-            'smtp_pass'   => $this->input->post('pass'),
-            'smtp_port'   => $this->input->post('port'),
-            'smtp_crypto' => $this->input->post('crypto'),
-        );
+        if ($this->input->post('protocol') == 'smtp') {
+            $config = array(
+                'protocol'   => $this->input->post('protocol'),
+                'SMTPHost'   => $this->input->post('host'),
+                'SMTPUser'   => $this->input->post('user'),
+                'SMTPPass'   => $this->input->post('pass'),
+                'SMTPPort'   => $this->input->post('port'),
+                'SMTPCrypto' => $this->input->post('crypto'),
+            );
+        }
 
         $this->email->initialize($config);
 
-        $this->email->from($this->config->item('smtp_sender'));
-        $this->email->to($this->user->getEmail());
+        $this->email->setFrom($this->config->item('smtp_sender'), $this->config->item('server_name'));
+        $this->email->setTo($this->user->getEmail());
 
-        $this->email->subject('Test mail');
-        $this->email->message('Looks like your mail configuration is working!');
+        $this->email->setSubject('Test mail');
+        $this->email->setMessage('Looks like your mail configuration is working!');
 
         if ($this->email->send()) {
             die(json_encode(array("success" => "Please check your spam folder.")));
         } else {
-            $error = $this->email->print_debugger();
+            $error = $this->email->printDebugger(['headers']);
             die(json_encode(array("error" => $error)));
         }
     }

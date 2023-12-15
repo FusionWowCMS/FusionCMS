@@ -1,13 +1,16 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Send a mail
+ * Send mail
  *
  * @param String $receiver
  * @param String $subject
+ * @param String $username
  * @param String $message
+ * @param $templateId
+ * @return false|void
  */
-function sendMail($receiver, $subject, $username, $message, $templateId)
+function sendMail(string $receiver, string $subject, string $username, string $message, $templateId)
 {
     static $CI;
 
@@ -26,29 +29,25 @@ function sendMail($receiver, $subject, $username, $message, $templateId)
     if ($CI->config->item('smtp_protocol') == 'smtp') {
         $config = array(
             'protocol'    => $CI->config->item('smtp_protocol'),
-            'smtp_host'   => $CI->config->item('smtp_host'),
-            'smtp_user'   => $CI->config->item('smtp_user'),
-            'smtp_pass'   => $CI->config->item('smtp_pass'),
-            'smtp_port'   => $CI->config->item('smtp_port'),
-            'smtp_crypto' => $CI->config->item('smtp_crypto'),
-            'crlf'        => "\r\n",
-            'newline'     => "\r\n",
+            'SMTPHost'   => $CI->config->item('smtp_host'),
+            'SMTPUser'   => $CI->config->item('smtp_user'),
+            'SMTPPass'   => $CI->config->item('smtp_pass'),
+            'SMTPPort'   => $CI->config->item('smtp_port'),
+            'SMTPCrypto' => $CI->config->item('smtp_crypto')
         );
     }
 
     // Configuration
-    $config['charset'] = 'utf-8';
-    $config['wordwrap'] = true;
-    $config['mailtype'] = 'html';
+    $config['mailType'] = 'html';
 
     $sender = $CI->config->item('smtp_sender');
     $CI->load->library('email', $config);
 
     // Set email data
-    $CI->email->from($sender, $CI->config->item('server_name'));
-    $CI->email->to($receiver);
-    $CI->email->subject($subject);
-    $CI->email->message($message);
+    $CI->email->setFrom($sender, $CI->config->item('server_name'));
+    $CI->email->setTo($receiver);
+    $CI->email->setSubject($subject);
+    $CI->email->setMessage($message);
 
     ######
     $data = array(
@@ -58,10 +57,10 @@ function sendMail($receiver, $subject, $username, $message, $templateId)
         'url' => $CI->template->page_url,
     );
     $template = $CI->cms_model->getTemplate($templateId);
-    $body = $CI->load->view('email_templates/' . $template['template_name'] . '', $data, true);
+    $body = $CI->load->view('email_templates/' . $template['template_name'], $data, true);
     ######
 
-    $CI->email->message($body);
+    $CI->email->setMessage($body);
 
     // Send the email
     if (!$CI->email->send()) {

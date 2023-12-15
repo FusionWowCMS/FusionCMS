@@ -2,7 +2,7 @@
 
 /**
  * @package FusionCMS
- * @version 6.0
+ * @version 8.3
  * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
