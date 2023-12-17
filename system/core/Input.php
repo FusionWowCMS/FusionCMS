@@ -56,21 +56,21 @@ class CI_Input {
 	 *
 	 * @var	string
 	 */
-	protected $ip_address = FALSE;
+	protected $ip_address = false;
 
 	/**
 	 * Allow GET array flag
 	 *
-	 * If set to FALSE, then $_GET will be set to an empty array.
+	 * If set to false, then $_GET will be set to an empty array.
 	 *
 	 * @var	bool
 	 */
-	protected $_allow_get_array = TRUE;
+	protected $_allow_get_array = true;
 
 	/**
 	 * Standardize new lines flag
 	 *
-	 * If set to TRUE, then newlines are standardized.
+	 * If set to true, then newlines are standardized.
 	 *
 	 * @var	bool
 	 */
@@ -85,7 +85,7 @@ class CI_Input {
 	 *
 	 * @var	bool
 	 */
-	protected $_enable_xss = FALSE;
+	protected $_enable_xss = false;
 
 	/**
 	 * Enable CSRF flag
@@ -95,7 +95,7 @@ class CI_Input {
 	 *
 	 * @var	bool
 	 */
-	protected $_enable_csrf = FALSE;
+	protected $_enable_csrf = false;
 
 	/**
 	 * List of all HTTP request headers
@@ -138,15 +138,15 @@ class CI_Input {
 	 */
 	public function __construct()
 	{
-		$this->_allow_get_array		= (config_item('allow_get_array') !== FALSE);
-		$this->_enable_xss		= (config_item('global_xss_filtering') === TRUE);
-		$this->_enable_csrf		= (config_item('csrf_protection') === TRUE);
+		$this->_allow_get_array		= (config_item('allow_get_array') !== false);
+		$this->_enable_xss		= (config_item('global_xss_filtering') === true);
+		$this->_enable_csrf		= (config_item('csrf_protection') === true);
 		$this->_standardize_newlines	= (bool) config_item('standardize_newlines');
 
 		$this->security =& load_class('Security', 'core');
 
 		// Do we need the UTF-8 class?
-		if (UTF8_ENABLED === TRUE)
+		if (UTF8_ENABLED === true)
 		{
 			$this->uni =& load_class('Utf8', 'core');
 		}
@@ -155,7 +155,7 @@ class CI_Input {
 		$this->_sanitize_globals();
 
 		// CSRF Protection check
-		if ($this->_enable_csrf === TRUE && ! is_cli())
+		if ($this->_enable_csrf === true && ! is_cli())
 		{
 			$this->security->csrf_verify();
 		}
@@ -172,14 +172,14 @@ class CI_Input {
 	 *
 	 * @param	array	&$array		$_GET, $_POST, $_COOKIE, $_SERVER, etc.
 	 * @param	mixed	$index		Index for item to be fetched from $array
-	 * @param	bool	$xss_clean	Whether to apply XSS filtering
+	 * @param	bool	$xssClean	Whether to apply XSS filtering
 	 * @return	mixed
 	 */
-	protected function _fetch_from_array(&$array, $index = NULL, $xss_clean = NULL)
+	protected function _fetch_from_array(&$array, $index = null, $xssClean = null)
 	{
-		is_bool($xss_clean) OR $xss_clean = $this->_enable_xss;
+		is_bool($xssClean) OR $xssClean = $this->_enable_xss;
 
-		// If $index is NULL, it means that the whole $array is requested
+		// If $index is null, it means that the whole $array is requested
 		isset($index) OR $index = array_keys($array);
 
 		// allow fetching multiple keys at once
@@ -188,7 +188,7 @@ class CI_Input {
 			$output = array();
 			foreach ($index as $key)
 			{
-				$output[$key] = $this->_fetch_from_array($array, $key, $xss_clean);
+				$output[$key] = $this->_fetch_from_array($array, $key, $xssClean);
 			}
 
 			return $output;
@@ -215,16 +215,16 @@ class CI_Input {
 				}
 				else
 				{
-					return NULL;
+					return null;
 				}
 			}
 		}
 		else
 		{
-			return NULL;
+			return null;
 		}
 
-		return ($xss_clean === TRUE)
+		return ($xssClean === true)
 			? $this->security->xss_clean($value)
 			: $value;
 	}
@@ -235,12 +235,12 @@ class CI_Input {
 	 * Fetch an item from the GET array
 	 *
 	 * @param	mixed	$index		Index for item to be fetched from $_GET
-	 * @param	bool	$xss_clean	Whether to apply XSS filtering
+	 * @param	bool	$xssClean	Whether to apply XSS filtering
 	 * @return	mixed
 	 */
-	public function get($index = NULL, $xss_clean = NULL)
+	public function get($index = null, $xssClean = null)
 	{
-		return $this->_fetch_from_array($_GET, $index, $xss_clean);
+		return $this->_fetch_from_array($_GET, $index, $xssClean);
 	}
 
 	// --------------------------------------------------------------------
@@ -249,12 +249,12 @@ class CI_Input {
 	 * Fetch an item from the POST array
 	 *
 	 * @param	mixed	$index		Index for item to be fetched from $_POST
-	 * @param	bool	$xss_clean	Whether to apply XSS filtering
+	 * @param	bool	$xssClean	Whether to apply XSS filtering
 	 * @return	mixed
 	 */
-	public function post($index = NULL, $xss_clean = TRUE)
+	public function post($index = null, $xssClean = true)
 	{
-		return $this->_fetch_from_array($_POST, $index, $xss_clean);
+		return $this->_fetch_from_array($_POST, $index, $xssClean);
 	}
 
 	// --------------------------------------------------------------------
@@ -263,14 +263,14 @@ class CI_Input {
 	 * Fetch an item from POST data with fallback to GET
 	 *
 	 * @param	string	$index		Index for item to be fetched from $_POST or $_GET
-	 * @param	bool	$xss_clean	Whether to apply XSS filtering
+	 * @param	bool	$xssClean	Whether to apply XSS filtering
 	 * @return	mixed
 	 */
-	public function post_get($index, $xss_clean = NULL)
+	public function post_get($index, $xssClean = null)
 	{
 		return isset($_POST[$index])
-			? $this->post($index, $xss_clean)
-			: $this->get($index, $xss_clean);
+			? $this->post($index, $xssClean)
+			: $this->get($index, $xssClean);
 	}
 
 	// --------------------------------------------------------------------
@@ -279,14 +279,14 @@ class CI_Input {
 	 * Fetch an item from GET data with fallback to POST
 	 *
 	 * @param	string	$index		Index for item to be fetched from $_GET or $_POST
-	 * @param	bool	$xss_clean	Whether to apply XSS filtering
+	 * @param	bool	$xssClean	Whether to apply XSS filtering
 	 * @return	mixed
 	 */
-	public function get_post($index, $xss_clean = NULL)
+	public function get_post($index, $xssClean = null)
 	{
 		return isset($_GET[$index])
-			? $this->get($index, $xss_clean)
-			: $this->post($index, $xss_clean);
+			? $this->get($index, $xssClean)
+			: $this->post($index, $xssClean);
 	}
 
 	// --------------------------------------------------------------------
@@ -295,12 +295,12 @@ class CI_Input {
 	 * Fetch an item from the COOKIE array
 	 *
 	 * @param	mixed	$index		Index for item to be fetched from $_COOKIE
-	 * @param	bool	$xss_clean	Whether to apply XSS filtering
+	 * @param	bool	$xssClean	Whether to apply XSS filtering
 	 * @return	mixed
 	 */
-	public function cookie($index = NULL, $xss_clean = NULL)
+	public function cookie($index = null, $xssClean = null)
 	{
-		return $this->_fetch_from_array($_COOKIE, $index, $xss_clean);
+		return $this->_fetch_from_array($_COOKIE, $index, $xssClean);
 	}
 
 	// --------------------------------------------------------------------
@@ -309,12 +309,12 @@ class CI_Input {
 	 * Fetch an item from the SERVER array
 	 *
 	 * @param	mixed	$index		Index for item to be fetched from $_SERVER
-	 * @param	bool	$xss_clean	Whether to apply XSS filtering
+	 * @param	bool	$xssClean	Whether to apply XSS filtering
 	 * @return	mixed
 	 */
-	public function server($index, $xss_clean = NULL)
+	public function server($index, $xssClean = null)
 	{
-		return $this->_fetch_from_array($_SERVER, $index, $xss_clean);
+		return $this->_fetch_from_array($_SERVER, $index, $xssClean);
 	}
 
 	// ------------------------------------------------------------------------
@@ -325,10 +325,10 @@ class CI_Input {
 	 * Useful when you need to access PUT, DELETE or PATCH request data.
 	 *
 	 * @param	string	$index		Index for item to be fetched
-	 * @param	bool	$xss_clean	Whether to apply XSS filtering
+	 * @param	bool	$xssClean	Whether to apply XSS filtering
 	 * @return	mixed
 	 */
-	public function input_stream($index = NULL, $xss_clean = NULL)
+	public function input_stream($index = null, $xssClean = null)
 	{
 		// Prior to PHP 5.6, the input stream can only be read once,
 		// so we'll need to check if we have already done that first.
@@ -339,7 +339,7 @@ class CI_Input {
 			is_array($this->_input_stream) OR $this->_input_stream = array();
 		}
 
-		return $this->_fetch_from_array($this->_input_stream, $index, $xss_clean);
+		return $this->_fetch_from_array($this->_input_stream, $index, $xssClean);
 	}
 
 	// ------------------------------------------------------------------------
@@ -361,7 +361,7 @@ class CI_Input {
 	 * @param	string		$samesite	SameSite attribute
 	 * @return	void
 	 */
-	public function set_cookie($name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = NULL, $httponly = NULL, $samesite = NULL)
+	public function set_cookie($name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = null, $httponly = null, $samesite = null)
 	{
 		if (is_array($name))
 		{
@@ -390,11 +390,11 @@ class CI_Input {
 			$path = config_item('cookie_path');
 		}
 
-		$secure = ($secure === NULL && config_item('cookie_secure') !== NULL)
+		$secure = ($secure === null && config_item('cookie_secure') !== null)
 			? (bool) config_item('cookie_secure')
 			: (bool) $secure;
 
-		$httponly = ($httponly === NULL && config_item('cookie_httponly') !== NULL)
+		$httponly = ($httponly === null && config_item('cookie_httponly') !== null)
 			? (bool) config_item('cookie_httponly')
 			: (bool) $httponly;
 
@@ -411,7 +411,7 @@ class CI_Input {
 		if (isset($samesite))
 		{
 			$samesite = ucfirst(strtolower($samesite));
-			in_array($samesite, array('Lax', 'Strict', 'None'), TRUE) OR $samesite = 'Lax';
+			in_array($samesite, array('Lax', 'Strict', 'None'), true) OR $samesite = 'Lax';
 		}
 		else
 		{
@@ -461,7 +461,7 @@ class CI_Input {
 	 */
 	public function ip_address()
 	{
-		if ($this->ip_address !== FALSE)
+		if ($this->ip_address !== false)
 		{
 			return $this->ip_address;
 		}
@@ -478,7 +478,7 @@ class CI_Input {
 		{
 			foreach (array('HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'HTTP_X_CLIENT_IP', 'HTTP_X_CLUSTER_CLIENT_IP') as $header)
 			{
-				if (($spoof = $this->server($header)) !== NULL)
+				if (($spoof = $this->server($header)) !== null)
 				{
 					// Some proxies typically list the whole chain of IP
 					// addresses through which the client has reached us.
@@ -487,7 +487,7 @@ class CI_Input {
 
 					if ( ! $this->valid_ip($spoof))
 					{
-						$spoof = NULL;
+						$spoof = null;
 					}
 					else
 					{
@@ -501,7 +501,7 @@ class CI_Input {
 				for ($i = 0, $c = count($proxy_ips); $i < $c; $i++)
 				{
 					// Check if we have an IP address or a subnet
-					if (strpos($proxy_ips[$i], '/') === FALSE)
+					if (strpos($proxy_ips[$i], '/') === false)
 					{
 						// An IP address (and not a subnet) is specified.
 						// We can compare right away.
@@ -518,7 +518,7 @@ class CI_Input {
 					isset($separator) OR $separator = $this->valid_ip($this->ip_address, 'ipv6') ? ':' : '.';
 
 					// If the proxy entry doesn't match the IP protocol - skip it
-					if (strpos($proxy_ips[$i], $separator) === FALSE)
+					if (strpos($proxy_ips[$i], $separator) === false)
 					{
 						continue;
 					}
@@ -619,11 +619,11 @@ class CI_Input {
 	/**
 	 * Fetch User Agent string
 	 *
-	 * @return	string|null	User Agent string or NULL if it doesn't exist
+	 * @return	string|null	User Agent string or null if it doesn't exist
 	 */
-	public function user_agent($xss_clean = NULL)
+	public function user_agent($xssClean = null)
 	{
-		return $this->_fetch_from_array($_SERVER, 'HTTP_USER_AGENT', $xss_clean);
+		return $this->_fetch_from_array($_SERVER, 'HTTP_USER_AGENT', $xssClean);
 	}
 
 	// --------------------------------------------------------------------
@@ -642,7 +642,7 @@ class CI_Input {
 	protected function _sanitize_globals()
 	{
 		// Is $_GET data allowed? If not we'll set the $_GET to an empty array
-		if ($this->_allow_get_array === FALSE)
+		if ($this->_allow_get_array === false)
 		{
 			$_GET = array();
 		}
@@ -679,7 +679,7 @@ class CI_Input {
 
 			foreach ($_COOKIE as $key => $val)
 			{
-				if (($cookie_key = $this->_clean_input_keys($key)) !== FALSE)
+				if (($cookie_key = $this->_clean_input_keys($key)) !== false)
 				{
 					$_COOKIE[$cookie_key] = $this->_clean_input_data($val);
 				}
@@ -705,7 +705,7 @@ class CI_Input {
 	 * standardizing newline characters to PHP_EOL.
 	 *
 	 * @param	string|string[]	$str	Input string(s)
-	 * @return	string
+	 * @return	string|array
 	 */
 	protected function _clean_input_data($str)
 	{
@@ -719,27 +719,17 @@ class CI_Input {
 			return $new_array;
 		}
 
-		/* We strip slashes if magic quotes is on to keep things consistent
-
-		   NOTE: In PHP 5.4 get_magic_quotes_gpc() will always return 0 and
-		         it will probably not exist in future versions at all.
-		*/
-		if ( ! is_php('5.4') && get_magic_quotes_gpc())
-		{
-			$str = stripslashes($str);
-		}
-
 		// Clean UTF-8 if supported
-		if (UTF8_ENABLED === TRUE)
+		if (UTF8_ENABLED === true)
 		{
 			$str = $this->uni->clean_string($str);
 		}
 
 		// Remove control characters
-		$str = remove_invisible_characters($str, FALSE);
+		$str = remove_invisible_characters($str, false);
 
 		// Standardize newlines if needed
-		if ($this->_standardize_newlines === TRUE)
+		if ($this->_standardize_newlines === true)
 		{
 			return preg_replace('/(?:\r\n|[\r\n])/', PHP_EOL, $str);
 		}
@@ -758,17 +748,17 @@ class CI_Input {
 	 *
 	 * @param	string	$str	Input string
 	 * @param	bool	$fatal	Whether to terminate script exection
-	 *				or to return FALSE if an invalid
+	 *				or to return false if an invalid
 	 *				key is encountered
 	 * @return	string|bool
 	 */
-	protected function _clean_input_keys($str, $fatal = TRUE)
+	protected function _clean_input_keys($str, $fatal = true)
 	{
 		if ( ! preg_match('/^[a-z0-9:_\/|-]+$/i', $str))
 		{
-			if ($fatal === TRUE)
+			if ($fatal === true)
 			{
-				return FALSE;
+				return false;
 			}
 			else
 			{
@@ -779,7 +769,7 @@ class CI_Input {
 		}
 
 		// Clean UTF-8 if supported
-		if (UTF8_ENABLED === TRUE)
+		if (UTF8_ENABLED === true)
 		{
 			return $this->uni->clean_string($str);
 		}
@@ -792,15 +782,15 @@ class CI_Input {
 	/**
 	 * Request Headers
 	 *
-	 * @param	bool	$xss_clean	Whether to apply XSS filtering
+	 * @param	bool	$xssClean	Whether to apply XSS filtering
 	 * @return	array
 	 */
-	public function request_headers($xss_clean = FALSE)
+	public function request_headers($xssClean = false)
 	{
 		// If header is already defined, return it immediately
 		if ( ! empty($this->headers))
 		{
-			return $this->_fetch_from_array($this->headers, NULL, $xss_clean);
+			return $this->_fetch_from_array($this->headers, null, $xssClean);
 		}
 
 		// In Apache, you can simply call apache_request_headers()
@@ -825,7 +815,7 @@ class CI_Input {
 			}
 		}
 
-		return $this->_fetch_from_array($this->headers, NULL, $xss_clean);
+		return $this->_fetch_from_array($this->headers, null, $xssClean);
 	}
 
 	// --------------------------------------------------------------------
@@ -836,10 +826,10 @@ class CI_Input {
 	 * Returns the value of a single member of the headers class member
 	 *
 	 * @param	string		$index		Header name
-	 * @param	bool		$xss_clean	Whether to apply XSS filtering
-	 * @return	string|null	The requested header on success or NULL on failure
+	 * @param	bool		$xssClean	Whether to apply XSS filtering
+	 * @return	string|null	The requested header on success or null on failure
 	 */
-	public function get_request_header($index, $xss_clean = FALSE)
+	public function get_request_header($index, $xssClean = false)
 	{
 		static $headers;
 
@@ -856,10 +846,10 @@ class CI_Input {
 
 		if ( ! isset($headers[$index]))
 		{
-			return NULL;
+			return null;
 		}
 
-		return ($xss_clean === TRUE)
+		return ($xssClean === true)
 			? $this->security->xss_clean($headers[$index])
 			: $headers[$index];
 	}
@@ -901,10 +891,10 @@ class CI_Input {
 	 * Return the request method
 	 *
 	 * @param	bool	$upper	Whether to return in upper or lower case
-	 *				(default: FALSE)
+	 *				(default: false)
 	 * @return 	string
 	 */
-	public function method($upper = FALSE)
+	public function method($upper = false)
 	{
 		return ($upper)
 			? strtoupper($this->server('REQUEST_METHOD'))
