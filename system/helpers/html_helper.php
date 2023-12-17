@@ -36,7 +36,7 @@ if (! function_exists('heading'))
 	 */
 	function heading($data = '', $h = '1', $attributes = ''): string
 	{
-		return '<h'.$h._stringify_attributes($attributes).'>'.$data.'</h'.$h.'>';
+		return '<h'.$h.stringify_attributes($attributes).'>'.$data.'</h'.$h.'>';
 	}
 }
 

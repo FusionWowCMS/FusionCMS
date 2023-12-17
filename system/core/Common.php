@@ -778,7 +778,7 @@ if ( ! function_exists('html_escape'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('_stringify_attributes'))
+if ( ! function_exists('stringify_attributes'))
 {
 	/**
 	 * Stringify attributes for use in HTML tags.
@@ -790,7 +790,7 @@ if ( ! function_exists('_stringify_attributes'))
 	 * @param	bool
 	 * @return	string
 	 */
-	function _stringify_attributes($attributes, $js = FALSE)
+	function stringify_attributes($attributes, $js = FALSE)
 	{
 		if (empty($attributes))
 		{

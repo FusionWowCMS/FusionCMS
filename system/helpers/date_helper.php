@@ -516,7 +516,7 @@ if (!function_exists('timezone_menu')) {
             $menu .= ' class="' . $class . '"';
         }
 
-        $menu .= _stringify_attributes($attributes) . ">\n";
+        $menu .= stringify_attributes($attributes) . ">\n";
 
         foreach (timezones() as $key => $val) {
             $selected = ($default === $key) ? ' selected="selected"' : '';
