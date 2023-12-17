@@ -50,19 +50,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('create_captcha'))
-{
-	/**
-	 * Create CAPTCHA
-	 *
-	 * @param	array	$data		Data for the CAPTCHA
-	 * @param	string	$img_path	Path to create the image in (deprecated)
-	 * @param	string	$img_url	URL to the CAPTCHA image folder (deprecated)
-	 * @param	string	$font_path	Server path to font (deprecated)
-	 * @return	string
-	 */
-	function create_captcha($data = '', $img_path = '', $img_url = '', $font_path = '')
-	{
+if (! function_exists('create_captcha')) {
+    /**
+     * Create CAPTCHA
+     *
+     * @param string $data Data for the CAPTCHA
+     * @param string $img_path Path to create the image in (deprecated)
+     * @param string $img_url URL to the CAPTCHA image folder (deprecated)
+     * @param string $font_path Server path to font (deprecated)
+     * @return false|array|string
+     */
+	function create_captcha(string $data = '', string $img_path = '', string $img_url = '', string $font_path = ''): false|array|string
+    {
 		$defaults = array(
 			'word'		=> '',
 			'img_path'	=> '',
@@ -85,17 +84,17 @@ if ( ! function_exists('create_captcha'))
 
 		foreach ($defaults as $key => $val)
 		{
-			if ( ! is_array($data) && empty($$key))
+			if (! is_array($data) && empty($$key))
 			{
 				$$key = $val;
 			}
 			else
 			{
-				$$key = isset($data[$key]) ? $data[$key] : $val;
+				$$key = $data[$key] ?? $val;
 			}
 		}
 
-		if ( ! extension_loaded('gd'))
+		if (! extension_loaded('gd'))
 		{
 			log_message('error', 'create_captcha(): GD extension is not loaded.');
 			return FALSE;
@@ -107,7 +106,7 @@ if ( ! function_exists('create_captcha'))
 			return FALSE;
 		}
 
-		if ( ! is_dir($img_path) OR ! is_really_writable($img_path))
+		if (! is_dir($img_path) OR ! is_really_writable($img_path))
 		{
 			log_message('error', "create_captcha(): '{$img_path}' is not a dir, nor is it writable.");
 			return FALSE;
