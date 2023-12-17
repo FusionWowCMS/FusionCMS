@@ -50,8 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('trim_slashes'))
-{
+if (! function_exists('trim_slashes')) {
 	/**
 	 * Trim Slashes
 	 *
@@ -63,32 +62,31 @@ if ( ! function_exists('trim_slashes'))
 	 *
 	 * this/that/theother
 	 *
-	 * @todo	Remove in version 3.1+.
+	 * @param	string$str
+	 * @return	string
+	 *@todo	Remove in version 3.1+.
 	 * @deprecated	3.0.0	This is just an alias for PHP's native trim()
 	 *
-	 * @param	string
-	 * @return	string
 	 */
-	function trim_slashes($str)
-	{
+	function trim_slashes($str): string
+    {
 		return trim($str, '/');
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('strip_slashes'))
-{
+if (! function_exists('strip_slashes')) {
 	/**
 	 * Strip Slashes
 	 *
 	 * Removes slashes contained in a string or in an array
 	 *
-	 * @param	mixed	string or array
-	 * @return	mixed	string or array
+	 * @param   mixed $str string or array
+	 * @return  string|array    string or array
 	 */
-	function strip_slashes($str)
-	{
+	function strip_slashes($str): string|array
+    {
 		if ( ! is_array($str))
 		{
 			return stripslashes($str);
@@ -105,44 +103,41 @@ if ( ! function_exists('strip_slashes'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('strip_quotes'))
-{
+if (! function_exists('strip_quotes')) {
 	/**
 	 * Strip Quotes
 	 *
 	 * Removes single and double quotes from a string
 	 *
-	 * @param	string
-	 * @return	string
+	 * @param	string $str
+     * @return	string
 	 */
-	function strip_quotes($str)
-	{
+	function strip_quotes($str): string
+    {
 		return str_replace(array('"', "'"), '', $str);
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('quotes_to_entities'))
-{
+if (! function_exists('quotes_to_entities')) {
 	/**
 	 * Quotes to Entities
 	 *
 	 * Converts single and double quotes to entities
 	 *
-	 * @param	string
-	 * @return	string
+	 * @param	string $str
+     * @return	string
 	 */
-	function quotes_to_entities($str)
-	{
+	function quotes_to_entities($str): string
+    {
 		return str_replace(array("\'","\"","'",'"'), array("&#39;","&quot;","&#39;","&quot;"), $str);
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('reduce_double_slashes'))
-{
+if (! function_exists('reduce_double_slashes')) {
 	/**
 	 * Reduce Double Slashes
 	 *
@@ -155,19 +150,18 @@ if ( ! function_exists('reduce_double_slashes'))
 	 *
 	 * http://www.some-site.com/index.php
 	 *
-	 * @param	string
-	 * @return	string
+	 * @param	string $str
+     * @return	string
 	 */
-	function reduce_double_slashes($str)
-	{
+	function reduce_double_slashes($str): string
+    {
 		return preg_replace('#(^|[^:])//+#', '\\1/', $str);
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('reduce_multiples'))
-{
+if (! function_exists('reduce_multiples')) {
 	/**
 	 * Reduce Multiples
 	 *
@@ -181,29 +175,28 @@ if ( ! function_exists('reduce_multiples'))
 	 *
 	 * @param	string
 	 * @param	string	the character you wish to reduce
-	 * @param	bool	TRUE/FALSE - whether to trim the character from the beginning/end
+	 * @param	bool	true/false - whether to trim the character from the beginning/end
 	 * @return	string
 	 */
-	function reduce_multiples($str, $character = ',', $trim = FALSE)
-	{
+	function reduce_multiples($str, $character = ',', $trim = false): string
+    {
 		$str = preg_replace('#'.preg_quote($character, '#').'{2,}#', $character, $str);
-		return ($trim === TRUE) ? trim($str, $character) : $str;
+		return ($trim === true) ? trim($str, $character) : $str;
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('random_string'))
-{
+if (! function_exists('random_string')) {
 	/**
 	 * Create a "Random" String
 	 *
-	 * @param	string	type of random string.  basic, alpha, alnum, numeric, nozero, unique, md5, encrypt and sha1
-	 * @param	int	number of characters
+	 * @param	string $type type of random string.  basic, alpha, alnum, numeric, nozero, unique, md5, encrypt and sha1
+	 * @param	int $len number of characters
 	 * @return	string
 	 */
-	function random_string($type = 'alnum', $len = 8)
-	{
+	function random_string($type = 'alnum', $len = 8): string
+    {
 		switch ($type)
 		{
 			case 'basic':
@@ -233,25 +226,25 @@ if ( ! function_exists('random_string'))
 				return md5(uniqid(mt_rand()));
 			case 'encrypt': // todo: remove in 3.1+
 			case 'sha1':
-				return sha1(uniqid(mt_rand(), TRUE));
+				return sha1(uniqid(mt_rand(), true));
 		}
+        return '';
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('increment_string'))
-{
+if (! function_exists('increment_string')) {
 	/**
 	 * Add's _1 to a string or increment the ending number to allow _2, _3, etc
 	 *
-	 * @param	string	required
-	 * @param	string	What should the duplicate number be appended with
-	 * @param	string	Which number should be used for the first dupe increment
+	 * @param	string $str required
+	 * @param	string $separator What should the duplicate number be appended with
+	 * @param	string $first Which number should be used for the first dupe increment
 	 * @return	string
 	 */
-	function increment_string($str, $separator = '_', $first = 1)
-	{
+	function increment_string($str, $separator = '_', $first = 1): string
+    {
 		preg_match('/(.+)'.preg_quote($separator, '/').'([0-9]+)$/', $str, $match);
 		return isset($match[2]) ? $match[1].$separator.($match[2] + 1) : $str.$separator.$first;
 	}
@@ -259,18 +252,16 @@ if ( ! function_exists('increment_string'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('alternator'))
-{
+if (! function_exists('alternator')) {
 	/**
 	 * Alternator
 	 *
 	 * Allows strings to be alternated. See docs...
 	 *
-	 * @param	string (as many parameters as needed)
 	 * @return	string
 	 */
-	function alternator()
-	{
+	function alternator(): string
+    {
 		static $i;
 
 		if (func_num_args() === 0)
@@ -286,8 +277,7 @@ if ( ! function_exists('alternator'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('repeater'))
-{
+if (! function_exists('repeater')) {
 	/**
 	 * Repeater function
 	 *
@@ -298,8 +288,8 @@ if ( ! function_exists('repeater'))
 	 * @param	int	$num	Number of repeats
 	 * @return	string
 	 */
-	function repeater($data, $num = 1)
-	{
+	function repeater($data, $num = 1): string
+    {
 		return ($num > 0) ? str_repeat($data, $num) : '';
 	}
 }

@@ -59,14 +59,14 @@ if ( ! function_exists('smiley_js'))
 	 * Returns the javascript required for the smiley insertion.  Optionally takes
 	 * an array of aliases to loosely couple the smiley array to the view.
 	 *
-	 * @param	mixed	alias name or array of alias->field_id pairs
-	 * @param	string	field_id if alias name was passed in
-	 * @param	bool
-	 * @return	array
+	 * @param	mixed $alias alias name or array of alias->field_id pairs
+	 * @param	string $field_id field_id if alias name was passed in
+	 * @param	bool $inline
+     * @return	array
 	 */
-	function smiley_js($alias = '', $field_id = '', $inline = TRUE)
-	{
-		static $do_setup = TRUE;
+	function smiley_js($alias = '', $field_id = '', $inline = true): array|string
+    {
+		static $do_setup = true;
 		$r = '';
 
 		if ($alias !== '' && ! is_array($alias))
@@ -74,9 +74,9 @@ if ( ! function_exists('smiley_js'))
 			$alias = array($alias => $field_id);
 		}
 
-		if ($do_setup === TRUE)
+		if ($do_setup === true)
 		{
-			$do_setup = FALSE;
+			$do_setup = false;
 			$m = array();
 
 			if (is_array($alias))
@@ -147,16 +147,16 @@ if ( ! function_exists('get_clickable_smileys'))
 	 * @param	array
 	 * @return	array
 	 */
-	function get_clickable_smileys($image_url, $alias = '')
-	{
+	function get_clickable_smileys($image_url, $alias = ''): false|array
+    {
 		// For backward compatibility with js_insert_smiley
 		if (is_array($alias))
 		{
 			$smileys = $alias;
 		}
-		elseif (FALSE === ($smileys = _get_smiley_array()))
+		elseif (false === ($smileys = _get_smiley_array()))
 		{
-			return FALSE;
+			return false;
 		}
 
 		// Add a trailing slash to the file path if needed
@@ -175,7 +175,7 @@ if ( ! function_exists('get_clickable_smileys'))
 			}
 
 			$link[] = '<a href="javascript:void(0);" onclick="insert_smiley(\''.$key.'\', \''.$alias.'\')"><img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" /></a>';
-			$used[$smileys[$key][0]] = TRUE;
+			$used[$smileys[$key][0]] = true;
 		}
 
 		return $link;
@@ -191,14 +191,14 @@ if ( ! function_exists('parse_smileys'))
 	 *
 	 * Takes a string as input and swaps any contained smileys for the actual image
 	 *
-	 * @param	string	the text to be parsed
-	 * @param	string	the URL to the folder containing the smiley images
-	 * @param	array
-	 * @return	string
+	 * @param	string $str the text to be parsed
+	 * @param	string $image_url the URL to the folder containing the smiley images
+	 * @param	array $smileys
+     * @return	string
 	 */
-	function parse_smileys($str = '', $image_url = '', $smileys = NULL)
-	{
-		if ($image_url === '' OR ( ! is_array($smileys) && FALSE === ($smileys = _get_smiley_array())))
+	function parse_smileys($str = '', $image_url = '', $smileys = null): string
+    {
+		if ($image_url === '' OR ( ! is_array($smileys) && false === ($smileys = _get_smiley_array())))
 		{
 			return $str;
 		}
@@ -217,7 +217,7 @@ if ( ! function_exists('parse_smileys'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('_get_smiley_array'))
+if (! function_exists('_get_smiley_array'))
 {
 	/**
 	 * Get Smiley Array
@@ -226,8 +226,8 @@ if ( ! function_exists('_get_smiley_array'))
 	 *
 	 * @return	mixed
 	 */
-	function _get_smiley_array()
-	{
+	function _get_smiley_array(): mixed
+    {
 		static $_smileys;
 
 		if ( ! is_array($_smileys))
@@ -245,7 +245,7 @@ if ( ! function_exists('_get_smiley_array'))
 			if (empty($smileys) OR ! is_array($smileys))
 			{
 				$_smileys = array();
-				return FALSE;
+				return false;
 			}
 
 			$_smileys = $smileys;
