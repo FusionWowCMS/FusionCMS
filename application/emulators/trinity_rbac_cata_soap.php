@@ -314,6 +314,23 @@ class Trinity_rbac_cata_soap implements Emulator
         );
     }
 
+
+    /**
+     * Password encryption for battlenet
+     */
+    public function encrypt2($email, $password)
+    {
+        if (!is_string($email)) {
+            $email = "";
+        }
+        if (!is_string($password)) {
+            $password = "";
+        }
+        $sha_pass_hash = strtoupper(bin2hex(strrev(hex2bin(strtoupper(hash("sha256", strtoupper(hash("sha256", strtoupper($email)) . ":" . strtoupper($password))))))));
+
+        return $sha_pass_hash;
+    }
+
     /**
      * Send mail via ingame mail to a specific character
      *
