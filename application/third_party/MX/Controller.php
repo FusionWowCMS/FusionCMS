@@ -193,7 +193,7 @@ class MX_Controller
             if ($username && $password) {
                 $check = CI::$APP->user->setUserDetails($username, $password);
 
-                if ($check == 0) {
+                if ($check == 0 && strtolower(str_replace(CI::$APP->config->item('controller_suffix'), '', get_class($this))) !== 'api') {
                     redirect('news');
                 }
             }
