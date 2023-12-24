@@ -151,7 +151,7 @@ class Data_model extends CI_Model
     public function getTeams($count = 5, $type = 2)
     {
         //make sure the count param is digit
-        if (!ctype_digit($count)) {
+        if (!ctype_digit((string)$count)) {
             $count = 5;
         }
 
@@ -268,7 +268,7 @@ class Data_model extends CI_Model
     public function getTopHKPlayers($count = 10)
     {
         //make sure the count param is digit
-        if (!ctype_digit($count)) {
+        if (!ctype_digit((string)$count)) {
             $count = 10;
         }
 

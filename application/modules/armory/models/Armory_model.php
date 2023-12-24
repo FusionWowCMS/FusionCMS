@@ -10,7 +10,7 @@ class Armory_model extends CI_Model
         parent::__construct();
     }
     
-    public function get_items($searchString = "", $limit, $offset, $realmId = 1)
+    public function get_items($searchString, $limit, $offset, $realmId = 1)
     {        
         //Connect to the world database
         $realm = $this->realms->getRealm($realmId);
@@ -54,7 +54,7 @@ class Armory_model extends CI_Model
         return $this->w_connection->count_all_results();
     }
 
-    public function get_guilds($searchString = "", $limit, $offset, $realmId = 1)
+    public function get_guilds($searchString, $limit, $offset, $realmId = 1)
     {
         //Connect to the character database
         $realm = $this->realms->getRealm($realmId);
@@ -88,7 +88,7 @@ class Armory_model extends CI_Model
         return $this->c_connection->count_all_results();
     }
 
-    public function get_characters($searchString = "", $limit, $offset, $realmId = 1)
+    public function get_characters($searchString, $limit, $offset, $realmId = 1)
     {
         $realm = $this->realms->getRealm($realmId);
         $realm->getCharacters()->connect();
