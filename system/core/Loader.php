@@ -309,7 +309,7 @@ class CI_Loader {
 			}
 			elseif ( ! class_exists('CI_Model', FALSE))
 			{
-				require_once(BASEPATH.'core'.DIRECTORY_SEPARATOR.'Model.php');
+				require_once(BASEPATH . DIRECTORY_SEPARATOR . 'Model.php');
 			}
 
 			$class = config_item('subclass_prefix').'Model';
@@ -349,7 +349,7 @@ class CI_Loader {
 				throw new RuntimeException('Unable to locate the model you have specified: '.$model);
 			}
 		}
-		elseif ( ! is_subclass_of($model, 'CI_Model'))
+		elseif (! is_subclass_of($model, 'CI_Model'))
 		{
 			throw new RuntimeException("Class ".$model." already exists and doesn't extend CI_Model");
 		}
