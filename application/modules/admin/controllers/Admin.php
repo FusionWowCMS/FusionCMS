@@ -23,6 +23,8 @@ class Admin extends MX_Controller
 
     public function index()
     {
+        $this->benchmark->mark('admin_start');
+
         $this->administrator->setTitle("Dashboard");
 
         $this->administrator->loadModules();
@@ -60,6 +62,9 @@ class Admin extends MX_Controller
             'latestVersion' => $this->getLatestVersion(),
             'isOldTheme' => empty($this->template->theme_data['min_required_version']),
         );
+
+        $this->benchmark->mark('admin_end');
+        $data['benchmark'] = $this->benchmark->elapsed_time('admin_start', 'admin_end');
 
         $output = $this->template->loadPage("dashboard.tpl", $data);
 
