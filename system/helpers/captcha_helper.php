@@ -54,13 +54,13 @@ if (! function_exists('create_captcha')) {
     /**
      * Create CAPTCHA
      *
-     * @param string $data Data for the CAPTCHA
+     * @param array|string $data Data for the CAPTCHA
      * @param string $img_path Path to create the image in (deprecated)
      * @param string $img_url URL to the CAPTCHA image folder (deprecated)
      * @param string $font_path Server path to font (deprecated)
      * @return false|array|string
      */
-	function create_captcha(string $data = '', string $img_path = '', string $img_url = '', string $font_path = ''): false|array|string
+	function create_captcha(array|string $data = '', string $img_path = '', string $img_url = '', string $font_path = ''): false|array|string
     {
 		$defaults = array(
 			'word'		=> '',
@@ -84,14 +84,10 @@ if (! function_exists('create_captcha')) {
 
 		foreach ($defaults as $key => $val)
 		{
-			if (! is_array($data) && empty($$key))
-			{
+			if (!is_array($data) && empty($$key))
 				$$key = $val;
-			}
 			else
-			{
 				$$key = $data[$key] ?? $val;
-			}
 		}
 
 		if (! extension_loaded('gd'))

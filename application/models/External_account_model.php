@@ -148,7 +148,7 @@ class External_account_model extends CI_Model
         }
 
         // Battlenet accounts
-        if ($this->realms->getEmulator()->battlenet() == true) {
+        if ($this->realms->getEmulator()->battlenet()) {
             $userId = $this->user->getId($username);
             $hash = $this->user->createHash2($email, $password);
 
