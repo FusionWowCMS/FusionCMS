@@ -103,13 +103,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Items $items                             Items Class
  * @property Language $language                       Language Class
  * @property Logger $logger                           Logger Class
- * @property Moderator $moderator                     Moderator Class
  * @property Plugin $plugin                           Plugin Class
  * @property Plugins $plugins                         Plugins Class
  * @property Realm $realm                             Realm Class
  * @property Realms $realms                           Realms Class
  * @property Recaptcha $recaptcha                     Recaptcha Class
- * @property Tasks $tasks                             Tasks Class
  * @property Template $template                       Template Class
  * @property User $user                               User Class
  * **************** Fusion CMS *****************

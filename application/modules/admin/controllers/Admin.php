@@ -2,15 +2,11 @@
 
 class Admin extends MX_Controller
 {
-    private $coreModules;
-
     public function __construct()
     {
         parent::__construct();
 
         $this->load->config('performance');
-
-        $this->coreModules = array('admin', 'login', 'logout', 'errors', 'news', 'mod');
 
         $this->load->library('administrator');
 

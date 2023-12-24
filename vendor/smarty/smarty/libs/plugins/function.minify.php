@@ -7,9 +7,8 @@ use MatthiasMullie\Minify;
  * Minify
  *
  * @param  array  $params
- * @return object $smarty
  */
-function smarty_function_minify($params = false, &$smarty)
+function smarty_function_minify($params = false)
 {
     // Missing a parameter or two..
     if(!is_array($params) || !isset($params['type']) || !isset($params['files']) || !isset($params['output']) || !isset($params['disable']))

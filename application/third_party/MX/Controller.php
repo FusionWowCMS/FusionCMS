@@ -3,8 +3,8 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * load the CI class for Modular Extensions 
-**/
+ * load the CI class for Modular Extensions
+ **/
 require_once __DIR__ . '/Base.php';
 
 /**
@@ -98,13 +98,11 @@ require_once __DIR__ . '/Base.php';
  * @property Items $items                       Items Class
  * @property Language $language                 Language Class
  * @property Logger $logger                     Logger Class
- * @property Moderator $moderator               Moderator Class
  * @property Plugin $plugin                     Plugin Class
  * @property Plugins $plugins                   Plugins Class
  * @property Realm $realm                       Realm Class
  * @property Realms $realms                     Realms Class
  * @property Recaptcha $recaptcha               Recaptcha Class
- * @property Tasks $tasks                       Tasks Class
  * @property Template $template                 Template Class
  * @property User $user                         User Class
  *  **************** Fusion CMS *****************
@@ -116,6 +114,7 @@ require_once __DIR__ . '/Base.php';
  * @property Logger_model $logger_model         Logger_model Class
  * @property World_model $world_model           World_model Class
  */
+#[AllowDynamicProperties]
 class MX_Controller
 {
     public $autoload = array();
@@ -128,7 +127,7 @@ class MX_Controller
      */
     public function __construct()
     {
-        $class = str_replace(CI::$APP->config->item('controller_suffix'), '', get_class($this));
+        $class = str_replace(CI::$APP->config->item('controller_suffix') ?? '', '', get_class($this));
         log_message('debug', $class . ' MX_Controller Initialized');
         _Modules::$registry[strtolower($class)] = $this;
 
@@ -193,7 +192,7 @@ class MX_Controller
             if ($username && $password) {
                 $check = CI::$APP->user->setUserDetails($username, $password);
 
-                if ($check == 0 && strtolower(str_replace(CI::$APP->config->item('controller_suffix'), '', get_class($this))) !== 'api') {
+                if ($check == 0 && strtolower(str_replace(CI::$APP->config->item('controller_suffix') ?? '', '', get_class($this))) !== 'api') {
                     redirect('news');
                 }
             }

@@ -134,13 +134,13 @@ if ( ! function_exists('load_class'))
 	 * exist it is instantiated and set to a static variable. If it has
 	 * previously been instantiated the variable is returned.
 	 *
-	 * @param	string	the class name being requested
-	 * @param	string	the directory where the class should be found
-	 * @param	mixed	an optional argument to pass to the class constructor
+	 * @param	string $class the class name being requested
+	 * @param	string $directory the directory where the class should be found
+	 * @param	mixed $param an optional argument to pass to the class constructor
 	 * @return	object
 	 */
-	function &load_class($class, $directory = 'libraries', $param = NULL)
-	{
+	function &load_class($class, $directory = 'libraries', $param = null): object
+    {
 		static $_classes = array();
 
 		// Does the class exist? If so, we're done...
@@ -149,7 +149,7 @@ if ( ! function_exists('load_class'))
 			return $_classes[$class];
 		}
 
-		$name = FALSE;
+		$name = false;
 
 		// Look for the class first in the local application/libraries folder
 		// then in the native system/libraries folder
@@ -159,7 +159,7 @@ if ( ! function_exists('load_class'))
 			{
 				$name = 'CI_'.$class;
 
-				if (class_exists($name, FALSE) === FALSE)
+				if (class_exists($name, false) === false)
 				{
 					require_once($path.$directory.'/'.$class.'.php');
 				}
@@ -173,14 +173,14 @@ if ( ! function_exists('load_class'))
 		{
 			$name = config_item('subclass_prefix').$class;
 
-			if (class_exists($name, FALSE) === FALSE)
+			if (class_exists($name, false) === false)
 			{
 				require_once(APPPATH.$directory.'/'.$name.'.php');
 			}
 		}
 
 		// Did we find the class?
-		if ($name === FALSE)
+		if ($name === false)
 		{
 			// Note: We use exit() rather than show_error() in order to avoid a
 			// self-referencing loop with the Exceptions class
@@ -236,17 +236,17 @@ if ( ! function_exists('get_config'))
 	 * @param	array
 	 * @return	array
 	 */
-	function &get_config(Array $replace = array())
-	{
+	function &get_config(array $replace = []): array
+    {
 		static $config;
 
 		if (empty($config))
 		{
 			$file_path = APPPATH.'config/config.php';
-			$found = FALSE;
+			$found = false;
 			if (file_exists($file_path))
 			{
-				$found = TRUE;
+				$found = true;
 				require($file_path);
 			}
 
@@ -255,7 +255,7 @@ if ( ! function_exists('get_config'))
 			{
 				require($file_path);
 			}
-			elseif ( ! $found)
+			elseif (! $found)
 			{
 				set_status_header(503);
 				echo 'The configuration file does not exist.';
@@ -263,7 +263,7 @@ if ( ! function_exists('get_config'))
 			}
 
 			// Does the $config array exist in the file?
-			if ( ! isset($config) OR ! is_array($config))
+			if (! isset($config) OR ! is_array($config))
 			{
 				set_status_header(503);
 				echo 'Your config file does not appear to be formatted correctly.';

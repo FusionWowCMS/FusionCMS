@@ -7,6 +7,7 @@
 
 class Cms_model extends CI_Model
 {
+    private $db;
     /**
      * Connect to the database
      */

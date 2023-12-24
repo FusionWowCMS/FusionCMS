@@ -90,9 +90,10 @@ class CI_URI {
 	 *
 	 * @var	string
 	 */
-	protected $_permitted_uri_chars;
+	protected string $_permitted_uri_chars;
+    private object $config;
 
-	/**
+    /**
 	 * Class constructor
 	 *
 	 * @return	void

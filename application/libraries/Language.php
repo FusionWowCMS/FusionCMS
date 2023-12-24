@@ -22,6 +22,7 @@ class Language
     private $requestedFiles;
     private $data;
     private $clientData;
+    private $languagePrefix;
 
     /**
      * Get the CI instance and load the default language

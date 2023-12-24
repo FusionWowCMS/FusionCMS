@@ -198,7 +198,7 @@ class Updater extends MX_Controller
 
         // Sort logs
         uksort($logs, function($a, $b) {
-            return strtotime($a) < strtotime($b);
+            return strtotime($a) <=> strtotime($b);
         });
 
         return $logs;

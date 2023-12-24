@@ -14,6 +14,8 @@ class Internal_user_model extends CI_Model
     private $vp;
     private $dp;
     private $nickname;
+    private $location;
+    private $avatarId;
     private $permissionCache;
     private $language;
 

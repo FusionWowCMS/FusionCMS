@@ -56,31 +56,32 @@ class CI_Router {
 	 *
 	 * @var	object
 	 */
-	public $config;
+	public object $config;
+    public object $uri;
 
 	/**
 	 * List of routes
 	 *
 	 * @var	array
 	 */
-	public $routes =	array();
+	public array $routes = [];
 
 	/**
 	 * Current class name
 	 *
 	 * @var	string
 	 */
-	public $class =		'';
+	public $class = '';
 
 	/**
 	 * Current method name
 	 *
 	 * @var	string
 	 */
-	public $method =	'index';
+	public $method = 'index';
 
 	/**
-	 * Sub-directory that contains the requested controller class
+	 * Subdirectory that contains the requested controller class
 	 *
 	 * @var	string
 	 */
@@ -101,7 +102,7 @@ class CI_Router {
 	 *
 	 * @var	bool
 	 */
-	public $translate_uri_dashes = FALSE;
+	public bool $translate_uri_dashes = false;
 
 	/**
 	 * Enable query strings flag
@@ -110,19 +111,19 @@ class CI_Router {
 	 *
 	 * @var	bool
 	 */
-	public $enable_query_strings = FALSE;
+	public bool $enable_query_strings = false;
 
 	// --------------------------------------------------------------------
 
-	/**
+    /**
 	 * Class constructor
 	 *
 	 * Runs the route mapping function.
 	 *
-	 * @param	array	$routing
+	 * @param array|null $routing
 	 * @return	void
 	 */
-	public function __construct($routing = NULL)
+	public function __construct(array $routing = null)
 	{
 		$this->config =& load_class('Config', 'core');
 		$this->uri =& load_class('URI', 'core');

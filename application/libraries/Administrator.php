@@ -16,6 +16,7 @@ if (!defined('BASEPATH')) {
 class Administrator
 {
     protected $CI;
+    protected $modules;
     private string $theme_path;
     private array $menu;
     private string $title;
