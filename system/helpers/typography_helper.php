@@ -50,18 +50,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if (! function_exists('nl2br_except_pre')) {
+if (! function_exists('nl2brExceptPre')) {
 	/**
 	 * Convert newlines to HTML line breaks except within PRE tags
 	 *
 	 * @param	string $str
      * @return	string
 	 */
-	function nl2br_except_pre($str): string
+	function nl2brExceptPre($str): string
     {
 		$CI =& get_instance();
 		$CI->load->library('typography');
-		return $CI->typography->nl2br_except_pre($str);
+		return $CI->typography->nl2brExceptPre($str);
 	}
 }
 
