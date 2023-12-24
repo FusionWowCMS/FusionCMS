@@ -159,7 +159,7 @@ class Install
 
 		$raw = '<?php
 $active_group = "cms";
-$query_builder = TRUE;
+$query_builder = true;
 
 $db["cms"]["hostname"] = "'.$_POST['cms_hostname'].'";
 $db["cms"]["username"] = "'.$_POST['cms_username'].'";
@@ -168,15 +168,15 @@ $db["cms"]["database"] = "'.$_POST['cms_database'].'";
 $db["cms"]["port"] 	   = '.(is_numeric($_POST['cms_port']) ? $_POST['cms_port'] : self::MYSQL_DEFAULT_PORT).';
 $db["cms"]["dbdriver"] = "mysqli";
 $db["cms"]["dbprefix"] = "";
-$db["cms"]["pconnect"] = FALSE;
-$db["cms"]["db_debug"] = FALSE;
-$db["cms"]["cache_on"] = FALSE;
+$db["cms"]["pconnect"] = false;
+$db["cms"]["db_debug"] = false;
+$db["cms"]["cache_on"] = false;
 $db["cms"]["cachedir"] = "";
 $db["cms"]["char_set"] = "utf8mb4";
 $db["cms"]["dbcollat"] = "utf8mb4_general_ci";
 $db["cms"]["swap_pre"] = "";
-$db["cms"]["autoinit"] = TRUE;
-$db["cms"]["stricton"] = FALSE;
+$db["cms"]["autoinit"] = true;
+$db["cms"]["stricton"] = false;
 
 $db["account"]["hostname"] = "'.$_POST['realmd_hostname'].'";
 $db["account"]["username"] = "'.$_POST['realmd_username'].'";
@@ -185,15 +185,15 @@ $db["account"]["database"] = "'.$_POST['realmd_database'].'";
 $db["account"]["port"]     = '.(is_numeric($_POST['realmd_port']) ? $_POST['realmd_port'] : self::MYSQL_DEFAULT_PORT).';
 $db["account"]["dbdriver"] = "mysqli";
 $db["account"]["dbprefix"] = "";
-$db["account"]["pconnect"] = FALSE;
-$db["account"]["db_debug"] = FALSE;
-$db["account"]["cache_on"] = FALSE;
+$db["account"]["pconnect"] = false;
+$db["account"]["db_debug"] = false;
+$db["account"]["cache_on"] = false;
 $db["account"]["cachedir"] = "";
 $db["account"]["char_set"] = "utf8";
 $db["account"]["dbcollat"] = "utf8_general_ci";
 $db["account"]["swap_pre"] = "";
-$db["account"]["autoinit"] = FALSE;
-$db["account"]["stricton"] = FALSE;';
+$db["account"]["autoinit"] = false;
+$db["account"]["stricton"] = false;';
 
 		fwrite($db, $raw);
 
