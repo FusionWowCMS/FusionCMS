@@ -123,26 +123,29 @@ class Register extends MX_Controller
                 "content" => $this->template->loadPage("register.tpl", $data),
             )), false, "modules/register/js/validate.js", "Account Creation");
         } else {
+            $username = $this->input->post('register_username');
+            $password = $this->input->post('register_password');
+            $email = $this->input->post('register_email');
 
-            if (!$this->username_check($this->input->post("register_username"))) {
+            if (!$this->username_check($username)) {
                 die();
             }
 
-            // Show success message
+            // Show a success message
             $data = array(
                 "url" => $this->template->page_url,
-                "account" => $this->input->post('register_username'),
-                "username" => $this->input->post('register_username'),
-                "email" => $this->input->post('register_email'),
-                "password" => $this->input->post('register_password'),
+                "account" => $username,
+                "username" => $username,
+                "email" => $email,
+                "password" => $password,
             );
 
             //Register our user.
-            $this->external_account_model->createAccount($this->input->post('register_username'), $this->input->post('register_password'), $this->input->post('register_email'));
+            $this->external_account_model->createAccount($username, $password, $email);
 
             // Log in
-            $sha_pass_hash = $this->user->createHash($this->input->post('register_username'), $this->input->post('register_password'));
-            $check = $this->user->setUserDetails($this->input->post('register_username'), $sha_pass_hash["verifier"]);
+            $sha_pass_hash = $this->user->createHash($username, $password);
+            $check = $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
         }
 
         $title = lang("created", "register");
