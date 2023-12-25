@@ -106,7 +106,7 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         array (
             'PayPal' => 
             array (
-                0 => __DIR__ . '/..' . '/paypal/rest-api-sdk-php/lib',
+                0 => __DIR__ . '/..' . '/fusion-cms/rest-api-sdk-php/lib',
             ),
         ),
         'H' => 

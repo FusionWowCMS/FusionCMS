@@ -1,14 +1,14 @@
 {
-    "name": "paypal/rest-api-sdk-php",
+    "name": "fusion-cms/rest-api-sdk-php",
     "description": "PayPal's PHP SDK for REST APIs",
     "keywords": ["paypal", "payments", "rest", "sdk"],
     "type": "library",
     "license": "Apache-2.0",
-    "homepage": "http://paypal.github.io/PayPal-PHP-SDK/",
+    "homepage": "https://github.com/FusionWowCMS/PayPal-PHP-SDK/",
     "authors": [
         {
             "name": "PayPal",
-            "homepage": "https://github.com/paypal/rest-api-sdk-php/contributors"
+            "homepage": "https://github.com/FusionWowCMS/PayPal-PHP-SDK/contributors"
         }
     ],
     "require": {

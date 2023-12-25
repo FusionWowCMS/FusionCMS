@@ -2,13 +2,13 @@
     "require": {
         "nightprince/php-wowemu-auth": "^1.0",
         "monolog/monolog": "^2.8",
-        "paypal/rest-api-sdk-php": "*",
         "psr/log": "^1.1",
         "phpseclib/phpseclib": "*",
         "ezyang/htmlpurifier": "^4.16",
         "smarty/smarty": "^4.3",
         "matthiasmullie/minify": "^1.3",
         "fusion-cms/auto-updater": "^1.0",
+        "fusion-cms/rest-api-sdk-php": "^2.0",
         "chillerlan/php-qrcode": "^5.0",
         "ext-zip": "*"
     }
