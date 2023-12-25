@@ -58,7 +58,7 @@ class Password_recovery extends MX_Controller
         
         $data = [
             "messages" => false,
-            "success" => false
+            "success" => []
         ];
 
         if ($this->form_validation->run())

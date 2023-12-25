@@ -88,10 +88,10 @@ class Auth extends MX_Controller
 
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
-        $data = array(
+        $data = [
             "redirect" => false,
-            "messages" => false
-        );
+            "messages" => []
+        ];
 
         if ($this->form_validation->run())
         {
@@ -116,7 +116,7 @@ class Auth extends MX_Controller
             if ($show_captcha)
             {
                 $data['showCaptcha'] = true;
-                if ($captcha_type == 'inbuilt') {
+                if ($captcha_type == 'inbuilt' || !empty($this->input->post('captcha'))) {
                     if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha'))) {
                         $data['messages']["error"] = lang("captcha_invalid", "auth");
                         die(json_encode($data));
@@ -131,9 +131,12 @@ class Auth extends MX_Controller
                 }
             }
 
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
             //Login
-            $sha_pass_hash = $this->user->createHash($this->input->post('username'), $this->input->post('password'));
-            $check = $this->user->setUserDetails($this->input->post('username'), $sha_pass_hash["verifier"]);
+            $sha_pass_hash = $this->user->createHash($username, $password);
+            $check = $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
 
             //if no errors, login
             if ($check == 0)
@@ -148,7 +151,7 @@ class Auth extends MX_Controller
                 {
                     if($this->input->post("remember") == "true")
                     {
-                        $this->input->set_cookie("fcms_username", $this->input->post('username'), 60 * 60 * 24 * 365);
+                        $this->input->set_cookie("fcms_username", $username, 60 * 60 * 24 * 365);
                         $this->input->set_cookie("fcms_password", $sha_pass_hash["verifier"], 60 * 60 * 24 * 365);
                     }
                 }
@@ -160,7 +163,7 @@ class Auth extends MX_Controller
             }
             else
             {
-                $this->logger->createLog("user", "login", "Login", [], Logger::STATUS_FAILED, $this->user->getId($this->input->post("username")));
+                $this->logger->createLog("user", "login", "Login", [], Logger::STATUS_FAILED, $this->user->getId($username));
                 $data["messages"]["error"] = lang("error", "auth");
             }
         }
