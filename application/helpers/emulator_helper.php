@@ -3,10 +3,11 @@
 /**
  * Get the name of a table
  *
- * @param  String $name
- * @return String
+ * @param string $name
+ * @param bool|int $realm
+ * @return string
  */
-function table($name, $realm = false)
+function table(string $name, bool|int $realm = false): string|null
 {
     $CI = &get_instance();
 
@@ -20,12 +21,13 @@ function table($name, $realm = false)
 /**
  * Get the name of a column
  *
- * @param  String $table
- * @param  String $name
- * @param  Boolean $as
- * @return String
+ * @param string $table
+ * @param string $name
+ * @param bool $as
+ * @param bool|int $realm
+ * @return false|string
  */
-function column($table, $name, $as = false, $realm = false)
+function column(string $table, string $name, bool $as = false, bool|int $realm = false): false|string|null
 {
     $CI = &get_instance();
 
@@ -45,10 +47,11 @@ function column($table, $name, $as = false, $realm = false)
 /**
  * Get a pre-defined query
  *
- * @param  String $name
- * @return String
+ * @param string $name
+ * @param bool|int $realm
+ * @return string|null
  */
-function query($name, $realm = false)
+function query(string $name, bool|int $realm = false): string|null
 {
     $CI = &get_instance();
 
@@ -62,12 +65,14 @@ function query($name, $realm = false)
 /**
  * Get the columns and format them
  *
- * @param  String $table
- * @param  Array $columns
- * @return String
+ * @param string $table
+ * @param array $columns
+ * @param bool|int $realm
+ * @return string
  */
-function columns($table, $columns, $realm = false)
+function columns(string $table, array $columns, bool|int $realm = false): string|null
 {
+    $out = '';
     foreach ($columns as $column) {
         if (!isset($out)) {
             $out = column($table, $column, false, $realm) . " AS " . $column;
@@ -82,13 +87,14 @@ function columns($table, $columns, $realm = false)
 /**
  * Get the columns and format them
  *
- * @param  String $table
- * @param  Array $columns
- * @return String
+ * @param string $table
+ * @param bool|int $realm
+ * @return string
  */
-function allColumns($table, $realm = false)
+function allColumns(string $table, bool|int $realm = false): string|null
 {
     global $CI;
+    $out = '';
 
     if ($realm) {
         $columns = $CI->realms->getRealm($realm)->getEmulator()->getAllColumns($table);
