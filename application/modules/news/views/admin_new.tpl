@@ -152,9 +152,16 @@
 </div>
 
 <script>
-	// Ready
-	$(window).on('load', function() {
-		//Image loader var to use when you need a function from object
+    function __SLEEP__()
+    {
+        // Make sure News loaded
+        if(typeof News === 'undefined')
+        {
+            setTimeout(__SLEEP__, 50);
+            return false;
+        }
+
+		// Image loader var to use when you need a function from object
 		var auctionImages = null;
 
 		// Create image loader plugin
@@ -163,8 +170,9 @@
 			minSelect: 1,
 			imagesToLoad: auctionImages
 		});
+    }
 
-	});
+    __SLEEP__();
 </script>
 <script src="{$url}application/js/tiny_mce/tinymce.min.js"></script>
 <script type="text/javascript">

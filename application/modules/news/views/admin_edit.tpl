@@ -151,16 +151,20 @@
     </div>
 </div>
 <script>
-    // Ready
-    $(window).on('load', function () {
-        News.selectedType = {if $article.type}{$article.type}{else}0{/if};
-        //Image loader var to use when you need a function from object
-        var auctionImages = {if !$article.type_content} null {else} [
-        {foreach from=json_decode($article.type_content) item=image}
-            { "Url":"{$url}uploads/news/{$image}" },
-        {/foreach}
-        ];
-        {/if}
+    function __SLEEP__()
+    {
+        // Make sure News loaded
+        if(typeof News === 'undefined')
+        {
+            setTimeout(__SLEEP__, 50);
+            return false;
+        }
+
+        // Select type
+        News.selectedType = {($article.type) ? $article.type : 0};
+
+        // Image loader var to use when you need a function from object
+        var auctionImages = {if !$article.type_content} null {else} [ {foreach from=json_decode($article.type_content) item=image}{ "Url":"{$url}uploads/news/{$image}" },{/foreach} ];{/if}
 
         // Create image loader plugin
         News.imagesloader = $('[data-type=imagesloader]').imagesloader({
@@ -168,8 +172,9 @@
             minSelect: 1,
             imagesToLoad: auctionImages
         });
+    }
 
-    });
+    __SLEEP__();
 </script>
 <script src="{$url}application/js/tiny_mce/tinymce.min.js"></script>
 <script type="text/javascript">
