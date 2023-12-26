@@ -5,7 +5,7 @@
  *
  * @return String
  */
-function getLang()
+function getLang(): string
 {
     static $CI;
 
@@ -19,11 +19,11 @@ function getLang()
 /**
  * Short-command to get a language string
  *
- * @param  String $id
- * @param  String $file
- * @return String
+ * @param String $id
+ * @param String $file
+ * @return mixed
  */
-function lang($id, $file = 'main')
+function lang(string $id, string $file = 'main'): mixed
 {
     static $CI;
 
@@ -37,11 +37,11 @@ function lang($id, $file = 'main')
 /**
  * Short-command to set a client language string
  *
- * @param  String $id
- * @param  String $file
- * @return String
+ * @param String $id
+ * @param String $file
+ * @return void
  */
-function clientLang($id, $file = 'main')
+function clientLang(string $id, string $file = 'main'): void
 {
     static $CI;
 
@@ -49,16 +49,16 @@ function clientLang($id, $file = 'main')
         $CI = &get_instance();
     }
 
-    return $CI->language->setClientData($id, $file);
+    $CI->language->setClientData($id, $file);
 }
 
 /**
  * Translate the JSON-stored language string to the desired language
  *
- * @param  String $json
+ * @param String $json
  * @return String
  */
-function langColumn($json)
+function langColumn(string $json): string
 {
     static $CI;
 
@@ -72,10 +72,10 @@ function langColumn($json)
 /**
  * Get the selected language
  *
- * @param  String $json
+ * @param String $json
  * @return String
  */
-function getColumnLang($json)
+function getColumnLang(string $json): string
 {
     static $CI;
 

@@ -22,7 +22,6 @@ class Language
     private $requestedFiles;
     private $data;
     private $clientData;
-    private $languagePrefix;
 
     /**
      * Get the CI instance and load the default language
@@ -46,7 +45,6 @@ class Language
 
         $this->language = $this->defaultLanguage;
         $this->load("main");
-        $this->languagePrefix = $this->get("abbreviation");
     }
 
     /**
@@ -72,7 +70,6 @@ class Language
         }
 
         $this->reloadLanguage();
-        $this->languagePrefix = $this->get("abbreviation");
     }
 
     /**
@@ -134,12 +131,12 @@ class Language
     }
 
     /**
-      * Get the selected language
+     * Get the selected language
      *
-     * @param  String $json
-     * @return String
+     * @param string $json
+     * @return string|null
      */
-    public function getColumnLanguage($json)
+    public function getColumnLanguage(string $json): string|null
     {
         $data = json_decode($json, true);
 
@@ -154,6 +151,8 @@ class Language
         } else {
             return $this->defaultLanguage;
         }
+
+        return null;
     }
 
     /**
@@ -172,8 +171,9 @@ class Language
      *
      * @param String $id
      * @param String $file defaults to 'main'
+     * @return mixed|void
      */
-    public function get($id, $file = 'main')
+    public function get(string $id, string $file = 'main')
     {
         if (!in_array($file, $this->requestedFiles)) {
             $this->load($file);
@@ -204,10 +204,13 @@ class Language
      * Load a language file
      *
      * @param String $file
-     * @param String $language defaults to the current language
+     * @param bool|string $language defaults to the current language
+     * @return void
      */
-    private function load($file, $language = false)
+    private function load(string $file, bool|string $language = false): void
     {
+        $path = '';
+
         // Default to the current language
         if (!$language) {
             $language = $this->language;
@@ -220,7 +223,7 @@ class Language
 
         // Add it to the list of requested files if it doesn't exist already
         if (!in_array($file, $this->requestedFiles)) {
-            array_push($this->requestedFiles, $file);
+            $this->requestedFiles[] = $file;
         }
 
         // Look in the shared directory
@@ -255,7 +258,7 @@ class Language
         // No language file was found, but it may exist for the default language
         else {
             $this->data[$language][$file] = array();
-            return false;
+            return;
         }
 
         // Load the requested language file
@@ -270,9 +273,9 @@ class Language
      *
      * @return Array
      */
-    public function getAllLanguages()
+    public function getAllLanguages(): array
     {
-        $languages = array();
+        $languages = [];
 
         $results = glob("application/language/*/");
 
@@ -298,7 +301,7 @@ class Language
         }
     }
 
-    public function setClientData($id, $file = 'main')
+    public function setClientData($id, $file = 'main'): void
     {
         $this->clientData[$file][$id] = $this->get($id, $file);
     }
@@ -308,7 +311,7 @@ class Language
      *
      * @return String
      */
-    public function getClientData()
+    public function getClientData(): string
     {
         return json_encode($this->clientData);
     }
