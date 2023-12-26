@@ -32,7 +32,7 @@ if (!function_exists('form_open')) {
      * @param array|string $attributes a key/value pair of attributes, or string representation
      * @param array $hidden a key/value pair hidden data
      */
-    function form_open(string $action = '', $attributes = [], array $hidden = []): string
+    function form_open(string $action = '', array|string $attributes = [], array $hidden = []): string
     {
         $CI =& get_instance();
 
@@ -40,18 +40,20 @@ if (!function_exists('form_open')) {
         if (!$action) {
             $action = $CI->config->site_url($CI->uri->uri_string());
         } // If an action is not a full URL then turn it into one
-        elseif (strpos($action, '://') === false) {
+        elseif (!str_contains($action, '://')) {
             $action = $CI->config->site_url($action);
         }
 
         $attributes = stringify_attributes($attributes);
 
-        if (stripos($attributes, 'method=') === false) {
-            $attributes .= ' method="post"';
-        }
+        if ($attributes !== null) {
+            if (stripos($attributes, 'method=') === false) {
+                $attributes .= ' method="post"';
+            }
 
-        if (stripos($attributes, 'accept-charset=') === false) {
-            $attributes .= ' accept-charset="' . strtolower(config_item('charset')) . '"';
+            if (stripos($attributes, 'accept-charset=') === false) {
+                $attributes .= ' accept-charset="' . strtolower(config_item('charset')) . '"';
+            }
         }
 
         $form = '<form action="' . $action . '"' . $attributes . ">\n";
@@ -63,7 +65,7 @@ if (!function_exists('form_open')) {
         }
 
         // Add CSRF field if enabled, but leave it out for GET requests and requests to external websites
-        if ($CI->config->item('csrf_protection') === true && strpos($action, $CI->config->base_url()) !== false && !stripos($form, 'method="get"')) {
+        if ($CI->config->item('csrf_protection') === true && str_contains($action, $CI->config->base_url()) && !stripos($form, 'method="get"')) {
             // Prepend/append random-length "white noise" around the CSRF
             // token input, as a form of protection against BREACH attacks
             if (false !== ($noise = $CI->security->get_random_bytes(1))) {
@@ -106,7 +108,7 @@ if (!function_exists('form_open_multipart')) {
      * @param array|string $attributes A key/value pair of attributes, or the same as a string
      * @param array $hidden A key/value pair hidden data
      */
-    function form_open_multipart(string $action = '', $attributes = [], array $hidden = []): string
+    function form_open_multipart(string $action = '', array|string $attributes = [], array $hidden = []): string
     {
         if (is_string($attributes)) {
             $attributes .= ' enctype="multipart/form-data"';
