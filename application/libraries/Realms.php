@@ -108,10 +108,10 @@ class Realms
     /**
      * Get one specific realm object
      *
-     * @param $id
+     * @param int $id
      * @return Object|null
      */
-    public function getRealm($id): ?object
+    public function getRealm(int $id): ?object
     {
         foreach ($this->realms as $key => $realm) {
             if ($realm->getId() == $id) {
@@ -355,12 +355,6 @@ class Realms
     public function formatMoney(bool|int $money = false): array|false
     {
         if ($money) {
-            $gold = array(
-                'copper' => 0,
-                'silver' => 0,
-                'gold' => 0
-            );
-    
             $gold['gold'] = floor($money / 10000);
             $remainder = $money % 10000;
             $gold['silver'] = floor($remainder / 100);
