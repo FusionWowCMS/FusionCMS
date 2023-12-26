@@ -44,7 +44,7 @@ class ConfigEditor
     {
         // Create an array
         if (is_array($value)) {
-            $value = "array(" . implode(",", $value) . ")";
+            $value = "[" . implode(",", $value) . "]";
         }
 
         // Create a boolean
@@ -53,7 +53,7 @@ class ConfigEditor
         }
 
         // Create a boolean from string
-        elseif (in_array($value, array("true", "false"))) {
+        elseif (in_array($value, ["true", "false"])) {
             $value = $value;
         }
 
@@ -66,7 +66,7 @@ class ConfigEditor
 
         // Create an array from a string of numbers separated by comma
         elseif (preg_match("/^([0-9]*,? ?)*$/", $value)) {
-            $value = "array(" . $value . ")";
+            $value = "[" . $value . "]";
         }
 
         // Create a string
