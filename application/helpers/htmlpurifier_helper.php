@@ -17,8 +17,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @return  string or array               The cleaned string (or array of strings).
  */
 if (!function_exists('html_purify')) {
-    function html_purify($dirty_html, $config = false)
+    function html_purify($dirty_html, $config = false): array|string
     {
+        $clean_html = '';
+
         if (is_array($dirty_html)) {
             foreach ($dirty_html as $key => $val) {
                 $clean_html[$key] = html_purify($val, $config);
@@ -28,7 +30,7 @@ if (!function_exists('html_purify')) {
 
             switch ($config) {
                 case 'comment':
-                    $config = \HTMLPurifier_Config::createDefault();
+                    $config = HTMLPurifier_Config::createDefault();
                     $config->set('Core.Encoding', $ci->config->item('charset'));
                     $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
                     $config->set('HTML.Allowed', 'p,a[href|title],abbr[title],acronym[title],b,strong,blockquote[cite],code,em,i,strike');
@@ -38,7 +40,7 @@ if (!function_exists('html_purify')) {
                     break;
 
                 case false:
-                    $config = \HTMLPurifier_Config::createDefault();
+                    $config = HTMLPurifier_Config::createDefault();
                     $config->set('Core.Encoding', $ci->config->item('charset'));
                     $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
                     break;
@@ -47,7 +49,7 @@ if (!function_exists('html_purify')) {
                     show_error('The HTMLPurifier configuration labeled "'.htmlspecialchars($config, ENT_QUOTES, $ci->config->item('charset')).'" could not be found.');
             }
 
-            $purifier = new \HTMLPurifier($config);
+            $purifier = new HTMLPurifier($config);
             $clean_html = $purifier->purify($dirty_html);
         }
 
