@@ -11,7 +11,7 @@ class Pvp_statistics extends MX_Controller
         $this->load->config('pvp_statistics/pvps_config');
     }
 
-    public function index($RealmId = false)
+    public function index(int|bool $RealmId = false)
     {
         $this->template->setTitle("PVP Statistics");
 
