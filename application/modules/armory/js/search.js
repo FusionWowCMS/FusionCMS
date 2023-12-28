@@ -42,9 +42,9 @@ var Search = {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: message,
+                text: message.toString().replace('DataTables warning: table id=search_results_' + table + ' - ', ''),
             })
-        } )
+        })
         .DataTable({
             "destroy": true,
             "processing": true,
@@ -60,7 +60,7 @@ var Search = {
                 Tooltip.refresh();
             },
             "ajax": {
-                "url": Config.URL + "armory/get_data",
+                "url": Config.URL + "armory/search",
                 "type": "POST",
                 "data": function(d) {
                     d.realm = realm;
@@ -94,7 +94,7 @@ var Search = {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: message,
+                text: message.toString().replace('DataTables warning: table id=search_results_' + table + ' - ', ''),
             })
         } )
         .DataTable({
@@ -111,7 +111,7 @@ var Search = {
                 results.show();
             },
             "ajax": {
-                "url": Config.URL + "armory/get_data",
+                "url": Config.URL + "armory/search",
                 "type": "POST",
                 "data": function(d) {
                     d.realm = realm;
@@ -152,7 +152,7 @@ var Search = {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: message,
+                text: message.toString().replace('DataTables warning: table id=search_results_' + table + ' - ', ''),
             })
         } )
         .DataTable({
@@ -169,7 +169,7 @@ var Search = {
                 results.show();
             },
             "ajax": {
-                "url": Config.URL + "armory/get_data",
+                "url": Config.URL + "armory/search",
                 "type": "POST",
                 "data": function(d) {
                     d.realm = realm;
