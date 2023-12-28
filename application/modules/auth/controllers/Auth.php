@@ -78,8 +78,8 @@ class Auth extends MX_Controller
         $captcha_type = $this->config->item('captcha_type');
         $show_captcha = $use_captcha == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps');
 
-        $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[4]|max_length[24]|xss_clean|alpha_numeric');
-        $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]|xss_clean');
+        $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[4]|max_length[24]|alpha_numeric');
+        $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]');
 
         if ($show_captcha && $captcha_type == 'inbuilt')
         {

@@ -36,10 +36,10 @@ class Register extends MX_Controller
         $this->template->setTitle(lang("register", "register"));
 
         //Load the form validations for if they tried to sneaky bypass our js system
-        $this->form_validation->set_rules('register_username', 'username', 'trim|required|min_length[4]|max_length[24]|xss_clean|alpha_numeric');
-        $this->form_validation->set_rules('register_email', 'email', 'trim|required|valid_email|xss_clean');
-        $this->form_validation->set_rules('register_password', 'password', 'trim|required|min_length[6]|xss_clean');
-        $this->form_validation->set_rules('register_password_confirm', 'password confirmation', 'trim|required|matches[register_password]|xss_clean');
+        $this->form_validation->set_rules('register_username', 'username', 'trim|required|min_length[4]|max_length[24]|alpha_numeric');
+        $this->form_validation->set_rules('register_email', 'email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('register_password', 'password', 'trim|required|min_length[6]');
+        $this->form_validation->set_rules('register_password_confirm', 'password confirmation', 'trim|required|matches[register_password]');
 
         $this->form_validation->set_error_delimiters('<img src="' . $this->template->page_url . 'application/images/icons/exclamation.png" data-tip="', '" />');
 
