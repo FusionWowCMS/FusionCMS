@@ -72,7 +72,7 @@ function query(string $name, bool|int $realm = false): string|null
  */
 function columns(string $table, array $columns, bool|int $realm = false): string|null
 {
-    $out = '';
+    $out = null;
     foreach ($columns as $column) {
         if (!isset($out)) {
             $out = column($table, $column, false, $realm) . " AS " . $column;
@@ -94,7 +94,7 @@ function columns(string $table, array $columns, bool|int $realm = false): string
 function allColumns(string $table, bool|int $realm = false): string|null
 {
     global $CI;
-    $out = '';
+    $out = null;
 
     if ($realm) {
         $columns = $CI->realms->getRealm($realm)->getEmulator()->getAllColumns($table);
