@@ -46,14 +46,11 @@ if (!function_exists('form_open')) {
 
         $attributes = stringify_attributes($attributes);
 
-        if ($attributes !== null) {
-            if (stripos($attributes, 'method=') === false) {
-                $attributes .= ' method="post"';
-            }
-
-            if (stripos($attributes, 'accept-charset=') === false) {
-                $attributes .= ' accept-charset="' . strtolower(config_item('charset')) . '"';
-            }
+        if (stripos($attributes ?? '', 'method=') === false) {
+            $attributes .= ' method="post"';
+        }
+        if (stripos($attributes ?? '', 'accept-charset=') === false) {
+            $attributes .= ' accept-charset="' . strtolower(config_item('charset')) . '"';
         }
 
         $form = '<form action="' . $action . '"' . $attributes . ">\n";
@@ -285,7 +282,7 @@ if (!function_exists('form_multiselect')) {
     {
         $extra = stringify_attributes($extra);
 
-        if (stripos($extra, 'multiple') === false) {
+        if (stripos($extra ?? '', 'multiple') === false) {
             $extra .= ' multiple="multiple"';
         }
 
@@ -344,7 +341,7 @@ if (!function_exists('form_dropdown')) {
         }
 
         $extra = stringify_attributes($extra);
-        $multiple = (count($selected) > 1 && stripos($extra, 'multiple') === false) ? ' multiple="multiple"' : '';
+        $multiple = (count($selected) > 1 && stripos($extra ?? '', 'multiple') === false) ? ' multiple="multiple"' : '';
         $form = '<select ' . rtrim(parse_form_attributes($data, $defaults)) . $extra . $multiple . ">\n";
 
         foreach ($options as $key => $val) {
