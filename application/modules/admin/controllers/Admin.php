@@ -6,11 +6,7 @@ class Admin extends MX_Controller
     {
         parent::__construct();
 
-        $this->load->config('performance');
-
         $this->load->library('administrator');
-
-        require_once('application/libraries/Prettyjson.php');
 
         $this->load->model('dashboard_model');
 
@@ -23,17 +19,13 @@ class Admin extends MX_Controller
 
         $this->administrator->setTitle("Dashboard");
 
-        $this->administrator->loadModules();
-
         // Load realm objects
         $realms = $this->realms->getRealms();
 
         $uptimes = $this->flush_uptime($realms);
 
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
-            'enabled_modules' => $this->administrator->getEnabledModules(),
-            'disabled_modules' => $this->administrator->getDisabledModules(),
             'theme' => $this->template->theme_data,
             'version' => $this->administrator->getVersion(),
             'php_version' => phpversion(),
@@ -50,14 +42,14 @@ class Admin extends MX_Controller
             'location' => $this->internal_user_model->getLocation(),
             'register_date' => $this->user->getRegisterDate(),
             'signups' => $this->getSignups(),
-            'graphMonthly' => array($this->graphMonthly(), $this->graphMonthly(1)),
-            'graphDaily' => array($this->graphDaily(), $this->graphDaily(1), $this->graphDaily(2)),
+            'graphMonthly' => [$this->graphMonthly(), $this->graphMonthly(1)],
+            'graphDaily' => [$this->graphDaily(), $this->graphDaily(1), $this->graphDaily(2)],
             'realm_status' => $this->config->item('disable_realm_status'),
             'realms' => $realms,
             'uptimes' => $uptimes,
             'latestVersion' => $this->getLatestVersion(),
             'isOldTheme' => empty($this->template->theme_data['min_required_version']),
-        );
+        ];
 
         $this->benchmark->mark('admin_end');
         $data['benchmark'] = $this->benchmark->elapsed_time('admin_start', 'admin_end');
