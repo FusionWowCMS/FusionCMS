@@ -33,6 +33,9 @@ FusionCMS is a free, open-source content management system. Server owners all ar
 
 ## Getting Started
 
+### Download
+
+[Latest release](https://github.com/FusionWowCMS/FusionCMS/releases/latest)
 
 ### Prerequisites
 
