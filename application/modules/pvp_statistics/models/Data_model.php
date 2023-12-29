@@ -22,6 +22,7 @@ class Data_model extends CI_Model
         switch ($this->emuStr) {
             case 'trinity':
             case 'trinity_df':
+            case 'trinity_wotlkclassic':
             case 'trinity_sl':
             case 'trinity_legion':
             case 'trinity_cata':
