@@ -251,8 +251,7 @@ class Template
             redirect($this->CI->template->page_url . "auth/security");
         }
 
-        // Output and stop rendering
-        die($output);
+        $this->CI->output->set_output($output);
     }
 
     /**

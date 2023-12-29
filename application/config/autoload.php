@@ -41,7 +41,7 @@ if (! defined('BASEPATH')) {
 |
 */
 
-$autoload['packages'] = array();
+$autoload['packages'] = [];
 
 
 /*
@@ -56,7 +56,7 @@ $autoload['packages'] = array();
 |   $autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('security', 'cache', 'database', 'session', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'logger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items');
+$autoload['libraries'] = ['security', 'cache', 'database', 'session', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'logger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items'];
 
 /*
 | -------------------------------------------------------------------
@@ -71,7 +71,7 @@ $autoload['libraries'] = array('security', 'cache', 'database', 'session', 'smar
 |
 |   $autoload['drivers'] = array('cache');
 */
-$autoload['drivers'] = array('session');
+$autoload['drivers'] = ['session'];
 
 
 /*
@@ -83,7 +83,7 @@ $autoload['drivers'] = array('session');
 |   $autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'emulator', 'form', 'text', 'lang', 'breadcumb', 'permission');
+$autoload['helper'] = ['url', 'emulator', 'form', 'text', 'lang', 'breadcumb', 'permission'];
 
 
 /*
@@ -99,7 +99,7 @@ $autoload['helper'] = array('url', 'emulator', 'form', 'text', 'lang', 'breadcum
 |
 */
 
-$autoload['config'] = array('language', 'version', 'acl_defaults', 'fusion', 'message', 'backups', 'cdn', 'captcha', 'social_media', 'performance', 'wow_db', 'wow_expansions');
+$autoload['config'] = ['language', 'version', 'acl_defaults', 'fusion', 'message', 'backups', 'cdn', 'captcha', 'social_media', 'performance', 'wow_db', 'wow_expansions', 'profiler'];
 
 
 /*
@@ -115,7 +115,7 @@ $autoload['config'] = array('language', 'version', 'acl_defaults', 'fusion', 'me
 |
 */
 
-$autoload['language'] = array();
+$autoload['language'] = [];
 
 
 /*
@@ -128,7 +128,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('cms_model', 'external_account_model', 'internal_user_model', 'acl_model');
+$autoload['model'] = ['cms_model', 'external_account_model', 'internal_user_model', 'acl_model'];
 
 
 /* End of file autoload.php */

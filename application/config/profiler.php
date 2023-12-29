@@ -21,3 +21,4 @@
 |   https://codeigniter.com/userguide3/general/profiling.html
 |
 */
+$config['enable_profiler'] = false;

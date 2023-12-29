@@ -269,7 +269,7 @@ class Administrator
         // Load the main template
         $output = $this->CI->smarty->view($this->theme_path . "template.tpl", $data, true);
 
-        die($output);
+        $this->CI->output->set_output($output);
     }
 
     /**
