@@ -468,6 +468,14 @@
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$benchmark}</span></div>
                                                         </a>
                                                     </li>
+                                                    <li>
+                                                        <a class="router-link-active router-link-exact-active group flex items-center justify-between">
+                                                            <p class="font-alt text-sm font-normal leading-normal leading-normal">
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> Memory usage </span>
+                                                            </p>
+                                                            <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$memory_usage}</span></div>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>

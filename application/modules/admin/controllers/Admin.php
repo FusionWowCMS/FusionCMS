@@ -53,6 +53,7 @@ class Admin extends MX_Controller
 
         $this->benchmark->mark('admin_end');
         $data['benchmark'] = $this->benchmark->elapsed_time('admin_start', 'admin_end');
+        $data['memory_usage'] = $this->benchmark->memory_usage();
 
         $output = $this->template->loadPage("dashboard.tpl", $data);
 
