@@ -32,7 +32,7 @@ class Cms_model extends CI_Model
 
         $session = array(
             'ip_address' => $this->input->ip_address(),
-            'user_agent' => substr($this->input->user_agent(), 0, 120),
+            'user_agent' => substr($this->input->user_agent() ?? 'unknown', 0, 120),
         );
 
         $this->db->where('ip_address', $session['ip_address']);
