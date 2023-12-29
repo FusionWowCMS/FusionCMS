@@ -18,28 +18,28 @@
 												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
 												    <a href="{$url}changelog/admin" data-toggle="tooltip" data-placement="top" title="ChangeLog">
 														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-															<i class="fa-solid fa-list-ul"></i>
+															<i class="fs-4 fa-duotone fa-list-ul"></i>
 														</div>
 													</a>
 												</div>
 												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
 												    <a href="{$url}admin/cachemanager" data-toggle="tooltip" data-placement="top" title="Manage cache">
 														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-															<i class="fa-solid fa-box-archive"></i>
+															<i class="fs-4 fa-duotone fa-box-archive"></i>
 														</div>
 													</a>
 												</div>
 												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
 												    <a href="{$url}page/admin" data-toggle="tooltip" data-placement="top" title="Custom pages">
 														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-															<i class="fa-solid fa-windows"></i>
+															<i class="fs-4 fa-duotone fa-window"></i>
 														</div>
 													</a>
 												</div>
 												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
 												    <a href="{$url}admin/modules" data-toggle="tooltip" data-placement="top" title="Modules">
 														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-															<i class="fa-solid fa-sitemap"></i>
+															<i class="fs-4 fa-duotone fa-sitemap"></i>
 														</div>
 													</a>
 												</div>
