@@ -1,41 +1,4 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2019 - 2022, CodeIgniter Foundation
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
- * @copyright	Copyright (c) 2019 - 2022, CodeIgniter Foundation (https://codeigniter.com/)
- * @license	https://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -53,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/userguide3/general/profiling.html
  */
+#[AllowDynamicProperties]
 class CI_Profiler {
 
 	/**
@@ -60,7 +24,7 @@ class CI_Profiler {
 	 *
 	 * @var array
 	 */
-	protected $_available_sections = array(
+	protected array $_available_sections = [
 		'benchmarks',
 		'get',
 		'memory_usage',
@@ -71,14 +35,14 @@ class CI_Profiler {
 		'http_headers',
 		'session_data',
 		'config'
-	);
+    ];
 
 	/**
 	 * Number of queries to show before making the additional queries togglable
 	 *
 	 * @var int
 	 */
-	protected $_query_toggle_count = 25;
+	protected int $_query_toggle_count = 25;
 
 	/**
 	 * Reference to the CodeIgniter singleton
@@ -94,9 +58,9 @@ class CI_Profiler {
 	 *
 	 * Initialize Profiler
 	 *
-	 * @param	array	$config	Parameters
+	 * @param array $config	Parameters
 	 */
-	public function __construct($config = array())
+	public function __construct(array $config = [])
 	{
 		$this->CI =& get_instance();
 		$this->CI->load->language('profiler');
@@ -104,9 +68,9 @@ class CI_Profiler {
 		// default all sections to display
 		foreach ($this->_available_sections as $section)
 		{
-			if ( ! isset($config[$section]))
+			if (! isset($config[$section]))
 			{
-				$this->{'_compile_'.$section} = TRUE;
+				$this->{'_compile_'.$section} = true;
 			}
 		}
 
@@ -124,8 +88,8 @@ class CI_Profiler {
 	 * @param	mixed	$config
 	 * @return	void
 	 */
-	public function set_sections($config)
-	{
+	public function set_sections(mixed $config): void
+    {
 		if (isset($config['query_toggle_count']))
 		{
 			$this->_query_toggle_count = (int) $config['query_toggle_count'];
@@ -136,7 +100,7 @@ class CI_Profiler {
 		{
 			if (in_array($method, $this->_available_sections))
 			{
-				$this->{'_compile_'.$method} = ($enable !== FALSE);
+				$this->{'_compile_'.$method} = ($enable !== false);
 			}
 		}
 	}
@@ -151,11 +115,11 @@ class CI_Profiler {
 	 * and "_end" respectively).  It then compiles the execution times for
 	 * all points and returns it as an array
 	 *
-	 * @return	array
-	 */
-	protected function _compile_benchmarks()
-	{
-		$profile = array();
+	 * @return string
+     */
+	protected function _compile_benchmarks(): string
+    {
+		$profile = [];
 		foreach ($this->CI->benchmark->marker as $key => $val)
 		{
 			// We match the "end" marker so that the list ends
@@ -195,9 +159,9 @@ class CI_Profiler {
 	 *
 	 * @return	string
 	 */
-	protected function _compile_queries()
-	{
-		$dbs = array();
+	protected function _compile_queries(): string
+    {
+		$dbs = [];
 
 		// Let's determine which databases are currently connected to
 		foreach (get_object_vars($this->CI) as $name => $cobject)
@@ -298,8 +262,8 @@ class CI_Profiler {
 	 *
 	 * @return	string
 	 */
-	protected function _compile_get()
-	{
+	protected function _compile_get(): string
+    {
 		$output = "\n\n"
 			.'<fieldset id="ci_profiler_get" style="border:1px solid #cd6e00;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -317,7 +281,7 @@ class CI_Profiler {
 			{
 				is_int($key) OR $key = "'".htmlspecialchars($key, ENT_QUOTES, config_item('charset'))."'";
 				$val = (is_array($val) OR is_object($val))
-					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset')).'</pre>'
+					? '<pre>'.htmlspecialchars(print_r($val, true), ENT_QUOTES, config_item('charset')).'</pre>'
 					: htmlspecialchars($val, ENT_QUOTES, config_item('charset'));
 
 				$output .= '<tr><td style="width:50%;color:#000;background-color:#ddd;padding:5px;">&#36;_GET['
@@ -338,8 +302,8 @@ class CI_Profiler {
 	 *
 	 * @return	string
 	 */
-	protected function _compile_post()
-	{
+	protected function _compile_post(): string
+    {
 		$output = "\n\n"
 			.'<fieldset id="ci_profiler_post" style="border:1px solid #009900;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -390,8 +354,8 @@ class CI_Profiler {
 	 *
 	 * @return	string
 	 */
-	protected function _compile_uri_string()
-	{
+	protected function _compile_uri_string(): string
+    {
 		return "\n\n"
 			.'<fieldset id="ci_profiler_uri_string" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -408,8 +372,8 @@ class CI_Profiler {
 	 *
 	 * @return	string
 	 */
-	protected function _compile_controller_info()
-	{
+	protected function _compile_controller_info(): string
+    {
 		return "\n\n"
 			.'<fieldset id="ci_profiler_controller_info" style="border:1px solid #995300;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -427,8 +391,8 @@ class CI_Profiler {
 	 *
 	 * @return	string
 	 */
-	protected function _compile_memory_usage()
-	{
+	protected function _compile_memory_usage(): string
+    {
 		return "\n\n"
 			.'<fieldset id="ci_profiler_memory_usage" style="border:1px solid #5a0099;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -447,8 +411,8 @@ class CI_Profiler {
 	 *
 	 * @return	string
 	 */
-	protected function _compile_http_headers()
-	{
+	protected function _compile_http_headers(): string
+    {
 		$output = "\n\n"
 			.'<fieldset id="ci_profiler_http_headers" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -475,8 +439,8 @@ class CI_Profiler {
 	 *
 	 * @return	string
 	 */
-	protected function _compile_config()
-	{
+	protected function _compile_config(): string
+    {
 		$output = "\n\n"
 			.'<fieldset id="ci_profiler_config" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -510,11 +474,11 @@ class CI_Profiler {
 	 *
 	 * @return 	string
 	 */
-	protected function _compile_session_data()
-	{
-		if ( ! isset($this->CI->session))
+	protected function _compile_session_data(): string
+    {
+		if (! isset($this->CI->session))
 		{
-			return;
+			return '';
 		}
 
 		$output = '<fieldset id="ci_profiler_csession" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
@@ -548,8 +512,8 @@ class CI_Profiler {
 	 *
 	 * @return	string
 	 */
-	public function run()
-	{
+	public function run(): string
+    {
 		$output = '<div id="codeigniter_profiler" style="clear:both;background-color:#fff;padding:10px;">';
 		$fields_displayed = 0;
 
