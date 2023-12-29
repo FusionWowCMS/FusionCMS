@@ -5,19 +5,10 @@ var Vote = {
 	 */
 	open: function(id, time)
 	{
-		console.log(id);
-		// Firefox and IE workaround
-		if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ||isIE)
+		$.post(Config.URL + "vote/site/", { id: id, csrf_token_name: Config.CSRF, isFirefox: navigator.userAgent.toLowerCase().indexOf('firefox') > -1 || isIE }, function(response)
 		{
-			$.post(Config.URL + "vote/site/", { id: id, csrf_token_name: Config.CSRF, isFirefoxHerpDerp: true }, function(response)
-			{
-				window.open(response);
-			});
-		}
-		else
-		{
-			$("#vote_field_" + id + ' form').submit();
-		}
+			window.open(response);
+		});
 		
 		// Change the "vote now" button
 		$("#vote_field_" + id).parents(".card").addClass("card-disabled");

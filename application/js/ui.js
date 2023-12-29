@@ -20,12 +20,12 @@ function UI()
 		Tooltip.initialize();
 
 		$.ajaxSetup({ beforeSend: function(jqXHR, settings) {
-				if(typeof settings.data === 'object')
-					settings.data.append('csrf_token_name', getCookie('csrf_cookie_name'));
+			if(typeof settings.data === 'object')
+				settings.data.append('csrf_token_name', getCookie('csrf_cookie_name'));
 
-				if(typeof settings.data === 'string')
-					settings.data += (settings.data ? '&' : '') + 'csrf_token_name' + '=' + getCookie('csrf_cookie_name');
-			} }); // adds CSRF token to posts actions, automatically
+			if(typeof settings.data === 'string')
+				settings.data += (settings.data ? '&' : '') + 'csrf_token_name' + '=' + getCookie('csrf_cookie_name');
+		} }); // adds CSRF token to posts actions, automatically
 
 		$.ajaxPrefilter(function(options) {
 			if(typeof options.forceCrossDomain === 'undefined' || (typeof options.forceCrossDomain !== 'undefined' && !options.forceCrossDomain))

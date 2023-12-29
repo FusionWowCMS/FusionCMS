@@ -76,11 +76,13 @@ class Vote extends MX_Controller
 
         //Check if that site exists and that the user didn't voted for it yet.
         if ($vote_site && $can_vote) {
+            $isFireFox = ($this->input->post("isFirefox") && (bool)$this->input->post("isFirefox") === true);
+
             //Update the vp if needed or else just go to the url if we got vote callback enabled.
             if ($vote_site['callback_enabled']) {
                 $vote_url = preg_replace("/\{user_id\}/", $this->user->getId(), $vote_site['vote_url']);
 
-                if ($this->input->post("isFirefoxHerpDerp")) {
+                if ($isFireFox) {
                     die($vote_url);
                 }
 
@@ -92,7 +94,7 @@ class Vote extends MX_Controller
 
                 $this->plugins->onVote($api['user_id'], $vote_site);
 
-                if ($this->input->post("isFirefoxHerpDerp")) {
+                if ($isFireFox) {
                     die($vote_site['vote_url']);
                 }
 
