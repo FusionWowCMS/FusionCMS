@@ -230,16 +230,14 @@ class Admin extends MX_Controller
 
         // check if image exists for this site
         if ($files = glob(APPPATH . 'modules/vote/images/vote_sites/' . $name . '.*')) {
-            $data['image'] =
-                base_url() . 'application/modules/vote/images/vote_sites/' .
-                substr($files[0], strrpos($files[0], '/') + 1);
+            $data['image'] = base_url() . 'application/modules/vote/images/vote_sites/' . substr($files[0], strrpos($files[0], '/') + 1);
         }
 
         // check if the site has a callback plugin
         $plugins = $this->plugins->getPlugins();
 
         foreach ($plugins as $plugin) {
-            if (isset($plugin->url) && strpos($plugin->url, $name) !== false) {
+            if (isset($plugin->url) && str_contains($plugin->url, $name)) {
                 $data['callback_support'] = true;
                 $data['votelink_format'] = $plugin->voteLinkFormat;
                 $data['url'] = $plugin->url;
