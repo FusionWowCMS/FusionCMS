@@ -53,33 +53,24 @@ class Acl
      */
     public function hasViewPermission(string $permissionName, string $moduleName): bool|null
     {
-        $userId = false;
+        // SKIP! No permission required
+        if(!$permissionName)
+            return true;
 
-        if ($this->CI->user->isOnline()) {
-            $userId = $this->CI->user->getId();
-        }
+        // Set: User id
+        $userId = $this->CI->user->getId();
 
-        // Asked the question before? Grab the last answer
-        if (
-            array_key_exists($moduleName, $this->runtimeCache)
-            && array_key_exists($permissionName, $this->runtimeCache[$moduleName])
-            && array_key_exists($userId, $this->runtimeCache[$moduleName][$permissionName])
-        ) {
+        // Fill runtime cache
+        $this->fillRuntimeCache($userId);
+
+        // It's been queried already
+        if(isset($this->runtimeCache[$moduleName][$permissionName][$userId]))
             return $this->runtimeCache[$moduleName][$permissionName][$userId];
-        } else {
-            // Get permission for a specific user
-            if ($userId) {
-                $result = $this->CI->acl_model->hasPermission($userId, $permissionName, $moduleName, true);
-            }
 
+        // DEBUG
+        # echo str_replace(['1', '2', '3'], [$moduleName, $permissionName, $userId], '[1][2][3]<br />');
 
-            // Get permission for the guest group
-            else {
-                $result = $this->CI->acl_model->hasPermissionGuest($permissionName, $moduleName, true);
-            }
-
-            return $result;
-        }
+        return false;
     }
 
     /**
@@ -92,69 +83,29 @@ class Acl
      */
     public function hasPermission(string $permissionName, false|string $moduleName = false, false|int $userId = false): bool
     {
-        // Default to the current module
-        if (!$moduleName) {
+        // SKIP! No permission required
+        if(!$permissionName)
+            return true;
+
+        // Set: Module name
+        if(!$moduleName)
             $moduleName = $this->CI->template->module_name;
-        }
 
-        if (!$userId && $this->CI->user->isOnline()) {
+        // Set: User id
+        if(!$userId)
             $userId = $this->CI->user->getId();
-        }
 
-        // Asked the question before? Grab the last answer
-        if (
-            array_key_exists($moduleName, $this->runtimeCache)
-            && array_key_exists($permissionName, $this->runtimeCache[$moduleName])
-            && array_key_exists($userId, $this->runtimeCache[$moduleName][$permissionName])
-        ) {
+        // Fill runtime cache
+        $this->fillRuntimeCache($userId);
+
+        // It's been queried already
+        if(isset($this->runtimeCache[$moduleName][$permissionName][$userId]))
             return $this->runtimeCache[$moduleName][$permissionName][$userId];
-        } else {
-            // Get the permission information
-            $permission = $this->getPermission($permissionName, $moduleName);
 
-            // Assign the default value
-            $result = $permission['default'];
+        // DEBUG
+        # echo str_replace(['1', '2', '3'], [$moduleName, $permissionName, $userId], '[1][2][3]<br />');
 
-            // Get permission for a specific user
-            if ($userId) {
-                $userPermission = $this->CI->acl_model->hasPermission($userId, $permissionName, $moduleName);
-            }
-
-            // Get permission for the guest group
-            else {
-                $userPermission = $this->CI->acl_model->hasPermissionGuest($permissionName, $moduleName);
-            }
-
-            // Only override the default value if the user has the permission assigned
-            if ($userPermission !== null) {
-                $result = $userPermission;
-            }
-
-            return $result;
-        }
-    }
-
-    /**
-     * Get the permission information
-     *
-     * @param String $permissionName
-     * @param String $moduleName
-     * @return Array
-     */
-    public function getPermission(string $permissionName, string $moduleName): array
-    {
-        if (!array_key_exists($moduleName, $this->modules)) {
-            $this->loadManifest($moduleName);
-        }
-
-        // Make sure the permission exists
-        if (array_key_exists($permissionName, $this->modules[$moduleName]['permissions'])) {
-            return $this->modules[$moduleName]['permissions'][$permissionName];
-        } else {
-            show_error("The permission <b>" . $permissionName . "</b> does not exist in <b>" . $moduleName . "</b>");
-        }
-
-        return array();
+        return false;
     }
 
     /**
@@ -198,5 +149,134 @@ class Acl
 
         $this->modules[$moduleName]['permissions'] = (array_key_exists("permissions", $manifest)) ? $manifest['permissions'] : array();
         $this->modules[$moduleName]['roles'] = (array_key_exists("roles", $manifest)) ? $manifest['roles'] : array();
+    }
+
+    /**
+     * Fill runtime cache
+     * Track all user permissions
+     *
+     * @param  int $userId
+     * @return void
+     */
+    private function fillRuntimeCache(int $userId = 0)
+    {
+        // STOP! Its filled already
+        if(count($this->runtimeCache))
+            return;
+
+        // Set: User id
+        if(!$userId)
+            $userId = CI::$APP->user->getId();
+
+        ####################################################################################################
+        ################################## Account permissions (db).Start ##################################
+        ####################################################################################################
+
+        // Get: Account permissions
+        $accountPermissions = CI::$APP->acl_model->getAccountPermissions($userId);
+
+        // Get: Account roles permissions
+        $accountRolesPermissions = CI::$APP->acl_model->getAccountRolesPermissions($userId, (CI::$APP->user->isOnline() ? CI::$APP->config->item('default_player_group') : CI::$APP->config->item('default_guest_group')));
+
+        // Merge: account-permissions and account-roles-permissions
+        $permissions = array_column((array)$accountPermissions, 'module', 'permission_name') + array_column((array)$accountRolesPermissions, 'module', 'role_name');
+
+        // Loop through permissions
+        foreach($permissions as $module => $permission)
+        {
+            // Check if its menu permission
+            if(strtoupper(trim($permission)) == '--MENU--')
+            {
+                // Temporary store module and permission
+                $tmp = [
+                    'module'     => $module,
+                    'permission' => $permission
+                ];
+
+                // Swap module and permission
+                $module     = $tmp['permission'];
+                $permission = $tmp['module'];
+
+                // Free up RAM
+                unset($tmp);
+            }
+
+            // Fill runtime cache
+            $this->runtimeCache[$module][$permission][$userId] = true;
+        }
+
+        ####################################################################################################
+        ################################### Account permissions (db).End ###################################
+        ####################################################################################################
+
+        /**************************************************************************************************/
+
+        ####################################################################################################
+        ################################ Manifest permissions (json).Start #################################
+        ####################################################################################################
+
+        // Get: Account roles (account-specific-roles and account-group-roles)
+        $roles = array_merge(array_column((array)CI::$APP->acl_model->getAccountRoles($userId), 'role_name'), array_column((array)CI::$APP->acl_model->getGroupRolesByUser($userId), 'role_name'));
+
+        // Manifest permissions: Initialize
+        $manifestPermissions = [];
+
+        // Get: Modules
+        if(!empty($modules = glob(realpath(APPPATH) . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR)))
+        {
+            // Loop through modules
+            foreach($modules as $module)
+            {
+                // Load manifest
+                $this->loadManifest(basename($module));
+
+                // Prevent error
+                if(!isset($manifestPermissions[basename($module)]))
+                    $manifestPermissions[basename($module)] = [];
+
+                // Priority 1: Store available permissions (db)
+                if(is_array($roles))
+                {
+                    // Loop through account roles
+                    foreach($roles as $role)
+                    {
+                        // Get: Manifest role
+                        $manifest = $this->getManifestRole($role, basename($module));
+
+                        // Set: Manifest permissions (db)
+                        if(isset($manifest['permissions']) && is_array($manifest['permissions']))
+                            $manifestPermissions[basename($module)] = array_merge($manifestPermissions[basename($module)], $manifest['permissions']);
+                    }
+                }
+
+                // Priority 2: Store available permissions (json)
+                if(is_array($this->modules[basename($module)]['permissions']))
+                {
+                    // Loop through manifest permissions
+                    foreach($this->modules[basename($module)]['permissions'] as $permission => $permission_info)
+                    {
+                        // Set: Manifest permissions (manifest.json/default)
+                        if(!isset($manifestPermissions[basename($module)][$permission]))
+                            $manifestPermissions[basename($module)][$permission] = $permission_info['default'];
+                    }
+                }
+            }
+        }
+
+        // Loop through manifest permissions
+        foreach($manifestPermissions as $module => $perms)
+        {
+            // Loop through permissions
+            foreach($perms as $k => $v)
+            {
+                // Fill runtime cache (if its not being filled by database already)
+                if(!isset($this->runtimeCache[basename($module)][$k][$userId]))
+                    $this->runtimeCache[basename($module)][$k][$userId] = (bool)$v;
+            }
+        }
+
+        ####################################################################################################
+        ################################# Manifest permissions (json).End ##################################
+        ####################################################################################################
     }
 }

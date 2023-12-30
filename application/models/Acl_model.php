@@ -210,7 +210,7 @@ class Acl_model extends CI_Model
      * @param  String $moduleName
      * @return Array
      */
-    private function getGroupRolesByUser($userId, $moduleName = false)
+    public function getGroupRolesByUser($userId, $moduleName = false)
     {
         $this->db->select("agr.role_name, agr.module");
         $this->db->where("aag.account_id", $userId);
@@ -227,6 +227,43 @@ class Acl_model extends CI_Model
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get account roles permissions
+     *
+     * @param  int $userId
+     * @param  int $default_group
+     * @return array
+     */
+    public function getAccountRolesPermissions(int $userId = 0, int $default_group = 1)
+    {
+        // Query: Prepare
+        $query = $this->db->select('agr.module')
+                          ->select('agr.role_name')
+                          ->select('arp.permission_name')
+
+                          # Filter by account id
+                          ->where('aag.account_id', $userId)
+
+                          # Filter by group
+                          ->where('aag.group_id = agr.group_id')
+                          ->or_where('agr.group_id', $default_group)
+
+                          # Filter by role name
+                          ->where('arp.role_name = agr.role_name')
+
+                          # Group
+                          ->group_by('agr.role_name')
+
+                          # Get
+                          ->get('acl_roles_permissions arp, acl_group_roles agr, acl_account_groups aag');
+
+        // Query: Make sure we have results
+        if($query->num_rows())
+            return $query->result_array();
+
+        return [];
     }
 
     /**
