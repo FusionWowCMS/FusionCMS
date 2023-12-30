@@ -177,14 +177,7 @@ class Trinity_rbac_wotlkclassic_soap implements Emulator
             'guid'    => 'guid'
         ),
 
-        'gm_tickets' => array(
-            'ticketId'   => 'Id',
-            'guid'       => 'playerGuid',
-            'message'    => 'note',
-            'createTime' => 'createTime',
-            'completed'  => 'comment',
-            'closedBy'   => 'closedBy'
-        )
+        'gm_tickets' => []
     );
 
     /**

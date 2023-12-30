@@ -33,7 +33,7 @@ class Gm_model extends CI_Model
 
             if ($this->connection->error()) {
                 if ($this->connection->error()["code"] > 0) {
-                    die($this->connection->error()["message"]);
+                    return false;
                 }
             }
 
@@ -71,7 +71,7 @@ class Gm_model extends CI_Model
 
             if ($this->connection->error()) {
                 if ($this->connection->error()["code"] > 0) {
-                    die($this->connection->error()["message"]);
+                    return false;
                 }
             }
 
