@@ -62,7 +62,7 @@ class Logging extends MX_Controller
         if ($logs)
         {
             foreach ($logs as $key => $value) {
-                $logs[$key]['custom'] = json_decode($logs[$key]['custom']);
+                $logs[$key]['custom'] = json_decode($value['custom']);
             }
         }
 
