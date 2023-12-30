@@ -159,8 +159,8 @@ class Data_model extends CI_Model
 
             // Add rank
             $i = 1;
-            foreach ($players as $player) {
-                $player['rank'] = $this->addNumberSuffix($i);
+            foreach ($players as $key => $player) {
+                $players[$key]['rank'] = $this->addNumberSuffix($i);
                 $i++;
             }
 
