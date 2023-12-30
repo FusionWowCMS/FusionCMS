@@ -2,6 +2,8 @@
 
 class Gm_model extends CI_Model
 {
+    private $connection;
+
     /**
      * Get all tickets
      * @param Object $realm
@@ -13,25 +15,27 @@ class Gm_model extends CI_Model
 		{
 			//Connect to the realm
 			$realm->getCharacters()->connect();
+            $this->connection = $realm->getCharacters()->getConnection();
 
 			//Do the query
 			if(column("gm_tickets", "closedBy", $realm->getId()))
 			{
-				$query = $realm->getCharacters()->getConnection()->query("SELECT ".allColumns("gm_tickets", $realm->getId())." FROM ".table("gm_tickets", $realm->getId())." WHERE ".column("gm_tickets", "completed", false, $realm->getId())." = 0 AND ".column("gm_tickets", "closedBy", false, $realm->getId())." = 0");
+				$query = $this->connection->query("SELECT ".allColumns("gm_tickets", $realm->getId())." FROM ".table("gm_tickets", $realm->getId())." WHERE ".column("gm_tickets", "completed", false, $realm->getId())." = 0 AND ".column("gm_tickets", "closedBy", false, $realm->getId())." = 0");
 			}
 			elseif(column("gm_tickets", "completed", $realm->getId()))
 			{
-				$query = $realm->getCharacters()->getConnection()->query("SELECT ".allColumns("gm_tickets", $realm->getId())." FROM ".table("gm_tickets", $realm->getId())." WHERE ".column("gm_tickets", "completed", false, $realm->getId())." = 0");
+				$query = $this->connection->query("SELECT ".allColumns("gm_tickets", $realm->getId())." FROM ".table("gm_tickets", $realm->getId())." WHERE ".column("gm_tickets", "completed", false, $realm->getId())." = 0");
 			}
 			else
 			{
-				$query = $realm->getCharacters()->getConnection()->query("SELECT ".allColumns("gm_tickets", $realm->getId())." FROM ".table("gm_tickets", $realm->getId()));
+				$query = $this->connection->query("SELECT ".allColumns("gm_tickets", $realm->getId())." FROM ".table("gm_tickets", $realm->getId()));
 			}
 
-		    if(!$query)
-		    {
-		    	die($err = $this->connection->error());
-		    }
+            if ($this->connection->error()) {
+                if ($this->connection->error()["code"] > 0) {
+                    die($this->connection->error()["message"]);
+                }
+            }
 
 			if($query->num_rows() > 0)
 			{
@@ -63,12 +67,13 @@ class Gm_model extends CI_Model
 			$realm->getCharacters()->connect();
 
 			//Do the query
-			$query = $realm->getCharacters()->getConnection()->query("SELECT ".allColumns("gm_tickets", $realm->getId())." FROM ".table("gm_tickets", $realm->getId())." WHERE ".column("gm_tickets", "ticketId", false, $realm->getId())." = ?", array($ticketId));
+			$query = $this->connection->query("SELECT ".allColumns("gm_tickets", $realm->getId())." FROM ".table("gm_tickets", $realm->getId())." WHERE ".column("gm_tickets", "ticketId", false, $realm->getId())." = ?", array($ticketId));
 
-		    if(!$query)
-		    {
-		    	die($err = $this->connection->error());
-		    }
+            if ($this->connection->error()) {
+                if ($this->connection->error()["code"] > 0) {
+                    die($this->connection->error()["message"]);
+                }
+            }
 
 			if($query->num_rows() > 0)
 			{
