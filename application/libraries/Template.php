@@ -252,6 +252,7 @@ class Template
         }
 
         $this->CI->output->set_output($output)->_display();
+        die();
     }
 
     /**
