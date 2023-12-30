@@ -58,7 +58,7 @@ class Status extends CI_Controller
     private function flush_uptime($realms)
     {
         $uptimes = array();
-        foreach ($realms as $k => $realm) {
+        foreach ($realms as $realm) {
             $uptimes[$realm->getId()] = $this->uptime($realm->getId());
         }
         return $uptimes;

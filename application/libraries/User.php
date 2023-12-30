@@ -240,63 +240,6 @@ class User
         return $this->online;
     }
 
-    /**
-     * Check if rank A is bigger than rank B
-     * Necessary to compare number-based ranks
-     * with "az" and "a" ranks in ArcEmu & AscEmu.
-     *
-     * @param  Mixed $a
-     * @param  Mixed $b
-     * @return Boolean
-     */
-    private function rankBiggerThan(mixed $a, mixed $b): bool
-    {
-        $a = ($a == "") ? 0 : $a;
-        $b = ($b == "") ? 0 : $b;
-
-        if ($a === $b) {
-            return false;
-        }
-
-        // Return true if b is bigger than a
-        if (is_numeric($a) && is_numeric($b)) {
-            if ($a < $b) {
-                return true;
-            } else {
-                return false;
-            }
-        } elseif (!is_numeric($a) && !is_numeric($b) && in_array($a, array("az", "a")) && in_array($b, array("az", "a"))) {
-            switch ($a) {
-                case "az":
-                    $a = 1;
-                    break;
-                case "a":
-                    $a = 0;
-                    break;
-            }
-
-            switch ($b) {
-                case "az":
-                    $b = 1;
-                    break;
-                case "a":
-                    $b = 0;
-                    break;
-            }
-
-            if ($a < $b) {
-                return true;
-            } else {
-                return false;
-            }
-        } elseif (in_array($a, array("az", "a")) && is_numeric($b)) {
-            return false;
-        } else {
-            // Unknown
-            return true;
-        }
-    }
-
     /*
     | -------------------------------------------------------------------
     |  Getters
@@ -336,10 +279,6 @@ class User
         }
 
         $this->CI->language->setLanguage($this->CI->session->userdata('language') ? $this->CI->session->userdata('language') : $this->CI->config->item('language'));
-
-        // Load acl
-        //$this->CI->load->library('acl');
-        //$this->CI->acl->initialize($this->id);
     }
 
     /**

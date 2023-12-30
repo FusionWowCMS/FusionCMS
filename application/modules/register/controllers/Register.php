@@ -145,7 +145,7 @@ class Register extends MX_Controller
 
             // Log in
             $sha_pass_hash = $this->user->createHash($username, $password);
-            $check = $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
+            $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
         }
 
         $title = lang("created", "register");

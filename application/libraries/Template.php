@@ -300,7 +300,7 @@ class Template
         );
 
         // Load the main template
-        return $output = $this->CI->smarty->view($this->theme_path . "template.tpl", $theme_data, true);
+        return $this->CI->smarty->view($this->theme_path . "template.tpl", $theme_data, true);
     }
 
     /**
@@ -591,7 +591,7 @@ class Template
         $links = $this->CI->cms_model->getLinks($side);
         $moduleName = $this->getModuleName();
 
-        foreach ((array) $links as $key => $item)
+        foreach ((array) $links as $item)
         {
             if ($item['permission'] && !hasViewPermission($item['permission'], "--MENU--"))
                 continue;

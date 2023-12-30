@@ -19,8 +19,6 @@ class Admin extends MX_Controller
     {
         $this->administrator->setTitle("Donation log");
 
-        $paypal_enabled = $this->config->item('donate_paypal');
-
         $logs = $this->donate_model->getLogs(0, 10);
 
         $data = array(

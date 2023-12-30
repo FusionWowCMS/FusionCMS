@@ -38,7 +38,7 @@ class Cms_model extends CI_Model
         $this->db->where('ip_address', $session['ip_address']);
         $this->db->update("ci_sessions", $session);
 
-        $query = $this->getSession($session);
+        $this->getSession($session);
 
         $data = array(
             "ip_address" => $session['ip_address'],

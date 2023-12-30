@@ -22,8 +22,8 @@ class Admin extends MX_Controller
 
         if ($changes) {
             foreach ($changes as $key => $value) {
-                if (strlen($changes[$key]['changelog']) > 30) {
-                    $changes[$key]['changelog'] = mb_substr($changes[$key]['changelog'], 0, 30) . '...';
+                if (strlen($value['changelog']) > 30) {
+                    $changes[$key]['changelog'] = mb_substr($value['changelog'], 0, 30) . '...';
                 }
             }
         }

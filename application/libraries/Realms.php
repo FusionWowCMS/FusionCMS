@@ -131,7 +131,7 @@ class Realms
      */
     public function realmExists($id): bool
     {
-        foreach ($this->realms as $key => $realm) {
+        foreach ($this->realms as $realm) {
             if ($realm->getId() == $id) {
                 return true;
             }

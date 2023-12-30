@@ -2,8 +2,6 @@
 
 class Changelog extends MX_Controller
 {
-    private $changelog_days;
-
     public function __construct()
     {
         parent::__construct();

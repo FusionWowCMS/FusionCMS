@@ -22,13 +22,13 @@ class Comments_model extends CI_Model
             $result = $query->result_array();
 
             foreach ($result as $key => $value) {
-                //Remove the empty comments since they are useless....
-                if ($result[$key]['content'] == "") {
+                //Remove the empty comments since they are useless…
+                if ($value['content'] == "") {
                     unset($result[$key]);
                 }
                 //Format the comments we have to enable xss protection :D
                 else {
-                    $result[$key]['content'] = $this->template->format($result[$key]['content']);
+                    $result[$key]['content'] = $this->template->format($value['content']);
                 }
             }
 

@@ -47,10 +47,10 @@ class Top_model extends CI_Model
         if ($result && $result->num_rows() > 0) {
             $results = $result->result_array();
 
-            foreach ($results as $key => $guild) {
-                $results[$key]['leaderName'] = $this->realms->getRealm($this->realmId)->getCharacters()->getNameByGuid($guild[column('guild', 'leaderguid', false, $this->realmId)]);
-                $results[$key]['faction'] = $this->realms->getRealm($this->realmId)->getCharacters()->getFaction($guild[column('guild', 'leaderguid', false, $this->realmId)]);
-                $results[$key]['achievement_points'] = round(($guild['achievement_points'] / $this->getMembersGuild($guild[column('guild', 'guildid', false, $this->realmId)])));
+            foreach ($results as $guild) {
+                $guild['leaderName'] = $this->realms->getRealm($this->realmId)->getCharacters()->getNameByGuid($guild[column('guild', 'leaderguid', false, $this->realmId)]);
+                $guild['faction'] = $this->realms->getRealm($this->realmId)->getCharacters()->getFaction($guild[column('guild', 'leaderguid', false, $this->realmId)]);
+                $guild['achievement_points'] = round(($guild['achievement_points'] / $this->getMembersGuild($guild[column('guild', 'guildid', false, $this->realmId)])));
             }
 
             return $this->addrank($this->orderBy($results, 'achievement_points', 'desc'));
@@ -65,8 +65,8 @@ class Top_model extends CI_Model
     {
         // Add rank
         $i = 1;
-        foreach ($results as $key => $Guild) {
-            $results[$key]['rank'] = $i;
+        foreach ($results as $Guild) {
+            $Guild['rank'] = $i;
             $i++;
         }
         return $results;
@@ -164,9 +164,9 @@ class Top_model extends CI_Model
 
             // Add rank
             $i = 1;
-            foreach ($players as $key => $player) {
-                $players[$key]['rank'] = $i;
-                $players[$key]['guild'] = $this->getGuildName($player[column("characters", "guid", false, $this->realmId)]);
+            foreach ($players as $player) {
+                $player['rank'] = $i;
+                $player['guild'] = $this->getGuildName($player[column("characters", "guid", false, $this->realmId)]);
                 $i++;
             }
 

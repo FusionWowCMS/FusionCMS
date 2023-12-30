@@ -2,13 +2,11 @@
 
 class Profile extends MX_Controller
 {
-    private $js;
-    private $css;
     private $id;
     private $username;
     private $location;
     private $register_date;
-    private $rank_name;
+    private array $groups;
 
     public function __construct()
     {
@@ -22,19 +20,12 @@ class Profile extends MX_Controller
      */
     public function setId($id)
     {
-        // Id isn't set - default to current user
-        if (
-            $id == false
-            && $this->user->isOnline()
-        ) {
+        // id isn't set - default to current user
+        if (!$id && $this->user->isOnline()) {
             redirect('profile/' . $this->user->getId());
         }
-
-        // Id is set and exists
-        elseif (
-            $id != false
-            && $this->external_account_model->userExists($id)
-        ) {
+        // id is set and exists
+        elseif ($id && $this->external_account_model->userExists($id)) {
             $this->id = $id;
         }
 
@@ -95,13 +86,13 @@ class Profile extends MX_Controller
         if ($cache !== false) {
             $characters = $cache;
         } else {
-            $characters = $this->template->loadPage("ucp_characters.tpl", array(
+            $characters = $this->template->loadPage("ucp_characters.tpl", [
                 "characters" => $this->realms->getTotalCharacters($this->id),
                 "realms" => $this->realms->getRealms(),
                 "realmsObj" => $this->realms,
                 "url" => $this->template->page_url,
                 "id" => $this->id
-            ));
+            ]);
 
             $this->cache->save("profile_characters_" . $this->id, $characters, 60 * 60);
         }
@@ -116,7 +107,7 @@ class Profile extends MX_Controller
             "register_date" => $this->register_date,
             "url" => $this->template->page_url,
             "avatar" => $this->user->getAvatar($this->id, "small"),
-            "not_me" => ($this->id == $this->user->getId()) ? false : true,
+            "not_me" => !($this->id == $this->user->getId()),
             "online" => $this->user->isOnline(),
             "id" => $this->id,
             "groups" => $this->groups

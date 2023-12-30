@@ -136,10 +136,10 @@ class Tooltip extends MX_Controller
         $min = 0;
         $max = 0;
 
-        return array(
+        return [
             'min' => $min,
             'max' => $max
-        );
+        ];
     }
 
     /**

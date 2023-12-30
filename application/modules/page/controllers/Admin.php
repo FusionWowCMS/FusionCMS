@@ -23,7 +23,7 @@ class Admin extends MX_Controller
 
         if ($pages) {
             foreach ($pages as $key => $value) {
-                $pages[$key]['name'] = langColumn($pages[$key]['name']);
+                $pages[$key]['name'] = langColumn($value['name']);
 
                 if (strlen($pages[$key]['name']) > 20) {
                     $pages[$key]['name'] = mb_substr($pages[$key]['name'], 0, 20) . '...';

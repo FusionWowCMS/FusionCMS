@@ -267,7 +267,7 @@ class Donate extends MX_Controller
             }
         }
 
-        foreach ($payment->getLinks() as $key => $link) {
+        foreach ($payment->getLinks() as $link) {
             if ($link->getRel() == 'approval_url') {
                 $redirectUrl = $link->getHref();
             }

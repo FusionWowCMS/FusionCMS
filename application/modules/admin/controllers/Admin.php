@@ -144,7 +144,6 @@ class Admin extends MX_Controller
 
                     $year = $expld[0];
                     $month = $expld[1];
-                    $date = $expld[2];
 
                     $date = new DateTime();
                     $fullYear = array();
@@ -212,10 +211,8 @@ class Admin extends MX_Controller
                     $expld = explode("-", $row["date"]);
 
                     $year = $expld[0];
-                    $month = $expld[1];
                     $day = $expld[2];
 
-                    $date = new DateTime();
                     $fullDays = array();
                     for ($i = 1; $i <= 31; $i++)
                     {
@@ -243,7 +240,6 @@ class Admin extends MX_Controller
             }
 
             $currentYear = date('Y');
-            $currentMonth = date('m');
 
             $data = $fullMonth[$currentYear]["day"];
 
@@ -334,7 +330,7 @@ class Admin extends MX_Controller
     private function flush_uptime($realms)
     {
         $uptimes = array();
-        foreach ($realms as $k => $realm) {
+        foreach ($realms as $realm) {
             $uptimes[$realm->getId()] = $this->uptime($realm->getId());
         }
         return $uptimes;

@@ -171,7 +171,7 @@ class Updater extends MX_Controller
         $log_file_name_arr = explode('{DATE}', $this->log_file);
 
         // Loop through files
-        foreach($files as $key => $file)
+        foreach($files as $file)
         {
             // Export file name
             $fileName = pathinfo(basename($file), PATHINFO_FILENAME);
@@ -230,7 +230,7 @@ class Updater extends MX_Controller
         $update_url = rtrim(str_replace([self::DS, '\\', '/', realpath(APPPATH)], ['/', '/', '/', base_url() . basename(APPPATH)], $this->cache_path), '/');
 
         // Format packages array
-        array_walk($response['packages'], function(&$v, $k) {
+        array_walk($response['packages'], function(&$v) {
             $v = $v['asset']['browser_download_url'];
         });
 
@@ -638,14 +638,14 @@ class Updater extends MX_Controller
         };
 
         // Loop through releases
-        foreach($releases as $key => $release)
+        foreach($releases as $release)
         {
             // Invalid release
             if(!is_array($release) || !isset($release['assets']) || !is_array($release['assets']))
                 continue;
 
             // Loop through assets
-            foreach($release['assets'] as $_key => $asset)
+            foreach($release['assets'] as $asset)
             {
                 // Invalid asset
                 if(!is_array($asset) || !isset($asset['browser_download_url']) || !is_string($asset['browser_download_url']))
@@ -731,7 +731,7 @@ class Updater extends MX_Controller
         ]);
 
         $response = curl_exec($curl);
-        $err      = curl_error($curl);
+        //$err      = curl_error($curl);
 
         curl_close($curl);
 

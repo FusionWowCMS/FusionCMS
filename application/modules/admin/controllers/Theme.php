@@ -41,7 +41,7 @@ class Theme extends MX_Controller
         $themes = glob("application/themes/*");
         $themesArr = array();
 
-        foreach ($themes as $key => $value) {
+        foreach ($themes as $value) {
             $value = preg_replace("/application\/themes\/([A-Za-z_-]*)/", "$1", $value);
 
             //Check if folder
@@ -60,7 +60,7 @@ class Theme extends MX_Controller
 					$manifest['has_configs'] = false;
 				}
 
-                array_push($themesArr, $manifest);
+                $themesArr[] = $manifest;
             }
         }
 

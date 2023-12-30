@@ -319,9 +319,6 @@ class Items
         if (!$nodes || $nodes->length == 0)
             return 1;
 
-        // Initialize result
-        $result = '';
-
         // Find stackable
         return (int)filter_var($nodes->item(0)->textContent, FILTER_SANITIZE_NUMBER_INT);
     }
