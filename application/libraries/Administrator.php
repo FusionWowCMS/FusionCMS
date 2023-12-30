@@ -175,34 +175,41 @@ class Administrator
             $adminManifests = isset($manifest['admin']['group']) ? array($manifest['admin']) : $manifest['admin'];
 
             foreach ($adminManifests as $menuGroup) {
-                if (!isset($this->menu[$menuGroup['text']])) {
-                    $this->menu[$menuGroup['text']] = array(
-                        'links' => array(),
-                        'icon' => $menuGroup['icon']
-                    );
+                $text = $menuGroup['text'];
+                $icon = $menuGroup['icon'];
+
+                if (!isset($this->menu[$text])) {
+                    $this->menu[$text] = ['links' => [], 'icon' => $icon];
                 }
 
-                foreach ($menuGroup['links'] as $key => $link) {
+                $currentPageSet = false;
+
+                $currentModule = $this->CI->router->fetch_module();
+                $currentClass = $this->CI->router->fetch_class();
+                $currentMethod = $this->CI->router->fetch_method();
+
+                foreach ($menuGroup['links'] as $link) {
                     if (!empty($link['requirePermission']) && !hasPermission($link['requirePermission'], $module)) {
                         continue;
                     }
 
-                    $menuGroup['links'][$key]['module'] = $module;
+                    $linkModule = $link['module'] = $module;
 
-                    if ($module == $this->CI->router->fetch_module()) {
-                        $url = $this->CI->router->fetch_class() . ($this->CI->router->fetch_method() != "index" ? "/" . $this->CI->router->fetch_method() : "");
+                    if ($currentModule == $linkModule) {
+                        $url = $currentClass . ($currentMethod != "index" ? "/" . $currentMethod : "");
 
-                        if ($url == $menuGroup['links'][$key]['controller']) {
-                            $menuGroup['links'][$key]['active'] = true;
-                            $this->currentPage = "$module/" . $menuGroup['links'][$key]['controller'];
+                        if ($url == $link['controller']) {
+                            $link['active'] = true;
+                            $this->currentPage = "$module/" . $link['controller'];
+                            $currentPageSet = true;
                         }
                     }
 
-                    $this->menu[$menuGroup['text']]['links'][] = $menuGroup['links'][$key];
+                    $this->menu[$text]['links'][] = $link;
                 }
 
-                if (empty($this->currentPage) && $this->CI->router->fetch_module() == "admin") {
-                    $this->currentPage = $this->CI->router->fetch_class();
+                if (!$currentPageSet && $currentModule == "admin") {
+                    $this->currentPage = $currentClass;
                 }
             }
         }
