@@ -101,8 +101,8 @@ class Donate extends MX_Controller
     {
         $execute = new PaymentExecution();
 
-        $payment_id = $_GET['paymentId'];
-        $payerId = $_GET['PayerID'];
+        $payment_id = $_GET['paymentId'] ?? '';
+        $payerId = $_GET['PayerID'] ?? '';
         $payment = Payment::get($payment_id, $this->getApi());
 
         $execute->setPayerId($payerId);
