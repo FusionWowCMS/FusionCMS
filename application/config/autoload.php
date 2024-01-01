@@ -63,6 +63,7 @@ if (! defined('BASEPATH')) {
  */
 $config['psr4'] = [
     'App'         => realpath(APPPATH),
+    'App\Controllers' => APPPATH.'Controllers',
     'CodeIgniter' => realpath(BASEPATH),
 ];
 
@@ -83,8 +84,10 @@ $config['psr4'] = [
  *   ];
  */
 $config['classmap'] = [
-    'CodeIgniter\Benchmark\Timer'    => BASEPATH.'Benchmark/Timer.php',
-    'CodeIgniter\Benchmark\Iterator' => BASEPATH.'Benchmark/Iterator.php',
+    'CodeIgniter\Benchmark\Timer'        => BASEPATH.'Benchmark/Timer.php',
+    'CodeIgniter\Benchmark\Iterator'     => BASEPATH.'Benchmark/Iterator.php',
+    'CodeIgniter\Router\RouteCollection' => BASEPATH.'Router/RouteCollection.php',
+    'CodeIgniter\Router\Router'          => BASEPATH.'Router/Router.php',
 ];
 
 /*
