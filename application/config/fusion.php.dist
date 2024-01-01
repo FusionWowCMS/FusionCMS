@@ -189,4 +189,4 @@ $config['analytics'] = false;
 | (Disabled, we do cache by .htaccess instead and are not dependant on the in-built CI Cache System. This allows use
 | to furtherly use filter options in specific places and modules we dont want cached. For example: Realm Status)
 */
-$config['cache'] = false;
+$config['cache'] = true;
