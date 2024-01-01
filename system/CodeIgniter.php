@@ -42,6 +42,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
  * ------------------------------------------------------
+ *  Get the DI Container ready for use
+ * ------------------------------------------------------
+ */
+
+require_once BASEPATH.'DI/DI.php';
+
+// This is the only time that services array will need
+// to be passed into the class. All other uses can
+// simply call getInstance().
+$di = CodeIgniter\DI\DI::getInstance(get_config2('services'));
+
+/*
+ * ------------------------------------------------------
+ *  Setup the autoloader
+ * ------------------------------------------------------
+ */
+
+// The autloader isn't initialized yet, so load the file manually.
+require_once BASEPATH.'Autoloader/Autoloader.php';
+
+// The Autoloader class only handles namespaces
+// and "legacy" support.
+$loader = $di->single('autoloader');
+$loader->initialize(get_config2('autoload'));
+
+// The register function will prepend
+// the psr4 loader.
+$loader->register();
+
+/*
+ * ------------------------------------------------------
  *  Define a custom error handler so we can log PHP errors
  * ------------------------------------------------------
  */
@@ -65,10 +96,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Note: Since the config file data is cached it doesn't
  * hurt to load it here.
  */
-	if ( ! empty($assign_to_config['subclass_prefix']))
-	{
-		get_config(array('subclass_prefix' => $assign_to_config['subclass_prefix']));
-	}
+if ( ! empty($assign_to_config['subclass_prefix']))
+{
+    get_config(array('subclass_prefix' => $assign_to_config['subclass_prefix']));
+}
 
 /*
  * ------------------------------------------------------
