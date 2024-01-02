@@ -637,10 +637,6 @@
 
 			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
         </form>
-        <div class="alert alert-dark mt-3" role="alert">
-			Do you like the CDN system and want to continue using it? We would appreciate your help!<br>
-			With a small <a href="https://www.paypal.com/donate/?hosted_button_id=HMX3ESBF2PGXC">donation</a> of only $5 you help to keep the CDN system alive
-        </div>
         </div>
 
         <div class="tab-pane" id="security">
