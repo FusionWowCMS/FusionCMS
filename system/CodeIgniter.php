@@ -440,24 +440,6 @@ if ( ! empty($assign_to_config['subclass_prefix']))
 		$params = array_slice($URI->rsegments, 2);
 	}
 
-require APPPATH.'config/routes.php';
-
-$router = $di->single('router');
-
-$controller = $router->controllerName();
-
-// Is it routed to a Closure?
-if (is_callable($controller))
-{
-    $controller(...$router->params());
-}
-else
-{
-    $class  = $di->make($controller);
-    $method = $router->methodName();
-    $class->$method(...$router->params());
-}
-
 /*
  * ------------------------------------------------------
  *  Is there a "pre_controller" hook?
@@ -515,3 +497,22 @@ else
  * ------------------------------------------------------
  */
 	$EXT->call_hook('post_system');
+
+
+require APPPATH.'config/routes.php';
+
+$router = $di->single('router');
+
+$controller = $router->controllerName();
+
+// Is it routed to a Closure?
+if (is_callable($controller))
+{
+    $controller(...$router->params());
+}
+else
+{
+    $class  = $di->make($controller);
+    $method = $router->methodName();
+    $class->$method(...$router->params());
+}
