@@ -260,7 +260,7 @@ class Acl_model extends CI_Model
                           ->get('acl_roles_permissions arp, acl_group_roles agr, acl_account_groups aag');
 
         // Query: Make sure we have results
-        if($query->num_rows())
+        if($query && $query->num_rows())
             return $query->result_array();
 
         return [];
