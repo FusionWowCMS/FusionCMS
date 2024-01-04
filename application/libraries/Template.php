@@ -24,6 +24,7 @@ class Template
     public string $theme_path;
     public string $full_theme_path;
     public string $image_path;
+    public string $writable_path;
     public ?string $theme;
     public string $page_url;
     public mixed $theme_data;
@@ -50,6 +51,7 @@ class Template
         $this->style_path  = base_url() . APPPATH . "themes/" . $this->theme . "/css/";
         $this->image_path  = base_url() . APPPATH . "themes/" . $this->theme . "/images/";
         $this->full_theme_path  = base_url() . APPPATH . $this->theme_path;
+        $this->writable_path  = base_url() .'writable/';
         $this->page_url    = ($this->CI->config->item('rewrite')) ? base_url() : base_url() . 'index.php/';
         $this->loadManifest();
         $this->loadModuleManifest();
@@ -284,6 +286,7 @@ class Template
             "currentPage" => $url,
             "url" => $this->page_url,
             "theme_path" => "application/" . $this->theme_path,
+            "writable_path" => $this->writable_path,
             "full_theme_path" => $this->page_url . "application/" . $this->theme_path,
             "serverName" => $this->CI->config->item('server_name'),
             "page" => '<div id="content_ajax">' . $content . '</div>',
@@ -379,6 +382,7 @@ class Template
             "theme_path" => $this->theme_path,
             "full_theme_path" => $this->page_url . "application/" . $this->theme_path,
             "image_path" => $this->image_path,
+            "writable_path" => $this->writable_path,
             "url" => $this->page_url,
             "title" => $this->title . $this->CI->config->item('title'),
             "serverName" => $this->CI->config->item('server_name'),
@@ -518,6 +522,7 @@ class Template
         $data['theme_path']      = array_key_exists("theme_path", $data) ? $data['theme_path'] : $this->theme_path;
         $data['image_path']      = array_key_exists("image_path", $data) ? $data['image_path'] : $this->image_path;
         $data['full_theme_path'] = array_key_exists("full_theme_path", $data) ? $data['full_theme_path'] : $this->full_theme_path;
+        $data['writable_path']   = array_key_exists("writable_path", $data) ? $data['writable_path'] : $this->writable_path;
         $data['CI']              = array_key_exists("CI", $data) ? $data['CI'] : $this->CI;
 
         // Should we load from the default views or not?

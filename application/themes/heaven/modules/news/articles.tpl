@@ -23,7 +23,7 @@
 	{$item.SEOurl = urlencode(str_replace('/', '-', $item.headline))}
 
 	{* Define: thumbnail *}
-	{$item.thumbnail = ($item.type && $item.type == '1' && isset($item.type_content[0])) ? ($url|cat:'uploads/news/'|cat:$item.type_content[0]) : false}
+	{$item.thumbnail = ($item.type && $item.type == '1' && isset($item.type_content[0])) ? ($url|cat:'writable/uploads/news/'|cat:$item.type_content[0]) : false}
 
 	{* Set default thumbnail *}
 	{if !$item.thumbnail}{$item.thumbnail = ($iterator == 0) ? ($MY_image_path|cat:'thumbnails/thumbnail-01.jpg') : ($MY_image_path|cat:'thumbnails/thumbnail-02.jpg')}{/if}
@@ -102,11 +102,11 @@
 								{if count($item.type_content) >= 2}
 									<div class="owl-carousel owl-theme owl-dots-inside[pos:bottom]" owl>
 										{foreach from=$item.type_content item=thumbnail}
-											<div class="thumbnail-item" style="background-image: url('{$url}uploads/news/{$thumbnail}');"></div>
+											<div class="thumbnail-item" style="background-image: url('{$writable_path}uploads/news/{$thumbnail}');"></div>
 										{/foreach}
 									</div>
 								{else}
-									<div class="thumbnail-item" style="background-image: url('{$url}uploads/news/{$item.type_content[0]}');"></div>
+									<div class="thumbnail-item" style="background-image: url('{$writable_path}uploads/news/{$item.type_content[0]}');"></div>
 								{/if}
 							{elseif $item.type == '2'}
 								{*--------------------- Video ---------------------*}

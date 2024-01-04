@@ -12,7 +12,7 @@ application/config/fusion.php
 !application/logs/index.html
 !application/logs/.htaccess
 backups/*.zip
-uploads/*
+writable/*
 
 .php-cs-fixer.cache
 install/.lock

@@ -91,7 +91,7 @@ class Modules extends MX_Controller
                 $_FILES['file']['size'] = $_FILES['module']['size'];
 
                 // Set preference
-                $config['upload_path'] = FCPATH . 'uploads/modules';
+                $config['upload_path'] = FCPATH . 'writable/uploads/modules';
                 $config['allowed_types'] = 'zip';
                 $config['overwrite'] = true;
                 $config['max_size'] = '1000000';

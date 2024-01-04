@@ -164,7 +164,7 @@
         News.selectedType = {($article.type) ? $article.type : 0};
 
         // Image loader var to use when you need a function from object
-        var auctionImages = {if !$article.type_content} null {else} [ {foreach from=json_decode($article.type_content) item=image}{ "Url":"{$url}uploads/news/{$image}" },{/foreach} ];{/if}
+        var auctionImages = {if !$article.type_content} null {else} [ {foreach from=json_decode($article.type_content) item=image}{ "Url":"{$writable_path}uploads/news/{$image}" },{/foreach} ];{/if}
 
         // Create image loader plugin
         News.imagesloader = $('[data-type=imagesloader]').imagesloader({

@@ -150,8 +150,8 @@ class Captcha
 
         $vals = array(
             'word'          => $this->getValue(),
-            'img_path'      => FCPATH . '/uploads/captcha/',
-            'img_url'       => pageURL . '/uploads/captcha/',
+            'img_path'      => FCPATH . '/writable/uploads/captcha/',
+            'img_url'       => pageURL . '/writable/uploads/captcha/',
 
             'img_width'     => $width,
               'img_height'    => $height,

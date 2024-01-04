@@ -60,11 +60,11 @@
 					{if count($item.type_content) >= 2}
 						<div class="{$module}-carousel owl-carousel owl-theme owl-dots-inside[pos:bottom]">
 							{foreach from=$item.type_content item=image}
-								<div class="thumbnail-item" style="background-image:url('{$url}uploads/news/{$image}')"></div>
+								<div class="thumbnail-item" style="background-image:url('{$writable_path}uploads/news/{$image}')"></div>
 							{/foreach}
 						</div>
 					{else}
-						<div class="thumbnail-item" style="background-image:url('{if strpos($item.type_content[0], $url) !== false}{$item.type_content[0]}{else}{$url}uploads/news/{$item.type_content[0]}{/if}')"></div>
+						<div class="thumbnail-item" style="background-image:url('{if strpos($item.type_content[0], $url) !== false}{$item.type_content[0]}{else}{$writable_path}uploads/news/{$item.type_content[0]}{/if}')"></div>
 					{/if}
 				{elseif $item.type == '2'}
 					{* ========== Video ========== *}

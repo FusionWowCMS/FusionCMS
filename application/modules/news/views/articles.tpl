@@ -29,7 +29,7 @@
 							<div class="owl-carousel news-carousel owl-theme show-nav-hover dots-inside nav-inside nav-style-1 nav-light mb-0">
 								{foreach from=$article.type_content item=image}
 									<figure class="article-thumbnail">
-										<img  src="{$url}uploads/news/{$image}" height="auto" width="inherit">
+										<img  src="{$writable_path}uploads/news/{$image}" height="auto" width="inherit">
 									</figure>
 								{/foreach}
 							</div>
@@ -37,7 +37,7 @@
 				{else}
 					<div class="col-md-12 col-lg-4" thumbnail>
 						<figure class="article-thumbnail">
-							<img src="{$url}uploads/news/{$article.type_content[0]}" width="100%" height="auto">
+							<img src="{$writable_path}uploads/news/{$article.type_content[0]}" width="100%" height="auto">
 						</figure>
 					</div>
 				{/if}
