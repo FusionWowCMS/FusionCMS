@@ -77,16 +77,16 @@ class Dashboard_model extends CI_Model
     public function getSignupsMonthly($type)
     {
         if ($type == "this") {
-            $date = date("Y-m") . "-0";
+            $date = date("Y-m") . "-01";
         } else {
-            $date = date("Y-m", time() - 60 * 60 * 24 * 30) . "-0";
-            $next = date("Y-m") . "-0";
+            $date = date("Y-m", time() - 60 * 60 * 24 * 30) . "-01";
+            $next = date("Y-m") . "-01";
         }
 
         if ($type == "this") {
-            $query = $this->db->query("SELECT amount FROM daily_signups WHERE `date` >= ?", array($date));
+            $query = $this->db->query("SELECT amount FROM daily_signups WHERE `date` >= ?", [$date]);
         } else {
-            $query = $this->db->query("SELECT amount FROM daily_signups WHERE `date` >= ? AND `date` < ?", array($date, $next));
+            $query = $this->db->query("SELECT amount FROM daily_signups WHERE `date` >= ? AND `date` < ?", [$date, $next]);
         }
 
         if ($query->num_rows()) {
