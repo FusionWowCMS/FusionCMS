@@ -127,9 +127,9 @@ class Dashboard_model extends CI_Model
     {
         if ($daily)
         {
-            $query = $this->db->query("SELECT date, COUNT(DISTINCT ip) ipCount FROM visitor_log WHERE YEAR(date) = YEAR(CURRENT_DATE()) AND MONTH(date) = MONTH(CURRENT_DATE()) - $ago GROUP BY date");
+            $query = $this->db->query("SELECT visitor_log.date, COUNT(DISTINCT ip) ipCount FROM visitor_log WHERE visitor_log.date BETWEEN DATE_FORMAT(CURRENT_DATE - INTERVAL $ago MONTH, '%Y-%m-01') AND DATE_FORMAT(CURRENT_DATE - INTERVAL $ago MONTH, '%Y-%m-31') GROUP BY visitor_log.date");
         } else {
-            $query = $this->db->query("SELECT date, COUNT(DISTINCT ip) ipCount FROM visitor_log WHERE YEAR(date) = YEAR(CURRENT_DATE()) - $ago GROUP BY date");
+            $query = $this->db->query("SELECT visitor_log.date, COUNT(DISTINCT ip) ipCount FROM visitor_log WHERE YEAR(date) = YEAR(CURRENT_DATE()) - $ago GROUP BY visitor_log.date");
             
         }
 

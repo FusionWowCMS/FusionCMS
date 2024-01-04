@@ -134,7 +134,7 @@ class Admin extends MX_Controller
             $data = $cache;
         } else {
             $rows = $this->dashboard_model->getGraph(false, $ago);
-            $fullGraph = array();
+            $fullGraph = [];
 
             if($rows)
             {
@@ -146,7 +146,7 @@ class Admin extends MX_Controller
                     $month = $expld[1];
 
                     $date = new DateTime();
-                    $fullYear = array();
+                    $fullYear = [];
                     for ($i = 1; $i <= 12; $i++)
                     {
                         if ($date->format("Y") == $year && $i > $date->format("m"))
@@ -203,7 +203,7 @@ class Admin extends MX_Controller
         } else {
             $rows = $this->dashboard_model->getGraph(true, $ago);
     
-            $fullMonth = array();
+            $fullMonth = [];
 
             if ($rows) {
                 foreach ($rows as $row)
@@ -213,7 +213,7 @@ class Admin extends MX_Controller
                     $year = $expld[0];
                     $day = $expld[2];
 
-                    $fullDays = array();
+                    $fullDays = [];
                     for ($i = 1; $i <= 31; $i++)
                     {
                         $fullDays[($i < 10 ? "0" : "") . $i] = 0;
@@ -230,7 +230,7 @@ class Admin extends MX_Controller
                     }
                 }
             } else {
-                $fullDays = array();
+                $fullDays = [];
                 for ($i = 1; $i <= 31; $i++)
                 {
                     $fullDays[($i < 10 ? "0" : "") . $i] = 0;
@@ -239,13 +239,13 @@ class Admin extends MX_Controller
                 $fullMonth[$year]["day"] = $fullDays;
             }
 
-            $currentYear = date('Y');
+            $currentYear = $ago > 0 && date('m') == '01' ? (date('Y') - 1) : date('Y');
 
             $data = $fullMonth[$currentYear]["day"];
 
             if (!isset($data))
             {
-                $data = array();
+                $data = [];
             }
 
             if ($ago == 0)
