@@ -28,6 +28,7 @@ $config['services'] = [
     'autoloader' => '\CodeIgniter\Autoloader\Autoloader',
     'bmtimer'    => '\CodeIgniter\Benchmark\Timer',
     'bmiterator' => '\CodeIgniter\Benchmark\Iterator',
+    'logger'     => '\CodeIgniter\Log\Logger',
     'router'     => '\CodeIgniter\Router\Router',
     'routes'     => '\CodeIgniter\Router\RouteCollection'
 

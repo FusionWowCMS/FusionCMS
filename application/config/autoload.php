@@ -62,9 +62,9 @@ if (! defined('BASEPATH')) {
  *   `];
  */
 $config['psr4'] = [
-    'App'         => realpath(APPPATH),
+    'App'             => realpath(APPPATH),
     'App\Controllers' => APPPATH.'Controllers',
-    'CodeIgniter' => realpath(BASEPATH),
+    'CodeIgniter'     => realpath(BASEPATH),
 ];
 
 /**
@@ -84,10 +84,16 @@ $config['psr4'] = [
  *   ];
  */
 $config['classmap'] = [
-    'CodeIgniter\Benchmark\Timer'        => BASEPATH.'Benchmark/Timer.php',
-    'CodeIgniter\Benchmark\Iterator'     => BASEPATH.'Benchmark/Iterator.php',
-    'CodeIgniter\Router\RouteCollection' => BASEPATH.'Router/RouteCollection.php',
-    'CodeIgniter\Router\Router'          => BASEPATH.'Router/Router.php',
+    'CodeIgniter\Benchmark\Timer'                 => BASEPATH.'Benchmark/Timer.php',
+    'CodeIgniter\Benchmark\Iterator'              => BASEPATH.'Benchmark/Iterator.php',
+    'CodeIgniter\Config\BaseConfig'               => BASEPATH.'Config/BaseConfig.php',
+    'CodeIgniter\Router\RouteCollection'          => BASEPATH.'Router/RouteCollection.php',
+    'CodeIgniter\Router\RouteCollectionInterface' => BASEPATH.'Router/RouteCollectionInterface.php',
+    'CodeIgniter\Router\Router'                   => BASEPATH.'Router/Router.php',
+    'CodeIgniter\Router\RouterInterface'          => BASEPATH.'Router/RouterInterface.php',
+    'CodeIgniter\Log\Logger'                      => BASEPATH.'Log/Logger.php',
+    'CodeIgniter\Log\LoggerInterface'             => BASEPATH.'Log/LoggerInterface.php',
+    'CodeIgniter\Log\LogLevel'                    => BASEPATH.'Log/LogLevel.php',
 ];
 
 /*

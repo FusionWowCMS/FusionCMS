@@ -350,10 +350,18 @@ if (! function_exists('DI'))
      * A convenience method for getting the current instance
      * of the dependency injection container.
      *
+     *  If a class "alias" is passed in as the first parameter
+     *  then try to create that class using the single() method.
+     *
      * @return \CodeIgniter\DI\DI instance
      */
-    function DI()
+    function DI($alias=null)
     {
+        if (! empty($alias) && is_string($alias))
+        {
+            return \CodeIgniter\DI\DI::getInstance()->single($alias);
+        }
+
         return \CodeIgniter\DI\DI::getInstance();
     }
 }
@@ -522,33 +530,38 @@ if ( ! function_exists('show_404'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('log_message'))
+
+
+if (! function_exists('log_message'))
 {
-	/**
-	 * Error Logging Interface
-	 *
-	 * We use this as a simple mechanism to access the logging
-	 * class and send messages to be logged.
-	 *
-	 * @param	string	the error level: 'error', 'debug' or 'info'
-	 * @param	string	the error message
-	 * @return	void
-	 */
-	function log_message($level, $message)
-	{
-		static $_log;
-
-		if ($_log === NULL)
-		{
-			// references cannot be directly assigned to static variables, so we use an array
-			$_log[0] =& load_class('Log', 'core');
-		}
-
-		$_log[0]->write_log($level, $message);
-	}
+    /**
+     * A convenience/compatibility method for logging events through
+     * the Log system.
+     *
+     * Allowed log levels are:
+     *  - emergency
+     *  - alert
+     *  - critical
+     *  - error
+     *  - warning
+     *  - notice
+     *  - info
+     *  - debug
+     *
+     * @param string $level
+     * @param        $message
+     * @param array  $context
+     *
+     * @return mixed
+     */
+    function log_message(string $level, $message, array $context=[])
+    {
+        $logger = new \CodeIgniter\Log\Logger();
+        return $logger->log($level, $message, $context);
+    }
 }
 
-// ------------------------------------------------------------------------
+//--------------------------------------------------------------------
 
 if ( ! function_exists('set_status_header'))
 {
