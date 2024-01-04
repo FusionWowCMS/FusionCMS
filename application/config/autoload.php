@@ -86,6 +86,7 @@ $config['psr4'] = [
 $config['classmap'] = [
     'CodeIgniter\Benchmark\Timer'                 => BASEPATH.'Benchmark/Timer.php',
     'CodeIgniter\Benchmark\Iterator'              => BASEPATH.'Benchmark/Iterator.php',
+    'CodeIgniter\Debug\Exceptions'                => BASEPATH.'Debug/Exceptions.php',
     'CodeIgniter\Config\BaseConfig'               => BASEPATH.'Config/BaseConfig.php',
     'CodeIgniter\Router\RouteCollection'          => BASEPATH.'Router/RouteCollection.php',
     'CodeIgniter\Router\RouteCollectionInterface' => BASEPATH.'Router/RouteCollectionInterface.php',

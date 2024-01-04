@@ -36,6 +36,9 @@
  * @since	Version 1.0.0
  * @filesource
  */
+
+use CodeIgniter\Debug\Exceptions;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -1787,9 +1790,9 @@ abstract class CI_DB_driver {
 			}
 		}
 
-		$error =& load_class('Exceptions', 'core');
-		echo $error->show_error($heading, $message, 'error_db');
-		exit(8); // EXIT_DATABASE
+        $exception = new Exceptions();
+        echo $exception->show_error($heading, $message, 'error_db');
+        exit(8); // EXIT_DATABASE
 	}
 
 	// --------------------------------------------------------------------

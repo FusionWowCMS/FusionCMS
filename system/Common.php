@@ -36,6 +36,9 @@
  * @since	Version 1.0.0
  * @filesource
  */
+
+use CodeIgniter\Debug\Exceptions;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -486,7 +489,7 @@ if ( ! function_exists('show_error'))
 	 * @param	string
 	 * @return	void
 	 */
-	function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
+	function show_error($message, int $status_code = 500, string $heading = 'An Error Was Encountered')
 	{
 		$status_code = abs($status_code);
 		if ($status_code < 100)
@@ -499,8 +502,8 @@ if ( ! function_exists('show_error'))
 			$exit_status = 1; // EXIT_ERROR
 		}
 
-		$_error =& load_class('Exceptions', 'core');
-		echo $_error->show_error($heading, $message, 'error_general', $status_code);
+		$exception = new Exceptions();
+		echo $exception->show_error($heading, $message, 'error_general', $status_code);
 		exit($exit_status);
 	}
 }
@@ -520,12 +523,12 @@ if ( ! function_exists('show_404'))
 	 * @param	bool
 	 * @return	void
 	 */
-	function show_404($page = '', $log_error = TRUE)
-	{
-		$_error =& load_class('Exceptions', 'core');
-		$_error->show_404($page, $log_error);
-		exit(4); // EXIT_UNKNOWN_FILE
-	}
+    function show_404($page = '', $log_error = true)
+    {
+        $exception = new Exceptions();
+        $exception->show_404($page, $log_error);
+        exit(4); // EXIT_UNKNOWN_FILE
+    }
 }
 
 // ------------------------------------------------------------------------
@@ -671,126 +674,6 @@ if ( ! function_exists('_string_handler'))
 		if(preg_match('/\S{50,}/',$class)) 
 		{ 
 			return true;
-		}
-	}
-}
-
-// --------------------------------------------------------------------
-
-if ( ! function_exists('_error_handler'))
-{
-	/**
-	 * Error Handler
-	 *
-	 * This is the custom error handler that is declared at the (relative)
-	 * top of CodeIgniter.php. The main reason we use this is to permit
-	 * PHP errors to be logged in our own log files since the user may
-	 * not have access to server logs. Since this function effectively
-	 * intercepts PHP errors, however, we also need to display errors
-	 * based on the current error_reporting level.
-	 * We do that with the use of a PHP error template.
-	 *
-	 * @param	int	$severity
-	 * @param	string	$message
-	 * @param	string	$filepath
-	 * @param	int	$line
-	 * @return	void
-	 */
-	function _error_handler($severity, $message, $filepath, $line)
-	{
-		$is_error = (((E_ERROR | E_PARSE | E_COMPILE_ERROR | E_CORE_ERROR | E_USER_ERROR) & $severity) === $severity);
-
-		// When an error occurred, set the status header to '500 Internal Server Error'
-		// to indicate to the client something went wrong.
-		// This can't be done within the $_error->show_php_error method because
-		// it is only called when the display_errors flag is set (which isn't usually
-		// the case in a production environment) or when errors are ignored because
-		// they are above the error_reporting threshold.
-		if ($is_error)
-		{
-			set_status_header(500);
-		}
-
-		// Should we ignore the error? We'll get the current error_reporting
-		// level and add its bits with the severity bits to find out.
-		if (($severity & error_reporting()) !== $severity)
-		{
-			return;
-		}
-
-		$_error =& load_class('Exceptions', 'core');
-		$_error->log_exception($severity, $message, $filepath, $line);
-
-		// Should we display the error?
-		if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors')))
-		{
-			$_error->show_php_error($severity, $message, $filepath, $line);
-		}
-
-		// If the error is fatal, the execution of the script should be stopped because
-		// errors can't be recovered from. Halting the script conforms with PHP's
-		// default error handling. See http://www.php.net/manual/en/errorfunc.constants.php
-		if ($is_error)
-		{
-			exit(1); // EXIT_ERROR
-		}
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('_exception_handler'))
-{
-	/**
-	 * Exception Handler
-	 *
-	 * Sends uncaught exceptions to the logger and displays them
-	 * only if display_errors is On so that they don't show up in
-	 * production environments.
-	 *
-	 * @param	Exception	$exception
-	 * @return	void
-	 */
-	function _exception_handler($exception)
-	{
-		$_error =& load_class('Exceptions', 'core');
-		$_error->log_exception('error', 'Exception: '.$exception->getMessage(), $exception->getFile(), $exception->getLine());
-
-		is_cli() OR set_status_header(500);
-		// Should we display the error?
-		if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors')))
-		{
-			$_error->show_exception($exception);
-		}
-
-		exit(1); // EXIT_ERROR
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('_shutdown_handler'))
-{
-	/**
-	 * Shutdown Handler
-	 *
-	 * This is the shutdown handler that is declared at the top
-	 * of CodeIgniter.php. The main reason we use this is to simulate
-	 * a complete custom exception handler.
-	 *
-	 * E_STRICT is purposively neglected because such events may have
-	 * been caught. Duplication or none? None is preferred for now.
-	 *
-	 * @link	http://insomanic.me.uk/post/229851073/php-trick-catching-fatal-errors-e-error-with-a
-	 * @return	void
-	 */
-	function _shutdown_handler()
-	{
-		$last_error = error_get_last();
-		if (isset($last_error) &&
-			($last_error['type'] & (E_ERROR | E_PARSE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING)))
-		{
-			_error_handler($last_error['type'], $last_error['message'], $last_error['file'], $last_error['line']);
 		}
 	}
 }

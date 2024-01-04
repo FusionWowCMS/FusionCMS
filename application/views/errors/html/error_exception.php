@@ -1,32 +1,295 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php $error_id = uniqid('error'); ?>
 
-<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
 
-<h4>An uncaught Exception was encountered</h4>
+    <title><?= htmlspecialchars($title, ENT_SUBSTITUTE, 'UTF-8') ?></title>
+    <style type="text/css">
+        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'debug.css')) ?>
+    </style>
 
-<p>Type: <?php echo get_class($exception); ?></p>
-<p>Message: <?php echo $message; ?></p>
-<p>Filename: <?php echo $exception->getFile(); ?></p>
-<p>Line Number: <?php echo $exception->getLine(); ?></p>
+    <script type="text/javascript">
+        <?= file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'debug.js') ?>
+    </script>
+</head>
+<body onload="init()" class="exception">
 
-<?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE): ?>
-
-	<p>Backtrace:</p>
-	<?php foreach ($exception->getTrace() as $error): ?>
-
-		<?php if (isset($error['file']) && strpos($error['file'], realpath(BASEPATH)) !== 0): ?>
-
-			<p style="margin-left:10px">
-			File: <?php echo $error['file']; ?><br />
-			Line: <?php echo $error['line']; ?><br />
-			Function: <?php echo $error['function']; ?>
-			</p>
-		<?php endif ?>
-
-	<?php endforeach ?>
-
-<?php endif ?>
-
+<!-- Header -->
+<div class="exception header">
+    <div class="exception container">
+        <h1><?= htmlspecialchars($title, ENT_SUBSTITUTE, 'UTF-8'), ($exception->getCode() ? ' #'.$exception->getCode() : '') ?></h1>
+        <p>
+            <?= htmlspecialchars($exception->getMessage(), ENT_SUBSTITUTE) ?>
+            <a href="https://www.google.com/search?q=<?= urlencode($title.' '.preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
+               rel="noreferrer" target="_blank">search &rarr;</a>
+        </p>
+    </div>
 </div>
+
+<!-- Source -->
+<div class="exception container">
+    <p><b><?= self::clean_path($file, $line) ?></b> at line <b><?= $line ?></b></p>
+
+    <?php if (is_file($file)) : ?>
+        <div class="source">
+            <?= self::highlightFile($file, $line, 15); ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+<div class="exception container">
+
+    <ul class="tabs" id="tabs">
+        <li><a href="#backtrace">Backtrace</a></li>
+        <li><a href="#server">Server</a></li>
+        <li><a href="#request">Request</a></li>
+        <li><a href="#response">Response</a></li>
+        <li><a href="#files">Files</a></li>
+        <li><a href="#memory">Memory</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <!-- Backtrace -->
+        <div class="content" id="backtrace">
+
+            <ol class="trace">
+                <?php foreach ($trace as $index => $row) : ?>
+
+                    <li>
+                        <p>
+                            <!-- Trace info -->
+                            <?php if (isset($row['file']) && is_file($row['file'])) :?>
+                                <?php
+                                if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once']))
+                                {
+                                    echo $row['function'].' '. self::clean_path($row['file']);
+                                }
+                                else
+                                {
+                                    echo self::clean_path($row['file']).' : '.$row['line'];
+                                }
+                                ?>
+                            <?php else : ?>
+                                {PHP internal code}
+                            <?php endif; ?>
+
+                            <!-- Class/Method -->
+                            <?php if (isset($row['class'])) : ?>
+                            &nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= $row['class'].$row['type'].$row['function'] ?>
+                            <?php if (! empty($row['args'])) : ?>
+                            <?php $args_id = $error_id.'args'.$index ?>
+                            ( <a href="#" onclick="return toggle('<?= $args_id ?>');">arguments</a> )
+                        <div class="args" id="<?= $args_id ?>">
+                            <table cellspacing="0">
+
+                                <?php foreach ($row['args'] as $key => $value) : ?>
+                                    <?php
+                                    $mirror = isset($row['class']) ? new \ReflectionMethod($row['class'], $row['function']) :
+                                        new \ReflectionFunction($row['function']);
+                                    $params = $mirror->getParameters();
+                                    ?>
+                                    <tr>
+                                        <td><code><?= htmlspecialchars(isset($params[$key]) ? '$'.$params[$key]->name : "#$key", ENT_SUBSTITUTE, 'UTF-8') ?></code></td>
+                                        <td><pre><?= print_r($value, true) ?></pre></td>
+                                    </tr>
+                                <?php endforeach ?>
+
+                            </table>
+                        </div>
+                        <?php else : ?>
+                            ()
+                        <?php endif; ?>
+                            <?php endif; ?>
+
+                            <?php if (! isset($row['class']) && isset($row['function'])) : ?>
+                                &nbsp;&nbsp;&mdash;&nbsp;&nbsp;	<?= $row['function'] ?>()
+                            <?php endif; ?>
+                        </p>
+
+                        <!-- Source? -->
+                        <?php if (isset($row['file']) && is_file($row['file']) &&  isset($row['class'])) : ?>
+                            <div class="source">
+                                <?= self::highlightFile($row['file'], $row['line']) ?>
+                            </div>
+                        <?php endif; ?>
+                    </li>
+
+                <?php endforeach; ?>
+            </ol>
+
+        </div>
+
+        <!-- Server -->
+        <div class="content" id="server">
+            <?php foreach (['_SERVER', '_SESSION'] as $var) : ?>
+                <?php if (empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var])) continue; ?>
+
+                <h3>$<?= $var ?></h3>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($GLOBALS[$var] as $key => $value) : ?>
+                        <tr>
+                            <td><?= htmlspecialchars($key, ENT_IGNORE, 'UTF-8') ?></td>
+                            <td>
+                                <?php if (! is_array($value) && ! is_object($value)) : ?>
+                                    <?= htmlspecialchars($value, ENT_SUBSTITUTE, 'UTF-8') ?>
+                                <?php else: ?>
+                                    <?= '<pre>'.print_r($value, true) ?>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+            <?php endforeach ?>
+
+            <!-- Constants -->
+            <?php $constants = get_defined_constants(true); ?>
+            <?php if (! empty($constants['user'])) : ?>
+                <h3>Constants</h3>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($constants['user'] as $key => $value) : ?>
+                        <tr>
+                            <td><?= htmlspecialchars($key, ENT_IGNORE, 'UTF-8') ?></td>
+                            <td>
+                                <?php if (!is_array($value) && ! is_object($value)) : ?>
+                                    <?= htmlspecialchars($value, ENT_SUBSTITUTE, 'UTF-8') ?>
+                                <?php else: ?>
+                                    <?= '<pre>'.print_r($value, true) ?>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+        </div>
+
+        <!-- Request -->
+        <div class="content" id="request">
+            <?php $empty = true; ?>
+            <?php foreach (['_GET', '_POST', '_COOKIE'] as $var) : ?>
+                <?php if (empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var])) continue; ?>
+
+                <?php $empty = false; ?>
+
+                <h3>$<?= $var ?></h3>
+
+                <table style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($GLOBALS[$var] as $key => $value) : ?>
+                        <tr>
+                            <td><?= htmlspecialchars($key, ENT_IGNORE, 'UTF-8') ?></td>
+                            <td>
+                                <?php if (!is_array($value) && ! is_object($value)) : ?>
+                                    <?= htmlspecialchars($value, ENT_SUBSTITUTE, 'UTF-8') ?>
+                                <?php else: ?>
+                                    <?= '<pre>'.print_r($value, true) ?>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+            <?php endforeach ?>
+
+            <?php if ($empty) : ?>
+
+                <div class="alert">
+                    No $_GET, $_POST, or $_COOKIE Information to show.
+                </div>
+
+            <?php endif; ?>
+        </div>
+
+        <!-- Response -->
+        <div class="content" id="response">
+            <p>Response Code: <?= http_response_code() ?></p>
+
+            <p>Headers:</p>
+            <?php if (! empty(headers_list())) : ?>
+                <ul>
+                    <?php foreach (headers_list() as $header) : ?>
+                        <li><?= htmlspecialchars($header, ENT_SUBSTITUTE, 'UTF-8') ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+
+        <!-- Files -->
+        <div class="content" id="files">
+            <?php $files = get_included_files(); ?>
+
+            <ol>
+                <?php foreach ($files as $file) :?>
+                    <li><?= htmlspecialchars( self::clean_path($file), ENT_SUBSTITUTE, 'UTF-8') ?></li>
+                <?php endforeach ?>
+            </ol>
+        </div>
+
+        <!-- Memory -->
+        <div class="content" id="memory">
+            <table>
+                <tbody>
+                <tr>
+                    <td>Memory Usage</td>
+                    <td><?= self::describeMemory(memory_get_usage(true)) ?></td>
+                </tr>
+                <tr>
+                    <td style="width: 12em">Peak Memory Usage:</td>
+                    <td><?= self::describeMemory(memory_get_peak_usage(true)) ?></td>
+                </tr>
+                <tr>
+                    <td>Memory Limit:</td>
+                    <td><?= ini_get('memory_limit') ?></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>  <!-- /tab-content -->
+
+</div> <!-- /container -->
+
+<div class="exception footer">
+    <div class="exception container">
+
+        <p>
+            Displayed at <?= date('H:i:sa') ?> &mdash;
+            PHP: <?= phpversion() ?>  &mdash;
+            CodeIgniter: <?= CI_VERSION ?>
+        </p>
+
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -77,3 +77,14 @@ $config['log_filePermissions'] = 0644;
 |
 */
 $config['log_dateFormat'] = 'Y-m-d H:i:s';
+
+/*
+| --------------------------------------------------------------------------
+| LOG DEPRECATIONS INSTEAD OF THROWING?
+| --------------------------------------------------------------------------
+| By default, CodeIgniter converts deprecations into exceptions. Also,
+| starting in PHP 8.1 will cause a lot of deprecated usage warnings.
+| Use this option to temporarily cease the warnings and instead log those.
+| This option also works for user deprecations.
+ */
+$config['logDeprecations'] = true;
