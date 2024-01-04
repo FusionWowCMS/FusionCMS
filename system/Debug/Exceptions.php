@@ -46,7 +46,8 @@ class Exceptions
      */
     public function exceptionHandler(\Throwable $exception)
     {
-        // Get Exception Info
+        // Get Exception Info - these are available
+        // directly in the template that's displayed.
         $type    = get_class($exception);
         $code    = $exception->getCode();
         $message = $exception->getMessage();
@@ -93,7 +94,7 @@ class Exceptions
         $templates_path = config_item('error_views_path');
         if (empty($templates_path))
         {
-            $templates_path = APPPATH.'views'.DIRECTORY_SEPARATOR.'errors'.DIRECTORY_SEPARATOR;
+            $templates_path = APPPATH.'views/errors/';
         }
 
         // Make a nicer title based on the type of Exception.
@@ -101,7 +102,7 @@ class Exceptions
 
         if (is_cli())
         {
-            $templates_path .= 'cli'.DIRECTORY_SEPARATOR;
+            $templates_path .= 'cli/';
 
             // CLI will never accessed by general public
             // while in production.
@@ -110,7 +111,7 @@ class Exceptions
         else
         {
             header('HTTP/1.1 401 Unauthorized', true, 500);
-            $templates_path .= 'html'.DIRECTORY_SEPARATOR;
+            $templates_path .= 'html/';
         }
 
         if (ob_get_level() > $this->ob_level + 1)
@@ -183,13 +184,13 @@ class Exceptions
         if (is_cli())
         {
             $message = "\t".(is_array($message) ? implode("\n\t", $message) : $message);
-            $templates_path .= 'cli'.DIRECTORY_SEPARATOR;
+            $templates_path .= 'cli/';
         }
         else
         {
             set_status_header($status_code, $heading);
             $message = '<p>'.(is_array($message) ? implode('</p><p>', $message) : $message).'</p>';
-            $templates_path .= 'html'.DIRECTORY_SEPARATOR;
+            $templates_path .= 'html/';
         }
 
         if (ob_get_level() > $this->ob_level + 1)
