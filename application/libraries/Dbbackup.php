@@ -39,7 +39,7 @@ class Dbbackup
      */
     public function backup(bool $trigger = false): void
     {
-        $db_backup_path = 'backups/';
+        $db_backup_path = 'writable/backups/';
         $max_files = $this->CI->config->item('backups_max_keep');
         $backups_interval = $this->CI->config->item('backups_interval');
         $backups_time = $this->CI->config->item('backups_time');
@@ -99,7 +99,7 @@ class Dbbackup
                         $file_del = $db_backup_path . $to_delete->backup_name . '.zip';
                         if (file_exists($file_del)) {
                             unlink($file_del);
-                            log_message('error', 'Backup ' . $file_del . ' deleted');
+                            log_message('info', 'Backup ' . $file_del . ' deleted');
                         }
                     }
                 }

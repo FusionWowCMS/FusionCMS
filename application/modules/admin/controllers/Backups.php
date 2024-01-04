@@ -83,7 +83,7 @@ class Backups extends MX_Controller
         requirePermission("executeBackupActions");
 
         $name = $this->cms_model->getBackups($id);
-        $file = 'backups/' . $name . '.zip';
+        $file = 'writable/backups/' . $name . '.zip';
         if (file_exists($file)) {
             force_download($file, null);
         } else {
@@ -96,7 +96,7 @@ class Backups extends MX_Controller
         requirePermission("executeBackupActions");
 
         $name = $this->cms_model->getBackups($id);
-        $file = 'backups/' . $name . '.zip';
+        $file = 'writable/backups/' . $name . '.zip';
         $this->cms_model->deleteBackups($id);
         if (file_exists($file)) {
             unlink($file);
@@ -113,11 +113,11 @@ class Backups extends MX_Controller
 
         $name = $this->cms_model->getBackups($id);
         $zip = new ZipArchive();
-        $zipfile = $zip->open('backups/' . $name . '.zip');
+        $zipfile = $zip->open('writable/backups/' . $name . '.zip');
 
         if ($zipfile === true) {
             // Unzip path
-            $extractpath = "backups/";
+            $extractpath = "writable/backups/";
 
             // Extract file
             $zip->extractTo($extractpath);
@@ -126,7 +126,7 @@ class Backups extends MX_Controller
             die('Extract failed. Check file permissions');
         }
 
-        $sqlfile = 'backups/' . $name . '.sql';
+        $sqlfile = 'writable/backups/' . $name . '.sql';
 
         if (file_exists($sqlfile)) {
             $lines = file($sqlfile);
@@ -142,7 +142,7 @@ class Backups extends MX_Controller
             die("SQL file doesn't exist!");
         }
 
-        unlink('backups/' . $name . '.sql');
+        unlink('writable/backups/' . $name . '.sql');
         die('yes');
     }
 }

@@ -11,7 +11,6 @@ application/config/database.php
 application/config/fusion.php
 !application/logs/index.html
 !application/logs/.htaccess
-backups/*.zip
 writable/*
 
 .php-cs-fixer.cache
