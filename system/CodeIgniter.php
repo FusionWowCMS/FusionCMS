@@ -205,7 +205,9 @@ if ( ! empty($assign_to_config['subclass_prefix']))
 		define('MB_ENABLED', true);
 		// mbstring.internal_encoding is deprecated starting with PHP 5.6
 		// and it's usage triggers E_DEPRECATED messages.
-		@ini_set('mbstring.internal_encoding', $charset);
+        if (ini_get('mbstring.internal_encoding')) {
+            ini_set('mbstring.internal_encoding', $charset);
+        }
 		// This is required for mb_convert_encoding() to strip invalid characters.
 		// That's utilized by CI_Utf8, but it's also done for consistency with iconv.
 		mb_substitute_character('none');
@@ -222,7 +224,9 @@ if ( ! empty($assign_to_config['subclass_prefix']))
 		define('ICONV_ENABLED', true);
 		// iconv.internal_encoding is deprecated starting with PHP 5.6
 		// and it's usage triggers E_DEPRECATED messages.
-		@ini_set('iconv.internal_encoding', $charset);
+        if (ini_get('iconv.internal_encoding')) {
+            ini_set('iconv.internal_encoding', $charset);
+        }
 	}
 	else
 	{
