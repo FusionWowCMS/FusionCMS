@@ -57,29 +57,17 @@ if (ENVIRONMENT !== 'production')
 
 /*
  * ------------------------------------------------------
- *  Get the DI Container ready for use
- * ------------------------------------------------------
- */
-
-require_once BASEPATH.'DI/DI.php';
-
-// This is the only time that services array will need
-// to be passed into the class. All other uses can
-// simply call getInstance().
-$di = CodeIgniter\DI\DI::getInstance(get_config2('services'));
-
-/*
- * ------------------------------------------------------
  *  Setup the autoloader
  * ------------------------------------------------------
  */
 
 // The autloader isn't initialized yet, so load the file manually.
 require_once BASEPATH.'Autoloader/Autoloader.php';
+require_once BASEPATH.'Config/Services.php';
 
 // The Autoloader class only handles namespaces
 // and "legacy" support.
-$loader = $di->single('autoloader');
+$loader = \CodeIgniter\Config\Services::autoloader();
 $loader->initialize(get_config2('autoload'));
 
 // The register function will prepend
@@ -91,7 +79,27 @@ $loader->register();
  *  Set custom exception handling
  * ------------------------------------------------------
  */
-$di->single('exceptions')->initialize();
+\CodeIgniter\Config\Services::exceptions(true)
+    ->initialize();
+
+//--------------------------------------------------------------------
+// Start the Benchmark
+//--------------------------------------------------------------------
+
+/*$benchmark = \CodeIgniter\Config\Services::timer(true);
+$benchmark->start('total_execution');*/
+
+//--------------------------------------------------------------------
+// Get our Request and Response objects
+//--------------------------------------------------------------------
+
+$request  = is_cli()
+    ? \CodeIgniter\Config\Services::clirequest()
+    : \CodeIgniter\Config\Services::request();
+$response = \CodeIgniter\Config\Services::response();
+
+// Assume success until proven otherwise.
+$response->setStatusCode(200);
 
 /*
  * ------------------------------------------------------
@@ -515,19 +523,53 @@ if ( ! empty($assign_to_config['subclass_prefix']))
  */
 	$EXT->call_hook('post_system');
 
+/*require APPPATH.'config/Routes.php';
 
-/*$router = $di->single('router');
+$router = \CodeIgniter\Config\Services::router($routes, true);
 
-$controller = $router->controllerName();
+$path = is_cli() ? $request->getPath() : $request->uri->getPath();
+$controller = $router->handle($path);
 
 // Is it routed to a Closure?
 if (is_callable($controller))
 {
-    $controller(...$router->params());
+    echo $controller(...$router->params());
 }
 else
 {
-    $class  = $di->make($controller);
-    $method = $router->methodName();
-    $class->$method(...$router->params());
-}*/
+    if (empty($controller))
+	{
+		// Show the 404 error page
+		if (is_cli())
+		{
+			require APPPATH.'views/errors/cli/error_404.php';
+		}
+		else
+		{
+			require APPPATH.'views/errors/html/error_404.php';
+		}
+
+		$response->setStatusCode(404);
+	}
+	else
+	{
+		if (! class_exists($controller))
+		{
+			require APPPATH.'controllers/'.$router->directory().$router->controllerName().'.php';
+		}
+
+		$class  = new $controller($request, $response);
+		$method = $router->methodName();
+		$class->$method(...$router->params());
+	}
+}
+
+$output = ob_get_contents();
+ob_end_clean();
+
+$output = str_replace('{elapsed_time}', $benchmark->getElapsedTime('total_execution'), $output);
+
+$response->setBody($output);
+
+$response->send();
+*/

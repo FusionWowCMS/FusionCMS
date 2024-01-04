@@ -108,11 +108,27 @@ interface RouteCollectionInterface
     //--------------------------------------------------------------------
 
     /**
+     * If TRUE, the system will attempt to match the URI against
+     * controllers by matching each segment against folders/files
+     * in APPPATH/controllers, when a match wasn't found against
+     * defined routes.
+     *
+     * If FALSE, will stop searching and do NO automatic routing.
+     *
+     * @param bool $value
+     *
+     * @return RouteCollection
+     */
+    public function setAutoRoute(bool $value): self;
+
+    //--------------------------------------------------------------------
+
+    /**
      * Returns the name of the default controller. With Namespace.
      *
      * @return string
      */
-    public function defaultController();
+    public function getDefaultController();
 
     //--------------------------------------------------------------------
 
@@ -121,7 +137,7 @@ interface RouteCollectionInterface
      *
      * @return string
      */
-    public function defaultMethod();
+    public function getDefaultMethod();
 
     //--------------------------------------------------------------------
 
@@ -132,7 +148,16 @@ interface RouteCollectionInterface
      *
      * @return mixed
      */
-    public function translateURIDashes();
+    public function shouldTranslateURIDashes();
+
+    //--------------------------------------------------------------------
+
+    /**
+     * Returns the flag that tells whether to autoRoute URI against controllers.
+     *
+     * @return bool
+     */
+    public function shouldAutoRoute();
 
     //--------------------------------------------------------------------
 
@@ -141,7 +166,7 @@ interface RouteCollectionInterface
      *
      * @return mixed
      */
-    public function routes();
+    public function getRoutes();
 
     //--------------------------------------------------------------------
 
@@ -150,7 +175,27 @@ interface RouteCollectionInterface
      *
      * @return string
      */
-    public function HTTPVerb();
+    public function getHTTPVerb();
+
+    //--------------------------------------------------------------------
+
+    /**
+     * Attempts to look up a route based on it's destination.
+     *
+     * If a route exists:
+     *
+     *      'path/(:any)/(:any)' => 'Controller::method/$1/$2'
+     *
+     * This method allows you to know the Controller and method
+     * and get the route that leads to it.
+     *
+     *      // Equals 'path/$param1/$param2'
+     *      reverseRoute('Controller::method', $param1, $param2);
+     *
+     * @param string $route
+     * @param        ...$params
+     */
+    public function reverseRoute(string $search, ...$params): string;
 
     //--------------------------------------------------------------------
 

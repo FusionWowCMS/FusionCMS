@@ -345,30 +345,6 @@ if ( ! function_exists('get_config2'))
 	}
 }
 
-// ------------------------------------------------------------------------
-
-if (! function_exists('DI'))
-{
-    /**
-     * A convenience method for getting the current instance
-     * of the dependency injection container.
-     *
-     *  If a class "alias" is passed in as the first parameter
-     *  then try to create that class using the single() method.
-     *
-     * @return \CodeIgniter\DI\DI instance
-     */
-    function DI($alias=null)
-    {
-        if (! empty($alias) && is_string($alias))
-        {
-            return \CodeIgniter\DI\DI::getInstance()->single($alias);
-        }
-
-        return \CodeIgniter\DI\DI::getInstance();
-    }
-}
-
 //--------------------------------------------------------------------
 
 if ( ! function_exists('config_item'))
@@ -559,8 +535,7 @@ if (! function_exists('log_message'))
      */
     function log_message(string $level, $message, array $context=[])
     {
-        $logger = new \CodeIgniter\Log\Logger();
-        return $logger->log($level, $message, $context);
+        return \CodeIgniter\Config\Services::logger(false)->log($level, $message, $context);
     }
 }
 
@@ -827,9 +802,32 @@ if ( ! function_exists('function_usable'))
 					: array();
 			}
 
-			return ! in_array($function_name, $_suhosin_func_blacklist, TRUE);
+			return ! in_array($function_name, $_suhosin_func_blacklist, true);
 		}
 
-		return FALSE;
+		return false;
 	}
+
+    if ( ! function_exists('route_to'))
+    {
+        /**
+         * Given a controller/method string and any params,
+         * will attempt to build the relative URL to the
+         * matching route.
+         *
+         * NOTE: This requires the controller/method to
+         * have a route defined in the routes config file.
+         *
+         * @param string $method
+         * @param        ...$params
+         *
+         * @return \CodeIgniter\Router\string
+         */
+        function route_to(string $method, ...$params): string
+        {
+            global $routes;
+
+            return $routes->reverseRoute($method, ...$params);
+        }
+    }
 }

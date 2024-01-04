@@ -47,6 +47,14 @@ class RouteCollection implements RouteCollectionInterface
     protected $translateURIDashes = false;
 
     /**
+     * Whether to match URI against controllers
+     * when it doesn't match defined routes.
+     *
+     * @var bool
+     */
+    protected $autoRoute = true;
+
+    /**
      * Defined placeholders that can be used
      * within the
      *
@@ -144,19 +152,22 @@ class RouteCollection implements RouteCollectionInterface
 
         // We need to ensure that the current namespace is added to the final mapping
         // so that it won't try to use the current namespace for the class.
-        if ( is_string($map) && strpos($map, '\\') === false)
+        if (is_string($map) && strpos($map, '\\') === false)
         {
-            $map = $this->defaultNamespace.'\\'.$map;
+            if ( ! empty($this->defaultNamespace))
+            {
+                $map = $this->defaultNamespace.'\\'.$map;
 
-            // Trim out any double back-slashes
-            $map = str_replace('\\\\', '\\', $map);
+                // Trim out any double back-slashes
+                $map = str_replace('\\\\', '\\', $map);
+            }
         }
 
         // Ensure that any strings are prefixed with backslash to get
         // out of the current namespace and into the proper one.
-        if (is_string($map))
+        if (is_string($map) && ! empty($this->defaultNamespace))
         {
-            $map = '\\'. ltrim($map, '\\ ');
+            $map = '\\'.ltrim($map, '\\ ');
         }
 
         $this->routes[$route] = $map;
@@ -168,9 +179,9 @@ class RouteCollection implements RouteCollectionInterface
      * Adds an array of routes to the class all at once. This allows additional
      * settings to be specified for all incoming routes, including:
      *
-     * namespace  Sets the namespace for all routes
-     * hostname   Route must be on the set domain
-     * prefix     Sets a string that will be prefixed to all routes (left side)
+     *  namespace  Sets the namespace for all routes
+     *  hostname   Route must be on the set domain
+     *  prefix     Sets a string that will be prefixed to all routes (left side)
      *
      * @param array|null $routes
      *
@@ -180,14 +191,14 @@ class RouteCollection implements RouteCollectionInterface
     {
         if (empty($_SERVER['HTTP_HOST']))
         {
-            $_SERVER['HTTP_HOST'] = 'null';
+            $_SERVER['HTTP_HOST'] = null;
         }
 
         $current_host = ! empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
 
         // If a hostname is provided as an option,
         // then don't waste time if our hostname doesn't match.
-        if (! empty($options['hostname']) && strtolower($current_host) != strtolower($options['hostname']))
+        if ( ! empty($options['hostname']) && strtolower($current_host) != strtolower($options['hostname']))
         {
             return;
         }
@@ -197,7 +208,7 @@ class RouteCollection implements RouteCollectionInterface
         // the user specifies here.
         $old_namespace = $this->defaultNamespace;
 
-        if (! empty($options['namespace']))
+        if (isset($options['namespace']))
         {
             $this->defaultNamespace = $options['namespace'];
         }
@@ -249,7 +260,7 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return mixed
      */
-    public function addPlaceholder(string $name, string $pattern): self
+    public function addPlaceholder(string $name, string $pattern): RouteCollectionInterface
     {
         $this->placeholders[$name] = $pattern;
 
@@ -266,7 +277,7 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return mixed
      */
-    public function setDefaultNamespace(string $value): self
+    public function setDefaultNamespace(string $value): RouteCollectionInterface
     {
         $this->defaultNamespace = $value;
 
@@ -283,7 +294,7 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return mixed
      */
-    public function setDefaultController(string $value): self
+    public function setDefaultController(string $value): RouteCollectionInterface
     {
         $this->defaultController = $value;
 
@@ -297,7 +308,7 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return string
      */
-    public function defaultController(): string
+    public function getDefaultController(): string
     {
         return $this->defaultController;
     }
@@ -309,9 +320,21 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return string
      */
-    public function defaultMethod(): string
+    public function getDefaultMethod(): string
     {
         return $this->defaultMethod;
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * Returns the flag that tells whether to autoRoute URI against controllers.
+     *
+     * @return bool
+     */
+    public function shouldAutoRoute()
+    {
+        return $this->autoRoute;
     }
 
     //--------------------------------------------------------------------
@@ -324,7 +347,7 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return mixed
      */
-    public function setDefaultMethod(string $value): self
+    public function setDefaultMethod(string $value): RouteCollectionInterface
     {
         $this->defaultMethod = $value;
 
@@ -344,9 +367,30 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return mixed
      */
-    public function setTranslateURIDashes(bool $value): self
+    public function setTranslateURIDashes(bool $value): RouteCollectionInterface
     {
         $this->translateURIDashes = $value;
+
+        return $this;
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * If TRUE, the system will attempt to match the URI against
+     * controllers by matching each segment against folders/files
+     * in APPPATH/controllers, when a match wasn't found against
+     * defined routes.
+     *
+     * If FALSE, will stop searching and do NO automatic routing.
+     *
+     * @param bool $value
+     *
+     * @return RouteCollection
+     */
+    public function setAutoRoute(bool $value): RouteCollectionInterface
+    {
+        $this->autoRoute = $value;
 
         return $this;
     }
@@ -358,7 +402,7 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return array
      */
-    public function routes()
+    public function getRoutes()
     {
         return $this->routes;
     }
@@ -370,7 +414,7 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return string
      */
-    public function HTTPVerb()
+    public function getHTTPVerb()
     {
         return $this->http_verb;
     }
@@ -382,9 +426,83 @@ class RouteCollection implements RouteCollectionInterface
      *
      * @return bool
      */
-    public function translateURIDashes()
+    public function shouldTranslateURIDashes()
     {
         return $this->translateURIDashes;
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * Attempts to look up a route based on it's destination.
+     *
+     * If a route exists:
+     *
+     *      'path/(:any)/(:any)' => 'Controller::method/$1/$2'
+     *
+     * This method allows you to know the Controller and method
+     * and get the route that leads to it.
+     *
+     *      // Equals 'path/$param1/$param2'
+     *      reverseRoute('Controller::method', $param1, $param2);
+     *
+     * @param string $route
+     * @param        ...$params
+     */
+    public function reverseRoute(string $search, ...$params): string
+    {
+        foreach ($this->routes as $from => $to)
+        {
+            // Lose any namespace slash at beginning of strings
+            // to ensure more consistent match.
+            $to     = ltrim($to, '\\');
+            $search = ltrim($search, '\\');
+
+            // If there's any chance of a match, then it will
+            // be with $search at the beginning of the $to string.
+            if (strpos($to, $search) !== 0)
+            {
+                continue;
+            }
+
+            // Ensure that the number of $params given here
+            // matches the number of back-references in the route
+            if (substr_count($to, '$') != count($params))
+            {
+                continue;
+            }
+
+            // Find all of our back-references in the original route
+            preg_match_all('/\(([^)]+)\)/', $from, $matches);
+
+            if (empty($matches[0]))
+            {
+                continue;
+            }
+
+            // Build our resulting string, inserting the $params in
+            // the appropriate places.
+            $route = $from;
+
+            foreach ($matches[0] as $index => $pattern)
+            {
+                // Ensure that the param we're inserting matches
+                // the expected param type.
+                if (preg_match("/{$pattern}/", $params[$index]))
+                {
+                    $route = str_replace($pattern, $params[$index], $route);
+                }
+                else
+                {
+                    throw new \LogicException('A parameter does not match the expected type.');
+                }
+            }
+
+            return $route;
+        }
+
+        // If we're still here, then we did not find a match.
+        throw new \InvalidArgumentException('Unable to locate a valid route.');
     }
 
     //--------------------------------------------------------------------

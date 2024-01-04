@@ -64,7 +64,7 @@ if (! defined('BASEPATH')) {
 $config['psr4'] = [
     'App'             => realpath(APPPATH),
     'App\Controllers' => APPPATH.'Controllers',
-    'CodeIgniter'     => realpath(BASEPATH),
+    'CodeIgniter'     => realpath(BASEPATH)
 ];
 
 /**
@@ -84,10 +84,18 @@ $config['psr4'] = [
  *   ];
  */
 $config['classmap'] = [
-    'CodeIgniter\Benchmark\Timer'                 => BASEPATH.'Benchmark/Timer.php',
-    'CodeIgniter\Benchmark\Iterator'              => BASEPATH.'Benchmark/Iterator.php',
+    'CodeIgniter\Debug\Timer'                     => BASEPATH.'Debug/Timer.php',
+    'CodeIgniter\Debug\Iterator'                  => BASEPATH.'Debug/Iterator.php',
     'CodeIgniter\Debug\Exceptions'                => BASEPATH.'Debug/Exceptions.php',
     'CodeIgniter\Config\BaseConfig'               => BASEPATH.'Config/BaseConfig.php',
+    'CodeIgniter\HTTP\Message'                    => BASEPATH.'HTTP/Message.php',
+    'CodeIgniter\HTTP\Request'                    => BASEPATH.'HTTP/Request.php',
+    'CodeIgniter\HTTP\IncomingRequest'            => BASEPATH.'HTTP/IncomingRequest.php',
+    'CodeIgniter\HTTP\RequestInterface'           => BASEPATH.'HTTP/RequestInterface.php',
+    'CodeIgniter\HTTP\URI'                        => BASEPATH.'HTTP/URI.php',
+    'CodeIgniter\HTTP\Response'                   => BASEPATH.'HTTP/Response.php',
+    'CodeIgniter\HTTP\ResponseInterface'          => BASEPATH.'HTTP/ResponseInterface.php',
+    'CodeIgniter\HTTP\CURLRequest'                => BASEPATH.'HTTP/CURLRequest.php',
     'CodeIgniter\Router\RouteCollection'          => BASEPATH.'Router/RouteCollection.php',
     'CodeIgniter\Router\RouteCollectionInterface' => BASEPATH.'Router/RouteCollectionInterface.php',
     'CodeIgniter\Router\Router'                   => BASEPATH.'Router/Router.php',

@@ -22,7 +22,7 @@ if (! defined('BASEPATH')) {
  */
 
 // Create a new instance of our RouteCollection class.
-$routes = DI()->single('routes');
+$routes = \CodeIgniter\Config\Services::routes();
 
 /**
  * --------------------------------------------------------------------
@@ -47,13 +47,29 @@ $routes = DI()->single('routes');
  *
  * Assigns the method inside the controller that is ran when the
  * Router is unable to determine the appropriate method to run.
+ *
+ *     $routes->setAutoRoute()
+ *
+ *  Determines whether the Router will attempt to match URIs to
+ *  controllers when no specific route has been defined. If false,
+ *  only routes that have been defined here will be available.
  */
 
 // CodeIgniter
-$routes->setDefaultNamespace('\\');
+$routes->setDefaultNamespace('');
 $routes->setDefaultController('news');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
+$routes->setAutoRoute(true);
+/**
+ * --------------------------------------------------------------------
+ * Route Definitions
+ * --------------------------------------------------------------------
+ */
+
+// We get a performance increase by specifying the default
+// route since we don't have to scan directories.
+$routes->add('/', 'News::index');
 $route['default_controller'] = "news";
 $route['404_override'] = 'errors';
 
