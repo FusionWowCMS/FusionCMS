@@ -7,9 +7,7 @@ defined('EXT') or define('EXT', '.php');
 global $CFG;
 
 /* get module locations from config settings or use the default module location and offset */
-is_array(_Modules::$locations = $CFG->item('modules_locations')) or _Modules::$locations = array(
-    APPPATH . 'modules/' => '../modules/',
-);
+is_array(_Modules::$locations = $CFG->item('modules_locations')) or _Modules::$locations = [APPPATH . 'modules/' => '../modules/'];
 
 /* PHP5 spl_autoload */
 spl_autoload_register('_Modules::autoload');
@@ -97,21 +95,14 @@ class _Modules
     public static function load($module)
     {
         // Backward function
-        // The function each() has been DEPRECATED as of PHP 7.2.0. Relying on this function is highly discouraged
-        // Before PHP 7.1.0, list() only worked on numerical arrays and assumes the numerical indices start at 0.
-        if (version_compare(phpversion(), '7.1', '<')) {
-            // php version isn't high enough
-            is_array($module) ? list($module, $params) = each($module) : $params = null;
+        if (!is_array($module)) {
+            $params = null;
         } else {
-            if (!is_array($module)) {
-                $params = null;
-            } else {
-                $keys = array_keys($module);
+            $keys = array_keys($module);
 
-                $params = $module[$keys[0]];
+            $params = $module[$keys[0]];
 
-                $module = $keys[0];
-            }
+            $module = $keys[0];
         }
 
         /* get the requested controller class name */
@@ -120,14 +111,7 @@ class _Modules
         /* create or return an existing controller from the registry */
         if (!isset(self::$registry[$alias])) {
             // Backward function
-            // Before PHP 7.1.0, list() only worked on numerical arrays and assumes the numerical indices start at 0.
-            if (version_compare(phpversion(), '7.1', '<')) {
-                // php version isn't high enough
-                /* find the controller */
-                list($class) = CI::$APP->router->locate(explode('/', $module));
-            } else {
-                [$class] = CI::$APP->router->locate(explode('/', $module));
-            }
+            [$class] = CI::$APP->router->locate(explode('/', $module));
 
             /* controller cannot be located */
             if (empty($class)) {
@@ -285,16 +269,8 @@ class _Modules
         /* load the route file */
         if (! isset(self::$routes[$module])) {
             // Backward function
-            // Before PHP 7.1.0, list() only worked on numerical arrays and assumes the numerical indices start at 0.
-            if (version_compare(phpversion(), '7.1', '<')) {
-                // php version isn't high enough
-                if (list($path) = self::find('routes', $module, 'config/')) {
-                    $path && self::$routes[$module] = self::load_file('routes', $path, 'route');
-                }
-            } else {
-                if ([$path] = self::find('routes', $module, 'config/')) {
-                    $path && self::$routes[$module] = self::load_file('routes', $path, 'route');
-                }
+            if ([$path] = self::find('routes', $module, 'config/')) {
+                $path && self::$routes[$module] = self::load_file('routes', $path, 'route');
             }
         }
 

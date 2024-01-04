@@ -117,8 +117,7 @@ require_once __DIR__ . '/Base.php';
 #[AllowDynamicProperties]
 class MX_Controller
 {
-    public $autoload = array();
-    private $standardModule = "news";
+    public $autoload = [];
 
     /**
      * [__construct description]
