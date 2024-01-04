@@ -499,9 +499,7 @@ if ( ! empty($assign_to_config['subclass_prefix']))
 	$EXT->call_hook('post_system');
 
 
-require APPPATH.'config/routes.php';
-
-$router = $di->single('router');
+/*$router = $di->single('router');
 
 $controller = $router->controllerName();
 
@@ -515,4 +513,4 @@ else
     $class  = $di->make($controller);
     $method = $router->methodName();
     $class->$method(...$router->params());
-}
+}*/
