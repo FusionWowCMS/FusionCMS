@@ -100,6 +100,7 @@ $config['classmap'] = [
     'CodeIgniter\Router\RouteCollectionInterface' => BASEPATH.'Router/RouteCollectionInterface.php',
     'CodeIgniter\Router\Router'                   => BASEPATH.'Router/Router.php',
     'CodeIgniter\Router\RouterInterface'          => BASEPATH.'Router/RouterInterface.php',
+    'CodeIgniter\CLI\CLI'                         => BASEPATH.'CLI/CLI.php',
     'CodeIgniter\Log\Logger'                      => BASEPATH.'Log/Logger.php',
     'CodeIgniter\Log\LoggerInterface'             => BASEPATH.'Log/LoggerInterface.php',
     'CodeIgniter\Log\LogLevel'                    => BASEPATH.'Log/LogLevel.php',
