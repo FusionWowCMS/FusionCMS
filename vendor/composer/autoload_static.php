@@ -21,6 +21,10 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
             'chillerlan\\Settings\\' => 20,
             'chillerlan\\QRCode\\' => 18,
         ),
+        'Z' => 
+        array (
+            'Zend\\Escaper\\' => 13,
+        ),
         'V' => 
         array (
             'VisualAppeal\\' => 13,
@@ -62,6 +66,10 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'chillerlan\\QRCode\\' => 
         array (
             0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
+        ),
+        'Zend\\Escaper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-escaper/src',
         ),
         'VisualAppeal\\' => 
         array (

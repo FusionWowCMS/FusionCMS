@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79e0acfc476ff11f9128bc1ae6c6820f",
+    "content-hash": "e121197ad86829d75f54c8ec89ec9823",
     "packages": [
         {
             "name": "chillerlan/php-qrcode",
@@ -1038,6 +1038,55 @@
                 "source": "https://github.com/smarty-php/smarty/tree/v4.3.4"
             },
             "time": "2023-09-14T10:59:08+00:00"
+        },
+        {
+            "name": "zendframework/zend-escaper",
+            "version": "2.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-escaper.git",
+                "reference": "2dcd14b61a72d8b8e27d579c6344e12c26141d4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/2dcd14b61a72d8b8e27d579c6344e12c26141d4e",
+                "reference": "2dcd14b61a72d8b8e27d579c6344e12c26141d4e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "1.7.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev",
+                    "dev-develop": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Escaper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://github.com/zendframework/zend-escaper",
+            "keywords": [
+                "escaper",
+                "zf2"
+            ],
+            "support": {
+                "issues": "https://github.com/zendframework/zend-escaper/issues",
+                "source": "https://github.com/zendframework/zend-escaper/tree/master"
+            },
+            "abandoned": "laminas/laminas-escaper",
+            "time": "2016-06-30T19:48:38+00:00"
         }
     ],
     "packages-dev": [],
@@ -1047,7 +1096,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-zip": "*"
+        "php": ">=8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

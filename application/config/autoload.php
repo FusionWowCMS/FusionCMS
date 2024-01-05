@@ -105,6 +105,7 @@ $config['classmap'] = [
     'CodeIgniter\Log\Logger'                      => BASEPATH.'Log/Logger.php',
     'CodeIgniter\Log\LoggerInterface'             => BASEPATH.'Log/LoggerInterface.php',
     'CodeIgniter\Log\LogLevel'                    => BASEPATH.'Log/LogLevel.php',
+    'Zend\Escaper\Escaper'                        => BASEPATH.'View/Escaper.php',
 ];
 
 /*
