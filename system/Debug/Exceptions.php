@@ -382,10 +382,9 @@ class Exceptions
             ini_set('highlight.string', '#869d6a');
         }
 
-        $source = @file_get_contents($file);
-
-        if (empty($source))
-        {
+        try {
+            $source = file_get_contents($file);
+        } catch (Throwable $e) {
             return false;
         }
 
@@ -396,14 +395,13 @@ class Exceptions
         $source = explode("\n", str_replace("\r\n", "\n", $source));
 
         // Get just the part to show
-        $start = $lineNumber - (int)round($lines / 2);
-        $start = $start < 0 ? 0 : $start;
+        $start = max($lineNumber - (int) round($lines / 2), 0);
 
         // Get just the lines we need to display, while keeping line numbers...
         $source = array_splice($source, $start, $lines, true);
 
         // Used to format the line number in the source
-        $format = '% '.strlen($start + $lines).'d';
+        $format = '% ' . strlen((string) ($start + $lines)) . 'd';
 
         $out = '';
         // Because the highlighting may have an uneven number
@@ -412,27 +410,27 @@ class Exceptions
         // showing correctly.
         $spans = 1;
 
-        foreach ($source as $n => $row)
-        {
+        foreach ($source as $n => $row) {
             $spans += substr_count($row, '<span') - substr_count($row, '</span');
             $row = str_replace(["\r", "\n"], ['', ''], $row);
 
-            if ($n == $lineNumber)
-            {
+            if (($n + $start + 1) === $lineNumber) {
                 preg_match_all('#<[^>]+>#', $row, $tags);
-                $out .= sprintf("<span class='line highlight'><span class='number'>{$format}</span> %s\n</span>%s",
-                    $n + $start,
+
+                $out .= sprintf(
+                    "<span class='line highlight'><span class='number'>{$format}</span> %s\n</span>%s",
+                    $n + $start + 1,
                     strip_tags($row),
                     implode('', $tags[0])
                 );
-            }
-            else
-            {
-                $out .= sprintf('<span class="line"><span class="number">'.$format.'</span> %s', $n + $start, $row) ."\n";
+            } else {
+                $out .= sprintf('<span class="line"><span class="number">' . $format . '</span> %s', $n + $start + 1, $row) . "\n";
             }
         }
 
-        $out .= str_repeat('</span>', $spans);
+        if ($spans > 0) {
+            $out .= str_repeat('</span>', $spans);
+        }
 
         return '<pre><code>'.$out.'</code></pre>';
     }
