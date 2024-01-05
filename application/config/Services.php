@@ -1,7 +1,6 @@
 <?php namespace App\Config;
 
-use CodeIgniter\HTTP\Response;
-use CodeIgniter\HTTP\URI;
+use CodeIgniter\HTTP\{Response, URI};
 use CodeIgniter\Router\RouteCollectionInterface;
 
 /**
@@ -33,6 +32,10 @@ class Services
 
     //--------------------------------------------------------------------
 
+    /**
+     * The Autoloader class is the central class that handles our
+     * spl_autoload_register method, and helper methods.
+     */
     public static function autoloader($getShared = false)
     {
         if (! $getShared)
@@ -45,95 +48,28 @@ class Services
 
     //--------------------------------------------------------------------
 
-    public static function timer($getShared = false)
+    /**
+     * The CLI Request class provides for ways to interact with
+     * a command line request.
+     */
+    public static function clirequest($getShared = false)
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\Debug\Timer();
+            return new \CodeIgniter\HTTP\CLIRequest(
+                new \CodeIgniter\HTTP\URI()
+            );
         }
 
-        return self::getSharedInstance('timer');
+        return self::getSharedInstance('clirequest');
     }
 
     //--------------------------------------------------------------------
 
-    public static function iterator($getShared = false)
-    {
-        if (! $getShared)
-        {
-            return new \CodeIgniter\Debug\Iterator();
-        }
-
-        return self::getSharedInstance('iterator');
-    }
-
-    //--------------------------------------------------------------------
-
-    public static function exceptions($getShared = false)
-    {
-        if (! $getShared)
-        {
-            return new \CodeIgniter\Debug\Exceptions();
-        }
-
-        return self::getSharedInstance('exceptions');
-    }
-
-    //--------------------------------------------------------------------
-
-    public static function logger($getShared = true)
-    {
-        if (! $getShared)
-        {
-            return new \CodeIgniter\Log\Logger();
-        }
-
-        return self::getSharedInstance('logger');
-    }
-
-    //--------------------------------------------------------------------
-
-    public static function routes($getShared = false)
-    {
-        if (! $getShared)
-        {
-            return new \CodeIgniter\Router\RouteCollection();
-        }
-
-        return self::getSharedInstance('routes');
-    }
-
-    //--------------------------------------------------------------------
-
-    public static function router(RouteCollectionInterface $routes = null, $getShared = false)
-    {
-        if ($getShared === true)
-        {
-            return self::getSharedInstance('router', $routes);
-        }
-
-        if (empty($routes))
-        {
-            $routes = self::routes();
-        }
-
-        return new \CodeIgniter\Router\Router($routes);
-    }
-
-    //--------------------------------------------------------------------
-
-   /* public static function renderer($viewPath = APPPATH.'views/', $getShared = false)
-    {
-        if (! $getShared)
-        {
-            return new \CodeIgniter\View\View($viewPath);
-        }
-
-        return self::getSharedInstance('renderer');
-    }*/
-
-    //--------------------------------------------------------------------
-
+    /**
+     * The CURL Request class acts as a simple HTTP client for interacting
+     * with other servers, typically through APIs.
+     */
     public static function curlrequest(array $options = [], $response = null, $getShared = false)
     {
         if ($getShared === true)
@@ -155,20 +91,76 @@ class Services
 
     //--------------------------------------------------------------------
 
-    public static function clirequest($getShared = false)
+    /**
+     * The Exceptions class holds the methods that handle:
+     *
+     *  - set_exception_handler
+     *  - set_error_handler
+     *  - register_shutdown_function
+     */
+    public static function exceptions($getShared = false)
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\HTTP\CLIRequest(
-                new \CodeIgniter\HTTP\URI()
-            );
+            return new \CodeIgniter\Debug\Exceptions();
         }
 
-        return self::getSharedInstance('clirequest');
+        return self::getSharedInstance('exceptions');
     }
 
     //--------------------------------------------------------------------
 
+    /**
+     * The Iterator class provides a simple way of looping over a function
+     * and timing the results and memory usage. Used when debugging and
+     * optimizing applications.
+     */
+    public static function iterator($getShared = false)
+    {
+        if (! $getShared)
+        {
+            return new \CodeIgniter\Debug\Iterator();
+        }
+
+        return self::getSharedInstance('iterator');
+    }
+
+    /**
+     * The Logger class is a PSR-3 compatible Logging class that supports
+     * multiple handlers that process the actual logging.
+     */
+    public static function logger($getShared = true)
+    {
+        if (! $getShared)
+        {
+            return new \CodeIgniter\Log\Logger();
+        }
+
+        return self::getSharedInstance('logger');
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * The Renderer class is the class that actually displays a file to the user.
+     * The default View class within CodeIgniter is intentionally simple, but this
+     * service could easily be replaced by a template engine if the user needed to.
+     */
+    /*public static function renderer($viewPath = APPPATH.'views/', $getShared = false)
+    {
+        if (! $getShared)
+        {
+            return new \CodeIgniter\View\View($viewPath);
+        }
+
+        return self::getSharedInstance('renderer');
+    }*/
+
+    //--------------------------------------------------------------------
+
+    /**
+     * The Request class models an HTTP request.
+     */
     public static function request($getShared = false)
     {
         if (! $getShared)
@@ -183,6 +175,93 @@ class Services
 
     //--------------------------------------------------------------------
 
+    /**
+     * The Response class models an HTTP response.
+     */
+    public static function response($getShared = false)
+    {
+        if (! $getShared)
+        {
+            return new \CodeIgniter\HTTP\Response();
+        }
+
+        return self::getSharedInstance('response');
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * The Routes service is a class that allows for easily building
+     * a collection of routes.
+     */
+    public static function routes($getShared = false)
+    {
+        if (! $getShared)
+        {
+            return new \CodeIgniter\Router\RouteCollection();
+        }
+
+        return self::getSharedInstance('routes');
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * The Router class uses a RouteCollection's array of routes, and determines
+     * the correct Controller and Method to execute.
+     */
+    public static function router(RouteCollectionInterface $routes = null, $getShared = false)
+    {
+        if ($getShared === true)
+        {
+            return self::getSharedInstance('router', $routes);
+        }
+
+        if (empty($routes))
+        {
+            $routes = self::routes();
+        }
+
+        return new \CodeIgniter\Router\Router($routes);
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * The Security class provides a few handy tools for keeping the site
+     * secure, most notably the CSRF protection tools.
+     */
+    public static function security($getShared = false)
+    {
+        if (! $getShared)
+        {
+            return new \CodeIgniter\Security\Security();
+        }
+
+        return self::getSharedInstance('security');
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * The Timer class provides a simple way to Benchmark portions of your
+     * application.
+     */
+    public static function timer($getShared = false)
+    {
+        if (! $getShared)
+        {
+            return new \CodeIgniter\Debug\Timer();
+        }
+
+        return self::getSharedInstance('timer');
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * The URI class provides a way to model and manipulate URIs.
+     */
     public static function uri($uri = null, $getShared = false)
     {
         if (! $getShared)
@@ -195,17 +274,6 @@ class Services
 
     //--------------------------------------------------------------------
 
-    public static function response($getShared = false)
-    {
-        if (! $getShared)
-        {
-            return new \CodeIgniter\HTTP\Response();
-        }
-
-        return self::getSharedInstance('response');
-    }
-
-    //--------------------------------------------------------------------
 
     //--------------------------------------------------------------------
     // Utility Methods - DO NOT EDIT
@@ -226,6 +294,25 @@ class Services
         }
 
         return static::$instances[$key];
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * Provides the ability to perform case-insensitive calling of service
+     * names.
+     *
+     * @param string $name
+     * @param array  $arguments
+     */
+    public static function __callStatic(string $name, array $arguments)
+    {
+        $name = strtolower($name);
+
+        if (method_exists('App\Config\Services', $name))
+        {
+            return Services::$name(...$arguments);
+        }
     }
 
     //--------------------------------------------------------------------

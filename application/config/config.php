@@ -375,7 +375,7 @@ $config['csrf_token_name'] = 'csrf_token_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = true;
-$config['csrf_exclude_uris'] = array('donate', 'vote/callback');
+$config['csrf_exclude_uris'] = ['donate', 'vote/callback'];
 
 /*
 |--------------------------------------------------------------------------

@@ -106,8 +106,6 @@ class IncomingRequest extends Request
 
         $this->populateHeaders();
 
-        // @todo perform csrf check
-
         $this->uri = $uri;
 
         $this->cookiePrefix   = config_item('cookie_prefix');
