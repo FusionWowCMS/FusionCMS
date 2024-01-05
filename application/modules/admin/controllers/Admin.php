@@ -52,7 +52,7 @@ class Admin extends MX_Controller
             'isOldTheme' => empty($this->template->theme_data['min_required_version']),
         ];
 
-        $data['benchmark'] = $benchmark->stop('admin_execution')->getElapsedTime('admin_execution');
+        $data['benchmark'] = $benchmark->stop('admin_execution')->getElapsedTime('admin_execution')  * 1000 . ' ms';
         $data['memory_usage'] = round(memory_get_usage() / 1024 / 1024, 2) . 'MB';
 
         $output = $this->template->loadPage("dashboard.tpl", $data);
