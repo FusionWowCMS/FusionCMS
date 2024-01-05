@@ -186,3 +186,19 @@ body {
 #ci-databases table tr td:first-child {
     width: 5%;
 }
+
+#debug-bar {
+    padding-top: 40px;
+}
+
+#debug-bar .toolbar {
+    width: 100%;
+
+    top: 0;
+    left: 0;
+
+    z-index: 9;
+    position: fixed;
+
+    background-color: #fff;
+}
