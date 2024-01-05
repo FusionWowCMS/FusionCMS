@@ -15,7 +15,8 @@ class Admin extends MX_Controller
 
     public function index()
     {
-        $this->benchmark->mark('admin_start');
+        $benchmark = \App\Config\Services::timer(true);
+        $benchmark->start('admin_execution');
 
         $this->administrator->setTitle("Dashboard");
 
@@ -51,9 +52,8 @@ class Admin extends MX_Controller
             'isOldTheme' => empty($this->template->theme_data['min_required_version']),
         ];
 
-        $this->benchmark->mark('admin_end');
-        $data['benchmark'] = $this->benchmark->elapsed_time('admin_start', 'admin_end');
-        $data['memory_usage'] = $this->benchmark->memory_usage();
+        $data['benchmark'] = $benchmark->stop('admin_execution')->getElapsedTime('admin_execution');
+        $data['memory_usage'] = round(memory_get_usage() / 1024 / 1024, 2) . 'MB';
 
         $output = $this->template->loadPage("dashboard.tpl", $data);
 

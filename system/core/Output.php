@@ -364,7 +364,6 @@ class CI_Output {
 		// Note:  We use load_class() because we can't use $CI =& get_instance()
 		// since this function is sometimes called by the caching mechanism,
 		// which happens before the CI super object is available.
-		$BM =& load_class('Benchmark', 'core');
 		$CFG =& load_class('Config', 'core');
 
 		// Grab the super object if we can.
@@ -389,19 +388,6 @@ class CI_Output {
 		if ($this->cache_expiration > 0 && isset($CI) && ! method_exists($CI, '_output'))
 		{
 			$this->_write_cache($output);
-		}
-
-		// --------------------------------------------------------------------
-
-		// Parse out the elapsed time and memory usage,
-		// then swap the pseudo-variables with the data
-
-		$elapsed = $BM->elapsed_time('total_execution_time_start', 'total_execution_time_end');
-
-		if ($this->parse_exec_vars === true)
-		{
-			$memory	= round(memory_get_usage() / 1024 / 1024, 2).'MB';
-			$output = str_replace(array('{elapsed_time}', '{memory_usage}'), array($elapsed, $memory), $output);
 		}
 
 		// --------------------------------------------------------------------
@@ -449,30 +435,10 @@ class CI_Output {
 
 			echo $output;
 			log_message('info', 'Final output sent to browser');
-			log_message('debug', 'Total execution time: '.$elapsed);
 			return;
 		}
 
 		// --------------------------------------------------------------------
-
-		// Do we need to generate profile data?
-		// If so, load the Profile class and run it.
-		if ($CI->config->item('enable_profiler') === true)
-		{
-			$CI->load->library('profiler');
-			if ( ! empty($this->_profiler_sections))
-			{
-				$CI->profiler->set_sections($this->_profiler_sections);
-			}
-
-			// If the output data contains closing </body> and </html> tags
-			// we will remove them and add them back after we insert the profile data
-			$output = preg_replace('|</body>.*?</html>|is', '', $output, -1, $count).$CI->profiler->run();
-			if ($count > 0)
-			{
-				$output .= '</body></html>';
-			}
-		}
 
 		// Does the controller contain a function named _output()?
 		// If so send the output there.  Otherwise, echo it.
@@ -486,7 +452,6 @@ class CI_Output {
 		}
 
 		log_message('info', 'Final output sent to browser');
-		log_message('debug', 'Total execution time: '.$elapsed);
 	}
 
 	// --------------------------------------------------------------------

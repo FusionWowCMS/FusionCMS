@@ -73,9 +73,23 @@ class Logger implements LoggerInterface
      */
     protected $fileExt;
 
+    /**
+     * Caches logging calls for debugbar.
+     *
+     * @var array
+     */
+    public $logCache;
+
+    /**
+     * Should we cache our logged items?
+     *
+     * @var bool
+     */
+    protected $cacheLogs = false;
+
     //--------------------------------------------------------------------
 
-    public function __construct()
+    public function __construct(bool $debug = CI_DEBUG)
     {
         $config =& get_config2('logger');
 
@@ -96,13 +110,18 @@ class Logger implements LoggerInterface
             unset($temp);
         }
 
-
         $this->fileExt = ! empty($config['log_fileExtension']) ? ltrim($config['log_fileExtension'], '.') : 'php';
 
         $this->dateFormat = $config['log_dateFormat'] ?? $this->dateFormat;
 
         $this->filePermissions = ! empty($config['log_filePermissions']) && is_int($config['log_filePermissions'])
             ? $config['log_filePermissions'] : $this->filePermissions;
+
+        $this->cacheLogs = (bool)$debug;
+        if ($this->cacheLogs)
+        {
+            $this->logCache = [];
+        }
     }
 
     //--------------------------------------------------------------------
@@ -259,6 +278,19 @@ class Logger implements LoggerInterface
 
         // Parse our placeholders
         $message = $this->interpolate($message, $context);
+
+        if (! is_string($message))
+        {
+            $message = print_r($message, true);
+        }
+
+        if ($this->cacheLogs)
+        {
+            $this->logCache[] = [
+                'level' => $level,
+                'msg'   => $message
+            ];
+        }
 
         $filepath = $this->logPath.'log-'.date('Y-m-d').'.'.$this->fileExt;
 

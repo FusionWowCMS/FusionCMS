@@ -28,7 +28,7 @@ class Services
      *
      * @var array
      */
-    static protected $instances = [];
+    static protected array $instances = [];
 
     //--------------------------------------------------------------------
 
@@ -259,6 +259,18 @@ class Services
 
     //--------------------------------------------------------------------
 
+    public static function toolbar($getShared = false)
+    {
+        if (! $getShared)
+        {
+            return new \CodeIgniter\Debug\Toolbar();
+        }
+
+        return self::getSharedInstance('toolbar');
+    }
+
+    //--------------------------------------------------------------------
+
     /**
      * The URI class provides a way to model and manipulate URIs.
      */
@@ -288,8 +300,12 @@ class Services
      */
     protected static function getSharedInstance(string $key, ...$params)
     {
-        if (! isset(static::$instances[$key]))
-        {
+        $key = strtolower($key);
+
+        if (! isset(static::$instances[$key])) {
+            // Make sure $getShared is false
+            $params[] = false;
+
             static::$instances[$key] = self::$key(...$params);
         }
 
@@ -313,8 +329,8 @@ class Services
         {
             return Services::$name(...$arguments);
         }
-    }
 
-    //--------------------------------------------------------------------
+        return null;
+    }
 
 }

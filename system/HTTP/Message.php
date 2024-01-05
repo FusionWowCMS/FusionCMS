@@ -264,6 +264,11 @@ class Message
      */
     public function setProtocolVersion(string $version): self
     {
+        if (! is_numeric($version))
+        {
+            $version = substr($version, strpos($version, '/') + 1);
+        }
+
         if (! in_array($version, $this->validProtocolVersions))
         {
             throw new \InvalidArgumentException('Invalid HTTP Protocol Version. Must be one of: '. implode(', ', $this->validProtocolVersions));
