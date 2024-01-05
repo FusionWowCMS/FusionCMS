@@ -22,7 +22,7 @@ if (! defined('BASEPATH')) {
  */
 
 // Create a new instance of our RouteCollection class.
-$routes = \CodeIgniter\Config\Services::routes();
+$routes = \App\Config\Services::routes();
 
 /**
  * --------------------------------------------------------------------

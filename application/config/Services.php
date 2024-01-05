@@ -1,4 +1,4 @@
-<?php namespace CodeIgniter\Config;
+<?php namespace App\Config;
 
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\URI;

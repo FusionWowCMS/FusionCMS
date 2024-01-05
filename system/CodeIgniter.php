@@ -23,22 +23,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *  Load the framework constants
  * ------------------------------------------------------
  */
-	if (file_exists(APPPATH . 'config/'.ENVIRONMENT.'/constants.php'))
-	{
-		require_once(APPPATH . 'config/'.ENVIRONMENT.'/constants.php');
-	}
+if (file_exists(APPPATH . 'config/'.ENVIRONMENT.'/constants.php'))
+{
+	require_once(APPPATH . 'config/'.ENVIRONMENT.'/constants.php');
+}
 
-	if (file_exists(APPPATH . 'config/constants.php'))
-	{
-		require_once(APPPATH . 'config/constants.php');
-	}
+require_once(APPPATH . 'config/constants.php');
 
 /*
  * ------------------------------------------------------
  *  Load the global functions
  * ------------------------------------------------------
  */
-	require_once(BASEPATH . 'Common.php');
+
+require_once(BASEPATH . 'Common.php');
 
 /*
  * ------------------------------------------------------
@@ -57,17 +55,24 @@ if (ENVIRONMENT !== 'production')
 
 /*
  * ------------------------------------------------------
+ *  Get the Services Factory ready for use
+ * ------------------------------------------------------
+ */
+
+require_once APPPATH.'config/Services.php';
+
+/*
+ * ------------------------------------------------------
  *  Setup the autoloader
  * ------------------------------------------------------
  */
 
 // The autloader isn't initialized yet, so load the file manually.
 require_once BASEPATH.'Autoloader/Autoloader.php';
-require_once BASEPATH.'Config/Services.php';
 
 // The Autoloader class only handles namespaces
 // and "legacy" support.
-$loader = \CodeIgniter\Config\Services::autoloader();
+$loader = \App\Config\Services::autoloader();
 $loader->initialize(get_config2('autoload'));
 
 // The register function will prepend
@@ -79,14 +84,14 @@ $loader->register();
  *  Set custom exception handling
  * ------------------------------------------------------
  */
-\CodeIgniter\Config\Services::exceptions(true)
+\App\Config\Services::exceptions(true)
     ->initialize();
 
 //--------------------------------------------------------------------
 // Start the Benchmark
 //--------------------------------------------------------------------
 
-/*$benchmark = \CodeIgniter\Config\Services::timer(true);
+/*$benchmark = \App\Config\Services::timer(true);
 $benchmark->start('total_execution');*/
 
 //--------------------------------------------------------------------
@@ -94,9 +99,9 @@ $benchmark->start('total_execution');*/
 //--------------------------------------------------------------------
 
 $request  = is_cli()
-    ? \CodeIgniter\Config\Services::clirequest()
-    : \CodeIgniter\Config\Services::request();
-$response = \CodeIgniter\Config\Services::response();
+    ? \App\Config\Services::clirequest()
+    : \App\Config\Services::request();
+$response = \App\Config\Services::response();
 
 // Assume success until proven otherwise.
 $response->setStatusCode(200);
@@ -525,7 +530,7 @@ if ( ! empty($assign_to_config['subclass_prefix']))
 
 /*require APPPATH.'config/Routes.php';
 
-$router = \CodeIgniter\Config\Services::router($routes, true);
+$router = \App\Config\Services::router($routes, true);
 
 $path = is_cli() ? $request->getPath() : $request->uri->getPath();
 $controller = $router->handle($path);

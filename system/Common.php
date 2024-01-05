@@ -535,7 +535,7 @@ if (! function_exists('log_message'))
      */
     function log_message(string $level, $message, array $context=[])
     {
-        return \CodeIgniter\Config\Services::logger(false)->log($level, $message, $context);
+        return \App\Config\Services::logger(false)->log($level, $message, $context);
     }
 }
 

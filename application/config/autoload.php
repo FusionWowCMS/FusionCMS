@@ -63,6 +63,7 @@ if (! defined('BASEPATH')) {
  */
 $config['psr4'] = [
     'App'             => realpath(APPPATH),
+    'App\Config'      => APPPATH.'config',
     'App\Controllers' => APPPATH.'Controllers',
     'CodeIgniter'     => realpath(BASEPATH)
 ];
