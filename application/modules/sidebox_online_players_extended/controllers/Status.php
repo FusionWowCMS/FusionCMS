@@ -1,6 +1,6 @@
 <?php
 
-class Status extends CI_Controller
+class Status extends MX_Controller
 {
     private $connection = null;
 

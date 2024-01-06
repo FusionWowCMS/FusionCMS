@@ -12,7 +12,7 @@ if (!defined('BASEPATH')) {
  */
 class Items
 {
-    private CI_Controller $CI;
+    private Controller $CI;
 
     public function __construct()
     {

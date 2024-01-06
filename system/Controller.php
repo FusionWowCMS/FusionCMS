@@ -52,8 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  ***************** CORE COMPONENTS *****************
  * @property CI_Benchmark $benchmark            This class enables you to mark points and calculate the time difference between them. Memory consumption can also be displayed.
  * @property CI_Config $config                  This class contains functions that enable config files to be managed
- * @property CI_Controller $controller          This class object is the super class that every library in CodeIgniter will be assigned to.
- * @property CI_Controller $CI                  This class object is the super class that every library in CodeIgniter will be assigned to.
+ * @property Controller $controller          This class object is the super class that every library in CodeIgniter will be assigned to.
+ * @property Controller $CI                  This class object is the super class that every library in CodeIgniter will be assigned to.
  * @property CI_Exceptions $exceptions          Exceptions Class
  * @property CI_Hooks $hooks                    Provides a mechanism to extend the base system without hacking.
  * @property CI_Input $input                    Pre-processes global input data for security
@@ -124,7 +124,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property World_model $world_model           World_model Class
  */
 #[\AllowDynamicProperties]
-class CI_Controller {
+class Controller {
 
 	/**
 	 * Reference to the CI singleton

@@ -150,7 +150,7 @@ class CI_Loader {
 	 * @todo	Figure out a way to move this to the constructor
 	 *		without breaking *package_path*() methods.
 	 * @uses	CI_Loader::_ci_autoloader()
-	 * @used-by	CI_Controller::__construct()
+	 * @used-by	Controller::__construct()
 	 * @return	void
 	 */
 	public function initialize()

@@ -51,7 +51,7 @@ class CI
     public function __construct()
     {
         /* assign the application instance */
-        self::$APP = CI_Controller::get_instance();
+        self::$APP = Controller::get_instance();
 
         global $LANG, $CFG;
 

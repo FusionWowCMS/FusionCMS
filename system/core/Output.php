@@ -367,7 +367,7 @@ class CI_Output {
 		$CFG =& load_class('Config', 'core');
 
 		// Grab the super object if we can.
-		if (class_exists('CI_Controller', false))
+		if (class_exists('Controller', false))
 		{
 			$CI =& get_instance();
 		}

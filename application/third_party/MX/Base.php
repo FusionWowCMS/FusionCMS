@@ -14,7 +14,7 @@ require_once __DIR__ . '/Config.php';
  * @link http://codeigniter.com
  *
  * Description:
- * This library extends the CodeIgniter CI_Controller class and creates an application
+ * This library extends the CodeIgniter Controller class and creates an application
  * object allowing use of the HMVC design pattern.
  *
  * Install this file as application/third_party/MX/Base.php
@@ -40,7 +40,7 @@ require_once __DIR__ . '/Config.php';
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  **/
-class CI extends CI_Controller
+class CI extends Controller
 {
     public static $APP;
 

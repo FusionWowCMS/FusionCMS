@@ -329,15 +329,15 @@ $LANG =& load_class('Lang', 'core');
 require_once BASEPATH . 'Controller.php';
 
 /**
- * Reference to the CI_Controller method.
+ * Reference to the Controller method.
  *
  * Returns current CI instance object
  *
- * @return CI_Controller
+ * @return Controller
  */
 function &get_instance()
 {
-	return CI_Controller::get_instance();
+	return Controller::get_instance();
 }
 
 if (file_exists(APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php'))
@@ -384,7 +384,7 @@ else
 {
 	require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
 
-	if ( ! class_exists($class, false) OR $method[0] === '_' OR method_exists('CI_Controller', $method))
+	if ( ! class_exists($class, false) OR $method[0] === '_' OR method_exists('Controller', $method))
 	{
 		$e404 = true;
 	}
@@ -402,7 +402,7 @@ else
 	 *
 	 * - method_exists() returns true for non-public methods, which passes the previous elseif
 	 * - is_callable() returns false for PHP 4-style constructors, even if there's a __construct()
-	 * - method_exists($class, '__construct') won't work because CI_Controller::__construct() is inherited
+	 * - method_exists($class, '__construct') won't work because Controller::__construct() is inherited
 	 * - People will only complain if this doesn't work, even though it is documented that it shouldn't.
 	 *
 	 * ReflectionMethod::isConstructor() is the ONLY reliable check,
