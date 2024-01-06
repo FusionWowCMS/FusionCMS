@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Pay extends MX_Controller
 {
     private $vp;

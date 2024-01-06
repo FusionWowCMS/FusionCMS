@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Modules extends MX_Controller
 {
     private $coreModules;

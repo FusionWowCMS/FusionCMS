@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Poll extends MX_Controller
 {
     private $total = 0;

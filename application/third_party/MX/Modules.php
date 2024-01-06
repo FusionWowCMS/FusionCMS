@@ -1,4 +1,4 @@
-<?php
+<?php namespace MX;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -7,10 +7,10 @@ defined('EXT') or define('EXT', '.php');
 global $CFG;
 
 /* get module locations from config settings or use the default module location and offset */
-is_array(_Modules::$locations = $CFG->item('modules_locations')) or _Modules::$locations = [APPPATH . 'modules/' => '../modules/'];
+is_array(MX_Modules::$locations = $CFG->item('modules_locations')) or MX_Modules::$locations = [APPPATH . 'modules/' => '../modules/'];
 
 /* PHP5 spl_autoload */
-spl_autoload_register('_Modules::autoload');
+spl_autoload_register('MX\MX_Modules::autoload');
 
 /**
  * Modular Extensions - HMVC
@@ -46,7 +46,7 @@ spl_autoload_register('_Modules::autoload');
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  **/
-class _Modules
+class MX_Modules
 {
     public static $routes;
     public static $registry;

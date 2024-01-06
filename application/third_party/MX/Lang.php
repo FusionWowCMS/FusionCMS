@@ -1,6 +1,10 @@
-<?php
+<?php namespace MX;
+
+use CI_Lang;
 
 defined('BASEPATH') or exit('No direct script access allowed');
+
+defined('EXT') or define('EXT', '.php');
 
 /**
  * Modular Extensions - HMVC
@@ -70,14 +74,14 @@ class MX_Lang extends CI_Lang
 
         $_module or $_module = CI::$APP->router->fetch_module();
 
-        [$path, $_langfile] = _Modules::find($langFile . '_lang', $_module, 'language/' . $idiom . '/');
+        [$path, $_langfile] = MX_Modules::find($langFile . '_lang', $_module, 'language/' . $idiom . '/');
 
         if ($path === false) {
             if ($lang = parent::load($langFile, $lang, $return, $add_suffix, $alt_path)) {
                 return $lang;
             }
         } else {
-            if ($lang = _Modules::load_file($_langfile, $path, 'lang')) {
+            if ($lang = MX_Modules::load_file($_langfile, $path, 'lang')) {
                 if ($return) {
                     return $lang;
                 }

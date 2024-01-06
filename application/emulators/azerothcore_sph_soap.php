@@ -1,5 +1,7 @@
 <?php
 
+use MX\CI;
+
 /**
  * Abstraction layer for supporting different emulators
  */
@@ -469,6 +471,6 @@ class Azerothcore_sph_soap implements Emulator
      */
     public function setTotp($account_id, $secret): void
     {
-        \CI::$APP->external_account_model->getConnection()->query('UPDATE '.table('account').' SET '.column('account', 'totp_secret').' = ? WHERE id = ?', array($secret, $account_id));
+        CI::$APP->external_account_model->getConnection()->query('UPDATE '.table('account').' SET '.column('account', 'totp_secret').' = ? WHERE id = ?', array($secret, $account_id));
     }
 }

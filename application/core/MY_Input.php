@@ -15,7 +15,7 @@ class MY_Input extends CI_Input
             $haystack = $URI->uri_string();
 
             foreach ($ignore_csrf as $needle) {
-                if (strlen($haystack) >= strlen($needle) && substr($haystack, 0, strlen($needle)) == $needle) {
+                if (strlen($haystack) >= strlen($needle) && str_starts_with($haystack, $needle)) {
                     $this->_enable_csrf = false;
                     break;
                 }

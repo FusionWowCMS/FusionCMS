@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Aclmanager extends MX_Controller
 {
     /**

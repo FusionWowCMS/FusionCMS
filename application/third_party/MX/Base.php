@@ -1,10 +1,8 @@
-<?php
+<?php namespace MX;
+
+use Controller;
 
 defined('BASEPATH') or exit('No direct script access allowed');
-
-/* load MX core classes */
-require_once __DIR__ . '/Lang.php';
-require_once __DIR__ . '/Config.php';
 
 /**
  * Modular Extensions - HMVC
@@ -42,7 +40,7 @@ require_once __DIR__ . '/Config.php';
  **/
 class CI extends Controller
 {
-    public static $APP;
+    public static CI $APP;
 
     /**
      * [__construct description]

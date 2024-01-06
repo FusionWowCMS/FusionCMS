@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 // todo: NO PERMISSIONS!
 
 class Admin extends MX_Controller

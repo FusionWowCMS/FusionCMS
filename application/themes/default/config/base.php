@@ -1,4 +1,6 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php use MX\CI;
+
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 # Directory separator
 if(!defined('DS'))

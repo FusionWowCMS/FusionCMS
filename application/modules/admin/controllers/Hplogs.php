@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Hplogs extends MX_Controller
 {
     private static $levelsIcon = array(

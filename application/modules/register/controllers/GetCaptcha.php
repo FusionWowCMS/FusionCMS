@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 defined('BASEPATH') || die('Silence is golden.');
 
 class getCaptcha extends MX_Controller

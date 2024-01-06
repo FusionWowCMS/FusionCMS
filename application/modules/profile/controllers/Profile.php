@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Profile extends MX_Controller
 {
     private $id;

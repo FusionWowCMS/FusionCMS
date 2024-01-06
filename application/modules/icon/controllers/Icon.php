@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Icon extends MX_Controller
 {
     /**

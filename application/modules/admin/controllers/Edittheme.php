@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class EditTheme extends MX_Controller
 {
     private $theme;

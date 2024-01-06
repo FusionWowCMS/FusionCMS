@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Sidebox extends MX_Controller
 {
     private $sideboxModules;

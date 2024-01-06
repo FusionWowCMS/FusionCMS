@@ -1,5 +1,7 @@
 <?php
 
+use MX\CI;
+
 /**
  * @package FusionCMS
  * @author  Jesper Lindström
@@ -70,7 +72,7 @@ class Characters_model
         if ($query->num_rows() > 0) {
             if($removeGMs) {
                 foreach ($rows as $key => $character) {
-                    if (\CI::$APP->external_account_model->getRank($character['account']) > 0) {
+                    if (CI::$APP->external_account_model->getRank($character['account']) > 0) {
                         unset($rows[$key]);
                     }
                 }

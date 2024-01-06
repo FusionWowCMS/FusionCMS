@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Donation_goal extends MX_Controller
 {
     private $db;

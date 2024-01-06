@@ -1,4 +1,7 @@
-<?php
+<?php namespace MX;
+
+use MX\CI;
+use CI_Config;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -59,14 +62,14 @@ class MX_Config extends CI_Config
         $_module or $_module = CI::$APP->router->fetch_module();
 
         // Backward function
-        [$path, $file] = _Modules::find($file, $_module, 'config/');
+        [$path, $file] = MX_Modules::find($file, $_module, 'config/');
 
         if ($path === false) {
             parent::load($file, $use_sections, $fail_gracefully);
             return $this->item($file);
         }
 
-        if ($config = _Modules::load_file($file, $path, 'config')) {
+        if ($config = MX_Modules::load_file($file, $path, 'config')) {
             /* reference to the config array */
             $current_config =& $this->config;
 

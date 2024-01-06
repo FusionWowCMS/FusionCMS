@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Status_refresh extends MX_Controller
 {
     /**

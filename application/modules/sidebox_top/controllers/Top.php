@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class top extends MX_Controller
 {
     function __construct()

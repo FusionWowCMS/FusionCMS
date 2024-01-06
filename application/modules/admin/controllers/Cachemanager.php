@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Cachemanager extends MX_Controller
 {
     private $itemMatches;

@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Page extends MX_Controller
 {
     public function index($page = "error")

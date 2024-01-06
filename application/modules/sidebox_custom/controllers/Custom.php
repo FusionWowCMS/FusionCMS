@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Custom extends MX_Controller
 {
     private $id;

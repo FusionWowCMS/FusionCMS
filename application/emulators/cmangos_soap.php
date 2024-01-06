@@ -1,6 +1,7 @@
 <?php
 
 use Laizerox\Wowemu\SRP\UserClient;
+use MX\CI;
 
 /**
  * Abstraction layer for supporting different emulators
@@ -344,7 +345,7 @@ class Cmangos_soap implements Emulator
     {
         static $salt;
         if (
-            $saltUser = \CI::$APP->external_account_model->getConnection()->query(sprintf(
+            $saltUser = CI::$APP->external_account_model->getConnection()->query(sprintf(
                 'SELECT TRIM("\0" FROM %s) FROM %s WHERE username = ?',
                 column('account', 'salt'),
                 table('account')
@@ -361,7 +362,7 @@ class Cmangos_soap implements Emulator
         $salt = strtoupper($client->generateSalt());
 
         register_shutdown_function(function () use ($salt, $username) {
-            \CI::$APP->external_account_model->getConnection()->query(sprintf(
+            CI::$APP->external_account_model->getConnection()->query(sprintf(
                 'UPDATE %s SET %s = ? WHERE username = ?',
                 table('account'),
                 column('account', 'salt')

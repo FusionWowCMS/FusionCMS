@@ -1,5 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+use MX\MX_Controller;
+
 class Spotlight extends MX_Controller
 {
     # Directory separator shortcut

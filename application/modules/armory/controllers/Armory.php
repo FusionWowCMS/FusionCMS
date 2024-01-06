@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Armory extends MX_Controller
 {
     private $weapon_sub;

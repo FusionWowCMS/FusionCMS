@@ -2,6 +2,7 @@
 
 # Import required classes
 use \VisualAppeal\AutoUpdate;
+use MX\MX_Controller;
 
 /**
  * Updater

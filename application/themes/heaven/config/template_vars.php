@@ -1,4 +1,6 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php use MX\CI;
+
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 # Load theme assets
 require(T_ROOT_PATH . 'config' . DS . 'template_assets' . PHP);

@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Vote extends MX_Controller
 {
     private $js;

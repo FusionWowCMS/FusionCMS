@@ -4,6 +4,8 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
+use MX\CI;
+
 /**
  * @package FusionCMS
  * @author  Jesper Lindström

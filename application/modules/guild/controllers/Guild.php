@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Guild extends MX_Controller
 {
     private $realm;

@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Online extends MX_Controller
 {
     public function __construct()

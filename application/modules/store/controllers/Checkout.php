@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Checkout extends MX_Controller
 {
     private $vp;

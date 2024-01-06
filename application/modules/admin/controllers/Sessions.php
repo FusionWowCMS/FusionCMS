@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Sessions extends MX_Controller
 {
     public function __construct()

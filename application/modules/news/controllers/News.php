@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class News extends MX_Controller
 {
     private $news_articles = array();

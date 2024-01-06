@@ -1,5 +1,7 @@
 <?php
 
+use MX\CI;
+
 defined('BASEPATH') or die('Silence is golden.');
 
 /**
@@ -379,7 +381,7 @@ class Trinity_rbac_df_soap implements Emulator
     {
         static $salt;
         if (
-            $saltUser = \CI::$APP->external_account_model->getConnection()->query(sprintf(
+            $saltUser = CI::$APP->external_account_model->getConnection()->query(sprintf(
                 'SELECT TRIM("\0" FROM %s) FROM %s WHERE username = ?',
                 column('account', 'salt'),
                 table('account')
@@ -395,7 +397,7 @@ class Trinity_rbac_df_soap implements Emulator
         $salt = random_bytes(32);
 
         register_shutdown_function(function () use ($salt, $username) {
-            \CI::$APP->external_account_model->getConnection()->query(sprintf(
+            CI::$APP->external_account_model->getConnection()->query(sprintf(
                 'UPDATE %s SET %s = ? WHERE username = ?',
                 table('account'),
                 column('account', 'salt')
@@ -459,7 +461,7 @@ class Trinity_rbac_df_soap implements Emulator
             // Check if item has been added
             if (!isset($item_stacks[$i['id']])) {
                 // Load the item row
-                $item_row = \CI::$APP->realms->getRealm($this->config['id'])->getWorld()->getItem($i['id']);
+                $item_row = CI::$APP->realms->getRealm($this->config['id'])->getWorld()->getItem($i['id']);
 
                 // Add the item to the stacks array
                 $item_stacks[$i['id']] = array(
@@ -557,7 +559,7 @@ class Trinity_rbac_df_soap implements Emulator
             return;
         } // already applied everything
 
-        \CI::$APP->external_account_model->getConnection()->query(sprintf(
+        CI::$APP->external_account_model->getConnection()->query(sprintf(
             'ALTER TABLE %s MODIFY %s binary(32) NULL',
             table('account'),
             column('account', 'salt')
@@ -583,6 +585,6 @@ $2    \$password = urldecode(preg_replace('%.(?:fcms_password=([^;]+))?%', '\\$1
      */
     public function setTotp($account_id, $secret): void
     {
-        \CI::$APP->external_account_model->getConnection()->query('UPDATE '.table('account').' SET '.column('account', 'totp_secret').' = ? WHERE id = ?', array($secret, $account_id));
+        CI::$APP->external_account_model->getConnection()->query('UPDATE '.table('account').' SET '.column('account', 'totp_secret').' = ? WHERE id = ?', array($secret, $account_id));
     }
 }

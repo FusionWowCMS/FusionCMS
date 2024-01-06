@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Edit extends MX_Controller
 {
     private $module;

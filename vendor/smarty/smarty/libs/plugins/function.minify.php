@@ -1,6 +1,7 @@
 <?php
 
 # Import required classes
+use MX\CI;
 use MatthiasMullie\Minify;
 
 /**
@@ -53,7 +54,7 @@ function smarty_function_minify($params = false)
     foreach($files as $k => $file)
     {
         // File is url - no need to go any further
-        if(filter_var($files[$k], FILTER_VALIDATE_URL) !== FALSE)
+        if(filter_var($files[$k], FILTER_VALIDATE_URL) !== false)
             continue;
 
         // CSS import - no need to go any further

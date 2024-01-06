@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Teleport extends MX_Controller
 {
     private $teleportLocations;

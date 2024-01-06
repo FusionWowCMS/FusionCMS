@@ -1,9 +1,12 @@
-<?php
+<?php namespace MX;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+defined('EXT') or define('EXT', '.php');
+
 /* load the MX core module class */
-require_once __DIR__ . '/_Modules.php';
+
+use CI_Router;
 
 /**
  * Modular Extensions - HMVC
@@ -62,7 +65,7 @@ class MX_Router extends CI_Router
      *
      * @param array        $segments [description]
      */
-    protected function _set_request($segments = array())
+    protected function _set_request($segments = [])
     {
         if ($this->translate_uri_dashes === true) {
             foreach (range(0, 2) as $v) {
@@ -143,7 +146,7 @@ class MX_Router extends CI_Router
         $ext = $this->config->item('controller_suffix') . EXT;
 
         /* use module route if available */
-        if (isset($segments[0]) && $routes = _Modules::parse_routes($segments[0], implode('/', $segments))) {
+        if (isset($segments[0]) && $routes = MX_Modules::parse_routes($segments[0], implode('/', $segments))) {
             $segments = $routes;
         }
 
@@ -151,7 +154,7 @@ class MX_Router extends CI_Router
         [$module, $directory, $controller] = array_pad($segments, 3, null);
 
         /* check modules */
-        foreach (_Modules::$locations as $location => $offset) {
+        foreach (MX_Modules::$locations as $location => $offset) {
             /* module exists? */
             if (is_dir($source = $location . $module . '/controllers/')) {
                 $this->module = $module;

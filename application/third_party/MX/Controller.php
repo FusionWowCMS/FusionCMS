@@ -1,11 +1,8 @@
-<?php
+<?php namespace MX;
+
+use MX\CI;
 
 defined('BASEPATH') or exit('No direct script access allowed');
-
-/**
- * load the CI class for Modular Extensions
- **/
-require_once __DIR__ . '/Base.php';
 
 /**
  * Modular Extensions - HMVC
@@ -128,7 +125,7 @@ class MX_Controller
     {
         $class = str_replace(CI::$APP->config->item('controller_suffix') ?? '', '', get_class($this));
         log_message('debug', $class . ' MX_Controller Initialized');
-        _Modules::$registry[strtolower($class)] = $this;
+        MX_Modules::$registry[strtolower($class)] = $this;
 
         //die(print_r(CI::$APP->template->getModuleData()));
 

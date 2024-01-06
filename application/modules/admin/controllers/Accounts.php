@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Accounts extends MX_Controller
 {
     private $logsToLoad = 10;

@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Status extends MX_Controller
 {
     private $connection = null;

@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Register extends MX_Controller
 {
     private $usernameError;

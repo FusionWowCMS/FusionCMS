@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Visitors extends MX_Controller
 {
     public function __construct()

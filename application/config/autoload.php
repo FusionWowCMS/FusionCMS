@@ -107,6 +107,13 @@ $config['classmap'] = [
     'CodeIgniter\Log\LoggerInterface'             => BASEPATH.'Log/LoggerInterface.php',
     'CodeIgniter\Log\LogLevel'                    => BASEPATH.'Log/LogLevel.php',
     'Zend\Escaper\Escaper'                        => BASEPATH.'View/Escaper.php',
+    'MX\MX_Modules'                               => APPPATH.'third_party/MX/Modules.php',
+    'MX\CI'                                       => APPPATH.'third_party/MX/Base.php',
+    'MX\MX_Config'                                => APPPATH.'third_party/MX/Config.php',
+    'MX\MX_Controller'                            => APPPATH.'third_party/MX/Controller.php',
+    'MX\MX_Lang'                                  => APPPATH.'third_party/MX/Lang.php',
+    'MX\MX_Loader'                                => APPPATH.'third_party/MX/Loader.php',
+    'MX\MX_Router'                                => APPPATH.'third_party/MX/Router.php',
 ];
 
 /*
@@ -115,7 +122,7 @@ $config['classmap'] = [
 | -------------------------------------------------------------------
 | Prototype:
 |
-|  $autoload['packages'] = array(APPPATH.'third_party', '/usr/local/shared');
+|  $autoload['packages'] = [APPPATH.'third_party', '/usr/local/shared'];
 |
 */
 
@@ -147,7 +154,7 @@ $autoload['libraries'] = ['security', 'cache', 'database', 'session', 'smartyeng
 |
 | Prototype:
 |
-|   $autoload['drivers'] = array('cache');
+|   $autoload['drivers'] = ['cache'];
 */
 $autoload['drivers'] = ['session'];
 
@@ -158,7 +165,7 @@ $autoload['drivers'] = ['session'];
 | -------------------------------------------------------------------
 | Prototype:
 |
-|   $autoload['helper'] = array('url', 'file');
+|   $autoload['helper'] = ['url', 'file'];
 */
 
 $autoload['helper'] = ['url', 'emulator', 'form', 'text', 'lang', 'breadcumb', 'permission'];
@@ -170,7 +177,7 @@ $autoload['helper'] = ['url', 'emulator', 'form', 'text', 'lang', 'breadcumb', '
 | -------------------------------------------------------------------
 | Prototype:
 |
-|   $autoload['config'] = array('config1', 'config2');
+|   $autoload['config'] = ['config1', 'config2'];
 |
 | NOTE: This item is intended for use ONLY if you have created custom
 | config files.  Otherwise, leave it blank.
@@ -186,7 +193,7 @@ $autoload['config'] = ['language', 'version', 'acl_defaults', 'fusion', 'message
 | -------------------------------------------------------------------
 | Prototype:
 |
-|   $autoload['language'] = array('lang1', 'lang2');
+|   $autoload['language'] = ['lang1', 'lang2'];
 |
 | NOTE: Do not include the "_lang" part of your file.  For example
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
@@ -202,7 +209,7 @@ $autoload['language'] = [];
 | -------------------------------------------------------------------
 | Prototype:
 |
-|   $autoload['model'] = array('model1', 'model2');
+|   $autoload['model'] = ['model1', 'model2'];
 |
 */
 

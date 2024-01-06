@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Tooltip extends MX_Controller
 {
     private $id;

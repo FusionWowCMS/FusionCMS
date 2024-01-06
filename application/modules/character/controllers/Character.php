@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Character extends MX_Controller
 {
     private $canCache;

@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Logging extends MX_Controller
 {
     private $logsToLoad = 10; // 10 at the time
