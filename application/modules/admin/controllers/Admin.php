@@ -241,7 +241,7 @@ class Admin extends MX_Controller
 
             $currentYear = $ago > 0 && date('m') == '01' ? (date('Y') - 1) : date('Y');
 
-            $data = $fullMonth[$currentYear]["day"];
+            $data = $fullMonth[$currentYear]["day"] ?? null;
 
             if (!isset($data))
             {
