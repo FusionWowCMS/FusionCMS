@@ -1,5 +1,7 @@
 <?php
 
+use CodeIgniter\Events\Events;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -67,7 +69,7 @@ require APPPATH.'config/Services.php';
  * ------------------------------------------------------
  */
 
-// The autloader isn't initialized yet, so load the file manually.
+// The autoloader isn't initialized yet, so load the file manually.
 require BASEPATH.'Autoloader/Autoloader.php';
 
 // The Autoloader class only handles namespaces
@@ -168,19 +170,11 @@ if ($composer_autoload = config_item('composer_autoload'))
 
 $benchmark->start('loading_time:_base_classes');
 
-/*
- * ------------------------------------------------------
- *  Instantiate the hooks class
- * ------------------------------------------------------
- */
-$EXT =& load_class('Hooks', 'core');
+//--------------------------------------------------------------------
+// Are there any "pre-system" hooks?
+//--------------------------------------------------------------------
 
-/*
- * ------------------------------------------------------
- *  Is there a "pre_system" hook?
- * ------------------------------------------------------
- */
-$EXT->call_hook('pre_system');
+Events::trigger('pre_system');
 
 /*
  * ------------------------------------------------------
@@ -297,7 +291,7 @@ $OUT =& load_class('Output', 'core');
  *	Is there a valid cache file? If so, we're done...
  * ------------------------------------------------------
  */
-if ($EXT->call_hook('cache_override') === false && $OUT->_display_cache($CFG, $URI) === true)
+if ($OUT->_display_cache($CFG, $URI) === true)
 {
 	exit;
 }
@@ -478,12 +472,11 @@ if ($method !== '_remap')
 	$params = array_slice($URI->rsegments, 2);
 }
 
-/*
- * ------------------------------------------------------
- *  Is there a "pre_controller" hook?
- * ------------------------------------------------------
- */
-$EXT->call_hook('pre_controller');
+//--------------------------------------------------------------------
+// Are there any "pre-controller" hooks?
+//--------------------------------------------------------------------
+
+Events::trigger('pre_controller');
 
 /*
  * ------------------------------------------------------
@@ -494,12 +487,11 @@ $benchmark->start('controller_execution_time_( '.$class.' / '.$method.' )');
 
 $CI = new $class();
 
-/*
- * ------------------------------------------------------
- *  Is there a "post_controller_constructor" hook?
- * ------------------------------------------------------
- */
-$EXT->call_hook('post_controller_constructor');
+//--------------------------------------------------------------------
+// Are there any "pre-controller" hooks?
+//--------------------------------------------------------------------
+
+Events::trigger('post_controller_constructor');
 
 /*
  * ------------------------------------------------------
@@ -511,29 +503,19 @@ call_user_func_array(array(&$CI, $method), $params);
 // Mark a benchmark end point
 $benchmark->stop('controller_execution_time_( '.$class.' / '.$method.' )');
 
-/*
- * ------------------------------------------------------
- *  Is there a "post_controller" hook?
- * ------------------------------------------------------
- */
-$EXT->call_hook('post_controller');
+//--------------------------------------------------------------------
+// Is there a "post_controller" event?
+//--------------------------------------------------------------------
+
+Events::trigger('post_controller');
 
 /*
  * ------------------------------------------------------
  *  Send the final rendered output to the browser
  * ------------------------------------------------------
  */
-if ($EXT->call_hook('display_override') === false)
-{
-	$OUT->_display();
-}
+$OUT->_display();
 
-/*
- * ------------------------------------------------------
- *  Is there a "post_system" hook?
- * ------------------------------------------------------
- */
-$EXT->call_hook('post_system');
 
 /*require APPPATH.'config/Routes.php';
 
@@ -601,3 +583,9 @@ if ($CI->config->item('enable_profiler') === true)
 $response->setBody($output);
 
 $response->send();
+
+//--------------------------------------------------------------------
+// Is there a post-system event?
+//--------------------------------------------------------------------
+
+Events::trigger('post_system');

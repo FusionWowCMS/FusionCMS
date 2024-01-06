@@ -88,6 +88,7 @@ $config['classmap'] = [
     'CodeIgniter\Debug\Timer'                     => BASEPATH.'Debug/Timer.php',
     'CodeIgniter\Debug\Iterator'                  => BASEPATH.'Debug/Iterator.php',
     'CodeIgniter\Debug\Exceptions'                => BASEPATH.'Debug/Exceptions.php',
+    'CodeIgniter\Events\Events'                   => BASEPATH.'Events/Events.php',
     'CodeIgniter\Config\BaseConfig'               => BASEPATH.'Config/BaseConfig.php',
     'CodeIgniter\HTTP\Message'                    => BASEPATH.'HTTP/Message.php',
     'CodeIgniter\HTTP\Request'                    => BASEPATH.'HTTP/Request.php',
