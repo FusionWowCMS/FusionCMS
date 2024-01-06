@@ -1,5 +1,7 @@
 <?php
 
+use App\Config\Services;
+use CodeIgniter\Config\DotEnv;
 use CodeIgniter\Events\Events;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -50,7 +52,7 @@ if (ENVIRONMENT !== 'production')
     // Load environment settings from .env files
     // into $_SERVER and $_ENV
     require BASEPATH.'Config/DotEnv.php';
-    $env = new \CodeIgniter\Config\DotEnv(APPPATH);
+    $env = new DotEnv(APPPATH);
     $env->load();
     unset($env);
 }
@@ -74,7 +76,7 @@ require BASEPATH.'Autoloader/Autoloader.php';
 
 // The Autoloader class only handles namespaces
 // and "legacy" support.
-$loader = \App\Config\Services::autoloader();
+$loader = Services::autoloader();
 $loader->initialize(get_config2('autoload'));
 
 // The register function will prepend
@@ -86,7 +88,7 @@ $loader->register();
  *  Set custom exception handling
  * ------------------------------------------------------
  */
-\App\Config\Services::exceptions(true)->initialize();
+Services::exceptions(true)->initialize();
 
 //--------------------------------------------------------------------
 // Start the Benchmark
@@ -96,7 +98,7 @@ $loader->register();
 // keeps it lining up with the benchmark timers.
 $startTime = microtime(true);
 
-$benchmark = \App\Config\Services::timer(true);
+$benchmark = Services::timer(true);
 $benchmark->start('total_execution');
 $benchmark->start('bootstrap');
 
@@ -116,10 +118,10 @@ $benchmark->start('bootstrap');
 //--------------------------------------------------------------------
 
 $request  = is_cli()
-    ? \App\Config\Services::clirequest()
-    : \App\Config\Services::request();
+    ? Services::clirequest()
+    : Services::request();
 $request->setProtocolVersion($_SERVER['SERVER_PROTOCOL']);
-$response = \App\Config\Services::response();
+$response = Services::response();
 
 // Assume success until proven otherwise.
 $response->setStatusCode(200);
@@ -576,7 +578,7 @@ $output = str_replace('{elapsed_time}', $totalTime, $output);
 
 if ($CI->config->item('enable_profiler') === true)
 {
-	$toolbar = \App\Config\Services::toolbar();
+	$toolbar = Services::toolbar();
 	$output .= $toolbar->run();
 }
 
