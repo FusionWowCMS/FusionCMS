@@ -1,5 +1,7 @@
 <?php namespace CodeIgniter\Autoloader;
 
+use Composer\Autoload\ClassLoader;
+
 /**
  * Class Autoloader
  *
@@ -83,9 +85,27 @@ class Autoloader
         }
 
         unset($config);
+
+        if (is_file(COMPOSER_PATH)) {
+            $this->loadComposerAutoloader();
+        }
     }
 
-    //--------------------------------------------------------------------
+    private function loadComposerAutoloader(): void
+    {
+        // The path to the vendor directory.
+        // We do not want to enforce this, so set the constant if Composer was used.
+        if (! defined('VENDORPATH')) {
+            define('VENDORPATH', dirname(COMPOSER_PATH) . '/');
+        }
+
+        /** @var ClassLoader $composer */
+        $composer = include COMPOSER_PATH;
+
+        $this->loadComposerClassmap($composer);
+
+        unset($composer);
+    }
 
     /**
      * Register the loader with the SPL autoloader stack.
@@ -315,6 +335,11 @@ class Autoloader
         return false;
     }
 
-    //--------------------------------------------------------------------
+    private function loadComposerClassmap(ClassLoader $composer): void
+    {
+        $classes = $composer->getClassMap();
+
+        $this->classmap = array_merge($this->classmap, $classes);
+    }
 
 }

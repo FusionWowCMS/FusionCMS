@@ -310,21 +310,25 @@ class Exceptions
      */
     public static function clean_path($file)
     {
-        if (strpos($file, APPPATH) === 0)
-        {
-            $file = 'APPPATH/'.substr($file, strlen(APPPATH));
-        }
-        elseif (strpos($file, BASEPATH) === 0)
-        {
-            $file = 'BASEPATH/'.substr($file, strlen(BASEPATH));
-        }
-        elseif (strpos($file, SYSDIR) === 0)
-        {
-            $file = 'SYSDIR/'.substr($file, strlen(SYSDIR));
-        }
-        elseif (strpos($file, FCPATH) === 0)
-        {
-            $file = 'FCPATH/'.substr($file, strlen(FCPATH));
+        switch (true) {
+            case str_starts_with($file, APPPATH):
+                $file = 'APPPATH/'.substr($file, strlen(APPPATH));
+                break;
+            case str_starts_with($file, BASEPATH):
+                $file = 'BASEPATH/'.substr($file, strlen(BASEPATH));
+                break;
+
+            case str_starts_with($file, SYSDIR):
+                $file = 'SYSDIR/'.substr($file, strlen(SYSDIR));
+                break;
+
+            case str_starts_with($file, FCPATH):
+                $file = 'FCPATH/'.substr($file, strlen(FCPATH));
+                break;
+
+            case defined('VENDORPATH') && str_starts_with($file, VENDORPATH):
+                $file = 'VENDORPATH/' . substr($file, strlen(VENDORPATH));
+                break;
         }
 
         return $file;

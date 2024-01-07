@@ -2,8 +2,6 @@
 
 use MX\MX_Controller;
 
-require './vendor/autoload.php';
-
 //API Container
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
