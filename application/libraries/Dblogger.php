@@ -14,7 +14,7 @@ if (!defined('BASEPATH')) {
  * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
-class Logger
+class Dblogger
 {
     private $CI;
 

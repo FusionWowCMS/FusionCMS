@@ -118,7 +118,7 @@ class Admin extends MX_Controller
         $this->page_model->delete($id);
 
         // Add log
-		$this->logger->createLog("admin", "delete", "Deleted page", ['ID' => $id]);
+		$this->dblogger->createLog("admin", "delete", "Deleted page", ['ID' => $id]);
 
         $this->plugins->onDelete($id);
     }
@@ -166,7 +166,7 @@ class Admin extends MX_Controller
             }
 
             // Add log
-            $this->logger->createLog("admin", "edit", "Edited page", ['ID' => $id, 'Page' => $headline]);
+            $this->dblogger->createLog("admin", "edit", "Edited page", ['ID' => $id, 'Page' => $headline]);
 
             $this->plugins->onUpdate($id, $headline, $identifier, $content);
         } else {
@@ -177,7 +177,7 @@ class Admin extends MX_Controller
             }
 
             // Add log
-            $this->logger->createLog("admin", "add", "Added page", ['ID' => $id, 'Page' => $headline]);
+            $this->dblogger->createLog("admin", "add", "Added page", ['ID' => $id, 'Page' => $headline]);
 
             $this->plugins->onCreate($id, $headline, $identifier, $content);
         }

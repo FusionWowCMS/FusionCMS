@@ -82,7 +82,7 @@ class Admin_items extends MX_Controller
         $this->cache->delete('store_items.cache');
 
         // Add log
-        $this->logger->createLog("admin", "add", "Added item group", ['Group' => $data['title']]);
+        $this->dblogger->createLog("admin", "add", "Added item group", ['Group' => $data['title']]);
 
         $this->plugins->onCreateGroup($data['title']);
 
@@ -161,7 +161,7 @@ class Admin_items extends MX_Controller
         $this->cache->delete('store_items.cache');
 
         // Add log
-        $this->logger->createLog("admin", "add", "Item added", ['Item' => $data['name']]);
+        $this->dblogger->createLog("admin", "add", "Item added", ['Item' => $data['name']]);
 
         $this->plugins->onAddItem($data);
 
@@ -346,7 +346,7 @@ class Admin_items extends MX_Controller
         $this->cache->delete('store_items.cache');
 
         // Add log
-		$this->logger->createLog("admin", "edit", "Edited item", ['Item' => $data['name']]);
+		$this->dblogger->createLog("admin", "edit", "Edited item", ['Item' => $data['name']]);
 
         $this->plugins->onEditItem($id, $data);
 
@@ -381,7 +381,7 @@ class Admin_items extends MX_Controller
         $this->items_model->editGroup($id, $data);
 
         // Add log
-        $this->logger->createLog("admin", "edit", "Edited item group", ['ID' => $id, 'Group' => $data["title"]]);
+        $this->dblogger->createLog("admin", "edit", "Edited item group", ['ID' => $id, 'Group' => $data["title"]]);
 
         $this->plugins->onEditGroup($id);
 
@@ -401,7 +401,7 @@ class Admin_items extends MX_Controller
         $this->items_model->delete($id);
 
         // Add log
-        $this->logger->createLog("admin", "delete", "Deleted item", ['ID' => $id]);
+        $this->dblogger->createLog("admin", "delete", "Deleted item", ['ID' => $id]);
 
         $this->plugins->onDeleteItem($id);
 
@@ -419,7 +419,7 @@ class Admin_items extends MX_Controller
         $this->items_model->deleteGroup($id);
 
         // Add log
-        $this->logger->createLog("admin", "delete", "Deleted item group", ['ID' => $id]);
+        $this->dblogger->createLog("admin", "delete", "Deleted item group", ['ID' => $id]);
 
         $this->plugins->onDeleteGroup($id);
 

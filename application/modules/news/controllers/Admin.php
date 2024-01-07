@@ -150,7 +150,7 @@ class Admin extends MX_Controller
         $this->news_model->delete($id);
 
         // Add log
-        $this->logger->createLog("admin", "delete", "Deleted news", ['news' => $id]);
+        $this->dblogger->createLog("admin", "delete", "Deleted news", ['news' => $id]);
 
         $this->plugins->onDelete($id);
     }
@@ -289,7 +289,7 @@ class Admin extends MX_Controller
             $this->news_model->update($id, $type, $type_content, $comments, $headline, $content);
 
             // Add log
-            $this->logger->createLog("admin", "edit", "Edited a news", ['news' => $headline]);
+            $this->dblogger->createLog("admin", "edit", "Edited a news", ['news' => $headline]);
 
             $this->plugins->onUpdate($id, $type, $type_content, $comments, $headline, $content);
         } else {
@@ -300,7 +300,7 @@ class Admin extends MX_Controller
             $this->news_model->create($type, $type_content, $comments, $headline, $content);
 
             // Add log
-            $this->logger->createLog("admin", "add", "Created a news", ['news' => $headline]);
+            $this->dblogger->createLog("admin", "add", "Created a news", ['news' => $headline]);
 
             $this->plugins->onCreate($type, $type_content, $comments, $headline, $content);
         }

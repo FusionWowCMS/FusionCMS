@@ -19,7 +19,7 @@ class Logout extends MX_Controller
         $this->input->set_cookie("fcms_username", false);
         $this->input->set_cookie("fcms_password", false);
 		
-        $this->logger->createLog("user", "logout", "Logout");
+        $this->dblogger->createLog("user", "logout", "Logout");
 
         delete_cookie("fcms_username");
         delete_cookie("fcms_password");

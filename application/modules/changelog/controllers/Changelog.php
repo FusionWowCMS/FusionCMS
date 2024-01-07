@@ -80,7 +80,7 @@ class Changelog extends MX_Controller
 
         $id = $this->changelog_model->addCategory($name);
 
-        $this->logger->createLog("admin", "add", "Created category", ['Name' => $name]);
+        $this->dblogger->createLog("admin", "add", "Created category", ['Name' => $name]);
 
         $this->plugins->onAddCategory($id, $name);
 
@@ -104,7 +104,7 @@ class Changelog extends MX_Controller
 
         $id = $this->changelog_model->addChange($change, $category);
 
-        $this->logger->createLog("admin", "add", "Created change", ['ID' => $id]);
+        $this->dblogger->createLog("admin", "add", "Created change", ['ID' => $id]);
 
         $this->plugins->onAddChange($id, $change, $category);
 
@@ -129,7 +129,7 @@ class Changelog extends MX_Controller
 
         $this->changelog_model->deleteChange($id);
 
-        $this->logger->createLog("admin", "delete", "Deleted change", ['ID' => $id]);
+        $this->dblogger->createLog("admin", "delete", "Deleted change", ['ID' => $id]);
 
         $this->plugins->onDeleteChange($id);
 

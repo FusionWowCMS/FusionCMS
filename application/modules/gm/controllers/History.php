@@ -13,7 +13,7 @@ class History extends MX_Controller
 
 	public function index(): void
     {
-        $gmLogs = $this->logger->getGMLogs();
+        $gmLogs = $this->dblogger->getGMLogs();
 
         $data = array(
             'url' => pageURL,

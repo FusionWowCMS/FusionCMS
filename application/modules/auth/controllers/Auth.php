@@ -161,11 +161,11 @@ class Auth extends MX_Controller
                 $this->external_account_model->setLastIp($this->user->getId(), $this->input->ip_address());
                 $this->plugins->onLogin($this->input->post('username'));
                 $this->login_model->deleteIP($ip_address);
-                $this->logger->createLog("user", "login", "Login");
+                $this->dblogger->createLog("user", "login", "Login");
             }
             else
             {
-                $this->logger->createLog("user", "login", "Login", [], Logger::STATUS_FAILED, $this->user->getId($username));
+                $this->dblogger->createLog("user", "login", "Login", [], Logger::STATUS_FAILED, $this->user->getId($username));
                 $data["messages"]["error"] = lang("error", "auth");
             }
         }

@@ -147,7 +147,7 @@ class Accounts_model extends CI_Model
         $this->connection->where(column('account', 'id'), $id);
         $this->connection->update(table('account'), $external_account_data);
 
-        $this->logger->createLog("admin", "edit", "Edited account " . $this->user->getUsername($id) . " (" . $id . ")", $changed_values);
+        $this->dblogger->createLog("admin", "edit", "Edited account " . $this->user->getUsername($id) . " (" . $id . ")", $changed_values);
     }
 
     public function getLogs($id, $offset = 0, $limit = 0)

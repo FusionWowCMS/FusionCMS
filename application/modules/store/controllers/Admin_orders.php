@@ -144,7 +144,7 @@ class Admin_orders extends MX_Controller
             $this->store_model->deleteLog($id);
 
             // Add log
-            $this->logger->createLog("admin", "refund", "Refunded order", ['ID' => $id, 'User' =>  $order['user_id'], 'VP' =>  $order['vp_cost'], 'DP' =>  $order['dp_cost']]);
+            $this->dblogger->createLog("admin", "refund", "Refunded order", ['ID' => $id, 'User' =>  $order['user_id'], 'VP' =>  $order['vp_cost'], 'DP' =>  $order['dp_cost']]);
 
             $this->plugins->onRefund($id, $order['user_id'], $order['vp_cost'], $order['dp_cost']);
         } else {

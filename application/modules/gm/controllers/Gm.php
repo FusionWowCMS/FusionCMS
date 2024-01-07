@@ -100,7 +100,7 @@ class Gm extends MX_Controller
 
 			$this->plugins->onSendItem($realmId, $ticket['guid'], $title, $body, $itemId);
 
-            $this->logger->createGMLog("Send Item", $ticket['guid'], 'characters', $realmId);
+            $this->dblogger->createGMLog("Send Item", $ticket['guid'], 'characters', $realmId);
 
 			//Finish
 			die('1');
@@ -144,7 +144,7 @@ class Gm extends MX_Controller
 
 				$this->plugins->onUnstuck($realmId, $ticket['guid'], $x, $y, $z, $o, $m);
 
-                $this->logger->createGMLog("Unstuck", $ticket['guid'], 'characters', $realmId);
+                $this->dblogger->createGMLog("Unstuck", $ticket['guid'], 'characters', $realmId);
 
 				//Die('1') to mark success
 				die('1');
@@ -187,7 +187,7 @@ class Gm extends MX_Controller
 
 			$this->plugins->onAnswer($realmId, $ticket['guid'], $title, $body);
 
-            $this->logger->createGMLog("Answer", $ticket['guid'], 'characters', $realmId);
+            $this->dblogger->createGMLog("Answer", $ticket['guid'], 'characters', $realmId);
 
 			die('1');
 		}
@@ -217,7 +217,7 @@ class Gm extends MX_Controller
 			//A row exists, update it
 			$this->gm_model->setTicketCompleted($realm->getCharacters()->getConnection(), $id, $realm->getId());
 
-            $this->logger->createGMLog("Ticket Completed", $ticket['guid'], 'ticket', $realmId);
+            $this->dblogger->createGMLog("Ticket Completed", $ticket['guid'], 'ticket', $realmId);
 			die('1');
 		}
 		else
@@ -225,7 +225,7 @@ class Gm extends MX_Controller
 			//Remove it
 			$this->gm_model->deleteTicket($realm->getCharacters()->getConnection(), $id, $realm->getId());
 
-            $this->logger->createGMLog("Ticket Deleted", $ticket['guid'], 'ticket', $realmId);
+            $this->dblogger->createGMLog("Ticket Deleted", $ticket['guid'], 'ticket', $realmId);
 			die('1');
 		}
 
@@ -250,7 +250,7 @@ class Gm extends MX_Controller
 
 			$this->plugins->onKick($realmId, $charName);
 
-            $this->logger->createGMLog("Kick", $realm->getCharacters()->getGuidByName($charName), 'characters', $realmId);
+            $this->dblogger->createGMLog("Kick", $realm->getCharacters()->getGuidByName($charName), 'characters', $realmId);
 		}
 		else
 		{
@@ -285,7 +285,7 @@ class Gm extends MX_Controller
 
 		$this->plugins->onBan($username, $ban['banCount'], $bannedBy, $banReason);
 
-        $this->logger->createGMLog("Ban Account", $this->external_account_model->getId($username), 'account', 1);
+        $this->dblogger->createGMLog("Ban Account", $this->external_account_model->getId($username), 'account', 1);
 
 		die('1');
 	}

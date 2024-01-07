@@ -141,7 +141,7 @@ $autoload['packages'] = [];
 |   $autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = ['security', 'cache', 'database', 'session', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'logger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items'];
+$autoload['libraries'] = ['security', 'cache', 'database', 'session', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'dblogger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items'];
 
 /*
 | -------------------------------------------------------------------

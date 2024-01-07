@@ -54,7 +54,7 @@ class Account_banned extends MX_Controller
 
         $this->gm_model->setUnBanAccount($this->external_account_model->getConnection(), $id);
 
-        $this->logger->createGMLog("Account unbanned", $id, 'account', 1);
+        $this->dblogger->createGMLog("Account unbanned", $id, 'account', 1);
 
         die('1');
     }

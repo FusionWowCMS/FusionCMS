@@ -24,7 +24,7 @@ class Logging extends MX_Controller
         //Set the title to menu
         $this->administrator->setTitle("Logs");
 
-        $logs = $this->logger->getLogs("", 0, 10);
+        $logs = $this->dblogger->getLogs("", 0, 10);
 
         if ($logs)
         {
@@ -37,7 +37,7 @@ class Logging extends MX_Controller
         $data = array(
             'logs' => $logs, // Get the logs from 0 till 10
             'modules' => $this->administrator->getEnabledModules(),
-            'show_more' => $this->logger->getLogCount() - count((array)$logs)
+            'show_more' => $this->dblogger->getLogCount() - count((array)$logs)
         );
 
         // Load my view
@@ -59,7 +59,7 @@ class Logging extends MX_Controller
         $extraLogCount -= $this->logsToLoad;
 
         // Validation, checking is done in the model.
-        $logs = $this->logger->getLogs("", $offset, $count);
+        $logs = $this->dblogger->getLogs("", $offset, $count);
 
         if ($logs)
         {

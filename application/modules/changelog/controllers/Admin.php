@@ -56,7 +56,7 @@ class Admin extends MX_Controller
         $id = $this->changelog_model->addCategory($name);
 
         // Add log
-        $this->logger->createLog("admin", "add", "Created category", ['Category' => $name]);
+        $this->dblogger->createLog("admin", "add", "Created category", ['Category' => $name]);
 
         $this->plugins->onAddCategory($id, $name);
     }
@@ -75,7 +75,7 @@ class Admin extends MX_Controller
         $data['date'] = date("Y/m/d");
 
         // Add log
-        $this->logger->createLog("admin", "add", 'Created change', ['Change' => $data['changelog'] . ' (' . $id . ')']);
+        $this->dblogger->createLog("admin", "add", 'Created change', ['Change' => $data['changelog'] . ' (' . $id . ')']);
 
         $this->plugins->onAddChange($data['id'], $data['changelog'], $data['type']);
 
@@ -128,7 +128,7 @@ class Admin extends MX_Controller
         $this->changelog_model->deleteChange($id);
 
         // Add log
-        $this->logger->createLog("admin", "delete", "Deleted change", ['ID' => $id]);
+        $this->dblogger->createLog("admin", "delete", "Deleted change", ['ID' => $id]);
 
         $this->plugins->onDeleteChange($id);
     }
@@ -145,7 +145,7 @@ class Admin extends MX_Controller
         $this->changelog_model->deleteCategory($id);
 
         // Add log
-        $this->logger->createLog("admin", "delete", "Deleted category", ['ID' => $id]);
+        $this->dblogger->createLog("admin", "delete", "Deleted category", ['ID' => $id]);
 
         $this->plugins->onDeleteCategory($id);
     }
@@ -163,7 +163,7 @@ class Admin extends MX_Controller
         $this->changelog_model->edit($id, $data);
 
         // Add log
-		$this->logger->createLog("admin", "edit", "Edited change", ['ID' => $id]);
+		$this->dblogger->createLog("admin", "edit", "Edited change", ['ID' => $id]);
 
         $this->plugins->onEditChange($id, $data['changelog']);
     }
@@ -181,7 +181,7 @@ class Admin extends MX_Controller
         $this->changelog_model->saveCategory($id, $data);
 
         // Add log
-        $this->logger->createLog("admin", "edit", "Edited category", ['ID' => $id]);
+        $this->dblogger->createLog("admin", "edit", "Edited category", ['ID' => $id]);
 
         $this->plugins->onSaveCategory($id, $data['typeName']);
     }

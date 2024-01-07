@@ -65,7 +65,7 @@ class Admin extends MX_Controller
         $this->vote_model->add($data);
 
         // Add log
-        $this->logger->createLog('admin', 'add', 'Added topsite', ['Name' => $data['vote_sitename']]);
+        $this->dblogger->createLog('admin', 'add', 'Added topsite', ['Name' => $data['vote_sitename']]);
 
         $this->plugins->onCreateSite($data);
 
@@ -170,7 +170,7 @@ class Admin extends MX_Controller
         $this->vote_model->edit($id, $data);
 
         // Add log
-        $this->logger->createLog('admin', 'edit', 'Edited topsite', ['ID' => $id]);
+        $this->dblogger->createLog('admin', 'edit', 'Edited topsite', ['ID' => $id]);
 
         $this->plugins->onEditSite($id, $data);
 
@@ -194,7 +194,7 @@ class Admin extends MX_Controller
         $this->vote_model->delete($id);
 
         // Add log
-        $this->logger->createLog('admin', 'delete', 'Deleted topsite', ['ID' => $id]);
+        $this->dblogger->createLog('admin', 'delete', 'Deleted topsite', ['ID' => $id]);
 
         $this->plugins->onDelete($id);
     }

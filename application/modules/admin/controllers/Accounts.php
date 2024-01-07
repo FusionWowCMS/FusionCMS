@@ -91,7 +91,7 @@ class Accounts extends MX_Controller
                 'register_date' => preg_replace("/\s.*/", "", $this->external_account_model->getJoinDate()),
                 'modules' => $this->getModulePermissions(),
                 'logs' => $logs,
-                'show_more' => $this->logger->getLogCount() - count(array($logs))
+                'show_more' => $this->dblogger->getLogCount() - count(array($logs))
             );
 
             // Load my view

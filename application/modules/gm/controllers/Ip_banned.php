@@ -65,7 +65,7 @@ class Ip_banned extends MX_Controller
 
         $this->gm_model->setBanIP($this->external_account_model->getConnection(), $ip, $bannedBy, $banReason, $day);
 
-        $this->logger->createGMLog("IP banned", $ip, 'ip', 1);
+        $this->dblogger->createGMLog("IP banned", $ip, 'ip', 1);
 
         die('1');
     }
@@ -82,7 +82,7 @@ class Ip_banned extends MX_Controller
 
         $this->gm_model->setUnBanIP($this->external_account_model->getConnection(), $ip);
 
-        $this->logger->createGMLog("Ip UnBanned", $ip, 'ip', 1);
+        $this->dblogger->createGMLog("Ip UnBanned", $ip, 'ip', 1);
 
         die('1');
     }

@@ -78,7 +78,7 @@ class Admin extends MX_Controller
         $this->teleport_model->add($data);
 
         // Add log
-        $this->logger->createLog("admin", "add", "Added teleport location", ['Name' => $data['name']]);
+        $this->dblogger->createLog("admin", "add", "Added teleport location", ['Name' => $data['name']]);
 
         $this->plugins->onAddTeleport($data);
 
@@ -168,7 +168,7 @@ class Admin extends MX_Controller
         $this->teleport_model->edit($id, $data);
 
         // Add log
-        $this->logger->createLog("admin", "edit", "Edited teleport location", ['Name' => $data['name']]);
+        $this->dblogger->createLog("admin", "edit", "Edited teleport location", ['Name' => $data['name']]);
 
         $this->plugins->onEditTeleport($id, $data);
 
@@ -187,7 +187,7 @@ class Admin extends MX_Controller
         $this->teleport_model->delete($id);
 
         // Add log
-		$this->logger->createLog("admin", "delete", "Deleted teleport location", ['ID' => $id]);
+		$this->dblogger->createLog("admin", "delete", "Deleted teleport location", ['ID' => $id]);
 
         $this->plugins->onDeleteTeleport($id);
     }

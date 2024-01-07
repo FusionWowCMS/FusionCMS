@@ -136,7 +136,7 @@ class Sessions extends MX_Controller
 
         $this->session_model->deleteSessions($ip_address);
 
-        $this->logger->createLog("admin", "purge", "Cleared sessions");
+        $this->dblogger->createLog("admin", "purge", "Cleared sessions");
 
         die('1');
     }

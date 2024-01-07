@@ -111,7 +111,7 @@ class Updater extends MX_Controller
         $this->administrator->setTitle('Updater');
 
         // Get last update log
-        ($log = $this->logger->getLogs('updater', 0, 1)) ? $log = reset($log) : $log = ['time' => false];
+        ($log = $this->dblogger->getLogs('updater', 0, 1)) ? $log = reset($log) : $log = ['time' => false];
 
         // Format last update log time
         if($log['time']) $log['time'] = date('Y-m-d H:i:s', $log['time']);
@@ -510,7 +510,7 @@ class Updater extends MX_Controller
         ];
 
         // Create log
-        $this->logger->createLog($data['type'], $data['event'], $data['message']);
+        $this->dblogger->createLog($data['type'], $data['event'], $data['message']);
     }
 
     /**

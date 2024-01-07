@@ -99,7 +99,7 @@ class Admin extends MX_Controller
         $this->poll_model->add($data, $answers);
 
         // Add log
-		$this->logger->createLog("admin", "add", "Created poll", ['Poll' => $data['question']]);
+		$this->dblogger->createLog("admin", "add", "Created poll", ['Poll' => $data['question']]);
 
         $this->plugins->onCreatePoll($id, $data['question'], $answers);
 
@@ -118,7 +118,7 @@ class Admin extends MX_Controller
         $this->poll_model->delete($id);
 
         // Add log
-        $this->logger->createLog("admin", "delete", "Deleted poll", ['ID' => $id]);
+        $this->dblogger->createLog("admin", "delete", "Deleted poll", ['ID' => $id]);
 
         $this->plugins->onDeletePoll($id);
     }
