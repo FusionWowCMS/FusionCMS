@@ -21,10 +21,6 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
             'chillerlan\\Settings\\' => 20,
             'chillerlan\\QRCode\\' => 18,
         ),
-        'Z' => 
-        array (
-            'Zend\\Escaper\\' => 13,
-        ),
         'V' => 
         array (
             'VisualAppeal\\' => 13,
@@ -42,6 +38,7 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         ),
         'L' => 
         array (
+            'Laminas\\Escaper\\' => 16,
             'Laizerox\\' => 9,
         ),
         'D' => 
@@ -51,6 +48,7 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'C' => 
         array (
             'Composer\\Semver\\' => 16,
+            'CodeIgniter\\' => 12,
         ),
     );
 
@@ -66,10 +64,6 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'chillerlan\\QRCode\\' => 
         array (
             0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
-        ),
-        'Zend\\Escaper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zendframework/zend-escaper/src',
         ),
         'VisualAppeal\\' => 
         array (
@@ -95,6 +89,10 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         array (
             0 => __DIR__ . '/..' . '/matthiasmullie/minify/src',
         ),
+        'Laminas\\Escaper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
+        ),
         'Laizerox\\' => 
         array (
             0 => __DIR__ . '/..' . '/nightprince/php-wowemu-auth/src',
@@ -106,6 +104,10 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'Composer\\Semver\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
+        ),
+        'CodeIgniter\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/system',
         ),
     );
 

@@ -24,9 +24,6 @@
         "fusion-cms/auto-updater": "^1.0",
         "fusion-cms/rest-api-sdk-php": "^2.0",
         "chillerlan/php-qrcode": "^5.0",
-		"zendframework/zend-escaper": "^2.5"
-	},
-	"scripts": {
-		"post-update-cmd": "CodeIgniter\\ComposerScripts::postUpdate"
+		"laminas/laminas-escaper": "^2.6"
 	}
 }

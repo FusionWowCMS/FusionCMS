@@ -38,6 +38,7 @@
  */
 
 use CodeIgniter\Debug\Exceptions;
+use Laminas\Escaper\Escaper;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -888,7 +889,7 @@ if ( ! function_exists('esc'))
                 $method = 'escape'.ucfirst($context);
             }
 
-            $escaper = new \Zend\Escaper\Escaper($encoding);
+            $escaper = new Escaper($encoding);
 
             $data   = $escaper->$method($data);
         }

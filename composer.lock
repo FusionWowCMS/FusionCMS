@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e121197ad86829d75f54c8ec89ec9823",
+    "content-hash": "cca303b75cdd740a610904a7bb6abf58",
     "packages": [
         {
             "name": "chillerlan/php-qrcode",
@@ -102,16 +102,16 @@
         },
         {
             "name": "chillerlan/php-settings-container",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chillerlan/php-settings-container.git",
-                "reference": "4d02944424fa1f48abca96353257c93cbac856c1"
+                "reference": "c41e89f8bf963d1e88584a47fb78d1cd204b6e2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chillerlan/php-settings-container/zipball/4d02944424fa1f48abca96353257c93cbac856c1",
-                "reference": "4d02944424fa1f48abca96353257c93cbac856c1",
+                "url": "https://api.github.com/repos/chillerlan/php-settings-container/zipball/c41e89f8bf963d1e88584a47fb78d1cd204b6e2a",
+                "reference": "c41e89f8bf963d1e88584a47fb78d1cd204b6e2a",
                 "shasum": ""
             },
             "require": {
@@ -120,9 +120,9 @@
             },
             "require-dev": {
                 "phan/phan": "^5.4",
-                "phpmd/phpmd": "^2.13",
-                "phpunit/phpunit": "^10.2",
-                "squizlabs/php_codesniffer": "^3.7"
+                "phpcsstandards/php_codesniffer": "^3.8",
+                "phpmd/phpmd": "^2.15",
+                "phpunit/phpunit": "^10.5"
             },
             "type": "library",
             "autoload": {
@@ -163,7 +163,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2023-07-17T20:46:37+00:00"
+            "time": "2024-01-05T23:55:20+00:00"
         },
         {
             "name": "composer/semver",
@@ -491,6 +491,68 @@
                 "source": "https://github.com/FusionWowCMS/PayPal-PHP-SDK/tree/2.0.0"
             },
             "time": "2023-12-25T09:26:18+00:00"
+        },
+        {
+            "name": "laminas/laminas-escaper",
+            "version": "2.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-escaper.git",
+                "reference": "af459883f4018d0f8a0c69c7a209daef3bf973ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/af459883f4018d0f8a0c69c7a209daef3bf973ba",
+                "reference": "af459883f4018d0f8a0c69c7a209daef3bf973ba",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-mbstring": "*",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
+            },
+            "conflict": {
+                "zendframework/zend-escaper": "*"
+            },
+            "require-dev": {
+                "infection/infection": "^0.27.0",
+                "laminas/laminas-coding-standard": "~2.5.0",
+                "maglnet/composer-require-checker": "^3.8.0",
+                "phpunit/phpunit": "^9.6.7",
+                "psalm/plugin-phpunit": "^0.18.4",
+                "vimeo/psalm": "^5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Escaper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Securely and safely escape HTML, HTML attributes, JavaScript, CSS, and URLs",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "escaper",
+                "laminas"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-escaper/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-escaper/issues",
+                "rss": "https://github.com/laminas/laminas-escaper/releases.atom",
+                "source": "https://github.com/laminas/laminas-escaper"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2023-10-10T08:35:13+00:00"
         },
         {
             "name": "matthiasmullie/minify",
@@ -1038,55 +1100,6 @@
                 "source": "https://github.com/smarty-php/smarty/tree/v4.3.4"
             },
             "time": "2023-09-14T10:59:08+00:00"
-        },
-        {
-            "name": "zendframework/zend-escaper",
-            "version": "2.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-escaper.git",
-                "reference": "2dcd14b61a72d8b8e27d579c6344e12c26141d4e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/2dcd14b61a72d8b8e27d579c6344e12c26141d4e",
-                "reference": "2dcd14b61a72d8b8e27d579c6344e12c26141d4e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Escaper\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "homepage": "https://github.com/zendframework/zend-escaper",
-            "keywords": [
-                "escaper",
-                "zf2"
-            ],
-            "support": {
-                "issues": "https://github.com/zendframework/zend-escaper/issues",
-                "source": "https://github.com/zendframework/zend-escaper/tree/master"
-            },
-            "abandoned": "laminas/laminas-escaper",
-            "time": "2016-06-30T19:48:38+00:00"
         }
     ],
     "packages-dev": [],
