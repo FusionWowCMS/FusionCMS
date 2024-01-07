@@ -1,0 +1,71 @@
+/*
+	@Theme Name  : AuzWoW
+	@Theme URI   : https://zafirehd.deviantart.com/art/AuzWoW-710569958
+	@Author      : ZafireHD, E. Darksider
+	@Author URI  : https://zafirehd.deviantart.com, https://code-path.com/author/darksider
+	@Description : to be written
+	@Version     : 1.0.0
+	@License     : Proprietary software License
+	@License URI : https://en.wikipedia.org/wiki/Proprietary_software
+*/
+
+/*-------------------------------------------------------------------------*/
+/*	iCheck plugin AUZWOW skin by E. Darksider
+/*-------------------------------------------------------------------------*/
+.iradio,
+.icheckbox {
+	border: none;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7), 0 2px 0 0 rgba(0, 0, 0, 0.88);
+	-moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7), 0 2px 0 0 rgba(0, 0, 0, 0.88);
+	-webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7), 0 2px 0 0 rgba(0, 0, 0, 0.88);
+	vertical-align: text-bottom;
+	background-color: transparent;
+	background-image: url(../images/misc/radio-checkbox.png);
+	background-repeat: no-repeat;
+}
+
+.iradio.disabled,
+.icheckbox.disabled {
+	cursor: default;
+}
+
+.iradio.hover,
+.iradio.checked,
+.icheckbox.hover,
+.icheckbox.checked {
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7), 0 2px 0 0 rgba(0, 0, 0, 0.88), inset 0 0 0 1px rgba(117, 108, 108, 0.25);
+	-moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7), 0 2px 0 0 rgba(0, 0, 0, 0.88), inset 0 0 0 1px rgba(117, 108, 108, 0.25);
+	-webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7), 0 2px 0 0 rgba(0, 0, 0, 0.88), inset 0 0 0 1px rgba(117, 108, 108, 0.25);
+}
+
+.iradio {
+	width: 15px;
+	height: 15px;
+	margin: 0;
+    border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+.iradio                  {background-position: 0 0;}
+.iradio.hover            {background-position: 0 -19px;}
+.iradio.checked          {background-position: 0 -38px;}
+.iradio.disabled         {background-position: 0 -57px;}
+.iradio.checked.disabled {background-position: 0 -76px;}
+
+.icheckbox {
+	width: 14px;
+	height: 14px;
+	margin: 0;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+.icheckbox                  {background-position: -19px -1px;}
+.icheckbox.hover            {background-position: -19px -20px;}
+.icheckbox.checked          {background-position: -19px -39px;}
+.icheckbox.disabled         {background-position: -19px -58px;}
+.icheckbox.checked.disabled {background-position: -19px -77px;}

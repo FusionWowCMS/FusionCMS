@@ -1,0 +1,709 @@
+/*
+	@Theme Name  : Heaven (legion)
+	@Theme URI   : -
+	@Author      : Darksider
+	@Author URI  : https://d4rksider.deviantart.com
+	@Description : LINEAGE II TEMPLATE
+	@Version     : 1.0.0
+	@License     : Proprietary software License
+	@License URI : https://en.wikipedia.org/wiki/Proprietary_software
+
+-------------------------------------------------------------------------
+
+	01. Define variables
+	02. Globally applied styles
+	03. Form labels
+	04. Fields
+	05. Form buttons
+	06. Nice table
+	07. Divider
+	08. Wall
+	09. Page
+	10. Footer
+	11. Header
+	12. Featured
+	13. News: Item (global)
+	14. News: Item (lg)
+	15. News: Item (full)
+	16. News: Comments
+	17. Register
+	18. [Sidebox] Status (ajax)
+	19. [Sidebox] Status (realm)
+	20. [Sidebox] Top PvP
+	21. UCP
+	22. [BS] Accordion
+	23. [BS] Nav pills
+	24. [BS] Input group
+	25. [BS] Alert (danger)
+	26. [BS] Pagination
+	27. [BS] Table
+	28. [BS] Nav tabs
+*/
+
+/*-------------------------------------------------------------------------*/
+/* 01. Define variables
+/*-------------------------------------------------------------------------*/
+.variation-legion {
+	/* Colors */
+	--color-base: #697564;
+
+	--color-idle: #d7eab4;
+	--color-active: #2ab642;
+	--color-inactive: #636e5e;
+
+	--color-primary: #d7eab4;
+	--color-secondary: #4ae74e;
+
+	/* Backgrounds */
+	--background-base: #0b0d08;
+	--background-light: #1a1c17;
+	--background-shade: #131412;
+	--background-shadow: #090a07;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 02. Globally applied styles
+/*-------------------------------------------------------------------------*/
+.variation-legion {
+	background-image: url('../images/graphics/background.jpg');
+}
+
+/*-------------------------------------------------------------------------*/
+/* 03. Form labels
+/*-------------------------------------------------------------------------*/
+.variation-legion label {
+	color: #697564;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 04. Fields
+/*-------------------------------------------------------------------------*/
+.variation-legion select,
+.variation-legion textarea,
+.variation-legion input[type='tel'],
+.variation-legion input[type='url'],
+.variation-legion input[type='date'],
+.variation-legion input[type='file'],
+.variation-legion input[type='text'],
+.variation-legion input[type='time'],
+.variation-legion input[type='week'],
+.variation-legion input[type='email'],
+.variation-legion input[type='month'],
+.variation-legion input[type='number'],
+.variation-legion input[type='search'],
+.variation-legion input[type='password'],
+.variation-legion input[type='datetime-local'] {
+	--color-idle: #697564;
+	--color-base: #55b457;
+
+	background-color: #2f3d2e !important;
+}
+
+/* Fields: Select
+/*---------------------------------------------------------------*/
+.variation-legion select {
+	--bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23636e5e' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+/* Fields: Autofill
+/*---------------------------------------------------------------*/
+.variation-legion input:-webkit-autofill,
+.variation-legion input:autofill {
+	--field-box-shadow: inset 0 0 0 100px #2f3d2e !important;
+
+	background-color: #2f3d2e !important;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 05. Form buttons
+/*-------------------------------------------------------------------------*/
+.variation-legion button,
+.variation-legion input[type='reset'],
+.variation-legion input[type='button'],
+.variation-legion input[type='submit'] {}
+
+/* Buttons: Nice button
+/*---------------------------------------------------------------*/
+.variation-legion .nice_button {
+	--color-idle: #d7eab4;
+
+	-webkit-filter: hue-rotate(260deg);
+	filter: hue-rotate(260deg);
+}
+
+/* Buttons: Blue
+/*---------------------------------------------------------------*/
+.variation-legion .btn-blue {
+	--color-idle: #d7eab4;
+
+	-webkit-filter: hue-rotate(260deg);
+	filter: hue-rotate(260deg);
+}
+
+/* Buttons: Big
+/*---------------------------------------------------------------*/
+.variation-legion .btn-big {
+	--color-idle: #d7eab4;
+
+	-webkit-filter: hue-rotate(260deg);
+	filter: hue-rotate(260deg);
+}
+
+/* Buttons: Big: Hover
+/*-----------------------------------------------------*/
+.variation-legion .btn-big:hover,
+.variation-legion .btn-big:active {
+	-webkit-filter: hue-rotate(260deg) brightness(1.30);
+	filter: hue-rotate(260deg) brightness(1.30);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 06. Nice table
+/*-------------------------------------------------------------------------*/
+.variation-legion .nice_table {
+	--color-idle: #3a482c;
+	--color-active: #497a4f;
+
+	/* Colors */
+	--table-head-color: #265823;
+	--table-body-color: #426e4c;
+}
+
+/* Nice table: Separator
+/*---------------------------------------------------------------*/
+.variation-legion .nice_table tr::after {
+	--table-sep-start: #1d351a;
+	--table-sep-end: #1d351a;
+}
+
+.variation-legion .nice_table thead tr::after {
+	--table-sep-start: #28401d;
+	--table-sep-end: #28401d;
+}
+
+.variation-legion .nice_table tbody tr:first-child::after {
+	--table-sep-start: #28401d;
+	--table-sep-end: #28401d;
+}
+
+.variation-legion .nice_table thead + tbody tr:first-child::after {
+	--table-sep-start: #1d351a;
+	--table-sep-end: #1d351a;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 07. Divider
+/*-------------------------------------------------------------------------*/
+.variation-legion .divider,
+.variation-legion .ucp_divider,
+.variation-legion .side_divider,
+.variation-legion .vertical_divider {
+	--divider-bg: #365830;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 08. Wall
+/*-------------------------------------------------------------------------*/
+.variation-legion .section-wall {
+	background-size: cover;
+	background-image: url('../images/graphics/header.jpg');
+	background-position: center center;
+}
+
+/* Wall: Slider
+/*---------------------------------------------------------------*/
+.variation-legion .section-wall .wall-slider {}
+
+/* Wall: Slider: Item
+/*-----------------------------------------------------*/
+.variation-legion .section-wall .wall-slider .slider-item {}
+
+/* Item (title) */
+.variation-legion .section-wall .wall-slider .slider-item .item-title {
+	color: #3d5c41;
+}
+
+@supports (-webkit-background-clip: text) {
+	.variation-legion .section-wall .wall-slider .slider-item .item-title {
+		background: -webkit-gradient(linear, left top, left bottom, from(#aef193), to(#3d5c41));
+		background: -o-linear-gradient(top, #aef193 0%, #3d5c41 100%);
+		background: linear-gradient(to bottom, #aef193 0%, #3d5c41 100%);
+
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+/* Item (desc) */
+.variation-legion .section-wall .wall-slider .slider-item .item-desc {
+	color: #5f9b59;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.4), 0 1px 0 #000;
+}
+
+/* Wall: Slider: Pagination
+/*-----------------------------------------------------*/
+.variation-legion .section-wall .wall-slider .owl-dots {}
+
+.variation-legion .section-wall .wall-slider .owl-dots .owl-dot {
+	background-color: #1a2414;
+}
+
+.variation-legion .section-wall .wall-slider .owl-dots .owl-dot::before {
+	background-color: #456924;
+}
+
+.variation-legion .section-wall .wall-slider .owl-dots .owl-dot::after {
+	-webkit-box-shadow: 0 0 5px 5px #c7ff45;
+	box-shadow: 0 0 5px 5px #c7ff45;
+}
+
+.variation-legion .section-wall .wall-slider .owl-dots .owl-dot.active {
+	-webkit-box-shadow: 0 0 10px 0 rgba(247, 255, 93, 0.5);
+	box-shadow: 0 0 10px 0 rgba(247, 255, 93, 0.5);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 09. Page
+/*-------------------------------------------------------------------------*/
+.variation-legion .section-page {
+	--textColor: #697564;
+	--borderColor: #1b1f15;
+	--backgroundColor: #13160f;
+	--backgroundActive: #1f2318;
+}
+
+.variation-legion.is-subpage .section-page {
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(11, 13, 8, 0.5)));
+	background: -o-linear-gradient(top, transparent 0%, rgba(11, 13, 8, 0.5) 100%);
+	background: linear-gradient(to bottom, transparent 0%, rgba(11, 13, 8, 0.5) 100%);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 10. Footer
+/*-------------------------------------------------------------------------*/
+.variation-legion .footer {
+	--colorLight: #d7eab4;
+}
+
+/* Footer: Credits
+/*---------------------------------------------------------------*/
+.variation-legion .footer .footer-credits {}
+
+.variation-legion .footer .footer-credits i {
+	color: #333333;
+}
+
+/* Footer: Brand
+/*---------------------------------------------------------------*/
+.variation-legion .footer .footer-brand {}
+
+.variation-legion .footer .footer-brand span i {
+	color: #71b62a;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 11. Header
+/*-------------------------------------------------------------------------*/
+.variation-legion .header {
+	--baseColor-r: 20;
+	--baseColor-g: 23;
+	--baseColor-b: 18;
+}
+
+/* Header: Gradient
+/*---------------------------------------------------------------*/
+.variation-legion .header [gradient] {}
+
+.variation-legion .header [gradient][gradient-1]::before {
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#101305));
+	background: -o-linear-gradient(top, transparent 0%, #101305 100%);
+	background: linear-gradient(to bottom, transparent 0%, #101305 100%);
+}
+
+.variation-legion .header [gradient][gradient-1]::after {
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#131412));
+	background: -o-linear-gradient(top, transparent 0%, #131412 100%);
+	background: linear-gradient(to bottom, transparent 0%, #131412 100%);
+}
+
+.variation-legion .header [gradient][gradient-2] {
+	border-color: #121c05;
+}
+
+.variation-legion .header [gradient][gradient-2]::before {
+	background: -webkit-gradient(linear, right top, left top, from(transparent), to(#101305));
+	background: -o-linear-gradient(right, transparent 0%, #101305 100%);
+	background: linear-gradient(to left, transparent 0%, #101305 100%);
+}
+
+.variation-legion .header [gradient][gradient-2]::after {
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#101305));
+	background: -o-linear-gradient(top, transparent 0%, #101305 100%);
+	background: linear-gradient(to bottom, transparent 0%, #101305 100%);
+}
+
+/* Header: Line
+/*---------------------------------------------------------------*/
+.variation-legion .header [line] {}
+
+.variation-legion .header [line][line-l] {
+	background: -webkit-gradient(linear, left top, right top, from(#0d1104), to(transparent));
+	background: -o-linear-gradient(left, #0d1104 0%, transparent 100%);
+	background: linear-gradient(to right, #0d1104 0%, transparent 100%);
+}
+
+.variation-legion .header [line][line-r] {
+	background: -webkit-gradient(linear, left top, right top, from(transparent), to(#0d1104));
+	background: -o-linear-gradient(left, transparent 0%, #0d1104 100%);
+	background: linear-gradient(to right, transparent 0%, #0d1104 100%);
+}
+
+/* Header: Arrow
+/*---------------------------------------------------------------*/
+.variation-legion .header [arrow] {
+	-webkit-filter: hue-rotate(208deg) brightness(0.3);
+	filter: hue-rotate(208deg) brightness(0.3);
+}
+
+/* Header: Navbar
+/*---------------------------------------------------------------*/
+.variation-legion .header .navbar {}
+
+/* Header: Navbar: Brand
+/*-----------------------------------------------------*/
+.variation-legion .header .navbar .navbar-brand {}
+
+.variation-legion .header .navbar .navbar-brand img {
+	display: block;
+}
+
+.variation-legion .header .navbar .navbar-brand span i {
+	color: #71b62a;
+}
+
+/* Header: Navbar: Toggler
+/*-----------------------------------------------------*/
+.variation-legion .header .navbar .navbar-toggler {}
+
+.variation-legion .header .navbar .navbar-toggler [line] {
+	background-color: #ddfabd;
+}
+
+/* Header: Navbar: Nav
+/*-----------------------------------------------------*/
+.variation-legion .header .navbar .navbar-nav {}
+
+/* Header: Navbar: Nav: Item
+/*-------------------------------------------*/
+.variation-legion .header .navbar .navbar-nav .nav-item {}
+
+.variation-legion .header .navbar .navbar-nav .nav-item::after {
+	-webkit-filter: hue-rotate(260deg);
+	filter: hue-rotate(260deg);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 12. Featured
+/*-------------------------------------------------------------------------*/
+.variation-legion .featured-banner {
+	background-image: url('../images/banners/banner-featured.jpg');
+}
+
+.variation-legion .featured-banner::before {
+	background: -webkit-gradient(linear, left top, right top, from(#141b0e), to(transparent));
+	background: -o-linear-gradient(left, #141b0e 0%, transparent 100%);
+	background: linear-gradient(to right, #141b0e 0%, transparent 100%);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 13. News: Item (global)
+/*-------------------------------------------------------------------------*/
+.variation-legion .page-news .item.type-news {}
+
+.variation-legion .page-news .item.type-news[style$="/assets/images/thumbnails/thumbnail-01.jpg');"] .item-thumbnail {background-image: url('../images/thumbnails/thumbnail-01.jpg') !important;}
+.variation-legion .page-news .item.type-news[style$="/assets/images/thumbnails/thumbnail-02.jpg');"] .item-thumbnail {background-image: url('../images/thumbnails/thumbnail-02.jpg') !important;}
+
+/*-------------------------------------------------------------------------*/
+/* 14. News: Item (lg)
+/*-------------------------------------------------------------------------*/
+.variation-legion .page-news .item.type-news.-lg {}
+
+/* Item: Thumbnail
+/*---------------------------------------------------------------*/
+.variation-legion .page-news .item.type-news.-lg .item-thumbnail {}
+
+.variation-legion .page-news .item.type-news.-lg .item-thumbnail::before {
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(32, 46, 66, 0.3)), to(#141b0e));
+	background: -o-linear-gradient(top, rgba(32, 46, 66, 0.3) 0%, #141b0e 100%);
+	background: linear-gradient(to bottom, rgba(32, 46, 66, 0.3) 0%, #141b0e 100%);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 15. News: Item (full)
+/*-------------------------------------------------------------------------*/
+.variation-legion .page-news .item.type-news.-full {}
+
+/* Item: Head
+/*---------------------------------------------------------------*/
+.variation-legion .page-news .item.type-news.-full .item-head {}
+
+/* Head (metadata) */
+.variation-legion .page-news .item.type-news.-full .item-head .head-metadata {
+	color: #697564;
+}
+
+.variation-legion .page-news .item.type-news.-full .item-head .head-metadata a {
+	color: var(--color-idle);
+}
+
+.variation-legion .page-news .item.type-news.-full .item-head .head-metadata a:hover,
+.variation-legion .page-news .item.type-news.-full .item-head .head-metadata a:active {
+	color: var(--color-active);
+}
+
+/* Item: Body
+/*---------------------------------------------------------------*/
+.variation-legion .page-news .item.type-news.-full .item-body {}
+
+/* Body (thumbnail) */
+.variation-legion .page-news .item.type-news.-full .item-body .body-thumbnail {
+	border-color: #28401d;
+
+	-webkit-box-shadow: 0 0 20px 0 rgba(55, 64, 29, 0.5);
+	box-shadow: 0 0 20px 0 rgba(55, 64, 29, 0.5);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 16. News: Comments
+/*-------------------------------------------------------------------------*/
+.variation-legion .page-news [news-comments] {}
+
+/* News: Comments: Area
+/*---------------------------------------------------------------*/
+.variation-legion .page-news [news-comments] .comments_area {}
+
+.variation-legion .page-news [news-comments] .comments_area .comments {}
+
+/* News: Comments: Area: Comment
+/*-----------------------------------------------------*/
+.variation-legion .page-news [news-comments] .comments_area .comments .comment {}
+
+.variation-legion .page-news [news-comments] .comments_area .comments .comment::before {
+	background-color: var(--background-light);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 17. Register
+/*-------------------------------------------------------------------------*/
+.variation-legion .page-register {
+	border-color: #53ad55;
+
+	-webkit-box-shadow: 0 0 20px 0 rgba(35, 100, 30, 0.5);
+	box-shadow: 0 0 20px 0 rgba(35, 100, 30, 0.5);
+
+	background-color: #010c03;
+}
+
+/* Register: Banner
+/*---------------------------------------------------------------*/
+.variation-legion .page-register .register-banner {
+	background-image: url('../images/banners/banner-register.jpg');
+}
+
+.variation-legion .page-register .register-banner::before {
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(35, 45, 31, 0.65)));
+	background: -o-linear-gradient(top, transparent 0%, rgba(35, 45, 31, 0.65) 100%);
+	background: linear-gradient(to bottom, transparent 0%, rgba(35, 45, 31, 0.65) 100%);
+}
+
+/* Register: Content
+/*---------------------------------------------------------------*/
+.variation-legion .page-register .register-content {}
+
+/* Register: Content: Title
+/*-----------------------------------------------------*/
+.variation-legion .page-register .register-content .register-title {
+	color: #475e4b;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 18. [Sidebox] Status (ajax)
+/*-------------------------------------------------------------------------*/
+.variation-legion [__realmStatusAjax__] {
+	-webkit-filter: hue-rotate(285deg);
+	filter: hue-rotate(285deg);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 19. [Sidebox] Status (realm)
+/*-------------------------------------------------------------------------*/
+.variation-legion .realm.type-status {}
+
+.variation-legion .realm.type-status .realm-name {
+	color: #57fd45;
+}
+
+.variation-legion .realm.type-status .realm-online {
+	color: #90ff91;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 20. [Sidebox] Top PvP
+/*-------------------------------------------------------------------------*/
+.variation-legion .sidebox.sidebox-toppvp {}
+
+.variation-legion .sidebox.sidebox-toppvp #toppvp {}
+
+.variation-legion .sidebox.sidebox-toppvp #toppvp .realm {}
+
+/* [Sidebox] Top PvP: Realm name
+/*---------------------------------------------------------------*/
+.variation-legion .sidebox.sidebox-toppvp #toppvp .realm .realm-name {
+	color: #90ff91;
+}
+
+.variation-legion .sidebox.sidebox-toppvp #toppvp .realm .realm-name::after {
+	background-color: #375830;
+}
+
+/* [Sidebox] Top PvP: Table
+/*---------------------------------------------------------------*/
+.variation-legion .sidebox.sidebox-toppvp #toppvp .realm table {}
+
+/* Table: Rank */
+.variation-legion .sidebox.sidebox-toppvp #toppvp .realm .player-rank {
+	background-color: #4a5847;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 21. UCP
+/*-------------------------------------------------------------------------*/
+.variation-legion .page-ucp {}
+
+/* UCP: Avatar
+/*---------------------------------------------------------------*/
+.variation-legion .page-ucp .avatars {}
+
+.variation-legion .page-ucp .avatars .my_avatar {}
+
+.variation-legion .page-ucp .avatars .my_avatar.avatar_current {
+	border-color: #25a926;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 22. [BS] Accordion
+/*-------------------------------------------------------------------------*/
+.variation-legion .accordion {}
+
+/* [BS] Accordion: Item
+/*---------------------------------------------------------------*/
+.variation-legion .accordion .accordion-item {}
+
+/* [BS] Accordion: Item: Header
+/*-----------------------------------------------------*/
+.variation-legion .accordion .accordion-item .accordion-header {}
+
+/* Button (idle) */
+.variation-legion .accordion .accordion-item .accordion-header .accordion-button {}
+
+/* Button (arrow) */
+.variation-legion .accordion .accordion-item .accordion-header .accordion-button::after {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23636e5e'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+/* [BS] Accordion: Item: Body
+/*-----------------------------------------------------*/
+.variation-legion .accordion .accordion-item .accordion-body {
+	color: #697564;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 23. [BS] Nav pills
+/*-------------------------------------------------------------------------*/
+.variation-legion .nav-pills {}
+
+/* [BS] Nav pills: Item
+/*---------------------------------------------------------------*/
+.variation-legion .nav-pills .nav-item {}
+
+/* [BS] Nav pills: Item: Link (idle)
+/*-----------------------------------------------------*/
+.variation-legion .nav-pills .nav-item .nav-link {
+	--color-idle: #d7eab4;
+
+	-webkit-filter: hue-rotate(260deg);
+	filter: hue-rotate(260deg);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 24. [BS] Input group
+/*-------------------------------------------------------------------------*/
+.variation-legion .input-group {}
+
+.variation-legion .input-group .input-group-text {
+	color: #697564;
+	border-color: #2f3d2e;
+	background-color: #2f3d2e;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 25. [BS] Alert (danger)
+/*-------------------------------------------------------------------------*/
+.variation-legion .alert-danger {
+	background-color: #2f3d2e;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 26. [BS] Pagination
+/*-------------------------------------------------------------------------*/
+.variation-legion .pagination {}
+
+/* [BS] Pagination: Item
+/*---------------------------------------------------------------*/
+.variation-legion .pagination .page-item {}
+
+/* [BS] Pagination: Item: Link (idle)
+/*-----------------------------------------------------*/
+.variation-legion .pagination .page-item .page-link {
+	--color-idle: #d7eab4;
+
+	-webkit-filter: hue-rotate(260deg);
+	filter: hue-rotate(260deg);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 27. [BS] Table
+/*-------------------------------------------------------------------------*/
+.variation-legion .table {
+	--bs-table-color-state: #265823;
+	--bs-table-hover-color: #426e4c;
+
+	color: #265823;
+}
+
+.variation-legion .table td,
+.variation-legion .table th,
+.variation-legion .table tr,
+.variation-legion .table tbody,
+.variation-legion .table tfoot,
+.variation-legion .table thead {
+	border-color: #1d351a;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 28. [BS] Nav tabs
+/*-------------------------------------------------------------------------*/
+.variation-legion .nav-tabs {}
+
+/* [BS] Nav tabs: Item
+/*---------------------------------------------------------------*/
+.variation-legion .nav-tabs .nav-item {}
+
+/* [BS] Nav tabs: Item: Link (idle)
+/*-----------------------------------------------------*/
+.variation-legion .nav-tabs .nav-item .nav-link {
+	--color-idle: #d7eab4;
+
+	-webkit-filter: hue-rotate(260deg);
+	filter: hue-rotate(260deg);
+}

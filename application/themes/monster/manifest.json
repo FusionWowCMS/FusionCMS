@@ -1,0 +1,19 @@
+{
+	"name": "Monster-Wow",
+	"author": "Keramat Jokar",
+	"website": "http://www.yekta-core.ir",
+	
+	"favicon": "favicon.ico",
+
+	"normal_avatar": "avatars/0_normal.jpg",
+	"small_avatar": "avatars/0_small.jpg",
+
+	"slider_text": {
+		"next": "Next",
+		"previous": "Prev"
+	},
+
+	"slider_id": "slider_bg",
+	"screenshot": "images/screenshot.jpg",
+	"blank_header": ""
+}

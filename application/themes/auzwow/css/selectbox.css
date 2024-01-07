@@ -1,0 +1,182 @@
+/*
+	@Theme Name  : AuzWoW
+	@Theme URI   : https://zafirehd.deviantart.com/art/AuzWoW-710569958
+	@Author      : ZafireHD, E. Darksider
+	@Author URI  : https://zafirehd.deviantart.com, https://code-path.com/author/darksider
+	@Description : to be written
+	@Version     : 1.0.0
+	@License     : Proprietary software License
+	@License URI : https://en.wikipedia.org/wiki/Proprietary_software
+*/
+
+/*-------------------------------------------------------------------------*/
+/*	Selectbox plugin AUZWOW skin by E. Darksider
+/*-------------------------------------------------------------------------*/
+.sbHolder {
+	width: 100%;
+	height: auto;
+	color: #e2e2e2;
+	cursor: pointer;
+	padding: 8px;
+	display: inline-block;
+	position: relative;
+	font-size: 12px;
+	text-align: left;
+	font-family: 'PTSansCaption';
+	vertical-align: middle;
+}
+
+.sbHolder,
+.sbHolder > * {
+	box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.sbHolder:before {
+	content: 'Select box';
+	display: block;
+	position: relative;
+}
+
+.sbHolder a {
+	float: none !important;
+	margin: 0 !important;
+}
+
+/* Arrow */
+.sbHolder .sbToggle {
+	width: 37px;
+	height: 100%;
+	top: 0;
+	right: 0;
+	z-index: 9;
+	display: block;
+	position: absolute;
+	background-color: transparent;
+	background-image: url(../images/misc/select-arrow.png);
+	background-repeat: no-repeat;
+	background-position: 50% 15px;
+}
+
+.sbHolder .sbToggle.sbToggleOpen {
+	background-position: 50% -15px;
+}
+
+/* Field */
+.sbHolder .sbSelector {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	color: #e2e2e2 !important;
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	box-shadow: inset 0 0 0 1px #1f1b0f, inset 0 0 0 2px #0d0d0d;
+	-moz-box-shadow: inset 0 0 0 1px #1f1b0f, inset 0 0 0 2px #0d0d0d;
+	-webkit-box-shadow: inset 0 0 0 1px #1f1b0f, inset 0 0 0 2px #0d0d0d;
+	line-height: 30px;
+	text-indent: 8px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #707070;
+	background: rgb(24,24,24); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(24,24,24,1) 0%, rgba(24,24,24,1) 50%, rgba(31,31,31,1) 50%, rgba(31,31,31,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(24,24,24,1) 0%,rgba(24,24,24,1) 50%,rgba(31,31,31,1) 50%,rgba(31,31,31,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(24,24,24,1) 0%,rgba(24,24,24,1) 50%,rgba(31,31,31,1) 50%,rgba(31,31,31,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#181818', endColorstr='#1f1f1f',GradientType=0 ); /* IE6-9 */
+	transition: color 300ms ease-in-out, border-color 300ms ease-in-out, background-color 300ms ease-in-out;
+	-o-transition: color 300ms ease-in-out, border-color 300ms ease-in-out, background-color 300ms ease-in-out;
+	-ms-transition: color 300ms ease-in-out, border-color 300ms ease-in-out, background-color 300ms ease-in-out;
+	-moz-transition: color 300ms ease-in-out, border-color 300ms ease-in-out, background-color 300ms ease-in-out;
+	-webkit-transition: color 300ms ease-in-out, border-color 300ms ease-in-out, background-color 300ms ease-in-out;
+}
+
+.sbHolder .sbToggle.sbToggleOpen + .sbSelector {
+	color: #fefefe !important;
+	border-color: #e9b320;
+}
+
+/* Dropdown */
+.sbHolder .sbOptions {
+	width: 100%;
+	max-height: 124px !important;
+	top: 34px !important;
+	left: 0;
+	cursor: default;
+	border: 2px #707070 solid;
+	z-index: 99;
+	position: absolute;
+	overflow-y: auto;
+	overflow-x: hidden;
+	box-shadow: inset 0 0 0 1px #1f1b0f, inset 0 0 0 2px #0d0d0d;
+	-moz-box-shadow: inset 0 0 0 1px #1f1b0f, inset 0 0 0 2px #0d0d0d;
+	-webkit-box-shadow: inset 0 0 0 1px #1f1b0f, inset 0 0 0 2px #0d0d0d;
+}
+
+.sbHolder .sbOptions li {
+	width: 100%;
+	height: 30px;
+	background-color: #1f1f1f;
+}
+
+.sbHolder .sbOptions li:nth-child(even) {
+	background-color: #171717;
+}
+
+.sbHolder .sbOptions li a {
+	width: 100%;
+	height: 100%;
+	color: #606060;
+	display: block;
+	text-indent: 8px;
+	line-height: 30px;
+	font-family: 'PTSansCaption';
+	text-transform: capitalize;
+	transition: color 100ms ease-in-out;
+	-o-transition: color 100ms ease-in-out;
+	-ms-transition: color 100ms ease-in-out;
+	-moz-transition: color 100ms ease-in-out;
+	-webkit-transition: color 100ms ease-in-out;
+}
+
+.sbHolder .sbOptions li a:hover,
+.sbHolder .sbOptions li a:focus,
+.sbHolder .sbOptions li .sbFocus {
+	color: #ADADAD;
+}
+
+.sbHolder .sbOptions li .sbDisabled {
+	width: 100%;
+	height: 100%;
+	color: #444444;
+	display: block;
+	text-indent: 8px;
+	line-height: 30px;
+	font-family: 'PTSansCaption';
+	text-transform: capitalize;
+	background-color: #0E0E0E;
+}
+
+.sbHolder .sbOptions .sbGroup {
+	width: 100%;
+	height: 100%;
+	color: #EBB52D;
+	display: block;
+	text-indent: 8px;
+	line-height: 30px;
+	font-family: 'PTSansCaption';
+	text-transform: capitalize;
+}
+
+.sbHolder .sbOptions .sbSub {
+	padding-left: 17px;
+}
+
+/* Disabled */
+.sbHolder.sbHolderDisabled {opacity: 0.8;}
+.sbHolder.sbHolderDisabled .sbToggle {}
+.sbHolder.sbHolderDisabled .sbHolder {}

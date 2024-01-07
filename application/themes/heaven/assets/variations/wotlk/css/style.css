@@ -1,0 +1,134 @@
+/*
+	@Theme Name  : Heaven (wotlk)
+	@Theme URI   : -
+	@Author      : Darksider
+	@Author URI  : https://d4rksider.deviantart.com
+	@Description : LINEAGE II TEMPLATE
+	@Version     : 1.0.0
+	@License     : Proprietary software License
+	@License URI : https://en.wikipedia.org/wiki/Proprietary_software
+
+-------------------------------------------------------------------------
+
+	01. Define variables
+	02. Globally applied styles
+	03. Wall
+	04. Header
+	05. Featured
+	06. News: Item (global)
+	07. Register
+*/
+
+/*-------------------------------------------------------------------------*/
+/* 01. Define variables
+/*-------------------------------------------------------------------------*/
+.variation-wotlk {
+	/* Backgrounds */
+	--background-base: #191d26;
+	--background-shadow: #1b1f29;
+}
+
+/*-------------------------------------------------------------------------*/
+/* 02. Globally applied styles
+/*-------------------------------------------------------------------------*/
+.variation-wotlk {
+	background-image: url('../images/graphics/background.jpg');
+}
+
+/*-------------------------------------------------------------------------*/
+/* 03. Wall
+/*-------------------------------------------------------------------------*/
+.variation-wotlk .section-wall {
+	background-size: cover;
+	background-image: url('../images/graphics/header.jpg');
+}
+
+/*-------------------------------------------------------------------------*/
+/* 04. Header
+/*-------------------------------------------------------------------------*/
+.variation-wotlk .header {
+	--baseColor-r: 18;
+	--baseColor-g: 22;
+	--baseColor-b: 23;
+}
+
+/* Header: Gradient
+/*---------------------------------------------------------------*/
+.variation-wotlk .header [gradient] {}
+
+.variation-wotlk .header [gradient][gradient-1]::before {
+	background: -webkit-gradient(linear, left top, right top, from(#181d20), to(transparent));
+	background: -o-linear-gradient(left, #181d20 0%, transparent 100%);
+	background: linear-gradient(to right, #181d20 0%, transparent 100%);
+}
+
+.variation-wotlk .header [gradient][gradient-1]::after {
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#3d6fb3));
+	background: -o-linear-gradient(top, transparent 0%, #3d6fb3 100%);
+	background: linear-gradient(to bottom, transparent 0%, #3d6fb3 100%);
+}
+
+.variation-wotlk .header [gradient][gradient-2] {
+	border-color: #223953;
+}
+
+.variation-wotlk .header [gradient][gradient-2]::before {
+	background: -webkit-gradient(linear, left top, right top, from(transparent), to(#3d6fb3));
+	background: -o-linear-gradient(left, transparent 0%, #3d6fb3 100%);
+	background: linear-gradient(to right, transparent 0%, #3d6fb3 100%);
+}
+
+.variation-wotlk .header [gradient][gradient-2]::after {
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#3d6fb3));
+	background: -o-linear-gradient(top, transparent 0%, #3d6fb3 100%);
+	background: linear-gradient(to bottom, transparent 0%, #3d6fb3 100%);
+}
+
+/* Header: Line
+/*---------------------------------------------------------------*/
+.variation-wotlk .header [line] {}
+
+.variation-wotlk .header [line][line-l] {
+	background: -webkit-gradient(linear, left top, right top, from(#64a2a6), to(transparent));
+	background: -o-linear-gradient(left, #64a2a6 0%, transparent 100%);
+	background: linear-gradient(to right, #64a2a6 0%, transparent 100%);
+}
+
+.variation-wotlk .header [line][line-r] {
+	background: -webkit-gradient(linear, left top, right top, from(transparent), to(#64a2a6));
+	background: -o-linear-gradient(left, transparent 0%, #64a2a6 100%);
+	background: linear-gradient(to right, transparent 0%, #64a2a6 100%);
+}
+
+/* Header: Arrow
+/*---------------------------------------------------------------*/
+.variation-wotlk .header [arrow] {
+	-webkit-filter: hue-rotate(345deg) saturate(0.6);
+	filter: hue-rotate(345deg) saturate(0.6);
+}
+
+/*-------------------------------------------------------------------------*/
+/* 05. Featured
+/*-------------------------------------------------------------------------*/
+.variation-wotlk .featured-banner {
+	background-image: url('../images/banners/banner-featured.jpg');
+}
+
+/*-------------------------------------------------------------------------*/
+/* 06. News: Item (global)
+/*-------------------------------------------------------------------------*/
+.variation-wotlk .page-news .item.type-news {}
+
+.variation-wotlk .page-news .item.type-news[style$="/assets/images/thumbnails/thumbnail-01.jpg');"] .item-thumbnail {background-image: url('../images/thumbnails/thumbnail-01.jpg') !important;}
+.variation-wotlk .page-news .item.type-news[style$="/assets/images/thumbnails/thumbnail-02.jpg');"] .item-thumbnail {background-image: url('../images/thumbnails/thumbnail-02.jpg') !important;}
+
+/*-------------------------------------------------------------------------*/
+/* 07. Register
+/*-------------------------------------------------------------------------*/
+.variation-wotlk .page-register {}
+
+/* Register: Banner
+/*---------------------------------------------------------------*/
+.variation-wotlk .page-register .register-banner {
+	background-image: url('../images/banners/banner-register.jpg');
+}

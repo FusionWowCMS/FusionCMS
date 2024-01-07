@@ -1,0 +1,409 @@
+/*
+	@Theme Name  : AuzWoW
+	@Theme URI   : https://zafirehd.deviantart.com/art/AuzWoW-710569958
+	@Author      : ZafireHD, E. Darksider
+	@Author URI  : https://zafirehd.deviantart.com, https://code-path.com/author/darksider
+	@Description : to be written
+	@Version     : 1.0.0
+	@License     : Proprietary software License
+	@License URI : https://en.wikipedia.org/wiki/Proprietary_software
+*/
+
+/*-------------------------------------------------------------------------*/
+/*	AUZWOW responsive
+/*-------------------------------------------------------------------------*/
+html,
+body {
+	min-width: 100%;
+}
+
+@media (max-width: 1180px)
+{
+	/* Containers
+	/*----------------------------------------------------------*/
+	.aw_container {
+		width: 100%;
+		padding: 0 15px;
+	}
+
+	/* Header
+	/*----------------------------------------------------------*/
+	.header .navigation ul.nav_menu {
+		margin: 0 -20px;
+	}
+
+	.header .navigation ul.nav_menu > li > .nav_item {
+		padding: 0 20px;
+	}
+
+	/* Slider/Welcome
+	/*----------------------------------------------------------*/
+	.slider_welcome .aw_container {
+		width: 100%;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	.slider_welcome .aw_container .slider_container {
+		width: 63%;
+	}
+
+	.slider_welcome .aw_container .slider_container #slider_buttons {
+		display: none;
+	}
+
+	.slider_welcome .aw_container .welcome_box {
+		width: 37%;
+	}
+
+	/* Mainside
+	/*----------------------------------------------------------*/
+	.mainside {
+		width: -webkit-calc(100% / 1.5);
+		width: expression(100% / 1.5);
+		width: -moz-calc(100% / 1.5);
+		width: -o-calc(100% / 1.5);
+		width: calc(100% / 1.5);
+	}
+
+	/* Sidebar
+	/*----------------------------------------------------------*/
+	.sidebar {
+		width: -webkit-calc(100% / 3 - 19px);
+		width: expression(100% / 3 - 19px);
+		width: -moz-calc(100% / 3 - 19px);
+		width: -o-calc(100% / 3 - 19px);
+		width: calc(100% / 3 - 19px);
+	}
+}
+
+@media (max-width: 1000px)
+{
+	/* Topbar
+	/*----------------------------------------------------------*/
+	.topbar {
+		height: auto;
+	}
+
+	.topbar .topbar-inner {
+		height: auto;
+		top: 0;
+		border: none;
+		padding: 0;
+	}
+
+	.topbar .topbar-inner .topbar-left,
+	.topbar .topbar-inner .topbar-right {
+		width: 100%;
+		float: none;
+		padding: 8px 0 8px 0;
+		text-align: left;
+	}
+
+	.topbar .topbar-inner .topbar-left > div,
+	.topbar .topbar-inner .topbar-right > div {
+		top: 0;
+		float: none;
+		display: inline-block;
+		line-height: inherit;
+		vertical-align: middle;
+	}
+
+	.topbar .topbar-inner .topbar-left {
+		padding: 8px 0 6px 0;
+		border-style: dotted;
+		border-color: #3c3c3c;
+		border-width: 0 0 2px 0;
+	}
+
+	.topbar .topbar-inner .topbar-left .topbar-avatar {
+		display: none;
+	}
+
+	.topbar .topbar-inner .topbar-right .topbar-coins,
+	.topbar .topbar-inner .topbar-right .topbar-menu {
+		margin: 0;
+	}
+
+	.topbar .topbar-inner .topbar-right .topbar-sep + .topbar-menu {
+		margin: 0 0 0 7px;
+	}
+
+	/* Header
+	/*----------------------------------------------------------*/
+	.header .navigation .nav_menu {
+		display: none;
+	}
+
+	.header .navigation .nav_menu.mobile {
+		display: block;
+	}
+
+	/* Slider/Welcome
+	/*----------------------------------------------------------*/
+	.slider_welcome {
+		height: auto;
+	}
+
+	.slider_welcome:before {
+		display: none;
+	}
+
+	.slider_welcome .aw_container {
+		width: 100%;
+		height: auto;
+		top: 0 !important;
+		padding: 15px;
+		transform: translateY(0) !important;
+		-o-transform: translateY(0) !important;
+		-ms-transform: translateY(0) !important;
+		-moz-transform: translateY(0) !important;
+		-webkit-transform: translateY(0) !important;
+		background: none;
+	}
+
+	.slider_welcome .aw_container .slider_container,
+	.slider_welcome .aw_container .welcome_box {
+		width: 100%;
+		height: 326px;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.slider_welcome .aw_container .welcome_box .welcome_content {
+		height: 57%;
+	}
+
+	.slider_welcome .aw_container .welcome_box .welcome_actions .welcome_col {
+		float: none;
+		margin: 15px 0 0 0;
+	}
+
+	/* Announcement
+	/*----------------------------------------------------------*/
+	.announcement {
+		height: auto;
+	}
+
+	.announcement .ann_title {
+		float: none;
+		display: block;
+		border-right: none;
+		border-bottom: 2px #383838 solid;
+	}
+
+	.announcement .ann_readmore {
+		float: none;
+		display: block;
+		border-left: none;
+		border-bottom: 2px #383838 solid;
+	}
+
+	.announcement .ann_text {
+		padding: 15px;
+	}
+
+	.announcement .ann_text,
+	.announcement .ann_text p {
+		line-height: inherit;
+	}
+
+	/* Columns
+	/*----------------------------------------------------------*/
+	.columns .c_col {
+		width: 100%;
+		margin: 0 0 15px 0;
+	}
+
+	.columns .countdown .c_col-inner .countdown_text:after {
+		display: none;
+	}
+
+	.columns .latestnews {
+		position: relative;
+	}
+
+	.columns .realmstatus {
+		margin: 0;
+	}
+
+	/* Mainside
+	/*----------------------------------------------------------*/
+	.mainside {
+		width: 100%;
+		float: none;
+	}
+
+	.mainside .content_header {
+		height: auto;
+		padding: 0 0 37px 0;
+	}
+
+	.mainside .content_header .content_header-left,
+	.mainside .content_header .content_header-right {
+		width: 100%;
+		height: auto;
+		float: none;
+	}
+
+	.mainside .content_header .content_header-left .content_header-title {
+		white-space: inherit;
+		text-overflow: inherit;
+	}
+
+	.mainside .content_header .content_header-right {
+		padding: 25px 0 0 0;
+	}
+
+	.mainside .content_header .content_header-right div#news_pagination {
+		text-align: left;
+	}
+
+	.mainside .content_header .content_header-right div#news_pagination a {
+		margin: 0 7px 0 0;
+	}
+
+	.mainside .post .post-left {
+		display: none;
+	}
+
+	.mainside .post .post-right .post_header {
+		height: auto;
+		padding: 15px;
+	}
+
+	.mainside .post .post-right .post_header .post_title {
+		max-width: 100%;
+		display: block;
+		padding: 0 0 10px 0;
+		line-height: inherit;
+	}
+
+	.mainside .post .post-right .post_header .post_title,
+	.mainside .post .post-right .post_header .post_title * {
+		white-space: inherit;
+		text-overflow: inherit;
+	}
+
+	.mainside .post .post-right .post_header .post_author {
+		display: inline-block;
+	}
+
+	.mainside .post .post-right .post_header .post_date {
+		margin: 0 0 0 7px;
+		padding: 0;
+		line-height: inherit;
+		vertical-align: baseline;
+	}
+
+	.mainside .post .post-right .post_header .post_date:before {
+		display: none;
+	}
+
+	.mainside .post .post-right .post_header .post_comment {
+		float: none;
+		margin: 0 0 0 7px;
+		line-height: inherit;
+	}
+
+	/* Sidebar
+	/*----------------------------------------------------------*/
+	.sidebar {
+		width: 100%;
+		float: none;
+		margin: 35px 0 0 0;
+	}
+
+	.sidebar .sidebox .sidebox_title {
+		white-space: inherit;
+		text-overflow: inherit;
+	}
+
+	/* Footer
+	/*----------------------------------------------------------*/
+	.footer .aw_row .aw_col {
+		width: 100%;
+		height: auto;
+		float: none;
+	}
+
+	.footer .aw_row .aw_col.col-1 {
+		margin: 0 0 15px 0;
+	}
+
+	.footer .aw_row.row-1 .aw_col {
+		text-align: left !important;
+	}
+
+	.footer .aw_row.row-1 .aw_col .box .box_content .footer_nav {
+		text-align: left;
+	}
+
+	.footer .aw_row.row-2 {
+		padding: 25px 0;
+	}
+
+	.footer .aw_row.row-2 .aw_col {
+		text-align: center !important;
+	}
+}
+
+@media (max-width: 734px)
+{
+	/* Page form
+	/*----------------------------------------------------------*/
+	.page_form {}
+
+	.page_form table {}
+
+	.page_form table tbody {}
+
+	.page_form table tbody tr {}
+
+	.page_form table tbody tr td {
+		width: 100% !important;
+		margin: 0 0 3px 0;
+		display: block;
+		padding: 0 !important;
+	}
+
+	.page_form table tbody tr td[style] {
+		white-space: nowrap;
+	}
+
+	.page_form table tbody tr td + td {
+		margin: 0 0 10px 0;
+	}
+
+	.page_form table tbody tr td input,
+	.page_form table tbody tr td select,
+	.page_form table tbody tr td .sbHolder {
+		width: 100%;
+		margin: 0;
+	}
+
+	.page_form table tbody tr td input + span,
+	.page_form table tbody tr td select + span,
+	.page_form table tbody tr td .sbHolder + span {
+		top: 50%;
+		right: 8px;
+		margin: -8px 0 0 0;
+		position: absolute;
+	}
+
+	.page_form table tbody tr td input + span img,
+	.page_form table tbody tr td select + span img,
+	.page_form table tbody tr td .sbHolder + span img {
+		display: block;
+		vertical-align: middle;
+	}
+}
+
+@media (max-width: 425px)
+{
+	/* Slider/Welcome
+	/*----------------------------------------------------------*/
+	.slider_welcome .aw_container .slider_container #slider .fluxslider .surface .caption {
+		display: none;
+	}
+}

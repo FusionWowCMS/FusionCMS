@@ -1,0 +1,102 @@
+/*-------------------------------------------------------------------------*/
+/* Armory
+/*-------------------------------------------------------------------------*/
+.page_armory {}
+
+/* Armory: Subbody
+/*---------------------------------------------------------------*/
+.page_armory .page-subbody {
+	--margin-primary: 19px;
+
+	padding: 0 !important;
+}
+
+/* Armory: Fields
+/*---------------------------------------------------------------*/
+.page_armory .input-group {
+	gap: var(--margin-primary);
+
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+.page_armory .input-group > * {
+	width: 100%;
+	margin: 0 !important;
+}
+
+/* Armory: Table
+/*---------------------------------------------------------------*/
+.page_armory .dataTables_wrapper {}
+
+.page_armory .dataTables_wrapper .row + .row + .row {
+	margin: var(--margin-primary) 0 0 0;
+
+	text-align: center;
+
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.page_armory .dataTables_wrapper .row + .row + .row > div {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.page_armory .dataTables_wrapper .row + .row + .row .dataTables_info {
+	padding: 0;
+}
+
+.page_armory .dataTables_wrapper .row + .row + .row .dataTables_paginate {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.page_armory .dataTables_wrapper .row + .row + .row .dataTables_paginate .pagination {
+	margin: 0 auto;
+}
+
+/* Armory: Responsive
+/*---------------------------------------------------------------*/
+@media screen and (min-width: 992px) { /* LG */
+	.page_armory {}
+
+	/* Armory: Fields
+	/*---------------------------------------------------------------*/
+	.page_armory .input-group {
+		-ms-flex-wrap: nowrap;
+		flex-wrap: nowrap;
+
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: row;
+		flex-direction: row;
+	}
+
+	.page_armory .input-group > * {
+		width: -webkit-calc(100% / 3);
+		width: -moz-calc(100% / 3);
+		width: calc(100% / 3);
+	}
+
+	.page_armory .input-group button {
+		width: auto;
+	}
+
+	/* Armory: Table
+	/*---------------------------------------------------------------*/
+	.page_armory .dataTables_wrapper {}
+
+	.page_armory .dataTables_wrapper .row + .row + .row {
+		text-align: left;
+	}
+
+	.page_armory .dataTables_wrapper .row + .row + .row .dataTables_paginate .pagination {
+		margin-left: auto;
+		margin-right: 0;
+	}
+}

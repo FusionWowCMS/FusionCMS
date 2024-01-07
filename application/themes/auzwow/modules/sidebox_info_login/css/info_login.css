@@ -1,0 +1,97 @@
+/*-------------------------------------------------------------------------*/
+/* [Sidebox] Info_login
+/*-------------------------------------------------------------------------*/
+#sidebox_info_login {
+	--field-border-radius: 0;
+}
+
+/* [Sidebox] Info_login: Info
+/*---------------------------------------------------------------*/
+#sidebox_info_login .sidebox_info {
+	padding: 0;
+}
+
+#sidebox_info_login .sidebox_info center {
+	padding-bottom: 0;
+}
+
+/* [Sidebox] Info_login: Login
+/*---------------------------------------------------------------*/
+#sidebox_info_login .card-body {
+	padding: 0;
+}
+
+/* [Sidebox] Info_login: Login: Checkbox
+/*-----------------------------------------------------*/
+#sidebox_info_login .card-body .form-switch {
+	margin: 0;
+	padding: 0;
+}
+
+/* [Sidebox] Info_login: Login: Input group
+/*-----------------------------------------------------*/
+#sidebox_info_login .card-body .input-group {
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+/* Input group (field icon) */
+#sidebox_info_login .card-body .input-group .input-group-text {
+	width: 45px !important;
+	padding: 0;
+
+	-webkit-border-radius: var(--field-border-radius) 0 0 var(--field-border-radius) !important;
+	border-radius: var(--field-border-radius) 0 0 var(--field-border-radius) !important;
+}
+
+/* Input group (field input) */
+#sidebox_info_login .card-body .input-group .form-control {
+	-webkit-border-top-left-radius: 0 !important;
+	-moz-border-top-left-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+
+	-webkit-border-bottom-left-radius: 0 !important;
+	-moz-border-bottom-left-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+}
+
+/* Input group (field captcha image) */
+#sidebox_info_login .card-body .input-group #captcha[for='floatingCaptcha'] {
+	width: 150px !important;
+	height: 100% !important;
+
+	top: 0;
+	right: 0;
+
+	-webkit-filter: grayscale(0.8);
+	filter: grayscale(0.8);
+
+	padding: 0;
+	z-index: 9;
+	opacity: 0.5;
+
+	overflow: hidden;
+	position: absolute;
+
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+#sidebox_info_login .card-body .input-group #captcha[for='floatingCaptcha'] img {
+	width: 100%;
+	height: 100%;
+
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+/* Input group (field captcha input) */
+#sidebox_info_login .card-body .input-group .side-captcha-input {
+	height: auto;
+	min-height: auto;
+	line-height: 1.5;
+}
+
+#sidebox_info_login .card-body .input-group .side-captcha-input + label {
+	display: none;
+}

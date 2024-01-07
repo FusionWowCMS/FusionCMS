@@ -1,0 +1,85 @@
+/*-------------------------------------------------------------------------*/
+/* Auth
+/*-------------------------------------------------------------------------*/
+.page_auth {
+	--field-border-radius: 0;
+}
+
+/* Auth: Form
+/*---------------------------------------------------------------*/
+.page_auth form {}
+
+/* Auth: Form: Login: Checkbox
+/*-----------------------------------------------------*/
+.page_auth form .form-switch {
+	margin: 0;
+	padding: 0;
+}
+
+/* Auth: Form: Input group
+/*-----------------------------------------------------*/
+.page_auth form .input-group {
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+/* Input group (field icon) */
+.page_auth form .input-group .input-group-text {
+	width: 45px !important;
+	padding: 0;
+
+	-webkit-border-radius: var(--field-border-radius) 0 0 var(--field-border-radius) !important;
+	border-radius: var(--field-border-radius) 0 0 var(--field-border-radius) !important;
+}
+
+/* Input group (field input) */
+.page_auth form .input-group .form-control {
+	-webkit-border-top-left-radius: 0 !important;
+	-moz-border-top-left-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+
+	-webkit-border-bottom-left-radius: 0 !important;
+	-moz-border-bottom-left-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+}
+
+/* Input group (field captcha image) */
+.page_auth form .input-group #captcha[for='floatingCaptcha'] {
+	width: 150px !important;
+	height: 100% !important;
+
+	top: 0;
+	right: 0;
+
+	-webkit-filter: grayscale(0.8);
+	filter: grayscale(0.8);
+
+	padding: 0;
+	z-index: 9;
+	opacity: 0.5;
+
+	overflow: hidden;
+	position: absolute;
+
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+.page_auth form .input-group #captcha[for='floatingCaptcha'] img {
+	width: 100%;
+	height: 100%;
+
+	-webkit-border-radius: var(--field-border-radius);
+	border-radius: var(--field-border-radius);
+}
+
+/* Input group (field captcha input) */
+.page_auth form .input-group .captcha-input {
+	height: auto;
+	min-height: auto;
+	line-height: 1.5;
+}
+
+.page_auth form .input-group .captcha-input + label {
+	display: none;
+}

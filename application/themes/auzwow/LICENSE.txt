@@ -1,0 +1,17 @@
+  _____ ____  _____  ______ _____     _______ _    _ 
+ / ____/ __ \|  __ \|  ____|  __ \ /\|__   __| |  | |
+| |   | |  | | |  | | |__  | |__) /  \  | |  | |__| |
+| |   | |  | | |  | |  __| |  ___/ /\ \ | |  |  __  |
+| |___| |__| | |__| | |____| |  / ____ \| |  | |  | |
+ \_____\____/|_____/|______|_| /_/    \_\_|  |_|  |_|
+                                https://code-path.com
+
+/*=================================================================================*/
+ * Agreements:
+ *
+ * - FREE RELEASE
+ * - AUZWOW Theme Designed by ZafireHD and Coded by E. Darksider.
+ * - END-USERS not allowed to remove copyrights and re-sell this product.
+ * - END-USERS not allowed to release this product.
+ * - END-USERS may modify the content of this product.
+**/

@@ -1,0 +1,657 @@
+@charset "utf-8";
+
+/**
+ * This stylesheet contains both general
+ * and certain module specific selectors.
+ * You should edit the colors to suit your
+ * theme. You can also override their module
+ * provided default styles like font-size,
+ * margin and padding.
+ *
+ * If you need to look up the default styles
+ * of a selector, please refer to:
+ * /application/css/default.css
+ */
+
+/* News pagination link states */
+#news_pagination a, #messages_pagination a {
+	margin:0px;
+	display:block;
+}
+
+.location {
+	border:1px solid #0E171E;
+	background-color:rgba(7,14,18,0.8);
+}
+
+.location_name {
+	color:#CF9139;
+}
+
+.location:hover {
+	background-color:rgba(7,14,18,1);
+}
+
+/* Slider text bar */
+.caption {
+	background-color:rgba(0,0,0,0.6);
+	color:#fff;
+}
+
+#slider_next,
+#slider_previous {
+	color:#fff;
+	background-color:rgba(0,0,0,0.6);
+}
+
+#slider_next:hover,
+#slider_previous:hover {
+	background-color:#000;
+}
+
+#store {
+	margin-left:-8px;
+} 
+
+/* News comments styles */
+.staff_comment .comment_author {
+	color:#00B4FF !important;
+}
+
+.comment, .message_box {
+	width:345px !important;
+	border:1px solid #0e171e !important;
+	background-color:#070e12 !important;
+	color:inherit !important;
+	box-shadow:none !important;
+	-webkit-box-shadow:none !important;
+	-moz-box-shadow:none !important;
+	border-radius:2px;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+}
+
+.comment a img, .message_box a img {
+	border:1px solid #000 !important;
+	box-shadow:none !important;
+	-moz-box-shadow:none !important;
+	-webkit-box-shadow:none !important;
+}
+
+.comment_author:hover, .message_box_author:hover {
+	color:#fff !important;
+}
+
+.comment_date, .message_box_date {
+	color:#666;
+}
+
+/* Comments and shoutbox: characters remaining indicator text */
+.characters_remaining {
+	color:#666;
+}
+
+#poll_answers .poll_answer {
+	margin-left:10px;
+}
+
+/* Modal boxes: alert & confirm */
+.popup {
+	background-color:#eee;
+	border:1px solid #fff;
+	box-shadow:0px 0px 35px #000;
+	-webkit-box-shadow:0px 0px 35px #000;
+	-moz-box-shadow:0px 0px 35px #000;
+}
+
+.popup a {
+	color: #fff;
+}
+
+.popup a:hover {
+	color:#fff;
+}
+
+.popup_button {
+	background-color: #7fbf4d;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7fbf4d), color-stop(100%, #63a62f));
+	background-image: -webkit-linear-gradient(top, #7fbf4d, #63a62f);
+	background-image: -moz-linear-gradient(top, #7fbf4d, #63a62f);
+	background-image: -ms-linear-gradient(top, #7fbf4d, #63a62f);
+	background-image: -o-linear-gradient(top, #7fbf4d, #63a62f);
+	background-image: linear-gradient(top, #7fbf4d, #63a62f);
+	border: 1px solid #63a62f;
+	border-bottom: 1px solid #5b992b;
+	-webkit-box-shadow: inset 0 1px 0 0 #96ca6d;
+	-moz-box-shadow: inset 0 1px 0 0 #96ca6d;
+	-ms-box-shadow: inset 0 1px 0 0 #96ca6d;
+	-o-box-shadow: inset 0 1px 0 0 #96ca6d;
+	box-shadow: inset 0 1px 0 0 #96ca6d;
+	text-shadow: 0 -1px 0 #4c9021;
+}
+
+.popup_button:hover {
+	 background-color: #76b347;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #76b347), color-stop(100%, #5e9e2e));
+    background-image: -webkit-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: -moz-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: -ms-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: -o-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: linear-gradient(top, #76b347, #5e9e2e);
+    -webkit-box-shadow: inset 0 1px 0 0 #8dbf67;
+    -moz-box-shadow: inset 0 1px 0 0 #8dbf67;
+    -ms-box-shadow: inset 0 1px 0 0 #8dbf67;
+    -o-box-shadow: inset 0 1px 0 0 #8dbf67;
+    box-shadow: inset 0 1px 0 0 #8dbf67;
+}
+
+.popup_button:active {
+	border: 1px solid #5b992b;
+    border-bottom: 1px solid #538c27;
+    -webkit-box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+    -moz-box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+    -ms-box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+    -o-box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+    box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+}
+
+.popup_hide {
+	background-color: #bfbfbf;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bfbfbf), color-stop(100%, #9a9a9a));
+	background-image: -webkit-linear-gradient(top, #bfbfbf, #9a9a9a);
+	background-image: -moz-linear-gradient(top, #bfbfbf, #9a9a9a);
+	background-image: -ms-linear-gradient(top, #bfbfbf, #9a9a9a);
+	background-image: -o-linear-gradient(top, #bfbfbf, #9a9a9a);
+	background-image: linear-gradient(top, #bfbfbf, #9a9a9a);
+	border: 1px solid #9a9a9a;
+	border-bottom: 1px solid #9a9a9a;
+	-webkit-box-shadow: inset 0 1px 0 0 #cbcbcb;
+	-moz-box-shadow: inset 0 1px 0 0 #cbcbcb;
+	-ms-box-shadow: inset 0 1px 0 0 #cbcbcb;
+	-o-box-shadow: inset 0 1px 0 0 #cbcbcb;
+	box-shadow: inset 0 1px 0 0 #cbcbcb;
+	text-shadow: 0 -1px 0 #8f8f8f;
+}
+
+.popup_hide:hover {
+	background-color: #adadad;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #adadad), color-stop(100%, #a0a0a0));
+    background-image: -webkit-linear-gradient(top, #adadad, #a0a0a0);
+    background-image: -moz-linear-gradient(top, #adadad, #a0a0a0);
+    background-image: -ms-linear-gradient(top, #adadad, #a0a0a0);
+    background-image: -o-linear-gradient(top, #adadad, #a0a0a0);
+    background-image: linear-gradient(top, #adadad, #a0a0a0);
+    -webkit-box-shadow: inset 0 1px 0 0 #bbbbbb;
+    -moz-box-shadow: inset 0 1px 0 0 #bbbbbb;
+    -ms-box-shadow: inset 0 1px 0 0 #bbbbbb;
+    -o-box-shadow: inset 0 1px 0 0 #bbbbbb;
+    box-shadow: inset 0 1px 0 0 #bbbbbb;
+}
+
+.popup_hide:active {
+	border: 1px solid #a0a0a0;
+    border-bottom: 1px solid #8b8b8b;
+    -webkit-box-shadow: inset 0 0 8px 4px #8c8c8c, 0 1px 0 0 #eeeeee;
+    -moz-box-shadow: inset 0 0 8px 4px #8c8c8c, 0 1px 0 0 #eeeeee;
+    -ms-box-shadow: inset 0 0 8px 4px #8c8c8c, 0 1px 0 0 #eeeeee;
+    -o-box-shadow: inset 0 0 8px 4px #8c8c8c, 0 1px 0 0 #eeeeee;
+    box-shadow: inset 0 0 8px 4px #8c8c8c, 0 1px 0 0 #eeeeee;
+}
+
+#popup_bg {
+	background-color:#000;
+}
+
+/* Tooltip */
+#tooltip, .tooltip {
+	background-color:#070c21;
+	background-color: rgba(7,12,33,0.9);
+	border:1px solid #777777;
+	border-top:1px solid #cfcfcf;
+	-webkit-box-shadow: 0px 0px 3px #000;
+	-moz-box-shadow: 0px 0px 3px #000;
+	box-shadow: 0px 0px 3px #000;
+	color: #fff;
+}
+
+/* Form fields */
+textarea {
+	padding:8px;
+	color:#3d4346;
+	background-color:#020407;
+	border:1px solid #080e14;
+	font-family:MuseoSans, Arial, Helvetica, Sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	-webkit-transition: all 300ms;
+	-moz-transition: all 300ms;
+	-o-transition: all 300ms;
+	-ms-transition: all 300ms;
+	transition: all 300ms;
+}
+
+select {
+	font-family:MuseoSans, Arial, Helvetica, Sans-serif;
+	font-size:12px;
+	width:80%;
+	padding:8px;
+	color:#3d4346;
+	background-color:#020407;
+	border:1px solid #080e14;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	margin:5px;
+	-webkit-transition: all 300ms;
+	-moz-transition: all 300ms;
+	-o-transition: all 300ms;
+	-ms-transition: all 300ms;
+	transition: all 300ms;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="email"]
+{
+	font-family:MuseoSans, Arial, Helvetica, Sans-serif;
+	font-size:12px;
+	width:80%;
+	padding:8px;
+	color:#3d4346;
+	background-color:#020407;
+	border:1px solid #080e14;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	margin:5px;
+	-webkit-transition: all 300ms;
+	-moz-transition: all 300ms;
+	-o-transition: all 300ms;
+	-ms-transition: all 300ms;
+	transition: all 300ms;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+	color:#fff;
+	border:1px solid #131f2b;
+}
+
+/* Full-page styles (log in, register etc.) */
+.page_form input[type="submit"] {
+	padding-left:20px;
+	padding-right:20px;
+	margin-top:20px;
+}
+
+.avatar, #ucp_avatar, .store_item .item_icon {
+	border:1px solid #000;
+	margin-right:10px;
+}
+
+.ucp_divider {
+	background-repeat:no-repeat;
+	height:32px;
+	background-position:center;
+}
+
+.vertical_divider {
+	background-image:url(../images/vertical_divider.png);
+	background-repeat:no-repeat;
+	height:424px;
+	width:33px;
+}
+
+#armory {
+	margin-left:-5px !important;
+}
+
+/* First column in the #ucp_info */
+#ucp_info aside:first-child {
+	border-right:1px solid #0E171E;
+}
+
+#ucp_info aside:nth-child(3) {
+	border-left:1px solid #0E171E;
+}
+
+
+#ucp_info aside:last-child {
+	border-right:none !important;
+}
+
+/* Second <td> of each row */
+#ucp_info td:nth-child(2) {
+	font-weight:bold;
+}
+
+#ucp_buttons a {
+	border:1px solid #000;
+	
+}
+
+/* UCP: character list, character */
+#ucp_characters a {
+	border:1px solid #000;
+}
+
+/* =========== CMS: realm status =========== */
+#left .realm {
+	color:#a07332;
+	font-size:14px;
+}
+
+#left .realm .realm_online {
+	color:#3d4346;
+	float:left;
+	font-size:12px;
+}
+
+#left .realm .realm_bar, .poll_bar {
+	height:13px;
+	border:1px solid #080e14;
+	background-color:#000000;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-ms-border-radius:4px;
+	-o-border-radius:4px;
+	-webkit-border-radius:4px;
+	margin-top:10px;
+	margin-bottom:20px;
+}
+
+#left .realm .realm_bar .realm_bar_fill, .poll_bar_fill {
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-ms-border-radius:2px;
+	-o-border-radius:2px;
+	-webkit-border-radius:2px;
+	height:9px;
+	margin-top:2px;
+	margin-left:2px;
+}
+
+#left #realmlist {
+	border:1px solid #080e14;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-ms-border-radius:4px;
+	-o-border-radius:4px;
+	-webkit-border-radius:4px;
+	background-color:#000000;
+	padding:5px;
+	text-align:center;
+	color:#a07332;
+	font-size:12px;
+}
+
+/* Online players bar and realm bar (used on UCP, profiles) */
+.online_realm_button, #ucp_characters h1 {
+	height:21px;
+	border:1px solid #090f15;
+	border-top-color:#111f2a;
+	color:#616c72;
+	box-shadow:1px 1px 0px #020508;
+	text-shadow:1px 1px 0px #000;
+	padding:8px;
+	margin-top:5px !important;
+}
+
+.online_realm_button:hover {
+	background-position:0px 37px;
+	color:#A07332;
+}
+
+.online_realm_button:active {
+	box-shadow:1px 1px 0px #020508, 0px 2px 5px #000 inset;
+	-webkit-box-shadow:1px 1px 0px #020508, 0px 2px 5px #000 inset;
+	-moz-box-shadow:1px 1px 0px #020508, 0px 2px 5px #000 inset;
+	-ms-box-shadow:1px 1px 0px #020508, 0px 2px 5px #000 inset;
+	-o-box-shadow:1px 1px 0px #020508, 0px 2px 5px #000 inset;
+}
+
+#ucp_info td {
+	font-size:10px;
+}
+
+/* Table style, used on vote panel, donate panel, online players etc. */
+.nice_table tr:first-child td {
+	border-bottom:1px solid #0e171e;
+	color:#A07332;
+	font-weight:normal;
+}
+
+.nice_table tr:first-child td a {
+	color:#A07332;
+}
+
+.nice_table td {
+	vertical-align: middle;
+}
+
+
+/* =========== CMS: shout box =========== */
+#left #shoutbox textarea {
+	width:92%;
+	max-width:92%;
+	height:20px;
+}
+
+#left #shoutbox .shout_characters_remaining {
+	font-size:10px;
+	margin-top:12px;
+	margin-left:1px;
+}
+
+#left #shoutbox #shoutbox_submit {
+	float:right;
+	padding-left:20px;
+	padding-right:20px;
+}
+
+#left #the_shouts .shout {
+	border-bottom:1px solid rgba(14,24,32,0.5);
+	border-top:1px solid rgba(0,0,0,0.9);
+	padding:10px;
+	color:#3d4346;
+}
+
+#left #the_shouts .shout:first-child {
+	border-top:none;
+}
+
+#left #the_shouts .shout:last-child {
+	border-bottom:none;
+}
+
+#left #the_shouts .shout_date {
+	float:right;
+	font-size:10px;
+}
+
+#left #the_shouts .shout_author a {
+	color:#a07332;
+}
+
+#left #the_shouts .shout_staff a {
+	color:#2a88c8;
+}
+
+#left #shoutbox #shoutbox_view {
+	text-align:center;
+	padding-top:10px;
+}
+
+#left #shoutbox #shoutbox_view a {
+	font-size:14px;
+}
+
+/* PvP ladder sidebox */
+.toppvp_select {
+	border-bottom:1px solid rgba(14,24,32,0.5);
+	margin-top:5px;
+}
+
+.toppvp_realm {
+	width:255px !important; /* Width of the button - should be whole sidebox */
+}
+
+.toppvp_character {
+	border-bottom:1px solid rgba(14,24,32,0.5);
+	border-top:1px solid rgba(0,0,0,0.9);
+	padding:10px;
+	color:#3d4346;
+}
+
+.toppvp_character:first-child {
+	border-top:1px solid rgba(0,0,0,0.9);
+}
+
+.toppvp_character:last-child {
+	border-bottom:none;
+}
+
+/* FusionEditor WYSIWYG field */
+.fusioneditor .fusioneditor_tools {
+	color:#3D4346 !important;
+	border-bottom:none !important;
+	border:1px solid #0E171E !important;
+	background-color:#070E12 !important;
+}
+
+.fusioneditor .fusioneditor_tools a:hover {
+	border:1px solid #080E14 !important;
+	background-color:#020407 !important;
+	box-shadow:none !important;
+	-webkit-box-shadow:none !important;
+	-moz-box-shadow:none !important;
+}
+
+.fusioneditor .fusioneditor_tools a:active {
+	border:1px solid #666;
+}
+
+.fusioneditor .fusioneditor_field {
+	color:#3D4346;
+	background-color:#020407 !important;
+	border:1px solid #080E14 !important;
+	border-top:none !important;
+}
+
+.fusioneditor .fusioneditor_field b {
+	font-weight:bold;
+}
+
+.fusioneditor .fusioneditor_toolbox {
+	border-top:1px solid #080E14 !important;
+}
+
+.fusioneditor .fusioneditor_size {
+	color:#666;
+}
+
+.fusioneditor .fusioneditor_size:hover {
+	color:#fff;
+}
+
+.fusioneditor .fusioneditor_color:hover {
+	border:1px solid rgba(0,0,0,0) !important;
+}
+
+.fusioneditor .fusioneditor_color:active {
+	border:1px solid rgba(0,0,0,0) !important;
+}
+
+/* The pop up "autocomplete" box on private messages -> compose */
+#pm_username_autocomplete {
+	background-color:#0a0603 !important;
+	border:1px solid #0A394B !important;
+}
+
+#pm_username_autocomplete a {
+	border-bottom:1px solid #0A3748 !important;
+}
+
+#ucp_buttons {
+	width:690px;
+	margin-left:-8px;
+}
+
+/* Store: filter fields divider */
+#store form .filter_field {
+	border-left:1px solid #0E171E;
+	margin-bottom:8px;
+}
+
+/* Store: item group title */
+.item_group_title, .store_item {
+	text-shadow:1px 1px 0px #000;
+}
+
+.item_group_title {
+	margin-top:20px;
+	margin-bottom:5px;
+	font-size:12px;
+	font-weight:bold;
+	margin-left:13px;
+}
+
+/* Store: item group box */
+.item_group {
+	border-radius:2px;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+	border:1px solid #0E171E;
+	background-color:rgba(7,14,18,0.8);
+	padding:0px;
+}
+
+/* Store: item */
+.store_item {
+	border-bottom:1px solid #0E171E;
+}
+
+/* Prevent the bottom border on the last item */
+.store_item:last-child {
+	border-bottom:none;
+}
+
+/* Prevent the top border on the first item */
+.store_item:first-child {
+	border-top:none;
+}
+
+#cart_price_divider {
+	border-bottom:1px solid #0E171E;
+	margin-bottom:10px;
+}
+
+#armory_top h1 {
+	color:#eee;
+}
+
+#avatar_page center {
+	color:#fff;
+}
+
+#armory_stats td {
+	font-size:12px !important;
+}
+
+#store form input[type="text"] {
+	width:95px !important;
+}
+
+#change_form input[type="text"] {
+	width:50% !important;
+}
+
+#sidebox_login input[type="submit"] {
+	width:80%;
+	margin-bottom:10px;
+}

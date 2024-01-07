@@ -1,0 +1,22 @@
+{
+    "date": "2023-11-19",
+    "name": "AuzWoW",
+    "author": "ZafireHD, Darksider <darksider.legend@gmail.com>",
+    "version": "1.0.0",
+    "website": "https://code-path.com/",
+    "min_required_version": "8.0.0",
+
+    "favicon": "favicon.ico",
+
+    "small_avatar": "avatars/0_small.jpg",
+    "normal_avatar": "avatars/0_normal.jpg",
+
+    "slider_text": {
+        "next": "",
+        "previous": ""
+    },
+
+    "slider_id": "slider_welcome",
+    "screenshot": "images/screenshot.jpg",
+    "blank_header": ""
+}
