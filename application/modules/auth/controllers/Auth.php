@@ -165,7 +165,7 @@ class Auth extends MX_Controller
             }
             else
             {
-                $this->dblogger->createLog("user", "login", "Login", [], Logger::STATUS_FAILED, $this->user->getId($username));
+                $this->dblogger->createLog("user", "login", "Login", [], Dblogger::STATUS_FAILED, $this->user->getId($username));
                 $data["messages"]["error"] = lang("error", "auth");
             }
         }

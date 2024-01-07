@@ -96,7 +96,7 @@ class Password_recovery extends MX_Controller
                 sendMail($email, $this->config->item('server_name') . ': ' . lang("reset_password", "recovery"), $username, lang("email", "recovery") . ' <a href="' . $link . '">' . $link . '</a>', 1);
 
                 $this->password_recovery_model->insert_token($token, $username, $email, $this->input->ip_address());
-                $this->dblogger->createLog("user", "recovery", "Password recovery requested", [], Logger::STATUS_SUCCEED, $this->user->getId($username));
+                $this->dblogger->createLog("user", "recovery", "Password recovery requested", [], Dblogger::STATUS_SUCCEED, $this->user->getId($username));
             }
             
             $data['messages']["success"] = lang("email_sent", "recovery");
@@ -134,7 +134,7 @@ class Password_recovery extends MX_Controller
                 $hash = $this->user->createHash($token_data['username'], $new_password);
                 $this->external_account_model->setPassword($token_data['username'], $hash["verifier"]);
                 
-                $this->dblogger->createLog("user", "recovery", "Password changed via reset", [], Logger::STATUS_SUCCEED, $this->user->getId($token_data['username']));
+                $this->dblogger->createLog("user", "recovery", "Password changed via reset", [], Dblogger::STATUS_SUCCEED, $this->user->getId($token_data['username']));
 
                 $this->password_recovery_model->delete_token($token);
 
