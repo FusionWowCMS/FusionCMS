@@ -46,23 +46,23 @@ class MX_Config extends CI_Config
      *
      * @method load
      *
-     * @param string  $file            [description]
-     * @param boolean $use_sections    [description]
+     * @param string $file [description]
+     * @param boolean $use_sections [description]
      * @param boolean $fail_gracefully [description]
-     * @param string  $_module         [description]
+     * @param string $module [description]
      *
-     * @return [type]                   [description]
+     * @return string|void|null
      */
-    public function load($file = '', $use_sections = false, $fail_gracefully = false, string $_module = '')
+    public function load($file = '', $use_sections = false, $fail_gracefully = false, string $module = '')
     {
         if (in_array($file, $this->is_loaded, true)) {
             return $this->item($file);
         }
 
-        $_module or $_module = CI::$APP->router->fetch_module();
+        $module or $module = CI::$APP->router->fetch_module();
 
         // Backward function
-        [$path, $file] = MX_Modules::find($file, $_module, 'config/');
+        [$path, $file] = MX_Modules::find($file, $module, 'config/');
 
         if ($path === false) {
             parent::load($file, $use_sections, $fail_gracefully);

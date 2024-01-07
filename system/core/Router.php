@@ -216,7 +216,7 @@ class CI_Router {
 			}
 			else
 			{
-				$this->_set_default_controller();
+				$this->set_default_controller();
 			}
 
 			// Routing rules don't apply to query strings and we don't need to detect
@@ -231,7 +231,7 @@ class CI_Router {
 		}
 		else
 		{
-			$this->_set_default_controller();
+			$this->set_default_controller();
 		}
 	}
 
@@ -254,7 +254,7 @@ class CI_Router {
 		// WARNING: Directories get shifted out of the segments array!
 		if (empty($segments))
 		{
-			$this->_set_default_controller();
+			$this->set_default_controller();
 			return;
 		}
 
@@ -289,7 +289,7 @@ class CI_Router {
 	 *
 	 * @return	void
 	 */
-	protected function _set_default_controller()
+	protected function set_default_controller()
 	{
 		if (empty($this->default_controller))
 		{

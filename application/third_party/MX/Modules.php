@@ -150,7 +150,7 @@ class MX_Modules
         }
 
         /* autoload Modular Extensions MX core classes */
-        if (strstr($class, 'MX_')) {
+        if (str_contains($class, 'MX_')) {
             if (is_file($location = dirname(__FILE__) . '/' . substr($class, 3) . EXT)) {
                 include_once $location;
                 return;
@@ -178,12 +178,12 @@ class MX_Modules
      *
      * @param [type]    $file   [description]
      * @param [type]    $path   [description]
-     * @param string    $type   [description]
+     * @param string $type   [description]
      * @param boolean   $result [description]
      *
      * @return [type]            [description]
      */
-    public static function load_file($file, $path, $type = 'other', $result = true)
+    public static function load_file($file, $path, string $type = 'other', $result = true)
     {
         $file = str_replace(EXT, '', $file);
         $location = $path . $file . EXT;
@@ -237,16 +237,16 @@ class MX_Modules
         }
 
         foreach (self::$locations as $location => $offset) {
-            foreach ($_modules as $module => $subpath) {
-                $fullpath = $location . $module . '/' . $base . $subpath;
+            foreach ($_modules as $module => $sub_path) {
+                $full_path = $location . $module . '/' . $base . $sub_path;
 
                 if ($base === 'libraries/' || $base === 'models/') {
-                    if (is_file($fullpath . ucfirst($file_ext))) {
-                        return array($fullpath, ucfirst($file));
+                    if (is_file($full_path . ucfirst($file_ext))) {
+                        return array($full_path, ucfirst($file));
                     }
                 } elseif /* load non-class files */
-                (is_file($fullpath . $file_ext)) {
-                    return array($fullpath, $file);
+                (is_file($full_path . $file_ext)) {
+                    return array($full_path, $file);
                 }
             }
         }
@@ -294,10 +294,10 @@ class MX_Modules
                 }
             }
 
-            $key = str_replace(array(':any', ':num'), array('.+', '[0-9]+'), $key);
+            $key = str_replace([':any', ':num'], ['.+', '[0-9]+'], $key);
 
             if (preg_match('#^' . $key . '$#', $uri)) {
-                if (strpos($val, '$') !== false && strpos($key, '(') !== false) {
+                if (str_contains($val, '$') && str_contains($key, '(')) {
                     $val = preg_replace('#^' . $key . '$#', $val, $uri);
                 }
                 return explode('/', $module . '/' . $val);

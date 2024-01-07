@@ -36,6 +36,14 @@
  * @since	Version 1.0.0
  * @filesource
  */
+
+use CodeIgniter\Debug\Exceptions;
+use CodeIgniter\Debug\Timer;
+use CodeIgniter\Debug\Toolbar;
+use CodeIgniter\Events\Events;
+use CodeIgniter\Log\Logger;
+use Encryption\Encryption;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -50,16 +58,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author      EllisLab Dev Team
  * @link        https://codeigniter.com/userguide3/general/controllers.html
  ***************** CORE COMPONENTS *****************
- * @property CI_Benchmark $benchmark            This class enables you to mark points and calculate the time difference between them. Memory consumption can also be displayed.
+ * @property Timer $timer                       This class enables you to mark points and calculate the time difference between them. Memory consumption can also be displayed.
  * @property CI_Config $config                  This class contains functions that enable config files to be managed
- * @property Controller $controller          This class object is the super class that every library in CodeIgniter will be assigned to.
- * @property Controller $CI                  This class object is the super class that every library in CodeIgniter will be assigned to.
- * @property CI_Exceptions $exceptions          Exceptions Class
- * @property CI_Hooks $hooks                    Provides a mechanism to extend the base system without hacking.
+ * @property Controller $controller             This class object is the super class that every library in CodeIgniter will be assigned to.
+ * @property Controller $CI                     This class object is the super class that every library in CodeIgniter will be assigned to.
+ * @property Exceptions $exceptions             Exceptions Class
+ * @property Events $events                     Provides a mechanism to extend the base system without hacking.
  * @property CI_Input $input                    Pre-processes global input data for security
  * @property CI_Lang $lang                      Language Class
  * @property CI_Loader $load                    Loads framework components.
- * @property CI_Log $log                        Logging Class
+ * @property Logger $logger                        Logging Class
  * @property CI_Model $model                    Model Class
  * @property CI_Output $output                  Responsible for sending final output to the browser.
  * @property CI_Router $router                  Parses URIs and determines routing
@@ -74,17 +82,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Cache $cache                    CodeIgniter Caching Class
  * @property CI_Session $session                CodeIgniter Session Class
  * @property CI_Calendar $calendar              This class enables the creation of calendars
- * @property CI_Cart $cart                      Shopping Cart Class
  * @property CI_Driver_Library $driver          This class enables you to create "Driver" libraries that add runtime ability to extend the capabilities of a class via additional driver objects
  * @property CI_Email $email                    Permits email to be sent using Mail, Sendmail, or SMTP.
- * @property CI_Encryption $encryption          Provides two-way keyed encryption via PHP's MCrypt and/or OpenSSL extensions.
+ * @property Encryption $encryption             Provides two-way keyed encryption via PHP's MCrypt and/or OpenSSL extensions.
  * @property CI_Form_validation $form_validation Form Validation Class
  * @property CI_FTP $ftp                        FTP Class
  * @property CI_Image_lib $image_lib            Image Manipulation class
  * @property CI_Migration $migration            All migrations should implement this, forces up() and down() and gives access to the CI super-global.
  * @property CI_Pagination $pagination          Pagination Class
  * @property CI_Parser $parser                  Parser Class
- * @property CI_Profiler $profiler              This class enables you to display benchmark, query, and other data in order to help with debugging and optimization.
+ * @property Toolbar $toolbar                   This class enables you to display benchmark, query, and other data in order to help with debugging and optimization.
  * @property CI_Table $table                    Lets you create tables manually or from database result objects, or arrays.
  * @property CI_Trackback $trackback            Trackback Sending/Receiving Class
  * @property CI_Typography $typography          Typography Class
@@ -94,10 +101,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Xmlrpc $xmlrpc                  XML-RPC request handler class
  * @property CI_Xmlrpcs $xmlrpcs                XML-RPC server class
  * @property CI_Zip $zip                        Zip Compression Class
- ***************** DEPRECATED LIBRARIES *****************
- * @property CI_Jquery $jquery                  Jquery Class
- * @property CI_Encrypt $encrypt                Provides two-way keyed encoding using Mcrypt
- * @property CI_Javascript $javascript          Javascript Class
  * **************** Fusion CMS LIBRARIES *****************
  * @property Acl $acl                           Acl Class
  * @property Administrator $administrator       Administrator Class
@@ -106,7 +109,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Dbbackup $dbbackup                 Dbbackup Class
  * @property Items $items                       Items Class
  * @property Language $language                 Language Class
- * @property Logger $logger                     Logger Class
+ * @property Dblogger $dblogger                 Dblogger Class
  * @property Plugin $plugin                     Plugin Class
  * @property Plugins $plugins                   Plugins Class
  * @property Realm $realm                       Realm Class
@@ -114,7 +117,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Recaptcha $recaptcha               Recaptcha Class
  * @property Template $template                 Template Class
  * @property User $user                         User Class
- *   **************** Fusion CMS *****************
+ *  **************** Fusion CMS *****************
  * @property Acl_model $acl_model               Acl_model Class
  * @property Characters_model $characters_model Characters_model Class
  * @property Cms_model $cms_model               Cms_model Class

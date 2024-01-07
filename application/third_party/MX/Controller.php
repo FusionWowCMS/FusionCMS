@@ -1,6 +1,68 @@
 <?php namespace MX;
 
+use Acl;
+use Acl_model;
+use Administrator;
+use Captcha;
+use Characters_model;
+use CI_Cache;
+use CI_Calendar;
+use CI_Config;
+use CI_DB_forge;
+use CI_DB_query_builder;
+use CI_DB_utility;
+use CI_Driver_Library;
+use CI_Email;
+use CI_Form_validation;
+use CI_FTP;
+use CI_Image_lib;
+use CI_Input;
+use CI_Lang;
+use CI_Loader;
+use CI_Migration;
+use CI_Model;
+use CI_Output;
+use CI_Pagination;
+use CI_Parser;
+use CI_Router;
+use CI_Security;
+use CI_Session;
+use CI_Table;
+use CI_Trackback;
+use CI_Typography;
+use CI_Unit_test;
+use CI_Upload;
+use CI_URI;
+use CI_User_agent;
+use CI_Utf8;
+use CI_Xmlrpc;
+use CI_Xmlrpcs;
+use CI_Zip;
+use Cms_model;
+use CodeIgniter\Debug\Exceptions;
+use CodeIgniter\Debug\Timer;
+use CodeIgniter\Debug\Toolbar;
+use CodeIgniter\Events\Events;
+use CodeIgniter\Log\Logger;
+use ConfigEditor;
+use Controller;
+use Dbbackup;
+use Dblogger;
+use Encryption\Encryption;
+use External_account_model;
+use Internal_user_model;
+use Items;
+use Language;
+use Logger_model;
 use MX\CI;
+use Plugin;
+use Plugins;
+use Realm;
+use Realms;
+use Recaptcha;
+use Template;
+use User;
+use World_model;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -38,16 +100,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  ***************** CORE COMPONENTS *****************
- * @property CI_Benchmark $benchmark            This class enables you to mark points and calculate the time difference between them. Memory consumption can also be displayed.
+ * @property Timer $timer                       This class enables you to mark points and calculate the time difference between them. Memory consumption can also be displayed.
  * @property CI_Config $config                  This class contains functions that enable config files to be managed
- * @property Controller $controller          This class object is the super class that every library in CodeIgniter will be assigned to.
- * @property Controller $CI                  This class object is the super class that every library in CodeIgniter will be assigned to.
- * @property CI_Exceptions $exceptions          Exceptions Class
- * @property CI_Hooks $hooks                    Provides a mechanism to extend the base system without hacking.
+ * @property Controller $controller             This class object is the super class that every library in CodeIgniter will be assigned to.
+ * @property Controller $CI                     This class object is the super class that every library in CodeIgniter will be assigned to.
+ * @property Exceptions $exceptions             Exceptions Class
+ * @property Events $events                     Provides a mechanism to extend the base system without hacking.
  * @property CI_Input $input                    Pre-processes global input data for security
  * @property CI_Lang $lang                      Language Class
  * @property CI_Loader $load                    Loads framework components.
- * @property CI_Log $log                        Logging Class
+ * @property Logger $logger                        Logging Class
  * @property CI_Model $model                    Model Class
  * @property CI_Output $output                  Responsible for sending final output to the browser.
  * @property CI_Router $router                  Parses URIs and determines routing
@@ -62,17 +124,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Cache $cache                    CodeIgniter Caching Class
  * @property CI_Session $session                CodeIgniter Session Class
  * @property CI_Calendar $calendar              This class enables the creation of calendars
- * @property CI_Cart $cart                      Shopping Cart Class
  * @property CI_Driver_Library $driver          This class enables you to create "Driver" libraries that add runtime ability to extend the capabilities of a class via additional driver objects
  * @property CI_Email $email                    Permits email to be sent using Mail, Sendmail, or SMTP.
- * @property CI_Encryption $encryption          Provides two-way keyed encryption via PHP's MCrypt and/or OpenSSL extensions.
+ * @property Encryption $encryption             Provides two-way keyed encryption via PHP's MCrypt and/or OpenSSL extensions.
  * @property CI_Form_validation $form_validation Form Validation Class
  * @property CI_FTP $ftp                        FTP Class
  * @property CI_Image_lib $image_lib            Image Manipulation class
  * @property CI_Migration $migration            All migrations should implement this, forces up() and down() and gives access to the CI super-global.
  * @property CI_Pagination $pagination          Pagination Class
  * @property CI_Parser $parser                  Parser Class
- * @property CI_Profiler $profiler              This class enables you to display benchmark, query, and other data in order to help with debugging and optimization.
+ * @property Toolbar $toolbar                   This class enables you to display benchmark, query, and other data in order to help with debugging and optimization.
  * @property CI_Table $table                    Lets you create tables manually or from database result objects, or arrays.
  * @property CI_Trackback $trackback            Trackback Sending/Receiving Class
  * @property CI_Typography $typography          Typography Class
@@ -82,10 +143,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Xmlrpc $xmlrpc                  XML-RPC request handler class
  * @property CI_Xmlrpcs $xmlrpcs                XML-RPC server class
  * @property CI_Zip $zip                        Zip Compression Class
- ***************** DEPRECATED LIBRARIES *****************
- * @property CI_Jquery $jquery                  Jquery Class
- * @property CI_Encrypt $encrypt                Provides two-way keyed encoding using Mcrypt
- * @property CI_Javascript $javascript          Javascript Class
  * **************** Fusion CMS LIBRARIES *****************
  * @property Acl $acl                           Acl Class
  * @property Administrator $administrator       Administrator Class
@@ -94,7 +151,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property Dbbackup $dbbackup                 Dbbackup Class
  * @property Items $items                       Items Class
  * @property Language $language                 Language Class
- * @property Logger $logger                     Logger Class
+ * @property Dblogger $dblogger                 Dblogger Class
  * @property Plugin $plugin                     Plugin Class
  * @property Plugins $plugins                   Plugins Class
  * @property Realm $realm                       Realm Class
@@ -114,7 +171,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 #[AllowDynamicProperties]
 class MX_Controller
 {
-    public $autoload = [];
+    public array $autoload = [];
 
     /**
      * [__construct description]
@@ -156,7 +213,7 @@ class MX_Controller
         $this->load->initialize($this);
 
         /* autoload module items */
-        $this->load->_autoloader($this->autoload);
+        $this->load->autoloader($this->autoload);
 
         $this->cookieLogIn();
     }
@@ -168,7 +225,7 @@ class MX_Controller
      *
      * @param [type] $class [description]
      *
-     * @return [type]        [description]
+     * @return mixed [type]        [description]
      */
     public function __get($class)
     {

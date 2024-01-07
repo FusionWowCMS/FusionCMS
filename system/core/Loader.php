@@ -57,14 +57,14 @@ class CI_Loader {
 	 *
 	 * @var	int
 	 */
-	protected $_ci_ob_level;
+	protected $ci_ob_level;
 
 	/**
 	 * List of paths to load views from
 	 *
 	 * @var	array
 	 */
-	protected $_ci_view_paths = [];
+	protected $ci_view_paths = [];
 
 	/**
 	 * List of paths to load libraries from
@@ -92,7 +92,7 @@ class CI_Loader {
 	 *
 	 * @var	array
 	 */
-	protected $_ci_cached_vars = [];
+	protected $ci_cached_vars = [];
 
 	/**
 	 * List of loaded classes
@@ -106,7 +106,7 @@ class CI_Loader {
 	 *
 	 * @var	array
 	 */
-	protected $_ci_models =	[];
+	protected $ci_models =	[];
 
 	/**
 	 * List of loaded helpers
@@ -136,7 +136,7 @@ class CI_Loader {
 	 */
 	public function __construct()
 	{
-		$this->_ci_ob_level = ob_get_level();
+		$this->ci_ob_level = ob_get_level();
 		$this->_ci_classes =& is_loaded();
 
 		log_message('info', 'Loader Class Initialized');
@@ -149,13 +149,13 @@ class CI_Loader {
 	 *
 	 * @todo	Figure out a way to move this to the constructor
 	 *		without breaking *package_path*() methods.
-	 * @uses	CI_Loader::_ci_autoloader()
+	 * @uses	CI_Loader::ci_autoloader()
 	 * @used-by	Controller::__construct()
 	 * @return	void
 	 */
 	public function initialize()
 	{
-		$this->_ci_autoloader();
+		$this->ci_autoloader();
 	}
 
 	// --------------------------------------------------------------------
@@ -265,7 +265,7 @@ class CI_Loader {
 			$name = $model;
 		}
 
-		if (in_array($name, $this->_ci_models, true))
+		if (in_array($name, $this->ci_models, true))
 		{
 			return $this;
 		}
@@ -354,7 +354,7 @@ class CI_Loader {
 			throw new RuntimeException("Class ".$model." already exists and doesn't extend CI_Model");
 		}
 
-		$this->_ci_models[] = $name;
+		$this->ci_models[] = $name;
 		$model = new $model();
 		$CI->$name = $model;
 		log_message('info', 'Model "'.get_class($model).'" initialized');
@@ -493,7 +493,7 @@ class CI_Loader {
 	 */
 	public function view($view, $vars = [], $return = false)
 	{
-		return $this->_ci_load(['_ci_view' => $view, '_ci_vars' => $this->_ci_prepare_view_vars($vars), '_ci_return' => $return]);
+		return $this->ci_load(['_ci_view' => $view, '_ci_vars' => $this->_ci_prepare_view_vars($vars), '_ci_return' => $return]);
 	}
 
 	// --------------------------------------------------------------------
@@ -507,7 +507,7 @@ class CI_Loader {
 	 */
 	public function file($path, $return = false)
 	{
-		return $this->_ci_load(array('_ci_path' => $path, '_ci_return' => $return));
+		return $this->ci_load(array('_ci_path' => $path, '_ci_return' => $return));
 	}
 
 	// --------------------------------------------------------------------
@@ -532,7 +532,7 @@ class CI_Loader {
 
 		foreach ($vars as $key => $val)
 		{
-			$this->_ci_cached_vars[$key] = $val;
+			$this->ci_cached_vars[$key] = $val;
 		}
 
 		return $this;
@@ -549,7 +549,7 @@ class CI_Loader {
 	 */
 	public function clear_vars()
 	{
-		$this->_ci_cached_vars = [];
+		$this->ci_cached_vars = [];
 		return $this;
 	}
 
@@ -565,7 +565,7 @@ class CI_Loader {
 	 */
 	public function get_var($key)
 	{
-		return isset($this->_ci_cached_vars[$key]) ? $this->_ci_cached_vars[$key] : null;
+		return isset($this->ci_cached_vars[$key]) ? $this->ci_cached_vars[$key] : null;
 	}
 
 	// --------------------------------------------------------------------
@@ -579,7 +579,7 @@ class CI_Loader {
 	 */
 	public function get_vars()
 	{
-		return $this->_ci_cached_vars;
+		return $this->ci_cached_vars;
 	}
 
 	// --------------------------------------------------------------------
@@ -785,7 +785,7 @@ class CI_Loader {
 		array_unshift($this->_ci_model_paths, $path);
 		array_unshift($this->_ci_helper_paths, $path);
 
-		$this->_ci_view_paths = [$path.'views/' => $view_cascade] + $this->_ci_view_paths;
+		$this->ci_view_paths = [$path.'views/' => $view_cascade] + $this->ci_view_paths;
 
 		// Add config file path
 		$config =& $this->_ci_get_component('config');
@@ -830,7 +830,7 @@ class CI_Loader {
 			array_shift($this->_ci_library_paths);
 			array_shift($this->_ci_model_paths);
 			array_shift($this->_ci_helper_paths);
-			array_shift($this->_ci_view_paths);
+			array_shift($this->ci_view_paths);
 			array_pop($config->_config_paths);
 		}
 		else
@@ -844,9 +844,9 @@ class CI_Loader {
 				}
 			}
 
-			if (isset($this->_ci_view_paths[$path.'views/']))
+			if (isset($this->ci_view_paths[$path.'views/']))
 			{
-				unset($this->_ci_view_paths[$path.'views/']);
+				unset($this->ci_view_paths[$path.'views/']);
 			}
 
 			if (($key = array_search($path, $config->_config_paths)) !== false)
@@ -859,7 +859,7 @@ class CI_Loader {
 		$this->_ci_library_paths = array_unique(array_merge($this->_ci_library_paths, [APPPATH, BASEPATH]));
 		$this->_ci_helper_paths = array_unique(array_merge($this->_ci_helper_paths, [APPPATH, BASEPATH]));
 		$this->_ci_model_paths = array_unique(array_merge($this->_ci_model_paths, [APPPATH]));
-		$this->_ci_view_paths = array_merge($this->_ci_view_paths, [APPPATH.'views/' => true]);
+		$this->ci_view_paths = array_merge($this->ci_view_paths, [APPPATH.'views/' => true]);
 		$config->_config_paths = array_unique(array_merge($config->_config_paths, [APPPATH]));
 
 		return $this;
@@ -877,15 +877,15 @@ class CI_Loader {
 	 *
 	 * @used-by	CI_Loader::view()
 	 * @used-by	CI_Loader::file()
-	 * @param	array	$_ci_data	Data to load
+	 * @param	array	$ci_data	Data to load
 	 * @return	object
 	 */
-	protected function _ci_load($_ci_data)
+	protected function ci_load($ci_data)
 	{
 		// Set the default data variables
 		foreach (array('_ci_view', '_ci_vars', '_ci_path', '_ci_return') as $_ci_val)
 		{
-			$$_ci_val = isset($_ci_data[$_ci_val]) ? $_ci_data[$_ci_val] : false;
+			$$_ci_val = isset($ci_data[$_ci_val]) ? $ci_data[$_ci_val] : false;
 		}
 
 		$file_exists = false;
@@ -901,7 +901,7 @@ class CI_Loader {
 			$_ci_ext = pathinfo($_ci_view, PATHINFO_EXTENSION);
 			$_ci_file = ($_ci_ext === '') ? $_ci_view.'.php' : $_ci_view;
 
-			foreach ($this->_ci_view_paths as $_ci_view_file => $cascade)
+			foreach ($this->ci_view_paths as $_ci_view_file => $cascade)
 			{
 				if (file_exists($_ci_view_file.$_ci_file))
 				{
@@ -941,8 +941,8 @@ class CI_Loader {
 		 * the two types and cache them so that views that are embedded within
 		 * other views can have access to these variables.
 		 */
-		empty($_ci_vars) OR $this->_ci_cached_vars = array_merge($this->_ci_cached_vars, $_ci_vars);
-		extract($this->_ci_cached_vars);
+		empty($_ci_vars) OR $this->ci_cached_vars = array_merge($this->ci_cached_vars, $_ci_vars);
+		extract($this->ci_cached_vars);
 
 		/*
 		 * Buffer the output
@@ -988,7 +988,7 @@ class CI_Loader {
 		 * it can be seen and included properly by the first included
 		 * template and any subsequent ones. Oy!
 		 */
-		if (ob_get_level() > $this->_ci_ob_level + 1)
+		if (ob_get_level() > $this->ci_ob_level + 1)
 		{
 			ob_end_flush();
 		}
@@ -1296,7 +1296,7 @@ class CI_Loader {
 	 * @used-by	CI_Loader::initialize()
 	 * @return	void
 	 */
-	protected function _ci_autoloader()
+	protected function ci_autoloader()
 	{
 		if (file_exists(APPPATH.'config/autoload.php'))
 		{

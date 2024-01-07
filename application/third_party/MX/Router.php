@@ -76,12 +76,12 @@ class MX_Router extends CI_Router
         $segments = $this->locate($segments);
 
         if ($this->located == -1) {
-            $this->_set_404override_controller();
+            $this->set_404override_controller();
             return;
         }
 
         if (empty($segments)) {
-            $this->_set_default_controller();
+            $this->set_default_controller();
             return;
         }
 
@@ -103,9 +103,9 @@ class MX_Router extends CI_Router
      *
      * @method _set_404override_controller
      */
-    protected function _set_404override_controller()
+    protected function set_404override_controller()
     {
-        $this->_set_module_path($this->routes['404_override']);
+        $this->set_module_path($this->routes['404_override']);
     }
 
     /**
@@ -113,17 +113,17 @@ class MX_Router extends CI_Router
      *
      * @method _set_default_controller
      */
-    protected function _set_default_controller()
+    protected function set_default_controller()
     {
         if (empty($this->directory)) {
             /* set the default controller module path */
-            $this->_set_module_path($this->default_controller);
+            $this->set_module_path($this->default_controller);
         }
 
-        parent::_set_default_controller();
+        parent::set_default_controller();
 
         if (empty($this->class)) {
-            $this->_set_404override_controller();
+            $this->set_404override_controller();
         }
     }
 
@@ -195,21 +195,21 @@ class MX_Router extends CI_Router
             return;
         }
 
-        /* application sub-directory controller exists? */
+        /* application subdirectory controller exists? */
         if ($directory) {
             if (is_file(APPPATH . 'controllers/' . $module . '/' . ucfirst($directory) . $ext)) {
                 $this->directory = $module . '/';
                 return array_slice($segments, 1);
             }
 
-            /* application sub-sub-directory controller exists? */
+            /* application sub-subdirectory controller exists? */
             if ($controller && is_file(APPPATH . 'controllers/' . $module . '/' . $directory . '/' . ucfirst($controller) . $ext)) {
                 $this->directory = $module . '/' . $directory . '/';
                 return array_slice($segments, 2);
             }
         }
 
-        /* application controllers sub-directory exists? */
+        /* application controllers subdirectory exist? */
         if (is_dir(APPPATH . 'controllers/' . $module . '/')) {
             $this->directory = $module . '/';
             return array_slice($segments, 1);
@@ -229,7 +229,7 @@ class MX_Router extends CI_Router
      *
      * @param [type]  &$_route [description]
      */
-    protected function _set_module_path(&$_route)
+    protected function set_module_path(&$_route)
     {
         if (! empty($_route)) {
             // Are module/directory/controller/method segments being specified?
@@ -268,7 +268,7 @@ class MX_Router extends CI_Router
         $suffix = $this->config->item('controller_suffix');
         // Fixing Error Message: strpos(): Non-string needles will be interpreted as strings in the future.
         // Use an explicit chr() call to preserve the current behavior.
-        if ($suffix && strpos($class, $suffix) === false) {
+        if ($suffix && !str_contains($class, $suffix)) {
             $class .= $suffix;
         }
         parent::set_class($class);
