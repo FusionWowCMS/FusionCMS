@@ -933,6 +933,25 @@ CREATE TABLE `paypal_logs`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `pending_accounts`
+-- ----------------------------
+DROP TABLE IF EXISTS `pending_accounts`;
+CREATE TABLE `pending_accounts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `timestamp` int(11) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `key` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of pending_accounts
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for ranks
 -- ----------------------------
 DROP TABLE IF EXISTS `ranks`;

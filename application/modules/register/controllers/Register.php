@@ -23,6 +23,9 @@ class Register extends MX_Controller
         $this->load->helper('email_helper');
 
         $this->load->config('captcha');
+
+        $this->load->config('activation');
+        $this->load->model('activation_model');
     }
 
     public function index()
@@ -58,15 +61,19 @@ class Register extends MX_Controller
             $emailAvailable = $this->email_check($this->input->post('register_email'));
             $usernameAvailable = $this->username_check($this->input->post('register_username'));
 
-            if ($captcha_type == 'recaptcha') {
-                if($this->recaptcha->getEnabledRecaptcha()) {
-                    $recaptcha = $this->input->post('g-recaptcha-response');
-                    $captcha = $this->recaptcha->verifyResponse($recaptcha)['success'];
+            if ($use_captcha) {
+                if ($captcha_type == 'recaptcha') {
+                    if($this->recaptcha->getEnabledRecaptcha()) {
+                        $recaptcha = $this->input->post('g-recaptcha-response');
+                        $captcha = $this->recaptcha->verifyResponse($recaptcha)['success'];
+                    }
+                    else
+                        $recaptcha = 'disabled';
+                } else if ($captcha_type == 'inbuilt') {
+                    $captcha = strtoupper($this->input->post('register_captcha')) == strtoupper($captchaObj->getValue());
                 }
-                else
-                    $recaptcha = 'disabled';
-            } else if ($captcha_type == 'inbuilt') {
-                $captcha = strtoupper($this->input->post('register_captcha')) == strtoupper($captchaObj->getValue());
+            } else {
+                $captcha = true;
             }
 
         } else {
@@ -134,16 +141,30 @@ class Register extends MX_Controller
                 "username" => $username,
                 "email" => $email,
                 "password" => $password,
+                "email_activation" => $this->config->item('enable_email_activation')
             ];
 
-            //Register our user.
-            $this->external_account_model->createAccount($username, $password, $email);
+            if($this->config->item('enable_email_activation'))
+            {
+                $key = $this->activation_model->add($username, $password, $email);
 
-            // Log in
-            $sha_pass_hash = $this->user->createHash($username, $password);
-            $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
+                $link = base_url().'register/activate/'.$key;
 
-            $this->template->view($this->template->box(lang("created", "register"), $this->template->loadPage("register_success.tpl", $data)));
+                sendMail($email, $this->config->item('server_name').': ' . lang('activate_account', 'register'), $username, lang('created_account_activate', 'register') . ' <a href="' . $link . '">' . $link . '</a>', 1);
+            }
+            else
+            {
+                //Register our user.
+                $this->external_account_model->createAccount($username, $password, $email);
+
+                // Log in
+                $sha_pass_hash = $this->user->createHash($username, $password);
+                $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
+            }
+
+            $title = ($data['email_activation']) ? lang("confirm_account", "register") : lang("created", "register");
+
+            $this->template->view($this->template->box($title, $this->template->loadPage("register_success.tpl", $data)));
         }
     }
 
@@ -175,5 +196,41 @@ class Register extends MX_Controller
 
             return false;
         }
+    }
+
+    public function activate($key = false)
+    {
+        if(!$key)
+        {
+            $this->template->box(lang("invalid_key", "register"), lang("invalid_key_long", "register"), true);
+        }
+
+        $account = $this->activation_model->getAccount($key);
+
+        if(!$account)
+        {
+            $this->template->box(lang("invalid_key", "register"), lang("invalid_key_long", "register"), true);
+        }
+
+        $this->activation_model->remove($account['id'], $account['username'], $account['email']);
+
+        $this->external_account_model->createAccount($account['username'], $account['password'], $account['email']);
+
+        // Log in
+        $this->user->setUserDetails($account['username'], $account['password']);
+
+        // Show success message
+        $data = [
+            "url" => $this->template->page_url,
+            "account" => $account['username'],
+            "username" => $account['username'],
+            "email" => $account['email'],
+            "password" => $account['password'],
+            "email_activation" => false
+        ];
+
+        $title = lang("created", "register");
+
+        $this->template->view($this->template->box($title, $this->template->loadPage("register_success.tpl", $data)));
     }
 }

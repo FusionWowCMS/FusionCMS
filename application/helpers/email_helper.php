@@ -50,12 +50,12 @@ function sendMail(string $receiver, string $subject, string $username, string $m
     $CI->email->setMessage($message);
 
     ######
-    $data = array(
+    $data = [
         'username' => $username,
         'message' => $message,
         'server_name' => $CI->config->item('server_name'),
         'url' => $CI->template->page_url,
-    );
+    ];
     $template = $CI->cms_model->getTemplate($templateId);
     $body = $CI->load->view('email_templates/' . $template['template_name'], $data, true);
     ######
