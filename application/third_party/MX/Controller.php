@@ -171,7 +171,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 #[AllowDynamicProperties]
 class MX_Controller
 {
-    public array $autoload = [];
+    public $autoload = [];
 
     /**
      * [__construct description]
@@ -213,7 +213,7 @@ class MX_Controller
         $this->load->initialize($this);
 
         /* autoload module items */
-        $this->load->autoloader($this->autoload);
+        $this->load->_autoloader($this->autoload);
 
         $this->cookieLogIn();
     }
@@ -225,7 +225,7 @@ class MX_Controller
      *
      * @param [type] $class [description]
      *
-     * @return mixed [type]        [description]
+     * @return [type]        [description]
      */
     public function __get($class)
     {

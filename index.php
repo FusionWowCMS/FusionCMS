@@ -190,6 +190,40 @@ else
     define('APPPATH', BASEPATH.$application_folder.'/');
 }
 
+// The path to the "views" directory
+if (! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
+{
+    $view_folder = APPPATH.'views';
+}
+elseif (is_dir($view_folder))
+{
+    if (($_temp = realpath($view_folder)) !== false)
+    {
+        $view_folder = $_temp;
+    }
+    else
+    {
+        $view_folder = strtr(
+            rtrim($view_folder, '/\\'),
+            '/\\',
+            DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+        );
+    }
+}
+elseif (is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
+{
+    $view_folder = APPPATH.strtr(
+            trim($view_folder, '/\\'), '/\\', DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR);
+}
+else
+{
+    header('HTTP/1.1 503 Service Unavailable.', true, 503);
+    echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+    exit(3); // EXIT_CONFIG
+}
+
+define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

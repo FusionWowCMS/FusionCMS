@@ -43,11 +43,11 @@ defined('EXT') or define('EXT', '.php');
  **/
 class MX_Loader extends CI_Loader
 {
-    protected $module;
+    protected $_module;
     protected $controller;
 
-    public array $ci_plugins = [];
-    public $ci_cached_vars = [];
+    public array $_ci_plugins = [];
+    public $_ci_cached_vars = [];
 
     /**
      * [Initialize the loader variables]
@@ -61,7 +61,7 @@ class MX_Loader extends CI_Loader
     public function initialize($controller = null)
     {
         /* set the module name */
-        $this->module = CI::$APP->router->fetch_module();
+        $this->_module = CI::$APP->router->fetch_module();
 
         if ($controller instanceof MX_Controller) {
             /* reference to the module controller */
@@ -77,11 +77,11 @@ class MX_Loader extends CI_Loader
             parent::initialize();
 
             /* autoload module items */
-            $this->autoloader([]);
+            $this->_autoloader(array());
         }
 
         /* add this module path to the loader variables */
-        $this->_add_module_paths($this->module);
+        $this->_add_module_paths($this->_module);
     }
 
     /**
@@ -111,10 +111,10 @@ class MX_Loader extends CI_Loader
      * @method config
      *
      * @param [type]  $file            [description]
-     * @param boolean $use_sections [description]
+     * @param boolean $use_sections    [description]
      * @param boolean $fail_gracefully [description]
      *
-     * @return bool
+     * @return [type]                   [description]
      */
     public function config($file, $use_sections = false, $fail_gracefully = false)
     {
@@ -126,10 +126,11 @@ class MX_Loader extends CI_Loader
      *
      * @method database
      *
-     * @param string $params [description]
-     * @param boolean $return [description]
-     * @param null $query_builder
-     * @return false|mixed|MX_Loader
+     * @param string   $params        [description]
+     * @param boolean  $return        [description]
+     * @param [type]   $query_builder [description]
+     *
+     * @return [type]                  [description]
      */
     public function database($params = '', $return = false, $query_builder = null)
     {
@@ -156,28 +157,28 @@ class MX_Loader extends CI_Loader
      *
      * @method helper
      *
-     * @param array  $helpers [description]
+     * @param array  $helper [description]
      *
      * @return [type]         [description]
      */
-    public function helper($helpers = [])
+    public function helper($helper = [])
     {
-        if (is_array($helpers)) {
-            return $this->helpers($helpers);
+        if (is_array($helper)) {
+            return $this->helpers($helper);
         }
 
-        if (isset($this->_ci_helpers[$helpers])) {
+        if (isset($this->_ci_helpers[$helper])) {
             return;
         }
         // Backward function
-        [$path, $module_helper] = MX_Modules::find($helpers . '_helper', $this->module, 'helpers/');
+        [$path, $_helper] = MX_Modules::find($helper . '_helper', $this->_module, 'helpers/');
 
         if ($path === false) {
-            return parent::helper($helpers);
+            return parent::helper($helper);
         }
 
-        MX_Modules::load_file($module_helper, $path);
-        $this->_ci_helpers[$module_helper] = true;
+        MX_Modules::load_file($_helper, $path);
+        $this->_ci_helpers[$_helper] = true;
         return $this;
     }
 
@@ -192,8 +193,8 @@ class MX_Loader extends CI_Loader
      */
     public function helpers($helpers = [])
     {
-        foreach ($helpers as $helper) {
-            $this->helper($helper);
+        foreach ($helpers as $_helper) {
+            $this->helper($_helper);
         }
         return $this;
     }
@@ -228,8 +229,8 @@ class MX_Loader extends CI_Loader
      */
     public function languages($languages)
     {
-        foreach ($languages as $language) {
-            $this->language($language);
+        foreach ($languages as $_language) {
+            $this->language($_language);
         }
         return $this;
     }
@@ -260,21 +261,21 @@ class MX_Loader extends CI_Loader
         ($_alias = strtolower($object_name ?? '')) or $_alias = $class;
 
         // Backward function
-        [$path, $module_library] = MX_Modules::find($library, $this->module, 'libraries/');
+        [$path, $_library] = MX_Modules::find($library, $this->_module, 'libraries/');
 
         /* load library config file as params */
         if ($params === null) {
             // Backward function
-            [$path2, $file] = MX_Modules::find($_alias, $this->module, 'config/');
+            [$path2, $file] = MX_Modules::find($_alias, $this->_module, 'config/');
             $path2 && $params = MX_Modules::load_file($file, $path2, 'config');
         }
 
         if ($path === false) {
-            $this->_ci_load_library($module_library, $params, $object_name);
+            $this->_ci_load_library($library, $params, $object_name);
         } else {
-            MX_Modules::load_file($module_library, $path);
+            MX_Modules::load_file($_library, $path);
 
-            $library = ucfirst($module_library);
+            $library = ucfirst($_library);
             CI::$APP->$_alias = new $library($params);
 
             $this->_ci_classes[$class] = $_alias;
@@ -318,12 +319,12 @@ class MX_Loader extends CI_Loader
 
         ($_alias = $object_name) or $_alias = basename($model);
 
-        if (in_array($_alias, $this->ci_models, true)) {
+        if (in_array($_alias, $this->_ci_models, true)) {
             return $this;
         }
 
         // Backward function
-        [$path, $module_model] = MX_Modules::find(strtolower($model), $this->module, 'models/');
+        [$path, $_model] = MX_Modules::find(strtolower($model), $this->_module, 'models/');
 
         if ($path === false) {
             /* check application & packages */
@@ -338,12 +339,12 @@ class MX_Loader extends CI_Loader
                 $this->database($connect, false, true);
             }
 
-            MX_Modules::load_file($module_model, $path);
+            MX_Modules::load_file($_model, $path);
 
-            $model = ucfirst($module_model);
+            $model = ucfirst($_model);
             CI::$APP->$_alias = new $model();
 
-            $this->ci_models[] = $_alias;
+            $this->_ci_models[] = $_alias;
         }
         return $this;
     }
@@ -397,8 +398,8 @@ class MX_Loader extends CI_Loader
      */
     public function modules($modules)
     {
-        foreach ($modules as $module) {
-            $this->module($module);
+        foreach ($modules as $_module) {
+            $this->module($_module);
         }
         return $this;
     }
@@ -418,19 +419,19 @@ class MX_Loader extends CI_Loader
             return $this->plugins($plugin);
         }
 
-        if (isset($this->ci_plugins[$plugin])) {
+        if (isset($this->_ci_plugins[$plugin])) {
             return $this;
         }
 
         // Backward function
-        [$path, $module_plugin] = MX_Modules::find($plugin . '_pi', $this->module, 'plugins/');
+        [$path, $_plugin] = MX_Modules::find($plugin . '_pi', $this->_module, 'plugins/');
 
-        if ($path === false && ! is_file($module_plugin = APPPATH . 'plugins/' . $module_plugin . EXT)) {
-            show_error("Unable to locate the plugin file: {$module_plugin}");
+        if ($path === false && ! is_file($_plugin = APPPATH . 'plugins/' . $_plugin . EXT)) {
+            show_error("Unable to locate the plugin file: {$_plugin}");
         }
 
-        MX_Modules::load_file($module_plugin, $path);
-        $this->ci_plugins[$plugin] = true;
+        MX_Modules::load_file($_plugin, $path);
+        $this->_ci_plugins[$plugin] = true;
         return $this;
     }
 
@@ -445,8 +446,8 @@ class MX_Loader extends CI_Loader
      */
     public function plugins($plugins)
     {
-        foreach ($plugins as $plugin) {
-            $this->plugin($plugin);
+        foreach ($plugins as $_plugin) {
+            $this->plugin($_plugin);
         }
         return $this;
     }
@@ -465,17 +466,17 @@ class MX_Loader extends CI_Loader
     public function view($view, $vars = [], $return = false)
     {
         // Backward function
-        [$path, $module_view] = MX_Modules::find($view, $this->module, 'views/');
+        [$path, $_view] = MX_Modules::find($view, $this->_module, 'views/');
 
         if ($path) {
-            $this->ci_view_paths = [$path => true] + $this->ci_view_paths;
-            $view = $module_view;
+            $this->_ci_view_paths = [$path => true] + $this->_ci_view_paths;
+            $view = $_view;
         }
 
         if (method_exists($this, '_ci_object_to_array')) {
-            return $this->ci_load(['_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => $return]);
+            return $this->_ci_load(['_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => $return]);
         } else {
-            return $this->ci_load(['_ci_view' => $view, '_ci_vars' => $this->_ci_prepare_view_vars($vars), '_ci_return' => $return]);
+            return $this->_ci_load(['_ci_view' => $view, '_ci_vars' => $this->_ci_prepare_view_vars($vars), '_ci_return' => $return]);
         }
     }
 
@@ -516,57 +517,57 @@ class MX_Loader extends CI_Loader
      *
      * @return [type]             [description]
      */
-    public function ci_load($ci_data)
+    public function _ci_load($_ci_data)
     {
-        extract($ci_data);
+        extract($_ci_data);
 
-        if (isset($ci_view)) {
-            $ci_path = '';
+        if (isset($_ci_view)) {
+            $_ci_path = '';
 
             /* add file extension if not provided */
-            $_ci_file = pathinfo($ci_view, PATHINFO_EXTENSION) ? $ci_view : $ci_view . EXT;
+            $_ci_file = pathinfo($_ci_view, PATHINFO_EXTENSION) ? $_ci_view : $_ci_view . EXT;
 
-            foreach ($this->ci_view_paths as $path => $cascade) {
+            foreach ($this->_ci_view_paths as $path => $cascade) {
                 if (file_exists($view = $path . $_ci_file)) {
-                    $ci_path = $view;
+                    $_ci_path = $view;
                     break;
                 }
                 if (! $cascade) {
                     break;
                 }
             }
-        } elseif (isset($ci_path)) {
-            $_ci_file = basename($ci_path);
-            if (! file_exists($ci_path)) {
-                $ci_path = '';
+        } elseif (isset($_ci_path)) {
+            $_ci_file = basename($_ci_path);
+            if (! file_exists($_ci_path)) {
+                $_ci_path = '';
             }
         }
 
-        if (empty($ci_path)) {
+        if (empty($_ci_path)) {
             show_error('Unable to load the requested file: ' . $_ci_file);
         }
 
-        if (isset($ci_vars)) {
-            $this->ci_cached_vars = array_merge($this->ci_cached_vars, (array) $ci_vars);
+        if (isset($_ci_vars)) {
+            $this->_ci_cached_vars = array_merge($this->_ci_cached_vars, (array) $_ci_vars);
         }
 
-        extract($this->ci_cached_vars);
+        extract($this->_ci_cached_vars);
 
         ob_start();
 
         if ((bool) @ini_get('short_open_tag') === false && CI::$APP->config->item('rewrite_short_tags')) {
-            echo eval('?>' . preg_replace('/;*\s*\?>/', '; ?>', str_replace('<?=', '<?php echo ', file_get_contents($ci_path))));
+            echo eval('?>' . preg_replace('/;*\s*\?>/', '; ?>', str_replace('<?=', '<?php echo ', file_get_contents($_ci_path))));
         } else {
-            include($ci_path);
+            include($_ci_path);
         }
 
-        log_message('debug', 'File loaded: ' . $ci_path);
+        log_message('debug', 'File loaded: ' . $_ci_path);
 
-        if ($ci_return === true) {
+        if ($_ci_return === true) {
             return ob_get_clean();
         }
 
-        if (ob_get_level() > $this->ci_ob_level + 1) {
+        if (ob_get_level() > $this->_ci_ob_level + 1) {
             ob_end_flush();
         } else {
             CI::$APP->output->append_output(ob_get_clean());
@@ -576,26 +577,26 @@ class MX_Loader extends CI_Loader
     /**
      * [Autoload module items]
      *
-     * @method autoloader
+     * @method _autoloader
      *
      * @param [type]      $autoload [description]
      *
      * @return [type]                [description]
      */
-    public function autoloader($autoload)
+    public function _autoloader($autoload)
     {
         $path = false;
 
-        if ($this->module) {
+        if ($this->_module) {
             // Backward function
-            [$path, $file] = MX_Modules::find('constants', $this->module, 'config/');
+            [$path, $file] = MX_Modules::find('constants', $this->_module, 'config/');
             /* module constants file */
             if ($path !== false) {
                 include_once $path . $file . EXT;
             }
 
             // Backward function
-            [$path, $file] = MX_Modules::find('autoload', $this->module, 'config/');
+            [$path, $file] = MX_Modules::find('autoload', $this->_module, 'config/');
 
             /* module autoload file */
             if ($path !== false) {
@@ -640,7 +641,7 @@ class MX_Loader extends CI_Loader
 
         /* autoload database & libraries */
         if (isset($autoload['libraries'])) {
-            if (!CI::$APP->config->item('database') && in_array('database', $autoload['libraries'])) {
+            if (!$db = CI::$APP->config->item('database') && in_array('database', $autoload['libraries'])) {
                 $this->database();
 
                 $autoload['libraries'] = array_diff($autoload['libraries'], array('database'));
@@ -662,7 +663,7 @@ class MX_Loader extends CI_Loader
         /* autoload module controllers */
         if (isset($autoload['modules'])) {
             foreach ($autoload['modules'] as $controller) {
-                ($controller != $this->module) && $this->module($controller);
+                ($controller != $this->_module) && $this->module($controller);
             }
         }
     }

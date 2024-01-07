@@ -47,16 +47,16 @@ class MX_Lang extends CI_Lang
      *
      * @method load
      *
-     * @param array $langFile
-     * @param string $lang [description]
-     * @param boolean $return [description]
+     * @param [type]  $langfile   [description]
+     * @param string  $lang       [description]
+     * @param boolean $return     [description]
      * @param boolean $add_suffix [description]
-     * @param string $alt_path [description]
-     * @param string $module [description]
+     * @param string  $alt_path   [description]
+     * @param string  $_module    [description]
      *
-     * @return array|bool|mixed|string[]|void
+     * @return [type]              [description]
      */
-    public function load($langFile = [], $lang = '', $return = false, $add_suffix = true, $alt_path = '', string $module = '')
+    public function load($langFile = [], $lang = '', $return = false, $add_suffix = true, $alt_path = '', string $_module = '')
     {
         if (is_array($langFile)) {
             foreach ($langFile as $_lang) {
@@ -72,16 +72,16 @@ class MX_Lang extends CI_Lang
             return $this->language;
         }
 
-        $module or $module = CI::$APP->router->fetch_module();
+        $_module or $_module = CI::$APP->router->fetch_module();
 
-        [$path, $module_langFile] = MX_Modules::find($langFile . '_lang', $module, 'language/' . $idiom . '/');
+        [$path, $_langfile] = MX_Modules::find($langFile . '_lang', $_module, 'language/' . $idiom . '/');
 
         if ($path === false) {
             if ($lang = parent::load($langFile, $lang, $return, $add_suffix, $alt_path)) {
                 return $lang;
             }
         } else {
-            if ($lang = MX_Modules::load_file($module_langFile, $path, 'lang')) {
+            if ($lang = MX_Modules::load_file($_langfile, $path, 'lang')) {
                 if ($return) {
                     return $lang;
                 }
