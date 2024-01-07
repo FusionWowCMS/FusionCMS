@@ -12,6 +12,7 @@
  *  will automatically look in that folder too.
  */
 
+$lang['account_creation'] = "ایجاد حساب کاربری";
 $lang['register'] = "ثبت نام";
 $lang['username_limit_length'] = "نام کاربری باید بین 4 تا 24 کاراکتر باشد";
 $lang['username_limit'] = "نام کاربری باید فقط شامل حروف الفبا و عدد باشد";

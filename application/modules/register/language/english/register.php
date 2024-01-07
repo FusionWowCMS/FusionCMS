@@ -12,6 +12,7 @@
  *  will automatically look in that folder too.
  */
 
+$lang['account_creation'] = "Account creation";
 $lang['register'] = "Register";
 $lang['username_limit_length'] = "Username must be between 4 and 24 characters long";
 $lang['username_limit'] = "Username may only contain alphabetical and numerical characters";

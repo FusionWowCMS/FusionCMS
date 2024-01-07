@@ -76,26 +76,20 @@ class Register extends MX_Controller
         }
 
         //Check if everything went correct
-        if (
-            $this->form_validation->run() == false
-            || !$captcha
-            || !count($_POST)
-            || !$usernameAvailable
-            || !$emailAvailable
-        ) {
+        if (!$this->form_validation->run() || !$captcha || !count($_POST) || !$usernameAvailable || !$emailAvailable) {
             $fields = array('username', 'email', 'password', 'password_confirm');
 
-            $data = array(
-                        "username_error" => $this->usernameError,
-                        "email_error" => $this->emailError,
-                        "password_error" => "",
-                        "password_confirm_error" => "",
-                        "use_captcha" => $this->config->item('use_captcha'),
-                        "captcha_type" => $this->config->item('captcha_type'),
-                        "recaptcha_html" => $this->recaptcha->getScriptTag() . $this->recaptcha->getWidget(),
-                        "captcha_error" => "",
-                        "url" => $this->template->page_url
-                    );
+            $data = [
+                "username_error" => $this->usernameError,
+                "email_error" => $this->emailError,
+                "password_error" => "",
+                "password_confirm_error" => "",
+                "use_captcha" => $this->config->item('use_captcha'),
+                "captcha_type" => $this->config->item('captcha_type'),
+                "recaptcha_html" => $this->recaptcha->getScriptTag() . $this->recaptcha->getWidget(),
+                "captcha_error" => "",
+                "url" => $this->template->page_url
+            ];
 
             if (count($_POST) > 0) {
                 // Loop through fields and assign error or success image
@@ -119,11 +113,11 @@ class Register extends MX_Controller
             }
 
             // If not then display our page again
-            $this->template->view($this->template->loadPage("page.tpl", array(
+            $this->template->view($this->template->loadPage("page.tpl", [
                 "module" => "default",
-                "headline" => "Account creation",
+                "headline" => lang("account_creation", "register"),
                 "content" => $this->template->loadPage("register.tpl", $data),
-            )), false, "modules/register/js/validate.js", "Account Creation");
+            ]), false, "modules/register/js/validate.js");
         } else {
             $username = $this->input->post('register_username');
             $password = $this->input->post('register_password');
@@ -134,13 +128,13 @@ class Register extends MX_Controller
             }
 
             // Show a success message
-            $data = array(
+            $data = [
                 "url" => $this->template->page_url,
                 "account" => $username,
                 "username" => $username,
                 "email" => $email,
                 "password" => $password,
-            );
+            ];
 
             //Register our user.
             $this->external_account_model->createAccount($username, $password, $email);
@@ -148,11 +142,9 @@ class Register extends MX_Controller
             // Log in
             $sha_pass_hash = $this->user->createHash($username, $password);
             $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
+
+            $this->template->view($this->template->box(lang("created", "register"), $this->template->loadPage("register_success.tpl", $data)));
         }
-
-        $title = lang("created", "register");
-
-        $this->template->view($this->template->box($title, $this->template->loadPage("register_success.tpl", $data)));
     }
 
     public function email_check($email)
