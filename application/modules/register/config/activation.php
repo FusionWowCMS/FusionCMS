@@ -1,3 +1,3 @@
 <?php
 
-$config['enable_email_activation'] = true;
+$config['enable_email_activation'] = false;
