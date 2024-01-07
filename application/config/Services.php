@@ -1,7 +1,16 @@
 <?php namespace App\Config;
 
-use CodeIgniter\HTTP\{Response, URI};
+use CodeIgniter\HTTP\{CLIRequest, CURLRequest, IncomingRequest, Response, URI};
+use CodeIgniter\Autoloader\Autoloader;
+use CodeIgniter\Debug\Exceptions;
+use CodeIgniter\Debug\Iterator;
+use CodeIgniter\Debug\Timer;
+use CodeIgniter\Debug\Toolbar;
+use CodeIgniter\Log\Logger;
+use CodeIgniter\Router\RouteCollection;
 use CodeIgniter\Router\RouteCollectionInterface;
+use CodeIgniter\Router\Router;
+use CodeIgniter\Security\Security;
 
 /**
  * Services Configuration file.
@@ -40,7 +49,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\Autoloader\Autoloader();
+            return new Autoloader();
         }
 
         return self::getSharedInstance('autoloader');
@@ -56,8 +65,8 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\HTTP\CLIRequest(
-                new \CodeIgniter\HTTP\URI()
+            return new CLIRequest(
+                new URI()
             );
         }
 
@@ -82,7 +91,7 @@ class Services
             $response = new Response();
         }
 
-        return new \CodeIgniter\HTTP\CURLRequest(
+        return new CURLRequest(
             new URI(),
             $response,
             $options
@@ -102,7 +111,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\Debug\Exceptions();
+            return new Exceptions();
         }
 
         return self::getSharedInstance('exceptions');
@@ -119,7 +128,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\Debug\Iterator();
+            return new Iterator();
         }
 
         return self::getSharedInstance('iterator');
@@ -133,7 +142,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\Log\Logger();
+            return new Logger();
         }
 
         return self::getSharedInstance('logger');
@@ -165,8 +174,8 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\HTTP\IncomingRequest(
-                new \CodeIgniter\HTTP\URI()
+            return new IncomingRequest(
+                new URI()
             );
         }
 
@@ -182,7 +191,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\HTTP\Response();
+            return new Response();
         }
 
         return self::getSharedInstance('response');
@@ -198,7 +207,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\Router\RouteCollection();
+            return new RouteCollection();
         }
 
         return self::getSharedInstance('routes');
@@ -222,7 +231,7 @@ class Services
             $routes = self::routes();
         }
 
-        return new \CodeIgniter\Router\Router($routes);
+        return new Router($routes);
     }
 
     //--------------------------------------------------------------------
@@ -235,7 +244,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\Security\Security();
+            return new Security();
         }
 
         return self::getSharedInstance('security');
@@ -251,7 +260,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\Debug\Timer();
+            return new Timer();
         }
 
         return self::getSharedInstance('timer');
@@ -263,7 +272,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\Debug\Toolbar();
+            return new Toolbar();
         }
 
         return self::getSharedInstance('toolbar');
@@ -278,7 +287,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new \CodeIgniter\HTTP\URI($uri);
+            return new URI($uri);
         }
 
         return self::getSharedInstance('uri', $uri);
