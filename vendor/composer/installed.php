@@ -3,7 +3,7 @@
         'name' => 'fusionwowcms/fusioncms',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '1d21a55c8a4ca7929175427986a3e1fc39e89ad8',
+        'reference' => 'fda9ec4a396abfc015e09d172cdb7acebc99dd79',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'chillerlan/php-qrcode' => array(
-            'pretty_version' => '5.0.0',
-            'version' => '5.0.0.0',
-            'reference' => 'a301af5b7faa7fcd690b29f38b283616a7d93b89',
+            'pretty_version' => '5.0.1',
+            'version' => '5.0.1.0',
+            'reference' => 'e81ed39ca3c94357aa021c7525fa9ffb451018d1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../chillerlan/php-qrcode',
             'aliases' => array(),
@@ -76,7 +76,7 @@
         'fusionwowcms/fusioncms' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '1d21a55c8a4ca7929175427986a3e1fc39e89ad8',
+            'reference' => 'fda9ec4a396abfc015e09d172cdb7acebc99dd79',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
