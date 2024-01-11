@@ -781,4 +781,33 @@ var Settings = {
 		else
 			$('#toggle_wowdb').fadeOut(300);
 	},
+
+	saveWowDatabase: function()
+	{
+		var values = {
+			account_encryption:$("#account_encryption").val(),
+			rbac:$("#rbac").val(),
+			battle_net:$("#battle_net").val(),
+			battle_net_encryption:$("#battle_net_encryption").val()
+		};
+
+		$.post(Config.URL + "admin/settings/saveAuthConfig", values, function(response)
+		{
+			if(response == "yes")
+			{
+				Swal.fire({
+					icon: "success",
+					title: "Auth configs have been saved!",
+				});
+			}
+			else
+			{
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: response,
+				})
+			}
+		});
+	},
 }

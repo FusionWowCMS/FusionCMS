@@ -23,6 +23,7 @@ class Install
 				case "checkApacheModules": $this->checkApacheModules(); break;
 				case "checkPhpVersion": $this->checkPhpVersion(); break;
 				case "checkDbConnection": $this->checkDbConnection(); break;
+				case "checkAuthConfig": $this->checkAuthConfig(); break;
 				case "final": $this->finalStep(); break;
 				case "getEmulators": $this->getEmulators(); break;
 			}
@@ -102,10 +103,25 @@ class Install
 	    	$_POST['username'], 
 	    	$_POST['password'], 
 	    	$_POST['database'],
-	    	isset($_POST['port']) ? $_POST['port'] : self::MYSQL_DEFAULT_PORT 
+	    	isset($_POST['port']) ? $_POST['port'] : self::MYSQL_DEFAULT_PORT
 	    );
-		
+
 		die($db->connect_error ? $db->connect_error : '1');
+	}
+
+	private function checkAuthConfig()
+	{
+        $fields = ['realmd_account_encryption', 'realmd_rbac', 'realmd_battle_net'];
+
+        if(!empty($_POST['realmd_battle_net']) && $_POST['realmd_battle_net'] == 'true')
+            $fields[] = 'realmd_battle_net_encryption';
+
+        // Make sure auth-settings-fields are filled
+        foreach($fields as $field)
+            if(empty($_POST[$field]))
+                die('Field `' . str_replace('realmd_', '', $field) . '` can\'t be empty.');
+
+		die('1');
 	}
 
 	private function config()
@@ -152,6 +168,23 @@ class Install
 		{
 			$config->set($key, $value);
 		}
+
+		$config->save();
+
+        // config/auth.php
+		$config = new ConfigEditor('../application/config/auth.php');
+
+        $data = [
+            'rbac'                  => $_POST['realmd_rbac'],
+            'battle_net'            => $_POST['realmd_battle_net'],
+            'account_encryption'    => $_POST['realmd_account_encryption']
+        ];
+
+        if(!empty($_POST['realmd_battle_net']) && $_POST['realmd_battle_net'] == 'true')
+            $data['battle_net_encryption'] = $_POST['realmd_battle_net_encryption'];
+
+		foreach($data as $key => $value)
+			$config->set($key, $value);
 
 		$config->save();
 
@@ -298,10 +331,9 @@ $db["account"]["stricton"] = false;';
         foreach($realms as $realm)
         {
             // Make sure all fields exists in realm array
-            foreach($fields as $field) {
-                if (empty($realm[$field]) && $field != 'realm_expansion')
+            foreach($fields as $field)
+                if(empty($realm[$field]) && $field != 'realm_expansion')
                     die('Field `' . $field . '` can\'t be empty.');
-            }
 
             // Connect to characters and world database
             @$connection = [

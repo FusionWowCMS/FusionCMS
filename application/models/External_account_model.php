@@ -1,5 +1,7 @@
 <?php
 
+use MX\CI;
+
 /**
  * @package FusionCMS
  * @author  Jesper Lindström
@@ -113,8 +115,7 @@ class External_account_model extends CI_Model
 
         $expansion = $this->config->item('max_expansion');
 
-        $hash = $this->user->createHash($username, $password);
-        $encryption = $this->realms->getEmulator()->encryption();
+        $encryption = $this->config->item('account_encryption');
 
         $data = [
             column("account", "username") => strtoupper($username),
@@ -123,10 +124,7 @@ class External_account_model extends CI_Model
             column("account", "joindate") => date("Y-m-d H:i:s")
         ];
 
-        $data[column("account", "password")] = strtoupper($hash["verifier"]);
-        if ($encryption == 'SRP6') {
-            $data[column("account", "salt")] = strtoupper($hash["salt"]);
-        }
+        list($hash, $data) = $this->setAccountPassword($encryption, $username, $password, $data);
 
         if (!preg_match("/^cmangos/i", get_class($this->realms->getEmulator())))
         {
@@ -147,27 +145,25 @@ class External_account_model extends CI_Model
             $this->connection->insert(table("account_logons"), $ip_data);
         }
 
-        // Battlenet accounts
-        if ($this->realms->getEmulator()->battlenet()) {
-            $userId = $this->user->getId($username);
-            $hash = $this->user->createHash2($email, $password);
+        $userId = $this->user->getId($username);
 
+        // Battlenet accounts
+        if ($this->config->item('battle_net')) {
             $battleData = [
                 column("battlenet_accounts", "id") => $userId,
                 column("battlenet_accounts", "email") => strtoupper($email),
-                column("battlenet_accounts", "sha_pass_hash") =>  strtoupper($hash),
                 column("battlenet_accounts", "last_ip") => $this->input->ip_address(),
                 column("battlenet_accounts", "joindate") => date("Y-m-d H:i:s")
             ];
+            list($hash, $battleData) = $this->setBattleNetPassword($email, $password, $battleData);
 
             $this->connection->insert(table("battlenet_accounts"), $battleData);
 
             $this->connection->query("UPDATE account SET battlenet_account = $userId, battlenet_index = 1 WHERE id = $userId", [$userId]);
         }
 
-        // Fix for TrinityCore RBAC (or any emulator with 'rbac' in it's emulator filename)
-        if (preg_match("/rbac/i", get_class($this->realms->getEmulator()))) {
-            $userId = $this->user->getId($username);
+        // Fix for TrinityCore RBAC (or any emulator with 'rbac')
+        if ($this->config->item('rbac')) {
             $this->connection->query("INSERT INTO rbac_account_permissions(`accountId`, `permissionId`, `granted`, `realmId`) values (?, 195, 1, -1)", [$userId]);
         }
 
@@ -190,10 +186,10 @@ class External_account_model extends CI_Model
     /**
      * Get the banned status
      *
-     * @param  Int $id
+     * @param Int $id
      * @return Boolean
      */
-    public function getBannedStatus($id)
+    public function getBannedStatus(int $id)
     {
         $this->connect();
 
@@ -250,12 +246,12 @@ class External_account_model extends CI_Model
     }
 
     /**
-     * Check if an username exists
+     * Check if a username exists
      *
-     * @param  String $username
+     * @param String $username
      * @return Boolean
      */
-    public function usernameExists($username)
+    public function usernameExists(string $username)
     {
         $this->connect();
 
@@ -305,10 +301,10 @@ class External_account_model extends CI_Model
     /**
      * Check if an email exists
      *
-     * @param  String $email
+     * @param String $email
      * @return Boolean
      */
-    public function emailExists($email)
+    public function emailExists(string $email)
     {
         $this->connect();
 
@@ -334,25 +330,45 @@ class External_account_model extends CI_Model
         $this->connection->update(table("account"), [column("account", "username") => $newUsername]);
     }
 
-    public function setPassword($username, $newPassword)
+    public function setPassword($username, $email, $newPassword)
     {
         $this->connect();
 
         $this->connection->where(column("account", "username"), $username);
 
+        $data = [];
+
         if (column("account", "v") && column("account", "s") && column("account", "sessionkey")) {
-            $this->connection->update(
-                table("account"),
-                [
+            $data = [
                 column("account", "v") => "",
                 column("account", "s")  => "",
                 column("account", "sessionkey") => "",
-                column("account", "password") => $newPassword
-                ]
-            );
-        } else {
-            $this->connection->update(table("account"), [column("account", "password") => $newPassword]);
+            ];
         }
+
+        $encryption = $this->config->item('account_encryption');
+
+        list($hash, $data) = $this->setAccountPassword($encryption, $username, $newPassword, $data);
+
+        $this->connection->update(table("account"), $data);
+
+        $userId = $this->user->getId($username);
+
+        // Battlenet accounts
+        if ($this->config->item('battle_net')) {
+            $this->connection->flush_cache();
+            $this->connection->where(column("battlenet_accounts", "email"), strtoupper($email));
+
+            $battleData = [
+                column("battlenet_accounts", "last_ip") => $this->input->ip_address(),
+                column("battlenet_accounts", "joindate") => date("Y-m-d H:i:s")
+            ];
+            list($hash, $battleData) = $this->setBattleNetPassword($email, $newPassword, $battleData);
+
+            $this->connection->update(table("battlenet_accounts"), $battleData);
+        }
+
+        CI::$APP->plugins->onChangePassword($userId, $hash);
     }
 
     public function setEmail($username, $newEmail)
@@ -373,7 +389,7 @@ class External_account_model extends CI_Model
             $this->connection->where(column("account", "username"), $username);
         }
 
-        // Update the 'expansion' column for all user
+        // Update the 'expansion' column for all users
         $this->connection->update(table("account"), [column("account", "expansion") => $newExpansion]);
     }
 
@@ -575,5 +591,54 @@ class External_account_model extends CI_Model
     public function getTotpSecret()
     {
         return $this->totp_secret;
+    }
+
+    /**
+     * @param string|null $encryption
+     * @param $username
+     * @param $newPassword
+     * @param array $data
+     * @return array
+     */
+    private function setAccountPassword(?string $encryption, $username, $newPassword, array $data): array
+    {
+        if ($encryption == 'SRP6') {
+            $hash = $this->crypto->SRP6($username, $newPassword);
+            $data[column("account", "salt")] = $hash["salt"];
+            $data[column("account", "verifier")] = $hash["verifier"];
+        } else if ($encryption == 'SRP') {
+            $hash = $this->crypto->SRP($username, $newPassword);
+            $data[column("account", "salt")] = $hash["salt"];
+            $data[column("account", "verifier")] = $hash["verifier"];
+        } else {
+            $hash = $this->crypto->SHA_PASS_HASH($username, $newPassword);
+            $data[column("account", "sha_pass_hash")] = $hash["verifier"];
+        }
+        return array($hash, $data);
+    }
+
+    /**
+     * @param $email
+     * @param $newPassword
+     * @param array $battleData
+     * @return array
+     */
+    private function setBattleNetPassword($email, $newPassword, array $battleData): array
+    {
+        if ($this->config->item('battle_net_encryption') == 'SRP6_V2') {
+            $hash = $this->crypto->BnetSRP6_V2($email, $newPassword);
+            $battleData['srp_version'] = 2;
+            $battleData[column("battlenet_accounts", "salt")] = $hash["salt"];
+            $battleData[column("battlenet_accounts", "verifier")] = $hash["verifier"];
+        } else if ($this->config->item('battle_net_encryption') == 'SRP6_V1') {
+            $hash = $this->crypto->BnetSRP6_V1($email, $newPassword);
+            $battleData['srp_version'] = 1;
+            $battleData[column("battlenet_accounts", "salt")] = $hash["salt"];
+            $battleData[column("battlenet_accounts", "verifier")] = $hash["verifier"];
+        } else {
+            $hash = $this->crypto->SHA_PASS_HASH_V2($email, $newPassword);
+            $battleData[column("battlenet_accounts", "sha_pass_hash")] = $hash;
+        }
+        return array($hash, $battleData);
     }
 }

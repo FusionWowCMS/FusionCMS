@@ -6,7 +6,7 @@ use MX\CI;
  * Abstraction layer for supporting different emulators
  */
 
-class Trinity_rbac_cata_soap implements Emulator
+class Trinity_cata_soap implements Emulator
 {
     protected $config;
 
@@ -24,12 +24,6 @@ class Trinity_rbac_cata_soap implements Emulator
      * Console object
      */
     protected $console;
-
-    /**
-     * Encryption
-     */
-    protected $encryption = 'SPH';
-    protected $battlenet = false;
 
     /**
      * Emulator support Totp
@@ -58,18 +52,18 @@ class Trinity_rbac_cata_soap implements Emulator
     protected $columns = array(
 
         "account" => array(
-            "id"         => "id",
-            "username"   => "username",
-            "password"   => "sha_pass_hash",
-            "email"      => "email",
-            "joindate"   => "joindate",
-            "last_ip"    => "last_ip",
-            "last_login" => "last_login",
-            "expansion"  => "expansion",
-            "v"          => "v",
-            "s"          => "s",
-            "sessionkey" => "sessionkey",
-            "totp_secret"  => "token_key"
+            "id"              => "id",
+            "username"        => "username",
+            "sha_pass_hash"   => "sha_pass_hash",
+            "email"           => "email",
+            "joindate"        => "joindate",
+            "last_ip"         => "last_ip",
+            "last_login"      => "last_login",
+            "expansion"       => "expansion",
+            "v"               => "v",
+            "s"               => "s",
+            "sessionkey"      => "sessionkey",
+            "totp_secret"     => "token_key"
         ),
 
         "account_access" => array(
@@ -84,6 +78,17 @@ class Trinity_rbac_cata_soap implements Emulator
             "bandate"   => "bandate",
             "unbandate" => "unbandate",
             "bannedby"  => "bannedby"
+        ),
+
+        'battlenet_accounts' => array(
+            'id'            => 'id',
+            'email'         => 'email',
+            'salt'          => 'salt',
+            'verifier'      => 'verifier',
+            'sha_pass_hash' => 'sha_pass_hash',
+            'joindate'      => 'joindate',
+            'last_ip'       => 'last_ip',
+            'last_login'    => 'last_login'
         ),
 
         'ip_banned' => array(
@@ -259,26 +264,6 @@ class Trinity_rbac_cata_soap implements Emulator
     }
 
     /**
-     * Get encryption for this emulator
-     *
-     * @return String
-     */
-    public function encryption()
-    {
-        return $this->encryption;
-    }
-
-    /**
-     * Whether or not emulator uses battlenet accounts
-     *
-     * @return Boolean
-     */
-    public function battlenet()
-    {
-        return $this->battlenet;
-    }
-
-    /**
      * Whether or not character stats are logged in the database
      *
      * @return Boolean
@@ -296,41 +281,6 @@ class Trinity_rbac_cata_soap implements Emulator
     public function hasTotp()
     {
         return $this->hasTotp;
-    }
-
-    /**
-     * Password encryption
-     */
-    public function encrypt($username, $password)
-    {
-        if (!is_string($username)) {
-            $username = "";
-        }
-        if (!is_string($password)) {
-            $password = "";
-        }
-        $sha_pass_hash = sha1(strtoupper($username) . ':' . strtoupper($password));
-
-        return array(
-           "verifier" => $sha_pass_hash
-        );
-    }
-
-
-    /**
-     * Password encryption for battlenet
-     */
-    public function encrypt2($email, $password)
-    {
-        if (!is_string($email)) {
-            $email = "";
-        }
-        if (!is_string($password)) {
-            $password = "";
-        }
-        $sha_pass_hash = strtoupper(bin2hex(strrev(hex2bin(strtoupper(hash("sha256", strtoupper(hash("sha256", strtoupper($email)) . ":" . strtoupper($password))))))));
-
-        return $sha_pass_hash;
     }
 
     /**

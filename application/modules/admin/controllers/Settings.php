@@ -83,6 +83,12 @@ class Settings extends MX_Controller
         $config['api_item_custom'] = $this->config->item('api_item_custom');
         $config['wow_db'] = $this->config->item('wow_db');
 
+        // auth configuration
+        $config['account_encryption'] = $this->config->item('account_encryption');
+        $config['rbac'] = $this->config->item('rbac');
+        $config['battle_net'] = $this->config->item('battle_net');
+        $config['battle_net_encryption'] = $this->config->item('battle_net_encryption');
+
         // Prepare my data
         $data = array(
             'url' => $this->template->page_url,
@@ -258,6 +264,20 @@ class Settings extends MX_Controller
         $fusionConfig->set('captcha_attemps', $this->input->post('captcha_attemps'));
         $fusionConfig->set('block_attemps', $this->input->post('block_attemps'));
         $fusionConfig->set('block_duration', $this->input->post('block_duration'));
+
+        $fusionConfig->save();
+
+        die('yes');
+    }
+
+    public function saveAuthConfig()
+    {
+        $fusionConfig = new ConfigEditor("application/config/auth.php");
+
+        $fusionConfig->set('account_encryption', $this->input->post('account_encryption'));
+        $fusionConfig->set('rbac', $this->input->post('rbac'));
+        $fusionConfig->set('battle_net', $this->input->post('battle_net'));
+        $fusionConfig->set('battle_net_encryption', $this->input->post('battle_net_encryption'));
 
         $fusionConfig->save();
 

@@ -117,6 +117,14 @@ var UI = {
 				database: $('#realmd_database').val()
 			};
 
+			// Auth config (config/auth.php)
+			var authSettings = {
+				realmd_rbac: $('#realmd_rbac').val(),
+				realmd_battle_net: $('#realmd_battle_net').val(),
+				realmd_account_encryption: $('#realmd_account_encryption').val(),
+				realmd_battle_net_encryption: $('#realmd_battle_net_encryption').val()
+			};
+
 			if ($('#realmd_port').val())
 				dbLogon['port'] = $('#realmd_port').val();
 
@@ -147,12 +155,18 @@ var UI = {
 				}
 				else {
 					Ajax.checkDbConnection(dbLogon, function(result) {
-						
 						if (result != '1') {
 							notifyResult(false, 'Logon database connection failed:<br />' + result);
 						}
 						else {
-							notifyResult(true);
+							Ajax.checkAuthConfig(authSettings, function(result) {
+								if (result != '1') {
+									notifyResult(false, 'Missing config:<br />' + result);
+								}
+								else {
+									notifyResult(true);
+								}
+							});
 						}
 					});
 				}

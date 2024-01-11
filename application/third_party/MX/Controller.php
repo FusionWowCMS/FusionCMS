@@ -46,6 +46,7 @@ use CodeIgniter\Events\Events;
 use CodeIgniter\Log\Logger;
 use ConfigEditor;
 use Controller;
+use Crypto;
 use Dbbackup;
 use Dblogger;
 use Encryption\Encryption;
@@ -148,6 +149,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property Administrator $administrator       Administrator Class
  * @property Captcha $captcha                   Captcha Class
  * @property ConfigEditor $configEditor         ConfigEditor Class
+ * @property Crypto $crypto                     Crypto Class
  * @property Dbbackup $dbbackup                 Dbbackup Class
  * @property Items $items                       Items Class
  * @property Language $language                 Language Class

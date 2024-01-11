@@ -1,5 +1,7 @@
 <?php
 
+use Laizerox\Wowemu\SRP\UserClient;
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -42,23 +44,45 @@ class User
     }
 
     /**
+     * Creates a hash of the password we enter
+     *
+     * @param String $username
+     * @param String $password in plain text
+     * @return array hashed password
+     */
+    public function getAccountPassword(string $username, string $password): array
+    {
+        $encryption = $this->CI->config->item('account_encryption');
+
+        if ($encryption == 'SRP6') {
+            $hash = $this->CI->crypto->SRP6($username, $password);
+        } else if ($encryption == 'SRP') {
+            $hash = $this->CI->crypto->SRP($username, $password);
+        } else {
+            $hash = $this->CI->crypto->SHA_PASS_HASH($username, $password);
+        }
+
+        return $hash;
+    }
+
+    /**
      * When they log in, this should be called to set all the user details.
      *
      * @param String $username
-     * @param String $sha_pass_hash
+     * @param String $password
      * @return Int
      */
-    public function setUserDetails(string $username, string $sha_pass_hash): int
+    public function setUserDetails(string $username, string $password): int
     {
         $check = $this->CI->external_account_model->initialize($username);
 
         if (!$check) {
             return 1;
-        } elseif (strtoupper($this->CI->external_account_model->getShaPassHash()) == strtoupper($sha_pass_hash)) {
+        } elseif (strtoupper($this->CI->external_account_model->getShaPassHash()) == strtoupper($password)) {
             // Load the internal values (vp, dp etc.)
             $this->CI->internal_user_model->initialize($this->CI->external_account_model->getId());
 
-            $userdata = array(
+            $userdata = [
                 'uid' => $this->CI->external_account_model->getId(),
                 'username' => $this->CI->external_account_model->getUsername(),
                 'password' => $this->CI->external_account_model->getShaPassHash(),
@@ -69,7 +93,7 @@ class User
                 'last_ip' => $this->CI->external_account_model->getLastIp(),
                 'nickname' => $this->CI->internal_user_model->getNickname(),
                 'language' => $this->CI->internal_user_model->getLanguage(),
-            );
+            ];
 
             // Set the session with the above data
             $this->CI->session->set_userdata($userdata);
@@ -82,29 +106,6 @@ class User
             //Return an error
             return 2;
         }
-    }
-
-    /**
-     * Creates a hash of the password we enter
-     *
-     * @param String $username
-     * @param String $password in plain text
-     * @return string|array hashed password
-     */
-    public function createHash(string $username = "", string $password = ""): string|array
-    {
-        return $this->CI->realms->getEmulator()->encrypt($username, $password);
-    }
-
-    /**
-     * Creates a hash of the password we enter
-     * @param String $email
-     * @param String $password in plain text
-     * @return String hashed password
-     */
-    public function createHash2(string $email = "", string $password = ""): string
-    {
-        return $this->CI->realms->getEmulator()->encrypt2($email, $password);
     }
 
     /**
@@ -182,15 +183,17 @@ class User
     public function userArea(): void
     {
         //A check, so it requires you to be logged in.
-        if (!$this->online) {
-            $this->CI->template->view($this->CI->template->loadPage("page.tpl", array(
-                "module" => "default",
-                "headline" => lang("denied"),
-                "content" => "<center style='margin:10px;font-weight:bold;'>" . lang("must_be_signed_in") . "</center>"
-            )));
+        if ($this->online) {
+            return;
         }
+        $this->CI->template->view($this->CI->template->loadPage("page.tpl", array(
+            "module" => "default",
+            "headline" => lang("denied"),
+            "content" => "<center style='margin:10px;font-weight:bold;'>" . lang("must_be_signed_in") . "</center>"
+        )));
 
-        return;
+        $this->CI->output->_display();
+        exit();
     }
 
     /**
@@ -199,15 +202,17 @@ class User
     public function guestArea(): void
     {
         //A check, so it requires you to be logged out.
-        if ($this->online) {
-            $this->CI->template->view($this->CI->template->loadPage("page.tpl", array(
-                "module" => "default",
-                "headline" => lang("denied"),
-                "content" => "<center style='margin:10px;font-weight:bold;'>" . lang("already_signed_in") . "</center>"
-            )));
+        if (!$this->online) {
+            return;
         }
+        $this->CI->template->view($this->CI->template->loadPage("page.tpl", array(
+            "module" => "default",
+            "headline" => lang("denied"),
+            "content" => "<center style='margin:10px;font-weight:bold;'>" . lang("already_signed_in") . "</center>"
+        )));
 
-        return;
+        $this->CI->output->_display();
+        exit();
     }
 
     /**
@@ -570,7 +575,7 @@ class User
         if (!$newPassword) {
             return;
         }
-        $this->CI->external_account_model->setPassword($this->username, $newPassword);
+        $this->CI->external_account_model->setPassword($this->username, $this->email, $newPassword);
         $this->CI->session->set_userdata('password', $newPassword);
     }
 

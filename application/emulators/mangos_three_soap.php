@@ -4,7 +4,7 @@
  * Abstraction layer for supporting different emulators
  */
 
-class Mangos_zero_sph_soap implements Emulator
+class Mangos_three_soap implements Emulator
 {
     protected $config;
 
@@ -22,12 +22,6 @@ class Mangos_zero_sph_soap implements Emulator
      * Console object
      */
     protected $console;
-
-    /**
-     * Encryption
-     */
-    protected $encryption = 'SPH';
-    protected $battlenet = false;
 
     /**
      * Emulator support Totp
@@ -56,18 +50,18 @@ class Mangos_zero_sph_soap implements Emulator
     protected $columns = array(
 
         "account" => array(
-            "id"         => "id",
-            "username"   => "username",
-            'gmlevel'    => 'gmlevel',
-            "password"   => "sha_pass_hash",
-            "email"      => "email",
-            "joindate"   => "joindate",
-            "last_ip"    => "last_ip",
-            "last_login" => "last_login",
-            "expansion"  => "expansion",
-            "v"          => "v",
-            "s"          => "s",
-            "sessionkey" => "sessionkey"
+            "id"              => "id",
+            "username"        => "username",
+            'gmlevel'         => 'gmlevel',
+            "sha_pass_hash"   => "sha_pass_hash",
+            "email"           => "email",
+            "joindate"        => "joindate",
+            "last_ip"         => "last_ip",
+            "last_login"      => "last_login",
+            "expansion"       => "expansion",
+            "v"               => "v",
+            "s"               => "s",
+            "sessionkey"      => "sessionkey"
         ),
 
         "account_banned" => array(
@@ -98,10 +92,10 @@ class Mangos_zero_sph_soap implements Emulator
             "zone"             => "zone",
             "online"           => "online",
             "money"            => "money",
-            "totalKills"       => "stored_honorable_kills",
-            'todayKills'       => 'stored_honorable_kills',
-            'yesterdayKills'   => 'stored_honorable_kills',
-            "totalHonorPoints" => "stored_honor_rating",
+            "totalKills"       => "totalKills",
+            'todayKills'       => 'todayKills',
+            'yesterdayKills'   => 'yesterdayKills',
+            "totalHonorPoints" => "totalHonorPoints",
             "position_x"       => "position_x",
             "position_y"       => "position_y",
             "position_z"       => "position_z",
@@ -128,8 +122,6 @@ class Mangos_zero_sph_soap implements Emulator
             "maxpower3"     => "maxpower3",
             "maxpower4"     => "maxpower4",
             "maxpower5"     => "maxpower5",
-            "maxpower6"     => "maxpower6",
-            "maxpower7"     => "maxpower7",
             "strength"      => "strength",
             "agility"       => "agility",
             "stamina"       => "stamina",
@@ -141,8 +133,9 @@ class Mangos_zero_sph_soap implements Emulator
             "parryPct"      => "parryPct",
             "critPct"       => "critPct",
             "rangedCritPct" => "rangedCritPct",
+            "spellCritPct"  => "spellCritPct",
             "attackPower"   => "attackPower",
-            "rangedAttackPower"    => "rangedAttackPower",
+            "spellPower"    => "spellPower",
         ),
 
         "guild" => array(
@@ -171,7 +164,7 @@ class Mangos_zero_sph_soap implements Emulator
      */
     protected $queries = array(
         "get_character" => "SELECT * FROM characters WHERE guid=?",
-        "get_item" => "SELECT entry, Flags, name, Quality, bonding, InventoryType, MaxDurability, RequiredLevel, ItemLevel, class, subclass, delay, spellid_1, spellid_2, spellid_3, spellid_4, spellid_5, spelltrigger_1, spelltrigger_2, spelltrigger_3, spelltrigger_4, spelltrigger_5, displayid, stat_type1, stat_value1, stat_type2, stat_value2, stat_type3, stat_value3, stat_type4, stat_value4, stat_type5, stat_value5, stat_type6, stat_value6, stat_type7, stat_value7, stat_type8, stat_value8, stat_type9, stat_value9, stat_type10, stat_value10, stackable FROM item_template WHERE entry=?",
+        "get_item" => "SELECT entry, Flags, name, Quality, bonding, InventoryType, MaxDurability, RequiredLevel, ItemLevel, class, subclass, delay, socketColor_1, socketColor_2, socketColor_3, spellid_1, spellid_2, spellid_3, spellid_4, spellid_5, spelltrigger_1, spelltrigger_2, spelltrigger_3, spelltrigger_4, spelltrigger_5, displayid, stat_type1, stat_value1, stat_type2, stat_value2, stat_type3, stat_value3, stat_type4, stat_value4, stat_type5, stat_value5, stat_type6, stat_value6, stat_type7, stat_value7, stat_type8, stat_value8, stat_type9, stat_value9, stat_type10, stat_value10, stackable FROM item_template WHERE entry=?",
         "get_rank" => "SELECT id id, gmlevel gmlevel FROM account WHERE id=?",
         "get_banned" => "SELECT id id, bandate bandate, bannedby bannedby, banreason banreason, active active FROM account_banned WHERE id=? AND active=1",
         "get_account_id" => "SELECT id id, username username, sha_pass_hash password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion FROM account WHERE id = ?",
@@ -252,26 +245,6 @@ class Mangos_zero_sph_soap implements Emulator
     }
 
     /**
-     * Get encryption for this emulator
-     *
-     * @return String
-     */
-    public function encryption()
-    {
-        return $this->encryption;
-    }
-
-    /**
-     * Whether or not emulator uses battlenet accounts
-     *
-     * @return Boolean
-     */
-    public function battlenet()
-    {
-        return $this->battlenet;
-    }
-
-    /**
      * Whether or not character stats are logged in the database
      *
      * @return Boolean
@@ -289,24 +262,6 @@ class Mangos_zero_sph_soap implements Emulator
     public function hasTotp()
     {
         return $this->hasTotp;
-    }
-
-    /**
-     * Password encryption
-     */
-    public function encrypt($username, $password)
-    {
-        if (!is_string($username)) {
-            $username = "";
-        }
-        if (!is_string($password)) {
-            $password = "";
-        }
-        $sha_pass_hash = sha1(strtoupper($username) . ':' . strtoupper($password));
-
-        return array(
-           "verifier" => $sha_pass_hash
-        );
     }
 
     /**

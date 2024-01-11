@@ -119,7 +119,7 @@
 								        	<div class="mx-auto mt-4">
 								        		<div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md shadow-muted-300/30 dark:shadow-muted-800/30 shadow-xl p-6 mt-4">
 								        	        <div class="mx-auto mb-4 max-w-xs text-center">
-								        	        	<p class="font-heading text-xxs font-medium leading-normal leading-normal text-white"> {{language}}</p>
+								        	        	<p class="font-heading text-xxs font-medium leading-normal text-white"> {{language}}</p>
 								        	        </div>
 													<div class="relative h-[calc(100%_-_64px)] w-full px-10">
 													    <div class="grid grid-cols-4 py-6">
@@ -160,9 +160,9 @@
 								        	<div class="mx-auto mt-4">
 								        		<div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md shadow-muted-300/30 dark:shadow-muted-800/30 shadow-xl p-6 mt-4">
 								        	        <div class="mx-auto mb-4 max-w-xs text-center">
-								        	        	<p class="font-heading text-xxs font-medium leading-normal leading-normal text-white"> {{welcome}}</p>
+								        	        	<p class="font-heading text-xxs font-medium leading-normal text-white"> {{welcome}}</p>
 								        	        </div>
-								        			<p class="font-alt text-base font-normal leading-normal leading-normal text-muted-500 dark:text-muted-400"> <b>{{dear_customer}}</b>, {{fusion_info}} </p>
+								        			<p class="font-alt text-base font-normal leading-normal text-muted-500 dark:text-muted-400"> <b>{{dear_customer}}</b>, {{fusion_info}} </p>
 								        		</div>
 								        		<div class="installer_navigation mt-6 flex items-center justify-between gap-2">
 								        			<button type="button" class="next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">{{start_installer}}</button>
@@ -173,29 +173,29 @@
 
 									<section class="box big step" data-validation="requirements" style="display:none;">
 										<h2 class="text-white">{{server_requirements}} <span style="color:red;display:inline;padding:0px;">({{important}})</span></h2>
-			
+
 										<span class="flex flex-col py-2">
-			
+
 											<div class="introduction text-muted-500">
 												<h3 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">{{what_need}}</h3>
-												
+
 												<div class="folder-permissions">
 													<h4 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">{{folder_permissions}}</h4>
 													<div style="font-weight:bold;margin:10px 0px;" id="config_folder">&bull; /application/config/ {{needs_writable}} ({{see}} <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)</div>
-			
+
 													<div style="font-weight:bold;margin:10px 0px;" id="modules_folder">&bull; /application/modules/ {{is_writable}}</div>
-			
+
 													<div style="font-weight:bold;margin:10px 0px;" id="cache_folder">&bull; /application/cache/</div>
 												</div>
-												
+
 												<div class="php-version">
 													<h4 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">{{php_version}}</h4>
 													{{minimum_required_php}}: <span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">8.1.0</span> <span class="check-result"></span>
 												</div>
-												
+
 												<div class="php-extensions">
 													<h4 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">{{php_extensions}}</h4>
-													
+
 													<b>{{extensions_required_php}}:</b><br>
 													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_mysqli</span>,
 													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_curl</span>,
@@ -208,26 +208,26 @@
 													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_mcrypt</span>,
 													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_xml</span>,
 													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">php_zip</span>
-			
+
 													<span class="check-result" style="display:none"></span>
 													<div id="php-extensions-missing" style="display:none;color:red;margin-top:15px">
 														<b>{{extensions_required}}:</b>
 														<span class="extensions"></span>
 													</div>
-													
+
 													<div class="how_to_box">
 														<div class="title bg-primary-500 dark:bg-primary-500">{{enable_extensions}}</div>
 														<div class="content">
 															Go into your PHP directory and find the <code>php.ini</code> file. Mine was located in <code>C:\xampp\php\</code>. Open the file with a text editor and search (CTRL+F) for one of the modules you need to enable. To enable them, simply remove the <code>;</code> character in front of the line.<br />Save the file and restart your webserver to apply the changes.<br /><br />
-			
+
 															<img src="images/php.jpg" style="border:1px solid #ccc" />
 														</div>
 													</div>
 												</div>
-												
+
 												<div class="apache-modules">
 													<h4 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">{{apache_modules}}</h4>
-													
+
 													<b>{{recommend_apache}}<br><br>
 													{{apache_required}}:</b> <br>
 													<span class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 h-7 w-auto items-center justify-center rounded-full text-xs p-1">mod_rewrite</span>,
@@ -241,7 +241,7 @@
 														<b>{{modules_required}}:</b>
 														<span class="modules"></span>
 													</div>
-													
+
 													<div class="how_to_box">
 														<div class="title bg-primary-500 dark:bg-primary-500">{{enable_modules}}</div>
 														<div class="content">
@@ -262,7 +262,7 @@
 									<section class="box big step" style="display:none;">
 										<form id="form-general-settings" class="mx-auto min-w-lg max-w-lg space-y-12 py-8">
 											<fieldset class="relative">
-												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{general_settings}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{general_detail}}</p></div>
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{general_settings}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{general_detail}}</p></div>
 												<div class="grid grid-cols-12 gap-4">
 													<div class="col-span-12">
 														<div class="group/nui-input relative">
@@ -315,7 +315,7 @@
 												</div>
 											</fieldset>
 											<fieldset class="relative">
-												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{max_expansion}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{max_expansion_detail}}</p></div>
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{max_expansion}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{max_expansion_detail}}</p></div>
 												<div class="grid grid-cols-12 gap-4">
 													<div class="col-span-12">
 														<div class="group/nui-input relative">
@@ -337,7 +337,7 @@
 												</div>
 											</fieldset>
 											<fieldset class="relative">
-												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{google_analytics}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400"><a href="http://analytics.google.com" target="_blank">{{google_analytics}}</a> {{google_analytics_detail}}</p></div>
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{google_analytics}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400"><a href="http://analytics.google.com" target="_blank">{{google_analytics}}</a> {{google_analytics_detail}}</p></div>
 												<div class="grid grid-cols-12 gap-4">
 													<div class="col-span-12">
 														<div class="group/nui-input relative">
@@ -350,7 +350,7 @@
 												</div>
 											</fieldset>
 											<fieldset class="relative">
-												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{captcha}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{enable}} <a href="http://www.google.com/recaptcha/admin" target="_blank">{{google_captcha}}</a> ({{optional}})</p></div>
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{captcha}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{enable}} <a href="http://www.google.com/recaptcha/admin" target="_blank">{{google_captcha}}</a> ({{optional}})</p></div>
 												<div class="grid grid-cols-12 gap-4">
 													<div class="col-span-12">
 														<div class="group/nui-input relative">
@@ -380,7 +380,7 @@
 												</div>
 											</fieldset>
 											<fieldset class="relative">
-												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{cdn}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{cdn_detail}}</p></div>
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{cdn}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{cdn_detail}}</p></div>
 												<div class="grid grid-cols-12 gap-4">
 													<div class="col-span-12">
 														<div class="group/nui-input relative">
@@ -399,13 +399,13 @@
 								        	<button type="button" class="next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">{{next_step}}</button>
 								        </div>
 									</section>
-			
+
 									<section class="box big step" data-validation="database" style="display:none;">
 										<h3 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">{{database_settings}}</h3>
-			
+
 										<form class="mx-auto min-w-lg max-w-lg space-y-12 py-8">
 											<fieldset class="relative">
-												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{website_database}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{website_database_detail}}</p></div>
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{website_database}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{website_database_detail}}</p></div>
 												<div class="grid grid-cols-12 gap-4">
 													<div class="col-span-12">
 														<div class="group/nui-input relative">
@@ -450,7 +450,7 @@
 
 											<br />
 											<fieldset class="relative">
-												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{auth_database}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{auth_database_detail}}</p></div>
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{auth_database}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{auth_database_detail}}</p></div>
 												<div class="grid grid-cols-12 gap-4">
 													<div class="col-span-12">
 														<div class="group/nui-input relative">
@@ -492,6 +492,59 @@
 													</div>
 												</div>
 											</fieldset>
+
+											<br />
+											<fieldset class="relative">
+												<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{auth_config}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{auth_config_detail}}</p></div>
+												<div class="grid grid-cols-12 gap-4">
+													<div class="col-span-12">
+														<p class="font-sans text-s font-normal leading-normal text-muted-400">{{account_encryption}}</p>
+														<p class="font-sans text-xs font-normal leading-normal text-muted-500">{{account_encryption_detail}}</p>
+														<div class="group/nui-input relative">
+															<select id="realmd_account_encryption" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option selected disabled hidden>{{account_encryption}}</option>
+																<option value="SRP6">SRP6</option>
+																<option value="SPH">SPH</option>
+																<option value="SRP">SRP</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<p class="font-sans text-s font-normal leading-normal text-muted-400">{{rbac}}</p>
+														<p class="font-sans text-xs font-normal leading-normal text-muted-500">{{rbac_detail}}</p>
+														<div class="group/nui-input relative">
+															<select id="realmd_rbac" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option selected disabled hidden>{{rbac}}</option>
+																<option value="false">{{no}}</option>
+																<option value="true">{{yes}}</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-span-12">
+														<p class="font-sans text-s font-normal leading-normal text-muted-400">{{battle_net}}</p>
+														<p class="font-sans text-xs font-normal leading-normal text-muted-500">{{battle_net_detail}}</p>
+														<div class="group/nui-input relative">
+															<select onchange="console.log($('[battle_net_encryption]')[this.value == 'true' ? 'show' : 'hide']())" id="realmd_battle_net" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option selected disabled hidden>{{battle_net}}</option>
+																<option value="false">{{no}}</option>
+																<option value="true">{{yes}}</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-span-12" style="display: none;" battle_net_encryption>
+														<p class="font-sans text-s font-normal leading-normal text-muted-400">{{battle_net_encryption}}</p>
+														<p class="font-sans text-xs font-normal leading-normal text-muted-500">{{battle_net_encryption_detail}}</p>
+														<div class="group/nui-input relative">
+															<select id="realmd_battle_net_encryption" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option selected disabled hidden>{{battle_net_encryption}}</option>
+																<option value="SRP6_V2">SRP6 V2</option>
+																<option value="SRP6_V1">SRP6 V1</option>
+																<option value="SPH">SPH</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</fieldset>
 										</form>
 
 								        <div class="installer_navigation mt-6 flex items-center justify-between gap-2">
@@ -503,8 +556,8 @@
 									<section class="box big step" data-validation="realms" style="display:none;">
 										<h3 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">{{realms}}</h3>
 
-										<span class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{realms_detail}}</span>
-			
+										<span class="font-sans text-xs font-normal leading-normal text-muted-400">{{realms_detail}}</span>
+
 										<div class="realmAdd">
 											<button type="button" onClick="Ajax.Realms.addRealm();" class="is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">{{add_realm}}</button>
 										</div>
@@ -514,7 +567,7 @@
 										<div id="loader" style="display:none;">
 											<form class="mx-auto min-w-lg max-w-lg space-y-12 py-8">
 												<fieldset class="relative">
-													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{emulator}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{emulator_detail}}</p></div>
+													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{emulator}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{emulator_detail}}</p></div>
 													<div class="grid grid-cols-12 gap-4">
 														<div class="col-span-12">
 															<div class="group/nui-input relative">
@@ -526,7 +579,7 @@
 													</div>
 												</fieldset>
 												<fieldset class="relative">
-													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{realm_settings}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{realm_settings_detail}}</p></div>
+													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{realm_settings}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{realm_settings_detail}}</p></div>
 													<div class="grid grid-cols-12 gap-4">
 														<div class="col-span-12">
 															<div class="group/nui-input relative">
@@ -537,7 +590,7 @@
 															</div>
 														</div>
 														<div class="col-span-12">
-															<p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{cap}}</p>
+															<p class="font-sans text-xs font-normal leading-normal text-muted-400">{{cap}}</p>
 															<div class="group/nui-input relative">
 																<input type="number" id="cap" data-tip="{{cap}}" placeholder="{{cap}}" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-9 rounded-xl" required value="100" />
 																<div class="h-10 w-10 text-muted-400 group-focus-within/nui-input:text-primary-500 absolute start-0 top-0 flex items-center justify-center transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-75">
@@ -546,7 +599,7 @@
 															</div>
 														</div>
 														<div class="col-span-12">
-															<p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{realm_expansion}}</p>
+															<p class="font-sans text-xs font-normal leading-normal text-muted-400">{{realm_expansion}}</p>
 															<div class="grid grid-cols-12 gap-4">
 																<div class="col-span-12">
 																	<div class="group/nui-input relative">
@@ -579,7 +632,7 @@
 												</fieldset>
 
 												<fieldset class="relative">
-													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{realm_database}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{realm_database_detail}}</p></div>
+													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{realm_database}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{realm_database_detail}}</p></div>
 													<div class="grid grid-cols-12 gap-4">
 														<div class="col-span-12">
 															<div class="group/nui-input relative">
@@ -630,7 +683,7 @@
 												</fieldset>
 
 												<fieldset class="relative">
-													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{console_settings}}</p><p class="font-sans text-xs font-normal leading-normal leading-normal text-muted-400">{{console_settings_detail_1}}<br />{{console_settings_detail_2}}</p></div>
+													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{console_settings}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{console_settings_detail_1}}<br />{{console_settings_detail_2}}</p></div>
 													<div class="grid grid-cols-12 gap-4">
 														<div class="col-span-12">
 															<div class="group/nui-input relative">
@@ -668,11 +721,11 @@
 								        	<button type="button" class="next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">{{next_step}}</button>
 								        </div>
 									</section>
-			
+
 									<section class="box big step" style="display:none;">
 										<h2 class="text-white"> {{installing}}</h2>
 										<span class="text-white" id="install">
-			
+
 										</span>
 									</section>
 								</aside>
@@ -680,7 +733,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center font-sans text-sm font-normal leading-normal leading-normal text-muted-400">
+                <div class="text-center font-sans text-sm font-normal leading-normal text-muted-400">
 					<a href="https://github.com/FusionWowCMS/FusionCMS" target="_blank">{{github}}</a> - 
 					<a href="https://github.com/FusionWowCMS/Modules" target="_blank">{{modules}}</a> - 
 					<a href="https://github.com/FusionWowCMS/Themes" target="_blank">{{themes}}</a> - 

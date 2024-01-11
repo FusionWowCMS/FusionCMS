@@ -45,7 +45,13 @@ var Memory = (function()
 			"realmd_username",
 			"realmd_database",
 			"realmd_password",
-			"realmd_port"
+			"realmd_port",
+
+			// Auth config (config/auth.php)
+			'realmd_rbac',
+			'realmd_battle_net',
+			'realmd_account_encryption',
+			'realmd_battle_net_encryption'
 		]
 	};
 
@@ -58,6 +64,10 @@ var Memory = (function()
 		// Make sure there is data available
 		if(typeof localStorage != "undefined")
 		{
+			// Force display battle net encryption
+			if(localStorage.getItem('installer_realmd_battle_net') == 'true')
+				$('[battle_net_encryption]').show();
+
 			$.each(steps, function(step, fields)
 			{
 				fields.forEach(function(field)

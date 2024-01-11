@@ -12,6 +12,5 @@ interface Emulator
     public function getColumn($table, $name);
     public function getQuery($name);
     public function getAllColumns($table);
-    public function encrypt($username, $password);
     public function __construct($config);
 }

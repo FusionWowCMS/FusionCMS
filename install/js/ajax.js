@@ -104,6 +104,14 @@ var Ajax = {
 		})
 	},
 
+	checkAuthConfig: function(data, onComplete)
+	{
+		$.post("system.php?step=checkAuthConfig", data, function(data) {
+			if (onComplete !== undefined)
+				onComplete(data);
+		})
+	},
+
 	checkPermissions: function(onComplete)
 	{
         var done = 0;
@@ -264,7 +272,13 @@ var Ajax = {
 				realmd_port: $("#realmd_port").val(),
 				security_code: $("#security_code").val(),
 				emulator: $("#emulator").val(),
-				superadmin: name
+				superadmin: name,
+
+				// Auth config (config/auth.php)
+				realmd_rbac: $('#realmd_rbac').val(),
+				realmd_battle_net: $('#realmd_battle_net').val(),
+				realmd_account_encryption: $('#realmd_account_encryption').val(),
+				realmd_battle_net_encryption: $('#realmd_battle_net_encryption').val()
 			};
 
 			$.post("system.php?step=config", data, function(res)

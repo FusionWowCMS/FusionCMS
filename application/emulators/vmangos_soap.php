@@ -27,22 +27,9 @@ class Vmangos_soap implements Emulator
     protected $console;
 
     /**
-     * Encryption
-     */
-    protected $encryption = 'SRP6';
-    protected $battlenet = false;
-
-    /**
      * Emulator support Totp
      */
     protected $hasTotp = true;
-
-    /**
-     * Array of expansion ids and their corresponding names
-     */
-    protected $expansions = array(
-        0 => "None"
-    );
 
     /**
      * Array of table names
@@ -68,7 +55,7 @@ class Vmangos_soap implements Emulator
         "account" => array(
             "id"         => "id",
             "username"   => "username",
-            "password"   => "v",
+            "verifier"   => "v",
             "salt"       => "s",
             'gmlevel'    => 'gmlevel',
             "email"      => "email",
@@ -262,26 +249,6 @@ class Vmangos_soap implements Emulator
     }
 
     /**
-     * Get encryption for this emulator
-     *
-     * @return String
-     */
-    public function encryption()
-    {
-        return $this->encryption;
-    }
-
-    /**
-     * Whether or not emulator uses battlenet accounts
-     *
-     * @return Boolean
-     */
-    public function battlenet()
-    {
-        return $this->battlenet;
-    }
-
-    /**
      * Whether or not character stats are logged in the database
      *
      * @return Boolean
@@ -299,62 +266,6 @@ class Vmangos_soap implements Emulator
     public function hasTotp()
     {
         return $this->hasTotp;
-    }
-
-    /**
-     * Password encryption
-     */
-    public function encrypt($username, $password, $salt = null)
-    {
-        is_string($username) || $username = '';
-        is_string($password) || $password = '';
-        is_string($salt) || $salt = $this->salt($username);
-
-        $client = new UserClient($username, $salt);
-        $verifier = strtoupper($client->generateVerifier($password));
-
-        return array(
-            "salt" => $salt,
-            "verifier" => $verifier
-        );
-    }
-
-    /**
-     * Fetches salt for the user or generates a new salt one and
-     * set it for them automatically if there is none.
-     *
-     * @param  string $username [description]
-     * @return string           [description]
-     */
-    public function salt($username)
-    {
-        static $salt;
-        if (
-            $saltUser = CI::$APP->external_account_model->getConnection()->query(sprintf(
-                'SELECT TRIM("\0" FROM %s) FROM %s WHERE username = ?',
-                column('account', 'salt'),
-                table('account')
-            ), [$username])->row_array()
-        ) {
-            $salt = $salt ?: current($saltUser); // get the stored salt
-
-            if ($salt) { // if it exists
-                return strtoupper($salt);
-            }
-        }
-
-        $client = new UserClient($username);
-        $salt = strtoupper($client->generateSalt());
-
-        register_shutdown_function(function () use ($salt, $username) {
-            CI::$APP->external_account_model->getConnection()->query(sprintf(
-                'UPDATE %s SET %s = ? WHERE username = ?',
-                table('account'),
-                column('account', 'salt')
-            ), [$salt, $username]);
-        }); // ..saves the salt for the user before finishing the scripts
-
-        return $salt;
     }
 
     /**

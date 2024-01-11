@@ -137,7 +137,7 @@ class Auth extends MX_Controller
             $password = $this->input->post('password');
 
             //Login
-            $sha_pass_hash = $this->user->createHash($username, $password);
+            $sha_pass_hash = $this->user->getAccountPassword($username, $password);
             $check = $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
 
             //if no errors, login

@@ -29,6 +29,57 @@
 
     <div class="tab-content border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-6">
 	    <div class="tab-pane active" id="realms">
+			<section class="card" id="auth_settings">
+				<div class="card-header"><p class="font-heading text-base font-medium leading-none text-white">Auth configuration <span style='color: #f00;'>(! important)</span></p><p class="font-sans text-xs font-normal leading-normal text-muted-400">Settings related to Realmd/Logon/Auth database and account password encryption.</p></div>
+				<div class="card-body">
+					<form role="form" onSubmit="Settings.saveWowDatabase(); return false">
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Account password encryption</label>
+							<div class="col-sm-10">
+								<select id="account_encryption" class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3">
+									<option value="SRP6" {if $config.account_encryption == 'SRP6'}selected{/if}>SRP6</option>
+									<option value="SPH" {if $config.account_encryption == 'SPH'}selected{/if}>SPH</option>
+									<option value="SRP" {if $config.account_encryption == 'SRP'}selected{/if}>SRP</option>
+								</select>
+							</div>
+							<p class="col-sm-12 col-form-label"><span style='color: #f00;'>SRP6:</span>Select this for most modern emulators (with <b>salt</b> and <b>verifier</b> columns in <b>auth.accounts</b> table).<br/><span style='color: #f00;'>SPH:</span> Select this for aged emulators (with <b>sha_pass_hash</b> column in <b>auth.accounts</b> table).<br/><span style='color: #f00;'>SRP:</span> Mostly for <b>cMangos</b> and <b>vMangos</b> emulators.</p>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">RBAC</label>
+							<div class="col-sm-10">
+								<select id="rbac" class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3">
+									<option value="false" {if $config.rbac == false}selected{/if}>No</option>
+									<option value="true" {if $config.rbac == true}selected{/if}>Yes</option>
+								</select>
+							</div>
+							<p class="col-sm-12 col-form-label">Set yes for emulators that has RBAC tables.</p>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">BattleNet</label>
+							<div class="col-sm-10">
+								<select onchange="console.log($('[battle_net_encryption]')[this.value == 'true' ? 'show' : 'hide']())" id="battle_net" class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3">
+									<option value="false" {if $config.battle_net == false}selected{/if}>No</option>
+									<option value="true" {if $config.battle_net == true}selected{/if}>Yes</option>
+								</select>
+							</div>
+							<p class="col-sm-12 col-form-label">Set yes for emulators that has auth.battlenet_accounts table.</p>
+						</div>
+						<div class="form-group row" {if $config.battle_net == false}style="display: none;"{/if} battle_net_encryption>
+							<label class="col-sm-2 col-form-label">BattleNet password encryption</label>
+							<div class="col-sm-10">
+								<select id="battle_net_encryption" class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3">
+									<option value="SRP6_V2" {if $config.battle_net_encryption == 'SRP6_V2'}selected{/if}>SRP6 V2</option>
+									<option value="SRP6_V1" {if $config.battle_net_encryption == 'SRP6_V1'}selected{/if}>SRP6 V1</option>
+									<option value="SPH" {if $config.battle_net_encryption == 'SPH'}selected{/if}>SPH</option>
+								</select>
+							</div>
+							<p class="col-sm-12 col-form-label"><span style='color: #f00;'>SRP6 (V1 / V2):</span> Select this for most modern emulators (with <b>salt</b> and <b>verifier</b> columns in <b>auth.battlenet_accounts table</b>).<br/><span style='color: #f00;'>SPH:</span> Select this for aged emulators (with <b>sha_pass_hash</b> column in <b>auth.battlenet_accounts</b> table).</p>
+						</div>
+						<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
+					</form>
+				</div>
+			</section>
+
 			<section class="card" id="realm_settings">
 			<header class="card-header">Realms (<div style="display:inline;" id="realm_count">{count($realms)}</div>)
 			<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="javascript:void(0)" onClick="Settings.showAddRealm()">Add a new realm</button>

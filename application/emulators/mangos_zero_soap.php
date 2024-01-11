@@ -1,12 +1,10 @@
 <?php
 
-use MX\CI;
-
 /**
  * Abstraction layer for supporting different emulators
  */
 
-class Skyfire_rbac_soap implements Emulator
+class Mangos_zero_soap implements Emulator
 {
     protected $config;
 
@@ -26,15 +24,9 @@ class Skyfire_rbac_soap implements Emulator
     protected $console;
 
     /**
-     * Encryption
-     */
-    protected $encryption = 'SPH';
-    protected $battlenet = false;
-
-    /**
      * Emulator support Totp
      */
-    protected $hasTotp = true;
+    protected $hasTotp = false;
 
     /**
      * Array of table names
@@ -49,7 +41,7 @@ class Skyfire_rbac_soap implements Emulator
         "character_stats" => "character_stats",
         "guild_member"    => "guild_member",
         "guild"           => "guild",
-        "gm_tickets"      => "gm_tickets"
+        "gm_tickets"      => "character_ticket"
     );
 
     /**
@@ -58,23 +50,18 @@ class Skyfire_rbac_soap implements Emulator
     protected $columns = array(
 
         "account" => array(
-            "id"         => "id",
-            "username"   => "username",
-            "password"   => "sha_pass_hash",
-            "email"      => "email",
-            "joindate"   => "joindate",
-            "last_ip"    => "last_ip",
-            "last_login" => "last_login",
-            "expansion"  => "expansion",
-            "v"          => "v",
-            "s"          => "s",
-            "sessionkey" => "sessionkey",
-            "totp_secret"  => "token_key"
-        ),
-
-        "account_access" => array(
-            "id"      => "id",
-            "gmlevel" => "gmlevel"
+            "id"            => "id",
+            "username"      => "username",
+            'gmlevel'       => 'gmlevel',
+            "sha_pass_hash" => "sha_pass_hash",
+            "email"         => "email",
+            "joindate"      => "joindate",
+            "last_ip"       => "last_ip",
+            "last_login"    => "last_login",
+            "expansion"     => "expansion",
+            "v"             => "v",
+            "s"             => "s",
+            "sessionkey"    => "sessionkey"
         ),
 
         "account_banned" => array(
@@ -105,10 +92,10 @@ class Skyfire_rbac_soap implements Emulator
             "zone"             => "zone",
             "online"           => "online",
             "money"            => "money",
-            "totalKills"       => "totalKills",
-            'todayKills'       => 'todayKills',
-            'yesterdayKills'   => 'yesterdayKills',
-            "totalHonorPoints" => "totalHonorPoints",
+            "totalKills"       => "stored_honorable_kills",
+            'todayKills'       => 'stored_honorable_kills',
+            'yesterdayKills'   => 'stored_honorable_kills',
+            "totalHonorPoints" => "stored_honor_rating",
             "position_x"       => "position_x",
             "position_y"       => "position_y",
             "position_z"       => "position_z",
@@ -135,6 +122,8 @@ class Skyfire_rbac_soap implements Emulator
             "maxpower3"     => "maxpower3",
             "maxpower4"     => "maxpower4",
             "maxpower5"     => "maxpower5",
+            "maxpower6"     => "maxpower6",
+            "maxpower7"     => "maxpower7",
             "strength"      => "strength",
             "agility"       => "agility",
             "stamina"       => "stamina",
@@ -146,10 +135,8 @@ class Skyfire_rbac_soap implements Emulator
             "parryPct"      => "parryPct",
             "critPct"       => "critPct",
             "rangedCritPct" => "rangedCritPct",
-            "spellCritPct"  => "spellCritPct",
             "attackPower"   => "attackPower",
-            "spellPower"    => "spellPower",
-            "resilience"    => "resilience"
+            "rangedAttackPower"    => "rangedAttackPower",
         ),
 
         "guild" => array(
@@ -164,12 +151,12 @@ class Skyfire_rbac_soap implements Emulator
         ),
 
         "gm_tickets" => array(
-            "ticketId"   => "ticketId",
+            "ticketId"   => "ticket_id",
             "guid"       => "guid",
-            "message"    => "message",
-            "createTime" => "createTime",
-            "completed"  => "completed",
-            "closedBy"   => "closedBy"
+            "message"    => "ticket_text",
+            "createTime" => "ticket_lastchange",
+            "completed"  => "resolved",
+            //"closedBy" => "closed"
         )
     );
 
@@ -178,14 +165,14 @@ class Skyfire_rbac_soap implements Emulator
      */
     protected $queries = array(
         "get_character" => "SELECT * FROM characters WHERE guid=?",
-        "get_item" => "SELECT entry, Flags, name, Quality, bonding, InventoryType, MaxDurability, RequiredLevel, ItemLevel, class, subclass, delay, socketColor_1, socketColor_2, socketColor_3, spellid_1, spellid_2, spellid_3, spellid_4, spellid_5, spelltrigger_1, spelltrigger_2, spelltrigger_3, spelltrigger_4, spelltrigger_5, displayid, stat_type1, stat_value1, stat_type2, stat_value2, stat_type3, stat_value3, stat_type4, stat_value4, stat_type5, stat_value5, stat_type6, stat_value6, stat_type7, stat_value7, stat_type8, stat_value8, stat_type9, stat_value9, stat_type10, stat_value10, stackable FROM item_template WHERE entry=?",
-        "get_rank" => "SELECT id id, gmlevel gmlevel, RealmID RealmID FROM account_access WHERE id=?",
+        "get_item" => "SELECT entry, Flags, name, Quality, bonding, InventoryType, MaxDurability, RequiredLevel, ItemLevel, class, subclass, delay, spellid_1, spellid_2, spellid_3, spellid_4, spellid_5, spelltrigger_1, spelltrigger_2, spelltrigger_3, spelltrigger_4, spelltrigger_5, displayid, stat_type1, stat_value1, stat_type2, stat_value2, stat_type3, stat_value3, stat_type4, stat_value4, stat_type5, stat_value5, stat_type6, stat_value6, stat_type7, stat_value7, stat_type8, stat_value8, stat_type9, stat_value9, stat_type10, stat_value10, stackable FROM item_template WHERE entry=?",
+        "get_rank" => "SELECT id id, gmlevel gmlevel FROM account WHERE id=?",
         "get_banned" => "SELECT id id, bandate bandate, bannedby bannedby, banreason banreason, active active FROM account_banned WHERE id=? AND active=1",
-        "get_account_id" => "SELECT id id, username username, sha_pass_hash password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion, token_key totp_secret FROM account WHERE id = ?",
-        "get_account" => "SELECT id id, username username, sha_pass_hash password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion, token_key totp_secret FROM account WHERE username = ?",
+        "get_account_id" => "SELECT id id, username username, sha_pass_hash password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion FROM account WHERE id = ?",
+        "get_account" => "SELECT id id, username username, sha_pass_hash password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion FROM account WHERE username = ?",
         "get_charactername_by_guid" => "SELECT name name FROM characters WHERE guid = ?",
         "find_guilds" => "SELECT g.guildid guildid, g.name name, COUNT(g_m.guid) GuildMemberCount, g.leaderguid leaderguid, c.name leaderName FROM guild g, guild_member g_m, characters c WHERE g.leaderguid = c.guid AND g_m.guildid = g.guildid AND g.name LIKE ? GROUP BY g.guildid",
-        "get_inventory_item" => "SELECT slot slot, item item, itemEntry itemEntry FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0",
+        "get_inventory_item" => "SELECT slot slot, item item, item_template itemEntry FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0",
         "get_guild_members" => "SELECT m.guildid guildid, m.guid guid, c.name name, c.race race, c.class class, c.gender gender, c.level level, m.rank member_rank, r.rname rname, r.rights rights FROM guild_member m JOIN guild_rank r ON m.guildid = r.guildid AND m.rank = r.rid JOIN characters c ON c.guid = m.guid WHERE m.guildid = ? ORDER BY r.rights DESC",
         "get_guild" => "SELECT guildid guildid, name guildName, leaderguid leaderguid, motd motd, createdate createdate FROM guild WHERE guildid = ?"
     );
@@ -259,26 +246,6 @@ class Skyfire_rbac_soap implements Emulator
     }
 
     /**
-     * Get encryption for this emulator
-     *
-     * @return String
-     */
-    public function encryption()
-    {
-        return $this->encryption;
-    }
-
-    /**
-     * Whether or not emulator uses battlenet accounts
-     *
-     * @return Boolean
-     */
-    public function battlenet()
-    {
-        return $this->battlenet;
-    }
-
-    /**
      * Whether or not character stats are logged in the database
      *
      * @return Boolean
@@ -296,24 +263,6 @@ class Skyfire_rbac_soap implements Emulator
     public function hasTotp()
     {
         return $this->hasTotp;
-    }
-
-    /**
-     * Password encryption
-     */
-    public function encrypt($username, $password)
-    {
-        if (!is_string($username)) {
-            $username = "";
-        }
-        if (!is_string($password)) {
-            $password = "";
-        }
-        $sha_pass_hash = sha1(strtoupper($username) . ':' . strtoupper($password));
-
-        return array(
-           "verifier" => $sha_pass_hash
-        );
     }
 
     /**
@@ -442,7 +391,7 @@ class Skyfire_rbac_soap implements Emulator
             null,
             array(
                 "location" => "http://" . $this->config['hostname'] . ":" . $this->config['console_port'],
-                "uri" => "urn:SF",
+                "uri" => "urn:MaNGOS",
                 'login' => $this->config['console_username'],
                 'password' => $this->config['console_password']
             )
@@ -453,16 +402,5 @@ class Skyfire_rbac_soap implements Emulator
         } catch (Exception $e) {
             die("Something went wrong! An administrator has been noticed and will send your order as soon as possible.<br /><br /><b>Error:</b> <br />" . $e->getMessage() . ($realm ? '<br/><br/><b>Realm:</b> <br />' . $realm->getName() : ''));
         }
-    }
-
-    /**
-     * set secret totp
-     *
-     * @param $account_id
-     * @param $secret
-     */
-    public function setTotp($account_id, $secret): void
-    {
-        CI::$APP->external_account_model->getConnection()->query('UPDATE '.table('account').' SET '.column('account', 'totp_secret').' = ? WHERE id = ?', array($secret, $account_id));
     }
 }

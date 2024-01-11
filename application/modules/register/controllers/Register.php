@@ -158,7 +158,7 @@ class Register extends MX_Controller
                 $this->external_account_model->createAccount($username, $password, $email);
 
                 // Log in
-                $sha_pass_hash = $this->user->createHash($username, $password);
+                $sha_pass_hash = $this->user->getAccountPassword($username, $password);
                 $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
             }
 

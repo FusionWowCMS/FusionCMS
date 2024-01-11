@@ -131,8 +131,7 @@ class Password_recovery extends MX_Controller
                     die(json_encode($data));
                 }
 
-                $hash = $this->user->createHash($token_data['username'], $new_password);
-                $this->external_account_model->setPassword($token_data['username'], $hash["verifier"]);
+                $this->external_account_model->setPassword($token_data['username'], $token_data['email'], $new_password);
                 
                 $this->dblogger->createLog("user", "recovery", "Password changed via reset", [], Dblogger::STATUS_SUCCEED, $this->user->getId($token_data['username']));
 

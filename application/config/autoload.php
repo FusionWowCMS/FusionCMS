@@ -138,10 +138,10 @@ $autoload['packages'] = [];
 |
 | Prototype:
 |
-|   $autoload['libraries'] = array('database', 'session', 'xmlrpc');
+|   $autoload['libraries'] = ['database', 'session', 'xmlrpc'];
 */
 
-$autoload['libraries'] = ['security', 'cache', 'database', 'session', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'dblogger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items'];
+$autoload['libraries'] = ['security', 'cache', 'database', 'session', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'dblogger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items', 'crypto'];
 
 /*
 | -------------------------------------------------------------------
@@ -184,7 +184,7 @@ $autoload['helper'] = ['url', 'emulator', 'form', 'text', 'lang', 'breadcumb', '
 |
 */
 
-$autoload['config'] = ['language', 'version', 'acl_defaults', 'fusion', 'message', 'backups', 'cdn', 'captcha', 'social_media', 'performance', 'wow_db', 'wow_expansions', 'profiler'];
+$autoload['config'] = ['language', 'version', 'acl_defaults', 'fusion', 'message', 'backups', 'cdn', 'captcha', 'social_media', 'performance', 'wow_db', 'wow_expansions', 'profiler', 'auth'];
 
 
 /*

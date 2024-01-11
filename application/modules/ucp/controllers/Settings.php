@@ -78,15 +78,11 @@ class Settings extends MX_Controller
             $currentPassword = $this->user->getPassword();
 
             // Hash the entered password
-            $passwordHash = $this->user->createHash($this->user->getUsername(), $oldPassword);
+            $passwordHash = $this->user->getAccountPassword($this->user->getUsername(), $oldPassword);;
 
             // Check if passwords match
             if (strtoupper($currentPassword) == strtoupper($passwordHash["verifier"])) {
-                $hash = $this->user->createHash($this->user->getUsername(), $newPassword);
-
-                $this->user->setPassword($hash["verifier"]);
-
-                $this->plugins->onChangePassword($this->user->getId(), $hash);
+                $this->user->setPassword($newPassword);
             } else {
                 die('no');
             }

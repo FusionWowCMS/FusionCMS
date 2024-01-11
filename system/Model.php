@@ -103,6 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Administrator $administrator       Administrator Class
  * @property Captcha $captcha                   Captcha Class
  * @property ConfigEditor $configEditor         ConfigEditor Class
+ * @property Crypto $crypto                     Crypto Class
  * @property Dbbackup $dbbackup                 Dbbackup Class
  * @property Items $items                       Items Class
  * @property Language $language                 Language Class

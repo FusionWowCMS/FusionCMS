@@ -26,12 +26,6 @@ class Azerothcore_soap implements Emulator
     protected $console;
 
     /**
-     * Encryption
-     */
-    protected $encryption = 'SRP6';
-    protected $battlenet = false;
-
-    /**
      * Emulator support Totp
      */
     protected $hasTotp = true;
@@ -58,16 +52,17 @@ class Azerothcore_soap implements Emulator
     protected $columns = array(
 
         'account' => array(
-            'id'         => 'id',
-            'username'   => 'username',
-            'salt'       => 'salt',
-            'password'   => 'verifier',
-            'email'      => 'email',
-            'joindate'   => 'joindate',
-            'last_ip'    => 'last_ip',
-            'last_login' => 'last_login',
-            'expansion'  => 'expansion',
-            'totp_secret'  => 'totp_secret'
+            'id'            => 'id',
+            'username'      => 'username',
+            'sha_pass_hash' => 'sha_pass_hash',
+            'salt'          => 'salt',
+            'verifier'      => 'verifier',
+            'email'         => 'email',
+            'joindate'      => 'joindate',
+            'last_ip'       => 'last_ip',
+            'last_login'    => 'last_login',
+            'expansion'     => 'expansion',
+            'totp_secret'   => 'totp_secret'
         ),
 
         'account_access' => array(
@@ -270,26 +265,6 @@ class Azerothcore_soap implements Emulator
     }
 
     /**
-     * Get encryption for this emulator
-     *
-     * @return String
-     */
-    public function encryption()
-    {
-        return $this->encryption;
-    }
-
-    /**
-     * Whether or not emulator uses battlenet accounts
-     *
-     * @return Boolean
-     */
-    public function battlenet()
-    {
-        return $this->battlenet;
-    }
-
-    /**
      * Whether or not character stats are logged in the database
      *
      * @return Boolean
@@ -307,70 +282,6 @@ class Azerothcore_soap implements Emulator
     public function hasTotp()
     {
         return $this->hasTotp;
-    }
-
-    /**
-     * Password encryption
-     */
-    public function encrypt($username, $password, $salt = null)
-    {
-        static::forge(); // once only
-
-        is_string($username) || $username = '';
-        is_string($password) || $password = '';
-        is_string($salt) || $salt = $this->salt($username);
-
-        // algorithm constants
-        $g = gmp_init(7);
-        $N = gmp_init('894B645E89E1535BBDAD5B8B290650530801B18EBFBF5E8FAB3C82872A3E9BB7', 16);
-
-        // calculate first then calculate the second hash; at last convert to integer (little-endian)
-        $h = gmp_import(sha1($salt . sha1(strtoupper($username . ':' . $password), true), true), 1, GMP_LSW_FIRST);
-
-        // convert back to byte array, within a 32 pad; remember zeros go on the end in little-endian
-        $verifier = str_pad(gmp_export(gmp_powm($g, $h, $N), 1, GMP_LSW_FIRST), 32, chr(0), STR_PAD_RIGHT);
-
-        return array(
-            "salt" => $salt,
-            "verifier" => $verifier
-        );
-    }
-
-    /**
-     * Fetches salt for the user or generates a new salt one and
-     * set it for them automatically if there is none.
-     *
-     * @param  string $username [description]
-     * @return string           [description]
-     */
-    public function salt($username)
-    {
-        static $salt;
-        if (
-            $saltUser = CI::$APP->external_account_model->getConnection()->query(sprintf(
-                'SELECT TRIM("\0" FROM %s) FROM %s WHERE username = ?',
-                column('account', 'salt'),
-                table('account')
-            ), [$username])->row_array()
-        ) {
-            $salt = $salt ?: current($saltUser); // get the stored salt
-
-            if ($salt) { // if it exists
-                return $salt;
-            }
-        }
-
-        $salt = random_bytes(32);
-
-        register_shutdown_function(function () use ($salt, $username) {
-            CI::$APP->external_account_model->getConnection()->query(sprintf(
-                'UPDATE %s SET %s = ? WHERE username = ?',
-                table('account'),
-                column('account', 'salt')
-            ), [$salt, $username]);
-        }); // ..saves the salt for the user before finishing the scripts
-
-        return $salt;
     }
 
     /**
@@ -510,35 +421,6 @@ class Azerothcore_soap implements Emulator
         } catch (Exception $e) {
             die("Something went wrong! An administrator has been noticed and will send your order as soon as possible.<br /><br /><b>Error:</b> <br />" . $e->getMessage() . ($realm ? '<br/><br/><b>Realm:</b> <br />' . $realm->getName() : ''));
         }
-    }
-
-/**
-     * Forges and patches everything that this emulator needs
-     * in order to work properly.
-     *
-     * @return [type] [description]
-     */
-    private static function forge()
-    {
-        if (file_exists(APPPATH . 'cache/data/srp6_account_model.cache')) {
-            return;
-        } // already applied everything
-
-        CI::$APP->external_account_model->getConnection()->query(sprintf(
-            'ALTER TABLE %s MODIFY %s binary(32) NULL',
-            table('account'),
-            column('account', 'salt')
-        )); // let the salt temporary be empty
-
-        if (!strpos($temp = file_get_contents(APPPATH . 'third_party/MX/Controller.php'), 'verifier')) {
-            $temp = preg_replace('~^((\s+).+cookie\([\'"]fcms_password[\'"]\).+)~m', "$1
-$2if($password && column('account', 'password') == 'verifier' && column('account', 'salt')) // emulator uses srp6 encryption
-$2    \$password = urldecode(preg_replace('%.(?:fcms_password=([^;]+))?%', '\\$1', @\$_SERVER['HTTP_COOKIE']));", $temp);
-
-            @file_put_contents(APPPATH . 'third_party/MX/Controller.php', $temp);
-        }
-
-        file_put_contents(APPPATH . 'cache/data/srp6_account_model.cache', null);
     }
 
     /**

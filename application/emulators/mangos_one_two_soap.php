@@ -4,7 +4,7 @@
  * Abstraction layer for supporting different emulators
  */
 
-class Mangos_one_two_sph_soap implements Emulator
+class Mangos_one_two_soap implements Emulator
 {
     protected $config;
 
@@ -22,12 +22,6 @@ class Mangos_one_two_sph_soap implements Emulator
      * Console object
      */
     protected $console;
-
-    /**
-     * Encryption
-     */
-    protected $encryption = 'SPH';
-    protected $battlenet = false;
 
     /**
      * Emulator support Totp
@@ -56,18 +50,18 @@ class Mangos_one_two_sph_soap implements Emulator
     protected $columns = array(
 
         "account" => array(
-            "id"         => "id",
-            "username"   => "username",
-            'gmlevel'    => 'gmlevel',
-            "password"   => "sha_pass_hash",
-            "email"      => "email",
-            "joindate"   => "joindate",
-            "last_ip"    => "last_ip",
-            "last_login" => "last_login",
-            "expansion"  => "expansion",
-            "v"          => "v",
-            "s"          => "s",
-            "sessionkey" => "sessionkey"
+            "id"            => "id",
+            "username"      => "username",
+            'gmlevel'       => 'gmlevel',
+            "sha_pass_hash" => "sha_pass_hash",
+            "email"         => "email",
+            "joindate"      => "joindate",
+            "last_ip"       => "last_ip",
+            "last_login"    => "last_login",
+            "expansion"     => "expansion",
+            "v"             => "v",
+            "s"             => "s",
+            "sessionkey"    => "sessionkey"
         ),
 
         "account_banned" => array(
@@ -253,26 +247,6 @@ class Mangos_one_two_sph_soap implements Emulator
     }
 
     /**
-     * Get encryption for this emulator
-     *
-     * @return String
-     */
-    public function encryption()
-    {
-        return $this->encryption;
-    }
-
-    /**
-     * Whether or not emulator uses battlenet accounts
-     *
-     * @return Boolean
-     */
-    public function battlenet()
-    {
-        return $this->battlenet;
-    }
-
-    /**
      * Whether or not character stats are logged in the database
      *
      * @return Boolean
@@ -290,24 +264,6 @@ class Mangos_one_two_sph_soap implements Emulator
     public function hasTotp()
     {
         return $this->hasTotp;
-    }
-
-    /**
-     * Password encryption
-     */
-    public function encrypt($username, $password)
-    {
-        if (!is_string($username)) {
-            $username = "";
-        }
-        if (!is_string($password)) {
-            $password = "";
-        }
-        $sha_pass_hash = sha1(strtoupper($username) . ':' . strtoupper($password));
-
-        return array(
-           "verifier" => $sha_pass_hash
-        );
     }
 
     /**
