@@ -64,7 +64,7 @@ class Updater extends MX_Controller
         $this->version = $this->administrator->getVersion();
 
         # Log path
-        $this->log_path = (($this->config->item('log_path') && realpath($this->config->item('log_path'))) ? realpath($this->config->item('log_path')) : realpath(APPPATH) . self::DS . 'logs') . self::DS;
+        $this->log_path = (($this->config->item('log_path') && realpath($this->config->item('log_path'))) ? realpath($this->config->item('log_path')) : realpath(WRITEPATH) . self::DS . 'logs') . self::DS;
 
         # Log file
         $this->log_file = 'update-{DATE}.log';
