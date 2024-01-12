@@ -199,7 +199,7 @@
                                             </div>
                                             <div class="mb-2">
                                                 <h4 class="font-heading text-3xl font-bold leading-tight text-muted-800 dark:text-white">
-                                                    <span>{$signups.today}</span>
+                                                    <span>{$signups.month}</span>
                                                 </h4>
                                             </div>
                                             <div class="text-success-500 flex items-center gap-1 font-sans text-sm">
