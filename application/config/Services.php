@@ -6,6 +6,7 @@ use CodeIgniter\Debug\Exceptions;
 use CodeIgniter\Debug\Iterator;
 use CodeIgniter\Debug\Timer;
 use CodeIgniter\Debug\Toolbar;
+use CodeIgniter\Email\Email;
 use CodeIgniter\Log\Logger;
 use CodeIgniter\Router\RouteCollection;
 use CodeIgniter\Router\RouteCollectionInterface;
@@ -96,6 +97,26 @@ class Services
             $response,
             $options
         );
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * The Email class allows you to send email via mail, sendmail, SMTP.
+     *
+     * @param array $config
+     * @param bool $getShared
+     *
+     * @return Email|mixed
+     */
+    public static function email(array $config = [], $getShared = false)
+    {
+        if ($getShared)
+        {
+            return self::getSharedInstance('email', $config);
+        }
+
+        return new Email($config);
     }
 
     //--------------------------------------------------------------------

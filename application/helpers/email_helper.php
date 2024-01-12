@@ -1,4 +1,8 @@
-<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (! defined('BASEPATH')) exit('No direct script access allowed');
+
+use App\Config\Services;
 
 /**
  * Send mail
@@ -28,7 +32,7 @@ function sendMail(string $receiver, string $subject, string $username, string $m
     // Pass the custom SMTP settings if any
     if ($CI->config->item('smtp_protocol') == 'smtp') {
         $config = array(
-            'protocol'    => $CI->config->item('smtp_protocol'),
+            'protocol'   => $CI->config->item('smtp_protocol'),
             'SMTPHost'   => $CI->config->item('smtp_host'),
             'SMTPUser'   => $CI->config->item('smtp_user'),
             'SMTPPass'   => $CI->config->item('smtp_pass'),
@@ -41,13 +45,13 @@ function sendMail(string $receiver, string $subject, string $username, string $m
     $config['mailType'] = 'html';
 
     $sender = $CI->config->item('smtp_sender');
-    $CI->load->library('email', $config);
+    $email = Services::email($config);
 
     // Set email data
-    $CI->email->setFrom($sender, $CI->config->item('server_name'));
-    $CI->email->setTo($receiver);
-    $CI->email->setSubject($subject);
-    $CI->email->setMessage($message);
+    $email->setFrom($sender, $CI->config->item('server_name'));
+    $email->setTo($receiver);
+    $email->setSubject($subject);
+    $email->setMessage($message);
 
     ######
     $data = [
@@ -60,10 +64,10 @@ function sendMail(string $receiver, string $subject, string $username, string $m
     $body = $CI->load->view('email_templates/' . $template['template_name'], $data, true);
     ######
 
-    $CI->email->setMessage($body);
+    $email->setMessage($body);
 
     // Send the email
-    if (!$CI->email->send()) {
+    if (!$email->send()) {
         die("cannot be send");
     }
 
