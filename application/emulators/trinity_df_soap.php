@@ -62,7 +62,7 @@ class Trinity_df_soap implements Emulator
             'id'          => 'id',
             'username'    => 'username',
             'salt'        => 'salt',
-            'password'    => 'verifier',
+            'verifier'    => 'verifier',
             'email'       => 'email',
             'joindate'    => 'joindate',
             'last_ip'     => 'last_ip',

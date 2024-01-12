@@ -59,16 +59,18 @@ class Trinity_legion_soap implements Emulator
     protected $columns = array(
 
         'account' => array(
-            'id'         => 'id',
-            'username'   => 'username',
-            'password'   => 'sha_pass_hash',
-            'email'      => 'email',
-            'joindate'   => 'joindate',
-            'last_ip'    => 'last_ip',
-            'last_login' => 'last_login',
-            'expansion'  => 'expansion',
-            'sessionkey' => 'sessionkey',
-            'totp_secret' => 'token_key'
+            'id'            => 'id',
+            'username'      => 'username',
+            'sha_pass_hash' => 'sha_pass_hash',
+            'salt'          => 'salt',
+            'verifier'      => 'verifier',
+            'email'         => 'email',
+            'joindate'      => 'joindate',
+            'last_ip'       => 'last_ip',
+            'last_login'    => 'last_login',
+            'expansion'     => 'expansion',
+            'sessionkey'    => 'sessionkey',
+            'totp_secret'   => 'token_key'
         ),
 
         'account_access' => array(

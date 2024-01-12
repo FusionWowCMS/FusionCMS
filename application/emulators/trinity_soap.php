@@ -58,16 +58,17 @@ class Trinity_soap implements Emulator
     protected $columns = array(
 
         'account' => array(
-            'id'         => 'id',
-            'username'   => 'username',
-            'salt'       => 'salt',
-            'password'   => 'verifier',
-            'email'      => 'email',
-            'joindate'   => 'joindate',
-            'last_ip'    => 'last_ip',
-            'last_login' => 'last_login',
-            'expansion'  => 'expansion',
-            'totp_secret'  => 'totp_secret'
+            'id'            => 'id',
+            'username'      => 'username',
+            'sha_pass_hash' => 'sha_pass_hash',
+            'salt'          => 'salt',
+            'verifier'      => 'verifier',
+            'email'         => 'email',
+            'joindate'      => 'joindate',
+            'last_ip'       => 'last_ip',
+            'last_login'    => 'last_login',
+            'expansion'     => 'expansion',
+            'totp_secret'   => 'totp_secret'
         ),
 
         'account_access' => array(
