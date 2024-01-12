@@ -1031,12 +1031,12 @@ CREATE TABLE `sideboxes`  (
 -- ----------------------------
 -- Records of sideboxes
 -- ----------------------------
-INSERT INTO `sideboxes` (`id`, `type`, `displayName`, `rank_needed`, `order`, `location`, `permission`) VALUES
-(1, 'status', '{"english":"Server status"}', 1, 0, 'side', NULL),
-(2, 'language_picker', '{"english":"Language"}', 1, 3, 'side', NULL),
-(3, 'top', '', 1, 1, 'top', NULL),
-(4, 'info_login', '{"english":"User area"}', 1, 2, 'side', NULL),
-(5, 'discord', '{"english":"Discord"}', 1, 4, 'side', NULL);
+INSERT INTO `sideboxes` (`id`, `type`, `displayName`, `rank_needed`, `order`, `location`, `permission`, `pages`) VALUES
+(1, 'status', '{"english":"Server status"}', 1, 0, 'side', NULL, '["news"]'),
+(2, 'language_picker', '{"english":"Language"}', 1, 3, 'side', NULL, '["news"]'),
+(3, 'top', '', 1, 1, 'top', NULL, '["news"]'),
+(4, 'info_login', '{"english":"User area"}', 1, 2, 'side', NULL, '["news"]'),
+(5, 'discord', '{"english":"Discord"}', 1, 4, 'side', NULL, '["news"]');
 
 -- ----------------------------
 -- Table structure for sideboxes_custom
