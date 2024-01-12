@@ -64,15 +64,31 @@ class Cms_model extends CI_Model
         return null;
     }
 
-    public function getSideboxes(string $type = "side")
+    public function getSideboxes(string $type = 'side', string $page = '*')
     {
-        if (in_array($type, array("top", "side", "bottom"))) {
-            $query = $this->db->query("SELECT * FROM sideboxes WHERE location = ? ORDER BY `order` ASC", array($type));
-        } else {
-            $query = $this->db->query("SELECT * FROM sideboxes ORDER BY `order` ASC");
-        }
+        // Query: Prepare
+        $query = $this->db->from('sideboxes')
+                          ->select('*')
+                          ->order_by('order', 'ASC');
 
-        return $query->result_array();
+        // Query: Filter (Type)
+        if($type && in_array($type, ['top', 'side', 'bottom']))
+            $query = $query->where('location', $type);
+
+        // Query: Filter (Page)
+        if($page && $page !== '*')
+            $query = $query->group_start()
+                           ->like('pages', str_replace(':page', $page, '":page"'), 'both')
+                           ->group_end();
+
+        // Query: Execute
+        $query = $query->get();
+
+        // Query: Make sure we have results
+        if($query->num_rows())
+            return $query->result_array();
+
+        return [];
     }
 
     /**

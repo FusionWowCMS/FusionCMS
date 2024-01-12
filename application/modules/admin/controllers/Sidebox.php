@@ -78,106 +78,127 @@ class Sidebox extends MX_Controller
 
     public function create_submit()
     {
-        requirePermission("addSideboxes");
+        // Make sure visitor has required permissions
+        requirePermission('addSideboxes');
 
-        $data['type'] = preg_replace("/sidebox_/", "", $this->input->post('type'));
-        $data['displayName'] = $this->input->post('displayName');
-        $data['location'] = $this->input->post('location');
+        // Prepare sidebox data
+        $data = [
+            'type'        => preg_replace('/sidebox_/', '', $this->input->post('type')),
+            'pages'       => $this->input->post('pages'),
+            'location'    => $this->input->post('location'),
+            'displayName' => $this->input->post('displayName')
+        ];
 
-        if (!$data["displayName"])
-        {
+        // Validate pages
+        if(!$data['pages'] || !is_array($data['pages']))
+            $data['pages'] = [];
+
+        // Format pages
+        $data['pages'] = json_encode($data['pages'], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+
+        // Make sure `displayName` filled
+        if(!$data['displayName'])
             die('Name can\'t be empty');
-        }
 
+        // Add sidebox
         $id = $this->sidebox_model->add($data);
 
-        if ($this->input->post('visibility') == "group")
-        {
+        // Set sidebox permission (if required)
+        if($this->input->post('visibility') == 'group')
             $this->sidebox_model->setPermission($id);
-        }
 
         // Handle custom sidebox text
-        if ($data['type'] == "custom")
+        if($data['type'] == 'custom')
         {
-            $data["content"] = $this->input->post("content");
-
-            if (!$data["content"]) {
-                die('Content can\'t be empty');
-            }
-
+            // Grab sidebox text
             $text = $this->input->post('content', false);
 
+            // Make sure `text` filled
+            if(!$text)
+                die('Content can\'t be empty');
+
+            // Add sidebox (custom text)
             $this->sidebox_model->addCustom($text);
         }
 
-        die("yes");
+        die('yes');
     }
 
     public function new()
     {
-        requirePermission("editSideboxes");
+        // Make sure visitor has required permissions
+        requirePermission('editSideboxes');
 
-        $this->sideboxModules = $this->getSideboxModules();
-
-        // Change the title
+        // Set the title
         $this->administrator->setTitle('Add Sidebox');
 
-        // Prepare my data
+        // Fill sidebox modules
+        $this->sideboxModules = $this->getSideboxModules();
+
+        // Prepare page data
         $data = array(
-            'url' => $this->template->page_url,
+            'url'            => $this->template->page_url,
+            'pages'          => self::getModules(),
             'sideboxModules' => $this->sideboxModules
         );
 
-        // Load my view
-        $output = $this->template->loadPage("sidebox/add_sidebox.tpl", $data);
+        // Load page view
+        $output = $this->template->loadPage('sidebox/add_sidebox.tpl', $data);
 
-        // Put my view in the main box with a headline
+        // Put page view in the main box with a headline
         $content = $this->administrator->box('', $output);
 
-        // Output my content. The method accepts the same arguments as template->view
-        $this->administrator->view($content, false, "modules/admin/js/sidebox.js");
+        // Output page content. The method accepts the same arguments as template->view
+        $this->administrator->view($content, false, 'modules/admin/js/sidebox.js');
     }
 
     public function edit($id = false)
     {
-        requirePermission("editSideboxes");
+        // Make sure visitor has required permissions
+        requirePermission('editSideboxes');
 
-        if (!is_numeric($id) || !$id)
-        {
+        // Invalid id
+        if(!is_numeric($id) || !$id)
             die();
-        }
 
-        $sidebox = $this->sidebox_model->getSidebox($id);
+        // Get sidebox data
+        $sidebox           = $this->sidebox_model->getSidebox($id);
         $sideboxCustomText = $this->sidebox_model->getCustomText($id);
 
-        if (!$sidebox)
-        {
-            show_error("There is no sidebox with ID " . $id);
+        // Invalid sidebox
+        if(!$sidebox)
+            show_error('There is no sidebox with ID ' . $id);
 
-            die();
-        }
+        // Format pages
+        $sidebox['pages'] = json_decode($sidebox['pages'], true);
 
-        $this->sideboxModules = $this->getSideboxModules();
+        // Validate pages
+        if(!$sidebox['pages'] || !is_array($sidebox['pages']))
+            $sidebox['pages'] = [];
 
-        // Change the title
+        // Set the title
         $this->administrator->setTitle(langColumn($sidebox['displayName']));
 
-        // Prepare my data
+        // Fill sidebox modules
+        $this->sideboxModules = $this->getSideboxModules();
+
+        // Prepare page data
         $data = array(
-            'url' => $this->template->page_url,
-            'sidebox' => $sidebox,
-            'sideboxModules' => $this->sideboxModules,
+            'url'               => $this->template->page_url,
+            'pages'             => self::getModules(),
+            'sidebox'           => $sidebox,
+            'sideboxModules'    => $this->sideboxModules,
             'sideboxCustomText' => $sideboxCustomText
         );
 
-        // Load my view
-        $output = $this->template->loadPage("sidebox/edit_sidebox.tpl", $data);
+        // Load page view
+        $output = $this->template->loadPage('sidebox/edit_sidebox.tpl', $data);
 
-        // Put my view in the main box with a headline
+        // Put page view in the main box with a headline
         $content = $this->administrator->box('', $output);
 
-        // Output my content. The method accepts the same arguments as template->view
-        $this->administrator->view($content, false, "modules/admin/js/sidebox.js");
+        // Output page content. The method accepts the same arguments as template->view
+        $this->administrator->view($content, false, 'modules/admin/js/sidebox.js');
     }
 
     public function move($id = false, $direction = false)
@@ -214,44 +235,54 @@ class Sidebox extends MX_Controller
 
     public function save($id = false)
     {
-        requirePermission("editSideboxes");
+        // Make sure visitor has required permissions
+        requirePermission('editSideboxes');
 
-        if (!$id || !is_numeric($id)) {
-            die("No ID");
-        }
+        // Invalid id
+        if(!$id || !is_numeric($id))
+            die('No ID');
 
-        $data["type"] = preg_replace("/sidebox_/", "", $this->input->post("type"));
-        $data["displayName"] = $this->input->post("displayName");
-        $data['location'] = $this->input->post('location');
+        // Prepare sidebox data
+        $data = [
+            'type'        => preg_replace('/sidebox_/', '', $this->input->post('type')),
+            'pages'       => $this->input->post('pages'),
+            'location'    => $this->input->post('location'),
+            'displayName' => $this->input->post('displayName'),
+        ];
 
-        foreach ($data as $value)
-        {
-            if (!$value)
-            {
-                die("The fields can\'t be empty");
-            }
-        }
+        // Validate pages
+        if(!$data['pages'] || !is_array($data['pages']))
+            $data['pages'] = [];
 
+        // Format pages
+        $data['pages'] = json_encode($data['pages'], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+
+        // Make sure everythings filled
+        foreach($data as $value)
+            if(!$value)
+                die('The fields can\'t be empty');
+
+        // Save changes
         $this->sidebox_model->edit($id, $data);
 
         // Handle custom sidebox text
-        if ($data["type"] == "custom")
-        {
-            $text = $this->input->post("content", false);
-            $this->sidebox_model->editCustom($id, $text);
-        }
+        if($data['type'] == 'custom')
+            $this->sidebox_model->editCustom($id, $this->input->post('content', false));
 
+        // Check for sidebox permission
         $hasPermission = $this->sidebox_model->hasPermission($id);
 
-        if ($this->input->post('visibility') == "group" && !$hasPermission)
+        // Set sidebox permission
+        if($this->input->post('visibility') == 'group' && !$hasPermission)
         {
             $this->sidebox_model->setPermission($id);
-        } elseif ($this->input->post('visibility') != "group" && $hasPermission)
+        }
+        elseif($this->input->post('visibility') != 'group' && $hasPermission)
         {
             $this->sidebox_model->deletePermission($id);
         }
 
-        die("yes");
+        die('yes');
     }
 
     public function delete($id = false)
@@ -264,5 +295,37 @@ class Sidebox extends MX_Controller
         }
 
         $this->sidebox_model->delete($id);
+    }
+
+    /**
+     * Get modules
+     * Returns available modules
+     *
+     * @return array $modules
+     */
+    private static function getModules()
+    {
+        // Modules: Initialize
+        $modules = [];
+
+        // Blacklist: Initialize
+        $blacklist = ['admin', 'api', 'icon'];
+
+        // Modules: Get
+        if(!empty($modules = glob(realpath(APPPATH) . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR)))
+        {
+            // Loop through modules
+            foreach($modules as $key => $module)
+            {
+                // Grab trailing name component
+                $modules[$key] = basename($modules[$key]);
+
+                // Filter
+                if(in_array($modules[$key], $blacklist) || strpos($modules[$key], 'sidebox_') === 0)
+                    unset($modules[$key]);
+            }
+        }
+
+        return $modules;
     }
 }

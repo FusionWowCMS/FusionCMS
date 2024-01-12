@@ -43,6 +43,27 @@
                     </select>
                 </div>
             </div>
+
+            {* Pages.Start *}
+            {if isset($pages) && $pages && is_array($pages) && count($pages)}
+                <div class="form-group row mb-3">
+                    <label class="col-sm-2 col-form-label">Pages</label>
+                    <div class="col-sm-10">
+                        <div class="row row-cols-2 row-cols-md-6">
+                            {foreach from=$pages item=item}
+                                <div class="col">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="pages[]" id="page_{$item}" value="{$item}" checked />
+                                        <label class="form-check-label" for="page_{$item}">{$item}</label>
+                                    </div>
+                                </div>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            {/if}
+            {* Pages.End *}
+
             <div class="mb-3" id="custom_field">
                 <textarea name="content" class="form-control tinymce" id="customContent"></textarea>
             </div>

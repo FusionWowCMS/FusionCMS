@@ -67,6 +67,7 @@ var Sidebox = {
 				content: $("textarea.tinymce").val(),
 				visibility: $("#visibility").val(),
 				location: $("#location").val(),
+				pages: [...document.querySelectorAll('input[name=\'pages[]\']:checked')].map(el => { return el.value; }),
 				csrf_token_name: Config.CSRF
 			};
 
@@ -107,6 +108,7 @@ var Sidebox = {
 				content: $("textarea.tinymce").val(),
 				visibility: $("#visibility").val(),
 				location: $("#location").val(),
+				pages: [...document.querySelectorAll('input[name=\'pages[]\']:checked')].map(el => { return el.value; }),
 				csrf_token_name: Config.CSRF
 			};
 

@@ -465,7 +465,7 @@ class Template
 
         $out = array();
 
-        $sideBoxes_db = $this->CI->cms_model->getSideboxes($location);
+        $sideBoxes_db = $this->CI->cms_model->getSideboxes($location, CI::$APP->router->fetch_module());
 
         // If we got sideboxes
         if ($sideBoxes_db)
