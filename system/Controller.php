@@ -40,9 +40,11 @@
 use CodeIgniter\Debug\Exceptions;
 use CodeIgniter\Debug\Timer;
 use CodeIgniter\Debug\Toolbar;
+use CodeIgniter\Email\Email;
 use CodeIgniter\Events\Events;
 use CodeIgniter\HTTP\UserAgent;
 use CodeIgniter\Log\Logger;
+use CodeIgniter\Typography\Typography;
 use Encryption\Encryption;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -84,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Session $session                CodeIgniter Session Class
  * @property CI_Calendar $calendar              This class enables the creation of calendars
  * @property CI_Driver_Library $driver          This class enables you to create "Driver" libraries that add runtime ability to extend the capabilities of a class via additional driver objects
- * @property CI_Email $email                    Permits email to be sent using Mail, Sendmail, or SMTP.
+ * @property Email $email                       Permits email to be sent using Mail, Sendmail, or SMTP.
  * @property Encryption $encryption             Provides two-way keyed encryption via PHP's MCrypt and/or OpenSSL extensions.
  * @property CI_Form_validation $form_validation Form Validation Class
  * @property CI_FTP $ftp                        FTP Class
@@ -95,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Toolbar $toolbar                   This class enables you to display benchmark, query, and other data in order to help with debugging and optimization.
  * @property CI_Table $table                    Lets you create tables manually or from database result objects, or arrays.
  * @property CI_Trackback $trackback            Trackback Sending/Receiving Class
- * @property CI_Typography $typography          Typography Class
+ * @property Typography $typography             Typography Class
  * @property CI_Unit_test $unit                 Simple testing class
  * @property CI_Upload $upload                  File Uploading Class
  * @property UserAgent $agent                   Identifies the platform, browser, robot, or mobile device of the browsing agent

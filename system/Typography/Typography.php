@@ -1,55 +1,23 @@
 <?php
+
 /**
- * CodeIgniter
+ * This file is part of CodeIgniter 4 framework.
  *
- * An open source application development framework for PHP
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
  *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2019 - 2022, CodeIgniter Foundation
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
- * @copyright	Copyright (c) 2019 - 2022, CodeIgniter Foundation (https://codeigniter.com/)
- * @license	https://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+namespace CodeIgniter\Typography;
 
 /**
  * Typography Class
  *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/userguide3/libraries/typography.html
+ * @see \CodeIgniter\Typography\TypographyTest
  */
-class CI_Typography
+class Typography
 {
-
     /**
      * Block level elements that should not be wrapped inside <p> tags
      *
@@ -83,7 +51,7 @@ class CI_Typography
      *
      * @var string
      */
-    public $last_block_element = '';
+    public $lastBlockElement = '';
 
     /**
      * whether or not to protect quotes within { curly braces }
@@ -106,13 +74,13 @@ class CI_Typography
      * @param bool $reduceLinebreaks whether to reduce more then two consecutive newlines to two
      */
     public function autoTypography(string $str, bool $reduceLinebreaks = false): string
-	{
-		if ($str === '') {
-			return '';
-		}
+    {
+        if ($str === '') {
+            return '';
+        }
 
         // Standardize Newlines to make matching easier
-        if (str_contains($str, "\r")) {
+        if (strpos($str, "\r") !== false) {
             $str = str_replace(["\r\n", "\r"], "\n", $str);
         }
 
@@ -124,7 +92,7 @@ class CI_Typography
 
         // HTML comment tags don't conform to patterns of normal tags, so pull them out separately, only if needed
         $htmlComments = [];
-        if (str_contains($str, '<!--') && preg_match_all('#(<!\-\-.*?\-\->)#s', $str, $matches)) {
+        if (strpos($str, '<!--') !== false && preg_match_all('#(<!\-\-.*?\-\->)#s', $str, $matches)) {
             for ($i = 0, $total = count($matches[0]); $i < $total; $i++) {
                 $htmlComments[] = $matches[0][$i];
                 $str            = str_replace($matches[0][$i], '{@HC' . $i . '}', $str);
@@ -133,7 +101,7 @@ class CI_Typography
 
         // match and yank <pre> tags if they exist.  It's cheaper to do this separately since most content will
         // not contain <pre> tags, and it keeps the PCRE patterns below simpler and faster
-        if (str_contains($str, '<pre')) {
+        if (strpos($str, '<pre') !== false) {
             $str = preg_replace_callback('#<pre.*?>.*?</pre>#si', [$this, 'protectCharacters'], $str);
         }
 
@@ -196,7 +164,7 @@ class CI_Typography
 
             // Convert Newlines into <p> and <br> tags
             $str .= $this->formatNewLines($chunks[$i]);
-		}
+        }
 
         // No opening block level tag? Add it if needed.
         if (! preg_match('/^\s*<(?:' . $this->blockElements . ')/i', $str)) {
@@ -251,9 +219,7 @@ class CI_Typography
         }
 
         return preg_replace(array_keys($table), $table, $str);
-	}
-
-	// --------------------------------------------------------------------
+    }
 
     /**
      * Format Characters
