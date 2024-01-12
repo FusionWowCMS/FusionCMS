@@ -12,7 +12,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | and the array values are used to set the actual name of the item.
 */
 $platforms = [
-    'windows nt 10.0' => 'Windows 10',
+    'windows nt 10.0' => 'Windows 10/11',
     'windows nt 6.3'  => 'Windows 8.1',
     'windows nt 6.2'  => 'Windows 8',
     'windows nt 6.1'  => 'Windows 7',

@@ -33,7 +33,6 @@ use CI_Typography;
 use CI_Unit_test;
 use CI_Upload;
 use CI_URI;
-use CI_User_agent;
 use CI_Utf8;
 use CI_Xmlrpc;
 use CI_Xmlrpcs;
@@ -43,6 +42,7 @@ use CodeIgniter\Debug\Exceptions;
 use CodeIgniter\Debug\Timer;
 use CodeIgniter\Debug\Toolbar;
 use CodeIgniter\Events\Events;
+use CodeIgniter\HTTP\UserAgent;
 use CodeIgniter\Log\Logger;
 use ConfigEditor;
 use Controller;
@@ -140,7 +140,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Typography $typography          Typography Class
  * @property CI_Unit_test $unit                 Simple testing class
  * @property CI_Upload $upload                  File Uploading Class
- * @property CI_User_agent $agent               Identifies the platform, browser, robot, or mobile device of the browsing agent
+ * @property UserAgent $agent                   Identifies the platform, browser, robot, or mobile device of the browsing agent
  * @property CI_Xmlrpc $xmlrpc                  XML-RPC request handler class
  * @property CI_Xmlrpcs $xmlrpcs                XML-RPC server class
  * @property CI_Zip $zip                        Zip Compression Class

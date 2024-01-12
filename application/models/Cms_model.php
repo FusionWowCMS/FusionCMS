@@ -15,8 +15,6 @@ class Cms_model extends CI_Model
     {
         $this->db = $this->load->database("cms", true);
 
-        $this->load->library('user_agent');
-
         $this->logVisit();
 
         if ($this->config->item('detect_language')) {
