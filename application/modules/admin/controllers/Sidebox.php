@@ -91,7 +91,7 @@ class Sidebox extends MX_Controller
 
         // Validate pages
         if(!$data['pages'] || !is_array($data['pages']))
-            $data['pages'] = [];
+            die('Select at least one page.');
 
         // Format pages
         $data['pages'] = json_encode($data['pages'], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
@@ -252,7 +252,7 @@ class Sidebox extends MX_Controller
 
         // Validate pages
         if(!$data['pages'] || !is_array($data['pages']))
-            $data['pages'] = [];
+            die('Select at least one page.');
 
         // Format pages
         $data['pages'] = json_encode($data['pages'], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
