@@ -13,9 +13,9 @@ class Cachemanager extends MX_Controller
         // Make sure to load the administrator library!
         $this->load->library('administrator');
 
-        $this->itemMatches = array("spells/*", "items/*", "search/*");
-        $this->minifyMatches = array("minify/*");
-        $this->websiteMatches = array("*.cache");
+        $this->itemMatches = ["spells/*", "items/*", "search/*"];
+        $this->minifyMatches = ["minify/*"];
+        $this->websiteMatches = ["*.cache"];
 
         parent::__construct();
 
@@ -52,13 +52,13 @@ class Cachemanager extends MX_Controller
         $total['size'] = $this->formatSize($item['size'] + $website['size'] + $theme['size']);
 
         // Prepare my data
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
             'item' => $item,
             'website' => $website,
             'theme' => $theme,
             'total' => $total
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("cachemanager/cache_data.tpl", $data);
@@ -69,10 +69,10 @@ class Cachemanager extends MX_Controller
     private function countItemCache()
     {
         // Define our result
-        $result = array(
+        $result = [
             "files" => 0,
             "size" => 0
-        );
+        ];
 
         // Define what to search for
         $matches = $this->itemMatches;
@@ -80,7 +80,7 @@ class Cachemanager extends MX_Controller
         // Loop through all searches
         foreach ($matches as $search) {
             // Search for matches
-            $matches = glob("application/cache/data/" . $search);
+            $matches = glob("writable/cache/data/" . $search);
 
             if ($matches) {
                 // Loop through all matches
@@ -102,10 +102,10 @@ class Cachemanager extends MX_Controller
     private function countThemeMinifyCache()
     {
         // Define our result
-        $result = array(
+        $result = [
             "files" => 0,
             "size" => 0
-        );
+        ];
 
         // Define what to search for
         $matches = $this->minifyMatches;
@@ -135,10 +135,10 @@ class Cachemanager extends MX_Controller
     private function countWebsiteCache()
     {
         // Define our result
-        $result = array(
+        $result = [
             "files" => 0,
             "size" => 0
-        );
+        ];
 
         // Define what to search for
         $matches = $this->websiteMatches;
@@ -146,7 +146,7 @@ class Cachemanager extends MX_Controller
         // Loop through all searches
         foreach ($matches as $search) {
             // Search for matches
-            $matches = glob("application/cache/data/" . $search);
+            $matches = glob("writable/cache/data/" . $search);
 
             if ($matches) {
                 // Loop through all matches
@@ -182,7 +182,7 @@ class Cachemanager extends MX_Controller
     {
         requirePermission("emptyCache");
 
-        if (!$type || !in_array($type, array('item', 'website', 'theme', 'all'))) {
+        if (!$type || !in_array($type, ['item', 'website', 'theme', 'all'])) {
             die();
         } else {
             switch ($type) {

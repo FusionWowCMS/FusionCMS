@@ -18,7 +18,7 @@ class Smartyengine extends Smarty
     {
         parent::__construct();
 
-        $this->setCompileDir(APPPATH . "cache/templates");
+        $this->setCompileDir(WRITEPATH . "cache/templates");
         $this->setTemplateDir(APPPATH);
         $this->assign('APPPATH', APPPATH);
         $this->assign('BASEPATH', BASEPATH);
@@ -51,18 +51,18 @@ class Smartyengine extends Smarty
      * @param  bool
      * @return string
      */
-    public function view($template, $data = array(), $return = false)
+    public function view($template, $data = [], $return = false)
     {
         try {
             if ($data == '') {
-                $data = array();
+                $data = [];
             }
 
             foreach ($data as $key => $val) {
                 $this->assign($key, $val);
             }
 
-            if ($return == false) {
+            if (!$return) {
                 $CI = &get_instance();
                 if (method_exists($CI->output, 'set_output')) {
                     $CI->output->set_output($this->fetch($template));
@@ -73,7 +73,7 @@ class Smartyengine extends Smarty
             } else {
                 return $this->fetch($template);
             }
-        } catch (SmartyException $e) {
+        } catch (SmartyException | Exception $e) {
             return "<span style='color:red;'><div style='font-size:16px;color:black;font-weight:bold;text-align:center;'>An error has occured while trying to load the requested view.</div><br /><br /><b>Template path:</b> " . $template . "<br /><br /><b>Error:</b> " . nl2br(preg_replace("/Stack trace\:/", "<br /><b>Stack trace:</b>", $e)) . "</span>";
         }
     }
