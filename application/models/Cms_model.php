@@ -79,6 +79,7 @@ class Cms_model extends CI_Model
         if($page && $page !== '*')
             $query = $query->group_start()
                            ->like('pages', str_replace(':page', $page, '":page"'), 'both')
+                           ->or_like('pages', '"*"', 'both')
                            ->group_end();
 
         // Query: Execute

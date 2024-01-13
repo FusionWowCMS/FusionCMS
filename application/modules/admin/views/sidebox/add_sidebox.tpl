@@ -45,7 +45,7 @@
             </div>
 
             {* Pages.Start *}
-            {if isset($pages) && $pages && is_array($pages) && count($pages)}
+            {if isset($pages) && is_array($pages) && count($pages)}
                 <div class="form-group row mb-3">
                     <label class="col-sm-2 col-form-label">Pages</label>
                     <div class="col-sm-10">
@@ -58,6 +58,25 @@
                                     </div>
                                 </div>
                             {/foreach}
+                        </div>
+
+                        <hr class="my-3" />
+
+                        <div class="row row-cols-2 row-cols-md-6 justify-content-md-end">
+                            <div class="col">
+                                <a href="javascript:void(0)" onclick="[...document.querySelectorAll('input[name=\'pages[]\']')].map(el => { if(el.value === '*') { return; } el.checked = true; })"><i class="fa-solid fa-toggle-on align-top"></i> Check all</a>
+                            </div>
+
+                            <div class="col">
+                                <a href="javascript:void(0)" onclick="[...document.querySelectorAll('input[name=\'pages[]\']')].map(el => { if(el.value === '*') { return; } el.checked = false; })"><i class="fa-solid fa-toggle-off align-top"></i> Uncheck all</a>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="pages[]" id="page_*" value="*" onclick="[...document.querySelectorAll('input[name=\'pages[]\']')].map(el => { if(el.value === '*') { return; } if(this.checked) { el.disabled = true; } else { el.disabled = false; } })" />
+                                    <label class="form-check-label" for="page_*">Visible in all pages</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
