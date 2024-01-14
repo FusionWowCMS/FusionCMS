@@ -7,35 +7,50 @@ use MatthiasMullie\Minify;
 /**
  * Minify
  *
- * @param  array  $params
+ * @param  array $params
+ * @return void|string
  */
-function smarty_function_minify($params = false)
+function smarty_function_minify(array $params = [])
 {
     // Missing a parameter or two..
     if(!is_array($params) || !isset($params['type']) || !isset($params['files']) || !isset($params['output']) || !isset($params['disable']))
-        return false;
+        return;
 
-    // Define ROOTURL
-    if(!defined('ROOTURL'))
-        define('ROOTURL', rtrim(base_url(str_replace(['\\', DIRECTORY_SEPARATOR], '/', APPPATH)), '/') . '/');
+    ####################################################################
 
-    // Define ROOTPATH
-    if(!defined('ROOTPATH'))
-        define('ROOTPATH', rtrim(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, realpath(APPPATH)), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+    # Define constants.Starts
 
-    // Get parameters
+    // Define: Directory separator shortcut
+    if(!defined('MIN_DS'))
+        define('MIN_DS', DIRECTORY_SEPARATOR);
+
+    // Define: ROOTURL
+    if(!defined('MIN_ROOTURL'))
+        define('MIN_ROOTURL', rtrim(base_url(str_replace(['\\', MIN_DS, basename(APPPATH)], ['/', '/', ''], APPPATH)), '/') . '/');
+
+    // Define: ROOTPATH
+    if(!defined('MIN_ROOTPATH'))
+        define('MIN_ROOTPATH', rtrim(str_replace(['\\', '/', basename(APPPATH)], [MIN_DS, MIN_DS, ''], realpath(APPPATH)), MIN_DS) . MIN_DS);
+
+    # Define constants.Ends
+
+    ####################################################################
+
+    # Gather parameters.Starts
+
     $type    = strtolower($params['type']);
     $files   = $params['files'];
     $output  = $params['output'];
     $disable = $params['disable'];
-    $age = 60 * 60 * 24 * CI::$APP->config->item('minify_cache_time');
+
+    # Gather parameters.Ends
 
     ####################################################################
 
     # Validate type.Starts
 
     if(!in_array($type, ['css', 'js']))
-        return false;
+        return;
 
     # Validate type.Ends
 
@@ -44,7 +59,7 @@ function smarty_function_minify($params = false)
     # Validate files.Starts
 
     if(!$files)
-        return false;
+        return;
 
     // Increase compatibility
     if(!is_array($files))
@@ -54,16 +69,16 @@ function smarty_function_minify($params = false)
     foreach($files as $k => $file)
     {
         // File is url - no need to go any further
-        if(filter_var($files[$k], FILTER_VALIDATE_URL) !== false)
+        if(filter_var($files[$k], FILTER_VALIDATE_URL) !== FALSE)
             continue;
 
         // CSS import - no need to go any further
-        if(__minify_parse__($files[$k]))
+        if(__minify_hasImport__($files[$k]))
             continue;
 
         // Add ROOTPATH to file.. if needed
-        if(strpos($files[$k], ROOTPATH) === false)
-            $files[$k] = ROOTPATH . str_replace(basename(ROOTPATH), '', $files[$k]);
+        if(strpos($files[$k], MIN_ROOTPATH) === false)
+            $files[$k] = MIN_ROOTPATH . str_replace(basename(MIN_ROOTPATH), '', $files[$k]);
 
         // File exists - no need to go any further
         if(file_exists($files[$k]))
@@ -79,8 +94,8 @@ function smarty_function_minify($params = false)
 
     # Validate output.Starts
 
-    if(!$output || strpos($output, $type) === false)
-        return false;
+    if(!$output || strpos($output, '.' . $type) === false)
+        return;
 
     # Validate output.Ends
 
@@ -96,10 +111,10 @@ function smarty_function_minify($params = false)
 
     // No files left to minify
     if(!count($files))
-        return false;
+        return;
 
     // Initialize http queries
-    $queries = false;
+    $queries = '';
 
     // Get http queries from output
     if(parse_url($output, PHP_URL_QUERY))
@@ -117,28 +132,31 @@ function smarty_function_minify($params = false)
     $outputPATH = str_replace($outputFILE, '', $output);
 
     // Add ROOTPATH to output.. if needed
-    if(strpos($outputPATH, ROOTPATH) === false)
-        $outputPATH = ROOTPATH . str_replace(basename(ROOTPATH), '', $outputPATH);
+    if(strpos($outputPATH, MIN_ROOTPATH) === false)
+        $outputPATH = MIN_ROOTPATH . str_replace(basename(MIN_ROOTPATH), '', $outputPATH);
 
     // Create output directory
     if(!file_exists($outputPATH))
     {
-        mkdir($outputPATH);
+        mkdir($outputPATH, 0755, true);
         chmod($outputPATH, 0755);
     }
 
-    // Initialize valid
-    $valid = true;
+    // Extra conditions here to check if cache file still alive...
+    if(file_exists($outputPATH . $outputFILE))
+    {
+        // Calculate age
+        $age = filemtime($outputPATH . $outputFILE) + (60 * 60 * 24 * CI::$APP->config->item('minify_cache_time'));
 
-    // Extra conditions here to check if cache file still valid...
-    if(file_exists($outputPATH . $outputFILE)) {
-        $cache_time = filemtime($outputPATH . $outputFILE);
+        // Initialize alive
+        $alive = true;
 
-        if (time() > $cache_time + $age)
-            $valid = false;
+        // Saved file is passed away..
+        if(time() > $age)
+            $alive = false;
 
         // Minified file found - no need to go any further
-        if($valid)
+        if($alive)
             return __minify_print__($type, [$outputPATH . $outputFILE], $queries);
     }
 
@@ -158,13 +176,14 @@ function smarty_function_minify($params = false)
 
 /**
  * Minify print
+ * Returns formatted html tags
  *
  * @param  string $type
  * @param  array  $files
  * @param  string $queries
  * @return string $output
  */
-function __minify_print__($type, $files, $queries = false)
+function __minify_print__(string $type = '', array $files = [], string $queries = '')
 {
     // Initialize output
     $output = '';
@@ -179,30 +198,28 @@ function __minify_print__($type, $files, $queries = false)
     // Loop through files
     foreach($files as $file)
     {
-        // Backup type
-        $_type = $type;
-
         // CSS import - switch type
-        if(__minify_parse__($file))
-            $_type = 'css_inline';
+        if(__minify_hasImport__($file))
+            $type = 'css_inline';
 
         // Swap ROOTPATH with ROOTURL
-        $file = str_replace(ROOTPATH, ROOTURL, $file);
+        $file = str_replace(MIN_ROOTPATH, MIN_ROOTURL, $file);
 
         // Append to output
-        $output .= str_replace(['__file__', '__query__'], [$file, $queries], $tags[$_type]) . "\n";
+        $output .= str_replace(['__file__', '__query__'], [$file, $queries], $tags[$type]) . PHP_EOL;
     }
 
     return $output;
 }
 
 /**
- * Minify parse
+ * Minify has import
+ * Checks for css @import rules
  *
  * @param  string $text
- * @return array  $matches
+ * @return bool
  */
-function __minify_parse__($text)
+function __minify_hasImport__(string $text = '')
 {
     // Parse @import rules
     preg_match_all("/@import (url\(\"?)?(url\()?(\")?(.*?)(?(1)\")+(?(2)\))+(?(3)\")/i", $text, $matches);
@@ -211,5 +228,5 @@ function __minify_parse__($text)
     if(!isset($matches[0][0]))
         return false;
 
-    return $matches;
+    return true;
 }
