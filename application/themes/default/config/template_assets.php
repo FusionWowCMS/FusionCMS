@@ -1,13 +1,17 @@
-<?php use MX\CI;
+<?php
 
+# Import required classes
+use MX\CI;
+
+# Make sure we're in CI
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 # Assets
 $assets = [
     'css' => [
         # Settings
-        'url'   => base_url() . 'application/cache/data/minify/',
-        'path'  => CMS_ROOT_PATH . basename(APPPATH) . DS . 'cache' . DS . 'data' . DS . 'minify' . DS,
+        'url'   => base_url() . 'writable/cache/data/minify/',
+        'path'  => CMS_ROOT_PATH . basename(WRITEPATH) . DS . 'cache' . DS . 'data' . DS . 'minify' . DS,
 
         # Parts
         'parts' => [
@@ -46,8 +50,8 @@ $assets = [
 
     'js' => [
         # Settings
-        'url'   => base_url() . 'application/cache/data/minify/',
-        'path'  => CMS_ROOT_PATH . basename(APPPATH) . DS . 'cache' . DS . 'data' . DS . 'minify' . DS,
+        'url'   => base_url() . 'writable/cache/data/minify/',
+        'path'  => CMS_ROOT_PATH . basename(WRITEPATH) . DS . 'cache' . DS . 'data' . DS . 'minify' . DS,
 
         # Parts
         'parts' => [
