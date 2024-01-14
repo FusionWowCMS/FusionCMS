@@ -1,5 +1,9 @@
-<?php use MX\CI;
+<?php
 
+# Import required classes
+use MX\CI;
+
+# Make sure we're in CI
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 if(!function_exists('FN_formatTitle'))
