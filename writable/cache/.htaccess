@@ -1,6 +1,3 @@
-<IfModule authz_core_module>
-    Require all denied
-</IfModule>
-<IfModule !authz_core_module>
+<Files ~ ".(php|cache|json)$">
     Deny from all
-</IfModule>
+</Files>
