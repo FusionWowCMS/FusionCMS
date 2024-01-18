@@ -78,25 +78,7 @@ class Cachemanager extends MX_Controller
         $matches = $this->itemMatches;
 
         // Loop through all searches
-        foreach ($matches as $search) {
-            // Search for matches
-            $matches = glob("writable/cache/data/" . $search);
-
-            if ($matches) {
-                // Loop through all matches
-                foreach ($matches as $file) {
-                    if (!preg_match("/index\.html/", $file)) {
-                        // Count and add their size to the result
-                        $result['files']++;
-                        $result['size'] += filesize($file);
-                    }
-                }
-            }
-        }
-
-        $result['sizeString'] = $this->formatSize($result['size']);
-
-        return $result;
+        return $this->SearchCache($matches, $result);
     }
 
     private function countThemeMinifyCache()
@@ -111,25 +93,7 @@ class Cachemanager extends MX_Controller
         $matches = $this->minifyMatches;
 
         // Loop through all searches
-        foreach ($matches as $search) {
-            // Search for matches
-            $matches = glob("writable/cache/data/" . $search);
-
-            if ($matches) {
-                // Loop through all matches
-                foreach ($matches as $file) {
-                    if (!preg_match("/index\.html/", $file)) {
-                        // Count and add their size to the result
-                        $result['files']++;
-                        $result['size'] += filesize($file);
-                    }
-                }
-            }
-        }
-
-        $result['sizeString'] = $this->formatSize($result['size']);
-
-        return $result;
+        return $this->SearchCache($matches, $result);
     }
 
     private function countWebsiteCache()
@@ -144,25 +108,7 @@ class Cachemanager extends MX_Controller
         $matches = $this->websiteMatches;
 
         // Loop through all searches
-        foreach ($matches as $search) {
-            // Search for matches
-            $matches = glob("writable/cache/data/" . $search);
-
-            if ($matches) {
-                // Loop through all matches
-                foreach ($matches as $file) {
-                    if (!preg_match("/index\.html/", $file)) {
-                        // Count and add their size to the result
-                        $result['files']++;
-                        $result['size'] += filesize($file);
-                    }
-                }
-            }
-        }
-
-        $result['sizeString'] = $this->formatSize($result['size']);
-
-        return $result;
+        return $this->SearchCache($matches, $result);
     }
 
     private function formatSize($size)
@@ -219,5 +165,35 @@ class Cachemanager extends MX_Controller
 
             die("success");
         }
+    }
+
+    /**
+     * Get size of cache
+     *
+     * @param array $matches
+     * @param array $result
+     * @return array
+     */
+    private function SearchCache(array $matches, array $result): array
+    {
+        foreach ($matches as $search) {
+            // Search for matches
+            $matches = glob("writable/cache/data/" . $search);
+
+            if ($matches) {
+                // Loop through all matches
+                foreach ($matches as $file) {
+                    if (!preg_match("/index\.html/", $file)) {
+                        // Count and add their size to the result
+                        $result['files']++;
+                        $result['size'] += filesize($file);
+                    }
+                }
+            }
+        }
+
+        $result['sizeString'] = $this->formatSize($result['size']);
+
+        return $result;
     }
 }
