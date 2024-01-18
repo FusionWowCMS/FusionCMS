@@ -113,7 +113,7 @@ class Cachemanager extends MX_Controller
         // Loop through all searches
         foreach ($matches as $search) {
             // Search for matches
-            $matches = glob("application/cache/data/" . $search);
+            $matches = glob("writable/cache/data/" . $search);
 
             if ($matches) {
                 // Loop through all matches
