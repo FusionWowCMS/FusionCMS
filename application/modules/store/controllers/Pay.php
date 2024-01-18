@@ -46,7 +46,7 @@ class Pay extends MX_Controller
             die(lang("empty_cart", "store"));
         }
 
-        $items = array();
+        $items = [];
 
         // Load all items
         foreach ($cart as $item) {
@@ -76,7 +76,7 @@ class Pay extends MX_Controller
         }
 
         // An array to hold all items in a sub-array for each realm
-        $realmItems = array();
+        $realmItems = [];
 
         // Make sure all realms are online
         foreach ($cart as $item) {
@@ -84,7 +84,7 @@ class Pay extends MX_Controller
 
             // Create a realm item array if it doesn't exist
             if (!isset($realmItems[$realm->getId()])) {
-                $realmItems[$realm->getId()] = array();
+                $realmItems[$realm->getId()] = [];
             }
 
             if (!$realm->isOnline(true)) {
@@ -122,7 +122,7 @@ class Pay extends MX_Controller
 
                 // Make sure the character array exists in the realm array
                 if (!isset($realmItems[$items[$item['id']]['realm']][$item['character']])) {
-                    $realmItems[$items[$item['id']]['realm']][$item['character']] = array();
+                    $realmItems[$items[$item['id']]['realm']][$item['character']] = [];
                 }
 
                 // Check for multiple items
@@ -134,15 +134,15 @@ class Pay extends MX_Controller
                     // Loop through the item IDs
                     foreach ($temp['id'] as $key => $id) {
                         // Add them individually to the array
-                        $itemCount = isset($temp['count'][$key]) ? $temp['count'][$key] : 1;
+                        $itemCount = $temp['count'][$key] ?? 1;
                         for($i = 0; $i < $itemCount; $i++) {
-                            array_push($realmItems[$items[$item['id']]['realm']][$item['character']], array('id' => $id));
+                            array_push($realmItems[$items[$item['id']]['realm']][$item['character']], ['id' => $id]);
                         }
                     }
                 } else {
-                    $itemCount = $items[$item['id']]['itemcount'];
+                    $itemCount = $items[$item['id']]['itemcount'] ?? 1;
                     for($i = 0; $i < $itemCount; $i++) {
-                        array_push($realmItems[$items[$item['id']]['realm']][$item['character']], array('id' => $items[$item['id']]['itemid']));
+                        array_push($realmItems[$items[$item['id']]['realm']][$item['character']], ['id' => $items[$item['id']]['itemid']]);
                     }
                 }
             } elseif (!empty($items[$item['id']]['command'])) {
