@@ -325,9 +325,9 @@
 			"icon":"list",
 			"links": [
 				{
-					"text": "HP Error Logs",
+					"text": "Error logs",
 					"icon": "list-ul",
-					"controller": "hplogs",
+					"controller": "errorlogs",
 					"requirePermission": "editSystemSettings"
 				},
 				

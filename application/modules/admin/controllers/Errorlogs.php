@@ -2,25 +2,29 @@
 
 use MX\MX_Controller;
 
-class Hplogs extends MX_Controller
+class Errorlogs extends MX_Controller
 {
     private static $levelsIcon = array(
-        'INFO'  => 'fa-solid fa-circle-info',
-        'ERROR' => 'fa-solid fa-triangle-exclamation',
-        'DEBUG' => 'fa-solid fa-triangle-exclamation',
-        'ALL'   => 'fa-solid fa-minus',
+        'INFO'     => 'fa-solid fa-circle-info',
+        'ERROR'    => 'fa-solid fa-triangle-exclamation',
+        'CRITICAL' => 'fa-solid fa-triangle-exclamation',
+        'DEBUG'    => 'fa-solid fa-triangle-exclamation',
+        'WARNING'  => 'fa-solid fa-warning',
+        'ALL'      => 'fa-solid fa-minus',
     );
 
     private static $levelClasses = [
-        'INFO'  => 'info',
-        'ERROR' => 'danger',
-        'DEBUG' => 'warning',
-        'ALL'   => 'muted',
+        'INFO'     => 'info',
+        'ERROR'    => 'danger',
+        'CRITICAL' => 'danger',
+        'WARNING'  => 'warning',
+        'DEBUG'    => 'debug',
+        'ALL'      => 'muted',
     ];
 
-    private $LOG_LINE_START_PATTERN = "/((INFO)|(ERROR)|(DEBUG)|(ALL))[\s\-\d:\.\/]+(-->)/";
-    private $LOG_DATE_PATTERN = ["/^((ERROR)|(INFO)|(DEBUG)|(ALL))\s\-\s/", "/\s(-->)/"];
-    private $LOG_LEVEL_PATTERN = "/^((ERROR)|(INFO)|(DEBUG)|(ALL))/";
+    private $LOG_LINE_START_PATTERN = "/((INFO)|(ERROR)|(DEBUG)|(CRITICAL)|(WARNING)|(ALL))[\s\-\d:\.\/]+(-->)/";
+    private $LOG_DATE_PATTERN = ["/^((ERROR)|(INFO)|(DEBUG)|(CRITICAL)|(WARNING)|(ALL))\s\-\s/", "/\s(-->)/"];
+    private $LOG_LEVEL_PATTERN = "/^((ERROR)|(INFO)|(DEBUG)|(CRITICAL)|(WARNING)|(ALL))/";
 
     //this is the path (folder) on the system where the log files are stored
     private $logFolderPath;
@@ -39,7 +43,7 @@ class Hplogs extends MX_Controller
 
         $this->load->library("administrator");
 
-        $this->logFolderPath =  APPPATH . "/logs";
+        $this->logFolderPath =  WRITEPATH . "/logs";
         $this->logFilePattern = "log-*.php";
 
         //concatenate to form Full Log Path
@@ -75,11 +79,11 @@ class Hplogs extends MX_Controller
             'currentFile' => !is_null($currentFile) ? basename($currentFile) : "",
         );
 
-        $output = $this->template->loadPage("hplogs.tpl", $data);
+        $output = $this->template->loadPage("errorlogs.tpl", $data);
 
-        $content = $this->administrator->box('HP logs', $output);
+        $content = $this->administrator->box('Error logs', $output);
 
-        $this->administrator->view($content, false, false);
+        $this->administrator->view($content);
     }
 
     private function processLogs($logs)
@@ -113,7 +117,7 @@ class Hplogs extends MX_Controller
                     $data["content"] = $logMessage;
                 }
 
-                array_push($superLog, $data);
+                $superLog[] = $data;
             } elseif (!empty($superLog)) {
                 //this log line is a continuation of previous logline
                 //so let's add them as extra
