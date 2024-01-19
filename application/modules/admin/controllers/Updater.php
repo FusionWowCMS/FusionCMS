@@ -70,7 +70,7 @@ class Updater extends MX_Controller
         $this->log_file = 'update-{DATE}.log';
 
         # Cache path
-        $this->cache_path = (($this->config->item('cache_path') && realpath($this->config->item('cache_path'))) ? realpath($this->config->item('cache_path')) : realpath(APPPATH) . self::DS . 'cache') . self::DS . 'data' . self::DS . 'update' . self::DS;
+        $this->cache_path = (($this->config->item('cache_path') && realpath($this->config->item('cache_path'))) ? realpath($this->config->item('cache_path')) : realpath(WRITEPATH) . self::DS . 'cache') . self::DS . 'data' . self::DS . 'update' . self::DS;
 
         # Cache file
         $this->cache_file = 'assets.json';
