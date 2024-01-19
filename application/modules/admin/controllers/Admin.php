@@ -1,5 +1,6 @@
 <?php
 
+use App\Config\Services;
 use MX\MX_Controller;
 
 class Admin extends MX_Controller
@@ -383,13 +384,14 @@ class Admin extends MX_Controller
 
 	private function getLatestVersion()
 	{
-		$content = @file_get_contents("https://raw.githubusercontent.com/FusionWowCMS/FusionCMS/master/application/config/version.php");
-		if ($content)
-		    $newVersion = substr($content, 37, 5);
-		else
-		    $newVersion = false;
+        $response = Services::curlrequest()->get('https://raw.githubusercontent.com/FusionWowCMS/FusionCMS/master/application/config/version.php');
+        $content = $response->getBody();
+        if ($content)
+            $newVersion = substr($content, 37, 5);
+        else
+            $newVersion = false;
 
-		if($this->template->compareVersions($newVersion, $this->config->item('FusionCMSVersion'), true))
-			return true;
+        if($this->template->compareVersions($newVersion, $this->config->item('FusionCMSVersion'), true))
+            return true;
 	}
 }
