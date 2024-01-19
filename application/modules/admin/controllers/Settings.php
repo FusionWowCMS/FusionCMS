@@ -1,14 +1,16 @@
 <?php
 
+use App\Config\Services;
 use MX\MX_Controller;
 
 class Settings extends MX_Controller
 {
+    private $email;
+
     public function __construct()
     {
         // Make sure to load the administrator library!
         $this->load->library('administrator');
-        $this->load->library('email');
 
         parent::__construct();
 
@@ -192,7 +194,7 @@ class Settings extends MX_Controller
             );
         }
 
-        $this->email->initialize($config);
+        $this->email = Services::email($config ?? []);
 
         $this->email->setFrom($this->config->item('smtp_sender'), $this->config->item('server_name'));
         $this->email->setTo($this->user->getEmail());
