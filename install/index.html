@@ -181,11 +181,17 @@
 
 												<div class="folder-permissions">
 													<h4 class="font-heading text-xl font-light leading-tight text-muted-800 dark:text-white">{{folder_permissions}}</h4>
-													<div style="font-weight:bold;margin:10px 0px;" id="config_folder">&bull; /application/config/ {{needs_writable}} ({{see}} <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)</div>
+													<div style="font-weight:bold;margin:10px 0;" id="config_folder">&bull; /application/config/ {{needs_writable}} ({{see}} <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)</div>
 
-													<div style="font-weight:bold;margin:10px 0px;" id="modules_folder">&bull; /application/modules/ {{is_writable}}</div>
+													<div style="font-weight:bold;margin:10px 0;" id="modules_folder">&bull; /application/modules/ {{is_writable}}</div>
 
-													<div style="font-weight:bold;margin:10px 0px;" id="cache_folder">&bull; /application/cache/</div>
+													<div style="font-weight:bold;margin:10px 0;" id="cache_folder">&bull; /writable/cache/</div>
+
+													<div style="font-weight:bold;margin:10px 0;" id="backups_folder">&bull; /writable/backups/</div>
+
+													<div style="font-weight:bold;margin:10px 0;" id="logs_folder">&bull; /writable/logs/</div>
+
+													<div style="font-weight:bold;margin:10px 0;" id="uploads_folder">&bull; /writable/uploads/</div>
 												</div>
 
 												<div class="php-version">

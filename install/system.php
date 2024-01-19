@@ -37,73 +37,76 @@ class Install
 		die(json_encode($emulators));
 	}
 
-	private function check()
-	{
-        if ( ! isset($_GET['test']))
+    private function check()
+    {
+        if (! isset($_GET['test']))
             return;
-        
-		$folder = $_GET['test'];
+        if (! isset($_GET['path']))
+            return;
 
-		$file = fopen("../application/".$folder."/write_test.txt", "w");
+        $folder = $_GET['test'];
+        $path = $_GET['path'];
 
-		fwrite($file, "success");
-		fclose($file);
+        $file = fopen("../".$path ."/".$folder."/write_test.txt", "w");
 
-		unlink("../application/".$folder."/write_test.txt");
+        fwrite($file, "success");
+        fclose($file);
 
-		die("1");
-	}
-    
+        unlink("../".$path ."/".$folder."/write_test.txt");
+
+        die("1");
+    }
+
     private function checkPhpExtensions()
     {
-        $req = array('mysqli', 'curl', 'openssl', 'soap', 'gd', 'gmp', 'mbstring', 'json', 'xml', 'zip');
+        $req = ['mysqli', 'curl', 'openssl', 'soap', 'gd', 'gmp', 'mbstring', 'json', 'xml', 'zip'];
         $loaded = get_loaded_extensions();
-        $errors = array();
-        
+        $errors = [];
+
         foreach ($req as $ext)
-            if ( ! in_array($ext, $loaded))
+            if (! in_array($ext, $loaded))
                 $errors[] = $ext;
-        
-        die( $errors ? join(', ', $errors) : '1' );
+
+        die($errors ? join(', ', $errors) : '1');
     }
-    
+
     private function checkApacheModules()
     {
-        $req = array('mod_rewrite', 'mod_headers', 'mod_expires', 'mod_deflate', 'mod_filter');
+        $req = ['mod_rewrite', 'mod_headers', 'mod_expires', 'mod_deflate', 'mod_filter'];
         $loaded = function_exists('apache_get_modules') ? apache_get_modules() : false;
 
         if(is_bool($loaded) && !$loaded)
             die('2');
 
-        $errors = array();
-        
+        $errors = [];
+
         foreach ($req as $ext)
             if (!in_array($ext, $loaded))
                 $errors[] = $ext;
-        
-        die( $errors ? join(', ', $errors) : '1' );
+
+        die($errors ? join(', ', $errors) : '1');
     }
-    
+
     private function checkPhpVersion()
     {
-		die( version_compare(PHP_VERSION, '8.1.0', '>=') ? '1' : '0' );
+		die(version_compare(PHP_VERSION, '8.1.0', '>=') ? '1' : '0');
     }
-	
+
 	private function checkDbConnection()
 	{
-		$req = array('hostname', 'username', 'database');
-		
+		$req = ['hostname', 'username', 'database'];
+
 		foreach ($req as $var) {
 			if ( ! isset($_POST[$var]) || empty($_POST[$var]))
 				die('Please fill all fields.');
 		}
 
 	    @$db = new mysqli(
-	    	$_POST['hostname'], 
-	    	$_POST['username'], 
-	    	$_POST['password'], 
+	    	$_POST['hostname'],
+	    	$_POST['username'],
+	    	$_POST['password'],
 	    	$_POST['database'],
-	    	isset($_POST['port']) ? $_POST['port'] : self::MYSQL_DEFAULT_PORT
+            $_POST['port'] ?? self::MYSQL_DEFAULT_PORT
 	    );
 
 		die($db->connect_error ? $db->connect_error : '1');
@@ -275,7 +278,7 @@ $db["account"]["stricton"] = false;';
 
 			if(is_resource($file) === true)
 			{
-				$query = array();
+				$query = [];
 
 				while(feof($file) === false)
 				{
@@ -298,7 +301,7 @@ $db["account"]["stricton"] = false;';
 
 					if(is_string($query) === true)
 					{
-						$query = array();
+						$query = [];
 					}
 				}
 
@@ -372,18 +375,18 @@ $db["account"]["stricton"] = false;';
                 ':override_port_char'  => $this->db->real_escape_string($realm['db_port'])
             ];
 
-            // Everything is correct.. insert realm
+            // Everything is correct. Insert realm
             $this->db->query(str_replace(array_keys($data), array_values($data), $statement));
         }
 
         die('1');
     }
-	
+
 	private function finalStep()
 	{
 		$file = fopen('.lock', 'w');
 		fclose($file);
-		
+
 		if(file_exists(".lock"))
 		{
 			die('success');

@@ -39,7 +39,7 @@ var Ajax = {
 			{
 				var name = $("#realmname_preserve").val();
 				
-				if ( ! name)
+				if (! name)
 					return;
 				
 				$("#realm_field").append("<div class=\"realmHeader\"><a onclick='Ajax.Realms.show(this);'><img class='realmExtend' src='images/icons/black16x16/ic_plus.png' /> " + name + "</a> <img class='realmDelete' src='images/icons/black16x16/ic_delete.png' onclick='Ajax.Realms.deleteRealm(this);' /></div><div class='realmForm' style='display: none;'></div>");
@@ -119,14 +119,14 @@ var Ajax = {
         if (onComplete !== undefined) 
         {
             var id = setInterval(function() {
-                if (done == 3) {
+                if (done == 6) {
                     clearInterval(id);
                     onComplete();
                 }
             }, 100);
         }
         
-		$.get("system.php?step=folder&test=config", function(data)
+		$.get("system.php?step=folder&test=config&path=application", function(data)
 		{
 			if(data == '1')
 			{
@@ -140,21 +140,7 @@ var Ajax = {
             done++;
 		});
 
-		$.get("system.php?step=folder&test=cache", function(data)
-		{
-			if(data == '1')
-			{
-				$("#cache_folder").css({color:"green"}).removeClass('error').html("/application/cache/ is writable");
-			}
-			else
-			{
-				$("#cache_folder").css({color:"red"}).addClass('error').html('/application/cache/ needs to be writable (see <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)');
-			}
-            
-            done++;
-		});
-
-		$.get("system.php?step=folder&test=modules", function(data)
+		$.get("system.php?step=folder&test=modules&path=application", function(data)
 		{
 			if(data == '1')
 			{
@@ -166,6 +152,62 @@ var Ajax = {
 			}
             
             done++;
+		});
+
+		$.get("system.php?step=folder&test=cache&path=writable", function(data)
+		{
+			if(data == '1')
+			{
+				$("#cache_folder").css({color:"green"}).removeClass('error').html("/writable/cache/ is writable");
+			}
+			else
+			{
+				$("#cache_folder").css({color:"red"}).addClass('error').html('/writable/cache/ needs to be writable (see <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)');
+			}
+
+			done++;
+		});
+
+		$.get("system.php?step=folder&test=backups&path=writable", function(data)
+		{
+			if(data == '1')
+			{
+				$("#backups_folder").css({color:"green"}).removeClass('error').html("/writable/backups/ is writable");
+			}
+			else
+			{
+				$("#backups_folder").css({color:"red"}).addClass('error').html('/writable/backups/ needs to be writable (see <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)');
+			}
+
+			done++;
+		});
+
+		$.get("system.php?step=folder&test=logs&path=writable", function(data)
+		{
+			if(data == '1')
+			{
+				$("#logs_folder").css({color:"green"}).removeClass('error').html("/writable/logs/ is writable");
+			}
+			else
+			{
+				$("#logs_folder").css({color:"red"}).addClass('error').html('/writable/logs/ needs to be writable (see <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)');
+			}
+
+			done++;
+		});
+
+		$.get("system.php?step=folder&test=uploads&path=writable", function(data)
+		{
+			if(data == '1')
+			{
+				$("#uploads_folder").css({color:"green"}).removeClass('error').html("/writable/uploads/ is writable");
+			}
+			else
+			{
+				$("#uploads_folder").css({color:"red"}).addClass('error').html('/writable/uploads/ needs to be writable (see <a href="http://en.wikipedia.org/wiki/Chmod" target="_blank">chmod</a>)');
+			}
+
+			done++;
 		});
 	},
     
