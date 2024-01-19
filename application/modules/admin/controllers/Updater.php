@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 # Import required classes
+use App\Config\Services;
 use \VisualAppeal\AutoUpdate;
 use MX\MX_Controller;
 
@@ -717,26 +718,17 @@ class Updater extends MX_Controller
         // HACK! Give it some time...
         set_time_limit(0);
 
-        $curl = curl_init();
+        $options = [
+            'timeout'         => 300,
+            'allow_redirects' => [
+                'max' => 10,
+            ],
+            'user_agent'      => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1',
+            'version'         => CURL_HTTP_VERSION_2_0,
+            'verify'          => false,
+        ];
 
-        curl_setopt_array($curl, [
-            CURLOPT_URL            => $url,
-            CURLOPT_TIMEOUT        => 300,
-            CURLOPT_ENCODING       => '',
-            CURLOPT_MAXREDIRS      => 10,
-            CURLOPT_USERAGENT      => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1',
-            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-            CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_RETURNTRANSFER => TRUE,
-            CURLOPT_FOLLOWLOCATION => TRUE
-        ]);
-
-        $response = curl_exec($curl);
-        //$err      = curl_error($curl);
-
-        curl_close($curl);
-
-        return $response;
+        return Services::curlrequest()->get($url, $options)->getBody();
     }
 
     /**

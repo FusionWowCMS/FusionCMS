@@ -97,6 +97,8 @@ class CURLRequest extends OutgoingRequest
      */
     private bool $shareOptions;
 
+    protected bool $showError = false;
+
     /**
      * Takes an array of options to set the following possible class properties:
      *
@@ -687,12 +689,19 @@ class CURLRequest extends OutgoingRequest
         // Send the request and wait for a response.
         $output = curl_exec($ch);
 
-        if ($output === false) {
+        if ($output === false && $this->showError) {
             throw HTTPException::forCurlError((string) curl_errno($ch), curl_error($ch));
         }
 
         curl_close($ch);
 
         return $output;
+    }
+
+    public function setShowError(bool $showError): CURLRequest
+    {
+        $this->showError = $showError;
+
+        return $this;
     }
 }
