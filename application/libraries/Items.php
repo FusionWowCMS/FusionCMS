@@ -1,5 +1,7 @@
 <?php
 
+use App\Config\Services;
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -31,7 +33,8 @@ class Items
     public function getItemWowHead(int $item, $realm, string $type, bool $enableCache = true): mixed
     {
         // Get the item XML data
-        $data = @file_get_contents("https://www.wowhead.com/item=" . $item . "&xml");
+        $response = Services::curlrequest()->get('https://www.wowhead.com/item=' . $item . '&xml');
+        $data = $response->getBody();
 
         if (!empty($data)) {
             $data = $this->XMLtoArray($data);
