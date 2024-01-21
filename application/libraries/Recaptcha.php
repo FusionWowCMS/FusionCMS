@@ -1,5 +1,7 @@
 <?php (! defined('BASEPATH')) and exit('No direct script access allowed');
 
+use App\Config\Services;
+
 /**
  * @package FusionCMS
  * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
@@ -55,7 +57,7 @@ class Recaptcha
     private function _submitHTTPGet(array $data): false|string
     {
         $url = self::site_verify_url.'?'.http_build_query($data);
-        return file_get_contents($url);
+        return Services::curlrequest()->get($url)->getBody();
     }
     /**
      * Calls the reCAPTCHA site-verify API to verify whether the user passes
