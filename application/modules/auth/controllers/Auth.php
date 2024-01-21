@@ -130,6 +130,13 @@ class Auth extends MX_Controller
                         $data['messages']["error"] = lang("captcha_invalid", "auth") . $result;
                         die(json_encode($data));
                     }
+                } else if ($captcha_type == 'recaptcha3') {
+                    $recaptcha = $this->input->post('recaptcha');
+                    $score = $this->recaptcha->verifyScore($recaptcha);
+                    if($score < 0.5) {
+                        $data['messages']["error"] = lang("captcha_invalid", "auth");
+                        die(json_encode($data));
+                    }
                 }
             }
 

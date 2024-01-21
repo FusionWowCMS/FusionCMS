@@ -73,17 +73,17 @@ class Recaptcha
         $remoteIp = (!empty($remoteIp)) ? $remoteIp : $this->CI->input->ip_address();
         // Discard empty solution submissions
         if (empty($response)) {
-            return array(
+            return [
                 'success' => false,
                 'error-codes' => 'missing-input',
-            );
+            ];
         }
         $getResponse = $this->_submitHttpGet(
-            array(
+            [
                 'secret' => $this->secretKey,
                 'remoteip' => $remoteIp,
                 'response' => $response,
-            )
+            ]
         );
         // get reCAPTCHA server response
         $responses = json_decode($getResponse, true);
@@ -94,10 +94,10 @@ class Recaptcha
             $error = (isset($responses['error-codes'])) ? $responses['error-codes']
                 : 'invalid-input-response';
         }
-        return array(
+        return [
             'success' => $status,
             'error-codes' => (isset($error)) ? $error : null,
-        );
+        ];
     }
     /**
      * Render Script Tag
@@ -111,12 +111,12 @@ class Recaptcha
      *
      * @return string
      */
-    public function getScriptTag(array $parameters = array()): string
+    public function getScriptTag(array $parameters = []): string
     {
-        $default = array(
+        $default = [
             'render' => 'onload',
             'hl' => $this->language,
-        );
+        ];
         $result = array_merge($default, $parameters);
         return sprintf('<script type="text/javascript" src="%s?%s" async defer></script>',
             self::api_url, http_build_query($result));
@@ -133,12 +133,12 @@ class Recaptcha
      */
     public function getWidget(array $parameters = array()): string
     {
-        $default = array(
+        $default = [
             'data-sitekey' => $this->siteKey,
             'data-theme' => $this->theme,
             'data-type' => 'image',
             'data-size' => 'normal',
-        );
+        ];
         $result = array_merge($default, $parameters);
         $html = '';
         foreach ($result as $key => $value) {
@@ -152,5 +152,56 @@ class Recaptcha
     public function getEnabledRecaptcha(): bool
     {
         return $this->CI->config->item('use_captcha') && $this->CI->config->item('captcha_type') == 'recaptcha';
+    }
+
+    /**
+     *
+     * Returns a float from 0 to 1 indicating the likelihood that the request is a from a human
+     * 0 is considered a robot
+     * 1 is considered a human
+     *
+     * @param string $response
+     * @return float|int
+     */
+    function verifyScore(string $response): float|int
+    {
+        $getResponse = $this->_submitHttpGet(
+            [
+                'secret' => $this->secretKey,
+                'response' => $response,
+            ]
+        );
+        $responses = json_decode($getResponse, true);
+
+        // handle any errors
+        if(!$responses->success){
+            foreach($responses->{'error-codes'} as $code){
+                switch ($code){
+                    case 'missing-input-secret':
+                        log_message('error', 'RECAPTCHA: The secret parameter is missing.');
+                        break;
+                    case 'invalid-input-secret':
+                        log_message('error', 'RECAPTCHA: The secret parameter is invalid or malformed.');
+                        break;
+                    case 'missing-input-response':
+                        log_message('error', 'RECAPTCHA: The response parameter is missing.');
+                        break;
+                    case 'invalid-input-response':
+                        log_message('error', 'RECAPTCHA: The response parameter is invalid or malformed.');
+                        break;
+                    case 'bad-request':
+                        log_message('error', 'RECAPTCHA: The request is invalid or malformed.');
+                        break;
+                    case 'timeout-or-duplicate':
+                        log_message('error', 'RECAPTCHA: The response is no longer valid: either is too old or has been used previously.');
+                        break;
+                    default:
+                        log_message('error', 'RECAPTCHA: Unknown error');
+                }
+            }
+            return 0; // treat it as spam?
+        }
+
+        return $responses->score;
     }
 }

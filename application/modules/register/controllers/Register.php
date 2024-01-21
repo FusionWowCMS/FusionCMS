@@ -62,10 +62,15 @@ class Register extends MX_Controller
             $usernameAvailable = $this->username_check($this->input->post('register_username'));
 
             if ($use_captcha) {
-                if ($captcha_type == 'recaptcha') {
+                if ($captcha_type == 'recaptcha' || $captcha_type == 'recaptcha3') {
                     if($this->recaptcha->getEnabledRecaptcha()) {
                         $recaptcha = $this->input->post('g-recaptcha-response');
-                        $captcha = $this->recaptcha->verifyResponse($recaptcha)['success'];
+                        if ($captcha_type == 'recaptcha') {
+                            $captcha = $this->recaptcha->verifyResponse($recaptcha)['success'];
+                        } else if ($captcha_type == 'recaptcha3') {
+                            $score = $this->recaptcha->verifyScore($recaptcha);
+                            $captcha = $score > 0.5;
+                        }
                     }
                     else
                         $recaptcha = 'disabled';
@@ -108,7 +113,7 @@ class Register extends MX_Controller
                     }
                 }
 
-                if ($captcha_type == 'recaptcha') {
+                if ($captcha_type == 'recaptcha' || $captcha_type == 'recaptcha3') {
                     if(!$captcha && !$recaptcha == 'disabled') {
                         $data['captcha_error'] = true;
                     }

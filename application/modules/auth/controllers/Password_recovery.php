@@ -33,11 +33,11 @@ class Password_recovery extends MX_Controller
 
         $this->template->setTitle(lang("password_recovery", "recovery"));
 
-        $data = array(
+        $data = [
             "use_captcha" => $this->config->item('use_captcha'),
             "captcha_type" => $this->config->item('captcha_type'),
             "recaptcha_html" => $this->recaptcha->getScriptTag() . $this->recaptcha->getWidget()
-        );
+        ];
 
         $content = $this->template->loadPage("password_recovery.tpl", $data);
         $box = $this->template->box(lang("password_recovery", "recovery"), $content);
@@ -80,6 +80,13 @@ class Password_recovery extends MX_Controller
                     $result = $this->recaptcha->verifyResponse($recaptcha)['success'];
                     if (!$result) {
                         $data['messages']["error"] = lang("captcha_invalid", "auth") . $result;
+                        die(json_encode($data));
+                    }
+                } else if ($captcha_type == 'recaptcha3') {
+                    $recaptcha = $this->input->post('recaptcha');
+                    $score = $this->recaptcha->verifyScore($recaptcha);
+                    if($score < 0.5) {
+                        $data['messages']["error"] = lang("captcha_invalid", "auth");
                         die(json_encode($data));
                     }
                 }
