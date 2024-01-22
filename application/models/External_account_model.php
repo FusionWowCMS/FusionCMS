@@ -164,7 +164,13 @@ class External_account_model extends CI_Model
 
         // Fix for TrinityCore RBAC (or any emulator with 'rbac')
         if ($this->config->item('rbac')) {
-            $this->connection->query("INSERT INTO rbac_account_permissions(`accountId`, `permissionId`, `granted`, `realmId`) values (?, 195, 1, -1)", [$userId]);
+            $rbac_data = [
+                'accountId'    => $userId,
+                'permissionId' => 195,
+                'granted'      => 1,
+                'realmId'      => -1
+            ];
+            $this->connection->insert('rbac_account_permissions', $rbac_data);
         }
 
         $this->updateDailySignUps();
