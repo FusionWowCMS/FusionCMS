@@ -2,6 +2,7 @@
 
 # Import required classes
 use MX\CI;
+use App\Config\Services;
 use MatthiasMullie\Minify;
 
 /**
@@ -165,7 +166,7 @@ function smarty_function_minify(array $params = [])
 
     // Loop through files and add them to minifier
     foreach($files as $file)
-        $minifier->add((filter_var($file, FILTER_VALIDATE_URL) !== FALSE) ? file_get_contents($file) : $file);
+        $minifier->add((filter_var($file, FILTER_VALIDATE_URL) !== FALSE) ? Services::curlrequest()->get($file)->getBody() : $file);
 
     // Save minified file
     $minifier->minify($outputPATH . $outputFILE);
