@@ -373,29 +373,6 @@ CREATE TABLE `acl_roles`  (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
 
 -- ----------------------------
--- Records of acl_roles
--- ----------------------------
-INSERT INTO `acl_roles` VALUES ('100', '--MENU--', ''), ('101', '--MENU--', ''), ('11', '--MENU--', ''), ('13', '--MENU--', ''), ('2', '--MENU--', ''), ('21', '--MENU--', ''), ('5', '--MENU--', ''), ('6', '--MENU--', ''), ('8', '--MENU--', '');
-
--- ----------------------------
--- Table structure for acl_roles_permissions
--- ----------------------------
-DROP TABLE IF EXISTS `acl_roles_permissions`;
-CREATE TABLE `acl_roles_permissions`  (
-  `role_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `permission_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `module` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `value` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
-  PRIMARY KEY (`role_name`, `permission_name`, `module`) USING BTREE,
-  UNIQUE INDEX `role_name_permission_name`(`role_name`, `permission_name`, `module`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
-
--- ----------------------------
--- Records of acl_roles_permissions
--- ----------------------------
-INSERT INTO `acl_roles_permissions` VALUES ('100', '100', '--MENU--', '1'), ('101', '101', '--MENU--', '1'), ('11', '11', '--MENU--', '1'), ('13', '13', '--MENU--', '1'), ('2', '2', '--MENU--', '1'), ('21', '21', '--MENU--', '1'), ('5', '5', '--MENU--', '1'), ('6', '6', '--MENU--', '1'), ('8', '8', '--MENU--', '1');
-
--- ----------------------------
 -- Table structure for article_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `article_tag`;

@@ -18,27 +18,26 @@ class Page_model extends CI_Model
 
     public function delete($id)
     {
-        $this->db->query("DELETE FROM pages WHERE id=?", array($id));
+        $this->db->query("DELETE FROM pages WHERE id=?", [$id]);
 
         $this->deletePermission($id);
     }
 
-    public function setPermission($id)
+    public function setPermission($id, $group_id)
     {
-        $this->db->query("UPDATE pages SET `permission`=? WHERE id=?", array($id, $id));
-        $this->db->query("INSERT INTO acl_roles(`name`, `module`) VALUES(?, '--PAGE--')", array($id));
-        $this->db->query("INSERT INTO acl_roles_permissions(`role_name`, `permission_name`, `module`, `value`) VALUES(?, ?, '--PAGE--', 1)", array($id, $id));
+        $this->db->query("UPDATE pages SET `permission`=? WHERE id=?", [$id, $id]);
+        $this->db->query("INSERT INTO acl_group_roles(`group_id`, `name`, `module`) VALUES(?, ?, '--PAGE--')", [$group_id, $id]);
     }
 
-    public function deletePermission($id)
+    public function deletePermission($id, $group_id)
     {
-        $this->db->query("UPDATE pages SET `permission`='' WHERE id=?", array($id));
-        $this->db->query("DELETE FROM acl_roles WHERE module='--PAGE--' AND name=?", array($id));
+        $this->db->query("UPDATE pages SET `permission`='' WHERE id=?", [$id]);
+        $this->db->query("DELETE FROM acl_group_roles WHERE module = '--PAGE--' AND name = ? AND group_id = ?", [$id, $group_id]);
     }
 
     public function hasPermission($id)
     {
-        $query = $this->db->query("SELECT `permission` FROM pages WHERE id=?", array($id));
+        $query = $this->db->query("SELECT `permission` FROM pages WHERE id = ?", [$id]);
 
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

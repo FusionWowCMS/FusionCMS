@@ -59,27 +59,26 @@ class Menu_model extends CI_Model
         $query = $this->db->query("SELECT id FROM menu ORDER BY id DESC LIMIT 1");
         $row = $query->result_array();
 
-        $this->db->query("UPDATE menu SET `order`=? WHERE id=?", array($row[0]['id'], $row[0]['id']));
+        $this->db->query("UPDATE menu SET `order`=? WHERE id = ?", [$row[0]['id'], $row[0]['id']]);
 
         return $row[0]['id'];
     }
 
-    public function setPermission($id)
+    public function setPermission($id, $group_id)
     {
-        $this->db->query("UPDATE menu SET `permission`=? WHERE id=?", array($id, $id));
-        $this->db->query("INSERT INTO acl_roles(`name`, `module`) VALUES(?, '--MENU--')", array($id));
-        $this->db->query("INSERT INTO acl_roles_permissions(`role_name`, `permission_name`, `module`, `value`) VALUES(?, ?, '--MENU--', 1)", array($id, $id));
+        $this->db->query("UPDATE menu SET `permission`=? WHERE id = ?", [$id, $id]);
+        $this->db->query("INSERT INTO acl_group_roles(`group_id`, `name`, `module`) VALUES(?, ?, '--MENU--')", [$group_id, $id]);
     }
 
-    public function deletePermission($id)
+    public function deletePermission($id, $group_id)
     {
-        $this->db->query("UPDATE menu SET `permission`='' WHERE id=?", array($id));
-        $this->db->query("DELETE FROM acl_roles WHERE module='--MENU--' AND name=?", array($id));
+        $this->db->query("UPDATE menu SET `permission` = '' WHERE id = ?", [$id]);
+        $this->db->query("DELETE FROM acl_group_roles WHERE module = '--MENU--' AND name = ? AND group_id = ?", [$id, $group_id]);
     }
 
     public function hasPermission($id)
     {
-        $query = $this->db->query("SELECT `permission` FROM menu WHERE id=?", array($id));
+        $query = $this->db->query("SELECT `permission` FROM menu WHERE id = ?", [$id]);
 
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

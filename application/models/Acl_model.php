@@ -30,180 +30,6 @@ class Acl_model extends CI_Model
     }
 
     /**
-     * Get the permission value for the guest group
-     *
-     * @param  String $permissionName
-     * @param  String $moduleName
-     * @param  Boolean $onlyDatabase
-     * @return Boolean
-     */
-    public function hasPermissionGuest($permissionName, $moduleName, $onlyDatabase = false)
-    {
-        $result = null;
-
-        $groupId = $this->config->item('default_guest_group');
-
-        $this->db->select("arp.value");
-        $this->db->where("agr.group_id", $groupId);
-        $this->db->where("agr.module", $moduleName);
-        $this->db->where("arp.role_name = agr.role_name");
-        $this->db->where("arp.module", $moduleName);
-        $this->db->where("arp.permission_name", $permissionName);
-
-        $query = $this->db->get("acl_roles_permissions arp, acl_group_roles agr");
-
-        if ($query->num_rows()) {
-            $row = $query->result_array();
-
-            $result = $row[0]['value'];
-        } elseif (!$onlyDatabase) {
-            // Give it another try with manifest defined roles
-            $roles = $this->getRolesByGroupId($groupId, $moduleName);
-
-            if ($roles) {
-                foreach ($roles as $role) {
-                    $manifest = $this->acl->getManifestRole($role['role_name'], $moduleName);
-
-                    if ($manifest && array_key_exists($permissionName, $manifest['permissions'])) {
-                        $result = $manifest['permissions'][$permissionName];
-                    }
-                }
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Get the permission value for the player group
-     *
-     * @param  String $permissionName
-     * @param  String $moduleName
-     * @return Boolean
-     */
-    private function hasPermissionPlayer($permissionName, $moduleName)
-    {
-        $result = null;
-
-        $groupId = $this->config->item('default_player_group');
-
-        $this->db->select("arp.value");
-        $this->db->where("agr.group_id", $groupId);
-        $this->db->where("agr.module", $moduleName);
-        $this->db->where("arp.role_name = agr.role_name");
-        $this->db->where("arp.module", $moduleName);
-        $this->db->where("arp.permission_name", $permissionName);
-
-        $query = $this->db->get("acl_roles_permissions arp, acl_group_roles agr");
-
-        if ($query->num_rows()) {
-            $row = $query->result_array();
-
-            $result = $row[0]['value'];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Get the permission value for a specific user
-     *
-     * @param  Int $userId
-     * @param  String $permissionName
-     * @param  String $moduleName
-     * @param  Boolean $onlyDatabase
-     * @return Boolean
-     */
-    public function hasPermission($userId, $permissionName, $moduleName, $onlyDatabase = false)
-    {
-        // Try to find via default player group
-        $result = $this->hasPermissionPlayer($permissionName, $moduleName);
-
-        // Try to find via the account's groups' roles
-        $this->db->select("arp.value");
-        $this->db->where("aag.account_id", $userId);
-        $this->db->where("aag.group_id = agr.group_id");
-        $this->db->where("agr.module", $moduleName);
-        $this->db->where("arp.role_name = agr.role_name");
-        $this->db->where("arp.module", $moduleName);
-        $this->db->where("arp.permission_name", $permissionName);
-
-        $query = $this->db->get("acl_roles_permissions arp, acl_group_roles agr, acl_account_groups aag");
-
-        if ($query->num_rows()) {
-            $permissions = $query->result_array();
-
-            foreach ($permissions as $permission) {
-                if ($permission['value'] || $result === null) {
-                    $result = $permission['value'];
-                }
-            }
-        } elseif (!$onlyDatabase) {
-            // Give it another try with manifest defined roles
-            $roles = $this->getGroupRolesByUser($userId, $moduleName);
-
-            if ($roles) {
-                foreach ($roles as $role) {
-                    $manifest = $this->acl->getManifestRole($role['role_name'], $moduleName);
-
-                    if ($manifest && array_key_exists($permissionName, $manifest['permissions'])) {
-                        $result = $manifest['permissions'][$permissionName];
-                    }
-                }
-            }
-        }
-
-        // Try to find via the account's roles
-        $this->db->select("arp.value");
-        $this->db->where("aar.account_id", $userId);
-        $this->db->where("aar.module", $moduleName);
-        $this->db->where("aar.role_name = arp.role_name");
-        $this->db->where("arp.module", $moduleName);
-        $this->db->where("arp.permission_name", $permissionName);
-
-        $userRoleQuery = $this->db->get("acl_account_roles aar, acl_roles_permissions arp");
-
-        if ($userRoleQuery->num_rows()) {
-            $userRolePermissions = $query->result_array();
-
-            foreach ($userRolePermissions as $userRolePermission) {
-                // Override group permissions
-                $result = $userRolePermission['value'];
-            }
-        } elseif (!$onlyDatabase) {
-            // Give it another try with manifest defined roles
-            $userRoles = $this->getAccountRoles($userId, $moduleName);
-
-            if ($userRoles) {
-                foreach ($userRoles as $userRole) {
-                    $manifest = $this->acl->getManifestRole($userRole['role_name'], $moduleName);
-
-                    if ($manifest && array_key_exists($permissionName, $manifest['permissions'])) {
-                        $result = $manifest['permissions'][$permissionName];
-                    }
-                }
-            }
-        }
-
-        // Try to find via account permissions directly
-        $this->db->select("value");
-        $this->db->where("account_id", $userId);
-        $this->db->where("module", $moduleName);
-        $this->db->where("permission_name", $permissionName);
-
-        $userQuery = $this->db->get("acl_account_permissions");
-
-        if ($userQuery->num_rows()) {
-            $userPermission = $userQuery->result_array();
-
-            // Override group and account role permissions
-            $result = $userPermission[0]['value'];
-        }
-
-        return $result;
-    }
-
-    /**
      * Get the roles for a group by the user ID
      *
      * @param  Int $userId
@@ -241,23 +67,21 @@ class Acl_model extends CI_Model
         // Query: Prepare
         $query = $this->db->select('agr.module')
                           ->select('agr.role_name')
-                          ->select('arp.permission_name')
 
                           # Filter by account id
                           ->where('aag.account_id', $userId)
 
                           # Filter by group
+                          ->group_start()
                           ->where('aag.group_id = agr.group_id')
                           ->or_where('agr.group_id', $default_group)
+                          ->group_end()
 
-                          # Filter by role name
-                          ->where('arp.role_name = agr.role_name')
-
-                          # Group
-                          ->group_by('agr.role_name')
+                          # Distinct
+                          ->distinct()
 
                           # Get
-                          ->get('acl_roles_permissions arp, acl_group_roles agr, acl_account_groups aag');
+                          ->get('acl_group_roles agr, acl_account_groups aag');
 
         // Query: Make sure we have results
         if($query && $query->num_rows())
@@ -546,29 +370,6 @@ class Acl_model extends CI_Model
     }
 
     /**
-     * Get the permissions
-     *
-     * @param  String $name
-     * @param  String $module
-     * @return Array
-     */
-    public function getPermissionsByRole($name, $module)
-    {
-        $this->db->select("role_name, permission_name, module, value");
-        $this->db->where('name', $name);
-        $this->db->where('module', $module);
-        $query = $this->db->get("acl_roles_permissions");
-
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-
-            return $result;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Create a group
      *
      * @param $data
@@ -759,58 +560,5 @@ class Acl_model extends CI_Model
     public function deleteAllRoleFromGroup($groupId)
     {
         $this->db->delete('acl_group_roles', array('group_id' => $groupId));
-    }
-
-    /**
-     * Add a permission to the give role
-     *
-     * @param String $name
-     * @param String $permission
-     * @param String $module
-     */
-    public function addPermissionToRole($name, $permission, $module, $value = 1)
-    {
-        $data = array(
-            'role_name' => $name,
-            'permission_name' => $permission,
-            'module' => $module,
-            'value' => $value
-        );
-
-        $this->db->insert('acl_roles_permissions', $data);
-    }
-
-    /**
-     * Remove a permission from the given role
-     *
-     * @param String $name
-     * @param String $permission
-     * @param String $module
-     */
-    public function deletePermissionFromRole($name, $permission, $module)
-    {
-        $where = array(
-            'role_name' => $name,
-            'permission_name' => $permission,
-            'module' => $module
-        );
-
-        $this->db->delete('acl_roles_permissions', $where);
-    }
-
-    /**
-     * Update a permission for the given role
-     *
-     * @param String $name
-     * @param String $permission
-     * @param String $module
-     * @param Int $value
-     */
-    public function updatePermissionOfRole($name, $permission, $module, $value)
-    {
-        $this->db->where('role_name', $name);
-        $this->db->where('permission_name', $permission);
-        $this->db->where('module', $module);
-        $this->db->update('acl_roles_permissions', array('value' => $value));
     }
 }

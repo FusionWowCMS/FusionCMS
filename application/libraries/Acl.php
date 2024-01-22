@@ -187,7 +187,7 @@ class Acl
         foreach($permissions as $module => $permission)
         {
             // Check if its menu permission
-            if(strtoupper(trim($permission)) == '--MENU--')
+            if(in_array(strtoupper(trim($permission)), ['--MENU--', '--PAGE--', '--SIDEBOX--']))
             {
                 // Temporary store module and permission
                 $tmp = [
