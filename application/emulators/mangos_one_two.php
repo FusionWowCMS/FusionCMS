@@ -4,7 +4,7 @@
  * Abstraction layer for supporting different emulators
  */
 
-class Mangos_three_soap implements Emulator
+class Mangos_one_two implements Emulator
 {
     protected $config;
 
@@ -50,18 +50,18 @@ class Mangos_three_soap implements Emulator
     protected $columns = array(
 
         "account" => array(
-            "id"              => "id",
-            "username"        => "username",
-            'gmlevel'         => 'gmlevel',
-            "sha_pass_hash"   => "sha_pass_hash",
-            "email"           => "email",
-            "joindate"        => "joindate",
-            "last_ip"         => "last_ip",
-            "last_login"      => "last_login",
-            "expansion"       => "expansion",
-            "v"               => "v",
-            "s"               => "s",
-            "sessionkey"      => "sessionkey"
+            "id"            => "id",
+            "username"      => "username",
+            'gmlevel'       => 'gmlevel',
+            "sha_pass_hash" => "sha_pass_hash",
+            "email"         => "email",
+            "joindate"      => "joindate",
+            "last_ip"       => "last_ip",
+            "last_login"    => "last_login",
+            "expansion"     => "expansion",
+            "v"             => "v",
+            "s"             => "s",
+            "sessionkey"    => "sessionkey"
         ),
 
         "account_banned" => array(
@@ -122,6 +122,8 @@ class Mangos_three_soap implements Emulator
             "maxpower3"     => "maxpower3",
             "maxpower4"     => "maxpower4",
             "maxpower5"     => "maxpower5",
+            "maxpower6"     => "maxpower6",
+            "maxpower7"     => "maxpower7",
             "strength"      => "strength",
             "agility"       => "agility",
             "stamina"       => "stamina",

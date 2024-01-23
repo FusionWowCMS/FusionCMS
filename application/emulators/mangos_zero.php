@@ -1,13 +1,10 @@
 <?php
 
-use Laizerox\Wowemu\SRP\UserClient;
-use MX\CI;
-
 /**
  * Abstraction layer for supporting different emulators
  */
 
-class Vmangos_soap implements Emulator
+class Mangos_zero implements Emulator
 {
     protected $config;
 
@@ -29,22 +26,22 @@ class Vmangos_soap implements Emulator
     /**
      * Emulator support Totp
      */
-    protected $hasTotp = true;
+    protected $hasTotp = false;
 
     /**
      * Array of table names
      */
     protected $tables = array(
-        'account'         => 'account',
-        'account_banned'  => 'account_banned',
-        'account_access'  => 'account_access',
+        "account"         => "account",
+        "account_access"  => "account_access",
+        "account_banned"  => "account_banned",
         'ip_banned'       => 'ip_banned',
-        'characters'      => 'characters',
-        'item_template'   => 'item_template',
-        'character_stats' => 'character_stats',
-        'guild_member'    => 'guild_member',
-        'guild'           => 'guild',
-        'gm_tickets'      => 'gm_tickets'
+        "characters"      => "characters",
+        "item_template"   => "item_template",
+        "character_stats" => "character_stats",
+        "guild_member"    => "guild_member",
+        "guild"           => "guild",
+        "gm_tickets"      => "character_ticket"
     );
 
     /**
@@ -53,18 +50,18 @@ class Vmangos_soap implements Emulator
     protected $columns = array(
 
         "account" => array(
-            "id"         => "id",
-            "username"   => "username",
-            "verifier"   => "v",
-            "salt"       => "s",
-            'gmlevel'    => 'gmlevel',
-            "email"      => "email",
-            "joindate"   => "joindate",
-            "last_ip"    => "last_ip",
-            "last_login" => "last_login",
-            "expansion"  => "expansion",
-            "sessionkey" => "sessionkey",
-            "totp_secret"  => "token_key"
+            "id"            => "id",
+            "username"      => "username",
+            'gmlevel'       => 'gmlevel',
+            "sha_pass_hash" => "sha_pass_hash",
+            "email"         => "email",
+            "joindate"      => "joindate",
+            "last_ip"       => "last_ip",
+            "last_login"    => "last_login",
+            "expansion"     => "expansion",
+            "v"             => "v",
+            "s"             => "s",
+            "sessionkey"    => "sessionkey"
         ),
 
         "account_banned" => array(
@@ -95,10 +92,10 @@ class Vmangos_soap implements Emulator
             "zone"             => "zone",
             "online"           => "online",
             "money"            => "money",
-            "totalKills"       => "honor_rank_points",
-            'todayKills'       => 'honor_rank_points',
-            'yesterdayKills'   => 'honor_rank_points',
-            "totalHonorPoints" => "honor_stored_hk",
+            "totalKills"       => "stored_honorable_kills",
+            'todayKills'       => 'stored_honorable_kills',
+            'yesterdayKills'   => 'stored_honorable_kills',
+            "totalHonorPoints" => "stored_honor_rating",
             "position_x"       => "position_x",
             "position_y"       => "position_y",
             "position_z"       => "position_z",
@@ -109,57 +106,57 @@ class Vmangos_soap implements Emulator
         "item_template" => array(
             "entry"         => "entry",
             "name"          => "name",
-            "Quality"       => "quality",
-            "InventoryType" => "inventory_type",
-            "RequiredLevel" => "required_level",
-            "ItemLevel"     => "item_level",
+            "Quality"       => "Quality",
+            "InventoryType" => "InventoryType",
+            "RequiredLevel" => "RequiredLevel",
+            "ItemLevel"     => "ItemLevel",
             "class"         => "class",
             "subclass"      => "subclass"
         ),
 
         "character_stats" => array(
             "guid"          => "guid",
-            "maxhealth"     => "max_health",
-            "maxpower1"     => "max_power1",
-            "maxpower2"     => "max_power2",
-            "maxpower3"     => "max_power3",
-            "maxpower4"     => "max_power4",
-            "maxpower5"     => "max_power5",
-            "maxpower6"     => "max_power6",
-            "maxpower7"     => "max_power7",
+            "maxhealth"     => "maxhealth",
+            "maxpower1"     => "maxpower1",
+            "maxpower2"     => "maxpower2",
+            "maxpower3"     => "maxpower3",
+            "maxpower4"     => "maxpower4",
+            "maxpower5"     => "maxpower5",
+            "maxpower6"     => "maxpower6",
+            "maxpower7"     => "maxpower7",
             "strength"      => "strength",
             "agility"       => "agility",
             "stamina"       => "stamina",
             "intellect"     => "intellect",
             "spirit"        => "spirit",
             "armor"         => "armor",
-            "blockPct"      => "block_chance",
-            "dodgePct"      => "dodge_chance",
-            "parryPct"      => "parry_chance",
-            "critPct"       => "crit_chance",
-            "rangedCritPct" => "ranged_crit_chance",
-            "attackPower"   => "attack_power",
-            "rangedAttackPower"    => "ranged_attack_power",
+            "blockPct"      => "blockPct",
+            "dodgePct"      => "dodgePct",
+            "parryPct"      => "parryPct",
+            "critPct"       => "critPct",
+            "rangedCritPct" => "rangedCritPct",
+            "attackPower"   => "attackPower",
+            "rangedAttackPower"    => "rangedAttackPower",
         ),
 
         "guild" => array(
-            "guildid"    => "guild_id",
+            "guildid"    => "guildid",
             "name"       => "name",
-            "leaderguid" => "leader_guid"
+            "leaderguid" => "leaderguid"
         ),
 
         "guild_member" => array(
-            "guildid" => "guild_id",
+            "guildid" => "guildid",
             "guid"    => "guid"
         ),
 
         "gm_tickets" => array(
             "ticketId"   => "ticket_id",
             "guid"       => "guid",
-            "message"    => "message",
-            "createTime" => "create_time",
-            "completed"  => "completed",
-            "closedBy"   => "closed_by"
+            "message"    => "ticket_text",
+            "createTime" => "ticket_lastchange",
+            "completed"  => "resolved",
+            //"closedBy" => "closed"
         )
     );
 
@@ -168,16 +165,16 @@ class Vmangos_soap implements Emulator
      */
     protected $queries = array(
         "get_character" => "SELECT * FROM characters WHERE guid=?",
-        "get_item" => "SELECT entry, flags as Flags, name, quality as Quality, bonding, inventory_type as InventoryType, max_durability as MaxDurability, required_level as RequiredLevel, item_level as ItemLevel, class, subclass, delay, spellid_1, spellid_2, spellid_3, spellid_4, spellid_5, spelltrigger_1, spelltrigger_2, spelltrigger_3, spelltrigger_4, spelltrigger_5, display_id as displayid, stat_type1, stat_value1, stat_type2, stat_value2, stat_type3, stat_value3, stat_type4, stat_value4, stat_type5, stat_value5, stat_type6, stat_value6, stat_type7, stat_value7, stat_type8, stat_value8, stat_type9, stat_value9, stat_type10, stat_value10, stackable FROM item_template WHERE entry=?",
+        "get_item" => "SELECT entry, Flags, name, Quality, bonding, InventoryType, MaxDurability, RequiredLevel, ItemLevel, class, subclass, delay, spellid_1, spellid_2, spellid_3, spellid_4, spellid_5, spelltrigger_1, spelltrigger_2, spelltrigger_3, spelltrigger_4, spelltrigger_5, displayid, stat_type1, stat_value1, stat_type2, stat_value2, stat_type3, stat_value3, stat_type4, stat_value4, stat_type5, stat_value5, stat_type6, stat_value6, stat_type7, stat_value7, stat_type8, stat_value8, stat_type9, stat_value9, stat_type10, stat_value10, stackable FROM item_template WHERE entry=?",
         "get_rank" => "SELECT id id, gmlevel gmlevel FROM account WHERE id=?",
         "get_banned" => "SELECT id id, bandate bandate, bannedby bannedby, banreason banreason, active active FROM account_banned WHERE id=? AND active=1",
-        "get_account_id" => "SELECT id id, username username, v password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion, token_key totp_secret FROM account WHERE id = ?",
-        "get_account" => "SELECT id id, username username, v password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion, token_key totp_secret FROM account WHERE username = ?",
+        "get_account_id" => "SELECT id id, username username, sha_pass_hash password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion FROM account WHERE id = ?",
+        "get_account" => "SELECT id id, username username, sha_pass_hash password, email email, joindate joindate, last_ip last_ip, last_login last_login, expansion expansion FROM account WHERE username = ?",
         "get_charactername_by_guid" => "SELECT name name FROM characters WHERE guid = ?",
-        "find_guilds" => "SELECT g.guild_id guildid, g.name name, COUNT(g_m.guid) GuildMemberCount, g.leader_guid leaderguid, c.name leaderName FROM guild g, guild_member g_m, characters c WHERE g.leader_guid = c.guid AND g_m.guild_id = g.guild_id AND g.name LIKE ? GROUP BY g.guild_id",
-        "get_inventory_item" => "SELECT slot slot, item_guid item, item_instance.item_id itemEntry FROM character_inventory, item_instance WHERE character_inventory.item_id = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0",
-        "get_guild_members" => "SELECT m.guild_id guildid, m.guid guid, c.name name, c.race race, c.class class, c.gender gender, c.level level, m.rank member_rank, r.name rname, r.rights rights FROM guild_member m JOIN guild_rank r ON m.guild_id = r.guild_id AND m.rank = r.id JOIN characters c ON c.guid = m.guid WHERE m.guild_id = ? ORDER BY r.rights DESC",
-        "get_guild" => "SELECT guild_id guildid, name guildName, leader_guid leaderguid, motd motd, create_date createdate FROM guild WHERE guild_id = ?"
+        "find_guilds" => "SELECT g.guildid guildid, g.name name, COUNT(g_m.guid) GuildMemberCount, g.leaderguid leaderguid, c.name leaderName FROM guild g, guild_member g_m, characters c WHERE g.leaderguid = c.guid AND g_m.guildid = g.guildid AND g.name LIKE ? GROUP BY g.guildid",
+        "get_inventory_item" => "SELECT slot slot, item item, item_template itemEntry FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0",
+        "get_guild_members" => "SELECT m.guildid guildid, m.guid guid, c.name name, c.race race, c.class class, c.gender gender, c.level level, m.rank member_rank, r.rname rname, r.rights rights FROM guild_member m JOIN guild_rank r ON m.guildid = r.guildid AND m.rank = r.rid JOIN characters c ON c.guid = m.guid WHERE m.guildid = ? ORDER BY r.rights DESC",
+        "get_guild" => "SELECT guildid guildid, name guildName, leaderguid leaderguid, motd motd, createdate createdate FROM guild WHERE guildid = ?"
     );
 
     public function __construct($config)

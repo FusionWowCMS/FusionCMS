@@ -6,13 +6,13 @@ defined('BASEPATH') or die('Silence is golden.');
 
 /**
  * @package FusionCMS
- * @version 6.x
+ * @version 8.x
  */
 
 /**
  * Abstraction layer for supporting different emulators
  */
-class Trinity_sl_soap implements Emulator
+class Trinity_wotlkclassic implements Emulator
 {
     protected $config;
 
@@ -147,6 +147,7 @@ class Trinity_sl_soap implements Emulator
             'maxpower4'     => 'maxpower4',
             'maxpower5'     => 'maxpower5',
             'maxpower6'     => 'maxpower6',
+            'maxpower7'     => 'maxpower7',
             'strength'      => 'strength',
             'agility'       => 'agility',
             'stamina'       => 'stamina',
@@ -174,14 +175,7 @@ class Trinity_sl_soap implements Emulator
             'guid'    => 'guid'
         ),
 
-        'gm_tickets' => array(
-            'ticketId'   => 'Id',
-            'guid'       => 'playerGuid',
-            'message'    => 'note',
-            'createTime' => 'createTime',
-            'completed'  => 'comment',
-            'closedBy'   => 'closedBy'
-        )
+        'gm_tickets' => []
     );
 
     /**

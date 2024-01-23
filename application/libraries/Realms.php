@@ -29,7 +29,7 @@ class Realms
     private array $hordeRaces;
     private array $allianceRaces;
 
-    private string $defaultEmulator = "trinity_rbac_soap";
+    private string $defaultEmulator = "trinity";
 
     public function __construct()
     {

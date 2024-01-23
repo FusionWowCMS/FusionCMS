@@ -12,7 +12,7 @@ defined('BASEPATH') or die('Silence is golden.');
 /**
  * Abstraction layer for supporting different emulators
  */
-class Trinity_soap implements Emulator
+class Trinity implements Emulator
 {
     protected $config;
 
