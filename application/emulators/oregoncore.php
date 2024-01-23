@@ -158,102 +158,59 @@ class Oregoncore implements Emulator
 
     /**
      * Get the name of a table
-     * @param String $name
+     *
+     * @param  String $name
      * @return String
      */
     public function getTable($name)
     {
-        if(array_key_exists($name, $this->tables))
-        {
-            return $this->tables[$name];
+        if (!isset($this->tables[$name])) {
+            return null;
         }
+        return $this->tables[$name];
     }
 
     /**
      * Get the name of a column
-     * @param String $table
-     * @param String $name
+     *
+     * @param  String $table
+     * @param  String $name
      * @return String
      */
     public function getColumn($table, $name)
     {
-        if(array_key_exists($table, $this->columns) && array_key_exists($name, $this->columns[$table]))
-        {
-            return $this->columns[$table][$name];
+        if (!isset($this->columns[$table][$name])) {
+            return null;
         }
+        return $this->columns[$table][$name];
     }
 
     /**
      * Get a set of all columns
-     * @param String $name
+     *
+     * @param  String $name
      * @return String
      */
     public function getAllColumns($table)
     {
-        if(array_key_exists($table, $this->columns))
-        {
-            return $this->columns[$table];
+        if (!isset($this->columns[$table])) {
+            return null;
         }
+        return $this->columns[$table];
     }
 
     /**
      * Get a pre-defined query
-     * @param String $name
+     *
+     * @param  String $name
      * @return String
      */
     public function getQuery($name)
     {
-        if(array_key_exists($name, $this->queries))
-        {
-            return $this->queries[$name];
+        if (!isset($this->queries[$name])) {
+            return null;
         }
-    }
-
-    /**
-     * Password encryption
-     */
-    public function encrypt($username, $password)
-    {
-        if(!is_string($username)) { $username = ""; }
-        if(!is_string($password)) { $password = ""; }
-        $sha_pass_hash = sha1(strtoupper($username).':'.strtoupper($password));
-
-        return $sha_pass_hash;
-    }
-
-    /**
-     * Expansion getter
-     * @return Array
-     */
-    public function getExpansions()
-    {
-        return $this->expansions;
-    }
-
-    /**
-     * Get the name of an expansion by the id
-     * @param Int $id
-     * @return String
-     */
-    public function getExpansionName($id)
-    {
-        if(array_key_exists($id, $this->expansions))
-        {
-            return $this->expansions[$id];
-        }
-    }
-
-    /**
-     * Get the name of an expansion by the name
-     * @param String $name
-     * @return Int
-     */
-    public function getExpansionId($name)
-    {
-        if(in_array($name, $this->expansions))
-        {
-            return array_search($name, $this->expansions);
-        }
+        return $this->queries[$name];
     }
 
     /**
