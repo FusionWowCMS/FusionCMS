@@ -36,7 +36,7 @@
 							<input type="text" name="register_captcha" id="register_captcha" class="form-control" value="" placeholder="{lang('login_label_captcha', 'sidebox_info_login')}" />
 							<img width="150" height="30" alt="{lang('login_label_captcha', 'sidebox_info_login')}" src="{$url}register/getCaptcha?{time()}" />
 							<span id="captcha_error">{$captcha_error}</span>
-						{elseif $captcha_type == 'recaptcha'}
+						{elseif $captcha_type == 'recaptcha' || $captcha_type == 'recaptcha3'}
 							<div class="captcha {if $captcha_error}alert-captcha{/if}">
 								{$recaptcha_html}
 							</div>

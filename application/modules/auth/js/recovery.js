@@ -2,6 +2,7 @@ var Recovery = {
 	timeout: null,
 	useCaptcha: false,
 	useRecaptcha: false,
+	useRecaptcha3: false,
 
 	request: function() {
 		var postData = {
@@ -21,6 +22,10 @@ var Recovery = {
 			postData["recaptcha"] = grecaptcha.getResponse();
 		}
 
+		if(Recovery.useRecaptcha3) {
+			postData["recaptcha"] = $(".g-recaptcha-response").val();
+		}
+
 		clearTimeout (Recovery.timeout);
 		Recovery.timeout = setTimeout (function()
 		{
@@ -31,6 +36,9 @@ var Recovery = {
 					if(data["showCaptcha"] === true) {
 						$(".captcha-field").removeClass("d-none");
 					}
+
+					if(Recovery.useRecaptcha3)
+						setCaptchaToken();
 
 					for(var i = 0; i<fields.length;i++)
                     {

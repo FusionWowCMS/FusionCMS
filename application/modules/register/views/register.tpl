@@ -34,8 +34,8 @@ input + span[id] {
                         <label for="captcha"><img src="{$url}register/getCaptcha?{time()}" /></label>
                         <input class="form-control" type="text" name="register_captcha" id="register_captcha"/>
                         <span id="captcha_error">{$captcha_error}</span>
-                    {elseif $captcha_type == 'recaptcha'}
-                        <div class="captcha {if $captcha_error} alert-captcha {/if}">
+                    {elseif $captcha_type == 'recaptcha' || $captcha_type == 'recaptcha3'}
+                        <div class="captcha {if $captcha_error && $captcha_type == 'recaptcha'} alert-captcha {/if}">
                             {$recaptcha_html}
                         </div>
                     {/if}

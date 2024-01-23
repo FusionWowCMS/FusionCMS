@@ -27,7 +27,7 @@
                             <input type="text" class="form-control captcha-input border-0 rounded-0 rounded-bottom-end" id="floatingCaptcha" placeholder="{lang('login_label_captcha', 'auth')}" aria-describedby="captcha">
                             <label for="floatingCaptcha">{lang("login_label_captcha", "auth")}</label>
                         </div>
-                    {elseif $captcha_type == 'recaptcha'}
+                    {elseif $captcha_type == 'recaptcha' || $captcha_type == 'recaptcha3'}
                         <div class="captcha">
                             {$recaptcha_html}
                         </div>
@@ -67,6 +67,12 @@
         <script>
             $(window).on("load", function() {
                 Auth.useRecaptcha = true;
+            });
+        </script>
+    {elseif $captcha_type == 'recaptcha3'}
+        <script>
+            $(window).on("load", function() {
+                Auth.useRecaptcha3 = true;
             });
         </script>
     {/if}

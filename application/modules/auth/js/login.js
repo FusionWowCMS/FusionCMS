@@ -2,6 +2,7 @@ var Auth = {
 	timeout: null,
 	useCaptcha: false,
 	useRecaptcha: false,
+	useRecaptcha3: false,
 
 	login: function(submit = false) {
 		var postData = {
@@ -24,7 +25,9 @@ var Auth = {
 			postData["recaptcha"] = grecaptcha.getResponse();
 		}
 
-		console.log("fields", fields);
+		if(Auth.useRecaptcha3) {
+			postData["recaptcha"] = $(".g-recaptcha-response").val();
+		}
 
 		clearTimeout (Auth.timeout);
 		Auth.timeout = setTimeout (function()
@@ -42,6 +45,9 @@ var Auth = {
 						$(".captcha-field").removeClass("d-none");
 					}
 
+					if(Auth.useRecaptcha3)
+						setCaptchaToken();
+
 					for(var i = 0; i<fields.length;i++)
                     {
 						if(data["messages"]["error"] != "")
@@ -56,8 +62,6 @@ var Auth = {
 					console.log(data);
 				}				
 			});
-
-			console.log(postData);
 
 		}, 500);
 	},

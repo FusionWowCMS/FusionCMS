@@ -11,8 +11,9 @@ $config['use_captcha'] = true;
  *
  * What type of captcha?
  *
- * 'recaptcha' = Google Recaptcha v2
- * 'inbuilt'   = inbuilt captcha system
+ * 'recaptcha'  = Google Recaptcha v2
+ * 'recaptcha3' = Google Recaptcha v3
+ * 'inbuilt'    = inbuilt captcha system
  *
  */
 $config["captcha_type"] = 'inbuilt';

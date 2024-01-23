@@ -40,12 +40,12 @@ class Auth extends MX_Controller
 
         $use_captcha = $this->config->item('use_captcha');
 
-        $data = array(
+        $data = [
             "use_captcha" => false,
             "captcha_type" => $this->config->item('captcha_type'),
             "recaptcha_html" => $this->recaptcha->getScriptTag() . $this->recaptcha->getWidget(),
             "has_smtp" => $this->config->item('has_smtp')
-        );
+        ];
 
         if ($use_captcha || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps')) {
             $data["use_captcha"] = true;

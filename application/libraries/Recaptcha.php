@@ -43,8 +43,7 @@ class Recaptcha
         $this->theme = $this->CI->config->item('recaptcha_theme');
 
         if ($this->getEnabledRecaptcha() && (empty($this->siteKey) or empty($this->secretKey))) {
-            die("To use reCAPTCHA you must get an API key from <a href='"
-                .self::sign_up_url."'>".self::sign_up_url."</a> and add in application\config\\captcha.php or disable Captcha");
+            die("To use reCAPTCHA you must get an API key from <a href='" . self::sign_up_url . "'>". self::sign_up_url . "</a> and add in application\config\captcha.php or disable Captcha");
         }
     }
     /**
@@ -113,10 +112,20 @@ class Recaptcha
      */
     public function getScriptTag(array $parameters = []): string
     {
-        $default = [
-            'render' => 'onload',
-            'hl' => $this->language,
-        ];
+        $default = [];
+
+        if ($this->CI->config->item('captcha_type') == 'recaptcha') {
+            $default = [
+                'render' => 'onload',
+                'hl' => $this->language,
+            ];
+        } else if ($this->CI->config->item('captcha_type') == 'recaptcha3') {
+            $default = [
+                'render' => $this->siteKey,
+                'lang' => $this->language,
+            ];
+        }
+
         $result = array_merge($default, $parameters);
         return sprintf('<script type="text/javascript" src="%s?%s" async defer></script>',
             self::api_url, http_build_query($result));
@@ -131,14 +140,39 @@ class Recaptcha
      *
      * @return string
      */
-    public function getWidget(array $parameters = array()): string
+    public function getWidget(array $parameters = []): string
     {
+        if ($this->CI->config->item('captcha_type') == 'recaptcha3') {
+            $js = '<script>
+                    const setCaptchaToken = function ()
+                    {
+                        if(typeof grecaptcha === \'undefined\')
+                        {
+                            setTimeout(setCaptchaToken, 50);
+                            return false;
+                        }
+                        grecaptcha.ready(function() {
+                            grecaptcha.execute("' . $this->siteKey . '", {action: "submit"}).then(function(token) {
+                                document.querySelector(".g-recaptcha-response").value = token;
+                            });
+                        });
+                    }
+
+                    setCaptchaToken();
+            </script>';
+
+
+
+            return $js. '<input type="hidden" class="g-recaptcha-response" name="g-recaptcha-response">';
+        }
+
         $default = [
             'data-sitekey' => $this->siteKey,
             'data-theme' => $this->theme,
             'data-type' => 'image',
             'data-size' => 'normal',
         ];
+
         $result = array_merge($default, $parameters);
         $html = '';
         foreach ($result as $key => $value) {
@@ -146,12 +180,13 @@ class Recaptcha
         }
         return '<div class="g-recaptcha" '.$html.'></div>';
     }
+
     /**
      * Render enable use Recaptcha
      */
     public function getEnabledRecaptcha(): bool
     {
-        return $this->CI->config->item('use_captcha') && $this->CI->config->item('captcha_type') == 'recaptcha';
+        return $this->CI->config->item('use_captcha') && ($this->CI->config->item('captcha_type') == 'recaptcha' || $this->CI->config->item('captcha_type') == 'recaptcha3');
     }
 
     /**
@@ -171,10 +206,10 @@ class Recaptcha
                 'response' => $response,
             ]
         );
-        $responses = json_decode($getResponse, true);
+        $responses = json_decode($getResponse);
 
         // handle any errors
-        if(!$responses->success){
+        if(!$responses->{'success'}){
             foreach($responses->{'error-codes'} as $code){
                 switch ($code){
                     case 'missing-input-secret':
