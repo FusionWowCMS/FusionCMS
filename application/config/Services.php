@@ -7,6 +7,7 @@ use CodeIgniter\Debug\Iterator;
 use CodeIgniter\Debug\Timer;
 use CodeIgniter\Debug\Toolbar;
 use CodeIgniter\Email\Email;
+use CodeIgniter\Format\Format;
 use CodeIgniter\Log\Logger;
 use CodeIgniter\Router\RouteCollection;
 use CodeIgniter\Router\RouteCollectionInterface;
@@ -316,6 +317,22 @@ class Services
 
     //--------------------------------------------------------------------
 
+    /**
+     * The Format class is a convenient place to create Formatters.
+     *
+     * @return Format
+     */
+    public static function format($config = null, bool $getShared = true)
+    {
+        if (! $getShared)
+        {
+            return new Format($config);
+        }
+
+        return self::getSharedInstance('format', $config);
+    }
+
+    //--------------------------------------------------------------------
 
     //--------------------------------------------------------------------
     // Utility Methods - DO NOT EDIT
