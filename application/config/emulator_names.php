@@ -14,4 +14,5 @@ $emulators = array(
     "mangos_one_two_sph"       => "Mangos One/Two (2.4.3/3.3.5a) - connected through SOAP",
     "mangos_three_sph"         => "Mangos Three (4.3.4) - connected through SOAP",
     "vmangos"                  => "VMangos - Vanilla - connected through SOAP",
+    "oregoncore"               => "OregonCore (2.4.3) - connected through SOAP",
 );
