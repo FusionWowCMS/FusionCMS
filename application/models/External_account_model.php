@@ -643,7 +643,7 @@ class External_account_model extends CI_Model
             $battleData[column("battlenet_accounts", "verifier")] = $hash["verifier"];
         } else {
             $hash = $this->crypto->SHA_PASS_HASH_V2($email, $newPassword);
-            $battleData[column("battlenet_accounts", "sha_pass_hash")] = $hash;
+            $battleData[column("battlenet_accounts", "sha_pass_hash")] = $hash["verifier"];
         }
         return array($hash, $battleData);
     }
