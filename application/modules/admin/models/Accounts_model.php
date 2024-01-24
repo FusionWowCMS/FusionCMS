@@ -1,5 +1,7 @@
 <?php
 
+use MX\CI;
+
 class Accounts_model extends CI_Model
 {
     private $connection;
@@ -52,11 +54,26 @@ class Accounts_model extends CI_Model
 
     public function getById($id)
     {
+        $encryption = $this->config->item('account_encryption');
+
         if (preg_match("/^cmangos/i", get_class($this->realms->getEmulator())))
         {
-            $query = $this->connection->query(query("get_account_id"), array($id));
+            $query = $this->connection->query(query('get_account_id'), [$id]);
         } else {
-            $query = $this->connection->query("SELECT " . allColumns("account") . " FROM " . table("account") . " WHERE " . column("account", "id") . " = ?", array($id));
+            $columns = CI::$APP->realms->getEmulator()->getAllColumns(table('account'));
+
+            if ($encryption == 'SPH') {
+                if (column('account', 'verifier') && column('account', 'salt')){
+                    unset($columns[column('account', 'verifier')]);
+                    unset($columns[column('account', 'salt')]);
+                }
+            } elseif ($encryption == 'SRP6' || $encryption == 'SRP') {
+                if (column('account', 'sha_pass_hash')){
+                    unset($columns[column('account', 'sha_pass_hash')]);
+                }
+            }
+
+            $query = $this->connection->query("SELECT " . formatColumns($columns) . " FROM " . table("account") . " WHERE " . column("account", "id") . " = ?", [$id]);
         }
 
         if ($query->num_rows() > 0)

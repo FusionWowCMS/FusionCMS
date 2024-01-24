@@ -1,20 +1,20 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
+use MX\CI;
+
 /**
  * Get the name of a table
  *
  * @param string $name
  * @param bool|int $realm
- * @return string
+ * @return string|null
  */
 function table(string $name, bool|int $realm = false): string|null
 {
-    $CI = &get_instance();
-
     if ($realm) {
-        return $CI->realms->getRealm($realm)->getEmulator()->getTable($name);
+        return CI::$APP->realms->getRealm($realm)->getEmulator()->getTable($name);
     } else {
-        return $CI->realms->getEmulator()->getTable($name);
+        return CI::$APP->realms->getEmulator()->getTable($name);
     }
 }
 
@@ -25,16 +25,14 @@ function table(string $name, bool|int $realm = false): string|null
  * @param string $name
  * @param bool $as
  * @param bool|int $realm
- * @return false|string
+ * @return false|string|null
  */
 function column(string $table, string $name, bool $as = false, bool|int $realm = false): false|string|null
 {
-    $CI = &get_instance();
-
     if ($realm) {
-        $column = $CI->realms->getRealm($realm)->getEmulator()->getColumn($table, $name);
+        $column = CI::$APP->realms->getRealm($realm)->getEmulator()->getColumn($table, $name);
     } else {
-        $column = $CI->realms->getEmulator()->getColumn($table, $name);
+        $column = CI::$APP->realms->getEmulator()->getColumn($table, $name);
     }
 
     if (!$column) {
@@ -53,12 +51,10 @@ function column(string $table, string $name, bool $as = false, bool|int $realm =
  */
 function query(string $name, bool|int $realm = false): string|null
 {
-    $CI = &get_instance();
-
     if ($realm) {
-        return $CI->realms->getRealm($realm)->getEmulator()->getQuery($name);
+        return CI::$APP->realms->getRealm($realm)->getEmulator()->getQuery($name);
     } else {
-        return $CI->realms->getEmulator()->getQuery($name);
+        return CI::$APP->realms->getEmulator()->getQuery($name);
     }
 }
 
@@ -89,18 +85,38 @@ function columns(string $table, array $columns, bool|int $realm = false): string
  *
  * @param string $table
  * @param bool|int $realm
- * @return string
+ * @return string|null
  */
 function allColumns(string $table, bool|int $realm = false): string|null
 {
-    global $CI;
     $out = null;
 
     if ($realm) {
-        $columns = $CI->realms->getRealm($realm)->getEmulator()->getAllColumns($table);
+        $columns = CI::$APP->realms->getRealm($realm)->getEmulator()->getAllColumns($table);
     } else {
-        $columns = $CI->realms->getEmulator()->getAllColumns($table);
+        $columns = CI::$APP->realms->getEmulator()->getAllColumns($table);
     }
+
+    foreach ($columns as $name => $column) {
+        if (!isset($out)) {
+            $out = $column . " AS " . $name;
+        } else {
+            $out .= "," . $column . " AS " . $name;
+        }
+    }
+
+    return $out;
+}
+
+/**
+ * Get the columns and format them
+ *
+ * @param array $columns
+ * @return string|null
+ */
+function formatColumns(array $columns): string|null
+{
+    $out = null;
 
     foreach ($columns as $name => $column) {
         if (!isset($out)) {

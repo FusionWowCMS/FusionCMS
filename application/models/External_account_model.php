@@ -15,7 +15,7 @@ class External_account_model extends CI_Model
     private $connection;
     private $id;
     private $username;
-    private $sha_pass_hash;
+    private $password;
     private $email;
     private $joindate;
     private $last_ip;
@@ -35,7 +35,7 @@ class External_account_model extends CI_Model
         } else {
             $this->id = 0;
             $this->username = "Guest";
-            $this->sha_pass_hash = "";
+            $this->password = "";
             $this->email = "";
             $this->joindate =  "";
             $this->expansion = 0;
@@ -63,40 +63,63 @@ class External_account_model extends CI_Model
     {
         $this->connect();
 
-        if (!$where) {
-            $query = $this->connection->query(query("get_account_id"), [$this->session->userdata('uid')]);
+        $encryption = $this->config->item('account_encryption');
+
+        if (preg_match("/^cmangos/i", get_class($this->realms->getEmulator()))) {
+            if (!$where) {
+                $query = $this->connection->query(query('get_account_id'), [$this->session->userdata('uid')]);
+            } else {
+                $query = $this->connection->query(query('get_account'), [$where]);
+            }
         } else {
-            $query = $this->connection->query(query("get_account"), [$where]);
+            $columns = CI::$APP->realms->getEmulator()->getAllColumns(table('account'));
+
+            if ($encryption == 'SPH') {
+                if (column('account', 'verifier') && column('account', 'salt')){
+                    unset($columns[column('account', 'verifier')]);
+                    unset($columns[column('account', 'salt')]);
+                }
+            } elseif ($encryption == 'SRP6' || $encryption == 'SRP') {
+                if (column('account', 'sha_pass_hash')){
+                    unset($columns[column('account', 'sha_pass_hash')]);
+                }
+            }
+
+            if (!$where) {
+                $query = $this->connection->query('SELECT ' . formatColumns($columns) . ' FROM ' . table('account') . ' WHERE ' . column('account', 'id') . ' = ?', [$this->session->userdata('uid')]);
+            } else {
+                $query = $this->connection->query('SELECT ' . formatColumns($columns) . ' FROM ' . table('account') . ' WHERE ' . column('account', 'username') . ' = ?', [$where]);
+            }
         }
 
         if (!$query)
-            show_error("Database Error occurs: " . $this->connection->error()['message'] . "<br/>Please check website database `realms.emulator` in 'field list' <b>(make sure you selected right emulator.)</b>");
+            show_error('Database Error occurs: ' . $this->connection->error()['message'] . "<br/>Please check website database `realms.emulator` in 'field list' <b>(make sure you selected right emulator.)</b>");
 
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
             $result = $result[0];
 
-            $this->id = $result["id"];
-            $this->username = $result["username"];
-            $this->sha_pass_hash = $result["password"];
-            $this->email = $result["email"];
-            $this->joindate = $result["joindate"];
-            $this->expansion = $result["expansion"];
-            $this->last_ip = $result["last_ip"];
-            $this->last_login = $result["last_login"];
-            $this->totp_secret = $result["totp_secret"] ?? '';
+            $this->id = $result['id'];
+            $this->username = $result['username'];
+            $this->password = $encryption == 'SPH' ? $result['sha_pass_hash'] : $result['verifier'];
+            $this->email = $result['email'];
+            $this->joindate = $result['joindate'];
+            $this->expansion = $result['expansion'];
+            $this->last_ip = $result['last_ip'];
+            $this->last_login = $result['last_login'];
+            $this->totp_secret = $result['totp_secret'] ?? '';
 
             return true;
         } else {
             $this->id = 0;
-            $this->username = "Guest";
-            $this->sha_pass_hash = "";
-            $this->email = "";
-            $this->joindate =  "";
+            $this->username = 'Guest';
+            $this->password = '';
+            $this->email = '';
+            $this->joindate =  '';
             $this->expansion = 0;
-            $this->last_ip =  "";
-            $this->last_login = "";
-            $this->totp_secret = "";
+            $this->last_ip =  '';
+            $this->last_login = '';
+            $this->totp_secret = '';
 
             return false;
         }
@@ -518,9 +541,9 @@ class External_account_model extends CI_Model
         }
     }
 
-    public function getShaPassHash()
+    public function getPassword()
     {
-        return $this->sha_pass_hash;
+        return $this->password;
     }
 
     public function getEmail($id = false)

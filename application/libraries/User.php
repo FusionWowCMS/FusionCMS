@@ -78,14 +78,14 @@ class User
 
         if (!$check) {
             return 1;
-        } elseif (strtoupper($this->CI->external_account_model->getShaPassHash()) == strtoupper($password)) {
+        } elseif (strtoupper($this->CI->external_account_model->getPassword()) == strtoupper($password)) {
             // Load the internal values (vp, dp etc.)
             $this->CI->internal_user_model->initialize($this->CI->external_account_model->getId());
 
             $userdata = [
                 'uid' => $this->CI->external_account_model->getId(),
                 'username' => $this->CI->external_account_model->getUsername(),
-                'password' => $this->CI->external_account_model->getShaPassHash(),
+                'password' => $this->CI->external_account_model->getPassword(),
                 'email' => $this->CI->external_account_model->getEmail(),
                 'expansion' => $this->CI->external_account_model->getExpansion(),
                 'online' => true,
