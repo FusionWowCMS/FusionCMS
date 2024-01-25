@@ -1,0 +1,33 @@
+.sidebox-topvoters .sidebox-head.text-ellipsis {
+    display: none;
+}
+
+.sidebox-topvoters.is-widget {
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
+    max-height: 500px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.sidebox-topvoters.is-widget::before {
+    width: 119px;
+    height: 119px;
+    top: 0;
+    left: 0;
+    margin: -59.5px auto 0 auto;
+    z-index: 9;
+    content: '';
+    display: inline-block;
+    position: relative;
+    background-color: transparent;
+    background-image: url(../images/giftbox.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
