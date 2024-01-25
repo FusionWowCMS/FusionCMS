@@ -461,9 +461,7 @@ class Template
      */
     public function loadSideboxes(string $location = 'side'): array
     {
-        require_once("application/interfaces/sidebox.php");
-
-        $out = array();
+        $out = [];
 
         $sideBoxes_db = $this->CI->cms_model->getSideboxes($location, CI::$APP->router->fetch_module());
 
