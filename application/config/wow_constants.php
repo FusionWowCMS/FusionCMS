@@ -51,3 +51,26 @@ $config['classes_en'] = array(
     12 => "Demon Hunter",
     13 => "Evoker"
 );
+
+$config['itemtype_en'] = array(
+    0 => 'Consumable',
+    1 => 'Container',
+    2 => 'Weapon',
+    3 => 'Gem',
+    4 => 'Armor',
+    5 => 'Reagent',
+    6 => 'Projectile',
+    7 => 'Tradeskill',
+    8 => 'Item Enhancement',
+    9 => 'Recipe',
+    10 => 'Money',
+    11 => 'Quiver',
+    12 => 'Quest',
+    13 => 'Key',
+    14 => 'Permanent',
+    15 => 'Miscellaneous',
+    16 => 'Glyph',
+    17 => 'Battle Pets',
+    18 => 'WoW Token',
+    19 => 'Profession'
+);

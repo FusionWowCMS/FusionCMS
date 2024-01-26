@@ -25,6 +25,7 @@ class Realms
     private array $classes;
     private $races_en;
     private $classes_en;
+    private $itemtype_en;
     private array $zones;
     private array $hordeRaces;
     private array $allianceRaces;
@@ -172,6 +173,7 @@ class Realms
 
         $this->races_en = $this->CI->config->item('races_en');
         $this->classes_en = $this->CI->config->item('classes_en');
+        $this->itemtype_en = $this->CI->config->item('itemtype_en');
     }
 
     /**
@@ -304,6 +306,38 @@ class Realms
             return $this->zones[$zoneId];
         } else {
             return "Unknown location";
+        }
+    }
+
+    /**
+     * Get all item class names
+     *
+     * @return array
+     */
+    public function getItemClassList(): array
+    {
+        if (!($this->itemtype_en)) {
+            $this->loadConstants();
+        }
+        return $this->itemtype_en;
+    }
+
+    /**
+     * Get the name of an item class
+     *
+     * @param Int $class
+     * @return String
+     */
+    public function getItemClassType(int $class): string
+    {
+        if (!($this->itemtype_en)) {
+            $this->loadConstants();
+        }
+
+        if (array_key_exists($class, $this->itemtype_en)) {
+            return $this->itemtype_en[$class];
+        } else {
+            return "Unknown";
         }
     }
 
