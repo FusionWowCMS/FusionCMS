@@ -47,7 +47,7 @@ class Items
                     'Quality' => $data['wowhead']['item']['quality']['@attributes']['id'],
                     'displayid' => $data['wowhead']['item']['icon']['@attributes']['displayId'],
                     'class' => $data['wowhead']['item']['class']['@attributes']['id'],
-                    'subclass' => $data['wowhead']['item']['class']['@attributes']['id'],
+                    'subclass' => $data['wowhead']['item']['subclass']['@attributes']['id'],
                     'ItemLevel' => $data['wowhead']['item']['level'],
                     'htmlTooltip' => $data['wowhead']['item']['htmlTooltip'],
                     'stackable' => $this->findStack($data['wowhead']['item']['htmlTooltip'], 'whtt-maxstack')
