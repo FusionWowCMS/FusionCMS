@@ -1,6 +1,5 @@
 <?php
 
-use Laizerox\Wowemu\SRP\UserClient;
 use MX\CI;
 
 /**

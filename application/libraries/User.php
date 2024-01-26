@@ -1,7 +1,5 @@
 <?php
 
-use Laizerox\Wowemu\SRP\UserClient;
-
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
