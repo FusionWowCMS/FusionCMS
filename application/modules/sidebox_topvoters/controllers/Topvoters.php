@@ -14,15 +14,24 @@ class Topvoters extends MX_Controller
 
     public function view()
     {
-        $data = [
-            'url'      => $this->template->page_url,
-            'module'   => 'sidebox_topvoters',
-            'accounts' => $this->topvoters_model->getThisWeekAccounts($this->config->item("limit")),
-			'css'	   => APPPATH . 'modules/sidebox_topvoters/css/topvoters.css'
-		];
+        $cache = $this->cache->get("sidebox_topvoters");
 
-		$page = $this->template->loadPage("topvoters.tpl", $data);
+        if ($cache !== false) {
+            $page = $cache;
+        } else {
+            $data = [
+                'url'      => $this->template->page_url,
+                'module'   => 'sidebox_topvoters',
+                'accounts' => $this->topvoters_model->getThisWeekAccounts($this->config->item("limit")),
+                'css'      => APPPATH . 'modules/sidebox_topvoters/css/topvoters.css'
+            ];
 
-		return $page;
-	}
+            $page = $this->template->loadPage("topvoters.tpl", $data);
+
+            // Cache
+            $this->cache->save("sidebox_topvoters", $page, strtotime($this->config->item("cache_time")));
+        }
+
+        return $page;
+    }
 }

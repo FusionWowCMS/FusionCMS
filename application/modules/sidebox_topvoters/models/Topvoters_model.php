@@ -15,7 +15,7 @@ class Topvoters_model extends CI_Model
     {
         $weekRange = $this->getWeekStartAndEnd();
 
-        $query = $this->db->query("Select COUNT(`vote_log`.`user_id`) AS vote, `vote_log`.`user_id`, `account_data`.`nickname` FROM `vote_log` Right Join `account_data` ON `account_data`.`id` = `vote_log`.`user_id` WHERE `time` > ? GROUP BY `vote_log`.`user_id` ORDER BY vote DESC LIMIT ?;", array(strtotime($weekRange[0]), $limit));
+        $query = $this->db->query("Select COUNT(`vote_log`.`user_id`) AS vote, `vote_log`.`user_id`, `account_data`.`nickname` FROM `vote_log` Right Join `account_data` ON `account_data`.`id` = `vote_log`.`user_id` WHERE `time` > ? GROUP BY `vote_log`.`user_id` ORDER BY vote DESC LIMIT ?;", [strtotime($weekRange[0]), $limit]);
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -39,6 +39,6 @@ class Topvoters_model extends CI_Model
             $endWeek = strtotime('this week next sunday', $time);
         }
 
-        return array(date('Y-m-d H:i', $startWeek), date('Y-m-d H:i', $endWeek + 60 * 60 * 23 + 60 * 59));
+        return [date('Y-m-d H:i', $startWeek), date('Y-m-d H:i', $endWeek + 60 * 60 * 23 + 60 * 59)];
     }
 }
