@@ -9,19 +9,19 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * CodeIgniter XML Helpers
  *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/userguide3/helpers/xml_helper.html
+ * @package     CodeIgniter
+ * @subpackage  Helpers
+ * @category    Helpers
+ * @author      EllisLab Dev Team
+ * @link        https://codeigniter.com/userguide3/helpers/xml_helper.html
  */
 
-if (! function_exists('xml_convert')) {
+if (!function_exists('xml_convert')) {
     /**
      * Convert Reserved XML characters to Entities
      */

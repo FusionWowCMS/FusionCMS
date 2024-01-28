@@ -8,41 +8,40 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * CodeIgniter HTML Helpers
  *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/userguide3/helpers/html_helper.html
+ * @package     CodeIgniter
+ * @subpackage  Helpers
+ * @category    Helpers
+ * @author      EllisLab Dev Team
+ * @link        https://codeigniter.com/userguide3/helpers/html_helper.html
  */
 
 // ------------------------------------------------------------------------
 
-if (! function_exists('heading'))
-{
-	/**
-	 * Heading
-	 *
-	 * Generates an HTML heading tag.
-	 *
-	 * @param	string $data content
-	 * @param	int $h heading level
-	 * @param	string $attributes
-     * @return	string
-	 */
-	function heading($data = '', $h = '1', $attributes = ''): string
-	{
-		return '<h'.$h.stringify_attributes($attributes).'>'.$data.'</h'.$h.'>';
-	}
+if (!function_exists('heading')) {
+    /**
+     * Heading
+     *
+     * Generates an HTML heading tag.
+     *
+     * @param string $data content
+     * @param int $h heading level
+     * @param string $attributes
+     * @return    string
+     */
+    function heading($data = '', $h = '1', $attributes = ''): string
+    {
+        return '<h' . $h . stringify_attributes($attributes) . '>' . $data . '</h' . $h . '>';
+    }
 }
 
 // ------------------------------------------------------------------------
 
-if (! function_exists('ul')) {
+if (!function_exists('ul')) {
     /**
      * Unordered List
      *
@@ -59,7 +58,7 @@ if (! function_exists('ul')) {
 
 // ------------------------------------------------------------------------
 
-if (! function_exists('ol')) {
+if (!function_exists('ol')) {
     /**
      * Ordered List
      *
@@ -75,13 +74,13 @@ if (! function_exists('ol')) {
 
 // ------------------------------------------------------------------------
 
-if (! function_exists('_list')) {
+if (!function_exists('_list')) {
     /**
      * Generates the list
      *
      * Generates an HTML ordered list from an single or multi-dimensional array.
      *
-     * @param array               $list
+     * @param array $list
      * @param array|object|string $attributes string, array, object
      */
     function _list(string $type = 'ul', $list = [], $attributes = '', int $depth = 0): string
@@ -97,7 +96,7 @@ if (! function_exists('_list')) {
         foreach ($list as $key => $val) {
             $out .= str_repeat(' ', $depth + 2) . '<li>';
 
-            if (! is_array($val)) {
+            if (!is_array($val)) {
                 $out .= $val;
             } else {
                 $out .= $key
@@ -116,32 +115,32 @@ if (! function_exists('_list')) {
 
 // ------------------------------------------------------------------------
 
-if (! function_exists('img')) {
+if (!function_exists('img')) {
     /**
      * Image
      *
      * Generates an image element
      *
-     * @param array|string        $src        Image source URI, or array of attributes and values
-     * @param bool                $indexPage  Whether to treat $src as a routed URI string
+     * @param array|string $src Image source URI, or array of attributes and values
+     * @param bool $indexPage Whether to treat $src as a routed URI string
      * @param array|object|string $attributes Additional HTML attributes
      */
     function img($src = '', bool $indexPage = false, $attributes = ''): string
     {
-        if (! is_array($src)) {
+        if (!is_array($src)) {
             $src = ['src' => $src];
         }
-        if (! isset($src['src'])) {
+        if (!isset($src['src'])) {
             $src['src'] = $attributes['src'] ?? '';
         }
-        if (! isset($src['alt'])) {
+        if (!isset($src['alt'])) {
             $src['alt'] = $attributes['alt'] ?? '';
         }
 
         $img = '<img';
 
         // Check for a relative URI
-        if (! preg_match('#^([a-z]+:)?//#i', $src['src']) && strpos($src['src'], 'data:') !== 0) {
+        if (!preg_match('#^([a-z]+:)?//#i', $src['src']) && strpos($src['src'], 'data:') !== 0) {
             if ($indexPage === true) {
                 $img .= ' src="' . get_instance()->config->site_url($src['src']) . '"';
             } else {
@@ -165,24 +164,24 @@ if (! function_exists('img')) {
     }
 }
 
-if (! function_exists('img_data')) {
+if (!function_exists('img_data')) {
     /**
      * Image (data)
      *
      * Generates a src-ready string from an image using the "data:" protocol
      *
-     * @param string      $path Image source path
+     * @param string $path Image source path
      * @param string|null $mime MIME type to use, or null to guess
      */
     function img_data(string $path, ?string $mime = null): string
     {
-        if (! is_file($path) || ! is_readable($path)) {
+        if (!is_file($path) || !is_readable($path)) {
             return false;
         }
 
         // Read in file binary data
         $handle = fopen($path, 'rb');
-        $data   = fread($handle, filesize($path));
+        $data = fread($handle, filesize($path));
         fclose($handle);
 
         // Encode as base64
@@ -197,8 +196,7 @@ if (! function_exists('img_data')) {
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('doctype'))
-{
+if (!function_exists('doctype')) {
     /**
      * Doctype
      *
@@ -211,42 +209,38 @@ if ( ! function_exists('doctype'))
      * @param string $type The doctype to be generated
      */
     function doctype(string $type = 'html5'): string
-	{
-		static $doctypes;
+    {
+        static $doctypes;
 
-		if ( ! is_array($doctypes))
-		{
-			if (file_exists(APPPATH.'config/doctypes.php'))
-			{
-				include(APPPATH.'config/doctypes.php');
-			}
+        if (!is_array($doctypes)) {
+            if (file_exists(APPPATH . 'config/doctypes.php')) {
+                include(APPPATH . 'config/doctypes.php');
+            }
 
-			if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php'))
-			{
-				include(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php');
-			}
+            if (file_exists(APPPATH . 'config/' . ENVIRONMENT . '/doctypes.php')) {
+                include(APPPATH . 'config/' . ENVIRONMENT . '/doctypes.php');
+            }
 
-			if (empty($_doctypes) OR ! is_array($_doctypes))
-			{
-				$doctypes = [];
-				return false;
-			}
+            if (empty($_doctypes) or !is_array($_doctypes)) {
+                $doctypes = [];
+                return false;
+            }
 
-			$doctypes = $_doctypes;
-		}
+            $doctypes = $_doctypes;
+        }
 
-		return $doctypes[$type] ?? false;
-	}
+        return $doctypes[$type] ?? false;
+    }
 }
 
-if (! function_exists('script_tag')) {
+if (!function_exists('script_tag')) {
     /**
      * Script
      *
      * Generates link to a JS file
      *
-     * @param array|string $src       Script source or an array of attributes
-     * @param bool         $indexPage Should indexPage be added to the JS path
+     * @param array|string $src Script source or an array of attributes
+     * @param bool $indexPage Should indexPage be added to the JS path
      */
     function script_tag($src = '', bool $indexPage = false): string
     {
@@ -254,13 +248,13 @@ if (! function_exists('script_tag')) {
 
         $cspNonce = csp_script_nonce();
         $cspNonce = $cspNonce ? ' ' . $cspNonce : $cspNonce;
-        $script   = '<script' . $cspNonce . ' ';
-        if (! is_array($src)) {
+        $script = '<script' . $cspNonce . ' ';
+        if (!is_array($src)) {
             $src = ['src' => $src];
         }
 
         foreach ($src as $k => $v) {
-            if ($k === 'src' && ! preg_match('#^([a-z]+:)?//#i', $v)) {
+            if ($k === 'src' && !preg_match('#^([a-z]+:)?//#i', $v)) {
                 if ($indexPage === true) {
                     $script .= 'src="' . $CI->config->site_url($v) . '" ';
                 } else {
@@ -278,14 +272,14 @@ if (! function_exists('script_tag')) {
 
 // ------------------------------------------------------------------------
 
-if (! function_exists('link_tag')) {
+if (!function_exists('link_tag')) {
     /**
      * Link
      *
      * Generates link tag
      *
-     * @param array<string, bool|string>|string $href      Stylesheet href or an array
-     * @param bool                              $indexPage should indexPage be added to the CSS path.
+     * @param array<string, bool|string>|string $href Stylesheet href or an array
+     * @param bool $indexPage should indexPage be added to the CSS path.
      */
     function link_tag(
         $href = '',
@@ -295,21 +289,22 @@ if (! function_exists('link_tag')) {
         string $media = '',
         bool $indexPage = false,
         string $hreflang = ''
-    ): string {
-		$CI =& get_instance();
+    ): string
+    {
+        $CI =& get_instance();
         $attributes = [];
         // extract fields if needed
         if (is_array($href)) {
-            $rel       = $href['rel'] ?? $rel;
-            $type      = $href['type'] ?? $type;
-            $title     = $href['title'] ?? $title;
-            $media     = $href['media'] ?? $media;
-            $hreflang  = $href['hreflang'] ?? '';
+            $rel = $href['rel'] ?? $rel;
+            $type = $href['type'] ?? $type;
+            $title = $href['title'] ?? $title;
+            $media = $href['media'] ?? $media;
+            $hreflang = $href['hreflang'] ?? '';
             $indexPage = $href['indexPage'] ?? $indexPage;
-            $href      = $href['href'] ?? '';
+            $href = $href['href'] ?? '';
         }
 
-        if (! preg_match('#^([a-z]+:)?//#i', $href)) {
+        if (!preg_match('#^([a-z]+:)?//#i', $href)) {
             $attributes['href'] = $indexPage ? $CI->config->site_url($href) : $CI->config->base_url($href);
         } else {
             $attributes['href'] = $href;
@@ -321,7 +316,7 @@ if (! function_exists('link_tag')) {
 
         $attributes['rel'] = $rel;
 
-        if ($type !== '' && $rel !== 'canonical' && $hreflang === '' && ! ($rel === 'alternate' && $media !== '')) {
+        if ($type !== '' && $rel !== 'canonical' && $hreflang === '' && !($rel === 'alternate' && $media !== '')) {
             $attributes['type'] = $type;
         }
 
@@ -334,19 +329,19 @@ if (! function_exists('link_tag')) {
         }
 
         return '<link' . stringify_attributes($attributes) . '/>';
-	}
+    }
 }
 
-if (! function_exists('video')) {
+if (!function_exists('video')) {
     /**
      * Video
      *
      * Generates a video element to embed videos. The video element can
      * contain one or more video sources
      *
-     * @param array|string $src                Either a source string or an array of sources
-     * @param string       $unsupportedMessage The message to display if the media tag is not supported by the browser
-     * @param string       $attributes         HTML attributes
+     * @param array|string $src Either a source string or an array of sources
+     * @param string $unsupportedMessage The message to display if the media tag is not supported by the browser
+     * @param string $attributes HTML attributes
      */
     function video($src, string $unsupportedMessage = '', string $attributes = '', array $tracks = [], bool $indexPage = false): string
     {
@@ -375,7 +370,7 @@ if (! function_exists('video')) {
             $video .= _space_indent() . $track . "\n";
         }
 
-        if (! empty($unsupportedMessage)) {
+        if (!empty($unsupportedMessage)) {
             $video .= _space_indent()
                 . $unsupportedMessage
                 . "\n";
@@ -385,15 +380,15 @@ if (! function_exists('video')) {
     }
 }
 
-if (! function_exists('audio')) {
+if (!function_exists('audio')) {
     /**
      * Audio
      *
      * Generates an audio element to embed sounds
      *
-     * @param array|string $src                Either a source string or an array of sources
-     * @param string       $unsupportedMessage The message to display if the media tag is not supported by the browser.
-     * @param string       $attributes         HTML attributes
+     * @param array|string $src Either a source string or an array of sources
+     * @param string $unsupportedMessage The message to display if the media tag is not supported by the browser.
+     * @param string $attributes HTML attributes
      */
     function audio($src, string $unsupportedMessage = '', string $attributes = '', array $tracks = [], bool $indexPage = false): string
     {
@@ -422,7 +417,7 @@ if (! function_exists('audio')) {
             $audio .= "\n" . _space_indent() . $track;
         }
 
-        if (! empty($unsupportedMessage)) {
+        if (!empty($unsupportedMessage)) {
             $audio .= "\n" . _space_indent() . $unsupportedMessage . "\n";
         }
 
@@ -430,7 +425,7 @@ if (! function_exists('audio')) {
     }
 }
 
-if (! function_exists('_media')) {
+if (!function_exists('_media')) {
     /**
      * Generate media based tag
      *
@@ -456,7 +451,7 @@ if (! function_exists('_media')) {
             $media .= _space_indent() . $track . "\n";
         }
 
-        if (! empty($unsupportedMessage)) {
+        if (!empty($unsupportedMessage)) {
             $media .= _space_indent() . $unsupportedMessage . "\n";
         }
 
@@ -464,28 +459,28 @@ if (! function_exists('_media')) {
     }
 }
 
-if (! function_exists('source')) {
+if (!function_exists('source')) {
     /**
      * Source
      *
      * Generates a source element that specifies multiple media resources
      * for either audio or video element
      *
-     * @param string $src        The path of the media resource
-     * @param string $type       The MIME-type of the resource with optional codecs parameters
+     * @param string $src The path of the media resource
+     * @param string $type The MIME-type of the resource with optional codecs parameters
      * @param string $attributes HTML attributes
      */
     function source(string $src, string $type = 'unknown', string $attributes = '', bool $indexPage = false): string
     {
         $CI =& get_instance();
-        if (! _has_protocol($src)) {
+        if (!_has_protocol($src)) {
             $src = $indexPage === true ? $CI->config->site_url($src) : $CI->config->base_url($src);
         }
 
         $source = '<source src="' . $src
             . '" type="' . $type . '"';
 
-        if (! empty($attributes)) {
+        if (!empty($attributes)) {
             $source .= ' ' . $attributes;
         }
 
@@ -493,47 +488,42 @@ if (! function_exists('source')) {
     }
 }
 
-if (! function_exists('meta'))
-{
-	/**
-	 * Generates meta tags from an array of key/values
-	 *
-	 * @param	array $name
-     * @param	string $content
-     * @param	string $type
-     * @param	string $newline
-     * @return	string
-	 */
-	function meta($name = '', $content = '', $type = 'name', $newline = "\n"): string
-	{
-		// Since we allow the data to be passes as a string, a simple array
-		// or a multidimensional one, we need to do a little prepping.
-		if ( ! is_array($name))
-		{
-			$name = array(array('name' => $name, 'content' => $content, 'type' => $type, 'newline' => $newline));
-		}
-		elseif (isset($name['name']))
-		{
-			// Turn single array into multidimensional
-			$name = array($name);
-		}
+if (!function_exists('meta')) {
+    /**
+     * Generates meta tags from an array of key/values
+     *
+     * @param array $name
+     * @param string $content
+     * @param string $type
+     * @param string $newline
+     * @return    string
+     */
+    function meta($name = '', $content = '', $type = 'name', $newline = "\n"): string
+    {
+        // Since we allow the data to be passes as a string, a simple array
+        // or a multidimensional one, we need to do a little prepping.
+        if (!is_array($name)) {
+            $name = array(array('name' => $name, 'content' => $content, 'type' => $type, 'newline' => $newline));
+        } elseif (isset($name['name'])) {
+            // Turn single array into multidimensional
+            $name = array($name);
+        }
 
-		$str = '';
-		foreach ($name as $meta)
-		{
-			$type		= (isset($meta['type']) && $meta['type'] !== 'name')	? 'http-equiv' : 'name';
-			$name		= $meta['name'] ?? '';
-			$content	= $meta['content'] ?? '';
-			$newline	= $meta['newline'] ?? "\n";
+        $str = '';
+        foreach ($name as $meta) {
+            $type = (isset($meta['type']) && $meta['type'] !== 'name') ? 'http-equiv' : 'name';
+            $name = $meta['name'] ?? '';
+            $content = $meta['content'] ?? '';
+            $newline = $meta['newline'] ?? "\n";
 
-			$str .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />'.$newline;
-		}
+            $str .= '<meta ' . $type . '="' . $name . '" content="' . $content . '" />' . $newline;
+        }
 
-		return $str;
-	}
+        return $str;
+    }
 }
 
-if (! function_exists('track')) {
+if (!function_exists('track')) {
     /**
      * Track
      *
@@ -552,7 +542,7 @@ if (! function_exists('track')) {
     }
 }
 
-if (! function_exists('object')) {
+if (!function_exists('object')) {
     /**
      * Object
      *
@@ -560,21 +550,21 @@ if (! function_exists('object')) {
      * as either image or a resource plugin such as audio, video,
      * Java applets, ActiveX, PDF and Flash
      *
-     * @param string $data       A resource URL
-     * @param string $type       Content-type of the resource
+     * @param string $data A resource URL
+     * @param string $type Content-type of the resource
      * @param string $attributes HTML attributes
      */
     function object(string $data, string $type = 'unknown', string $attributes = '', array $params = [], bool $indexPage = false): string
     {
         $CI =& get_instance();
-        if (! _has_protocol($data)) {
+        if (!_has_protocol($data)) {
             $data = $indexPage === true ? $CI->config->site_url($data) : $CI->config->base_url($data);
         }
 
         $object = '<object data="' . $data . '" '
             . $attributes . '>';
 
-        if (! empty($params)) {
+        if (!empty($params)) {
             $object .= "\n";
         }
 
@@ -586,16 +576,16 @@ if (! function_exists('object')) {
     }
 }
 
-if (! function_exists('param')) {
+if (!function_exists('param')) {
     /**
      * Param
      *
      * Generates a param element that defines parameters
      * for the object element.
      *
-     * @param string $name       The name of the parameter
-     * @param string $value      The value of the parameter
-     * @param string $type       The MIME-type
+     * @param string $name The name of the parameter
+     * @param string $value The value of the parameter
+     * @param string $type The MIME-type
      * @param string $attributes HTML attributes
      */
     function param(string $name, string $value, string $type = 'ref', string $attributes = ''): string
@@ -607,20 +597,20 @@ if (! function_exists('param')) {
     }
 }
 
-if (! function_exists('embed')) {
+if (!function_exists('embed')) {
     /**
      * Embed
      *
      * Generates an embed element
      *
-     * @param string $src        The path of the resource to embed
-     * @param string $type       MIME-type
+     * @param string $src The path of the resource to embed
+     * @param string $type MIME-type
      * @param string $attributes HTML attributes
      */
     function embed(string $src, string $type = 'unknown', string $attributes = '', bool $indexPage = false): string
     {
         $CI =& get_instance();
-        if (! _has_protocol($src)) {
+        if (!_has_protocol($src)) {
             $src = $indexPage === true ? $CI->config->site_url($src) : $CI->config->base_url($src);
         }
 
@@ -630,7 +620,7 @@ if (! function_exists('embed')) {
     }
 }
 
-if (! function_exists('_has_protocol')) {
+if (!function_exists('_has_protocol')) {
     /**
      * Test the protocol of a URI.
      *
@@ -642,7 +632,7 @@ if (! function_exists('_has_protocol')) {
     }
 }
 
-if (! function_exists('_space_indent')) {
+if (!function_exists('_space_indent')) {
     /**
      * Provide space indenting.
      */

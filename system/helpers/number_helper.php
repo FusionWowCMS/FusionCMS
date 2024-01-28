@@ -9,19 +9,19 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * CodeIgniter Number Helpers
  *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/userguide3/helpers/number_helper.html
+ * @package     CodeIgniter
+ * @subpackage  Helpers
+ * @category    Helpers
+ * @author      EllisLab Dev Team
+ * @link        https://codeigniter.com/userguide3/helpers/number_helper.html
  */
 
-if (! function_exists('number_to_roman')) {
+if (!function_exists('number_to_roman')) {
     /**
      * Convert a number to a roman numeral.
      *
@@ -45,7 +45,7 @@ if (! function_exists('number_to_roman')) {
             'I'  => 1,
         ];
 
-        $num = (int) $num;
+        $num = (int)$num;
 
         if ($num < 1 || $num > 3999) {
             return null;
@@ -54,7 +54,7 @@ if (! function_exists('number_to_roman')) {
         $result = '';
 
         foreach ($map as $roman => $arabic) {
-            $repeat = (int) floor($num / $arabic);
+            $repeat = (int)floor($num / $arabic);
             $result .= str_repeat($roman, $repeat);
             $num %= $arabic;
         }
@@ -63,46 +63,36 @@ if (! function_exists('number_to_roman')) {
     }
 }
 
-if ( ! function_exists('byte_format'))
-{
-	/**
-	 * Formats a numbers as bytes, based on size, and adds the appropriate suffix
-	 *
-	 * @param	mixed $num will be cast as int
-	 * @param	int $precision
-     * @return	string
-	 */
-	function byte_format($num, $precision = 1): string
+if (!function_exists('byte_format')) {
+    /**
+     * Formats a numbers as bytes, based on size, and adds the appropriate suffix
+     *
+     * @param mixed $num will be cast as int
+     * @param int $precision
+     * @return    string
+     */
+    function byte_format($num, $precision = 1): string
     {
-		$CI =& get_instance();
-		$CI->lang->load('number');
+        $CI =& get_instance();
+        $CI->lang->load('number');
 
-		if ($num >= 1000000000000)
-		{
-			$num = round($num / 1099511627776, $precision);
-			$unit = $CI->lang->line('terabyte_abbr');
-		}
-		elseif ($num >= 1000000000)
-		{
-			$num = round($num / 1073741824, $precision);
-			$unit = $CI->lang->line('gigabyte_abbr');
-		}
-		elseif ($num >= 1000000)
-		{
-			$num = round($num / 1048576, $precision);
-			$unit = $CI->lang->line('megabyte_abbr');
-		}
-		elseif ($num >= 1000)
-		{
-			$num = round($num / 1024, $precision);
-			$unit = $CI->lang->line('kilobyte_abbr');
-		}
-		else
-		{
-			$unit = $CI->lang->line('bytes');
-			return number_format($num).' '.$unit;
-		}
+        if ($num >= 1000000000000) {
+            $num = round($num / 1099511627776, $precision);
+            $unit = $CI->lang->line('terabyte_abbr');
+        } elseif ($num >= 1000000000) {
+            $num = round($num / 1073741824, $precision);
+            $unit = $CI->lang->line('gigabyte_abbr');
+        } elseif ($num >= 1000000) {
+            $num = round($num / 1048576, $precision);
+            $unit = $CI->lang->line('megabyte_abbr');
+        } elseif ($num >= 1000) {
+            $num = round($num / 1024, $precision);
+            $unit = $CI->lang->line('kilobyte_abbr');
+        } else {
+            $unit = $CI->lang->line('bytes');
+            return number_format($num) . ' ' . $unit;
+        }
 
-		return number_format($num, $precision).' '.$unit;
-	}
+        return number_format($num, $precision) . ' ' . $unit;
+    }
 }

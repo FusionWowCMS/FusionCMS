@@ -9,19 +9,19 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * CodeIgniter Inflector Helpers
  *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/userguide3/helpers/inflector_helper.html
+ * @package     CodeIgniter
+ * @subpackage  Helpers
+ * @category    Helpers
+ * @author      EllisLab Dev Team
+ * @link        https://codeigniter.com/userguide3/helpers/inflector_helper.html
  */
 
-if (! function_exists('singular')) {
+if (!function_exists('singular')) {
     /**
      * Singular
      *
@@ -33,7 +33,7 @@ if (! function_exists('singular')) {
     {
         $result = $string;
 
-        if (! is_pluralizable($result)) {
+        if (!is_pluralizable($result)) {
             return $result;
         }
 
@@ -80,7 +80,7 @@ if (! function_exists('singular')) {
     }
 }
 
-if (! function_exists('plural')) {
+if (!function_exists('plural')) {
     /**
      * Plural
      *
@@ -92,7 +92,7 @@ if (! function_exists('plural')) {
     {
         $result = $string;
 
-        if (! is_pluralizable($result)) {
+        if (!is_pluralizable($result)) {
             return $result;
         }
 
@@ -130,14 +130,14 @@ if (! function_exists('plural')) {
     }
 }
 
-if (! function_exists('counted')) {
+if (!function_exists('counted')) {
     /**
      * Counted
      *
      * Takes a number and a word to return the plural or not
      * E.g. 0 cats, 1 cat, 2 cats, ...
      *
-     * @param int    $count  Number of items
+     * @param int $count Number of items
      * @param string $string Input string
      */
     function counted(int $count, string $string): string
@@ -148,7 +148,7 @@ if (! function_exists('counted')) {
     }
 }
 
-if (! function_exists('camelize')) {
+if (!function_exists('camelize')) {
     /**
      * Camelize
      *
@@ -163,7 +163,7 @@ if (! function_exists('camelize')) {
     }
 }
 
-if (! function_exists('pascalize')) {
+if (!function_exists('pascalize')) {
     /**
      * Pascalize
      *
@@ -179,7 +179,7 @@ if (! function_exists('pascalize')) {
     }
 }
 
-if (! function_exists('underscore')) {
+if (!function_exists('underscore')) {
     /**
      * Underscore
      *
@@ -195,7 +195,7 @@ if (! function_exists('underscore')) {
     }
 }
 
-if (! function_exists('decamelize')) {
+if (!function_exists('decamelize')) {
     /**
      * Decamelize
      *
@@ -210,14 +210,14 @@ if (! function_exists('decamelize')) {
     }
 }
 
-if (! function_exists('humanize')) {
+if (!function_exists('humanize')) {
     /**
      * Humanize
      *
      * Takes multiple words separated by the separator,
      * camelizes and changes them to spaces
      *
-     * @param string $string    Input string
+     * @param string $string Input string
      * @param string $separator Input separator
      */
     function humanize(string $string, string $separator = '_'): string
@@ -228,7 +228,7 @@ if (! function_exists('humanize')) {
     }
 }
 
-if (! function_exists('is_pluralizable')) {
+if (!function_exists('is_pluralizable')) {
     /**
      * Checks if the given word has a plural version.
      *
@@ -289,11 +289,11 @@ if (! function_exists('is_pluralizable')) {
             true
         );
 
-        return ! $uncountables;
+        return !$uncountables;
     }
 }
 
-if (! function_exists('dasherize')) {
+if (!function_exists('dasherize')) {
     /**
      * Replaces underscores with dashes in the string.
      *
@@ -305,7 +305,7 @@ if (! function_exists('dasherize')) {
     }
 }
 
-if (! function_exists('ordinal')) {
+if (!function_exists('ordinal')) {
     /**
      * Returns the suffix that should be added to a
      * number to denote the position in an ordered
@@ -332,7 +332,7 @@ if (! function_exists('ordinal')) {
     }
 }
 
-if (! function_exists('ordinalize')) {
+if (!function_exists('ordinalize')) {
     /**
      * Turns a number into an ordinal string used
      * to denote the position in an ordered sequence
