@@ -163,7 +163,7 @@ window.theme.fn = {
 	var $window = $( window );
 
 	var toggleClass = function( $el ) {
-		if ( !!$el.data('toggleClassBinded') ) {
+		if ( $el.data('toggleClassBinded') ) {
 			return false;
 		}
 
@@ -182,7 +182,7 @@ window.theme.fn = {
 
 			var hasClass = $target.hasClass( className );
 
-			if ( !!eventName ) {
+			if ( eventName ) {
 				$window.trigger( eventName, {
 					added: hasClass,
 					removed: !hasClass
@@ -1542,7 +1542,7 @@ window.theme.fn = {
 		build: function() {
 			var _self = this;
 
-			if ( !!window.SnazzyThemes ) {
+			if ( window.SnazzyThemes ) {
 				var themeOpts = [];
 
 				$.each( window.SnazzyThemes, function( i, theme ) {
@@ -2080,7 +2080,7 @@ window.theme.fn = {
 				'</li>'
 			].join('');
 
-			html = html.replace( /\{location\}/, !!marker.title ? marker.title : marker.location );
+			html = html.replace( /\{location\}/, marker.title ? marker.title : marker.location );
 
 			marker._$html = $( html );
 
@@ -2118,8 +2118,8 @@ window.theme.fn = {
 				'</div>'
 			].join('');
 
-			html = html.replace(/\{title\}/, !!marker.title ?  ("<h4>" + marker.title + "</h4>") : "" );
-			html = html.replace(/\{description\}/, !!marker.description ?  ("<p>" + marker.description + "</p>") : "" );
+			html = html.replace(/\{title\}/, marker.title ?  ("<h4>" + marker.title + "</h4>") : "" );
+			html = html.replace(/\{description\}/, marker.description ?  ("<p>" + marker.description + "</p>") : "" );
 
 			marker._infoWindow = new google.maps.InfoWindow({ content: html });
 
@@ -2270,11 +2270,11 @@ window.theme.fn = {
 
 					object += '            { lat: ' + m.lat + ', lng: ' + m.lng;
 
-					if ( !!m.title ) {
+					if ( m.title ) {
 						object += ', title: "' + m.title + '"';
 					}
 
-					if ( !!m.description ) {
+					if ( m.description ) {
 						object += ', description: "' + m.description + '"';
 					}
 
@@ -2822,7 +2822,7 @@ window.theme.fn = {
 				data = {};
 			}
 
-			if (!!porletId) {
+			if (porletId) {
 				data[porletId] = $this.sortable('toArray');
 				store.set(key, data);
 			}
@@ -2835,10 +2835,10 @@ window.theme.fn = {
 				porletId = $this.prop('id'),
 				portlet = $('#' + porletId);
 
-			if (!!data) {
+			if (data) {
 				var cards = data[porletId];
 
-				if (!!cards) {
+				if (cards) {
 					$.each(cards, function(index, panelId) {
 						$('#' + panelId).appendTo(portlet);
 					});
@@ -2879,7 +2879,7 @@ window.theme.fn = {
 			var key = storageStateKey,
 				data = store.get(key);
 
-			if (!!data) {
+			if (data) {
 				$.each(data, function(panelId, state) {
 					var panel = $('#' + panelId);
 					if (!panel.data('portlet-state-loaded')) {

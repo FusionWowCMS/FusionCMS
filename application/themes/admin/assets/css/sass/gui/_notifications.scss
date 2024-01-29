@@ -44,7 +44,7 @@
 				font-size: 10px;
 				font-weight: normal;
 				height: 16px;
-				padding: 3px 5px 3px 5px;
+				padding: 3px 5px;
 				position: absolute;
 				right: -8px;
 				top: -3px;
@@ -64,7 +64,7 @@
 		@media only screen and (min-width: 768px) {
 			left: auto !important;
 		}
-		margin: 10px 0 0 0;
+		margin: 10px 0 0;
 		padding: 0;
 		right: -5px !important;
 		top: 9px;
@@ -250,7 +250,6 @@ html.header-dark {
 			}
 
 			.notification-menu {
-				left: 15px;
 				top: auto;
 			    width: 94vw !important;
 			    left: 50% !important;

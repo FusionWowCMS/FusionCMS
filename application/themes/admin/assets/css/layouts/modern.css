@@ -468,7 +468,7 @@ html.modern ul.nav-main > li.nav-active > a {
 
 @media (max-width: 1440px) {
 	html.modern:not(.sidebar-left-collapsed) .header .separator {
-		margin: 0 15px 0;
+		margin: 0 15px;
 	}
 }
 
@@ -593,7 +593,7 @@ html.modern .sidebar-widget .widget-header h6 {
 	}
 
 	html.modern .notifications {
-		margin: 0 15px 0 15px;
+		margin: 0 15px;
 	}
 
 	html.modern .notifications .notification-icon:before {

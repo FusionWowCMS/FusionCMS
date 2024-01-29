@@ -6,7 +6,7 @@
 
 	ul {
 		list-style: none;
-		margin: 20px 0 0 0;
+		margin: 20px 0 0;
 		padding: 0;
 	}
 	li {
@@ -19,7 +19,7 @@
 		border-radius: corner-values(2px 2px 0 0);
 		font-size: 1.3em;
 		font-weight: normal;
-		margin: -20px -20px 50px -20px;
+		margin: -20px -20px 50px;
 		padding: 20px;
 		.desc {
 			font-size: 0.7em;
@@ -162,7 +162,6 @@
 					background: #666;
 					color: #FFF;
 					font-family: $font-primary;
-					font-size: 600;
 					box-shadow: none;
 					width: 100%;
 					font-size: 1.5em;

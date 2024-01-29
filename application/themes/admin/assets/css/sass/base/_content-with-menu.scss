@@ -96,7 +96,7 @@ html.boxed {
 
 	hr.separator {
 		background-image: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.4), transparent);
-		margin: 20px -35px 20px;
+		margin: 20px -35px;
 	}
 
 	a,
@@ -107,8 +107,8 @@ html.boxed {
 	a.menu-item {
 		color: #abb4be;
 		display: block;
-		margin: 0 -35px 0 -35px;
-		padding: 10px 50px 10px 50px;
+		margin: 0 -35px;
+		padding: 10px 50px;
 		text-decoration: none;
 
 		&:hover {
@@ -215,7 +215,7 @@ html.sidebar-light:not(.dark) {
 }
 
 .inner-menu-toggle-inside {
-	margin: -35px -35px 15px -35px;
+	margin: -35px -35px 15px;
 
 	.inner-menu-collapse i {
 		margin-right: 5px;

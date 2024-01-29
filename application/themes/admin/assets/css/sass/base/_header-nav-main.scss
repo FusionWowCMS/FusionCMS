@@ -57,7 +57,7 @@
 							border: 0;
 							border-top: 5px solid $color-primary;
 							box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
-							margin: -3px 0 0 0;
+							margin: -3px 0 0;
 							min-width: 200px;
 							padding: 5px;
 							text-align: left;
@@ -299,7 +299,7 @@
 						> a {
 							&.dropdown-toggle {
 								&:after {
-									border-color: #444 transparent transparent transparent;
+									border-color: #444 transparent transparent;
 								}
 							}
 						}
@@ -374,7 +374,7 @@
 
 						&.dropdown-toggle {
 							&:after {
-								border-color: #FFF transparent transparent transparent;
+								border-color: #FFF transparent transparent;
 							}
 						}
 					}
@@ -384,7 +384,7 @@
 
 							&.dropdown-toggle {
 								&:after {
-									border-color: #CCC transparent transparent transparent;
+									border-color: #CCC transparent transparent;
 								}
 							}
 						}
@@ -404,7 +404,7 @@
 
 							&.dropdown-toggle {
 								&:after {
-									border-color: #CCC transparent transparent transparent;
+									border-color: #CCC transparent transparent;
 								}
 							}
 						}

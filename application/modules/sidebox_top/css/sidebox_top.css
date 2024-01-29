@@ -69,7 +69,7 @@
 #top_ranked_content .realm_content .header #column a {
     display: block;
     width: 100%;
-    padding: 15px 0 0 0;
+    padding: 15px 0 0;
     height: 45px;
     box-sizing: border-box;
     font-family: Tahoma, sans-serif;
@@ -160,7 +160,7 @@
 }
 @media (max-width:397px){
     #top_ranked_content .realm_content .header {
-        margin: 0 0 17px 0
+        margin: 0 0 17px
     }
 }
 @media (max-width:767px){

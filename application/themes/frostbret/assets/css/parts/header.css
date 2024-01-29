@@ -12,11 +12,11 @@
 	background-image: url('../../images/graphics/header.png');
 	background-repeat: repeat-x;
 	background-position: center center;
-} .is-homepage .header             {margin: 0 0 150px 0;}
-  .normal-slider.no-banner .header {margin: 0 0 300px 0;}
+} .is-homepage .header             {margin: 0 0 150px;}
+  .normal-slider.no-banner .header {margin: 0 0 300px;}
   .text-slider.has-slider .header  {margin: 0;}
   .has-banner .header              {margin: 0;}
-  .is-subpage .header              {margin: 0 0 5rem 0 !important;}
+  .is-subpage .header              {margin: 0 0 5rem !important;}
 
 .header::before {
 	width: 100%;
@@ -294,11 +294,11 @@ h1 {
 /* Header: Responsive
 /*---------------------------------------------------------------*/
 @media screen and (min-width: 992px) { /* Desktop */
-	.is-homepage .header             {margin: 0 0 150px 0;}
-	.normal-slider.no-banner .header {margin: 0 0 448px 0;}
+	.is-homepage .header             {margin: 0 0 150px;}
+	.normal-slider.no-banner .header {margin: 0 0 448px;}
 	.text-slider.has-slider .header  {margin: 0;}
 	.has-banner .header              {margin: 0;}
-	.is-subpage .header              {margin: 0 0 5rem 0 !important;}
+	.is-subpage .header              {margin: 0 0 5rem !important;}
 }
 
 @media screen and (min-width: 1200px) { /* Desktop */

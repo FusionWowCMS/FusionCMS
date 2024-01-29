@@ -82,7 +82,7 @@
 }
 .sidebox-toppvp .realm .realm-name{
     color:#baddf4;
-    margin:0 0 .5rem 0;
+    margin:0 0 .5rem;
     font-size:1.25rem;
     text-align:center;
     line-height:100%;
@@ -325,7 +325,7 @@
     height:119px;
     top:0;
     left:0;
-    margin:-59.5px auto 0 auto;
+    margin:-59.5px auto 0;
     z-index:9;
     content:'';
     display:inline-block;

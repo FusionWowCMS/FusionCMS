@@ -21,7 +21,7 @@
     height: 0;
     content: '';
     display: table;
-    padding: 100% 0 0 0;
+    padding: 100% 0 0;
 }
 
 .avatars_name {
