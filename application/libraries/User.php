@@ -517,11 +517,11 @@ class User
     /**
      * Set the Totp secret
      *
-     * @param string $secret
+     * @param string|null $secret
      * @param int $userId
      * @return void
      */
-    public function setTotpSecret(string $secret, int $userId = 0): void
+    public function setTotpSecret(string|null $secret, int $userId = 0): void
     {
         if ($userId)
             $this->CI->external_account_model->getConnection()->query('UPDATE '.table('account').' SET ' . $this->CI->config->item('totp_secret_name') . ' = ? WHERE id = ?', [$secret, $userId]);

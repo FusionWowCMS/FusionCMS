@@ -9,7 +9,7 @@ class Security extends MX_Controller
         //Call the constructor of MX_Controller
         parent::__construct();
 
-        if (!$this->realms->getEmulator()->hasTotp())
+        if (!$this->config->item('totp_secret'))
             redirect('ucp');
 
         requirePermission("canUpdateAccountSettings");
@@ -54,7 +54,7 @@ class Security extends MX_Controller
 
     public function submit()
     {
-        $security_enabled = $this->input->post('security_enabled');
+        $security_enabled = $this->input->post('security_enabled') == 'true';
 
         if ($security_enabled) {
             $auth_code = $this->input->post('auth_code');
