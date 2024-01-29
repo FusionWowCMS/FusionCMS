@@ -8,7 +8,7 @@ const OTP = (() => {
 
         let data = '';
 
-        Inp.forEach((item, ) => {
+        Inp.forEach((item) => {
             data = String(data) + String(item.value);
         });
 
