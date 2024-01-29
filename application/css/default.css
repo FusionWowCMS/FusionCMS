@@ -332,6 +332,7 @@ input[type="radio"] {
     border-radius: 2px;
     font-size: 14px;
     text-align: center;
+    height: 40px !important;
 }
 
 .online_realm_button:first-child {
@@ -607,11 +608,6 @@ input[type="radio"] {
 .comment {
     word-wrap: break-word;
 }
-
-.online_realm_button, #ucp_characters h1 {
-	height: 40px !important;
-}
-
 
 /* Captcha*/
 .captcha{
