@@ -2730,7 +2730,7 @@ html:not(.sidebar-light) .datepicker.datepicker-dark table tbody tr td.day.new:h
 }
 
 .datepicker.datepicker-primary table thead tr:first-child th:first-child {
-	border-radius: 4px 0 0 0;
+	border-radius: 4px 0 0;
 }
 
 .datepicker.datepicker-primary table thead tr:first-child th:last-child {
@@ -3246,7 +3246,7 @@ html.dark .form-bordered .form-group {
 }
 
 .form-group-vertical .input-group:last-child .form-control, .form-group-vertical .input-group:last-of-type .form-control {
-	border-radius: 0 0 4px 0;
+	border-radius: 0 0 4px;
 }
 
 .form-group-vertical .input-group.input-group-icon:first-child .form-control, .form-group-vertical .input-group.input-group-icon:first-of-type .form-control {
@@ -3323,7 +3323,7 @@ input[type="checkbox"].checkbox-style-1:checked {
 	position: absolute;
 	top: 50%;
 	left: 3px;
-	margin: -6px 0 0 0;
+	margin: -6px 0 0;
 	z-index: 2;
 	cursor: pointer;
 }
@@ -3522,7 +3522,7 @@ html.dark .checkbox-text-dark input[type="checkbox"]:checked + label:after,
 	position: absolute;
 	top: 50%;
 	left: 3px;
-	margin: -6px 0 0 0;
+	margin: -6px 0 0;
 	z-index: 2;
 	cursor: pointer;
 }
@@ -3747,8 +3747,8 @@ html.dark .radio-dark input[type="radio"]:checked + label:after,
 .validation-message ul {
 	display: none;
 	list-style: none;
-	margin: -20px -20px 30px -20px;
-	padding: 20px 20px 10px 20px;
+	margin: -20px -20px 30px;
+	padding: 20px 20px 10px;
 	border-bottom: 1px solid #FFCBCB;
 	background: #FFEFEF;
 }
@@ -4287,7 +4287,7 @@ html.dark .md-editor > textarea {
 
 .modal-text h1, .modal-text h2, .modal-text h3, .modal-text h4, .modal-text h5, .modal-text h6 {
 	padding: 0;
-	margin: -7px 0 4px 0;
+	margin: -7px 0 4px;
 }
 
 .modal-block-primary .fa, .modal-block-primary .fab, .modal-block-primary .fal, .modal-block-primary .far, .modal-block-primary .fas {
@@ -4481,7 +4481,7 @@ html.dark .multiselect-container > li > a:hover, html.dark .multiselect-containe
 	font-size: 10px;
 	font-weight: normal;
 	height: 16px;
-	padding: 3px 5px 3px 5px;
+	padding: 3px 5px;
 	position: absolute;
 	right: -8px;
 	top: -3px;
@@ -4496,7 +4496,7 @@ html.dark .multiselect-container > li > a:hover, html.dark .multiselect-containe
 .notifications .notification-menu {
 	border: none;
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-	margin: 10px 0 0 0;
+	margin: 10px 0 0;
 	padding: 0;
 	right: -5px !important;
 	top: 9px;
@@ -4680,7 +4680,6 @@ html.header-dark .notifications .notification-menu hr {
 	}
 
 	.notifications > li .notification-menu {
-		left: 15px;
 		top: auto;
 		width: 94vw !important;
 		left: 50% !important;

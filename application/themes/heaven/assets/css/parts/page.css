@@ -9,12 +9,7 @@
 
 	width: 100%;
 	height: auto;
-
-	display: block;
 	padding: 15rem 0;
-
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 
 	-webkit-box-flex: 1;
@@ -131,8 +126,8 @@
 /* [COMPONENT] Section header
 /*-------------------------------------------------------------------------*/
 .section-header {
-	margin: 0 0 1rem 0;
-	padding: 0 0 0.5rem 0;
+	margin: 0 0 1rem;
+	padding: 0 0 0.5rem;
 
 	font-size: 1.3rem;
 }
@@ -168,7 +163,7 @@
 	line-height: 100%;
 
 	border-style: solid;
-	border-width: 1px 1px 0 1px;
+	border-width: 1px 1px 0;
 	border-color: var(--borderColor);
 
 	text-transform: uppercase;
@@ -181,7 +176,7 @@
 }
 
 .col-lg-8 .section-body + .section-header {
-	margin: 1rem 0 0 0;
+	margin: 1rem 0 0;
 }
 
 /*-------------------------------------------------------------------------*/

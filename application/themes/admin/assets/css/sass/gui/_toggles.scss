@@ -124,7 +124,7 @@
 		.toggle {
 			> label {
 				font-size: 1.1em;
-				padding: 16px 20px 16px 20px;
+				padding: 16px 20px;
 			}
 			> .toggle-content > p {
 				font-size: 1.1em;
@@ -138,7 +138,6 @@
 				border-radius: 0;
 				border: 0;
 				background: transparent;
-				color: $color-font-default;
 				padding-#{$left}: 32px;
 				margin-bottom: -10px;
 				font-size: 1em;

@@ -234,7 +234,7 @@ html .background-color-light {
 
 @media (min-width: 992px) {
 	.header.header-nav-menu .header-nav-main nav > ul > li > a.dropdown-toggle:after {
-		border-color: #0088CC transparent transparent transparent;
+		border-color: #0088CC transparent transparent;
 	}
 
 	.header.header-nav-menu .header-nav-main nav > ul > li > a:focus {
@@ -251,7 +251,7 @@ html .background-color-light {
 	.header.header-nav-menu .header-nav-main nav > ul > li.open > a.dropdown-toggle:after,
 	.header.header-nav-menu .header-nav-main nav > ul > li:hover > a.dropdown-toggle:after,
 	.header.header-nav-menu .header-nav-main nav > ul > li.active > a.dropdown-toggle:after {
-		border-color: #ffffff transparent transparent transparent;
+		border-color: #ffffff transparent transparent;
 	}
 
 	.header.header-nav-menu .header-nav-main nav > ul > li.dropdown .dropdown-menu {
@@ -263,7 +263,7 @@ html .background-color-light {
 	}
 
 	.header.header-nav-menu.header-nav-stripe .header-nav-main nav > ul > li > a.dropdown-toggle:after {
-		border-color: #000000 transparent transparent transparent;
+		border-color: #000000 transparent transparent;
 	}
 
 	.header.header-nav-menu.header-nav-stripe .header-nav-main nav > ul > li > a:focus {
@@ -279,11 +279,11 @@ html .background-color-light {
 	.header.header-nav-menu.header-nav-stripe .header-nav-main nav > ul > li.open > a.dropdown-toggle:after,
 	.header.header-nav-menu.header-nav-stripe .header-nav-main nav > ul > li:hover > a.dropdown-toggle:after,
 	.header.header-nav-menu.header-nav-stripe .header-nav-main nav > ul > li.active > a.dropdown-toggle:after {
-		border-color: #ffffff transparent transparent transparent;
+		border-color: #ffffff transparent transparent;
 	}
 
 	.header.header-nav-menu.header-nav-top-line .header-nav-main nav > ul > li > a.dropdown-toggle:after {
-		border-color: #000000 transparent transparent transparent;
+		border-color: #000000 transparent transparent;
 	}
 
 	.header.header-nav-menu.header-nav-top-line .header-nav-main nav > ul > li > a:focus {
@@ -305,7 +305,7 @@ html .background-color-light {
 	.header.header-nav-menu.header-nav-top-line .header-nav-main nav > ul > li.open > a.dropdown-toggle:after,
 	.header.header-nav-menu.header-nav-top-line .header-nav-main nav > ul > li:hover > a.dropdown-toggle:after,
 	.header.header-nav-menu.header-nav-top-line .header-nav-main nav > ul > li.active > a.dropdown-toggle:after {
-		border-color: #0088CC transparent transparent transparent;
+		border-color: #0088CC transparent transparent;
 	}
 
 	.header.header-nav-menu.header-nav-top-line .header-nav-main nav > ul > li.dropdown .dropdown-menu {

@@ -495,7 +495,7 @@ html {
 			@media(max-width: 1440px) {
 				.header {
 					.separator {
-						margin: 0 15px 0;
+						margin: 0 15px;
 					}
 					
 					@media(min-width: 768px) {
@@ -684,7 +684,7 @@ html {
 				left: 15px;
 			}
 			.notifications {
-				margin: 0 15px 0 15px;
+				margin: 0 15px;
 				.notification-icon {
 					&:before {
 					    right: 6px;

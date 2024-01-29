@@ -236,7 +236,7 @@
 	top: -10px;
 	right: 0;
 	color: #a3bed6;
-	margin: 1rem 0 0 0;
+	margin: 1rem 0 0;
 	display: inline-block;
 	padding: 0.5rem 0.75rem 0.5rem 2.8125rem;
 	position: absolute;
@@ -336,7 +336,7 @@
 	width: 95%;
 	height: auto;
 	color: #9ea8b5;
-	margin: 5rem auto 0 auto;
+	margin: 5rem auto 0;
 	font-size: 1.0625rem;
 	text-align: center;
 	font-weight: 600;
@@ -353,7 +353,7 @@
 /* Page sub body
 /*-------------------------------------------------------------------------*/
 .page-subbody {
-	margin: 5rem 0 0 0;
+	margin: 5rem 0 0;
 	padding: 1rem;
 	background-color: rgba(33, 49, 65, 0.6);
 	background-image: url('../../images/patterns/pattern-noise-02.png');

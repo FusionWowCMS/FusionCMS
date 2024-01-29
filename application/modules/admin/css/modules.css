@@ -60,7 +60,7 @@
 *************************************/
 .files-container {
     position: relative;
-    margin: 0px 2px 15px 2px;
+    margin: 0px 2px 15px;
 }
 .dark .files-container {
     background-color: rgba(0, 0, 0, 0.2);

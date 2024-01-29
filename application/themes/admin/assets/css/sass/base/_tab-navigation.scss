@@ -43,9 +43,9 @@ html.has-tab-navigation {
 // -----------------------------------------------------------------------------
 html.has-tab-navigation {
 	.content-body {
-        padding: 25px 25px;
+        padding: 25px;
         background-color: #eee;
-        border-radius: 0 7px 7px 7px;
+        border-radius: 0 7px 7px;
         transition: ease padding 300ms;
         
         /* Only for desktop */
@@ -88,7 +88,7 @@ html.has-tab-navigation {
         background-color: transparent;
         border: none;
         box-shadow: none;
-        padding: 0 0 10px 0;
+        padding: 0 0 10px;
         .breadcrumbs {
 			a,
 			span {

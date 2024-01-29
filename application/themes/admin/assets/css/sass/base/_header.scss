@@ -21,7 +21,7 @@
 		background-image: linear-gradient(#F6F6F6 60%, #EDEDED);
 		display: inline-block;
 		height: 100%;
-		margin: 0 25px 0;
+		margin: 0 25px;
 		width: 1px;
 		vertical-align: middle;
 	}
@@ -299,7 +299,7 @@ html.header-dark {
 
 								&.dropdown-toggle {
 									&:after {
-										border-color: #444 transparent transparent transparent;
+										border-color: #444 transparent transparent;
 									}
 								}
 							}
@@ -360,7 +360,7 @@ html.header-dark {
 							> a {
 								&.dropdown-toggle {
 									&:after {
-										border-color: #444 transparent transparent transparent;
+										border-color: #444 transparent transparent;
 									}
 								}
 							}
@@ -624,7 +624,7 @@ html.header-dark {
 									> a {
 										color: #FFF;
 										&.dropdown-toggle::after {
-										    border-color: #FFF transparent transparent transparent;
+										    border-color: #FFF transparent transparent;
 										}
 									}
 								}

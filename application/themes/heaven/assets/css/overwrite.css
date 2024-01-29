@@ -385,7 +385,7 @@
 	color: #3d4b62;
 
 	border-style: solid;
-	border-width: 1px 0 0 0;
+	border-width: 1px 0 0;
 	border-color: var(--borderColor);
 }
 
@@ -553,7 +553,7 @@
 
 	border-width: 8px;
 	border-style: solid;
-	border-color: #325195 transparent transparent transparent;
+	border-color: #325195 transparent transparent;
 }
 
 /*-------------------------------------------------------------------------*/
@@ -754,7 +754,7 @@
 
 	border-width: 8px;
 	border-style: solid;
-	border-color: #325195 transparent transparent transparent;
+	border-color: #325195 transparent transparent;
 }
 
 /*-------------------------------------------------------------------------*/

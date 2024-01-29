@@ -262,7 +262,7 @@
 
 .swal2-container.swal2-center>.swal2-popup {
     border: 2px solid #223243;
-    padding: 3rem 1rem 1rem 1rem;
+    padding: 3rem 1rem 1rem;
     box-shadow: 0 0 59px 0 rgb(0 0 0 / 15%), inset 0 0 15px 0 rgb(9 16 28 / 18%);
     -moz-box-shadow: 0 0 59px 0 rgba(0, 0, 0, 0.15), inset 0 0 15px 0 rgba(9, 16, 28, 0.18);
     -webkit-box-shadow: 0 0 59px 0 rgb(0 0 0 / 15%), inset 0 0 15px 0 rgb(9 16 28 / 18%);

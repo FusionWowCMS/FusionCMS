@@ -34,7 +34,7 @@
 /* Popup box: Links
 /*---------------------------------------------------------------*/
 .popup-box .popup-links {
-	margin: 1rem 0 0 0;
+	margin: 1rem 0 0;
 	text-align: center;
 }
 
@@ -103,7 +103,7 @@
 
 .popup-login .popup-content table tbody tr td input[type='text'],
 .popup-login .popup-content table tbody tr td input[type='password'] {
-	margin: 0 0 2rem 0;
+	margin: 0 0 2rem;
 }
 
 .popup-login .popup-content table tbody tr td a {
@@ -136,6 +136,6 @@
 	}
 
 	.popup-login .popup-content table + table button {
-		margin: 0 0 1rem 0;
+		margin: 0 0 1rem;
 	}
 }

@@ -117,7 +117,7 @@ a:active {
 	border-left: 1px solid #3A3A3A;
 	box-shadow: 1px 3px 0 1px #CCCCCC;
 	height: 50px;
-	margin: -40px -40px 40px -40px;
+	margin: -40px -40px 40px;
 	padding: 0;
 }
 
@@ -345,7 +345,7 @@ a:active {
 	}
 
 	html.boxed .content-body {
-		border-radius: 0 0 5px 0;
+		border-radius: 0 0 5px;
 	}
 
 	html.boxed .sidebar-right {
@@ -364,7 +364,7 @@ a:active {
 	}
 
 	html.boxed.sidebar-right-opened .header {
-		border-radius: 5px 0 0 0;
+		border-radius: 5px 0 0;
 	}
 
 	html.boxed.sidebar-right-opened .content-body {
@@ -375,7 +375,7 @@ a:active {
 		bottom: 20px;
 		position: absolute;
 		top: 25px;
-		border-radius: 0 5px 5px 5px;
+		border-radius: 0 5px 5px;
 	}
 }
 /* Layout Boxed - larger or equal min width */
@@ -619,7 +619,7 @@ a:active {
 @media only screen and (min-width: 768px) {
 	.content-with-menu {
 		border-top: 110px solid transparent;
-		margin: -150px -40px -53px -40px;
+		margin: -150px -40px -53px;
 		min-height: 100vh;
 	}
 
@@ -682,7 +682,7 @@ a:active {
 	html.fixed .inner-menu-toggle {
 		position: absolute;
 		top: 114px;
-		border-radius: 0 0 5px 0;
+		border-radius: 0 0 5px;
 		width: 140px;
 		z-index: 1002;
 	}
@@ -733,7 +733,7 @@ a:active {
 	html.boxed .inner-menu-toggle {
 		position: absolute;
 		top: 0;
-		border-radius: 0 0 5px 0;
+		border-radius: 0 0 5px;
 		width: 140px;
 		z-index: 3;
 	}
@@ -1320,7 +1320,7 @@ a:active {
 
 .sidebar-left hr.separator {
 	background: none;
-	margin: 20px 10px 20px;
+	margin: 20px 10px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -2321,7 +2321,7 @@ html.sidebar-right-opened .page-header .sidebar-right-toggle i:before {
 
 	.page-header h2 {
 		font-size: 16px;
-		padding: 0 15px 0;
+		padding: 0 15px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -2390,9 +2390,9 @@ html.has-tab-navigation {
 }
 
 html.has-tab-navigation .content-body {
-	padding: 25px 25px;
+	padding: 25px;
 	background-color: #eee;
-	border-radius: 0 7px 7px 7px;
+	border-radius: 0 7px 7px;
 	transition: ease padding 300ms;
 	/* Only for desktop */;
 }
@@ -2425,7 +2425,7 @@ html.has-tab-navigation .page-header {
 	background-color: transparent;
 	border: none;
 	box-shadow: none;
-	padding: 0 0 10px 0;
+	padding: 0 0 10px;
 }
 
 html.has-tab-navigation .page-header .breadcrumbs a,
@@ -3068,7 +3068,7 @@ html.boxed.no-overflowscrolling.custom-scroll .inner-menu .nano > .nano-content 
 
 .inner-menu hr.separator {
 	background-image: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.4), transparent);
-	margin: 20px -35px 20px;
+	margin: 20px -35px;
 }
 
 .inner-menu a,
@@ -3079,8 +3079,8 @@ html.boxed.no-overflowscrolling.custom-scroll .inner-menu .nano > .nano-content 
 .inner-menu a.menu-item {
 	color: #abb4be;
 	display: block;
-	margin: 0 -35px 0 -35px;
-	padding: 10px 50px 10px 50px;
+	margin: 0 -35px;
+	padding: 10px 50px;
 	text-decoration: none;
 }
 
@@ -3188,7 +3188,7 @@ html.sidebar-light:not(.dark) .inner-menu .inner-menu-toggle-inside > a {
 }
 
 .inner-menu-toggle-inside {
-	margin: -35px -35px 15px -35px;
+	margin: -35px -35px 15px;
 }
 
 .inner-menu-toggle-inside .inner-menu-collapse i {
@@ -3487,7 +3487,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 	}
 
 	.header-nav-main nav > ul > li > a.dropdown-toggle:after {
-		border-color: #CCC transparent transparent transparent;
+		border-color: #CCC transparent transparent;
 		border-style: solid;
 		border-width: 4px;
 		content: " ";
@@ -3510,7 +3510,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 		border: 0;
 		border-top: 5px solid #CCC;
 		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
-		margin: -3px 0 0 0;
+		margin: -3px 0 0;
 		min-width: 200px;
 		padding: 5px;
 		text-align: left;
@@ -3712,7 +3712,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 	}
 
 	.header-nav.header-nav-dark-dropdown nav > ul > li > a.dropdown-toggle:after {
-		border-color: #444 transparent transparent transparent;
+		border-color: #444 transparent transparent;
 	}
 
 	.header-nav.header-nav-dark-dropdown nav > ul > li.dropdown li a {
@@ -3770,7 +3770,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 	}
 
 	.header-nav-main.header-nav-main-light nav > ul > li > a.dropdown-toggle:after {
-		border-color: #FFF transparent transparent transparent;
+		border-color: #FFF transparent transparent;
 	}
 
 	.header-nav-main.header-nav-main-light nav > ul > li.show > a, .header-nav-main.header-nav-main-light nav > ul > li:hover > a {
@@ -3778,7 +3778,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 	}
 
 	.header-nav-main.header-nav-main-light nav > ul > li.show > a.dropdown-toggle:after, .header-nav-main.header-nav-main-light nav > ul > li:hover > a.dropdown-toggle:after {
-		border-color: #CCC transparent transparent transparent;
+		border-color: #CCC transparent transparent;
 	}
 
 	.header-nav-main.header-nav-main-light nav > ul > li.show > .dropdown-menu, .header-nav-main.header-nav-main-light nav > ul > li:hover > .dropdown-menu {
@@ -3795,7 +3795,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 	}
 
 	.header-nav-main.header-nav-main-light nav > ul > li.active > a.dropdown-toggle:after {
-		border-color: #CCC transparent transparent transparent;
+		border-color: #CCC transparent transparent;
 	}
 
 	.header-nav-main.header-nav-main-light .dropdown-menu > li > a:hover, .header-nav-main.header-nav-main-light .dropdown-menu > li > a:focus {
@@ -3897,7 +3897,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 	background-image: linear-gradient(#F6F6F6 60%, #EDEDED);
 	display: inline-block;
 	height: 100%;
-	margin: 0 25px 0;
+	margin: 0 25px;
 	width: 1px;
 	vertical-align: middle;
 }
@@ -4080,7 +4080,7 @@ html.header-dark .header .separator {
 	}
 
 	.header.header-nav-menu .header-nav-main nav > ul > li > a.dropdown-toggle:after {
-		border-color: #CCC transparent transparent transparent;
+		border-color: #CCC transparent transparent;
 		border-style: solid;
 		border-width: 4px;
 		content: " ";
@@ -4103,7 +4103,7 @@ html.header-dark .header .separator {
 		border: 0;
 		border-top: 5px solid #CCC;
 		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
-		margin: -3px 0 0 0;
+		margin: -3px 0 0;
 		min-width: 200px;
 		padding: 5px;
 		text-align: left;
@@ -4305,7 +4305,7 @@ html.header-dark .header .separator {
 	}
 
 	.header.header-nav-menu .header-nav.header-nav-dark-dropdown nav > ul > li > a.dropdown-toggle:after {
-		border-color: #444 transparent transparent transparent;
+		border-color: #444 transparent transparent;
 	}
 
 	.header.header-nav-menu .header-nav.header-nav-dark-dropdown nav > ul > li.dropdown li a {
@@ -4363,7 +4363,7 @@ html.header-dark .header .separator {
 	}
 
 	.header.header-nav-menu .header-nav-main.header-nav-main-light nav > ul > li > a.dropdown-toggle:after {
-		border-color: #FFF transparent transparent transparent;
+		border-color: #FFF transparent transparent;
 	}
 
 	.header.header-nav-menu .header-nav-main.header-nav-main-light nav > ul > li.show > a, .header.header-nav-menu .header-nav-main.header-nav-main-light nav > ul > li:hover > a {
@@ -4371,7 +4371,7 @@ html.header-dark .header .separator {
 	}
 
 	.header.header-nav-menu .header-nav-main.header-nav-main-light nav > ul > li.show > a.dropdown-toggle:after, .header.header-nav-menu .header-nav-main.header-nav-main-light nav > ul > li:hover > a.dropdown-toggle:after {
-		border-color: #CCC transparent transparent transparent;
+		border-color: #CCC transparent transparent;
 	}
 
 	.header.header-nav-menu .header-nav-main.header-nav-main-light nav > ul > li.show > .dropdown-menu, .header.header-nav-menu .header-nav-main.header-nav-main-light nav > ul > li:hover > .dropdown-menu {
@@ -4388,7 +4388,7 @@ html.header-dark .header .separator {
 	}
 
 	.header.header-nav-menu .header-nav-main.header-nav-main-light nav > ul > li.active > a.dropdown-toggle:after {
-		border-color: #CCC transparent transparent transparent;
+		border-color: #CCC transparent transparent;
 	}
 
 	.header.header-nav-menu .header-nav-main.header-nav-main-light .dropdown-menu > li > a:hover, .header.header-nav-menu .header-nav-main.header-nav-main-light .dropdown-menu > li > a:focus {
@@ -4746,7 +4746,7 @@ html.header-dark .header .separator {
 	}
 
 	.header.header-nav-menu.header-nav-stripe nav > ul > li > a.dropdown-toggle:after {
-		border-color: #444 transparent transparent transparent;
+		border-color: #444 transparent transparent;
 	}
 
 	.header.header-nav-menu.header-nav-stripe nav > ul > li:hover > a {
@@ -4790,11 +4790,11 @@ html.header-dark .header .separator {
 	}
 
 	.header.header-nav-menu.header-nav-top-line nav > ul > li.active > a.dropdown-toggle:after, .header.header-nav-menu.header-nav-top-line nav > ul > li:hover > a.dropdown-toggle:after {
-		border-color: #CCC transparent transparent transparent;
+		border-color: #CCC transparent transparent;
 	}
 
 	.header.header-nav-menu.header-nav-top-line nav > ul > li > a.dropdown-toggle:after {
-		border-color: #444 transparent transparent transparent;
+		border-color: #444 transparent transparent;
 	}
 
 	.header.header-nav-menu.header-nav-top-line nav > ul > li.dropdown:hover > a, .header.header-nav-menu.header-nav-top-line nav > ul > li.dropdown.show > a {
@@ -4975,7 +4975,7 @@ html.header-dark .header.header-nav-menu {
 	html.dark .header.header-nav-menu.header-nav-stripe .header-nav-main nav > ul > li:not(.active):not(:hover) > a.dropdown-toggle::after, html.dark .header.header-nav-menu.header-nav-top-line .header-nav-main nav > ul > li:not(.active):not(:hover) > a.dropdown-toggle::after,
 	html.header-dark .header.header-nav-menu.header-nav-stripe .header-nav-main nav > ul > li:not(.active):not(:hover) > a.dropdown-toggle::after,
 	html.header-dark .header.header-nav-menu.header-nav-top-line .header-nav-main nav > ul > li:not(.active):not(:hover) > a.dropdown-toggle::after {
-		border-color: #FFF transparent transparent transparent;
+		border-color: #FFF transparent transparent;
 	}
 }
 
@@ -6372,7 +6372,7 @@ html.sidebar-light:not(.dark) ul.nav-main li .nav-children li a:hover, html.side
 }
 
 .accordion.accordion-lg .card-header a {
-	padding: 15px 15px;
+	padding: 15px;
 	font-size: 1em;
 	font-weight: 600;
 }
@@ -7145,13 +7145,13 @@ html.sidebar-light:not(.dark) ul.nav-main li .nav-children li a:hover, html.side
 .btn-dark:active, .btn-dark.active, .show > .btn-dark.dropdown-toggle {
 	background-color: #040404;
 	background-image: none;
-	border-color: black black black;
+	border-color: black;
 }
 
 .show > .btn-dark.dropdown-toggle {
 	background-color: #040404;
 	background-image: none;
-	border-color: black black black;
+	border-color: black;
 }
 
 /* Gradient */
@@ -8326,7 +8326,6 @@ html .card-dark .card-title {
 }
 
 .owl-carousel.show-nav-title .owl-nav button[class*="owl-"], .owl-carousel.show-nav-title .owl-nav button[class*="owl-"]:hover, .owl-carousel.show-nav-title .owl-nav button[class*="owl-"]:active {
-	font-size: 18px;
 	background: transparent !important;
 	width: 18px;
 	font-size: 18px;
@@ -8369,8 +8368,8 @@ html .card-dark .card-title {
 
 .owl-carousel.nav-bottom-inside .owl-nav {
 	position: relative;
-	margin: -68.8px 0 0 0;
-	margin: -4.3rem 0 0 0;
+	margin: -68.8px 0 0;
+	margin: -4.3rem 0 0;
 	padding: 0;
 	width: auto;
 }
@@ -8473,7 +8472,7 @@ html .card-dark .card-title {
 .carousel-areas {
 	background: transparent url(../img/patterns/stripes.png) repeat 0 0;
 	margin-bottom: -10px;
-	padding: 10px 10px 0 10px;
+	padding: 10px 10px 0;
 	border-radius: 6px 6px 0 0;
 }
 
@@ -9364,7 +9363,7 @@ html:not(.sidebar-light) .datepicker.datepicker-dark table tbody tr td.day.new:h
 }
 
 .datepicker.datepicker-primary table thead tr:first-child th:first-child {
-	border-radius: 4px 0 0 0;
+	border-radius: 4px 0 0;
 }
 
 .datepicker.datepicker-primary table thead tr:first-child th:last-child {
@@ -9415,19 +9414,19 @@ hr {
 	border: 0;
 	height: 1px;
 	background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-	margin: 22px 0 22px 0;
+	margin: 22px 0;
 }
 
 hr.short {
-	margin: 11px 0 11px 0;
+	margin: 11px 0;
 }
 
 hr.tall {
-	margin: 44px 0 44px 0;
+	margin: 44px 0;
 }
 
 hr.taller {
-	margin: 66px 0 66px 0;
+	margin: 66px 0;
 }
 
 hr.light {
@@ -11375,7 +11374,7 @@ html.dark .form-bordered .form-group {
 }
 
 .form-group-vertical .input-group:last-child .form-control, .form-group-vertical .input-group:last-of-type .form-control {
-	border-radius: 0 0 4px 0;
+	border-radius: 0 0 4px;
 }
 
 .form-group-vertical .input-group.input-group-icon:first-child .form-control, .form-group-vertical .input-group.input-group-icon:first-of-type .form-control {
@@ -11452,7 +11451,7 @@ input[type="checkbox"].checkbox-style-1:checked {
 	position: absolute;
 	top: 50%;
 	left: 3px;
-	margin: -6px 0 0 0;
+	margin: -6px 0 0;
 	z-index: 2;
 	cursor: pointer;
 }
@@ -11651,7 +11650,7 @@ html.dark .checkbox-text-dark input[type="checkbox"]:checked + label:after,
 	position: absolute;
 	top: 50%;
 	left: 3px;
-	margin: -6px 0 0 0;
+	margin: -6px 0 0;
 	z-index: 2;
 	cursor: pointer;
 }
@@ -11876,8 +11875,8 @@ html.dark .radio-dark input[type="radio"]:checked + label:after,
 .validation-message ul {
 	display: none;
 	list-style: none;
-	margin: -20px -20px 30px -20px;
-	padding: 20px 20px 10px 20px;
+	margin: -20px -20px 30px;
+	padding: 20px 20px 10px;
 	border-bottom: 1px solid #FFCBCB;
 	background: #FFEFEF;
 }
@@ -12040,7 +12039,7 @@ label.error {
 /* Google Maps */
 @media only screen and (max-width: 767px) {
 	#gmap {
-		margin: -40px -15px 0 -15px;
+		margin: -40px -15px 0;
 	}
 
 	html.mobile-device #gmap {
@@ -12070,7 +12069,7 @@ label.error {
 }
 
 .list-markers p {
-	margin: 0 0 2px 0;
+	margin: 0 0 2px;
 	padding: 3px 55px 3px 0;
 	overflow: hidden;
 	white-space: nowrap;
@@ -13569,7 +13568,7 @@ html.dark .show-grid [class*="col"] {
 }
 /* Filters Sidebar Wrapper */
 .filters-sidebar-wrapper {
-	padding: 30px 15px 30px;
+	padding: 30px 15px;
 	box-shadow: 0px 0px 37px -36px rgba(0, 0, 0, 0.4);
 }
 
@@ -13741,7 +13740,7 @@ html.dark .show-grid [class*="col"] {
 
 .modal-text h1, .modal-text h2, .modal-text h3, .modal-text h4, .modal-text h5, .modal-text h6 {
 	padding: 0;
-	margin: -7px 0 4px 0;
+	margin: -7px 0 4px;
 }
 
 .modal-block-primary .fa, .modal-block-primary .fab, .modal-block-primary .fal, .modal-block-primary .far, .modal-block-primary .fas {
@@ -14074,9 +14073,7 @@ ul.nav-list.primary > li a {
 .dd-empty {
 	margin: 5px 0;
 	padding: 0;
-	min-height: 30px;
 	background: #f2fbff;
-	border: 1px dashed #b6bcbf;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	border: 1px dashed #bbb;
@@ -14160,7 +14157,7 @@ html.dark .dd-handle:hover {
 	font-size: 10px;
 	font-weight: normal;
 	height: 16px;
-	padding: 3px 5px 3px 5px;
+	padding: 3px 5px;
 	position: absolute;
 	right: -8px;
 	top: -3px;
@@ -14175,7 +14172,7 @@ html.dark .dd-handle:hover {
 .notifications .notification-menu {
 	border: none;
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-	margin: 10px 0 0 0;
+	margin: 10px 0 0;
 	padding: 0;
 	right: -5px !important;
 	top: 9px;
@@ -14361,7 +14358,6 @@ html.header-dark .notifications .notification-menu hr {
 	}
 
 	.notifications > li .notification-menu {
-		left: 15px;
 		top: auto;
 		width: 94vw !important;
 		left: 50% !important;
@@ -14822,7 +14818,7 @@ body .ui-pnotify.icon-nb .notification .ui-pnotify-icon > span {
 
 .pricing-table ul {
 	list-style: none;
-	margin: 20px 0 0 0;
+	margin: 20px 0 0;
 	padding: 0;
 }
 
@@ -14837,7 +14833,7 @@ body .ui-pnotify.icon-nb .notification .ui-pnotify-icon > span {
 	border-radius: 2px 2px 0 0;
 	font-size: 1.3em;
 	font-weight: normal;
-	margin: -20px -20px 50px -20px;
+	margin: -20px -20px 50px;
 	padding: 20px;
 }
 
@@ -14988,7 +14984,6 @@ body .ui-pnotify.icon-nb .notification .ui-pnotify-icon > span {
 	background: #666;
 	color: #FFF;
 	font-family: "Poppins", Arial, sans-serif;
-	font-size: 600;
 	box-shadow: none;
 	width: 100%;
 	font-size: 1.5em;
@@ -15504,7 +15499,6 @@ html.dark .select2-container--bootstrap .select2-search--dropdown .select2-searc
 .sidebar-widget .widget-header .btn-widget-act {
 	position: relative;
 	top: -2px;
-	border-color: #0a0a0a;
 	background-color: #0a0a0a;
 	border-color: #0a0a0a black black;
 }
@@ -15741,7 +15735,6 @@ html.dark .select2-container--bootstrap .select2-search--dropdown .select2-searc
 
 /* Sidebar Light */
 html.sidebar-light:not(.dark) .sidebar-widget .widget-header .btn-widget-act {
-	border-color: #f2f2f2;
 	background-color: #f2f2f2;
 	border-color: #e6e6e6;
 	color: #777;
@@ -16475,7 +16468,7 @@ html.dark .table .actions-hover a {
 
 /* Bottom Tabs */
 .tabs.tabs-bottom {
-	margin: 0 0 20px 0;
+	margin: 0 0 20px;
 	padding: 0;
 }
 
@@ -16573,7 +16566,7 @@ html.dark .table .actions-hover a {
 }
 
 .tabs-left .tab-content {
-	border-radius: 0 5px 5px 5px;
+	border-radius: 0 5px 5px;
 	border-left: none;
 }
 
@@ -16582,7 +16575,7 @@ html.dark .table .actions-hover a {
 }
 
 .tabs-left .nav-tabs > li:first-child .nav-link {
-	border-radius: 5px 0 0 0;
+	border-radius: 5px 0 0;
 }
 
 .tabs-left .nav-tabs > li:last-child .nav-link {
@@ -16627,7 +16620,7 @@ html.dark .table .actions-hover a {
 }
 
 .tabs-right .nav-tabs > li:last-child .nav-link {
-	border-radius: 0 0 5px 0;
+	border-radius: 0 0 5px;
 	border-bottom: 1px solid #eee;
 }
 
@@ -16661,7 +16654,7 @@ html.dark .table .actions-hover a {
 
 .nav-tabs.nav-justified li:first-child .nav-link,
 .nav-tabs.nav-justified li:first-child .nav-link:hover {
-	border-radius: 5px 0 0 0;
+	border-radius: 5px 0 0;
 }
 
 .nav-tabs.nav-justified li:last-child .nav-link,
@@ -16720,7 +16713,7 @@ html.dark .table .actions-hover a {
 
 .tabs.tabs-bottom .nav.nav-tabs.nav-justified li:last-child .nav-link {
 	margin-right: 0;
-	border-radius: 0 0 5px 0;
+	border-radius: 0 0 5px;
 }
 
 .tabs.tabs-bottom .nav.nav-tabs.nav-justified li.active .nav-link,
@@ -17165,7 +17158,7 @@ html.dark .bootstrap-timepicker-widget table td input {
 
 .toggle.toggle-lg .toggle > label {
 	font-size: 1.1em;
-	padding: 16px 20px 16px 20px;
+	padding: 16px 20px;
 }
 
 .toggle.toggle-lg .toggle > .toggle-content > p {
@@ -17176,7 +17169,6 @@ html.dark .bootstrap-timepicker-widget table td input {
 	border-radius: 0;
 	border: 0;
 	background: transparent;
-	color: #777;
 	padding-left: 32px;
 	margin-bottom: -10px;
 	font-size: 1em;
@@ -17443,8 +17435,8 @@ html.dark body .jstree-default .jstree-icon {
 /* Blockquotes */
 blockquote {
 	border-left: 5px solid #eee;
-	margin: 0 0 16px 0;
-	margin: 0 0 1rem 0;
+	margin: 0 0 16px;
+	margin: 0 0 1rem;
 	padding: 8px 16px;
 	padding: 0.5rem 1rem;
 	font-size: 1em;
@@ -17703,7 +17695,7 @@ p.drop-caps.drop-caps-style-2:first-letter {
 
 	.userbox .dropdown-menu {
 		left: -5px !important;
-		padding: 43px 0 0 0;
+		padding: 43px 0 0;
 	}
 }
 /* Header Dark - Userbox */
@@ -17765,7 +17757,7 @@ html.header-dark .userbox .dropdown-menu a {
 	font-weight: 700;
 	left: 0;
 	letter-spacing: -1px;
-	padding: 9px 11px 9px;
+	padding: 9px 11px;
 	position: absolute;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 	text-transform: uppercase;
@@ -17786,7 +17778,7 @@ html.header-dark .userbox .dropdown-menu a {
 	font-size: 12px;
 	font-weight: 400;
 	letter-spacing: 0;
-	margin: 8px -2px -15px -2px;
+	margin: 8px -2px -15px;
 	padding: 2px 9px;
 	text-transform: none;
 }
@@ -20389,7 +20381,7 @@ html.boxed .mailbox .mailbox-email-list .nano .nano-content {
 .mailbox .mailbox-email .mailbox-email-header {
 	background: #FFF;
 	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
-	margin: -40px -40px 0 -40px;
+	margin: -40px -40px 0;
 	padding: 30px;
 }
 
@@ -20456,7 +20448,7 @@ html.boxed .mailbox .mailbox-email-list .nano .nano-content {
 }
 /* Mailbox Compose */
 .mailbox-compose {
-	margin: -20px -40px 0 -40px;
+	margin: -20px -40px 0;
 	padding: 0 15px;
 }
 
@@ -20492,7 +20484,7 @@ html.boxed .mailbox .mailbox-email-list .nano .nano-content {
 
 @media only screen and (max-width: 767px) {
 	.mailbox-compose {
-		margin: -20px -15px 0 -15px;
+		margin: -20px -15px 0;
 	}
 
 	.mailbox-compose .compose {

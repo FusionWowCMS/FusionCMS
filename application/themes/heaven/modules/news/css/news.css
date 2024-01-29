@@ -325,7 +325,7 @@
 
 /* Info (buttons) */
 .page-news .item.type-news.-md .item-info .info-buttons {
-	margin: auto 0 0 0;
+	margin: auto 0 0;
 	text-align: left;
 }
 
@@ -508,7 +508,7 @@
 	/*---------------------------------------------------------------*/
 	.page-news .item.type-news.-full .item-body {
 		margin: 0;
-		padding: 5rem 0 0 0;
+		padding: 5rem 0 0;
 	}
 }
 

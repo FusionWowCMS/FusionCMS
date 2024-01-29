@@ -573,7 +573,7 @@ input[type='submit'][disabled] {
 /*---------------------------------------------------------------*/
 .page_form label {
 	color: #929eaf;
-	margin: 0 0 0.5rem 0;
+	margin: 0 0 0.5rem;
 	font-size: 1.125rem !important;
 	font-weight: 600;
 	font-family: var(--font-family-secondary);
@@ -602,7 +602,7 @@ input[type='submit'][disabled] {
 
 .page_form table tbody tr td label {
 	width: 100%;
-	margin: 1rem 0 0.5rem 0;
+	margin: 1rem 0 0.5rem;
 	display: block;
 	white-space: nowrap;
 }
@@ -610,7 +610,7 @@ input[type='submit'][disabled] {
 /* Page form: Center
 /*---------------------------------------------------------------*/
 .page_form table + center {
-	margin: 1rem 0 0 0 !important;
+	margin: 1rem 0 0 !important;
 }
 
 .input-group-text {

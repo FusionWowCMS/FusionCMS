@@ -130,7 +130,7 @@ input[type="radio"] {
     border-radius: 3px;
     color: #fff;
     line-height: 1;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px;
     text-align: center;
     font-weight: bold;
     margin-right: 7px;
@@ -281,7 +281,7 @@ input[type="radio"] {
 
 .realm {
     font-size: 1rem;
-    margin: 0px auto 0px auto;
+    margin: 0px auto;
     margin-bottom: 5px;
     margin-top: 5px;
 }

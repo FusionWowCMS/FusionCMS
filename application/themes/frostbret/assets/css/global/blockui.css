@@ -53,7 +53,7 @@
 	position: absolute;
 	border-width: 2px;
 	border-style: solid;
-	border-color: transparent #fff transparent #fff;
+	border-color: transparent #fff;
 	border-radius: 50%;
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
@@ -73,7 +73,7 @@
 	position: absolute;
 	border-width: 2px;
 	border-style: solid;
-	border-color: #bde2fa transparent #bde2fa transparent;
+	border-color: #bde2fa transparent;
 	border-radius: 50%;
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
