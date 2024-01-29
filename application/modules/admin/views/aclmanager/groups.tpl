@@ -180,20 +180,10 @@
 		
 		<div id="roles">
 			{foreach from=$modules key=name item=module}
-				{if $module.db || $module.manifest}
+				{if $module.manifest}
 					<div class="role_module">
 						<h3>{ucfirst($module.name)}</h3>
 						<table class="table table-responsive-md table-hover">
-							{if $module.db}
-								{foreach from=$module.db item=role}
-									<tr>
-										<td width="5%" style="text-align:center;"><input type="checkbox" name="{$name}-{$role.name}" id="{$name}-{$role.name}"></td>
-										<td width="25%">Custom role: <label for="{$name}-{$role.name}" style="display:inline;border:none;font-weight:bold;">{$role.name}</label></td>
-										<td style="font-size:10px;">{$role.description}</td>
-									</tr>
-								{/foreach}
-							{/if}
-							
 							{if $module.manifest}
 								{foreach from=$module.manifest key=roleName item=role}
 									<tr>

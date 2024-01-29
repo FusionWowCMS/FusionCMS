@@ -36,7 +36,7 @@ class Aclmanager extends MX_Controller
      */
     public function groups()
     {
-        $data = array(
+        $data = [
             "groups" => $this->acl_model->getGroups(),
             "modules" => $this->getAllRoles(),
             "guestId" => $this->config->item('default_guest_group'),
@@ -44,7 +44,7 @@ class Aclmanager extends MX_Controller
             "links" => $this->cms_model->getLinks("all"),
             "sideboxes" => $this->cms_model->getSideboxes(),
             "pages" => $this->cms_model->getPages()
-        );
+        ];
 
         if ($data['groups']) {
             foreach ($data['groups'] as $k => $v) {
@@ -79,16 +79,16 @@ class Aclmanager extends MX_Controller
         $this->administrator->setTitle($group['name']);
 
         // Prepare my data
-        $data = array(
+        $data = [
             "group" => $group,
-            "modules" => $this->getAllRoles(),
+            "modules" => $this->getAllRoles($id),
             "members" => $this->acl_model->getGroupMembers($id),
             "guestId" => $this->config->item('default_guest_group'),
             "playerId" => $this->config->item('default_player_group'),
             "links" => $this->cms_model->getLinks("all"),
             "sideboxes" => $this->cms_model->getSideboxes(),
             "pages" => $this->cms_model->getPages()
-        );
+        ];
 
         // Links
         foreach ($data['links'] as $key => $value) {
@@ -110,7 +110,7 @@ class Aclmanager extends MX_Controller
             // Database roles
             if ($data['modules'][$key]['db']) {
                 foreach ($data['modules'][$key]['db'] as $subKey => $subValue) {
-                    $data['modules'][$key]['db'][$subKey]['has'] = $this->acl_model->groupHasRole($id, $subValue['name'], $key);
+                    $data['modules'][$key]['db'][$subKey]['has'] = $this->acl_model->groupHasRole($id, $subValue['role_name'], $key);
                 }
             }
 
@@ -293,54 +293,6 @@ class Aclmanager extends MX_Controller
         $this->acl_model->removeGroupFromUser($groupId, $accountId);
     }
 
-    // --- Role related methods ---
-
-    /**
-     * Manage the roles
-     */
-    public function roles()
-    {
-        $data = array(
-            "modules" => $this->getAllRoles()
-        );
-
-        $output = $this->template->loadPage("aclmanager/roles.tpl", $data);
-
-        $output = $this->administrator->box("<a href='" . pageURL . "admin/aclmanager'>User groups &amp; permissions</a> &rarr; Roles", $output);
-
-        $this->administrator->view($output, "modules/admin/css/aclmanager.css", "modules/admin/js/roles.js");
-    }
-
-    /**
-     * Delete a role
-     *
-     * @param Int $id
-     */
-    public function roleDelete($id)
-    {
-        requirePermission("deletePermissions");
-
-        $this->acl_model->deleteRole($id);
-    }
-
-    /**
-     * Create a role
-     */
-    public function roleCreate()
-    {
-        requirePermission("addPermissions");
-    }
-
-    /**
-     * Save a role
-     *
-     * @param Int $id
-     */
-    public function roleSave($id)
-    {
-        requirePermission("editPermissions");
-    }
-
     // --- User related methods ---
 
     /**
@@ -364,14 +316,14 @@ class Aclmanager extends MX_Controller
      *
      * @return Array
      */
-    private function getAllRoles()
+    private function getAllRoles($group = 0)
     {
-        $modules = array();
-        $dangerLevel = array(
+        $modules = [];
+        $dangerLevel = [
             3 => "#A11500", // Owner actions
             2 => "#DF5500", // Admin actions
             1 => "#A11D73" // Moderator actions
-        );
+        ];
 
         foreach (glob("application/modules/*") as $module) {
             if (is_dir($module)) {
@@ -392,7 +344,7 @@ class Aclmanager extends MX_Controller
                         }
                     }
 
-                    $modules[$module]['db'] = $this->acl_model->getRolesByModule($module);
+                    $modules[$module]['db'] = $this->acl_model->getRolesByModule($module, $group);
                 }
             }
         }

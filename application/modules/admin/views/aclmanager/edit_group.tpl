@@ -166,9 +166,9 @@
 						{if $module.db}
 							{foreach from=$module.db item=role}
 								<tr>
-									<td width="5%" style="text-align:center;"><input class="form-check-input" type="checkbox" name="{$name}-{$role.name}" id="{$name}-{$role.name}" {if $role.has}checked="checked"{/if}></td>
-									<td width="25%">Custom role: <label for="{$name}-{$role.name}" style="display:inline;border:none;font-weight:bold;">{$role.name}</label></td>
-									<td style="font-size:10px;">{$role.description}</td>
+									<td width="5%" style="text-align:center;"><input class="form-check-input" type="checkbox" name="{$name}-{$role.role_name}" id="{$name}-{$role.role_name}" {if $role.has}checked="checked"{/if}></td>
+									<td width="25%">Custom role: <label for="{$name}-{$role.role_name}" style="display:inline;border:none;font-weight:bold;">{$role.role_name}</label></td>
+									<td style="font-size:10px;">{$role.module}</td>
 								</tr>
 							{/foreach}
 						{/if}

@@ -261,23 +261,6 @@ class Acl_model extends CI_Model
     }
 
     /**
-     * Get all the roles
-     *
-     * @return Array
-     */
-    public function getRoles()
-    {
-        $this->db->select('name, module, description');
-        $query = $this->db->get('acl_roles');
-
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Check if a group has a specific role
      *
      * @param  Int $id
@@ -299,71 +282,17 @@ class Acl_model extends CI_Model
     }
 
     /**
-     * Get the role by the given id.
-     *
-     * @param  String $name
-     * @param  String $module
-     * @return Array
-     */
-    public function getRole($name, $module)
-    {
-        $this->db->select('name, module, description');
-        $this->db->where('name', $name);
-        $this->db->where('module', $module);
-        $query = $this->db->get('acl_roles');
-
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-
-            return $result[0];
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Get the roles that match the given groupId
-     *
-     * @param  Int $groupId
-     * @param  String $moduleName
-     * @return Array
-     */
-    public function getRolesByGroupId($groupId, $moduleName)
-    {
-        $this->db->select("ar.name, ar.module, ar.description");
-        $this->db->where("agr.group_id", $groupId);
-
-        if ($moduleName) {
-            $this->db->where("agr.module", $moduleName);
-        }
-
-        $this->db->where("agr.module = ar.module");
-        $this->db->where("agr.role_name = ar.name");
-        $query = $this->db->get('acl_group_roles agr, acl_roles ar');
-
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-
-            return $result;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Get the database roles for a module
      *
      * @param  String $moduleName
      * @return Array
      */
-    public function getRolesByModule($moduleName)
+    public function getRolesByModule($moduleName, $groupId)
     {
-        $query = $this->db->query("SELECT * FROM acl_roles WHERE module=?", array($moduleName));
+        $query = $this->db->query("SELECT * FROM acl_group_roles WHERE module = ? AND group_id = ?", [$moduleName, $groupId]);
 
         if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-
-            return $result;
+            return $query->result_array();
         } else {
             return false;
         }
@@ -383,22 +312,6 @@ class Acl_model extends CI_Model
     }
 
     /**
-     * Create a role
-     *
-     * @param String $name
-     * @param String $description
-     */
-    public function createRole($name, $description = '')
-    {
-        $data = array(
-            'name' => $name,
-            'description' => $description
-        );
-
-        $this->db->insert('acl_roles', $data);
-    }
-
-    /**
      * Delete the group with the given id
      *
      * @param Int $groupId
@@ -406,17 +319,6 @@ class Acl_model extends CI_Model
     public function deleteGroup($groupId)
     {
         $this->db->delete('acl_groups', array('id' => $groupId));
-    }
-
-    /**
-     * Delete the role with the given id
-     *
-     * @param String $name
-     * @param String $module
-     */
-    public function deleteRole($name, $module)
-    {
-        $this->db->delete('acl_roles', array('name' => $name, 'module' => $module));
     }
 
     /**
@@ -538,18 +440,6 @@ class Acl_model extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->update('acl_groups', $data);
-    }
-
-    /**
-     * Save the role
-     *
-     * @param Int $id
-     * @param Array $data
-     */
-    public function saveRole($id, $data)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('acl_roles', $data);
     }
 
     /**

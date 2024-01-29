@@ -362,17 +362,6 @@ INSERT INTO `acl_groups` (`id`, priority, `name`, `color`, `description`) VALUES
 (8, 8, 'Owner', '#ae1600', 'This is the owner of the server.');
 
 -- ----------------------------
--- Table structure for acl_roles
--- ----------------------------
-DROP TABLE IF EXISTS `acl_roles`;
-CREATE TABLE `acl_roles`  (
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `module` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '',
-  PRIMARY KEY (`name`, `module`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
-
--- ----------------------------
 -- Table structure for article_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `article_tag`;
