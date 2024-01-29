@@ -24,11 +24,6 @@ class Mangos_three implements Emulator
     protected $console;
 
     /**
-     * Emulator support Totp
-     */
-    protected $hasTotp = false;
-
-    /**
      * Array of table names
      */
     protected $tables = array(
@@ -250,16 +245,6 @@ class Mangos_three implements Emulator
     public function hasStats()
     {
         return $this->hasStats;
-    }
-
-    /**
-     * Emulator support Totp
-     *
-     * @return Boolean
-     */
-    public function hasTotp()
-    {
-        return $this->hasTotp;
     }
 
     /**

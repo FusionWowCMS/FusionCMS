@@ -50,6 +50,8 @@ var Memory = (function()
 			// Auth config (config/auth.php)
 			'realmd_rbac',
 			'realmd_battle_net',
+			'realmd_totp_secret',
+			'realmd_totp_secret_name',
 			'realmd_account_encryption',
 			'realmd_battle_net_encryption'
 		]

@@ -75,6 +75,26 @@
 							</div>
 							<p class="col-sm-12 col-form-label"><span style='color: #f00;'>SRP6 (V1 / V2):</span> Select this for most modern emulators (with <b>salt</b> and <b>verifier</b> columns in <b>auth.battlenet_accounts table</b>).<br/><span style='color: #f00;'>SPH:</span> Select this for aged emulators (with <b>sha_pass_hash</b> column in <b>auth.battlenet_accounts</b> table).</p>
 						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Totp secret</label>
+							<div class="col-sm-10">
+								<select onchange="console.log($('[totp_secret_name]')[this.value == 'true' ? 'show' : 'hide']())" id="totp_secret" class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3">
+									<option value="false" {if $config.totp_secret == false}selected{/if}>No</option>
+									<option value="true" {if $config.totp_secret == true}selected{/if}>Yes</option>
+								</select>
+							</div>
+							<p class="col-sm-12 col-form-label">Set yes for emulators that auth.account table has <b>token_key</b> or <b>totp_secret</b> column.</p>
+						</div>
+						<div class="form-group row" {if $config.totp_secret == false}style="display: none;"{/if} totp_secret_name>
+							<label class="col-sm-2 col-form-label">Totp secret field name</label>
+							<div class="col-sm-10">
+								<select id="totp_secret_name" class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3">
+									<option value="token_key" {if $config.totp_secret_name == 'token_key'}selected{/if}>token_key</option>
+									<option value="totp_secret" {if $config.totp_secret_name == 'totp_secret'}selected{/if}>totp_secret</option>
+								</select>
+							</div>
+							<p class="col-sm-12 col-form-label"><span style='color: #f00;'>totp_secret:</span> Select this for most modern emulators (with <b>totp_secret</b> column in <b>auth.account table</b>).<br/><span style='color: #f00;'>token_key:</span> Select this for aged emulators (with <b>token_key</b> column in <b>auth.account</b> table).</p>
+						</div>
 						<button class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit">Save</button>
 					</form>
 				</div>

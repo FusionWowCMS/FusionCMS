@@ -26,11 +26,6 @@ class Vmangos implements Emulator
     protected $console;
 
     /**
-     * Emulator support Totp
-     */
-    protected $hasTotp = true;
-
-    /**
      * Array of table names
      */
     protected $tables = array(
@@ -63,7 +58,6 @@ class Vmangos implements Emulator
             "last_login"   => "last_login",
             "expansion"    => "expansion",
             "sessionkey"   => "sessionkey",
-            "totp_secret"  => "token_key"
         ),
 
         "account_banned" => array(
@@ -253,16 +247,6 @@ class Vmangos implements Emulator
     public function hasStats()
     {
         return $this->hasStats;
-    }
-
-    /**
-     * Emulator support Totp
-     *
-     * @return Boolean
-     */
-    public function hasTotp()
-    {
-        return $this->hasTotp;
     }
 
     /**

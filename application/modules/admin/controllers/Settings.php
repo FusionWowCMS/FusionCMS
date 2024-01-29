@@ -90,6 +90,8 @@ class Settings extends MX_Controller
         $config['rbac'] = $this->config->item('rbac');
         $config['battle_net'] = $this->config->item('battle_net');
         $config['battle_net_encryption'] = $this->config->item('battle_net_encryption');
+        $config['totp_secret'] = $this->config->item('totp_secret');
+        $config['totp_secret_name'] = $this->config->item('totp_secret_name');
 
         // Prepare my data
         $data = array(

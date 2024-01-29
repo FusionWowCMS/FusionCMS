@@ -114,10 +114,13 @@ class Install
 
 	private function checkAuthConfig()
 	{
-        $fields = ['realmd_account_encryption', 'realmd_rbac', 'realmd_battle_net'];
+        $fields = ['realmd_account_encryption', 'realmd_rbac', 'realmd_battle_net', 'realmd_totp_secret', 'realmd_totp_secret_name'];
 
         if(!empty($_POST['realmd_battle_net']) && $_POST['realmd_battle_net'] == 'true')
             $fields[] = 'realmd_battle_net_encryption';
+
+        if(!empty($_POST['realmd_totp_secret']) && $_POST['realmd_totp_secret'] == 'true')
+            $fields[] = 'realmd_totp_secret_name';
 
         // Make sure auth-settings-fields are filled
         foreach($fields as $field)
@@ -180,11 +183,16 @@ class Install
         $data = [
             'rbac'                  => $_POST['realmd_rbac'],
             'battle_net'            => $_POST['realmd_battle_net'],
+            'totp_secret'           => $_POST['realmd_totp_secret'],
+            'totp_secret_name'      => $_POST['realmd_totp_secret_name'],
             'account_encryption'    => $_POST['realmd_account_encryption']
         ];
 
         if(!empty($_POST['realmd_battle_net']) && $_POST['realmd_battle_net'] == 'true')
             $data['battle_net_encryption'] = $_POST['realmd_battle_net_encryption'];
+
+        if(!empty($_POST['realmd_totp_secret']) && $_POST['realmd_totp_secret'] == 'true')
+            $data['realmd_totp_secret_name'] = $_POST['realmd_totp_secret_name'];
 
 		foreach($data as $key => $value)
 			$config->set($key, $value);

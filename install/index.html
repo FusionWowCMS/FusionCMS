@@ -550,6 +550,28 @@
 															</select>
 														</div>
 													</div>
+													<div class="col-span-12">
+														<p class="font-sans text-s font-normal leading-normal text-muted-400">{{totp_secret}}</p>
+														<p class="font-sans text-xs font-normal leading-normal text-muted-500">{{totp_secret_detail}}</p>
+														<div class="group/nui-input relative">
+															<select onchange="console.log($('[totp_secret_name]')[this.value == 'true' ? 'show' : 'hide']())" id="realmd_totp_secret" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option selected disabled hidden>{{totp_secret}}</option>
+																<option value="false">{{no}}</option>
+																<option value="true">{{yes}}</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-span-12" style="display: none;" totp_secret_name>
+														<p class="font-sans text-s font-normal leading-normal text-muted-400">{{totp_secret_name}}</p>
+														<p class="font-sans text-xs font-normal leading-normal text-muted-500">{{totp_secret_name_detail}}</p>
+														<div class="group/nui-input relative">
+															<select id="realmd_totp_secret_name" class="nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer/input relative w-full border bg-white pe-12 ps-4 font-sans text-sm leading-5 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 rounded-xl">
+																<option selected disabled hidden>{{totp_secret_name}}</option>
+																<option value="token_key">token_key</option>
+																<option value="totp_secret">totp_secret</option>
+															</select>
+														</div>
+													</div>
 												</div>
 											</fieldset>
 										</form>

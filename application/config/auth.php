@@ -18,3 +18,7 @@ $config['rbac'] = true;
 $config['battle_net'] = true;
 
 $config['battle_net_encryption'] = "SPH"; // SRP6_V2, SRP6_V1, SPH
+
+$config['totp_secret'] = true;
+
+$config['totp_secret_name'] = "token_key"; // token_key, totp_secret

@@ -26,11 +26,6 @@ class Trinity_cata implements Emulator
     protected $console;
 
     /**
-     * Emulator support Totp
-     */
-    protected $hasTotp = true;
-
-    /**
      * Array of table names
      */
     protected $tables = array(
@@ -65,7 +60,6 @@ class Trinity_cata implements Emulator
             "v"               => "v",
             "s"               => "s",
             "sessionkey"      => "sessionkey",
-            "totp_secret"     => "token_key"
         ),
 
         "account_access" => array(
@@ -274,16 +268,6 @@ class Trinity_cata implements Emulator
     }
 
     /**
-     * Emulator support Totp
-     *
-     * @return Boolean
-     */
-    public function hasTotp()
-    {
-        return $this->hasTotp;
-    }
-
-    /**
      * Send mail via ingame mail to a specific character
      *
      * @param String $character
@@ -420,16 +404,5 @@ class Trinity_cata implements Emulator
         } catch (Exception $e) {
             die("Something went wrong! An administrator has been noticed and will send your order as soon as possible.<br /><br /><b>Error:</b> <br />" . $e->getMessage() . ($realm ? '<br/><br/><b>Realm:</b> <br />' . $realm->getName() : ''));
         }
-    }
-
-    /**
-     * set secret totp
-     *
-     * @param $account_id
-     * @param $secret
-     */
-    public function setTotp($account_id, $secret): void
-    {
-        CI::$APP->external_account_model->getConnection()->query('UPDATE '.table('account').' SET '.column('account', 'totp_secret').' = ? WHERE id = ?', array($secret, $account_id));
     }
 }

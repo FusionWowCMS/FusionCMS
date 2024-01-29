@@ -319,6 +319,8 @@ var Ajax = {
 				// Auth config (config/auth.php)
 				realmd_rbac: $('#realmd_rbac').val(),
 				realmd_battle_net: $('#realmd_battle_net').val(),
+				realmd_totp_secret: $('#realmd_totp_secret').val(),
+				realmd_totp_secret_name: $('#realmd_totp_secret_name').val(),
 				realmd_account_encryption: $('#realmd_account_encryption').val(),
 				realmd_battle_net_encryption: $('#realmd_battle_net_encryption').val()
 			};

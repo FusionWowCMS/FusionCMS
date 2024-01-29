@@ -524,7 +524,7 @@ class User
     public function setTotpSecret(string $secret, int $userId = 0): void
     {
         if ($userId)
-            $this->CI->realms->getEmulator()->setTotp($userId, $secret);
+            $this->CI->external_account_model->getConnection()->query('UPDATE '.table('account').' SET ' . $this->CI->config->item('totp_secret_name') . ' = ? WHERE id = ?', [$secret, $userId]);
 
         $this->CI->session->set_userdata('totp_secret', $secret);
     }

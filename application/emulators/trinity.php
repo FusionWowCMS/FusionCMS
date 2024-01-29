@@ -32,11 +32,6 @@ class Trinity implements Emulator
     protected $console;
 
     /**
-     * Emulator support Totp
-     */
-    protected $hasTotp = true;
-
-    /**
      * Array of table names
      */
     protected $tables = array(
@@ -68,7 +63,6 @@ class Trinity implements Emulator
             'last_ip'       => 'last_ip',
             'last_login'    => 'last_login',
             'expansion'     => 'expansion',
-            'totp_secret'   => 'totp_secret'
         ),
 
         'account_access' => array(
@@ -279,16 +273,6 @@ class Trinity implements Emulator
     }
 
     /**
-     * Emulator support Totp
-     *
-     * @return Boolean
-     */
-    public function hasTotp()
-    {
-        return $this->hasTotp;
-    }
-
-    /**
      * Send console command
      *
      * @param String $command
@@ -425,16 +409,5 @@ class Trinity implements Emulator
             die('Something went wrong! An administrator has been noticed and will send your order as soon as possible.<br/><br/>
                 <b>Error:</b> <br/>' . $e->getMessage()); // @note this isn't dev friendly and make impossible to catch errors
         }
-    }
-
-    /**
-     * set secret totp
-     *
-     * @param $account_id
-     * @param $secret
-     */
-    public function setTotp($account_id, $secret): void
-    {
-        CI::$APP->external_account_model->getConnection()->query('UPDATE '.table('account').' SET '.column('account', 'totp_secret').' = ? WHERE id = ?', array($secret, $account_id));
     }
 }

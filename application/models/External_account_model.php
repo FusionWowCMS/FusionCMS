@@ -64,6 +64,7 @@ class External_account_model extends CI_Model
         $this->connect();
 
         $encryption = $this->config->item('account_encryption');
+        $totp_secret_name = $this->config->item('totp_secret_name');
 
         if (preg_match("/^cmangos/i", get_class($this->realms->getEmulator()))) {
             if (!$where) {
@@ -84,6 +85,8 @@ class External_account_model extends CI_Model
                     unset($columns[column('account', 'sha_pass_hash')]);
                 }
             }
+
+            $columns['totp_secret'] = $totp_secret_name == 'totp_secret' ? 'totp_secret' : 'token_key';
 
             if (!$where) {
                 $query = $this->connection->query('SELECT ' . formatColumns($columns) . ' FROM ' . table('account') . ' WHERE ' . column('account', 'id') . ' = ?', [$this->session->userdata('uid')]);
