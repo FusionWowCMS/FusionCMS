@@ -39,10 +39,10 @@ class Security extends MX_Controller
 
         $data = array(
             "module" => "default",
-            "headline" => breadcumb(array(
+            "headline" => breadcrumb([
                             "ucp" => lang("ucp"),
                             "ucp/security" => lang("account_security", "ucp")
-                        )),
+            ]),
             "content" => $this->template->loadPage("security.tpl", $settings_data)
         );
 

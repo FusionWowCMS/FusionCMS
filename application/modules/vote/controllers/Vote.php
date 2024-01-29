@@ -43,10 +43,10 @@ class Vote extends MX_Controller
         // Load the topsite page and format the page contents
         $data = array(
             "module" => "default",
-            "headline" => breadcumb(array(
+            "headline" => breadcrumb([
                             "ucp" => lang("ucp"),
                             "vote" => lang("vote_panel", "vote")
-                        )),
+            ]),
             "content" => $output
         );
 

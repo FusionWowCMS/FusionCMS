@@ -37,7 +37,10 @@ class Item extends MX_Controller
 
         $data3 = array(
             "module" => "default",
-            "headline" => "<span style='cursor:pointer;' onClick='window.location=\"" . $this->template->page_url . "armory\"'>" . lang("armory", "item") . "</span> &rarr; " . $itemName,
+            "headline" => breadcrumb([
+                "armory" => lang("armory", "item"),
+                uri_string() => $itemName
+            ]),
             "content" => $content
         );
 

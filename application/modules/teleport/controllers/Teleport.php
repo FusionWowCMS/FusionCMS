@@ -83,10 +83,10 @@ class Teleport extends MX_Controller
         //Load the page
         $page_data = array(
             "module" => "default",
-            "headline" => breadcumb(array(
+            "headline" => breadcrumb([
                             "ucp" => lang("ucp"),
                             "teleport" => lang("teleport_hub", "teleport")
-                        )),
+            ]),
             "content" => $page_content
         );
 

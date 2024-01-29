@@ -35,10 +35,10 @@ class Ip_banned extends MX_Controller
 
         $content = $this->template->loadPage('ip_banned.tpl', $data);
 
-        $output = $this->template->box(breadcumb(array(
+        $output = $this->template->box(breadcrumb([
             "gm" => lang("gm_panel", "gm"),
             "gm/account_banned" => lang("banned_ip_list", "gm")
-            )), $content);
+            ]), $content);
 
 		$this->template->view($output, "modules/gm/css/gm.css", "modules/gm/js/gm.js");
 	}

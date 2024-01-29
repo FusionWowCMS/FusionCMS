@@ -23,10 +23,10 @@ class History extends MX_Controller
 
         $content = $this->template->loadPage('history.tpl', $data);
 
-        $output = $this->template->box(breadcumb(array(
+        $output = $this->template->box(breadcrumb([
             "gm" => lang("gm_panel", "gm"),
             "gm/history" => lang("history_list", "gm")
-        )), $content);
+        ]), $content);
 
         $this->template->view($output, "modules/gm/css/gm.css", "modules/gm/js/gm.js");
 	}

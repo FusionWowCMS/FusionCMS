@@ -417,7 +417,10 @@ class Character extends MX_Controller
 
                 $data = array(
                     "module" => "default",
-                    "headline" => "<span style='cursor:pointer;' data-tip='" . lang("view_profile", "character") . "' onClick='window.location=\"" . $this->template->page_url . "profile/" . $this->account . "\"'>" . $this->name,
+                    "headline" => breadcrumb([
+                        "profile/" . $this->account => lang("view_profile", "character"),
+                        uri_string() => $this->name
+                    ]),
                     "content" => $character
                 );
 

@@ -51,10 +51,10 @@ class Store extends MX_Controller
         // Load the topsite page and format the page contents
         $pageData = array(
             "module" => "default",
-            "headline" => breadcumb(array(
+            "headline" => breadcrumb([
                             "ucp" => lang("ucp"),
                             "store" => lang("item_store", "store")
-                        )),
+            ]),
             "content" => $content
         );
 

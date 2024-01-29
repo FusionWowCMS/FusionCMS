@@ -66,10 +66,10 @@ class Donate extends MX_Controller
         // Load the top site page and format the page contents
         $pageData = array(
             "module" => "default",
-            "headline" => breadcumb(array(
+            "headline" => breadcrumb([
                             "ucp" => lang("ucp"),
                             "donate" => lang("donate_panel", "donate")
-                        )),
+            ]),
             "content" => $output
         );
 
