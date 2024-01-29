@@ -199,8 +199,6 @@ class Aclmanager extends MX_Controller
                 $roleParts = explode("-", $role);
 
                 $this->acl_model->addRoleToGroup($id, $roleParts[1], $roleParts[0]);
-            } else {
-                // Unknown POST data
             }
         }
 
@@ -261,8 +259,6 @@ class Aclmanager extends MX_Controller
                 $roleParts = explode("-", $role);
 
                 $this->acl_model->addRoleToGroup($id, $roleParts[1], $roleParts[0]);
-            } else {
-                // Unknown POST data
             }
         }
 

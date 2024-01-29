@@ -125,18 +125,6 @@ class Errorlogs extends MX_Controller
                 $extra = (array_key_exists("extra", $prevLog)) ? $prevLog["extra"] : "";
                 $prevLog["extra"] = $extra . "<br>" . $log;
                 $superLog[count($superLog) - 1] = $prevLog;
-            } else {
-                //this means the file has content that are not logged
-                //using log_message()
-                //they may be sensitive! so we are just skipping this
-                //other we could have just insert them like this
-//               array_push($superLog, [
-//                   "level" => "INFO",
-//                   "date" => "",
-//                   "icon" => $$levelsIcon["INFO"],
-//                   "class" => $$levelClasses["INFO"],
-//                   "content" => $log
-//               ]);
             }
         }
 
