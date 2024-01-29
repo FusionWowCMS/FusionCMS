@@ -85,7 +85,7 @@ class Edit extends MX_Controller
     private function loadConfigs()
     {
         foreach (glob("application/modules/" . $this->module . "/config/*") as $file) {
-            if ($file == 'application/modules/' . $this->module . '/config/' . 'routes.php')
+            if ($file == 'application/modules/' . $this->module . '/config/routes.php')
                 continue;
 
             $this->getConfig($file);
