@@ -4,9 +4,9 @@ use MX\MX_Controller;
 
 class Cachemanager extends MX_Controller
 {
-    private $itemMatches;
-    private $minifyMatches;
-    private $websiteMatches;
+    private array $itemMatches;
+    private array $minifyMatches;
+    private array $websiteMatches;
 
     public function __construct()
     {
@@ -66,7 +66,7 @@ class Cachemanager extends MX_Controller
         die($output);
     }
 
-    private function countItemCache()
+    private function countItemCache(): array
     {
         // Define our result
         $result = [
@@ -81,7 +81,7 @@ class Cachemanager extends MX_Controller
         return $this->SearchCache($matches, $result);
     }
 
-    private function countThemeMinifyCache()
+    private function countThemeMinifyCache(): array
     {
         // Define our result
         $result = [
@@ -96,7 +96,7 @@ class Cachemanager extends MX_Controller
         return $this->SearchCache($matches, $result);
     }
 
-    private function countWebsiteCache()
+    private function countWebsiteCache(): array
     {
         // Define our result
         $result = [
@@ -111,7 +111,7 @@ class Cachemanager extends MX_Controller
         return $this->SearchCache($matches, $result);
     }
 
-    private function formatSize($size)
+    private function formatSize($size): string
     {
         if ($size < 1024) {
             return $size . " B";
@@ -128,7 +128,7 @@ class Cachemanager extends MX_Controller
     {
         requirePermission("emptyCache");
 
-        if (!$type || !in_array($type, ['item', 'website', 'theme', 'all'])) {
+        if (!in_array($type, ['item', 'website', 'theme', 'all'])) {
             die();
         } else {
             switch ($type) {
@@ -154,7 +154,7 @@ class Cachemanager extends MX_Controller
                     foreach ($this->itemMatches as $match) {
                         $this->cache->delete($match);
                     }
-                    foreach ($this->minifyMatches as $match) {
+                    foreach ($this->websiteMatches as $match) {
                         $this->cache->delete($match);
                     }
                     foreach ($this->minifyMatches as $match) {
