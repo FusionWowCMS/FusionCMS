@@ -62,6 +62,7 @@ use Plugins;
 use Realm;
 use Realms;
 use Recaptcha;
+use Smarty;
 use Template;
 use User;
 use World_model;
@@ -162,6 +163,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property Recaptcha $recaptcha               Recaptcha Class
  * @property Template $template                 Template Class
  * @property User $user                         User Class
+ * @property Smarty $smarty                     Smarty Class
  *  **************** Fusion CMS *****************
  * @property Acl_model $acl_model               Acl_model Class
  * @property Characters_model $characters_model Characters_model Class
