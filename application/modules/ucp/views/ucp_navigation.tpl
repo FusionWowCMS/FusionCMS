@@ -50,7 +50,7 @@
 		<div class="list-group">
 			<a href="{$url}ucp" class="list-group-item list-group-item-action {if $link_active == 'ucp'}active{/if}">Account Overview</a>
 			{if hasPermission('canUpdateAccountSettings', 'ucp')}<a href="{$url}ucp/settings" class="list-group-item list-group-item-action {if $link_active == 'settings'}active{/if}">{lang("account_settings", "main")}</a>{/if}
-			{if $CI->realms->getEmulator()->hasTotp()}<a href="{$url}ucp/security" class="list-group-item list-group-item-action {if $link_active == 'security'}active{/if}">{lang("account_security", "main")}</a>{/if}
+			{if $CI->config->item('totp_secret')}<a href="{$url}ucp/security" class="list-group-item list-group-item-action {if $link_active == 'security'}active{/if}">{lang("account_security", "main")}</a>{/if}
 		</div>
 		
 		{* <div class="list-group mt-3">
