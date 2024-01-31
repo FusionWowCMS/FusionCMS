@@ -261,7 +261,7 @@ class Settings extends MX_Controller
         $fusionConfig = new ConfigEditor("application/config/captcha.php");
 
         $fusionConfig->set('use_captcha', ($this->input->post('captcha') == 'disabled') ? false : true);
-        $fusionConfig->set('captcha_type', ($this->input->post('captcha') == 'recaptcha') ? 'recaptcha' : 'inbuilt');
+        $fusionConfig->set('captcha_type', $this->input->post('captcha'));
         $fusionConfig->set('recaptcha_theme', $this->input->post('recaptcha_theme'));
         $fusionConfig->set('recaptcha_site_key', $this->input->post('recaptcha_site_key'));
         $fusionConfig->set('recaptcha_secret_key', $this->input->post('recaptcha_secret_key'));
