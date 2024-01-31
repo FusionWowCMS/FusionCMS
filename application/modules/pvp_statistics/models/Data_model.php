@@ -20,34 +20,9 @@ class Data_model extends CI_Model
         }
 
         switch ($this->emuStr) {
-            case 'trinity':
-            case 'trinity_df':
-            case 'trinity_wotlkclassic':
-            case 'trinity_sl':
-            case 'trinity_legion':
-            case 'trinity_cata':
-            case 'azerothcore':
-            case 'skyfire':
-            {
-                $statements = [
-                    'TopArenaTeams' => "SELECT `arenaTeamId` AS arenateamid, `rating`, `rank`, `name`, `captainGuid` AS captain, `type` FROM `arena_team` WHERE `type` = ? ORDER BY rating DESC LIMIT ?;",
-                    'TeamMembers' => "SELECT 
-                                    `arena_team_member`.`arenaTeamId` AS arenateamid, 
-                                    `arena_team_member`.`guid` AS guid, 
-                                    `arena_team_member`.`personalRating` AS rating,
-                                    `arena_team_member`.`seasonGames` AS games,
-                                    `arena_team_member`.`seasonWins` AS wins,
-                                    `characters`.`name` AS name,
-                                    `characters`.`class` AS class,
-                                    `characters`.`level` AS level
-                                FROM `arena_team_member` 
-                                RIGHT JOIN `characters` ON `characters`.`guid` = `arena_team_member`.`guid` 
-                                WHERE `arena_team_member`.`arenateamid` = ? ORDER BY guid ASC;",
-                    'TopHKPlayers' => "SELECT `guid`, `name`, `level`, `race`, `class`, `gender`, `totalKills` AS kills FROM `characters` WHERE `totalKills` > 0 ORDER BY `totalKills` DESC LIMIT ?;"
-                ];
-                break;
-            }
             case 'cmangos':
+            case 'mangos_three':
+            case 'mangos_one_two':
             {
                 $statements = [
                     'TopArenaTeams' => "SELECT `arena_team`.`arenateamid` AS arenateamid, 
@@ -65,6 +40,26 @@ class Data_model extends CI_Model
                                     `arena_team_member`.`personal_rating` AS rating,
                                     `arena_team_member`.`played_season` AS games,
                                     `arena_team_member`.`wons_season` AS wins,
+                                    `characters`.`name` AS name,
+                                    `characters`.`class` AS class,
+                                    `characters`.`level` AS level
+                                FROM `arena_team_member` 
+                                RIGHT JOIN `characters` ON `characters`.`guid` = `arena_team_member`.`guid` 
+                                WHERE `arena_team_member`.`arenateamid` = ? ORDER BY guid ASC;",
+                    'TopHKPlayers' => "SELECT `guid`, `name`, `level`, `race`, `class`, `gender`, `totalKills` AS kills FROM `characters` WHERE `totalKills` > 0 ORDER BY `totalKills` DESC LIMIT ?;"
+                ];
+                break;
+            }
+            default:
+            {
+                $statements = [
+                    'TopArenaTeams' => "SELECT `arenaTeamId` AS arenateamid, `rating`, `rank`, `name`, `captainGuid` AS captain, `type` FROM `arena_team` WHERE `type` = ? ORDER BY rating DESC LIMIT ?;",
+                    'TeamMembers' => "SELECT 
+                                    `arena_team_member`.`arenaTeamId` AS arenateamid, 
+                                    `arena_team_member`.`guid` AS guid, 
+                                    `arena_team_member`.`personalRating` AS rating,
+                                    `arena_team_member`.`seasonGames` AS games,
+                                    `arena_team_member`.`seasonWins` AS wins,
                                     `characters`.`name` AS name,
                                     `characters`.`class` AS class,
                                     `characters`.`level` AS level
