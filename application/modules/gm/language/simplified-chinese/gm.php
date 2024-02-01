@@ -1,0 +1,56 @@
+<?php
+
+$lang['invalid'] = "Invalid values";
+$lang['message_too_long'] = "Message is too long. Must be under 8000 characters.";
+$lang['kick'] = "Kick a player";
+$lang['ban'] = "封禁账户";
+$lang['ticket'] = "Ticket";
+$lang['time'] = "Time";
+$lang['message'] = "Message";
+$lang['by'] = "by";
+$lang['view'] = "View";
+$lang['hide'] = "Hide";
+$lang['close'] = "Close ticket";
+$lang['answer'] = "Answer";
+$lang['unstuck'] = "Unstuck";
+$lang['send_item'] = "Send item";
+$lang['no_tickets'] = "No tickets";
+$lang['account_name'] = "Account name";
+$lang['ban_reason'] = "Ban reason";
+$lang['account'] = "Account";
+$lang['has_been_banned'] = "has been banned";
+$lang['character_name'] = "Character name";
+$lang['character_has_been_kicked'] = "Character has been kicked";
+$lang['close_ticket'] = "Are you sure you want to close this ticket?";
+$lang['close_short'] = "Close";
+$lang['ban_short'] = "Ban";
+$lang['kick_short'] = "Kick";
+$lang['send'] = "Send";
+$lang['mail_sent'] = "Mail has been sent";
+$lang['teleported'] = "The character has been teleported";
+$lang['must_be_offline'] = "The character must be offline";
+$lang['item_sent'] = "Item has been sent";
+
+$lang['table_command_rank'] = "Rank";
+$lang['table_command'] = "Command";
+$lang['table_help'] = "Help";
+
+$lang['ticket_list'] = "Ticket list";
+$lang['ban_list'] = "Ban list";
+$lang['history_list'] = "History";
+$lang['banned_account_list'] = "Banned accounts list";
+$lang['banned_ip_list'] = "Banned ip list";
+$lang['gm_panel'] = "GM Panel";
+$lang['banned_account_list_active'] = "Banned accounts active";
+$lang['banned_account_list_expired'] = "Banned accounts expired";
+$lang['ip'] = "IP";
+$lang['ban_ip'] = "Ban an ip";
+$lang['no_data'] = "There is no data";
+$lang['day'] = "Day";
+$lang['gm'] = "GM";
+$lang['action'] = "Action";
+$lang['type'] = "Type";
+$lang['affected'] = "Affected";
+$lang['banned_at'] = "Banned at";
+$lang['unbanned_at'] = "Unbanned at";
+$lang['banned_by'] = "Banned By";
