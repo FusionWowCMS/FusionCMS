@@ -10,7 +10,7 @@
 namespace Laizerox\Wowemu\SRP;
 
 use Exception;
-use phpseclib\Math\BigInteger;
+use phpseclib3\Math\BigInteger;
 
 abstract class Client
 {
@@ -71,7 +71,7 @@ abstract class Client
      * @param string|null $salt   User's salt
      * @param array|null $options Various options for SRP Client
      */
-    public function __construct(string $identity, string $salt = null, array $options = null)
+    public function __construct(string $identity, ?string $salt = null, ?array $options = null)
     {
         $this->g = new BigInteger($options['g'] ?? '07', 16);
         $this->multiplier = new BigInteger('03', 16);
