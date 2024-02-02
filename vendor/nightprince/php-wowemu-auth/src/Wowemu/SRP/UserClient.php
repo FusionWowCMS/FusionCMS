@@ -10,7 +10,7 @@
 namespace Laizerox\Wowemu\SRP;
 
 use Exception;
-use phpseclib\Math\BigInteger;
+use phpseclib3\Math\BigInteger;
 use RuntimeException;
 
 class UserClient extends Client
