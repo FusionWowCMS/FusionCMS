@@ -14,7 +14,7 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
     public static $prefixLengthsPsr4 = array (
         'p' => 
         array (
-            'phpseclib\\' => 10,
+            'phpseclib3\\' => 11,
         ),
         'c' => 
         array (
@@ -29,6 +29,7 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
+            'ParagonIE\\ConstantTime\\' => 23,
         ),
         'M' => 
         array (
@@ -53,7 +54,7 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
     );
 
     public static $prefixDirsPsr4 = array (
-        'phpseclib\\' => 
+        'phpseclib3\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
@@ -76,6 +77,10 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'ParagonIE\\ConstantTime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
         'Monolog\\' => 
         array (

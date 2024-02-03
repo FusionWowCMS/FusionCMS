@@ -10,7 +10,7 @@
 namespace Laizerox\Wowemu\SRP;
 
 use Exception;
-use phpseclib\Math\BigInteger;
+use phpseclib3\Math\BigInteger;
 
 class HostClient extends Client
 {
@@ -33,7 +33,7 @@ class HostClient extends Client
         string $salt,
         string $verifier,
         string $clientPublicEphemeralValue,
-        array $options = null
+        ?array $options = null
     ) {
         $this->clientPublicEphemeralValue = new BigInteger($clientPublicEphemeralValue, 16);
         $this->verifier = new BigInteger($verifier, 16);
