@@ -32,7 +32,7 @@
 			<section class="card" id="auth_settings">
 				<div class="card-header"><p class="font-heading text-base font-medium leading-none text-white">Auth configuration <span style='color: #f00;'>(! important)</span></p><p class="font-sans text-xs font-normal leading-normal text-muted-400">Settings related to Realmd/Logon/Auth database and account password encryption.</p></div>
 				<div class="card-body">
-					<form role="form" onSubmit="Settings.saveWowDatabase(); return false">
+					<form role="form" onSubmit="Settings.saveAuthConfig(); return false">
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Account password encryption</label>
 							<div class="col-sm-10">

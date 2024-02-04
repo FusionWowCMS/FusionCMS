@@ -782,7 +782,7 @@ var Settings = {
 			$('#toggle_wowdb').fadeOut(300);
 	},
 
-	saveWowDatabase: function()
+	saveAuthConfig: function()
 	{
 		var values = {
 			account_encryption:$("#account_encryption").val(),
