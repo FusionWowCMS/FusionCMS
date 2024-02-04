@@ -247,10 +247,8 @@ class DotEnv
         {
             case array_key_exists($name, $_ENV):
                 return $_ENV[$name];
-                break;
             case array_key_exists($name, $_SERVER):
                 return $_SERVER[$name];
-                break;
             default:
                 $value = getenv($name);
 
