@@ -2,11 +2,6 @@
 
 class Guild_model extends CI_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function getGuild($realm, $guildId)
     {
         $realm = $this->realms->getRealm($realm);

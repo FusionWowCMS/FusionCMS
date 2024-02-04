@@ -5,11 +5,6 @@ class Armory_model extends CI_Model
     private $c_connection;
     private $w_connection;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-    
     public function get_items($searchString, $limit, $offset, $realmId = 1)
     {        
         //Connect to the world database

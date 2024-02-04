@@ -6,11 +6,6 @@ class Data_model extends CI_Model
     private $connection;
     private bool|string $emuStr = false;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function GetStatement($key): false|string
     {
         $statements = [];

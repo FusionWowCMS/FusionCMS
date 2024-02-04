@@ -6,11 +6,6 @@ class Top_model extends CI_Model
     private $connection;
     private $realmId = 1;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * Assign the realm object to the model
      */

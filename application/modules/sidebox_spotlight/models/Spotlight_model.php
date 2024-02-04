@@ -2,12 +2,6 @@
 
 class Spotlight_model extends CI_Model
 {
-    public function __construct()
-    {
-        // Call `CI_Model` construct
-        parent::__construct();
-    }
-
     public function getData()
     {
         // Prepare query

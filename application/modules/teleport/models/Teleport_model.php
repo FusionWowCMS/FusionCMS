@@ -2,11 +2,6 @@
 
 class Teleport_model extends CI_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function getTeleportLocations()
     {
         $query = $this->db->query("SELECT * FROM teleport_locations");
