@@ -26,8 +26,7 @@ class Guild_model extends CI_Model
         $query = $connection->query(query('get_guild_members', $realm->getId()), array($guildId));
 
         if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            return $result;
+            return $query->result_array();
         } else {
             return false;
         }
