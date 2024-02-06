@@ -73,8 +73,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Unit_test $unit                 Simple testing class
  * @property CI_Upload $upload                  File Uploading Class
  * @property UserAgent $agent                   Identifies the platform, browser, robot, or mobile device of the browsing agent
- * @property CI_Xmlrpc $xmlrpc                  XML-RPC request handler class
- * @property CI_Xmlrpcs $xmlrpcs                XML-RPC server class
  * @property CI_Zip $zip                        Zip Compression Class
  * **************** Fusion CMS LIBRARIES *****************
  * @property Acl $acl                           Acl Class
