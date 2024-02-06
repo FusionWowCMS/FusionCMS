@@ -12,7 +12,6 @@ use CI_DB_forge;
 use CI_DB_query_builder;
 use CI_DB_utility;
 use CI_Driver_Library;
-use CI_Email;
 use CI_Form_validation;
 use CI_FTP;
 use CI_Image_lib;
@@ -33,8 +32,6 @@ use CI_Unit_test;
 use CI_Upload;
 use CI_URI;
 use CI_Utf8;
-use CI_Xmlrpc;
-use CI_Xmlrpcs;
 use CI_Zip;
 use Cms_model;
 use CodeIgniter\Debug\Exceptions;
@@ -143,8 +140,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Unit_test $unit                 Simple testing class
  * @property CI_Upload $upload                  File Uploading Class
  * @property UserAgent $agent                   Identifies the platform, browser, robot, or mobile device of the browsing agent
- * @property CI_Xmlrpc $xmlrpc                  XML-RPC request handler class
- * @property CI_Xmlrpcs $xmlrpcs                XML-RPC server class
  * @property CI_Zip $zip                        Zip Compression Class
  * **************** Fusion CMS LIBRARIES *****************
  * @property Acl $acl                           Acl Class
@@ -173,7 +168,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property Logger_model $logger_model         Logger_model Class
  * @property World_model $world_model           World_model Class
  */
-#[AllowDynamicProperties]
+#[\AllowDynamicProperties]
 class MX_Controller
 {
     public $autoload = [];
@@ -189,38 +184,12 @@ class MX_Controller
         log_message('debug', $class . ' MX_Controller Initialized');
         MX_Modules::$registry[strtolower($class)] = $this;
 
-        //die(print_r(CI::$APP->template->getModuleData()));
-
-        //Get Module Name
-        $moduleName = $this->template->getModuleName();
-
-        //Get Module Data from Template Library
-        $module = CI::$APP->template->getModuleData();
-
-        // Is the module enabled?
-        if (!isset($module['enabled']) || !$module['enabled']) {
-            //CI::$APP->template->show404();
-            redirect("errors");
-        }
-
-        // Default to current version
-        if (!array_key_exists("min_required_version", $module)) {
-            $module['min_required_version'] = CI::$APP->config->item('FusionCMSVersion');
-        }
-
-        // Does the module got the correct version?
-        if (version_compare($module['min_required_version'], CI::$APP->config->item('FusionCMSVersion'), '>')) {
-            show_error("The module <b>" . strtolower($moduleName) . "</b> requires FusionCMS v" . $module['min_required_version'] . ", please update at https://github.com/FusionWowCMS/FusionCMS");
-        }
-
         /* copy a loader instance and initialize */
         $this->load = clone load_class('Loader');
         $this->load->initialize($this);
 
         /* autoload module items */
         $this->load->_autoloader($this->autoload);
-
-        $this->cookieLogIn();
     }
 
     /**
@@ -235,25 +204,5 @@ class MX_Controller
     public function __get($class)
     {
         return CI::$APP->$class;
-    }
-
-    public function cookieLogIn()
-    {
-        if (!CI::$APP->user->isOnline()) {
-            $username = CI::$APP->input->cookie("fcms_username");
-            $password = CI::$APP->input->cookie("fcms_password");
-
-            if ($password && $this->config->item('account_encryption') != 'SPH' && column('account', 'verifier') && column('account', 'salt')) { // Emulator Uses SRP6 Encryption.
-                $password = urldecode(preg_replace('~.(?:fcms_password=([^;]+))?~', '$1', @$_SERVER['HTTP_COOKIE'])); // Fix for HTTP_COOKIE Error.
-            }
-
-            if ($username && $password) {
-                $check = CI::$APP->user->setUserDetails($username, $password);
-
-                if ($check == 0 && strtolower(str_replace(CI::$APP->config->item('controller_suffix') ?? '', '', get_class($this))) !== 'api') {
-                    redirect('news');
-                }
-            }
-        }
     }
 }
