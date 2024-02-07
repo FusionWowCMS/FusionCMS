@@ -47,7 +47,7 @@ Events::on('post_controller_constructor', static function () {
         $username = CI::$APP->input->cookie("fcms_username");
         $password = CI::$APP->input->cookie("fcms_password");
 
-        if ($password && $this->config->item('account_encryption') != 'SPH' && column('account', 'verifier') && column('account', 'salt')) { // Emulator Uses SRP6 Encryption.
+        if ($password && CI::$APP->config->item('account_encryption') != 'SPH' && column('account', 'verifier') && column('account', 'salt')) { // Emulator Uses SRP6 Encryption.
             $password = urldecode(preg_replace('~.(?:fcms_password=([^;]+))?~', '$1', @$_SERVER['HTTP_COOKIE'])); // Fix for HTTP_COOKIE Error.
         }
 
