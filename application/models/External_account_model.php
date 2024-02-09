@@ -86,7 +86,9 @@ class External_account_model extends CI_Model
                 }
             }
 
-            $columns['totp_secret'] = $totp_secret_name == 'totp_secret' ? 'totp_secret' : 'token_key';
+            if ($this->config->item('totp_secret')) {
+                $columns['totp_secret'] = $totp_secret_name == 'totp_secret' ? 'totp_secret' : 'token_key';
+            }
 
             if (!$where) {
                 $query = $this->connection->query('SELECT ' . formatColumns($columns) . ' FROM ' . table('account') . ' WHERE ' . column('account', 'id') . ' = ?', [$this->session->userdata('uid')]);
