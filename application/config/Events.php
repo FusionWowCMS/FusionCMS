@@ -54,7 +54,7 @@ Events::on('post_controller_constructor', static function () {
         if ($username && $password) {
             $check = CI::$APP->user->setUserDetails($username, $password);
 
-            if ($check == 0 && strtolower(str_replace(CI::$APP->config->item('controller_suffix') ?? '', '', get_class($this))) !== 'api') {
+            if ($check == 0 && strtolower(str_replace(CI::$APP->config->item('controller_suffix') ?? '', '', CI::$APP->router->fetch_module())) !== 'api') {
                 redirect('news');
             }
         }
