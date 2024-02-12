@@ -148,7 +148,8 @@ class Skyfire implements Emulator
             "spellCritPct"  => "spellCritPct",
             "attackPower"   => "attackPower",
             "spellPower"    => "spellPower",
-            "resilience"    => "resilience"
+            "resilience"    => "resilience",
+            'mastery'       => 'mastery'
         ),
 
         "guild" => array(

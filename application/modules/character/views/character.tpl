@@ -131,6 +131,20 @@
 					<td class="text-end">{if isset($stats.attackPower)}{$stats.attackPower}{else}{lang("unknown", "character")}{/if}</td>
 				</tr>
 				{/if}
+
+				{if $stats && array_key_exists("mastery", $stats)}
+				<tr>
+					<td>{lang("mastery", "character")}</td>
+					<td class="text-end">{if isset($stats.mastery)}{$stats.mastery}{else}{lang("unknown", "character")}{/if}</td>
+				</tr>
+				{/if}
+
+				{if $stats && array_key_exists("versatility", $stats)}
+				<tr>
+					<td>{lang("versatility", "character")}</td>
+					<td class="text-end">{if isset($stats.versatility)}{$stats.versatility}{else}{lang("unknown", "character")}{/if}</td>
+				</tr>
+				{/if}
 			</table>
 			
 			<table class="table table-striped table-hover">

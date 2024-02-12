@@ -158,7 +158,9 @@ class Trinity_df implements Emulator
             'spellCritPct'  => 'spellCritPct',
             'attackPower'   => 'attackPower',
             'spellPower'    => 'spellPower',
-            'resilience'    => 'resilience'
+            'resilience'    => 'resilience',
+            'mastery'       => 'mastery',
+            'versatility'   => 'versatility'
         ),
 
         'guild' => array(
