@@ -190,11 +190,6 @@ class Cmangos implements Emulator
     public function __construct($config)
     {
         $this->config = $config;
-
-        // Make sure it's loaded
-        if (!extension_loaded('gmp')) {
-            show_error('GMP extension is not enabled.');
-        }
     }
 
     /**

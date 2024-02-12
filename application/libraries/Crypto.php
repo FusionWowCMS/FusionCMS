@@ -5,6 +5,13 @@ use MX\CI;
 
 class Crypto
 {
+    public function __construct()
+    {
+        if (!extension_loaded('gmp')) { // make sure it's loaded
+            show_error('GMP extension is not enabled.');
+        }
+    }
+
     /**
      * Creates a hash of the password we enter
      *

@@ -202,10 +202,6 @@ class Trinity_df implements Emulator
     public function __construct($config)
     {
         $this->config = $config;
-
-        if (!extension_loaded('gmp')) { // make sure it's loaded
-            show_error('GMP extension is not enabled.');
-        }
     }
 
     /**
