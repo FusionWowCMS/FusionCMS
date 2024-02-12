@@ -131,6 +131,7 @@ class Trinity_sl implements Emulator
             'class'                   => 'class',
             'subclass'                => 'subclass',
             "enchantments"            => "enchantments",
+            'transmogrification'      => 'transmogrification',
         ),
 
         'character_stats' => array(

@@ -125,6 +125,7 @@ class Skyfire implements Emulator
             "class"                   => "class",
             "subclass"                => "subclass",
             "enchantments"            => "enchantments",
+            'transmogrification'      => 'transmogrifyId'
         ),
 
         "character_stats" => array(

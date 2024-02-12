@@ -133,6 +133,7 @@ class Trinity_legion implements Emulator
             'class'                   => 'class',
             'subclass'                => 'subclass',
             "enchantments"            => "enchantments",
+            'transmogrification'      => 'transmogrification',
         ),
 
         'character_stats' => array(
