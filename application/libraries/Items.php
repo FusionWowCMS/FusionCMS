@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Services;
+use MX\CI;
 
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
@@ -198,13 +199,25 @@ class Items
                 if ($query->num_rows() > 0) {
                     $row = $query->result_array()[0];
 
+                    $data = [
+                         'item' => $this->getItemDataFromWorldDB($row)
+                    ];
+
+                    $row['htmlTooltip'] = CI::$APP->smarty->view(CI::$APP->template->view_path . "tooltip.tpl", $data, true);
+
                     // check if item is on Wowhead
                     $item_wowhead = $this->getItemWowHead($item, $realm, 'all', false);
 
                     if ($item_wowhead) {
                         $row['icon'] = $item_wowhead['icon'];
-                        $row['displayId'] = $item_wowhead['displayid'];
-                        $row['htmlTooltip'] = $item_wowhead['htmlTooltip'];
+
+                        if (!array_key_exists('displayId', $row)) {
+                            $row['displayId'] = $item_wowhead['displayid'];
+                        }
+
+                        if (!array_key_exists('htmlTooltip', $row)) {
+                            $row['htmlTooltip'] = $item_wowhead['htmlTooltip'];
+                        }
                     } else {
                         $row['icon'] = 'inv_misc_questionmark';
                     }
@@ -216,7 +229,7 @@ class Items
                         'displayid' => $row['displayid'],
                         'htmlTooltip' => $row['htmlTooltip'],
                         'name' => $row['name'],
-                        'icon' => isset($row['icon']) ? $row['icon'] : 'inv_misc_questionmark',
+                        'icon' => $row['icon'],
                         default => $row,
                     };
                 } else {
@@ -226,6 +239,298 @@ class Items
                     return false;
                 }
             }
+        }
+    }
+
+    /**
+     * Gather all data item needed
+     */
+    private function getItemDataFromWorldDB($itemDB)
+    {
+        // Assign them
+        $bind = lang("bind", "wow_tooltip");
+        $slots = lang("slots", "wow_tooltip");
+        $damages = lang("damages", "wow_tooltip");
+
+        // No item was found
+        if (!$itemDB || $itemDB == "empty") {
+            return lang("unknown_item", "tooltip");
+        }
+
+        $flags = $this->getFlags($itemDB['Flags']);
+
+        $item['name'] = $itemDB['name'];
+
+        // Support custom colors
+        if (preg_match("/\|cff/", $itemDB['name'])) {
+            while (preg_match("/\|cff/", $item['name'])) {
+                $item['name'] = preg_replace("/\|cff([A-Za-z0-9]{6})(.*)(\|cff)?/", '<span style="color:#$1;">$2</span>', $item['name']);
+            }
+        }
+
+        $item['quality'] = $itemDB['Quality'];
+        $item['bind'] = $bind[$itemDB['bonding']];
+        $item['unique'] = ($this->hasFlag(524288, $flags)) ? "Unique-Equipped" : null;
+        $item['slot'] = $slots[$itemDB['InventoryType']];
+        $item['durability'] = $itemDB['MaxDurability'];
+        $item['armor'] = (array_key_exists("armor", $itemDB)) ? $itemDB['armor'] : false;
+        $item['required'] = $itemDB['RequiredLevel'];
+        $item['level'] = $itemDB['ItemLevel'];
+        $item['type'] = $this->getType($itemDB['class'], $itemDB['subclass']);
+        $item['damage_type'] = (array_key_exists("dmg_type1", $itemDB)) ? $damages[$itemDB['dmg_type1']] : false;
+
+        if (array_key_exists("dmg_min1", $itemDB)) {
+            $item['damage_min'] = $itemDB['dmg_min1'];
+            $item['damage_max'] = $itemDB['dmg_max1'];
+        } else {
+            $item['damage_min'] = false;
+            $item['damage_max'] = false;
+        }
+
+        $item['spells'] = $this->getSpells($itemDB);
+        $item['attributes'] = $this->getAttributes($itemDB);
+        $item['holy_res'] = (array_key_exists("holy_res", $itemDB)) ? $itemDB['holy_res'] : $this->getAttributeById(53, $itemDB);
+        $item['fire_res'] = (array_key_exists("fire_res", $itemDB)) ? $itemDB['fire_res'] : $this->getAttributeById(51, $itemDB);
+        $item['nature_res'] = (array_key_exists("nature_res", $itemDB)) ? $itemDB['nature_res'] : $this->getAttributeById(55, $itemDB);
+        $item['frost_res'] = (array_key_exists("frost_res", $itemDB)) ? $itemDB['frost_res'] : $this->getAttributeById(52, $itemDB);
+        $item['shadow_res'] = (array_key_exists("shadow_res", $itemDB)) ? $itemDB['shadow_res'] : $this->getAttributeById(54, $itemDB);
+        $item['arcane_res'] = (array_key_exists("arcane_res", $itemDB)) ? $itemDB['arcane_res'] : $this->getAttributeById(56, $itemDB);
+        $item['speed'] = ($itemDB['delay'] > 0) ? ($itemDB['delay'] / 1000) . "0" : 0;
+        $item['dps'] = $this->getDPS($item['damage_min'], $item['damage_max'], $item['speed']);
+        $item['sockets'] = $this->getSockets($itemDB);
+
+        return $item;
+    }
+
+    /**
+     * Get the sockets
+     *
+     * @param array $item
+     * @return bool|string
+     */
+    private function getSockets(array $item): bool|string
+    {
+        if (array_key_exists("socketColor_1", $item)) {
+            $output = "";
+
+            $meta   = "<span class='socket-meta q0'>" . lang("meta", "tooltip") . "</span><br />";
+            $red    = "<span class='socket-red q0'>" . lang("red", "tooltip") . "</span><br />";
+            $yellow = "<span class='socket-yellow q0'>" . lang("yellow", "tooltip") . "</span><br />";
+            $blue   = "<span class='socket-blue q0'>" . lang("blue", "tooltip") . "</span><br />";
+
+            for ($i = 1; $i < 3; $i++) {
+                switch ($item['socketColor_' . $i]) {
+                    case 1:
+                        $output .= $meta;
+                        break;
+                    case 2:
+                        $output .= $red;
+                        break;
+                    case 4:
+                        $output .= $yellow;
+                        break;
+                    case 8:
+                        $output .= $blue;
+                        break;
+                }
+            }
+
+            return $output;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Calculate DPS
+     *
+     * @param float $min
+     * @param float $max
+     * @param float $speed
+     * @return float|int
+     */
+    private function getDPS(float $min, float $max, float $speed): float|int
+    {
+        if ($speed > 0) {
+            return round((($min + $max) / 2) / $speed, 1);
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get the attributes
+     *
+     * @param array $item
+     * @return array
+     */
+    private function getAttributes(array $item): array
+    {
+        $types = lang("stats", "wow_tooltip");
+
+        $statCount = 10;
+        $attributes = [
+            "spells"  => [],
+            "regular" => []
+        ];
+
+        for ($i = 1; $i <= $statCount; $i++) {
+            if (!empty($item['stat_value' . $i]) && array_key_exists($item['stat_type' . $i], (array)$types)) {
+                $type = "spells";
+
+                $stat = '';
+                // Mana/health
+                if (in_array($item['stat_type' . $i], [42, 46])) {
+                    $stat = "<span class='q2'>" . lang("restores", "tooltip") . " " . $item['stat_value' . $i] . " " . $types[$item['stat_type' . $i]] . "</span><br />";
+                } elseif ($item['stat_type' . $i] > 7 && !in_array($item['stat_type' . $i], [42, 46])) {
+                    $stat = "<span class='q2'>" . lang("increases", "tooltip") . " " . $types[$item['stat_type' . $i]] . lang("by", "tooltip") . " " . $item['stat_value' . $i] . ".</span><br />";
+                } else {
+                    if (array_key_exists($item['stat_type' . $i], (array)$types)) {
+                        $type = "regular";
+                        $stat = "+" . $item['stat_value' . $i] . " " . $types[$item['stat_type' . $i]] . "<br />";
+                    }
+                }
+
+                $attributes[$type][] = ['id' => $item['stat_value' . $i], 'text' => $stat];
+            }
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * Get attribute by the ID if any
+     *
+     * @param int $id
+     * @param $item
+     * @return bool|int
+     */
+    private function getAttributeById(int $id, $item): bool|int
+    {
+        $statCount = 10;
+
+        for ($i = 1; $i <= $statCount; $i++) {
+            if ($item['stat_type' . $i] == $id) {
+                return $item['stat_value' . $i];
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the spells
+     *
+     * @param array $item
+     * @return array
+     */
+    private function getSpells(array $item): array
+    {
+        $spellTriggers = lang("spelltriggers", "wow_tooltip");
+
+        $spellCount = 5;
+        $spells = [];
+
+        for ($i = 0; $i < $spellCount; $i++) {
+            if (!empty($item['spellid_' . $i])) {
+                $data = array(
+                    "id" => $item['spellid_' . $i],
+                    "trigger" => $spellTriggers[$item['spelltrigger_' . $i]],
+                    "text" => $this->getSpellText($item['spellid_' . $i])
+                );
+
+                $spells[] = $data;
+            }
+        }
+
+        return $spells;
+    }
+
+    private function getSpellText($id)
+    {
+        $cache = CI::$APP->cache->get("spells/spell_" . $id);
+
+        if ($cache !== false) {
+            return $cache;
+        } else {
+            $query = CI::$APP->db->query("SELECT spellText FROM spelltext_en WHERE spellId = ? LIMIT 1", [$id]);
+
+            // Check for results
+            if ($query->num_rows() > 0) {
+                $row = $query->result_array();
+
+                $data = $row[0]['spellText'];
+            } else {
+                $data = false;
+            }
+
+            CI::$APP->cache->save("spells/spell_" . $id, $data);
+
+            return $data;
+        }
+    }
+
+    /**
+     * Get the type
+     *
+     * @param int $class
+     * @param int $subclass
+     * @return string|null
+     */
+    private function getType(int $class, int $subclass): ?string
+    {
+        // Weapons
+        if ($class == 2) {
+            $sub = lang("weapon_sub", "wow_tooltip");
+
+            return $sub[$subclass];
+        }
+
+        // Armor
+        elseif ($class == 4) {
+            $sub = lang("armor_sub", "wow_tooltip");
+
+            return $sub[$subclass];
+        }
+
+        // Anything else
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Get flags as an array
+     *
+     * @param int $flags
+     * @return array
+     */
+    private function getFlags(int $flags): array
+    {
+        $bits = [];
+
+        for ($i = 1; $i <= $flags; $i *= 2) {
+            if (($i & $flags) > 0) {
+                $bits[] = $i;
+            }
+        }
+
+        return $bits;
+    }
+
+    /**
+     * Check if our flag array contains the flag
+     *
+     * @param int $flag
+     * @param array $flags
+     * @return bool
+     */
+    private function hasFlag(int $flag, array $flags): bool
+    {
+        if (in_array($flag, $flags)) {
+            return true;
+        } else {
+            return false;
         }
     }
 

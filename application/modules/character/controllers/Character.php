@@ -469,7 +469,7 @@ class Character extends MX_Controller
         }
     }
 
-    public function getDisplayId($slot, $id)
+    private function getDisplayId($slot, $id)
     {
         // Check if item ID
         if ($id) {
