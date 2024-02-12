@@ -107,7 +107,8 @@ class Vmangos implements Emulator
             "RequiredLevel" => "required_level",
             "ItemLevel"     => "item_level",
             "class"         => "class",
-            "subclass"      => "subclass"
+            "subclass"      => "subclass",
+            "enchantments"  => "enchantments",
         ),
 
         "character_stats" => array(

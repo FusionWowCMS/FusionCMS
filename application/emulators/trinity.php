@@ -118,7 +118,8 @@ class Trinity implements Emulator
             'RequiredLevel' => 'RequiredLevel',
             'ItemLevel'     => 'ItemLevel',
             'class'         => 'class',
-            'subclass'      => 'subclass'
+            'subclass'      => 'subclass',
+            "enchantments"  => "enchantments",
         ),
 
         'character_stats' => array(

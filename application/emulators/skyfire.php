@@ -116,14 +116,15 @@ class Skyfire implements Emulator
         ),
 
         "item_template" => array(
-            "entry"         => "entry",
-            "name"          => "name",
-            "Quality"       => "Quality",
-            "InventoryType" => "InventoryType",
-            "RequiredLevel" => "RequiredLevel",
-            "ItemLevel"     => "ItemLevel",
-            "class"         => "class",
-            "subclass"      => "subclass"
+            "entry"                   => "entry",
+            "name"                    => "name",
+            "Quality"                 => "Quality",
+            "InventoryType"           => "InventoryType",
+            "RequiredLevel"           => "RequiredLevel",
+            "ItemLevel"               => "ItemLevel",
+            "class"                   => "class",
+            "subclass"                => "subclass",
+            "enchantments"            => "enchantments",
         ),
 
         "character_stats" => array(
