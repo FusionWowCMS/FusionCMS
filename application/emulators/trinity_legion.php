@@ -131,9 +131,7 @@ class Trinity_legion implements Emulator
             'RequiredLevel'           => 'RequiredLevel',
             'ItemLevel'               => 'ItemLevel',
             'class'                   => 'class',
-            'subclass'                => 'subclass',
-            "enchantments"            => "enchantments",
-            'transmogrification'      => 'transmogrification',
+            'subclass'                => 'subclass'
         ),
 
         'character_stats' => array(
@@ -193,7 +191,7 @@ class Trinity_legion implements Emulator
         'get_banned'                => 'SELECT id id, bandate bandate, bannedby bannedby, banreason banreason, active active FROM account_banned WHERE id=? AND active=1',
         'get_charactername_by_guid' => 'SELECT name name FROM characters WHERE guid = ?',
         'find_guilds'               => 'SELECT g.guildid guildid, g.name name, COUNT(g_m.guid) GuildMemberCount, g.leaderguid leaderguid, c.name leaderName FROM guild g, guild_member g_m, characters c WHERE g.leaderguid = c.guid AND g_m.guildid = g.guildid AND g.name LIKE ? GROUP BY g.guildid',
-        'get_inventory_item'        => 'SELECT slot slot, item item, itemEntry itemEntry FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0',
+        'get_inventory_item'        => 'SELECT slot slot, item item, itemEntry itemEntry, enchantments enchantments FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid = ? AND character_inventory.bag = 0',
         'get_guild_members'         => 'SELECT m.guildid guildid, m.guid guid, c.name name, c.race race, c.class class, c.gender gender, c.level level, m.rank member_rank, r.rname rname, r.rights rights FROM guild_member m JOIN guild_rank r ON m.guildid = r.guildid AND m.rank = r.rid JOIN characters c ON c.guid = m.guid WHERE m.guildid = ? ORDER BY r.rights DESC',
         'get_guild'                 => 'SELECT guildid guildid, name guildName, leaderguid leaderguid, motd motd, createdate createdate FROM guild WHERE guildid = ?'
     );
