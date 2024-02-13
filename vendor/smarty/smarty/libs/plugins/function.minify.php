@@ -196,9 +196,15 @@ function __minify_print__(string $type = '', array $files = [], string $queries 
         'css_inline' => '<style type="text/css">__file__</style>'
     ];
 
+    // Backup type
+    $_type = $type;
+
     // Loop through files
     foreach($files as $file)
     {
+        // Restore type
+        $type = $_type;
+
         // CSS import - switch type
         if(__minify_hasImport__($file))
             $type = 'css_inline';
