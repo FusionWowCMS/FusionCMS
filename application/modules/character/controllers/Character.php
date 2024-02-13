@@ -23,7 +23,7 @@ class Character extends MX_Controller
     private $stats;
     private $slotsItems;
     private $equippedItems;
-    private $equippedItemsDisplayId;
+    private $transmogsItems;
 
     public function __construct()
     {
@@ -38,9 +38,9 @@ class Character extends MX_Controller
         $this->load->model("armory_model");
 
         $this->canCache = true;
-        $this->slotsItems = array();
-        $this->equippedItems = array();
-        $this->equippedItemsDisplayId = array();
+        $this->slotsItems = [];
+        $this->equippedItems = [];
+        $this->transmogsItems = [];
     }
 
     /**
@@ -62,18 +62,29 @@ class Character extends MX_Controller
         }
     }
 
-    public function getItem($id = false)
+    private function getItem($id = false, $type = '', $trans = false)
     {
-        if ($id) {
-            $cache = $this->cache->get("items/item_" . $this->realm . "_" . $id);
+        if(!$id)
+            return;
 
-            if ($cache !== false) {
-                return "<a href='" . $this->template->page_url . "item/" . $this->realm . "/" . $id . "' rel='item=" . $id . "' data-realm='" . $this->realm . "'></a><img src='" . $this->config->item('api_item_icons') . "/large/" . ($cache['icon'] != null ? $cache['icon'] : 'inv_misc_questionmark') . ".jpg' />";
-            } else {
-                $this->canCache = false;
-                return $this->template->loadPage("icon_ajax.tpl", array('id' => $id, 'realm' => $this->realm, 'url' => $this->template->page_url));
-            }
-        }
+        // Prepare page data
+        $data = [
+            'url'   => $this->template->page_url,
+            'item'  => $id,
+            'type'  => $type,
+            'trans' => $trans,
+            'realm' => $this->realm,
+            'cache' => [
+                'item'  => $this->cache->get('items/item_' . $this->realm . '_' . $id),
+                'trans' => $trans ? $this->cache->get('items/item_' . $this->realm . '_' . $trans) : false
+            ]
+        ];
+
+        // Force turn off cache
+        if($data['cache']['item'] === false || ($trans && $data['cache']['trans']))
+            $this->canCache = false;
+
+        return $this->template->loadPage('item.tpl', $data);
     }
 
     /**
@@ -239,6 +250,9 @@ class Character extends MX_Controller
             $this->secondBarValue = lang("unknown", "character");
         }
 
+        // Load the transmog items
+        $this->transmogsItems = $this->armory_model->getTransmogItems($this->id);
+
         // Load the items
         $slotsItems = $this->armory_model->getItems();
 
@@ -269,8 +283,8 @@ class Character extends MX_Controller
             // Loop through to assign the items
             foreach ($slotsItems as $item) {
                 $this->equippedItems[$item['slot']] = $item['itemEntry'];
-                $this->slotsItems[$slots[$item['slot']]] = $this->getItem($item['itemEntry']);
-                $this->getDisplayId($item['slot'], $item['itemEntry']);
+                $key = array_search($item['itemEntry'], array_column($this->transmogsItems, 'itemEntry'));
+                $this->slotsItems[$slots[$item['slot']]] = $this->getItem($item['itemEntry'], $slots[$item['slot']], is_int($key) ? $this->transmogsItems[$key]['transmogrifyId'] : false);
             }
         }
 
@@ -393,7 +407,6 @@ class Character extends MX_Controller
                     "gender" => $this->gender,
                     "items" => $this->slotsItems,
                     "equippedItems" => (!empty($this->equippedItems) ? $this->equippedItems : false),
-                    "equippedItemsDisplayId" => (!empty($this->equippedItemsDisplayId) ? $this->equippedItemsDisplayId : false),
                     "expansionId" => $this->realms->getRealm($this->realm)->getExpansionId(),
                     "guild" => $this->guild,
                     "guildName" => $this->guildName,
@@ -469,63 +482,4 @@ class Character extends MX_Controller
         }
     }
 
-    private function getDisplayId($slot, $id)
-    {
-        // Check if item ID
-        if ($id) {
-            // get item data
-            $item_in_cache = $this->items->getItem($id, $this->realm, 'displayid');
-
-            if ($item_in_cache) {
-                $displayId = $item_in_cache;
-            } else {
-                $displayId = null;
-            }
-        }
-
-        if ($displayId == null || $displayId == '')
-            return;
-
-        switch ($slot) {
-            case 0:
-                $this->equippedItemsDisplayId[1] = $displayId;
-                break;
-            case 2:
-                $this->equippedItemsDisplayId[3] = $displayId;
-                break;
-            case 3:
-                $this->equippedItemsDisplayId[4] = $displayId;
-                break;
-            case 4:
-                $this->equippedItemsDisplayId[5] = $displayId;
-                break;
-            case 5:
-                $this->equippedItemsDisplayId[6] = $displayId;
-                break;
-            case 6:
-                $this->equippedItemsDisplayId[7] = $displayId;
-                break;
-            case 7:
-                $this->equippedItemsDisplayId[8] = $displayId;
-                break;
-            case 8:
-                $this->equippedItemsDisplayId[9] = $displayId;
-                break;
-            case 9:
-                $this->equippedItemsDisplayId[10] = $displayId;
-                break;
-            case 14:
-                $this->equippedItemsDisplayId[16] = $displayId;
-                break;
-            case 15:
-                $this->equippedItemsDisplayId[21] = $displayId;
-                break;
-            case 16:
-                $this->equippedItemsDisplayId[14] = $displayId;
-                break;
-            case 18:
-                $this->equippedItemsDisplayId[19] = $displayId;
-                break;
-        }
-    }
 }

@@ -48,4 +48,18 @@ class Item extends MX_Controller
 
         $this->template->view($page, "modules/item/css/item.css");
     }
+
+    public function ajax(int $realm = 0, int $item = 0)
+    {
+        if (!$this->input->is_ajax_request()) {
+            die('No direct script access allowed');
+        }
+
+        // Make sure item and realm are set
+        if (!$item || !$realm) {
+            die(lang("no_item", "item"));
+        }
+
+        die(json_encode($this->items->getItem($item, $realm)));
+    }
 }

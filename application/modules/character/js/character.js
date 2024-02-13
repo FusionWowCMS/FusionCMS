@@ -23,6 +23,57 @@ var Character = {
 	 	}
 	 },
 
+	getItem: function(item, trans, realm, api_item_icons)
+	{
+		let transmog = false;
+
+		if(parseInt(trans))
+		{
+			transmog = true;
+
+			// Send AJAX call to grab transmog item info
+			$.get(Config.URL + 'item/ajax/' + realm + '/' + trans, (data) => {
+				transmog = data;
+			}, 'json');
+		}
+
+		function __SLEEP__()
+		{
+			if(transmog && typeof(transmog) === 'boolean')
+			{
+				setTimeout(__SLEEP__, 50);
+				return false;
+			}
+
+			$.get(Config.URL + 'item/ajax/' + realm + '/' + item, (data) => {
+				$(".get_icon_" + item).each(function()
+				{
+					// Prepare html
+					html = '<div class="item" equiplist="[{SLOT}, {DISPLAY}]"><a href="{BASEURL}item/{REALM}/{ITEM}" rel="item={ITEM}&transmog={TRANSMOG}" data-realm="{REALM}"></a><img src="{ICONURL}/large/{ICON}.jpg" /></div>';
+
+					// format html
+					html = html.replace('{BASEURL}', Config.URL)
+							   .replaceAll('{ITEM}', item)
+							   .replaceAll('{REALM}', realm)
+							   .replace('{ICONURL}', api_item_icons)
+							   .replace('{ICON}', data.icon)
+						       .replace('{SLOT}', data.InventoryType);
+
+					html = (data.displayId) ? html.replace('{DISPLAY}', (transmog) ? transmog.displayId : data.displayId) : html.replace('equiplist="[{SLOT}, {DISPLAY}]"', '');
+
+					// Transmog available?
+					html = (transmog) ? html.replace('{TRANSMOG}', transmog.name) : html.replace('&transmog={TRANSMOG}', '');
+
+					$(this).html(html);
+
+					Tooltip.refresh();
+				});
+			}, 'json');
+		}
+
+		__SLEEP__();
+	},
+
 	 /**
 	  * Whether the tabs are changing or not
 	  * @type Boolean

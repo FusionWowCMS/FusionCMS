@@ -111,6 +111,25 @@ class Armory_model extends CI_Model
         }
     }
 
+    /**
+     * Load transmog items that belong to the character
+     */
+    public function getTransmogItems($character_guid)
+    {
+        if(!table("item_instance_transmog", $this->realmId))
+            return [];
+
+        $this->connect();
+
+        $query = $this->connection->query("SELECT " . allColumns("item_instance_transmog", $this->realmId) . ", item_instance.itemEntry FROM " . table("item_instance_transmog", $this->realmId) . " Left JOIN item_instance ON " . table("item_instance_transmog", $this->realmId) . '.' .column("item_instance_transmog", "itemGuid", false, $this->realmId) . " = item_instance.guid WHERE item_instance.owner_guid = ?", [$character_guid]);
+
+        if ($query && $query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return [];
+        }
+    }
+
     public function getGuild()
     {
         $this->connect();

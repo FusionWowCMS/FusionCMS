@@ -35,17 +35,18 @@ class Trinity_sl implements Emulator
      * Array of table names
      */
     protected $tables = array(
-        'account'            => 'account',
-        'account_access'     => 'account_access',
-        'account_banned'     => 'account_banned',
-        'ip_banned'          => 'ip_banned',
-        'battlenet_accounts' => 'battlenet_accounts',
-        'characters'         => 'characters',
-        'item_template'      => 'item_template',
-        'character_stats'    => 'character_stats',
-        'guild_member'       => 'guild_member',
-        'guild'              => 'guild',
-        'gm_tickets'         => 'gm_bug'
+        'account'                  => 'account',
+        'account_access'           => 'account_access',
+        'account_banned'           => 'account_banned',
+        'ip_banned'                => 'ip_banned',
+        'battlenet_accounts'       => 'battlenet_accounts',
+        'characters'               => 'characters',
+        'item_template'            => 'item_template',
+        'item_instance_transmog'   => 'item_instance_transmog',
+        'character_stats'          => 'character_stats',
+        'guild_member'             => 'guild_member',
+        'guild'                    => 'guild',
+        'gm_tickets'               => 'gm_bug'
     );
 
     /**
