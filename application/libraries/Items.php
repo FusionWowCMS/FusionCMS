@@ -210,10 +210,7 @@ class Items
 
                     if ($item_wowhead) {
                         $row['icon'] = $item_wowhead['icon'];
-
-                        if (!array_key_exists('displayId', $row)) {
-                            $row['displayId'] = $item_wowhead['displayid'];
-                        }
+                        $row['displayId'] = $item_wowhead['displayid'];
 
                         if (!array_key_exists('htmlTooltip', $row)) {
                             $row['htmlTooltip'] = $item_wowhead['htmlTooltip'];
