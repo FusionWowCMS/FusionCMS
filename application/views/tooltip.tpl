@@ -1,4 +1,6 @@
+<!--nstart-->
 <span class='q{$item.quality}' style='font-size: 16px'>{$item.name}</span><br />
+<!--nend-->
 
 {if $item.bind}{$item.bind}<br />{/if}
 {if $item.unique}{$item.unique}<br />{/if}

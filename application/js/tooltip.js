@@ -60,11 +60,34 @@ function Tooltip()
 				function()
 				{
 					$(document).bind('mousemove', Tooltip.addEvents.handleMouseMove);
-					if(/^item=[0-9]*$/.test($(this).attr("rel")))
+
+					// `Attributes`: Initialize
+					let attributes = {};
+
+					// `Rel`: Get attribute
+					let rel = $(this).attr('rel');
+
+					// `Rel`: Explode attribute
+					rel = rel.split('&');
+
+					// `Rel`: Loop through
+					Object.keys(rel).map((key) => {
+						// `Rel`: Explode
+						rel[key] = rel[key].split('=');
+
+						// `Rel`: Invalid
+						if(rel[key].length !== 2)
+							return;
+
+						// `Attributes`: Push
+						attributes[rel[key][0]] = rel[key][1];
+					});
+
+					if(typeof attributes.item !== 'undefined')
 					{
-						Tooltip.Item.get(this, function(data)
+						Tooltip.Item.get(this, attributes, function(data)
 						{
-							Tooltip.show(data);
+							Tooltip.show(data, attributes);
 						});
 					}
 				},
@@ -94,10 +117,34 @@ function Tooltip()
 	/**
 	 * Displays the tooltip
 	 * @param Object element
+	 * @param Object attributes
 	 */
-	this.show = function(data)
+	this.show = function(data, attributes)
 	{
+		if(attributes)
+		{
+			// `Attributes`: Loop through
+			Object.keys(attributes).map((key) => {
+				// Modifier available
+				if(typeof Tooltip['modifier_' + key] === 'function')
+					data = Tooltip['modifier_' + key](attributes[key], data);
+			});
+		}
+
 		$("#"+ Tooltip.tooltip_element).html(data).show();
+	}
+
+	/**
+	 * Modifier: Transmog
+	 * Apply tooltip data modifier
+	 *
+	 * @param  string value
+	 * @param  string data
+	 * @return string data
+	 */
+	this.modifier_transmog = function(value, data)
+	{
+		return data = data.replace('<!--nend-->', '<!--nend--><div style="color: #e060df; font-weight: bold;">Transmogrified to:<br />' + value + '</div>');
 	}
 
 	/**
@@ -123,13 +170,14 @@ function Tooltip()
 	 	/**
 	 	 * Load an item and display it in the tooltip
 	 	 * @param Object element
+	 	 * @param Object attributes
 	 	 * @param Function callback
 	 	 */
-	 	this.get = function(element, callback)
+	 	this.get = function(element, attributes, callback)
 	 	{
 	 		var obj = $(element);
 	 		var realm = obj.attr("data-realm");
-	 		var id = obj.attr("rel").replace("item=", "");
+	 		var id = attributes.item;
 	 		Tooltip.Item.currentId = id;
 
 	 		if(id in this.cache)
