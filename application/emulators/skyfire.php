@@ -152,6 +152,11 @@ class Skyfire implements Emulator
             'mastery'       => 'mastery'
         ),
 
+        'item_instance_transmog' => array(
+            'itemGuid'       => 'itemGuid',
+            'transmogrifyId' => 'transmogrifyId'
+        ),
+
         "guild" => array(
             "guildid"    => "guildid",
             "name"       => "name",

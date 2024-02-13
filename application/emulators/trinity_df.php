@@ -163,6 +163,11 @@ class Trinity_df implements Emulator
             'versatility'   => 'versatility'
         ),
 
+        'item_instance_transmog' => array(
+            'itemGuid'       => 'itemGuid',
+            'transmogrifyId' => 'itemModifiedAppearanceAllSpecs'
+        ),
+
         'guild' => array(
             'guildid'    => 'guildid',
             'name'       => 'name',
