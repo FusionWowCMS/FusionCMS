@@ -110,9 +110,9 @@ class Realms
      * Get one specific realm object
      *
      * @param int $id
-     * @return Object|null
+     * @return Realm|null
      */
-    public function getRealm(int $id): ?object
+    public function getRealm(int $id): ?Realm
     {
         foreach ($this->realms as $key => $realm) {
             if ($realm->getId() == $id) {
