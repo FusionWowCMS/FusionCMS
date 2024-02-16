@@ -18,8 +18,6 @@ class Armory extends MX_Controller
 
         $this->load->library('form_validation');
 
-        $this->load->config('tooltip/tooltip_constants');
-
         $this->weapon_sub = $this->config->item("weapon_sub");
         $this->armor_sub = $this->config->item("armor_sub");
         $this->slots = $this->config->item("slots");
