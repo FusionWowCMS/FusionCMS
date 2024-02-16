@@ -50,6 +50,7 @@ class Items
                     'class' => $data['wowhead']['item']['class']['@attributes']['id'],
                     'subclass' => $data['wowhead']['item']['subclass']['@attributes']['id'],
                     'ItemLevel' => $data['wowhead']['item']['level'],
+                    'InventoryType' => $data['wowhead']['item']['inventorySlot']['@attributes']['id'],
                     'htmlTooltip' => $data['wowhead']['item']['htmlTooltip'],
                     'stackable' => $this->findStack($data['wowhead']['item']['htmlTooltip'], 'whtt-maxstack')
                 ];
@@ -210,7 +211,7 @@ class Items
 
                     if ($item_wowhead) {
                         $row['icon'] = $item_wowhead['icon'];
-                        $row['displayId'] = $item_wowhead['displayid'];
+                        $row['displayid'] = $item_wowhead['displayid'];
 
                         if (!array_key_exists('htmlTooltip', $row)) {
                             $row['htmlTooltip'] = $item_wowhead['htmlTooltip'];
