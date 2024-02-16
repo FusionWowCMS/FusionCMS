@@ -39,7 +39,7 @@ class Sessions extends MX_Controller
                 $date = new DateTime();
                 $date->setTimestamp($value["timestamp"]);
 
-                $user_agent->parse($value['user_agent']);
+                $user_agent->parse($value['user_agent'] ?? '');
 
                 $sessions[$key]['os'] = $this->getPlatform($value['user_agent']);
                 $sessions[$key]['osName'] = $user_agent->getPlatform();
