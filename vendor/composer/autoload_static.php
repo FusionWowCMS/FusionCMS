@@ -7,15 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
 {
     public static $files = array (
-        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'p' => 
-        array (
-            'phpseclib3\\' => 11,
-        ),
         'c' => 
         array (
             'chillerlan\\Settings\\' => 20,
@@ -29,7 +24,6 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
-            'ParagonIE\\ConstantTime\\' => 23,
         ),
         'M' => 
         array (
@@ -40,7 +34,6 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'L' => 
         array (
             'Laminas\\Escaper\\' => 16,
-            'Laizerox\\' => 9,
         ),
         'D' => 
         array (
@@ -54,10 +47,6 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
     );
 
     public static $prefixDirsPsr4 = array (
-        'phpseclib3\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
-        ),
         'chillerlan\\Settings\\' => 
         array (
             0 => __DIR__ . '/..' . '/chillerlan/php-settings-container/src',
@@ -78,10 +67,6 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'ParagonIE\\ConstantTime\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
-        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -97,10 +82,6 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'Laminas\\Escaper\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
-        ),
-        'Laizerox\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nightprince/php-wowemu-auth/src',
         ),
         'Desarrolla2\\Cache\\' => 
         array (

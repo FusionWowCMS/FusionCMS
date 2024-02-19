@@ -1,6 +1,5 @@
 <?php
 
-use Laizerox\Wowemu\SRP\UserClient;
 use MX\CI;
 
 class Crypto
@@ -167,8 +166,13 @@ class Crypto
         is_string($password) || $password = '';
         is_string($salt) || $salt = $this->salt($username, true);
 
-        $client = new UserClient($username, $salt);
-        $verifier = strtoupper($client->generateVerifier($password));
+        // algorithm constants
+        $g = gmp_init(7);
+        $N = gmp_init('894B645E89E1535BBDAD5B8B290650530801B18EBFBF5E8FAB3C82872A3E9BB7', 16);
+
+        $h = gmp_init(sha1(hex2bin($salt) . hash('sha1', strtoupper($username . ':' . $password), true)), 16);
+
+        $verifier = gmp_strval(gmp_powm($g, $h, $N), 16);
 
         return array(
             "salt" => $salt,
@@ -199,8 +203,7 @@ class Crypto
         }
 
         if ($hex) {
-            $client = new UserClient($username);
-            $salt = strtoupper($client->generateSalt());
+            $salt = bin2hex(random_bytes(32));
         } else {
             $salt = random_bytes(32);
         }

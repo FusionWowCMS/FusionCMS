@@ -6,18 +6,15 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'phpseclib3\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'chillerlan\\Settings\\' => array($vendorDir . '/chillerlan/php-settings-container/src'),
     'chillerlan\\QRCode\\' => array($vendorDir . '/chillerlan/php-qrcode/src'),
     'VisualAppeal\\' => array($vendorDir . '/fusion-cms/auto-updater/src'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
-    'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'MatthiasMullie\\PathConverter\\' => array($vendorDir . '/matthiasmullie/path-converter/src'),
     'MatthiasMullie\\Minify\\' => array($vendorDir . '/matthiasmullie/minify/src'),
     'Laminas\\Escaper\\' => array($vendorDir . '/laminas/laminas-escaper/src'),
-    'Laizerox\\' => array($vendorDir . '/nightprince/php-wowemu-auth/src'),
     'Desarrolla2\\Cache\\' => array($vendorDir . '/desarrolla2/cache/src'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
     'CodeIgniter\\' => array($baseDir . '/system'),
