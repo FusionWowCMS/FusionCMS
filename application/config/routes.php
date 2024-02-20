@@ -101,6 +101,7 @@ $route['character/(:num)'] = "character/index/$1";
 $route['character/(:num)/(:any)'] = "character/index/$1/$2";
 $route['guild/(:num)/(:num)'] = "guild/index/$1/$2";
 $route['tooltip/(:num)/(:num)'] = "tooltip/index/$1/$2";
+$route['character_tooltip/(:num)/(:num)'] = "tooltip/character/$1/$2";
 $route['item/(:num)/(:num)'] = "item/index/$1/$2";
 
 // Admin
