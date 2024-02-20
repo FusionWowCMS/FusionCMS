@@ -260,9 +260,10 @@ class Donate extends MX_Controller
             if (preg_match('[500|501|502|503|504|60000]', $e)) {
                 $this->session->set_tempdata('paypal_error', 'PayPal is currently experiencing problems. Please try later', 10);
                 redirect(base_url('/donate/error'));
-            }
-            else
-            {
+            } else if (str_contains($e, '401')) {
+                $this->session->set_tempdata('paypal_error', 'Check Credentials (Client ID, Secret Password) and make sure you switch the PayPal mode to Live or Sandbox mode for whichever you need and match it in the config.', 10);
+                redirect(base_url('/donate/error'));
+            } else {
                 die($e);
             }
         }
