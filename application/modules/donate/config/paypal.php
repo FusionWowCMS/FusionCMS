@@ -42,3 +42,8 @@ $config['paypal_userid'] = "";
  * https://developer.paypal.com/developer/applications
 */
 $config['paypal_secretpass'] = "";
+
+/**
+ * Amount charged for tax. 10 characters max with support for two decimal places.
+*/
+$config['paypal_tax'] = "0.00";

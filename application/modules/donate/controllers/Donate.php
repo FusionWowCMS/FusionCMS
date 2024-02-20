@@ -179,9 +179,9 @@ class Donate extends MX_Controller
         $transaction = new Transaction();
         $redirectUrls = new RedirectUrls();
 
-        $setTax = '0.00';
+        $setTax = $this->config->item('paypal_tax');
         $setPrice = $this->paypal_model->getSpecifyDonate($id)['price'];
-        $setTotal = ($setTax + $setPrice);
+        $setTotal = ((float)$setTax + $setPrice);
 
         //Payer
         $payer->setPaymentMethod('paypal');
@@ -207,7 +207,7 @@ class Donate extends MX_Controller
         //transaction
         $transaction->setAmount($amount)
             ->setItemList($itemList)
-            ->setDescription('Purchase ' . $this->paypal_model->getSpecifyDonate($id)['points'] . ' points for user ' . $this->user->getId() . '')
+            ->setDescription('Purchase ' . $this->paypal_model->getSpecifyDonate($id)['points'] . ' points for user ' . $this->user->getId())
             ->setInvoiceNumber(uniqid());
 
         //payment
@@ -266,6 +266,8 @@ class Donate extends MX_Controller
                 die($e);
             }
         }
+
+        $redirectUrl = '';
 
         foreach ($payment->getLinks() as $link) {
             if ($link->getRel() == 'approval_url') {
