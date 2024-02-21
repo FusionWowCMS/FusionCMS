@@ -49,15 +49,20 @@ var Character = {
 				$(".get_icon_" + item).each(function()
 				{
 					// Prepare html
-					html = '<div class="item" equiplist="[{SLOT}, {DISPLAY}]"><a href="{BASEURL}item/{REALM}/{ITEM}" rel="item={ITEM}&transmog={TRANSMOG}" data-realm="{REALM}"></a><img src="{ICONURL}/large/{ICON}.jpg" /></div>';
+					html = '<div class="item" equiplist="[{SLOT}, {DISPLAY}]"><!-- [TRANS] --><a href="{BASEURL}item/{REALM}/{ITEM}" rel="item={ITEM}&transmog={TRANSMOG}" data-realm="{REALM}"></a><img src="{ICONURL}/large/{ICON}.jpg" /></div>';
+
+					// Append trans icon
+					if(transmog)
+						html = html.replace('<!-- [TRANS] -->', '<a href="{BASEURL}item/{REALM}/{TRANS}" class="item-trans" rel="item={TRANS}" data-realm="{REALM}"></a>');
 
 					// format html
-					html = html.replace('{BASEURL}', Config.URL)
+					html = html.replaceAll('{BASEURL}', Config.URL)
 							   .replaceAll('{ITEM}', item)
+							   .replaceAll('{TRANS}', trans)
 							   .replaceAll('{REALM}', realm)
 							   .replace('{ICONURL}', api_item_icons)
 							   .replace('{ICON}', data.icon)
-						       .replace('{SLOT}', data.InventoryType);
+							   .replace('{SLOT}', data.InventoryType);
 
 					html = (data.displayId) ? html.replace('{DISPLAY}', (transmog) ? transmog.displayId : data.displayId) : html.replace('equiplist="[{SLOT}, {DISPLAY}]"', '');
 

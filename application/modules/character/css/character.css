@@ -85,3 +85,26 @@
 	z-index:999;
 	display:block;
 }
+
+.item .item-trans {
+	width: 22px;
+	height: 22px;
+
+	left: 0;
+	bottom: 14px;
+
+	margin: 0;
+
+	z-index: 1000;
+	position: absolute;
+
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent transparent #e060df #e060df;
+
+	-webkit-border-radius: 0 0 0 3px;
+	border-radius: 0 0 0 3px;
+
+	background-image: none;
+	background-color: transparent;
+}
