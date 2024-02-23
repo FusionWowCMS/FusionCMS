@@ -13,6 +13,10 @@ class Tooltip extends MX_Controller
 
     public function Index($realm = false, $id = false)
     {
+        if (!$this->input->is_ajax_request()) {
+            die('No direct script access allowed');
+        }
+
         // Make sure item and realm are set
         if (!$id || !$realm) {
             die("No item or realm specified!");
@@ -36,6 +40,10 @@ class Tooltip extends MX_Controller
 
     public function character($realm = false, $id = false)
     {
+        if (!$this->input->is_ajax_request()) {
+            die('No direct script access allowed');
+        }
+
         // Make sure item and realm are set
         if (!$id || !$realm) {
             die("No item or realm specified!");
