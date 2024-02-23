@@ -313,7 +313,6 @@ function Tooltip()
 		 */
 		this.get = function(element, callback)
 		{
-
 			if (typeof $(element).attr('data-character-tip') == 'undefined' || $(element).attr('data-character-tip').length == 0)
 				return;
 
@@ -322,6 +321,7 @@ function Tooltip()
 
 			const characterId = $(element).attr('data-character-tip');
 			const realmId = $(element).attr('data-realm');
+			Tooltip.Character.currentId = characterId;
 
 			if(characterId in this.cache)
 			{
