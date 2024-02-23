@@ -11,13 +11,10 @@
     z-index: 9999999;
     padding:1rem;
 }
-.character-tooltip {
-    min-width: 150px;
-}
 .character-tooltip .icon-frame.frame-56 {
     position: absolute;
-    left: -72px;
-    top: -8px;
+    left: -88px;
+    top: -17px;
     display: inline-block;
     overflow: hidden;
     padding: 1px;
