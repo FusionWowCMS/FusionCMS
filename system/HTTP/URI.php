@@ -626,9 +626,6 @@ class URI
         $path   = $this->getPath();
         $scheme = $this->getScheme();
 
-        // If the hosts matches then assume this should be relative to baseURL
-        [$scheme, $path] = $this->changeSchemeAndPath($scheme, $path);
-
         return static::createURIString(
             $scheme,
             $this->getAuthority(),
@@ -636,33 +633,6 @@ class URI
             $this->getQuery(),
             $this->getFragment()
         );
-    }
-
-    /**
-     * Change the path (and scheme) assuming URIs with the same host as baseURL
-     * should be relative to the project's configuration.
-     *
-     * @deprecated This method will be deleted.
-     */
-    private function changeSchemeAndPath(string $scheme, string $path): array
-    {
-        // Check if this is an internal URI
-        $baseUri = new self(base_url());
-
-        if (
-            substr($this->getScheme(), 0, 4) === 'http'
-            && $this->getHost() === $baseUri->getHost()
-        ) {
-            // Check for additional segments
-            $basePath = trim($baseUri->getPath(), '/') . '/';
-            $trimPath = ltrim($path, '/');
-
-            if ($basePath !== '/' && strpos($trimPath, $basePath) !== 0) {
-                $path = $basePath . $trimPath;
-            }
-        }
-
-        return [$scheme, $path];
     }
 
     /**
