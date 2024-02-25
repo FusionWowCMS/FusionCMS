@@ -1,0 +1,33 @@
+{
+	"name":"Unstuck",
+	"description":"Enables your users to use blizzlike Unstuck.",
+	"version":"2.0.0",
+	"date":"2024-02-25",
+	"min_required_version":"8.2.1",
+	"author":
+	{
+		"name":"FusionCMS",
+		"website":"https://github.com/FusionWowCMS/FusionCMS"
+	},
+	"permissions":
+	{
+		"view":
+		{
+			"default":true,
+			"description":"View the Unstuck screen."
+		}
+	},
+	"roles":
+	{
+		"view":
+		{
+			"description":"View the Unstuck module.",
+			"permissions":
+			{
+				"view":true
+			}
+		}
+        
+	},
+	"enabled":true
+}
