@@ -453,6 +453,53 @@
             "install-path": "../fusion-cms/auto-updater"
         },
         {
+            "name": "fusion-cms/mx",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FusionWowCMS/MX.git",
+                "reference": "3600533aab0646ecd1730475d0db36550b8cac73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FusionWowCMS/MX/zipball/3600533aab0646ecd1730475d0db36550b8cac73",
+                "reference": "3600533aab0646ecd1730475d0db36550b8cac73",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1.0"
+            },
+            "time": "2024-02-25T08:42:44+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "MX/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wiredesignz",
+                    "email": "Wiredesignz@test.com"
+                },
+                {
+                    "name": "Keramat Jokar",
+                    "email": "keramatjokar8855@gmail.com"
+                }
+            ],
+            "description": "Modular Extensions - HMVC",
+            "support": {
+                "issues": "https://github.com/FusionWowCMS/MX/issues",
+                "source": "https://github.com/FusionWowCMS/MX/tree/2.0.2"
+            },
+            "install-path": "../fusion-cms/mx"
+        },
+        {
             "name": "fusion-cms/rest-api-sdk-php",
             "version": "2.0.0",
             "version_normalized": "2.0.0.0",

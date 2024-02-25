@@ -100,14 +100,7 @@ $config['classmap'] = [
     'CodeIgniter\Log\Logger'                      => BASEPATH.'Log/Logger.php',
     'CodeIgniter\Log\LoggerInterface'             => BASEPATH.'Log/LoggerInterface.php',
     'CodeIgniter\Log\LogLevel'                    => BASEPATH.'Log/LogLevel.php',
-    'Laminas\Escaper\Escaper'                     => BASEPATH.'View/Escaper.php',
-    'MX\MX_Modules'                               => APPPATH.'third_party/MX/Modules.php',
-    'MX\CI'                                       => APPPATH.'third_party/MX/Base.php',
-    'MX\MX_Config'                                => APPPATH.'third_party/MX/Config.php',
-    'MX\MX_Controller'                            => APPPATH.'third_party/MX/Controller.php',
-    'MX\MX_Lang'                                  => APPPATH.'third_party/MX/Lang.php',
-    'MX\MX_Loader'                                => APPPATH.'third_party/MX/Loader.php',
-    'MX\MX_Router'                                => APPPATH.'third_party/MX/Router.php',
+    'Laminas\Escaper\Escaper'                     => BASEPATH.'View/Escaper.php'
 ];
 
 /*

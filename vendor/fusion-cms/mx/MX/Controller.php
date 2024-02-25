@@ -197,9 +197,9 @@ class MX_Controller
      *
      * @method __get
      *
-     * @param [type] $class [description]
+     * @param [type] $class
      *
-     * @return [type]        [description]
+     * @return mixed [type]
      */
     public function __get($class)
     {

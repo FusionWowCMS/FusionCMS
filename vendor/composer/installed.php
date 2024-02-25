@@ -3,7 +3,7 @@
         'name' => 'fusionwowcms/fusioncms',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5bef764289c4f9605fcf1a09f7b2e45cf0267ae9',
+        'reference' => '7eaab5f16bb3a82e8ecfa981a26ad3aeee4e0576',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -64,6 +64,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'fusion-cms/mx' => array(
+            'pretty_version' => '2.0.2',
+            'version' => '2.0.2.0',
+            'reference' => '3600533aab0646ecd1730475d0db36550b8cac73',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../fusion-cms/mx',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'fusion-cms/rest-api-sdk-php' => array(
             'pretty_version' => '2.0.0',
             'version' => '2.0.0.0',
@@ -76,7 +85,7 @@
         'fusionwowcms/fusioncms' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5bef764289c4f9605fcf1a09f7b2e45cf0267ae9',
+            'reference' => '7eaab5f16bb3a82e8ecfa981a26ad3aeee4e0576',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb6fead0027578df1eb394f3e494505a",
+    "content-hash": "eeb29212487d07a15598cb62061171c4",
     "packages": [
         {
             "name": "chillerlan/php-qrcode",
@@ -439,6 +439,50 @@
                 "source": "https://github.com/FusionWowCMS/AutoUpdater/tree/1.0.3"
             },
             "time": "2023-11-19T18:32:38+00:00"
+        },
+        {
+            "name": "fusion-cms/mx",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FusionWowCMS/MX.git",
+                "reference": "3600533aab0646ecd1730475d0db36550b8cac73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FusionWowCMS/MX/zipball/3600533aab0646ecd1730475d0db36550b8cac73",
+                "reference": "3600533aab0646ecd1730475d0db36550b8cac73",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "MX/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wiredesignz",
+                    "email": "Wiredesignz@test.com"
+                },
+                {
+                    "name": "Keramat Jokar",
+                    "email": "keramatjokar8855@gmail.com"
+                }
+            ],
+            "description": "Modular Extensions - HMVC",
+            "support": {
+                "issues": "https://github.com/FusionWowCMS/MX/issues",
+                "source": "https://github.com/FusionWowCMS/MX/tree/2.0.2"
+            },
+            "time": "2024-02-25T08:42:44+00:00"
         },
         {
             "name": "fusion-cms/rest-api-sdk-php",

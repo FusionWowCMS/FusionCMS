@@ -28,6 +28,7 @@
         "ext-gmp": "*",
         "ext-gd": "*",
 
+        "fusion-cms/mx": "^2.0",
         "monolog/monolog": "^2.8",
         "psr/log": "^1.1",
         "ezyang/htmlpurifier": "^4.16",

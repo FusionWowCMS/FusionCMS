@@ -116,6 +116,13 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'MX\\CI' => __DIR__ . '/..' . '/fusion-cms/mx/MX/Base.php',
+        'MX\\MX_Config' => __DIR__ . '/..' . '/fusion-cms/mx/MX/Config.php',
+        'MX\\MX_Controller' => __DIR__ . '/..' . '/fusion-cms/mx/MX/Controller.php',
+        'MX\\MX_Lang' => __DIR__ . '/..' . '/fusion-cms/mx/MX/Lang.php',
+        'MX\\MX_Loader' => __DIR__ . '/..' . '/fusion-cms/mx/MX/Loader.php',
+        'MX\\MX_Modules' => __DIR__ . '/..' . '/fusion-cms/mx/MX/Modules.php',
+        'MX\\MX_Router' => __DIR__ . '/..' . '/fusion-cms/mx/MX/Router.php',
         'Smarty' => __DIR__ . '/..' . '/smarty/smarty/libs/Smarty.class.php',
         'SmartyCompilerException' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smartycompilerexception.php',
         'SmartyException' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smartyexception.php',

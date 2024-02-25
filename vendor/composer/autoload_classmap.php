@@ -7,6 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'MX\\CI' => $vendorDir . '/fusion-cms/mx/MX/Base.php',
+    'MX\\MX_Config' => $vendorDir . '/fusion-cms/mx/MX/Config.php',
+    'MX\\MX_Controller' => $vendorDir . '/fusion-cms/mx/MX/Controller.php',
+    'MX\\MX_Lang' => $vendorDir . '/fusion-cms/mx/MX/Lang.php',
+    'MX\\MX_Loader' => $vendorDir . '/fusion-cms/mx/MX/Loader.php',
+    'MX\\MX_Modules' => $vendorDir . '/fusion-cms/mx/MX/Modules.php',
+    'MX\\MX_Router' => $vendorDir . '/fusion-cms/mx/MX/Router.php',
     'Smarty' => $vendorDir . '/smarty/smarty/libs/Smarty.class.php',
     'SmartyCompilerException' => $vendorDir . '/smarty/smarty/libs/sysplugins/smartycompilerexception.php',
     'SmartyException' => $vendorDir . '/smarty/smarty/libs/sysplugins/smartyexception.php',
