@@ -1,0 +1,33 @@
+{
+	"name":"Levelup",
+	"description":"Enables your users to use blizzlike Levelup.",
+	"version":"1.0.0",
+	"date":"2024-02-25",
+	"min_required_version":"8.2.1",
+	"author":
+	{
+		"name":"FusionCMS",
+		"website":"https://github.com/FusionWowCMS/FusionCMS"
+	},
+	"permissions":
+	{
+		"view":
+		{
+			"default":true,
+			"description":"View the levelup screen."
+		}
+	},
+	"roles":
+	{
+		"view":
+		{
+			"description":"View the levelup module.",
+			"permissions":
+			{
+				"view":true
+			}
+		}
+        
+	},
+	"enabled":true
+}
