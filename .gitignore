@@ -6,11 +6,8 @@
 !*/cache/index.html
 !*/cache/.htaccess
 
-application/logs/*
 application/config/database.php
 application/config/fusion.php
-!application/logs/index.html
-!application/logs/.htaccess
 writable/*
 
 .php-cs-fixer.cache
