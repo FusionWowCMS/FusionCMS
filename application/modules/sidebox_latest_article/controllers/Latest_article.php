@@ -40,10 +40,6 @@ class Latest_article extends MX_Controller
         self::$News = $this->getNews($this->latest_article_model->getArticles(false,5));
     }
 
-    /**
-     * View
-     * @return void
-     */
     public function view()
     {
         // Prepare data
@@ -52,36 +48,30 @@ class Latest_article extends MX_Controller
             'module'     => self::$moduleName,
             'moduleUrl'  => self::$moduleUrl,
             'modulePath' => self::$modulePath,
-            'news'  => self::$News ,
-            'url' => $this->template->page_url
-     
+            'news'       => self::$News ,
+            'url'        => $this->template->page_url
         ];
 
         // Render output
         return $this->template->loadPage('latest.tpl', $data);
     }
     
-     private function getNews($articles) {
-       
-   
-        if ($articles) {
-            foreach ($articles as $key => $value) {
-				
-				   $articles[$key]['headline'] = langColumn($value['headline']);
-				
-                   if (strlen($value['headline']) > 20) {
-                    $articles[$key]['headline'] =(strlen(mb_substr($articles[$key]['headline'], 0, 40)) < 40) ? mb_substr($articles[$key]['headline'], 0, 40) : mb_substr($articles[$key]['headline'], 0, 40).' ...';
-				   }
-				
-				
-                    $articles[$key]['date'] = 'Posted by '.$this->user->getNickname($value['author_id']).' on '.date("Y/m/d", $value['timestamp']);
-                
-                $articles[$key]['id'] = $value['id'];
-            }
-        }
-        
-           return $articles;
-    
-     
+     private function getNews($articles)
+     {
+         if ($articles) {
+             foreach ($articles as $key => $value) {
+                 $articles[$key]['headline'] = langColumn($value['headline']);
+
+                 if (strlen($value['headline']) > 20) {
+                     $articles[$key]['headline'] = (strlen(mb_substr($articles[$key]['headline'], 0, 40)) < 40) ? mb_substr($articles[$key]['headline'], 0, 40) : mb_substr($articles[$key]['headline'], 0, 40) . ' ...';
+                 }
+
+                 $articles[$key]['date'] = 'Posted by ' . $this->user->getNickname($value['author_id']) . ' on ' . date("Y/m/d", $value['timestamp']);
+
+                 $articles[$key]['id'] = $value['id'];
+             }
+         }
+
+        return $articles;
      } 
 }
