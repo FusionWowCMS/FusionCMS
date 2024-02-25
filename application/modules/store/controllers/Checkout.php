@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Checkout Controller Class
+ * @property store_model $store_model store_model Class
+ */
 class Checkout extends MX_Controller
 {
     private $vp;

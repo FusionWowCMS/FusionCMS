@@ -3,6 +3,10 @@
 use App\Config\Services;
 use MX\MX_Controller;
 
+/**
+ * Admin Controller Class
+ * @property dashboard_model $dashboard_model dashboard_model Class
+ */
 class Admin extends MX_Controller
 {
     public function __construct()

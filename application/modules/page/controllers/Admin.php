@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Admin page Controller Class
+ * @property page_model $page_model page_model Class
+ */
 class Admin extends MX_Controller
 {
     public function __construct()

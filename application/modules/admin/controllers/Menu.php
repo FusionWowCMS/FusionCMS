@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Menu Controller Class
+ * @property menu_model $menu_model menu_model Class
+ */
 class Menu extends MX_Controller
 {
     public function __construct()

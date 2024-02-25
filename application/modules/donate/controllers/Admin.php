@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Admin Donate Controller Class
+ * @property donate_model $donate_model donate_model Class
+ */
 class Admin extends MX_Controller
 {
     private $logsToLoad = 10;

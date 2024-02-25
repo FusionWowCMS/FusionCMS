@@ -2,6 +2,11 @@
 
 use MX\MX_Controller;
 
+/**
+ * Comments News Controller Class
+ * @property news_model $news_model news_model Class
+ * @property comments_model $comments_model comments_model Class
+ */
 class Comments extends MX_Controller
 {
     public function __construct()

@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Emaillogs Controller Class
+ * @property dashboard_model $dashboard_model dashboard_model Class
+ */
 class Emaillogs extends MX_Controller
 {
     public function __construct()

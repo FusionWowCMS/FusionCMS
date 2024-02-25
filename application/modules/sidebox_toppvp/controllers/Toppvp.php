@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Toppvp Controller Class
+ * @property toppvp_model $toppvp_model toppvp_model Class
+ */
 class Toppvp extends MX_Controller
 {
     private $realm;

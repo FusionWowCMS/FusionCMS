@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Account_banned Controller Class
+ * @property gm_model $gm_model gm_model Class
+ */
 class Account_banned extends MX_Controller
 {
 	public function __construct()

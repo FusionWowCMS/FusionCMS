@@ -2,7 +2,11 @@
 
 use MX\MX_Controller;
 
-class top extends MX_Controller
+/**
+ * Top Controller Class
+ * @property top_model $top_model top_model Class
+ */
+class Top extends MX_Controller
 {
     function __construct()
     {

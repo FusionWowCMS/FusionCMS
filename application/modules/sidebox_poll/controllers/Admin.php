@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Admin Poll Controller Class
+ * @property poll_model $poll_model poll_model Class
+ */
 class Admin extends MX_Controller
 {
     public function __construct()

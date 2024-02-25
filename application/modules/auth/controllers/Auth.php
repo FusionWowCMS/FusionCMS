@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Auth Controller Class
+ * @property login_model $login_model login_model Class
+ */
 class Auth extends MX_Controller
 {
     public function __construct()

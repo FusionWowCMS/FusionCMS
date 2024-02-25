@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Visitors Controller Class
+ * @property visitor_model $visitor_model visitor_model Class
+ */
 class Visitors extends MX_Controller
 {
     public function __construct()

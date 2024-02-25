@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Changelog Controller Class
+ * @property changelog_model $changelog_model changelog_model Class
+ */
 class Changelog extends MX_Controller
 {
     public function __construct()

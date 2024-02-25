@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Armory Controller Class
+ * @property armory_model $armory_model armory_model Class
+ */
 class Armory extends MX_Controller
 {
     private $weapon_sub;

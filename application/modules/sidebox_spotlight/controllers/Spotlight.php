@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Spotlight Controller Class
+ * @property spotlight_model $spotlight_model spotlight_model Class
+ */
 class Spotlight extends MX_Controller
 {
     # Directory separator shortcut

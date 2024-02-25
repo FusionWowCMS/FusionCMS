@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Vote Controller Class
+ * @property vote_model $vote_model vote_model Class
+ */
 class Vote extends MX_Controller
 {
     private $js;

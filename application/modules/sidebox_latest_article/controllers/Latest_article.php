@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Latest_article Controller Class
+ * @property latest_article_model $latest_article_model latest_article_model Class
+ */
 class Latest_article extends MX_Controller
 {
     # Directory separator shortcut

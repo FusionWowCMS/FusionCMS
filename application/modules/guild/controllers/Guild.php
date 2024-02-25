@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Guild Controller Class
+ * @property guild_model $guild_model guild_model Class
+ */
 class Guild extends MX_Controller
 {
     private $realm;
@@ -11,6 +15,8 @@ class Guild extends MX_Controller
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->load->model('guild_model');
     }
 

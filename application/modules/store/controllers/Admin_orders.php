@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Admin_orders Controller Class
+ * @property store_model $store_model store_model Class
+ */
 class Admin_orders extends MX_Controller
 {
     public function __construct()

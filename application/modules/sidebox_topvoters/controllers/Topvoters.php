@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Topvoters Controller Class
+ * @property topvoters_model $topvoters_model topvoters_model Class
+ */
 class Topvoters extends MX_Controller
 {
     public function __construct()

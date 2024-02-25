@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Avatar Controller Class
+ * @property settings_model $settings_model settings_model Class
+ */
 class Avatar extends MX_Controller
 {
     public function __construct()

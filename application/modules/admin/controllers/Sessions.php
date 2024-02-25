@@ -3,6 +3,10 @@
 use MX\MX_Controller;
 use CodeIgniter\HTTP\UserAgent;
 
+/**
+ * Sessions Controller Class
+ * @property session_model $session_model session_model Class
+ */
 class Sessions extends MX_Controller
 {
     public function __construct()

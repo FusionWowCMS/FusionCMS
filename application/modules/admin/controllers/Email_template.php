@@ -4,6 +4,10 @@ defined('BASEPATH') or exit('This page does not exist');
 
 use MX\MX_Controller;
 
+/**
+ * Email_template Controller Class
+ * @property email_template_model $email_template_model email_template_model Class
+ */
 class Email_template extends MX_Controller
 {
     public function __construct()

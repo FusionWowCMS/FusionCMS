@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Sidebox Controller Class
+ * @property sidebox_model $sidebox_model sidebox_model Class
+ */
 class Sidebox extends MX_Controller
 {
     private $sideboxModules;

@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Gm Controller Class
+ * @property gm_model $gm_model gm_model Class
+ */
 class Gm extends MX_Controller
 {
 	public function __construct()

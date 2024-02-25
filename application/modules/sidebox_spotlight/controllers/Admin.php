@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Admin Spotlight Controller Class
+ * @property spotlight_model $spotlight_model spotlight_model Class
+ */
 class Admin extends MX_Controller
 {
     public function __construct()

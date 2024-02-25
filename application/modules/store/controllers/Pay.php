@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Pay Controller Class
+ * @property store_model $store_model store_model Class
+ */
 class Pay extends MX_Controller
 {
     private $vp;

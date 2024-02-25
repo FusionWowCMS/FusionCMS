@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Admin News Controller Class
+ * @property news_model $news_model news_model Class
+ */
 class Admin extends MX_Controller
 {
     public function __construct()

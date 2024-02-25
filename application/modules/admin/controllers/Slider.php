@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Slider Controller Class
+ * @property slider_model $slider_model slider_model Class
+ */
 class Slider extends MX_Controller
 {
     public function __construct()

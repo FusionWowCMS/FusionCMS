@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Logging Controller Class
+ * @property logging_model $logging_model logging_model Class
+ */
 class Logging extends MX_Controller
 {
     private $logsToLoad = 10; // 10 at the time

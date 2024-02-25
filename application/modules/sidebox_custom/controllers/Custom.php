@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Custom Controller Class
+ * @property custom_model $custom_model custom_model Class
+ */
 class Custom extends MX_Controller
 {
     private $id;

@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Tooltip Controller Class
+ * @property tooltip_model $tooltip_model tooltip_model Class
+ */
 class Tooltip extends MX_Controller
 {
     public function __construct()

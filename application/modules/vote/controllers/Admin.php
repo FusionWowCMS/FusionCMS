@@ -4,6 +4,10 @@ use MX\MX_Controller;
 
 // todo: NO PERMISSIONS!
 
+/**
+ * Admin Vote Controller Class
+ * @property vote_model $vote_model vote_model Class
+ */
 class Admin extends MX_Controller
 {
     public function __construct()

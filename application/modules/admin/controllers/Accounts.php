@@ -2,6 +2,11 @@
 
 use MX\MX_Controller;
 
+/**
+ * Accounts Controller Class
+ * @property accounts_model $accounts_model accounts_model Class
+ * @property logging_model $logging_model logging_model Class
+ */
 class Accounts extends MX_Controller
 {
     private $logsToLoad = 10;

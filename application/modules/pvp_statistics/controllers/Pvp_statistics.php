@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Pvp_statistics Controller Class
+ * @property data_model $data_model data_model Class
+ */
 class Pvp_statistics extends MX_Controller
 {
     public function __construct()

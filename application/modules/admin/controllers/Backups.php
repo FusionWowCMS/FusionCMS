@@ -8,7 +8,6 @@ class Backups extends MX_Controller
     {
         // Make sure to load the administrator library!
         $this->load->library('administrator');
-        $this->load->library('dbbackup');
         $this->load->helper('download');
         $this->load->model('cms_model');
 

@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Admin Teleport Controller Class
+ * @property teleport_model $teleport_model teleport_model Class
+ */
 class Admin extends MX_Controller
 {
     public function __construct()

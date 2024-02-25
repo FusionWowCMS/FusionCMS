@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Register Controller Class
+ * @property activation_model $activation_model activation_model Class
+ */
 class Register extends MX_Controller
 {
     private $usernameError;

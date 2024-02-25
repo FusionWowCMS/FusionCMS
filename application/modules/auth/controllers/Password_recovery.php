@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Password_recovery Controller Class
+ * @property password_recovery_model $password_recovery_model password_recovery_model Class
+ */
 class Password_recovery extends MX_Controller
 {
     public function __construct()

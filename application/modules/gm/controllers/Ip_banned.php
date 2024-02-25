@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Ip_banned Controller Class
+ * @property gm_model $gm_model gm_model Class
+ */
 class Ip_banned extends MX_Controller
 {
 	public function __construct()

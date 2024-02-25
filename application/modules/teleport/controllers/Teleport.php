@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Teleport Controller Class
+ * @property teleport_model $teleport_model teleport_model Class
+ */
 class Teleport extends MX_Controller
 {
     private $teleportLocations;

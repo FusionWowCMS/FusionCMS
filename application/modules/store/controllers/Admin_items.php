@@ -4,6 +4,10 @@ use MX\MX_Controller;
 
 // todo: NO PERMISSIONS!
 
+/**
+ * Admin_items Controller Class
+ * @property items_model $items_model items_model Class
+ */
 class Admin_items extends MX_Controller
 {
     public function __construct()

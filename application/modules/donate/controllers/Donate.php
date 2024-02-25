@@ -18,6 +18,10 @@ use PayPal\Api\Transaction;
 use PayPal\Api\RedirectUrls;
 use PayPal\Exception\PayPalConnectionException;
 
+/**
+ * Donate Controller Class
+ * @property donate_model $donate_model donate_model Class
+ */
 class Donate extends MX_Controller
 {
     public function __construct()

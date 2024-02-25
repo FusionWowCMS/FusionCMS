@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Character Controller Class
+ * @property character_model $character_model Character_model Class
+ */
 class Character extends MX_Controller
 {
     private $canCache;

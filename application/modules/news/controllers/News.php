@@ -2,6 +2,11 @@
 
 use MX\MX_Controller;
 
+/**
+ * News Controller Class
+ * @property news_model $news_model news_model Class
+ * @property comments_model $comments_model comments_model Class
+ */
 class News extends MX_Controller
 {
     private $news_articles = array();

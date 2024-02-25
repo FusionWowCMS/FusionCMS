@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Poll Controller Class
+ * @property poll_model $poll_model poll_model Class
+ */
 class Poll extends MX_Controller
 {
     private $total = 0;

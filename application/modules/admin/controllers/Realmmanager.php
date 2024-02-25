@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Realmmanager Controller Class
+ * @property realm_model $realm_model realm_model Class
+ */
 class Realmmanager extends MX_Controller
 {
     public function __construct()
