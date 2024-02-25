@@ -16,9 +16,6 @@ class levelup extends MX_Controller
         //Load the Config
         $this->load->config('levelup');
 
-        //Load the models
-        $this->load->model('Levelup_Model');
-
     }
 
     private function init()

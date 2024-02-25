@@ -19,7 +19,7 @@ const LevelUp = {
         });
         $(`select[id="character_select_${realmId}"]`).next().show();
 
-        this.User.realm = id;
+        this.User.realm = realmId;
     },
     CharacterChanged: function (selectField, realmId) {
         var selected = $(selectField).find('option:selected');

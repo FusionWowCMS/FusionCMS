@@ -125,7 +125,6 @@ class Unstuck extends MX_Controller
             //Get the character  is online?
             $isOnline = $realmConnection->isOnline($characterGuid);
 
-
             if ($isOnline) {
                 die(lang("character_is_online", "unstuck"));
             }
