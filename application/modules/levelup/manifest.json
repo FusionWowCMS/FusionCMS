@@ -11,23 +11,22 @@
 	},
 	"permissions":
 	{
-		"view":
-		{
-			"default":true,
-			"description":"View the levelup screen."
+		"view": {
+			"default": true,
+			"description": "View the levelup screen."
 		}
 	},
 	"roles":
 	{
 		"view":
 		{
-			"description":"View the levelup module.",
+			"description": "View the levelup module.",
 			"permissions":
 			{
 				"view":true
 			}
 		}
-        
+
 	},
 	"enabled":true
 }
