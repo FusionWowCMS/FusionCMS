@@ -132,7 +132,7 @@ $autoload['packages'] = [];
 |
 | Prototype:
 |
-|   $autoload['libraries'] = ['database', 'session', 'xmlrpc'];
+|   $autoload['libraries'] = ['database', 'session', 'security'];
 */
 
 $autoload['libraries'] = ['security', 'cache', 'database', 'session', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'dblogger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items', 'crypto'];
@@ -190,7 +190,7 @@ $autoload['config'] = ['language', 'version', 'acl_defaults', 'fusion', 'message
 |   $autoload['language'] = ['lang1', 'lang2'];
 |
 | NOTE: Do not include the "_lang" part of your file.  For example
-| "codeigniter_lang.php" would be referenced as array('codeigniter');
+| "codeigniter_lang.php" would be referenced as ['codeigniter'];
 |
 */
 

@@ -289,7 +289,7 @@ require_once BASEPATH . 'Controller.php';
  *
  * @return Controller
  */
-function &get_instance()
+function &get_instance(): Controller
 {
     return Controller::get_instance();
 }

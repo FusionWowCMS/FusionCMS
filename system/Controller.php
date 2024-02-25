@@ -108,9 +108,9 @@ class Controller
     /**
      * Reference to the CI singleton
      *
-     * @var    object
+     * @var    Controller
      */
-    private static object $instance;
+    private static Controller $instance;
 
     /**
      * CI_Loader
@@ -146,9 +146,9 @@ class Controller
      * Get the CI singleton
      *
      * @static
-     * @return    object
+     * @return    Controller
      */
-    public static function &get_instance(): object
+    public static function &get_instance(): Controller
     {
         return self::$instance;
     }
