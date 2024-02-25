@@ -11,7 +11,7 @@ const LevelUp = {
         }
     },
 
-    RealmChanged: function (selectField) {
+    RealmChanged: function () {
         const realmId = $('select[id="realm"]').val();
 
         $(`[data-character]`).each(function() {

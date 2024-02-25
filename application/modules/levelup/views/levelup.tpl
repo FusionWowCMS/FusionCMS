@@ -18,15 +18,15 @@
 <section id="character_tools">
     <form onSubmit="LevelUp.Submit(this); return false;">
         <label for="realm">Realm</label>
-            <select name="realm" id="realm" onChange="LevelUp.RealmChanged(this);">
-                {if $characters}
-                    {foreach from=$characters item=realm}
-                        <option value="{$realm.realmId}">{$realm.realmName}</option>
-                    {/foreach}
-                {else}
-                    <option value="0">No realms</option>
-                {/if}
-            </select>
+        <select name="realm" id="realm" onChange="LevelUp.RealmChanged();">
+            {if $characters}
+                {foreach from=$characters item=realm}
+                    <option value="{$realm.realmId}">{$realm.realmName}</option>
+                {/foreach}
+            {else}
+                <option value="0">No realms</option>
+            {/if}
+        </select>
 
         <label for="character" class="character_select">Character</label>
         {foreach from=$characters item=realm}

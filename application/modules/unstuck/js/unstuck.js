@@ -1,56 +1,38 @@
-var Unstuck = {
+const Unstuck = {
 
     User: {
-
         dp: null,
         price: 0,
-        toolid: 0,
-        realm: 0,
         character: 0,
-        faction: 0,
 
         initialize: function (config) {
             this.dp = config.dp;
             this.price = config.price;
-            this.realm = config.realm;
         }
     },
 
-    RealmChanged: function (selectField) {
-        var selected = $(selectField).find('option:selected');
+    RealmChanged: function () {
+        const realmId = $('select[id="realm"]').val();
 
-        if (typeof selected != 'undefined' && selected.length > 0) {
-            var visible = $('.character_select:visible');
-            var id = parseInt(selected.val());
+        $(`[data-character]`).each(function() {
+            $(this).next().hide();
+        });
+        $(`select[id="character_select_${realmId}"]`).next().show();
 
-            if (typeof visible != 'undefined' && visible.length > 0) {
-                visible.fadeOut('fast', function () {
-                    $('#character_select_' + id).fadeIn('fast');
-                });
-            } else {
-                $('#character_select_' + id).fadeIn('fast');
-            }
-
-            this.User.realm = id;
-        }
+        this.User.realm = realmId;
     },
     CharacterChanged: function (selectField, realmId) {
-        var selected = $(selectField).find('option:selected');
+        const selected = $(selectField).find('option:selected');
 
         if (typeof selected != 'undefined' && selected.length > 0) {
-            var guid = parseInt(selected.val());
-
-            this.User.character = guid;
-
+            this.User.character = parseInt(selected.val());
         }
 
         this.User.realm = realmId;
     },
+
     getPrice: function () {
-        var price = this.User.price;
-
-
-        return price;
+        return this.User.price;
     },
 
     busy: false,
@@ -61,21 +43,19 @@ var Unstuck = {
 
         //Check if we have selected realm
         if (this.User.realm == 0) {
-            
             Swal.fire({
                 icon: 'error',
-                title: 'character tools',
+                title: 'Unstuck',
                 text: lang("no_realm_selected", "unstuck"),
             })
             return;
         }
 
         //Check if we have selected character
-        if (this.User.character == 0) 
-
+        if (this.User.character == 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'character tools',
+                title: 'Unstuck',
                 text: lang("no_char_selected", "unstuck"),
             })
             return;
@@ -87,14 +67,11 @@ var Unstuck = {
             CanAfford = true;
         } else {
             if (Unstuck.User.dp < this.getPrice()) {
-
                 Swal.fire({
                     icon: 'error',
-                    title: 'character tools',
+                    title: 'Unstuck',
                     text: lang("cant_afford", "unstuck"),
                 })
-
-
             } else {
                 CanAfford = true;
             }
@@ -102,10 +79,8 @@ var Unstuck = {
 
         if (CanAfford) {
             // Make the user confirm the purchase
-
             Swal.fire({
-
-                title: lang("want_to_buy", "Unstuck"),
+                title: lang('want_to_buy', 'Unstuck'),
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -121,7 +96,6 @@ var Unstuck = {
 
                     // Post the data
                     $.post(Config.URL + "unstuck/submit", {
-
                         realm: Unstuck.User.realm,
                         guid: Unstuck.User.character,
                         csrf_token_name: Config.CSRF
@@ -152,6 +126,6 @@ var Unstuck = {
     },
 
     Back: function () {
-        window.location = Config.URL + "Unstuck";
+        window.location = Config.URL + "unstuck";
     }
-}
+};

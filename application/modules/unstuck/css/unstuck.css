@@ -1,5 +1,5 @@
 #left form {
-    padding: 45px 32px 19px 26px;
+    padding: 10px 20px 20px 20px;
     margin-top: 9px;
     border: 1px solid rgb(33, 26, 22);
     border-radius: 14px;
@@ -19,7 +19,6 @@
 }
 
 #content_description {
-
     border: 1px solid rgb(33, 26, 22);
     padding: 5px;
     margin-bottom: -20px;
@@ -36,14 +35,11 @@
 }
 
 #submit {
-
     text-align: center;
 }
 
 #cost-fee {
-
     padding: 5px;
-
     margin-top: 15px;
     width: 15%;
     margin-bottom: 5px
@@ -52,7 +48,7 @@
 #left form label {
     display: block;
     width: 100%;
-    margin-bottom: 20px;
+    margin-top: 20px;
     text-align: left;
     font-size: 17px;
     font-weight: bold;
@@ -61,7 +57,6 @@
 }
 
 #info_text {
-    border-radius: 2px;
     box-shadow: 0 0 9px rgba(12, 7, 6, 0.1);
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
     border: 1px solid rgb(33, 26, 22);
