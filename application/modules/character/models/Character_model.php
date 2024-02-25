@@ -1,6 +1,6 @@
 <?php
 
-class Armory_model extends CI_Model
+class Character_model extends CI_Model
 {
     public $realm;
     private $connection;
