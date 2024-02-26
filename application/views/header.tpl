@@ -31,7 +31,7 @@
 
 		<!-- Header CSS.Start -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-		{minify files=array("css/default.css", "css/tooltip.css", "vendor/node_modules/bootstrap/dist/css/bootstrap.min.css", "vendor/node_modules/sweetalert2/dist/sweetalert2.min.css", "vendor/node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "vendor/node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "{$theme_path}css/cms.css", "{$theme_path}css/main.css") type='css' output='cache/data/minify/all.min.css' disable={$minify_css}}
+		{minify files=array("application/css/default.css", "application/css/tooltip.css", "application/vendor/node_modules/bootstrap/dist/css/bootstrap.min.css", "application/vendor/node_modules/sweetalert2/dist/sweetalert2.min.css", "application/vendor/node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "application/vendor/node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "{$full_theme_path}css/cms.css", "{$full_theme_path}css/main.css") type='css' output='writable/cache/data/minify/all.min.css' disable={$minify_css}}
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css">
 
 		{if $extra_css}<link rel="stylesheet" href="{$path}{$extra_css}">{/if}
@@ -49,7 +49,7 @@
 		<!-- Header CSS.End -->
 
 		<!-- Header JS.Start -->
-		{minify files=array("js/jquery.min.js", "js/jquery.placeholder.min.js", "js/jquery.transit.min.js", "js/jquery.sort.js", "vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "vendor/node_modules/owl.carousel/dist/owl.carousel.min.js", "{$theme_path}vendor/OwlCarousel2/js/owl.carousel.js", "js/main.js", "js/cookie.js", "js/ui.js", "js/language.js", "js/tooltip.js") type='js' output='cache/data/minify/all.min.js' disable={$minify_js}}
+		{minify files=array("application/js/jquery.min.js", "application/js/jquery.placeholder.min.js", "application/js/jquery.transit.min.js", "application/js/jquery.sort.js", "application/vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "application/vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "application/vendor/node_modules/owl.carousel/dist/owl.carousel.min.js", "{$full_theme_path}vendor/OwlCarousel2/js/owl.carousel.js", "application/js/main.js", "application/js/cookie.js", "application/js/ui.js", "application/js/language.js", "application/js/tooltip.js") type='js' output='writable/cache/data/minify/all.min.js' disable={$minify_js}}
 
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
