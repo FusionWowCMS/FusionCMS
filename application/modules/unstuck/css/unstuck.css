@@ -1,73 +1,24 @@
-#left form {
-    padding: 10px 20px 20px 20px;
-    margin-top: 9px;
-    border: 1px solid rgb(33, 26, 22);
-    border-radius: 14px;
-}
-
-#left .form_message,
-.page_message {
-    /* width: 70%; */
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 59px;
-    /* margin-bottom: 30px; */
-    font-size: 14px;
-    text-align: center;
-    border: 1px solid rgb(33, 26, 22);
-    background-color: #121516;
-}
-
-#content_description {
-    border: 1px solid rgb(33, 26, 22);
-    padding: 5px;
-    margin-bottom: -20px;
-    border-radius: 5px;
-}
-
-#cost {
-    border: 1px solid #1e1a1a;
-    padding: 5px;
-    background-color: #131412;
-    margin-top: 15px;
-    width: 25%;
-    margin-bottom: 5px
-}
-
-#submit {
-    text-align: center;
-}
-
-#cost-fee {
-    padding: 5px;
-    margin-top: 15px;
-    width: 15%;
-    margin-bottom: 5px
-}
-
-#left form label {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    text-align: left;
+.page-desc-holder {
+    padding: 0;
+    margin: 0 auto 35px auto;
+    text-shadow: 0 1px 1px #000000;
     font-size: 17px;
-    font-weight: bold;
-    color: #908371;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
 }
 
-#info_text {
-    box-shadow: 0 0 9px rgba(12, 7, 6, 0.1);
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgb(33, 26, 22);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: left;
-    box-sizing: border-box;
-    padding: 13px 26px 14px 40px;
-    background-image: url(../images/info.png);
-    background-repeat: no-repeat;
-    background-position: left 8px center;
-    border-radius: 12px;
+.cooldown-ico {
+    height: 87px;
+    width: 87px;
+    border: none;
+    background: url(../images/not_active.png) no-repeat;
+}
+
+.cooldown-ico:hover {
+    background: url(../images/active.png) no-repeat;
+}
+
+.description-small {
+    text-align: center;
 }

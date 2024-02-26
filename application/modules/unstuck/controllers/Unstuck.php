@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Unstuck Controller Class
+ * @property unstuck_model $unstuck_model unstuck_model Class
+ */
 class Unstuck extends MX_Controller
 {
     private $characters;
@@ -25,7 +29,7 @@ class Unstuck extends MX_Controller
         $this->load->config('unstuck');
 
         //Load the models
-        $this->load->model('Unstuck_Model');
+        $this->load->model('unstuck_model');
     }
 
     private function init()
@@ -53,23 +57,20 @@ class Unstuck extends MX_Controller
     {
         $this->init();
 
-        $this->template->setTitle("Character Unstuck");
+        $this->template->setTitle(lang('unstuck', 'unstuck'));
 
         clientLang("cant_afford", "unstuck");
-        clientLang("purchase", "unstuck");
-        clientLang("want_to_buy", "unstuck");
-        clientLang("processing", "unstuck");
         clientLang("no_realm_selected", "unstuck");
         clientLang("no_char_selected", "unstuck");
+        clientLang("sure_want_unstack", "unstuck");
 
         //Load the content
         $content_data = array(
             "characters" => $this->characters,
             "url" => $this->template->page_url,
             "total" => $this->total,
-            "dp" => $this->user->getDp(),
-            "service_cost" => $this->config->item("price"),
-            'description' => $this->config->item("description")
+            "vp" => $this->user->getVp(),
+            "service_cost" => $this->config->item("price_vote_point")
         );
 
         $page_content = $this->template->loadPage("unstuck.tpl", $content_data);
@@ -77,7 +78,7 @@ class Unstuck extends MX_Controller
         //Load the page
         $page_data = array(
             "module" => "default",
-            "headline" => "Character Unstuck",
+            "headline" => lang('unstuck', 'unstuck'),
             "content" => $page_content
         );
 
@@ -97,65 +98,96 @@ class Unstuck extends MX_Controller
         }
 
         if ($characterGuid && $realmId) {
-
             $realmConnection = $this->realms->getRealm($realmId)->getCharacters();
             $realmConnection->connect();
 
-            //Get the price
-            $Price = $this->config->item("price");
-
-            // Make sure the character exists
-            if (!$realmConnection->characterExists($characterGuid)) {
-                die(lang("character_does_not_exist", "unstuck"));
+            $character = $realmConnection->getCharacterByGuid($characterGuid);
+            if ($characterGuid <= 0 || !$character) {
+                $data = [
+                    'status' => false,
+                    'icon' => 'error',
+                    'text' => lang("character_does_not_exist", "unstuck")
+                ];
+                die(json_encode($data));
             }
 
             // Make sure the character belongs to this account
             if (!$realmConnection->characterBelongsToAccount($characterGuid, $this->user->getId())) {
-                die(lang("character_does_not_belong_account", "unstuck"));
+                $data = [
+                    'status' => false,
+                    'icon' => 'error',
+                    'text' => lang("character_does_not_belong_account", "unstuck")
+                ];
+                die(json_encode($data));
             }
 
-            //Get the character name
-            $CharacterName = $realmConnection->getNameByGuid($characterGuid);
+            $characterName = $character[column("characters", "name", false, $realmId)];
 
-            //Make sure we've got the name
-            if (!$CharacterName) {
-                die(lang("unable_resolve_character_name", "unstuck"));
+            if (!$characterName) {
+                $data = [
+                    'status' => false,
+                    'icon' => 'error',
+                    'text' => lang("unable_resolve_character_name", "unstuck")
+                ];
+                die(json_encode($data));
             }
 
-            //Get the character  is online?
+            //Get the character is online?
             $isOnline = $realmConnection->isOnline($characterGuid);
 
             if ($isOnline) {
-                die(lang("character_is_online", "unstuck"));
+                $data = [
+                    'status' => false,
+                    'icon' => 'error',
+                    'text' => lang("character_is_online", "unstuck")
+                ];
+                die(json_encode($data));
             }
 
+            //Get the price
+            $price = $this->config->item("price_vote_point");
+
             //Check if the user can afford the service
-            if ($this->user->getDp() >= $Price) {
+            if ($this->user->getVp() >= $price) {
+                //Execute the command
+                $this->realms->getRealm($realmId)->getEmulator()->sendCommand('.revive ' . $characterName);
 
                 $this->home($realmId, $characterGuid);
+                $this->unstuck_model->setLocation($this->gps['posX'], $this->gps['posY'], $this->gps['posZ'], $this->gps['orientation'], $this->gps['mapId'], $characterGuid, $realmConnection->getConnection());
 
-                $this->Unstuck_Model->setLocation($this->gps['posX'], $this->gps['posY'], $this->gps['posZ'], $this->gps['orientation'], $this->gps['mapId'], $characterGuid, $realmConnection->getConnection());
-
-                //Update Donation Points
-                if ($Price > 0) {
-                    $this->user->setDp($this->user->getDp() - $Price);
+                // Update Donation Points
+                if ($price > 0) {
+                    $this->user->setVp($this->user->getVp() - $price);
                 }
 
                 //Successful
-                die(lang("successfully", "unstuck"));
+                $data = [
+                    'status' => true,
+                    'icon' => 'success',
+                    'text' => lang("successfully", "unstuck")
+                ];
 
             } else {
-                die(lang("dont_enough_Donation_Points", "unstuck"));
+                $data = [
+                    'status' => false,
+                    'icon' => 'error',
+                    'text' => lang("dont_enough_vote_points", "unstuck")
+                ];
             }
-
+            die(json_encode($data));
         } else {
-            die(lang("no_selected_service", "unstuck"));
+            $data = [
+                'status' => false,
+                'icon' => 'error',
+                'text' => lang("no_selected_service", "unstuck")
+            ];
+            die(json_encode($data));
         }
     }
 
     public function home($realmid, $guid)
     {
-        $rows = $this->Unstuck_Model->getcharacter_homebind($realmid, $guid);
+        $rows = $this->unstuck_model->getcharacter_homebind($realmid, $guid);
         $this->gps['mapId'] = $rows[0]['mapId'];
         $this->gps['orientation'] = 1.64;
         $this->gps['posX'] = $rows[0]['posX'];

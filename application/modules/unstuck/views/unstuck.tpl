@@ -3,7 +3,7 @@
         function initializeUnstuck() {
             if (typeof Unstuck != "undefined") {
                 Unstuck.User.initialize({
-                    dp: {$dp},
+                    vp: {$vp},
                     price: {$service_cost},
                 });
             } else {
@@ -14,45 +14,57 @@
         initializeUnstuck();
     });
 </script>
-<div id="info_text"> {$description} </div>
 
-<section id="character_tools">
+<div class="unstuck">
+    <div class="page-desc-holder">
+        {lang('description', 'unstuck')}
+    </div>
+
     <form onSubmit="Unstuck.Submit(this); return false;">
-        <label for="realm">Realm</label>
-        <select name="realm" id="realm" onChange="Unstuck.RealmChanged();">
-            {if $characters}
-                {foreach from=$characters item=realm}
-                    <option value="{$realm.realmId}">{$realm.realmName}</option>
-                {/foreach}
-            {else}
-                <option value="0">No realms</option>
-            {/if}
-        </select>
+        <div class="container_3 account-wide">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-lg-5 mt-4">
+                    <select name="realm" id="realm" onChange="Unstuck.RealmChanged();">
+                        {if $characters}
+                            {foreach from=$characters item=realm}
+                                <option value="{$realm.realmId}">{$realm.realmName}</option>
+                            {/foreach}
+                        {else}
+                            <option value="0">{lang('no_realm', 'unstuck')}</option>
+                        {/if}
+                    </select>
+                </div>
 
-        <label for="character" class="character_select">Character</label>
-        {foreach from=$characters item=realm}
-            <select {if !$realm@first}style="display:none"{/if} name="character_selector" data-character id="character_select_{$realm.realmId}" onChange="Unstuck.CharacterChanged(this, {$realm.realmId});">
-                {if $realm.characters}
-                    <option value="0"> Select Character</option>
-                    {foreach from=$realm.characters item=character}
-                        <option value="{$character.guid}">{$character.name} - Lvl {$character.level}</option>
+                <div class="col-sm-12 col-lg-2 text-center">
+                    <input type="submit" class="cooldown-ico" value="" data-bs-html="true" data-bs-toggle="tooltip" data-bs-title="{lang('take_me_home', 'unstuck')}"/>
+                </div>
+
+                <div class="col-sm-12 col-lg-5 mt-4">
+                    {foreach from=$characters item=realm}
+                        <select {if !$realm@first}style="display:none"{/if} name="character_selector" data-character id="character_select_{$realm.realmId}" onChange="Unstuck.CharacterChanged(this, {$realm.realmId});">
+                            {if $realm.characters}
+                                <option value="0">{lang('no_char_selected', 'unstuck')}</option>
+                                {foreach from=$realm.characters item=character}
+                                    <option value="{$character.guid}">{$character.name} - Lvl {$character.level}</option>
+                                {/foreach}
+                            {else}
+                                <option value="0">{lang('no_character', 'unstuck')}</option>
+                            {/if}
+                        </select>
                     {/foreach}
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="description-small">
+                {lang('notify', 'unstuck')}<br>
+                {if $service_cost}
+                    <div id="cost">{lang('service_fee', 'unstuck')}: {$service_cost} VP</div>
                 {else}
-                    <option value="0">No character</option>
+                    {lang('is_free', 'unstuck')}
                 {/if}
-            </select>
-        {/foreach}
-
-        <div class="service_cost">
-            {if $service_cost}
-                <div id="cost">Server Fee<img src="{$url}application/images/icons/coins_add.png"/>DP {$service_cost}</div>
-            {else}
-                <div id="cost"> Server Fee Free</div>
-            {/if}
+            </div>
         </div>
-
-        <div id="submit"><input type="submit" class="nice_button mt-2" value="Unstuck"/></div>
-
     </form>
-</section>
-<section id="character_tools_message" class="form_message" style="display: none;"></section>
+</div>

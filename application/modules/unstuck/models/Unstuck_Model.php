@@ -18,8 +18,7 @@ class Unstuck_Model extends CI_Model {
         $query = $character_database->getConnection()->query( "SELECT * FROM character_homebind WHERE guid = ?", [$guid]);
 
         if ( $query->num_rows() > 0 ) {
-            $result = $query->result_array();
-            return $result;
+            return $query->result_array();
         } else {
             return false;
         }

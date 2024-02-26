@@ -1,12 +1,12 @@
 const Unstuck = {
 
     User: {
-        dp: null,
+        vp: null,
         price: 0,
         character: 0,
 
         initialize: function (config) {
-            this.dp = config.dp;
+            this.vp = config.vp;
             this.price = config.price;
         }
     },
@@ -66,7 +66,7 @@ const Unstuck = {
         if (this.getPrice() == 0) {
             CanAfford = true;
         } else {
-            if (Unstuck.User.dp < this.getPrice()) {
+            if (Unstuck.User.vp < this.getPrice()) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Unstuck',
@@ -80,8 +80,8 @@ const Unstuck = {
         if (CanAfford) {
             // Make the user confirm the purchase
             Swal.fire({
-                title: lang('want_to_buy', 'Unstuck'),
-                text: "You won't be able to revert this!",
+                title: 'Unstuck',
+                text: lang("sure_want_unstack", "unstuck"),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -89,10 +89,8 @@ const Unstuck = {
                 confirmButtonText: 'Yes'
             }).then((result) => {
                 if (result.isConfirmed) {
-
                     // Mark as busy
                     Unstuck.busy = true;
-                    Unstuck.DisplayMessage(lang('processing', 'unstuck') + '<br><img src="' + Config.image_path + 'ajax.gif" />');
 
                     // Post the data
                     $.post(Config.URL + "unstuck/submit", {
@@ -100,27 +98,18 @@ const Unstuck = {
                         guid: Unstuck.User.character,
                         csrf_token_name: Config.CSRF
                     }, function (data) {
-                        // Display the returned message
-                        Unstuck.DisplayMessage(data);
-
-                        // Mark the store as no longer bussy
                         Unstuck.busy = false;
+                        data = JSON.parse(data);
+                        Swal.fire({
+                            text: data.text,
+                            icon: data.icon,
+                            willClose: () => {
+                                if (data.status)
+                                    window.location.reload();
+                            }
+                        });
                     });
                 }
-            });
-        }
-    },
-
-    DisplayMessage: function (data) {
-        if ($('#character_tools_message').is(':visible')) {
-            $('#character_tools_message').fadeOut('fast', function () {
-                $('#character_tools_message').html(data);
-                $('#character_tools_message').fadeIn('fast');
-            });
-        } else {
-            $('#character_tools').fadeOut('fast', function () {
-                $('#character_tools_message').html(data);
-                $('#character_tools_message').fadeIn('fast');
             });
         }
     },
