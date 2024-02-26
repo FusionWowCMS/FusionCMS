@@ -21,7 +21,10 @@ function getLang(): string
  *
  * @param String $id
  * @param String $file
- * @param array $args
+ * @param array $args Summary Example:
+ *                  + You have: $lang['apple'] = 'I have {0, number} apples.';
+ *                  + You can use: echo lang('apples', main, [3]);
+ *                  + Displays "I have 3 apples."
  * @return mixed
  */
 function lang(string $id, string $file = 'main', array $args = []): mixed
