@@ -21,9 +21,10 @@ function getLang(): string
  *
  * @param String $id
  * @param String $file
+ * @param array $args
  * @return mixed
  */
-function lang(string $id, string $file = 'main'): mixed
+function lang(string $id, string $file = 'main', array $args = []): mixed
 {
     static $CI;
 
@@ -31,7 +32,7 @@ function lang(string $id, string $file = 'main'): mixed
         $CI = &get_instance();
     }
 
-    return $CI->language->get($id, $file);
+    return $CI->language->get($id, $file, $args);
 }
 
 /**

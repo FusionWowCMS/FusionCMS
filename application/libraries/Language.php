@@ -24,13 +24,21 @@ class Language
     private $clientData;
 
     /**
+     * Boolean value whether the intl
+     * libraries exist on the system.
+     *
+     * @var bool
+     */
+    protected $intlSupport = false;
+
+    /**
      * Get the CI instance and load the default language
      */
     public function __construct()
     {
         $this->CI = &get_instance();
 
-        $this->requestedFiles = $this->data = array();
+        $this->requestedFiles = $this->data = [];
 
         // Load default language
         $this->defaultLanguage = $this->CI->config->item('language');
@@ -45,6 +53,10 @@ class Language
 
         $this->language = $this->defaultLanguage;
         $this->load("main");
+
+        if (class_exists(MessageFormatter::class)) {
+            $this->intlSupport = true;
+        }
     }
 
     /**
@@ -173,7 +185,7 @@ class Language
      * @param String $file defaults to 'main'
      * @return mixed|void
      */
-    public function get(string $id, string $file = 'main')
+    public function get(string $id, string $file = 'main', array $args = [])
     {
         if (!in_array($file, $this->requestedFiles)) {
             $this->load($file);
@@ -181,7 +193,8 @@ class Language
 
         // Try to find the string in the current language
         if (array_key_exists($id, $this->data[$this->language][$file])) {
-            return $this->data[$this->language][$file][$id];
+            $output = $this->data[$this->language][$file][$id];
+            return $this->formatMessage($output, $args);
         }
 
         // If the current language isn't the default language
@@ -191,7 +204,8 @@ class Language
             }
 
             if (array_key_exists($id, $this->data[$this->defaultLanguage][$file])) {
-                return $this->data[$this->defaultLanguage][$file][$id];
+                $output = $this->data[$this->defaultLanguage][$file][$id];
+                return $this->formatMessage($output, $args);
             } else {
                 show_error("Language string not found (" . $id . " in " . $file . ")");
             }
@@ -314,5 +328,35 @@ class Language
     public function getClientData(): string
     {
         return json_encode($this->clientData);
+    }
+
+    /**
+     * Advanced message formatting.
+     *
+     * @param array|string $message
+     * @param list<string> $args
+     *
+     * @return array|string
+     */
+    protected function formatMessage(array|string $message, array $args = []): array|string
+    {
+        if (!$this->intlSupport || $args === []) {
+            return $message;
+        }
+
+        if (is_array($message)) {
+            foreach ($message as $index => $value) {
+                $message[$index] = $this->formatMessage($value, $args);
+            }
+
+            return $message;
+        }
+
+        $formatted = MessageFormatter::formatMessage('en-US', $message, $args);
+        if ($formatted === false) {
+            throw new InvalidArgumentException('Invalid message format: "' . $message . '", args: "' . implode(',', $args) . '"');
+        }
+
+        return $formatted;
     }
 }

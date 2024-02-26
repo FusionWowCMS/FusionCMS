@@ -27,6 +27,7 @@
         "ext-dom": "*",
         "ext-gmp": "*",
         "ext-gd": "*",
+        "ext-intl": "*",
 
         "fusion-cms/mx": "^2.0",
         "monolog/monolog": "^2.8",
