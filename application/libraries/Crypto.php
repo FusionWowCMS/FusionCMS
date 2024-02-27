@@ -170,9 +170,9 @@ class Crypto
         $g = gmp_init(7);
         $N = gmp_init('894B645E89E1535BBDAD5B8B290650530801B18EBFBF5E8FAB3C82872A3E9BB7', 16);
 
-        $h = gmp_init(sha1(hex2bin($salt) . hash('sha1', strtoupper($username . ':' . $password), true)), 16);
+        $h = gmp_init($this->reverseHex(sha1(hex2bin($this->reverseHex($salt)) . hash('sha1', strtoupper($username . ':' . $password), true))), 16);
 
-        $verifier = gmp_strval(gmp_powm($g, $h, $N), 16);
+        $verifier = strtoupper(gmp_strval(gmp_powm($g, $h, $N), 16));
 
         return array(
             "salt" => $salt,
@@ -208,5 +208,20 @@ class Crypto
             $salt = random_bytes(32);
         }
         return $salt;
+    }
+
+    /**
+     * Reverse a hexadecimal string.
+     *
+     * @param string $string The input hexadecimal string to be reversed.
+     * @return string The reversed hexadecimal string.
+     */
+    private function reverseHex(string $string): string
+    {
+        for ($i = 0, $length = strlen($string); $i < $length; $i += 2) {
+            $bytes[] = substr($string, $i, 2);
+        }
+
+        return implode(array_reverse($bytes ?? []));
     }
 }
