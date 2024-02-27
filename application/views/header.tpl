@@ -49,7 +49,7 @@
 		<!-- Header CSS.End -->
 
 		<!-- Header JS.Start -->
-		{minify files=array("application/js/jquery.min.js", "application/js/jquery.placeholder.min.js", "application/js/jquery.transit.min.js", "application/js/jquery.sort.js", "application/vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "application/vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "application/vendor/node_modules/owl.carousel/dist/owl.carousel.min.js", "{$full_theme_path}vendor/OwlCarousel2/js/owl.carousel.js", "application/js/main.js", "application/js/cookie.js", "application/js/ui.js", "application/js/language.js", "application/js/tooltip.js") type='js' output='writable/cache/data/minify/all.min.js' disable={$minify_js}}
+		{minify files=array("application/js/jquery.min.js", "application/js/jquery.placeholder.min.js", "application/js/jquery.transit.min.js", "application/js/jquery.sort.js", "application/vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "application/vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "application/vendor/node_modules/owl.carousel/dist/owl.carousel.min.js", "application/js/main.js", "application/js/cookie.js", "application/js/ui.js", "application/js/language.js", "application/js/tooltip.js") type='js' output='writable/cache/data/minify/all.min.js' disable={$minify_js}}
 
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
