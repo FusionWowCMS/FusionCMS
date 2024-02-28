@@ -67,12 +67,12 @@ var UI = {
 					notifyResult(false, 'Please fix all folder permissions to continue.');
                 }
                 else {
-                    // check Apache Modules
+                    // check Apache or Ngnix Modules
                     Ajax.checkApacheModules(function(result) {
                         if (result == '2') {
-                            notifyResult(false, 'Unable to check Apache Modules, make sure required modules are enabled.');
+                            notifyResult(false, 'Unable to check Apache or Ngnix Modules, make sure required modules are enabled.');
                         } else if (result != '1') {
-                            notifyResult(false, 'Please enable all required Apache modules to continue.');
+                            notifyResult(false, 'Please enable all required Apache or Ngnix modules to continue.');
                         }
                     });
                     // check php extensions
