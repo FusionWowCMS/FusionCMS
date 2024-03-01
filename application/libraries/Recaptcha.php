@@ -56,7 +56,16 @@ class Recaptcha
     private function _submitHTTPGet(array $data): false|string
     {
         $url = self::site_verify_url.'?'.http_build_query($data);
-        return Services::curlrequest()->get($url)->getBody();
+        $options = [
+            'timeout'         => 300,
+            'allow_redirects' => [
+                'max' => 10,
+            ],
+            'user_agent'      => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1',
+            'version'         => CURL_HTTP_VERSION_2_0,
+            'verify'          => false,
+        ];
+        return Services::curlrequest()->get($url, $options)->getBody();
     }
     /**
      * Calls the reCAPTCHA site-verify API to verify whether the user passes
