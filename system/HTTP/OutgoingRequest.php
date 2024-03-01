@@ -40,7 +40,7 @@ class OutgoingRequest extends Message implements OutgoingRequestInterface
         string $method,
         ?URI $uri = null,
         array $headers = [],
-               $body = null,
+        $body = null,
         string $version = '1.1'
     ) {
         $this->method = $method;

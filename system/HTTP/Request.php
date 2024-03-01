@@ -1,324 +1,119 @@
-<?php namespace CodeIgniter\HTTP;
+<?php
 
-require_once BASEPATH.'Config/BaseConfig.php';
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
 
-class Request extends Message implements RequestInterface
+namespace CodeIgniter\HTTP;
+
+use CodeIgniter\Validation\FormatRules;
+
+/**
+ * Representation of an incoming, server-side HTTP request.
+ *
+ * @see \CodeIgniter\HTTP\RequestTest
+ */
+class Request extends OutgoingRequest implements RequestInterface
 {
-    /**
-     * IP address of the current user.
-     *
-     * @var string
-     */
-    protected $ipAddress = '';
+    use RequestTrait;
 
+    /**
+     * Proxy IPs
+     *
+     * @var array<string, string>
+     *
+     * @deprecated 4.0.5 No longer used. Check the App config directly
+     */
     protected $proxyIPs;
 
-    //--------------------------------------------------------------------
-
-    public function __construct($uri=null)
-    {
-        $this->proxyIPs = config_item('proxy_ips');
-    }
-
-    //--------------------------------------------------------------------
-
     /**
-     * Gets the user's IP address.
+     * Constructor.
      *
-     * @return string IP address
      */
-    public function getIPAddress(): string
+    public function __construct() // @phpstan-ignore-line
     {
-        if (! empty($this->ipAddress))
-        {
-            return $this->ipAddress;
+        if (empty($this->method)) {
+            $this->method = $this->getServer('REQUEST_METHOD') ?? 'GET';
         }
 
-        $proxy_ips = $this->proxyIPs;
-        if ( ! empty($this->proxyIPs) && ! is_array($this->proxyIPs))
-        {
-            $proxy_ips = explode(',', str_replace(' ', '', $this->proxyIPs));
+        if (empty($this->uri)) {
+            $this->uri = new URI();
         }
-
-        $this->ipAddress = $this->server('REMOTE_ADDR');
-
-        if ($proxy_ips)
-        {
-            foreach (array('HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'HTTP_X_CLIENT_IP', 'HTTP_X_CLUSTER_CLIENT_IP') as $header)
-            {
-                if (($spoof = $this->server($header)) !== NULL)
-                {
-                    // Some proxies typically list the whole chain of IP
-                    // addresses through which the client has reached us.
-                    // e.g. client_ip, proxy_ip1, proxy_ip2, etc.
-                    sscanf($spoof, '%[^,]', $spoof);
-
-                    if ( ! $this->isValidIP($spoof))
-                    {
-                        $spoof = NULL;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-
-            if ($spoof)
-            {
-                for ($i = 0, $c = count($this->proxyIPs); $i < $c; $i++)
-                {
-                    // Check if we have an IP address or a subnet
-                    if (strpos($proxy_ips[$i], '/') === false)
-                    {
-                        // An IP address (and not a subnet) is specified.
-                        // We can compare right away.
-                        if ($proxy_ips[$i] === $this->ipAddress)
-                        {
-                            $this->ipAddress = $spoof;
-                            break;
-                        }
-
-                        continue;
-                    }
-
-                    // We have a subnet ... now the heavy lifting begins
-                    isset($separator) OR $separator = $this->isValidIP($this->ipAddress, 'ipv6') ? ':' : '.';
-
-                    // If the proxy entry doesn't match the IP protocol - skip it
-                    if (strpos($proxy_ips[$i], $separator) === false)
-                    {
-                        continue;
-                    }
-
-                    // Convert the REMOTE_ADDR IP address to binary, if needed
-                    if ( ! isset($ip, $sprintf))
-                    {
-                        if ($separator === ':')
-                        {
-                            // Make sure we're have the "full" IPv6 format
-                            $ip = explode(':',
-                                str_replace('::',
-                                    str_repeat(':', 9 - substr_count($this->ipAddress, ':')),
-                                    $this->ipAddress
-                                )
-                            );
-
-                            for ($j = 0; $j < 8; $j++)
-                            {
-                                $ip[$j] = intval($ip[$j], 16);
-                            }
-
-                            $sprintf = '%016b%016b%016b%016b%016b%016b%016b%016b';
-                        }
-                        else
-                        {
-                            $ip = explode('.', $this->ipAddress);
-                            $sprintf = '%08b%08b%08b%08b';
-                        }
-
-                        $ip = vsprintf($sprintf, $ip);
-                    }
-
-                    // Split the netmask length off the network address
-                    sscanf($proxy_ips[$i], '%[^/]/%d', $netaddr, $masklen);
-
-                    // Again, an IPv6 address is most likely in a compressed form
-                    if ($separator === ':')
-                    {
-                        $netaddr = explode(':', str_replace('::', str_repeat(':', 9 - substr_count($netaddr, ':')), $netaddr));
-                        for ($i = 0; $i < 8; $i++)
-                        {
-                            $netaddr[$i] = intval($netaddr[$i], 16);
-                        }
-                    }
-                    else
-                    {
-                        $netaddr = explode('.', $netaddr);
-                    }
-
-                    // Convert to binary and finally compare
-                    if (strncmp($ip, vsprintf($sprintf, $netaddr), $masklen) === 0)
-                    {
-                        $this->ipAddress = $spoof;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if ( ! $this->isValidIP($this->ipAddress))
-        {
-            return $this->ipAddress = '0.0.0.0';
-        }
-
-        return empty($this->ipAddress) ? '' : $this->ipAddress;
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Validate an IP address
      *
-     * @param        $ip     IP Address
-     * @param string $which  IP protocol: 'ipv4' or 'ipv6'
+     * @param string $ip    IP Address
+     * @param string $which IP protocol: 'ipv4' or 'ipv6'
      *
-     * @return bool
+     * @deprecated 4.0.5 Use Validation instead
+     *
+     * @codeCoverageIgnore
      */
-    public function isValidIP(string $ip, string $which = null): bool
+    public function isValidIP(?string $ip = null, ?string $which = null): bool
     {
-        switch (strtolower($which))
-        {
-            case 'ipv4':
-                $which = FILTER_FLAG_IPV4;
-                break;
-            case 'ipv6':
-                $which = FILTER_FLAG_IPV6;
-                break;
-            default:
-                $which = NULL;
-                break;
-        }
-
-        return (bool) filter_var($ip, FILTER_VALIDATE_IP, $which);
+        return (new FormatRules())->valid_ip($ip, $which);
     }
-
-    //--------------------------------------------------------------------
-
 
     /**
      * Get the request method.
      *
-     * @param bool|false $upper Whether to return in upper or lower case.
+     * @param bool $upper Whether to return in upper or lower case.
      *
-     * @return string
+     * @deprecated 4.0.5 The $upper functionality will be removed and this will revert to its PSR-7 equivalent
+     *
+     * @codeCoverageIgnore
      */
-    public function getMethod($upper = false): string
+    public function getMethod(bool $upper = false): string
     {
-        return ($upper)
-            ? strtoupper($this->server('REQUEST_METHOD'))
-            : strtolower($this->server('REQUEST_METHOD'));
+        return ($upper) ? strtoupper($this->method) : strtolower($this->method);
     }
-
-    //--------------------------------------------------------------------
 
     /**
-     * Fetch an item from the $_SERVER array.
+     * Sets the request method. Used when spoofing the request.
      *
-     * @param null $index   Index for item to be fetched from $_SERVER
-     * @param null $filter  A filter name to be applied
-     * @return mixed
+     * @return $this
+     *
+     * @deprecated 4.0.5 Use withMethod() instead for immutability
+     *
+     * @codeCoverageIgnore
      */
-    public function server($index = null, $filter = null)
+    public function setMethod(string $method)
     {
-        return $this->fetchGlobal(INPUT_SERVER, $index, $filter);
-    }
+        $this->method = $method;
 
-    //--------------------------------------------------------------------
+        return $this;
+    }
 
     /**
-     * Fetches one or more items from a global, like cookies, get, post, etc.
-     * Can optionally filter the input when you retrieve it by passing in
-     * a filter.
+     * Returns an instance with the specified method.
      *
-     * If $type is an array, it must conform to the input allowed by the
-     * filter_input_array method.
+     * @param string $method
      *
-     * http://php.net/manual/en/filter.filters.sanitize.php
-     *
-     * @param      $type
-     * @param null $index
-     * @param null $filter
-     *
-     * @return mixed
+     * @return static
      */
-    protected function fetchGlobal($type, $index = null, $filter = null)
+    public function withMethod($method)
     {
-        // Null filters cause null values to return.
-        if (is_null($filter))
-        {
-            $filter = FILTER_DEFAULT;
-        }
+        $request = clone $this;
 
-        // If $index is null, it means that the whole input type array is requested
-        if (is_null($index))
-        {
-            return filter_input_array($type, is_null($filter) ? FILTER_FLAG_NONE : $filter);
-        }
+        $request->method = $method;
 
-        // allow fetching multiple keys at once
-        if (is_array($index))
-        {
-            $output = [];
-
-            foreach ($index as $key)
-            {
-                $output[$key] = $this->fetchGlobal($type, $key, $filter);
-            }
-
-            return $output;
-        }
-//
-//		// Does the index contain array notation?
-//		if (($count = preg_match_all('/(?:^[^\[]+)|\[[^]]*\]/', $index, $matches)) > 1) // Does the index contain array notation
-//		{
-//			$value = $array;
-//			for ($i = 0; $i < $count; $i++)
-//			{
-//				$key = trim($matches[0][$i], '[]');
-//				if ($key === '') // Empty notation will return the value as array
-//				{
-//					break;
-//				}
-//
-//				if (isset($value[$key]))
-//				{
-//					$value = $value[$key];
-//				}
-//				else
-//				{
-//					return NULL;
-//				}
-//			}
-//		}
-
-        // Due to issues with FastCGI and testing,
-        // we need to do these all manually instead
-        // of the simpler filter_input();
-        switch ($type)
-        {
-            case INPUT_GET:
-                $value = isset($_GET[$index]) ? $_GET[$index] : null;
-                break;
-            case INPUT_POST:
-                $value = isset($_POST[$index]) ? $_POST[$index] : null;
-                break;
-            case INPUT_SERVER:
-                $value = isset($_SERVER[$index]) ? $_SERVER[$index] : null;
-                break;
-            case INPUT_ENV:
-                $value = isset($_ENV[$index]) ? $_ENV[$index] : null;
-                break;
-            case INPUT_COOKIE:
-                $value = isset($_COOKIE[$index]) ? $_COOKIE[$index] : null;
-                break;
-            case INPUT_REQUEST:
-                $value = isset($_REQUEST[$index]) ? $_REQUEST[$index] : null;
-                break;
-            case INPUT_SESSION:
-                $value = isset($_SESSION[$index]) ? $_SESSION[$index] : null;
-                break;
-            default:
-                $value = '';
-        }
-
-        if (is_array($value) || is_object($value))
-        {
-            return $value;
-        }
-
-        return filter_var($value, $filter);
+        return $request;
     }
 
-    //--------------------------------------------------------------------
+    /**
+     * Retrieves the URI instance.
+     *
+     * @return URI
+     */
+    public function getUri()
+    {
+        return $this->uri;
+    }
 }

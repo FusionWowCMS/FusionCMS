@@ -1,8 +1,20 @@
-<?php namespace CodeIgniter\HTTP;
+<?php
 
 /**
- * Class CLIRequest
+ * This file is part of CodeIgniter 4 framework.
  *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\HTTP;
+
+use Locale;
+use RuntimeException;
+
+/**
  * Represents a request from the command-line. Provides additional
  * tools to interact with that request since CLI requests are not
  * static like HTTP requests might be.
@@ -13,11 +25,10 @@
  *
  * http://fuelphp.com
  *
- * @package CodeIgniter\HTTP
+ * @see \CodeIgniter\HTTP\CLIRequestTest
  */
 class CLIRequest extends Request
 {
-
     /**
      * Stores the segments of our cli "URI" command.
      *
@@ -27,24 +38,44 @@ class CLIRequest extends Request
 
     /**
      * Command line options and their values.
+     *
      * @var array
      */
     protected $options = [];
 
-    //--------------------------------------------------------------------
+    /**
+     * Command line arguments (segments and options).
+     *
+     * @var array
+     */
+    protected $args = [];
 
-    public function __construct()
+    /**
+     * Set the expected HTTP verb
+     *
+     * @var string
+     */
+    protected $method = 'cli';
+
+    /**
+     * Constructor
+     */
+    public function __construct($config)
     {
-        global $config;
-        parent::__construct($config, null);
+        if (! is_cli()) {
+            throw new RuntimeException(static::class . ' needs to run from the command line.'); // @codeCoverageIgnore
+        }
+
+        parent::__construct($config);
 
         // Don't terminate the script when the cli's tty goes away
         ignore_user_abort(true);
 
         $this->parseCommand();
-    }
 
-    //--------------------------------------------------------------------
+        // Set SiteURI for this request
+        $this->uri = new SiteURI($config, $this->getPath());
+    }
 
     /**
      * Returns the "path" of the request script so that it can be used
@@ -63,42 +94,43 @@ class CLIRequest extends Request
     {
         $path = implode('/', $this->segments);
 
-        return empty($path) ? '' : $path;
+        return ($path === '') ? '' : $path;
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Returns an associative array of all CLI options found, with
      * their values.
-     *
-     * @return array
      */
     public function getOptions(): array
     {
         return $this->options;
     }
 
-    //--------------------------------------------------------------------
+    /**
+     * Returns an array of all CLI arguments (segments and options).
+     */
+    public function getArgs(): array
+    {
+        return $this->args;
+    }
+
+    /**
+     * Returns the path segments.
+     */
+    public function getSegments(): array
+    {
+        return $this->segments;
+    }
 
     /**
      * Returns the value for a single CLI option that was passed in.
-     *
-     * @param string $key
      *
      * @return string|null
      */
     public function getOption(string $key)
     {
-        if (array_key_exists($key, $this->options))
-        {
-            return $this->options[$key];
-        }
-
-        return null;
+        return $this->options[$key] ?? null;
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Returns the options as a string, suitable for passing along on
@@ -111,34 +143,35 @@ class CLIRequest extends Request
      *      ];
      *
      *      getOptionString() = '-foo bar -baz "queue some stuff"'
-     *
-     * @return string
      */
-    public function getOptionString(): string
+    public function getOptionString(bool $useLongOpts = false): string
     {
-        if (empty($this->options))
-        {
+        if ($this->options === []) {
             return '';
         }
 
         $out = '';
 
-        foreach ($this->options as $name => $value)
-        {
-            // If there's a space, we need to group
-            // so it will pass correctly.
-            if (strpos($value, ' ') !== false)
-            {
-                $value = '"'. $value .'"';
+        foreach ($this->options as $name => $value) {
+            if ($useLongOpts && mb_strlen($name) > 1) {
+                $out .= "--{$name} ";
+            } else {
+                $out .= "-{$name} ";
             }
 
-            $out .= "-{$name} $value ";
+            if ($value === null) {
+                continue;
+            }
+
+            if (mb_strpos($value, ' ') !== false) {
+                $out .= '"' . $value . '" ';
+            } else {
+                $out .= "{$value} ";
+            }
         }
 
-        return $out;
+        return trim($out);
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Parses the command line it was called from and collects all options
@@ -146,49 +179,146 @@ class CLIRequest extends Request
      *
      * NOTE: I tried to use getopt but had it fail occasionally to find
      * any options, where argv has always had our back.
+     *
+     * @return void
      */
     protected function parseCommand()
     {
-        // Since we're building the options ourselves,
-        // we stop adding it to the segments array once
-        // we have found the first dash.
-        $options_found = false;
+        $args = $this->getServer('argv');
+        array_shift($args); // Scrap index.php
 
-        $argc = $this->server('argc', FILTER_SANITIZE_NUMBER_INT);
-        $argv = $this->server('argv');
+        $optionValue = false;
 
-        // We start at 1 since we never want to include index.php
-        for ($i = 1; $i < $argc; $i++)
-        {
-            // If there's no '-' at the beginning of the argument
-            // then add it to our segments.
-            if ( ! $options_found && strpos($argv[$i], '-') === false)
-            {
-                $this->segments[] = filter_var($argv[$i], FILTER_SANITIZE_STRING);
+        foreach ($args as $i => $arg) {
+            if (mb_strpos($arg, '-') !== 0) {
+                if ($optionValue) {
+                    $optionValue = false;
+                } else {
+                    $this->segments[] = $arg;
+                    $this->args[]     = $arg;
+                }
+
                 continue;
             }
 
-            $options_found = true;
-
-            if (substr($argv[$i], 0, 1) != '-')
-            {
-                continue;
-            }
-
-            $arg = filter_var(str_replace('-', '', $argv[$i]), FILTER_SANITIZE_STRING);
+            $arg   = ltrim($arg, '-');
             $value = null;
 
-            // If the next item starts with a dash it's a value
-            if (isset($argv[$i + 1]) && substr($argv[$i + 1], 0, 1) != '-' )
-            {
-                $value = filter_var($argv[$i + 1], FILTER_SANITIZE_STRING);
-                $i++;
+            if (isset($args[$i + 1]) && mb_strpos($args[$i + 1], '-') !== 0) {
+                $value       = $args[$i + 1];
+                $optionValue = true;
             }
 
             $this->options[$arg] = $value;
+            $this->args[$arg]    = $value;
         }
     }
 
-    //--------------------------------------------------------------------
+    /**
+     * Determines if this request was made from the command line (CLI).
+     */
+    public function isCLI(): bool
+    {
+        return true;
+    }
 
+    /**
+     * Fetch an item from GET data.
+     *
+     * @param array|string|null $index  Index for item to fetch from $_GET.
+     * @param int|null          $filter A filter name to apply.
+     * @param array|int|null    $flags
+     *
+     * @return array|null
+     */
+    public function getGet($index = null, $filter = null, $flags = null)
+    {
+        return $this->returnNullOrEmptyArray($index);
+    }
+
+    /**
+     * Fetch an item from POST.
+     *
+     * @param array|string|null $index  Index for item to fetch from $_POST.
+     * @param int|null          $filter A filter name to apply
+     * @param array|int|null    $flags
+     *
+     * @return array|null
+     */
+    public function getPost($index = null, $filter = null, $flags = null)
+    {
+        return $this->returnNullOrEmptyArray($index);
+    }
+
+    /**
+     * Fetch an item from POST data with fallback to GET.
+     *
+     * @param array|string|null $index  Index for item to fetch from $_POST or $_GET
+     * @param int|null          $filter A filter name to apply
+     * @param array|int|null    $flags
+     *
+     * @return array|null
+     */
+    public function getPostGet($index = null, $filter = null, $flags = null)
+    {
+        return $this->returnNullOrEmptyArray($index);
+    }
+
+    /**
+     * Fetch an item from GET data with fallback to POST.
+     *
+     * @param array|string|null $index  Index for item to be fetched from $_GET or $_POST
+     * @param int|null          $filter A filter name to apply
+     * @param array|int|null    $flags
+     *
+     * @return array|null
+     */
+    public function getGetPost($index = null, $filter = null, $flags = null)
+    {
+        return $this->returnNullOrEmptyArray($index);
+    }
+
+    /**
+     * This is a place holder for calls from cookie_helper get_cookie().
+     *
+     * @param array|string|null $index  Index for item to be fetched from $_COOKIE
+     * @param int|null          $filter A filter name to be applied
+     * @param mixed             $flags
+     *
+     * @return array|null
+     */
+    public function getCookie($index = null, $filter = null, $flags = null)
+    {
+        return $this->returnNullOrEmptyArray($index);
+    }
+
+    /**
+     * @param array|string|null $index
+     *
+     * @return array|null
+     */
+    private function returnNullOrEmptyArray($index)
+    {
+        return ($index === null || is_array($index)) ? [] : null;
+    }
+
+    /**
+     * Gets the current locale, with a fallback to the default
+     * locale if none is set.
+     */
+    public function getLocale(): string
+    {
+        return Locale::getDefault();
+    }
+
+    /**
+     * Checks this request type.
+     *
+     * @param         string                                                                    $type HTTP verb or 'json' or 'ajax'
+     * @phpstan-param string|'get'|'post'|'put'|'delete'|'head'|'patch'|'options'|'json'|'ajax' $type
+     */
+    public function is(string $type): bool
+    {
+        return false;
+    }
 }
