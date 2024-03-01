@@ -64,7 +64,7 @@ var Character = {
 							   .replace('{ICON}', data.icon)
 							   .replace('{SLOT}', data.InventoryType);
 
-					html = (data.displayId) ? html.replace('{DISPLAY}', (transmog) ? transmog.displayId : data.displayId) : html.replace('equiplist="[{SLOT}, {DISPLAY}]"', '');
+					html = (data.displayid) ? html.replace('{DISPLAY}', (transmog) ? transmog.displayid : data.displayid) : html.replace('equiplist="[{SLOT}, {DISPLAY}]"', '');
 
 					// Transmog available?
 					html = (transmog) ? html.replace('{TRANSMOG}', transmog.name) : html.replace('&transmog={TRANSMOG}', '');

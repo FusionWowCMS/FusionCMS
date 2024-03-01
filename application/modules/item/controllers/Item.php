@@ -21,19 +21,19 @@ class Item extends MX_Controller
 
         if ($cache !== false) {
             $itemName = $cache['name'];
-            $displayId = $cache['displayid'];
+            $displayid = $cache['displayid'];
             $icon = str_replace(['_baseURL_', '_icon_'], [$this->config->item('api_item_icons'), ($cache['icon'] != null ? $cache['icon'] : 'inv_misc_questionmark')], '<div class="item"><a></a><img src="_baseURL_/large/_icon_.jpg" /></div>');
             $item = $cache['htmlTooltip'];
         } else {
             $itemName = lang("view_item", "item");
-            $displayId = false;
+            $displayid = false;
             $icon = $this->template->loadPage("icon_ajax.tpl", array('id' => $id, 'realm' => $this->realm, 'url' => $this->template->page_url));
-            $item = $this->template->loadPage("ajax.tpl", array('module' => 'item', 'id' => $id, 'realm' => $realm, 'icon' => $icon, 'displayid' => $displayId));
+            $item = $this->template->loadPage("ajax.tpl", array('module' => 'item', 'id' => $id, 'realm' => $realm, 'icon' => $icon, 'displayid' => $displayid));
         }
 
         $this->template->setTitle($itemName);
 
-        $content = $this->template->loadPage("item.tpl", array('module' => 'item', 'item' => $item, 'icon' => $icon, 'displayid' => $displayId));
+        $content = $this->template->loadPage("item.tpl", array('module' => 'item', 'item' => $item, 'icon' => $icon, 'displayid' => $displayid));
 
         $data3 = array(
             "module" => "default",
