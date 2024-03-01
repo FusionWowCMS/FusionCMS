@@ -33,8 +33,18 @@ class Items
      */
     public function getItemWowHead(int $item, $realm, string $type, bool $enableCache = true): mixed
     {
+        $options = [
+            'timeout'         => 300,
+            'allow_redirects' => [
+                'max' => 10,
+            ],
+            'user_agent'      => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1',
+            'version'         => CURL_HTTP_VERSION_2_0,
+            'verify'          => false,
+        ];
+
         // Get the item XML data
-        $response = Services::curlrequest()->get('https://www.wowhead.com/item=' . $item . '&xml');
+        $response = Services::curlrequest()->get('https://www.wowhead.com/item=' . $item . '&xml', $options);
         $data = $response->getBody();
 
         if (!empty($data)) {
