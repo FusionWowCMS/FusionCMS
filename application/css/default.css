@@ -516,6 +516,22 @@ input[type="radio"] {
 .socket-yellow { padding-left: 20px; background: url(../images/misc/socket_yellow.gif) no-repeat left center; }
 .socket-blue   { padding-left: 20px; background: url(../images/misc/socket_blue.gif) no-repeat left center; }
 
+.moneygold {
+    display: inline-block;
+    padding-right: 15px;
+    background: url(../images/misc/money-gold.gif) no-repeat right center;
+}
+.moneysilver {
+    display: inline-block;
+    padding-right: 15px;
+    background: url(../images/misc/money-silver.gif) no-repeat right center;
+}
+.moneycopper {
+    display: inline-block;
+    padding-right: 15px;
+    background: url(../images/misc/money-copper.gif) no-repeat right center;
+}
+
 /* User info sidebox */
 
 .sidebox_info {
