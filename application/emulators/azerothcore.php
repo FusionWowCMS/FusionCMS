@@ -153,7 +153,7 @@ class Azerothcore implements Emulator
         ),
 
         'gm_tickets' => array(
-            'ticketId'   => 'Id',
+            'ticketId'   => 'id',
             'name'       => 'name',
             'guid'       => 'playerGuid',
             'message'    => 'description',
