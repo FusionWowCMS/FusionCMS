@@ -27,13 +27,13 @@ class Item extends MX_Controller
         } else {
             $itemName = lang("view_item", "item");
             $displayid = false;
-            $icon = $this->template->loadPage("icon_ajax.tpl", array('id' => $id, 'realm' => $this->realm, 'url' => $this->template->page_url));
-            $item = $this->template->loadPage("ajax.tpl", array('module' => 'item', 'id' => $id, 'realm' => $realm, 'icon' => $icon, 'displayid' => $displayid));
+            $icon = $this->template->loadPage("icon_ajax.tpl", ['id' => $id, 'realm' => $this->realm, 'url' => $this->template->page_url]);
+            $item = $this->template->loadPage("ajax.tpl", ['module' => 'item', 'id' => $id, 'realm' => $realm, 'icon' => $icon, 'displayid' => $displayid]);
         }
 
         $this->template->setTitle($itemName);
 
-        $content = $this->template->loadPage("item.tpl", array('module' => 'item', 'item' => $item, 'icon' => $icon, 'displayid' => $displayid));
+        $content = $this->template->loadPage("item.tpl", ['module' => 'item', 'item' => $item, 'icon' => $icon, 'displayid' => $displayid]);
 
         $data3 = array(
             "module" => "default",
