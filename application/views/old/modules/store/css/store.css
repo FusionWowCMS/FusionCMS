@@ -91,10 +91,6 @@
 	transition:0.5s all;
 }
 
-#cart .store_item .item_name, #cart .store_item .item_realm {
-	display:block;
-}
-
 #cart .store_item:hover .item_name, #cart .store_item:hover .item_realm {
 	margin-left:25px;
 }
@@ -115,6 +111,7 @@
 }
 
 #cart .store_item .item_name, #cart .store_item .item_realm {
+	display:block;
 	font-size:12px;
 	-webkit-transition:0.5s all;
 	-moz-transition:0.5s all;
