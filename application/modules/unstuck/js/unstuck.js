@@ -37,7 +37,7 @@ const Unstuck = {
 
     busy: false,
 
-    Submit: function (form) {
+    Submit: function () {
         if (Unstuck.busy)
             return;
 
