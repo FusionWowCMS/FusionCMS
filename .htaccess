@@ -176,3 +176,14 @@ ModPagespeedEnableFilters collapse_whitespace,remove_comments
     AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
 </IfModule>
 ##### Compress resources end
+
+# deny direct access on git
+<Files .gitignore>
+    order allow,deny
+    Deny from all
+</Files>
+
+<Files .git>
+    order allow,deny
+    Deny from all
+</Files>
