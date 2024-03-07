@@ -2,7 +2,9 @@
 <div class="col-12 col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 mx-auto">
     <form onSubmit="Auth.login(true); return false;">
         <div class="card-body">
+            </br>
             <div class="alert alert-danger text-center error-feedback d-none" role="alert"></div>
+            </br>
 
             <div class="input-group p-0 flex-row">
                 <label for="floatingUser" class="input-group-text" id="username" style="width:45px;"><i class="fas fa-user"></i></label>
