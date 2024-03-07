@@ -27,6 +27,7 @@ body {
     overflow: hidden;
     overflow-y: auto;
     max-height: 62%;
+    padding-top: 40px;
 }
 #debug-bar h1,
 #debug-bar h2,
@@ -52,13 +53,18 @@ body {
 }
 #debug-bar .toolbar {
     display: block;
-    position: relative;
     overflow: hidden;
     overflow-y: auto;
     white-space: nowrap;
     border-bottom: 1px solid #eee;
     padding: 3px 20px;
     text-align: right;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    position: fixed;
+    background-color: #fff;
 }
 #debug-bar h1 {
     font-size: 13pt;
@@ -185,20 +191,4 @@ body {
 }
 #ci-databases table tr td:first-child {
     width: 5%;
-}
-
-#debug-bar {
-    padding-top: 40px;
-}
-
-#debug-bar .toolbar {
-    width: 100%;
-
-    top: 0;
-    left: 0;
-
-    z-index: 9;
-    position: fixed;
-
-    background-color: #fff;
 }
