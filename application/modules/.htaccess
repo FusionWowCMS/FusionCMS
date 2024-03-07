@@ -1,0 +1,8 @@
+# Disable directory listing
+Options -Indexes
+IndexIgnore *
+
+# Deny access to tpl and json files
+<Files ~ "\.(tpl|json)$">
+    Deny from all
+</Files>
