@@ -41,7 +41,7 @@ const LevelUp = {
 
     busy: false,
 
-    Submit: function (form) {
+    Submit: function () {
         if (this.busy)
             return;
 
