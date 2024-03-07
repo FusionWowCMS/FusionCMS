@@ -114,7 +114,7 @@ class Install
 
 	private function checkAuthConfig()
 	{
-        $fields = ['realmd_account_encryption', 'realmd_rbac', 'realmd_battle_net', 'realmd_totp_secret', 'realmd_totp_secret_name'];
+        $fields = ['realmd_account_encryption', 'realmd_rbac', 'realmd_battle_net', 'realmd_totp_secret'];
 
         if(!empty($_POST['realmd_battle_net']) && $_POST['realmd_battle_net'] == 'true')
             $fields[] = 'realmd_battle_net_encryption';
