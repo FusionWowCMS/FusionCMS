@@ -28,7 +28,7 @@ class Latest_article extends MX_Controller
         self::$moduleName = basename(str_replace('controllers', '', __DIR__));
 
         // Get module url
-        self::$moduleUrl = rtrim(base_url(), '/') . '/' . basename(APPPATH) . '/' . 'modules' . '/' . self::$moduleName . '/';
+        self::$moduleUrl = rtrim(base_url(), '/') . '/' . basename(APPPATH) . '/modules/' . self::$moduleName . '/';
 
         // Get module path
         self::$modulePath = rtrim(str_replace(['\\', '/'], self::DS, realpath(APPPATH)), self::DS) . self::DS . 'modules' . self::DS . self::$moduleName . self::DS;

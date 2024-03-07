@@ -2,11 +2,6 @@
 
 class latest_article_model extends CI_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function getArticles($start = 0, $limit = 1)
     {
         if ($start === true) {
