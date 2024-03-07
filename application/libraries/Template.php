@@ -234,8 +234,6 @@ class Template
             $this->CI->administrator->view('<script>window.location.reload()</script>');
         }
 
-        $output = "";
-
         if ($this->CI->config->item("message_enabled") && $this->CI->router->fetch_class() != "auth" && !$this->CI->user->isStaff())
         {
             $output = $this->handleAnnouncement();
@@ -672,13 +670,17 @@ class Template
 
         $this->setTitle(lang("404_title", "error"));
 
-        $message = $this->loadPage("error.tpl", array(
+        $message = $this->loadPage("error.tpl", [
             'module' => 'errors',
             'is404' => true
-        ));
+        ]);
+
         $output  = $this->box(lang("404", "error"), $message);
 
         $this->view($output);
+
+        $this->CI->output->_display();
+        exit();
     }
 
     /**
@@ -688,13 +690,17 @@ class Template
      */
     public function showError(false|string $error = false)
     {
-        $message = $this->loadPage("error.tpl", array(
+        $message = $this->loadPage("error.tpl", [
             'module' => 'errors',
             'errorMessage' => $error
-        ));
+        ]);
+
         $output  = $this->box($error, $message);
-        
+
         $this->view($output);
+
+        $this->CI->output->_display();
+        exit();
     }
 
     /**
