@@ -65,16 +65,16 @@ $config = [
         'banner_01' => [
             'date'  => '07.09.21',
             'link'  => base_url('page/announcement'),
-            'text'  => json_encode(['english' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.', 'persian' => '', 'spanish' => '', 'portugues-br' => ''], JSON_UNESCAPED_UNICODE),
-            'title' => json_encode(['english' => 'Welcome to FusionCMS', 'persian' => '', 'spanish' => '', 'portugues-br' => ''], JSON_UNESCAPED_UNICODE)
+            'text'  => json_encode(['english' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.', 'persian' => '', 'spanish' => '', 'portuguese-brazilian' => ''], JSON_UNESCAPED_UNICODE),
+            'title' => json_encode(['english' => 'Welcome to FusionCMS', 'persian' => '', 'spanish' => '', 'portuguese-brazilian' => ''], JSON_UNESCAPED_UNICODE)
         ],
 
         # Banner 02
         'banner_02' => [
             'date'  => '07.09.21',
             'link'  => base_url('page/announcement'),
-            'text'  => json_encode(['english' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.', 'persian' => '', 'spanish' => '', 'portugues-br' => ''], JSON_UNESCAPED_UNICODE),
-            'title' => json_encode(['english' => 'Welcome to FusionCMS-8.x', 'persian' => '', 'spanish' => '', 'portugues-br' => ''], JSON_UNESCAPED_UNICODE)
+            'text'  => json_encode(['english' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.', 'persian' => '', 'spanish' => '', 'portuguese-brazilian' => ''], JSON_UNESCAPED_UNICODE),
+            'title' => json_encode(['english' => 'Welcome to FusionCMS-8.x', 'persian' => '', 'spanish' => '', 'portuguese-brazilian' => ''], JSON_UNESCAPED_UNICODE)
         ]
     ],
 
