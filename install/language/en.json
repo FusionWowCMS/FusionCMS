@@ -119,5 +119,6 @@
     "support": "Support",
     "copyright": "© 2023 FusionCMS. All rights reserved. ",
     "previous_step": "Previous step",
-    "next_step": "Next step"
+    "next_step": "Next step",
+    "step": "Step"
 }

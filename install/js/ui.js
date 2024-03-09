@@ -1,45 +1,58 @@
-var UI = {
+const UI = {
 
-	/**
-	 * Initialize the installation UI
-	 */
-	initialize: function()
-	{
-		this.Tooltip.initialize();
+    /**
+     * Initialize the installation UI
+     */
+    initialize: function () {
+        this.Tooltip.initialize();
 
         // how-to box
-        $('.how_to_box .title').click(function() {
+        $('.how_to_box .title').click(function () {
             $(this).parent().children('.content').slideToggle();
         });
 
         // bind previous buttons
-        $('.installer_navigation .prev').click(function() { 
+        $('.installer_navigation .prev').click(function () {
             UI.Navigation.previous();
         });
 
         // bind next buttons, without validation
-        $('.installer_navigation .next').click(function() { 
+        $('.installer_navigation .next').click(function () {
             UI.Navigation.next();
         });
 
         // navigation
-        $('.sub li').click(function() {
-            UI.Navigation.goTo( $(this).attr('id') );
+        $('.menus li').click(function () {
+            UI.Navigation.goTo($(this).attr('id'));
         });
-	},
+
+        // Select Navigation
+		$('.option-menu').click(function(e) {
+			$('.option-menu svg').addClass('rotate-180');
+			$('.menus').removeClass('opacity-0 translate-y-1').addClass('opacity-100 translate-y-0');
+			e.stopPropagation();
+		});
+
+		// Hide Navigation Menu
+		$('body').click(function(e){
+			if ($('.option-menu svg').hasClass('rotate-180')) {
+				$('.option-menu svg').removeClass('rotate-180');
+				$('.menus').removeClass('opacity-100 translate-y-0').addClass('opacity-0 translate-y-1');
+				e.stopPropagation();
+			}
+		});
+    },
 
     /**
-     * Displays a loading animation in the next / previous 
+     * Displays a loading animation in the next / previous
      * navigation area
      * @param onComplete
      */
-    displayLoading: function(onComplete)
-    {
-        $('.installer_navigation:visible').fadeOut(100, function() {
+    displayLoading: function (onComplete) {
+        $('.installer_navigation:visible').fadeOut(100, function () {
             $(this).find('a').hide();
 
-			$(this).append('<img src="images/ajax.gif" />').fadeIn(100, function()
-            {
+            $(this).append('<img src="images/ajax.gif" />').fadeIn(100, function () {
                 if (onComplete !== undefined)
                     onComplete();
             });
@@ -47,452 +60,413 @@ var UI = {
     },
 
     /**
-     * Remove the loading animation in the next / previous 
+     * Remove the loading animation in the next / previous
      * navigation area
      * @param onComplete
      */
-    completeLoading: function() 
-    {
+    completeLoading: function () {
         $('.installer_navigation').find('img').remove();
         $('.installer_navigation a:not(:visible)').show();
     },
 
-    Validation: 
-	{
-        requirements: function(notifyResult)
-		{
-            // check folder permissions
-            Ajax.checkPermissions(function() {
-                if ($('.folder-permissions .error').length) {
-					notifyResult(false, 'Please fix all folder permissions to continue.');
+    Validation:
+        {
+            requirements: function (notifyResult) {
+                // check folder permissions
+                Ajax.checkPermissions(function () {
+                    if ($('.folder-permissions .error').length) {
+                        notifyResult(false, 'Please fix all folder permissions to continue.');
+                    } else {
+                        // check Apache or Nginx Modules
+                        Ajax.checkApacheModules(function (result) {
+                            if (result == '2') {
+                                notifyResult(false, 'Unable to check Apache or Nginx Modules, make sure required modules are enabled.');
+                            } else if (result != '1') {
+                                notifyResult(false, 'Please enable all required Apache or Nginx modules to continue.');
+                            }
+                        });
+                        // check php extensions
+                        Ajax.checkPhpExtensions(function (result) {
+                            if (result == '1') {
+                                // check php version
+                                Ajax.checkPhpVersion(function (result) {
+                                    if (result == '1') {
+                                        notifyResult(true);
+                                    } else {
+                                        notifyResult(false, 'FusionCMS requires at least PHP 8.0');
+                                    }
+                                });
+                            } else {
+                                notifyResult(false, 'Please enable all required PHP extensions to continue.');
+                            }
+                        });
+                    }
+                });
+            },
+
+            database: function (notifyResult) {
+                // check cms db connection
+				const dbCMS = {
+					hostname: $('#cms_hostname').val(),
+					username: $('#cms_username').val(),
+					password: $('#cms_password').val(),
+					database: $('#cms_database').val()
+				};
+
+				if ($('#cms_port').val())
+                    dbCMS['port'] = $('#cms_port').val();
+
+				const dbLogon = {
+					hostname: $('#realmd_hostname').val(),
+					username: $('#realmd_username').val(),
+					password: $('#realmd_password').val(),
+					database: $('#realmd_database').val()
+				};
+
+				// Auth config (config/auth.php)
+				const authSettings = {
+					realmd_rbac: $('#realmd_rbac').val(),
+					realmd_battle_net: $('#realmd_battle_net').val(),
+					realmd_totp_secret: $('#realmd_totp_secret').val(),
+					realmd_totp_secret_name: $('#realmd_totp_secret_name').val(),
+					realmd_account_encryption: $('#realmd_account_encryption').val(),
+					realmd_battle_net_encryption: $('#realmd_battle_net_encryption').val()
+				};
+
+				if ($('#realmd_port').val())
+                    dbLogon['port'] = $('#realmd_port').val();
+
+                // check if all required fields filled
+				const required = ['hostname', 'username', 'password', 'database'];
+				let all_filled = true;
+
+				for (let key in required) {
+                    key = required[key];
+
+                    if ((dbCMS[key] === undefined || !dbCMS[key].length) ||
+                        (dbLogon[key] === undefined || !dbLogon[key].length)) {
+                        all_filled = false;
+                        break;
+                    }
                 }
-                else {
-                    // check Apache or Nginx Modules
-                    Ajax.checkApacheModules(function(result) {
-                        if (result == '2') {
-                            notifyResult(false, 'Unable to check Apache or Nginx Modules, make sure required modules are enabled.');
-                        } else if (result != '1') {
-                            notifyResult(false, 'Please enable all required Apache or Nginx modules to continue.');
-                        }
-                    });
-                    // check php extensions
-                    Ajax.checkPhpExtensions(function(result) {
-                        if (result == '1') 
-						{
-							// check php version
-							Ajax.checkPhpVersion(function(result) {
-								if (result == '1') {
-									notifyResult(true);
-								}
-								else {
-	                                notifyResult(false, 'FusionCMS requires at least PHP 8.0');
-								}
-							});
-                        }
-                        else {
-                            notifyResult(false, 'Please enable all required PHP extensions to continue.');
-                        }
-                    });
+
+                if (!all_filled) {
+                    notifyResult(false, 'Please fill all fields.');
+                    return;
                 }
-            });
+
+                // all filled, check connections
+                Ajax.checkDbConnection(dbCMS, function (result) {
+                    if (result != '1') {
+                        notifyResult(false, 'CMS database connection failed:<br />' + result);
+                    } else {
+                        Ajax.checkDbConnection(dbLogon, function (result) {
+                            if (result != '1') {
+                                notifyResult(false, 'Logon database connection failed:<br />' + result);
+                            } else {
+                                Ajax.checkAuthConfig(authSettings, function (result) {
+                                    if (result != '1') {
+                                        notifyResult(false, 'Missing config:<br />' + result);
+                                    } else {
+                                        notifyResult(true);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                })
+            },
+
+            realms: function (notifyResult) {
+                // Save realms data
+                Ajax.Realms.saveAll();
+
+                // Perform AJAX to check realms data
+                $.post('system.php?step=realms', {
+                    realms: JSON.stringify(Ajax.Realms.data),
+                    insert: false
+                }, function (response) {
+                    // Invalid response.. Exit
+                    if (response !== '1') {
+                        // Show error message
+                        UI.alert(response);
+
+                        // Remove loading
+                        UI.completeLoading();
+
+                        // Exit
+                        return false;
+                    }
+
+                    UI.confirm('<input type="text" id="superadmin" class="nui-focus border-muted-300 text-white placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-4 rounded" placeholder="Enter username that will receive owner access..." autofocus />', 'Accept', function () {
+							const name = $("#superadmin").val();
+							if (name.length) {
+                                notifyResult(true);
+                                Ajax.Realms.saveAll();
+                                Ajax.Install.initialize(name);
+                            } else {
+                                notifyResult(false, 'Invalid username.');
+                            }
+                        },
+                        function () {
+                            notifyResult(false);
+                        });
+                });
+            }
         },
 
-		database: function(notifyResult) 
-		{
-			// check cms db connection
-			var dbCMS = {
-				hostname: $('#cms_hostname').val(),
-				username: $('#cms_username').val(),
-				password: $('#cms_password').val(),
-				database: $('#cms_database').val()
-			};
+    /**
+     * Shows an alert box
+     * @param String message
+     */
+    alert: function (question, time) {
+        // Put question and button text
+        $("#alert_message").html(question);
 
-			if ($('#cms_port').val())
-				dbCMS['port'] = $('#cms_port').val();
+        // Show box
+        $("#popup_bg").fadeTo(200, 0.5);
+        $("#alert").fadeTo(200, 1);
 
-			var dbLogon = {
-				hostname: $('#realmd_hostname').val(),
-				username: $('#realmd_username').val(),
-				password: $('#realmd_password').val(),
-				database: $('#realmd_database').val()
-			};
+        if (typeof time == "undefined") {
+            $("#alert_message").css({marginBottom: "10px"});
+            $(".popup_links").show();
 
-			// Auth config (config/auth.php)
-			var authSettings = {
-				realmd_rbac: $('#realmd_rbac').val(),
-				realmd_battle_net: $('#realmd_battle_net').val(),
-				realmd_totp_secret: $('#realmd_totp_secret').val(),
-				realmd_totp_secret_name: $('#realmd_totp_secret_name').val(),
-				realmd_account_encryption: $('#realmd_account_encryption').val(),
-				realmd_battle_net_encryption: $('#realmd_battle_net_encryption').val()
-			};
-
-			if ($('#realmd_port').val())
-				dbLogon['port'] = $('#realmd_port').val();
-
-			// check if all required fields filled
-			var required = ['hostname', 'username', 'password', 'database'];
-			var all_filled = true;
-
-			for (var key in required) {
-				key = required[key];
-				
-				if ( (dbCMS[key] === undefined || ! dbCMS[key].length) || 
-				     (dbLogon[key] === undefined || ! dbLogon[key].length)) 
-				{
-					all_filled = false;
-					break;
-				}
-			}
-
-			if ( ! all_filled) {
-				notifyResult(false, 'Please fill all fields.');
-				return;
-			}
-
-			// all filled, check connections
-			Ajax.checkDbConnection(dbCMS, function(result) {
-				if (result != '1') {
-					notifyResult(false, 'CMS database connection failed:<br />' + result);
-				}
-				else {
-					Ajax.checkDbConnection(dbLogon, function(result) {
-						if (result != '1') {
-							notifyResult(false, 'Logon database connection failed:<br />' + result);
-						}
-						else {
-							Ajax.checkAuthConfig(authSettings, function(result) {
-								if (result != '1') {
-									notifyResult(false, 'Missing config:<br />' + result);
-								}
-								else {
-									notifyResult(true);
-								}
-							});
-						}
-					});
-				}
-			})
-		},
-
-        realms: function(notifyResult) {
-            // Save realms data
-            Ajax.Realms.saveAll();
-
-            // Perform AJAX to check realms data
-            $.post('system.php?step=realms', {realms: JSON.stringify(Ajax.Realms.data), insert: false}, function(response)
-            {
-                // Invalid response.. Exit
-                if(response !== '1')
-                {
-                    // Show error message
-                    UI.alert(response);
-
-                    // Remove loading
-                    UI.completeLoading();
-
-                    // Exit
-                    return false;
-                }
-
-                UI.confirm('<input type="text" id="superadmin" class="nui-focus border-muted-300 text-white placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 pe-4 ps-4 rounded" placeholder="Enter username that will receive owner access..." autofocus />', 'Accept', function()
-                {
-                    var name = $("#superadmin").val();
-                    if (name.length) {
-                        notifyResult(true);
-                        Ajax.Realms.saveAll();
-                        Ajax.Install.initialize(name);
-                    }
-                    else {
-                        notifyResult(false, 'Invalid username.');
-                    }
-                },
-                function() {
-                    notifyResult(false);
-                });
-            })
-            .fail(function()
-            {
-                // #
-            })
-            .always(function()
-            {
-                // #
+            // Assign click event
+            $("#alert_button").bind('click', function () {
+                UI.hidePopup();
             });
+        } else {
+            $("#alert_message").css({marginBottom: "0px"});
+            $(".popup_links").hide();
+
+            setTimeout(function () {
+                UI.hidePopup();
+            }, time);
         }
+
+        // Assign hide-function to background
+        $("#popup_bg").bind('click', function () {
+            UI.hidePopup();
+        });
+
+        // Assign key events
+        $(document).keypress(function (event) {
+            // If "enter"
+            if (event.which == 13) {
+                UI.hidePopup();
+            }
+        });
     },
 
-	/**
-	 * Shows an alert box
-	 * @param String message
-	 */
-	alert: function(question, time)
-	{
-		// Put question and button text
-		$("#alert_message").html(question);
+    /**
+     * Shows a confirm box
+     * @param String question
+     * @param String button
+     * @param Function callback
+     */
+    confirm: function (question, button, callback, callback_false) {
+        $(".popup_links").show();
 
-		// Show box
-		$("#popup_bg").fadeTo(200, 0.5);
-		$("#alert").fadeTo(200, 1);
+        // Put question and button text
+        $("#confirm_question").html(question);
+        $("#confirm_button").html(button);
 
-		if(typeof time == "undefined")
-		{
-			$("#alert_message").css({marginBottom:"10px"});
-			$(".popup_links").show();
+        // Show box
+        $("#popup_bg").fadeTo(200, 0.5);
+        $("#confirm").fadeTo(200, 1);
 
-			// Assign click event
-			$("#alert_button").bind('click', function()
-			{
-				UI.hidePopup();	
-			});
-		}
-		else
-		{
-			$("#alert_message").css({marginBottom:"0px"});
-			$(".popup_links").hide();
+        // Assign click event
+        $("#confirm_button").bind('click', function () {
+            callback();
+            UI.hidePopup();
+        });
 
-			setTimeout(function()
-			{
-				UI.hidePopup();
-			}, time);
-		}
+        if (callback_false !== undefined)
+            $('#confirm_hide').bind('click', callback_false);
 
-		// Assign hide-function to background
-		$("#popup_bg").bind('click', function()
-		{
-			UI.hidePopup();
-		});
+        // Assign hide-function to background
+        $("#popup_bg").bind('click', function () {
+            UI.hidePopup();
+        });
 
-		// Assign key events
-		$(document).keypress(function(event)
-		{
-			// If "enter"
-			if(event.which == 13)
-			{
-				UI.hidePopup();
-			}
-		});
-	},
+        // Assign key events
+        $(document).keypress(function (event) {
+            // If "enter"
+            if (event.which == 13) {
+                callback();
+                UI.hidePopup();
+            }
+        });
+    },
 
-	/**
-	 * Shows a confirm box
-	 * @param String question
-	 * @param String button
-	 * @param Function callback
-	 */
-	confirm: function(question, button, callback, callback_false)
-	{
-		$(".popup_links").show();
+    /**
+     * Hides the current popup box
+     */
+    hidePopup: function () {
+        // Hide box
+        $("#popup_bg").hide();
+        $("#confirm").hide();
+        $("#alert").hide();
+        $("#vote_reminder").hide();
 
-		// Put question and button text
-		$("#confirm_question").html(question);
-		$("#confirm_button").html(button);
+        // Remove events
+        $("#confirm_button").unbind('click');
+        $("#alert_button").unbind('click');
+        $(document).unbind('keypress');
+    },
 
-		// Show box
-		$("#popup_bg").fadeTo(200, 0.5);
-		$("#confirm").fadeTo(200, 1);
+    Navigation: {
+        current: 1,
 
-		// Assign click event
-		$("#confirm_button").bind('click', function()
-		{
-			callback();
-			UI.hidePopup();	
-		});
+        next: function (onComplete) {
+            if (this.current < ($('.step').length + 1))
+                UI.Navigation.goTo(UI.Navigation.current + 1);
+        },
 
-		if (callback_false !== undefined)
-			$('#confirm_hide').bind('click', callback_false);
+        previous: function (onComplete) {
+            if (this.current > 1)
+                UI.Navigation.goTo(UI.Navigation.current - 1);
+        },
 
-		// Assign hide-function to background
-		$("#popup_bg").bind('click', function()
-		{
-			UI.hidePopup();
-		});
+        goTo: function (id, onComplete) {
+            id = parseInt(id);
 
-		// Assign key events
-		$(document).keypress(function(event)
-		{
-			// If "enter"
-			if(event.which == 13)
-			{
-				callback();
-				UI.hidePopup();
-			}
-		});
-	},
+            // Menu: Define
+            const $menu = document.querySelector('[id="' + id + '"]');
 
-	/**
-	 * Hides the current popup box
-	 */
-	hidePopup: function()
-	{
-		// Hide box
-		$("#popup_bg").hide();
-		$("#confirm").hide();
-		$("#alert").hide();
-		$("#vote_reminder").hide();
+            // Step: Define
+            const $step        = document.querySelector('[_step_]');
+            const step_lang             = JSON.parse($step.getAttribute('_lang_'));
+            const $step_name   = $step.querySelector('[_step_name_]');
+            const $step_number = $step.querySelector('[_step_number_]');
 
-		// Remove events
-		$("#confirm_button").unbind('click');
-		$("#alert_button").unbind('click');
-		$(document).unbind('keypress');
-	},
+            // Step: Update
+            $step_name.innerHTML   = $menu.querySelector('h4').innerHTML;
+            $step_number.innerHTML = step_lang.step + ' ' + id + ': ';
 
-	Navigation: {
-		current: 1,
+            if (UI.Navigation.current == id)
+                return;
 
-		next: function(onComplete)
-		{
-			if (this.current < ($('.step').length + 1))
-				UI.Navigation.goTo(UI.Navigation.current + 1);
-		},
+            // check if step is accessible yet (is next step, is first step or was completed before)
+            if (!(UI.Navigation.current == 1 && id == 2) && id != (UI.Navigation.current + 1) && !$('.menus li:nth-child(' + id + ') a').hasClass('unlocked')) {
+                console.log('goto failed: ' + id);
+                return;
+            }
 
-		previous: function(onComplete)
-		{
-			if(this.current > 1)
-				UI.Navigation.goTo(UI.Navigation.current - 1);
-		},
+            $('#progressbar .nui-progress-bar').width((id - 1) * 14.285 + '%');
 
-		goTo: function(id, onComplete)
-		{
-			id = parseInt(id);
-			
-			if (UI.Navigation.current == id)
-				return;
+            const showRequestedStep = function () {
+                // Save the current step's fields
+                Memory.save(UI.Navigation.current);
 
-			// check if step is accessible yet (is next step, is first step or was completed before)
-			if ( ! (UI.Navigation.current == 1 && id == 2) && id != (UI.Navigation.current + 1)  && ! $('.sub li:nth-child(' + id + ') a').hasClass('unlocked')) {
-				console.log('goto failed: '+id);
-				return;
-			}
+                // display tick in navigation for current step
+                $('.menus li:nth-child(' + UI.Navigation.current + ') a').addClass('unlocked');
+                $(".menus li .router-link-active").removeClass('router-link-active');
 
-			console.log('current=' + UI.Navigation.current, 'loading next='+id);
+                // fade current step out, requested step in
+                $(".step:eq(" + (UI.Navigation.current - 1) + ")").fadeOut(200, function () {
+                    UI.Navigation.current = id;
 
-			var showRequestedStep = function()
-			{
-	            // Save the current step's fields
-				Memory.save(UI.Navigation.current);
+                    $('.menus li:nth-child(' + UI.Navigation.current + ') a').addClass('router-link-active');
+                    $('.step:eq(' + (UI.Navigation.current - 1) + ')').fadeIn(200, function () {
+                        $('document').scrollTop();
 
-				// display tick in navigation for current step
-				$('.sub li:nth-child(' + UI.Navigation.current + ') a').addClass('unlocked');				
-				$(".sub li .router-link-active").removeClass('router-link-active !text-white !bg-primary-600');
+                        if (onComplete !== undefined)
+                            onComplete();
+                    });
+                });
+            };
 
-				// fade current step out, requested step in
-				$(".step:eq(" + (UI.Navigation.current - 1) + ")").fadeOut(200, function()
-				{
-					UI.Navigation.current = id;
+            // validate current step (only if moving forward)
+			const validation = $('.step:eq(' + (UI.Navigation.current - 1) + ')').attr('data-validation');
 
-					$('.sub li:nth-child(' + UI.Navigation.current + ') a').addClass('router-link-active !text-white !bg-primary-600');
-					$('.step:eq(' + (UI.Navigation.current - 1) + ')').fadeIn(200, function() {
-						$('document').scrollTop();
-						
-					   if (onComplete !== undefined)
-                           onComplete();
-					});
-				});
-			}
-
-			// validate current step (only if moving forward)
-			var validation = $('.step:eq(' + (UI.Navigation.current - 1) + ')').attr('data-validation');
-
-			if (id > UI.Navigation.current && validation && UI.Validation[validation] !== undefined) 
-			{
-				// display loading animation, run validation, remove loading
-				UI.displayLoading(function() {
-					var result = UI.Validation[validation](function(result, errorMsg) 
-					{
+			if (id > UI.Navigation.current && validation && UI.Validation[validation] !== undefined) {
+                // display loading animation, run validation, remove loading
+                UI.displayLoading(function () {
+					UI.Validation[validation](function (result, errorMsg) {
 						UI.completeLoading();
 
-						if ( ! result) {
-							$('.sub li:nth-child(' + id + ') a').removeClass('unlocked');
+						if (!result) {
+							$('.menus li:nth-child(' + id + ') a').removeClass('unlocked');
 
 							if (errorMsg !== undefined)
 								UI.alert(errorMsg);
 
- 						   if (onComplete !== undefined)
- 	                           onComplete();
-						}
-						else {
+							if (onComplete !== undefined)
+								onComplete();
+						} else {
 							// validation OK, show requested step page
 							showRequestedStep();
 						}
 					});
 				});
-			}
-			else {
-				showRequestedStep();
-			}
-		}
-	},
+            } else {
+                showRequestedStep();
+            }
+        }
+    },
 
-	Tooltip: {
+    Tooltip: {
 
-		/**
-		 * Add event-listeners
-		 */
-		initialize: function()
-		{
-			// Add the tooltip element
-			$("body").prepend('<div id="tooltip"></div>');
+        /**
+         * Add event-listeners
+         */
+        initialize: function () {
+            // Add the tooltip element
+            $("body").prepend('<div id="tooltip"></div>');
 
-			// Add mouse-over event listeners
-			this.addEvents();
+            // Add mouse-over event listeners
+            this.addEvents();
 
-			// Add mouse listener
-			$(document).mousemove(function(e)
-			{
-				UI.Tooltip.move(e.pageX, e.pageY);
-			});
-		},
+            // Add mouse listener
+            $(document).mousemove(function (e) {
+                UI.Tooltip.move(e.pageX, e.pageY);
+            });
+        },
 
-		/**
-		 * Used to support Ajax content
-		 * Reloads the tooltip elements
-		 */
-		refresh: function()
-		{
-			// Remove all
-			$("[data-tip]").unbind('hover');
+        /**
+         * Used to support Ajax content
+         * Reloads the tooltip elements
+         */
+        refresh: function () {
+            // Remove all
+            $("[data-tip]").unbind('hover');
 
-			// Re-add
-			this.addEvents();
-		},
+            // Re-add
+            this.addEvents();
+        },
 
-		addEvents: function()
-		{
-			// Add mouse-over event listeners
-			$("[data-tip]").hover(
-				function()
-				{
-					UI.Tooltip.show($(this).attr("data-tip"));
-				},
-				function()
-				{
-					$("#tooltip").hide();
-				}
-			);
-		},
+        addEvents: function () {
+            // Add mouse-over event listeners
+            $("[data-tip]").hover(
+                function () {
+                    UI.Tooltip.show($(this).attr("data-tip"));
+                },
+                function () {
+                    $("#tooltip").hide();
+                }
+            );
+        },
 
-		/**
-		 * Moves tooltip
-		 * @param Int x
-		 * @param Int y
-		 */
-		move: function(x, y)
-		{
-			// Get half of the width
-			var width = ($("#tooltip").css("width").replace("px", "") / 2);
+        /**
+         * Moves tooltip
+         * @param Int x
+         * @param Int y
+         */
+        move: function (x, y) {
+            // Get half of the width
+            var width = ($("#tooltip").css("width").replace("px", "") / 2);
 
-			// Position it at the mouse, and center
-			$("#tooltip").css("left", x - width).css("top", y + 25);
-		},
+            // Position it at the mouse, and center
+            $("#tooltip").css("left", x - width).css("top", y + 25);
+        },
 
-		/**
-		 * Displays the tooltip
-		 * @param Object element
-		 */
-		show: function(data)
-		{
-			$("#tooltip").html(data).show();
-		}
-	}
-}
+        /**
+         * Displays the tooltip
+         * @param Object element
+         */
+        show: function (data) {
+            $("#tooltip").html(data).show();
+        }
+    }
+};

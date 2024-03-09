@@ -113,5 +113,6 @@
     "support": "پشتیبانی",
     "copyright": "© 2023 FusionCMS. تمامی حقوق محفوظ است.",
     "previous_step": "مرحله قبل",
-    "next_step": "مرحله بعد"
+    "next_step": "مرحله بعد",
+    "step": "مرحله"
 }
