@@ -122,7 +122,7 @@ const Gm = {
             confirmButtonText: lang("close_short", "gm")
         }).then((result) => {
             if (result.isConfirmed) {
-                $(element).parents("tr").slideUp(300, function () {
+                $(field).parents("div.gm_ticket").slideUp(300, function () {
                     $(this).remove();
                 });
 

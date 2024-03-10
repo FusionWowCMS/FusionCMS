@@ -104,7 +104,7 @@ class Gm extends MX_Controller
 
 			$this->plugins->onSendItem($realmId, $ticket['guid'], $title, $body, $itemId);
 
-            $this->dblogger->createGMLog("Send Item", $ticket['guid'], 'characters', $realmId);
+            $this->dblogger->createGMLog("Send Item with ticket " . $id, $ticket['guid'], 'characters', $realmId);
 
 			//Finish
 			die('1');
@@ -148,7 +148,7 @@ class Gm extends MX_Controller
 
 				$this->plugins->onUnstuck($realmId, $ticket['guid'], $x, $y, $z, $o, $m);
 
-                $this->dblogger->createGMLog("Unstuck", $ticket['guid'], 'characters', $realmId);
+                $this->dblogger->createGMLog("Unstuck with ticket " . $id, $ticket['guid'], 'characters', $realmId);
 
 				//Die('1') to mark success
 				die('1');
@@ -191,7 +191,7 @@ class Gm extends MX_Controller
 
 			$this->plugins->onAnswer($realmId, $ticket['guid'], $title, $body);
 
-            $this->dblogger->createGMLog("Answer", $ticket['guid'], 'characters', $realmId);
+            $this->dblogger->createGMLog("Ticket Answer " . $id, $ticket['guid'], 'characters', $realmId);
 
 			die('1');
 		}
@@ -216,25 +216,19 @@ class Gm extends MX_Controller
 		//Get the ticket
 		$ticket = $this->gm_model->getTicket($realm, $id);
 
-		if(column("gm_tickets", "completed"))
-		{
-			//A row exists, update it
-			$this->gm_model->setTicketCompleted($realm->getCharacters()->getConnection(), $id, $realm->getId());
+        if($realm->getEmulator()->hasConsole())
+        {
+            $realm->getEmulator()->send(".ticket close " . $id);
 
-            $this->dblogger->createGMLog("Ticket Completed", $ticket['guid'], 'ticket', $realmId);
-			die('1');
-		}
-		else
-		{
-			//Remove it
-			$this->gm_model->deleteTicket($realm->getCharacters()->getConnection(), $id, $realm->getId());
+            $this->dblogger->createGMLog("Ticket Close " . $id, $ticket['guid'], 'ticket', $realmId);
 
-            $this->dblogger->createGMLog("Ticket Deleted", $ticket['guid'], 'ticket', $realmId);
-			die('1');
-		}
-
-		$this->plugins->onClose($realmId, $id);
-	}
+            die('1');
+        }
+        else
+        {
+            die('2');
+        }
+    }
 
 	public function kick($realmId = false, $charName = false)
 	{
@@ -252,9 +246,9 @@ class Gm extends MX_Controller
 		{
 			$realm->getEmulator()->send($this->config->item('gm_kickcommand')." ".$charName);
 
-			$this->plugins->onKick($realmId, $charName);
-
             $this->dblogger->createGMLog("Kick", $realm->getCharacters()->getGuidByName($charName), 'characters', $realmId);
+
+            die('1');
 		}
 		else
 		{
@@ -286,8 +280,6 @@ class Gm extends MX_Controller
 			//Update the row.
 			$this->gm_model->updateBan($this->external_account_model->getConnection(), $this->external_account_model->getId($username), $bannedBy, $banReason, $day * 3600 * 24);
 		}
-
-		$this->plugins->onBan($username, $ban['banCount'], $bannedBy, $banReason);
 
         $this->dblogger->createGMLog("Ban Account", $this->external_account_model->getId($username), 'account', 1);
 
