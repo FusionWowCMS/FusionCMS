@@ -1,5 +1,7 @@
 <?php namespace CodeIgniter\Debug;
 
+use Throwable;
+
 class Exceptions
 {
 
@@ -94,7 +96,7 @@ class Exceptions
         $templates_path = config_item('error_views_path');
         if (empty($templates_path))
         {
-            $templates_path = APPPATH.'views/errors/';
+            $templates_path = rtrim(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, FCPATH), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . basename(APPPATH) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR;
         }
 
         // Make a nicer title based on the type of Exception.
@@ -102,7 +104,7 @@ class Exceptions
 
         if (is_cli())
         {
-            $templates_path .= 'cli/';
+            $templates_path .= 'cli'.DIRECTORY_SEPARATOR;
 
             // CLI will never accessed by general public
             // while in production.
@@ -111,7 +113,7 @@ class Exceptions
         else
         {
             header('HTTP/1.1 401 Unauthorized', true, 500);
-            $templates_path .= 'html/';
+            $templates_path .= 'html'.DIRECTORY_SEPARATOR;
         }
 
         if (ob_get_level() > $this->ob_level + 1)
