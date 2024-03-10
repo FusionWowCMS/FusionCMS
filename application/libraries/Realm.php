@@ -235,7 +235,7 @@ class Realm
         return $this->characters;
     }
 
-    public function getEmulator()
+    public function getEmulator(): emulator
     {
         return $this->emulator;
     }
