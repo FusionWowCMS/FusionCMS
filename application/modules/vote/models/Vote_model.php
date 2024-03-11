@@ -1,5 +1,7 @@
 <?php
 
+use App\Config\Services;
+
 class Vote_model extends CI_Model
 {
     private $vote_sites;
@@ -163,7 +165,7 @@ class Vote_model extends CI_Model
         $this->db->query("UPDATE account_data SET `vp` = vp + ? WHERE id=?", array($extra_vp, $user_id));
 
         //Update the session
-        $this->session->set_userdata('vp', $this->user->getVp() + $extra_vp);
+        Services::session()->set('vp', $this->user->getVp() + $extra_vp);
 
         $this->updateMonthlyVotes();
     }

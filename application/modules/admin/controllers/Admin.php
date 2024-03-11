@@ -295,7 +295,7 @@ class Admin extends MX_Controller
 
     public function destroySession()
     {
-        $this->session->unset_userdata('admin_access');
+        Services::session()->remove('admin_access');
     }
 
     public function notifications($count = false)

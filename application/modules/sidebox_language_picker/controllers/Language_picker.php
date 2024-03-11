@@ -1,5 +1,6 @@
 <?php
 
+use App\Config\Services;
 use MX\MX_Controller;
 
 class Language_picker extends MX_Controller
@@ -27,7 +28,7 @@ class Language_picker extends MX_Controller
         if ($this->user->isOnline()) {
             $this->user->setLanguage($language);
         } else {
-            $this->session->set_userdata(array('language' => $language));
+            Services::session()->set(['language' => $language]);
         }
 
         $this->plugins->onSetLanguage($this->user->getId(), $language);

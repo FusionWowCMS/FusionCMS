@@ -1,5 +1,8 @@
 <?php
 
+use App\Config\Services;
+use CodeIgniter\Session\Session;
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -58,7 +61,7 @@ class Administrator
         }
 
         if ($security_code == $this->CI->config->item('security_code')) {
-            $this->CI->session->set_userdata(array('admin_access' => true));
+            Services::session()->set(['admin_access' => true]);
 
             die("welcome");
         } else {
@@ -357,7 +360,7 @@ class Administrator
      */
     private function showLogIn()
     {
-        if (!$this->CI->session->userdata('admin_access') || !hasPermission("view", "admin")) {
+        if (!Services::session()->get('admin_access') || !hasPermission("view", "admin")) {
             if ($this->CI->input->post('send')) {
                 $this->logIn();
             } else {

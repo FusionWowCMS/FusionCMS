@@ -1,12 +1,13 @@
 <?php
 
+use App\Config\Services;
 use MX\MX_Controller;
 
 class Info_login extends MX_Controller
 {
     public function view()
     {
-        if ($this->config->item("use_captcha") == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps')) {
+        if ($this->config->item("use_captcha") == true || (int)Services::session()->get('attempts') >= $this->config->item('captcha_attemps')) {
             $data["use_captcha"] = true;
         }
 
@@ -31,7 +32,7 @@ class Info_login extends MX_Controller
                     "has_smtp" => $this->config->item('has_smtp')
                 );
                 
-            if ($this->config->item("use_captcha") == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps')) {
+            if ($this->config->item("use_captcha") == true || (int)Services::session()->get('attempts') >= $this->config->item('captcha_attemps')) {
                 $data["use_captcha"] = true;
             }
 

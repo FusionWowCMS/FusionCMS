@@ -1,5 +1,8 @@
 <?php
 
+use App\Config\Services;
+use CodeIgniter\Session\Session;
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -94,7 +97,7 @@ class User
             ];
 
             // Set the session with the above data
-            $this->CI->session->set_userdata($userdata);
+            Services::session()->set($userdata);
 
             // Reload this object.
             $this->getUserData();
@@ -252,17 +255,17 @@ class User
     public function getUserData(): void
     {
         // If they are logged in sync the settings with our object
-        if ($this->CI->session->userdata('online')) {
-            $this->id = $this->CI->session->userdata('uid');
-            $this->username = $this->CI->session->userdata('username');
-            $this->password = $this->CI->session->userdata('password');
-            $this->email = $this->CI->session->userdata('email');
-            $this->expansion = $this->CI->session->userdata('expansion');
+        if (Services::session()->get('online')) {
+            $this->id = Services::session()->get('uid');
+            $this->username = Services::session()->get('username');
+            $this->password = Services::session()->get('password');
+            $this->email = Services::session()->get('email');
+            $this->expansion = Services::session()->get('expansion');
             $this->online = true;
-            $this->register_date = $this->CI->session->userdata('register_date');
-            $this->last_ip = $this->CI->session->userdata('last_ip');
-            $this->totp_secret = $this->CI->session->userdata('totp_secret');
-            $this->nickname = $this->CI->session->userdata('nickname');
+            $this->register_date = Services::session()->get('register_date');
+            $this->last_ip = Services::session()->get('last_ip');
+            $this->totp_secret = Services::session()->get('totp_secret');
+            $this->nickname = Services::session()->get('nickname');
             $this->vp = false;
             $this->dp = false;
         } else {
@@ -281,7 +284,7 @@ class User
 
         }
 
-        $this->CI->language->setLanguage($this->CI->session->userdata('language') ? $this->CI->session->userdata('language') : $this->CI->config->item('language'));
+        $this->CI->language->setLanguage(Services::session()->get('language') ? Services::session()->get('language') : $this->CI->config->item('language'));
     }
 
     /**
@@ -526,7 +529,7 @@ class User
         if ($userId)
             $this->CI->external_account_model->getConnection()->query('UPDATE '.table('account').' SET ' . $this->CI->config->item('totp_secret_name') . ' = ? WHERE id = ?', [$secret, $userId]);
 
-        $this->CI->session->set_userdata('totp_secret', $secret);
+        Services::session()->set('totp_secret', $secret);
     }
 
     /*
@@ -546,7 +549,7 @@ class User
             return;
         }
         $this->CI->external_account_model->setUsername($this->username, $newUsername);
-        $this->CI->session->set_userdata('username', $newUsername);
+        Services::session()->set('username', $newUsername);
     }
 
     /**
@@ -560,7 +563,7 @@ class User
             return;
         }
         $this->CI->internal_user_model->setLanguage($this->id, $newLanguage);
-        $this->CI->session->set_userdata('language', $newLanguage);
+        Services::session()->set('language', $newLanguage);
     }
 
     /**
@@ -574,7 +577,7 @@ class User
             return;
         }
         $this->CI->external_account_model->setPassword($this->username, $this->email, $newPassword);
-        $this->CI->session->set_userdata('password', $newPassword);
+        Services::session()->set('password', $newPassword);
     }
 
     /**
@@ -588,7 +591,7 @@ class User
             return;
         }
         $this->CI->external_account_model->setEmail($this->username, $newEmail);
-        $this->CI->session->set_userdata('email', $newEmail);
+        Services::session()->set('email', $newEmail);
     }
 
     /**
@@ -599,7 +602,7 @@ class User
     public function setExpansion($newExpansion): void
     {
         $this->CI->external_account_model->setExpansion($newExpansion, $this->username);
-        $this->CI->session->set_userdata('expansion', $newExpansion);
+        Services::session()->set('expansion', $newExpansion);
     }
 
     /**

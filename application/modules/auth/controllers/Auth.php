@@ -1,5 +1,6 @@
 <?php
 
+use App\Config\Services;
 use MX\MX_Controller;
 
 /**
@@ -51,7 +52,7 @@ class Auth extends MX_Controller
             "has_smtp" => $this->config->item('has_smtp')
         ];
 
-        if ($use_captcha || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps')) {
+        if ($use_captcha || (int)Services::session()->get('attempts') >= $this->config->item('captcha_attemps')) {
             $data["use_captcha"] = true;
         }
 
@@ -82,7 +83,7 @@ class Auth extends MX_Controller
 
         $use_captcha = $this->config->item('use_captcha');
         $captcha_type = $this->config->item('captcha_type');
-        $show_captcha = $use_captcha == true || (int)$this->session->userdata('attempts') >= $this->config->item('captcha_attemps');
+        $show_captcha = $use_captcha == true || (int)Services::session()->get('attempts') >= $this->config->item('captcha_attemps');
 
         $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[4]|max_length[24]|alpha_numeric');
         $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]');
@@ -157,7 +158,7 @@ class Auth extends MX_Controller
                 $data["redirect"] = true;
 
                 unset($_SESSION['captcha']);
-                $this->session->unset_userdata('attempts');
+                Services::session()->remove('attempts');
 
                 // Remember me
                 if (isset($_POST["remember"]))
@@ -197,7 +198,7 @@ class Auth extends MX_Controller
     {
         $find = $this->login_model->getIP($ip_address);
         
-        $this->session->set_userdata('attempts', $this->session->userdata('attempts') + 1);
+        Services::session()->set('attempts', Services::session()->get('attempts') + 1);
 
         if (!empty($find['attempts']))
         {

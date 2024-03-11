@@ -1,5 +1,6 @@
 <?php
 
+use App\Config\Services;
 use MX\MX_Controller;
 
 //API Container
@@ -157,7 +158,7 @@ class Donate extends MX_Controller
 
     public function error()
     {
-        $data = ['msg' => $this->session->userdata('paypal_error')];
+        $data = ['msg' => Services::session()->getTempdata('paypal_error')];
 
         $page = $this->template->loadPage("error.tpl", $data);
 
@@ -260,10 +261,10 @@ class Donate extends MX_Controller
             log_message('error', $e);
 
             if (preg_match('[500|501|502|503|504|60000]', $e)) {
-                $this->session->set_tempdata('paypal_error', 'PayPal is currently experiencing problems. Please try later', 10);
+                Services::session()->setTempdata('paypal_error', 'PayPal is currently experiencing problems. Please try later', 10);
                 redirect(base_url('/donate/error'));
             } else if (str_contains($e, '401')) {
-                $this->session->set_tempdata('paypal_error', 'Check Credentials (Client ID, Secret Password) and make sure you switch the PayPal mode to Live or Sandbox mode for whichever you need and match it in the config.', 10);
+                Services::session()->setTempdata('paypal_error', 'Check Credentials (Client ID, Secret Password) and make sure you switch the PayPal mode to Live or Sandbox mode for whichever you need and match it in the config.', 10);
                 redirect(base_url('/donate/error'));
             } else {
                 die($e);

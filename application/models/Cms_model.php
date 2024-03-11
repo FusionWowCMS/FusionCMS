@@ -1,5 +1,7 @@
 <?php
 
+use App\Config\Services;
+
 /**
  * @package FusionCMS
  * @link    https://github.com/FusionWowCMS/FusionCMS
@@ -300,16 +302,12 @@ class Cms_model extends CI_Model
 
     public function setReadNotification($id, $uid, $all = false)
     {
-        if ($all) {
-            $this->db->set('read', 1);
-            $this->db->where('uid', $uid);
-            $this->db->update('notifications');
-        } else {
-            $this->db->set('read', 1);
+        $this->db->set('read', 1);
+        if (!$all) {
             $this->db->where('id', $id);
-            $this->db->where('uid', $uid);
-            $this->db->update('notifications');
         }
+        $this->db->where('uid', $uid);
+        $this->db->update('notifications');
     }
 
     private function setLangugage()
@@ -329,10 +327,10 @@ class Cms_model extends CI_Model
             $setLang = $this->config->item('default_language');
         }
 
-        if ($this->session->userdata('online')) {
+        if (Services::session()->get('online')) {
             $this->user->setLanguage($setLang);
         } else {
-            $this->session->set_userdata(array('language' => $setLang));
+            Services::session()->set(['language' => $setLang]);
         }
     }
 
@@ -343,8 +341,7 @@ class Cms_model extends CI_Model
         $query = $this->db->get("ci_sessions");
 
         if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            return $result;
+            return $query->result_array();
         } else {
             return false;
         }

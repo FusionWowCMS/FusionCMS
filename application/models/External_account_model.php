@@ -1,5 +1,6 @@
 <?php
 
+use App\Config\Services;
 use MX\CI;
 
 /**
@@ -68,7 +69,7 @@ class External_account_model extends CI_Model
 
         if (preg_match("/^cmangos/i", get_class($this->realms->getEmulator()))) {
             if (!$where) {
-                $query = $this->connection->query(query('get_account_id'), [$this->session->userdata('uid')]);
+                $query = $this->connection->query(query('get_account_id'), [Services::session()->get('uid')]);
             } else {
                 $query = $this->connection->query(query('get_account'), [$where]);
             }
@@ -91,7 +92,7 @@ class External_account_model extends CI_Model
             }
 
             if (!$where) {
-                $query = $this->connection->query('SELECT ' . formatColumns($columns) . ' FROM ' . table('account') . ' WHERE ' . column('account', 'id') . ' = ?', [$this->session->userdata('uid')]);
+                $query = $this->connection->query('SELECT ' . formatColumns($columns) . ' FROM ' . table('account') . ' WHERE ' . column('account', 'id') . ' = ?', [Services::session()->get('uid')]);
             } else {
                 $query = $this->connection->query('SELECT ' . formatColumns($columns) . ' FROM ' . table('account') . ' WHERE ' . column('account', 'username') . ' = ?', [$where]);
             }

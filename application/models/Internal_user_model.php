@@ -1,5 +1,7 @@
 <?php
 
+use App\Config\Services;
+
 /**
  * @package FusionCMS
  * @author  Jesper Lindström
@@ -41,7 +43,7 @@ class Internal_user_model extends CI_Model
     public function initialize($id = false)
     {
         if (!$id) {
-            $id = $this->session->userdata('uid');
+            $id = Services::session()->get('uid');
         }
 
         $this->connection->select('*')->from('account_data')->where(array('id' => $id));

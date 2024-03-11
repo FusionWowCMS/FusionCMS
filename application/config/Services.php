@@ -13,6 +13,9 @@ use CodeIgniter\Router\RouteCollection;
 use CodeIgniter\Router\RouteCollectionInterface;
 use CodeIgniter\Router\Router;
 use CodeIgniter\Security\Security;
+use CodeIgniter\Session\Handlers\Database\MySQLiHandler;
+use CodeIgniter\Session\Handlers\DatabaseHandler;
+use CodeIgniter\Session\Session;
 
 /**
  * Services Configuration file.
@@ -270,6 +273,49 @@ class Services
         }
 
         return self::getSharedInstance('security');
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * @param bool $getShared
+     *
+     * @return Session
+     */
+    public static function session($getShared = true)
+    {
+        if (! $getShared)
+        {
+            $config = new \App\Config\Session();
+
+            $logger = self::logger();
+
+            $driverName = $config->driver;
+
+            if ($driverName === DatabaseHandler::class) {
+                $driverName = MySQLiHandler::class;
+            }
+
+            $driver = new $driverName($config, self::request()->getIPAddress());
+            $driver->setLogger($logger);
+
+            $session = new Session($driver, $config);
+            $session->setLogger($logger);
+
+            if (session_status() === PHP_SESSION_NONE) {
+                // PHP Session emits the headers according to `session.cache_limiter`.
+                // See https://www.php.net/manual/en/function.session-cache-limiter.php.
+                // The headers are not managed by CI's Response class.
+                // So, we remove CI's default Cache-Control header.
+                self::response()->removeHeader('Cache-Control');
+
+                $session->start();
+            }
+
+            return $session;
+        }
+
+        return self::getSharedInstance('session');
     }
 
     //--------------------------------------------------------------------

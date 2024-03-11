@@ -123,10 +123,10 @@ $autoload['packages'] = [];
 |
 | Prototype:
 |
-|   $autoload['libraries'] = ['database', 'session', 'security'];
+|   $autoload['libraries'] = ['database', 'cache', 'security'];
 */
 
-$autoload['libraries'] = ['security', 'cache', 'database', 'session', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'dblogger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items', 'crypto'];
+$autoload['libraries'] = ['security', 'cache', 'database', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'dblogger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items', 'crypto'];
 
 /*
 | -------------------------------------------------------------------
@@ -141,7 +141,7 @@ $autoload['libraries'] = ['security', 'cache', 'database', 'session', 'smartyeng
 |
 |   $autoload['drivers'] = ['cache'];
 */
-$autoload['drivers'] = ['session'];
+$autoload['drivers'] = [''];
 
 
 /*

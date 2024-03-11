@@ -52,7 +52,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_DB_utility $dbutil              Database Utility Class
  ***************** CORE LIBRARIES *****************
  * @property CI_Cache $cache                    CodeIgniter Caching Class
- * @property CI_Session $session                CodeIgniter Session Class
  * @property CI_Calendar $calendar              This class enables the creation of calendars
  * @property CI_Driver_Library $driver          This class enables you to create "Driver" libraries that add runtime ability to extend the capabilities of a class via additional driver objects
  * @property Email $email                       Permits email to be sent using Mail, Sendmail, or SMTP.

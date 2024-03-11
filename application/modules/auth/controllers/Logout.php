@@ -1,5 +1,6 @@
 <?php
 
+use App\Config\Services;
 use MX\MX_Controller;
 
 class Logout extends MX_Controller
@@ -24,7 +25,7 @@ class Logout extends MX_Controller
         delete_cookie("fcms_username");
         delete_cookie("fcms_password");
 
-        $this->session->sess_destroy();
+        Services::session()->destroy();
 
         $this->plugins->onLogout();
 
