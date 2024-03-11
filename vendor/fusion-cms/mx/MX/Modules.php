@@ -230,7 +230,7 @@ class MX_Modules
         $file_ext = pathinfo($file, PATHINFO_EXTENSION) ? $file : $file . EXT;
 
         $path = ltrim(implode('/', $segments) . '/', '/');
-        $module ? $_modules[$module] = $path : $_modules = array();
+        $module ? $_modules[$module] = $path : $_modules = [];
 
         if (! empty($segments)) {
             $_modules[array_shift($segments)] = ltrim(implode('/', $segments) . '/', '/');
@@ -242,66 +242,15 @@ class MX_Modules
 
                 if ($base === 'libraries/' || $base === 'models/') {
                     if (is_file($fullpath . ucfirst($file_ext))) {
-                        return array($fullpath, ucfirst($file));
+                        return [$fullpath, ucfirst($file)];
                     }
                 } elseif /* load non-class files */
                 (is_file($fullpath . $file_ext)) {
-                    return array($fullpath, $file);
+                    return [$fullpath, $file];
                 }
             }
         }
 
-        return array(false, $file);
-    }
-
-    /**
-     * [Parse module routes]
-     *
-     * @method parse_routes
-     *
-     * @param [type]       $module [description]
-     * @param [type]       $uri    [description]
-     *
-     * @return [type]               [description]
-     */
-    public static function parse_routes($module, $uri)
-    {
-        /* load the route file */
-        if (! isset(self::$routes[$module])) {
-            // Backward function
-            if ([$path] = self::find('routes', $module, 'config/')) {
-                $path && self::$routes[$module] = self::load_file('routes', $path, 'route');
-            }
-        }
-
-        if (! isset(self::$routes[$module])) {
-            return;
-        }
-
-        // Add http verb support for each module routing
-        $http_verb = isset($_SERVER['REQUEST_METHOD']) ? strtolower($_SERVER['REQUEST_METHOD']) : 'cli';
-
-        /* parse module routes */
-        foreach (self::$routes[$module] as $key => $val) {
-            // Add http verb support for each module routing
-            if (is_array($val)) {
-                $val = array_change_key_case($val, CASE_LOWER);
-
-                if (isset($val[$http_verb])) {
-                    $val = $val[$http_verb];
-                } else {
-                    continue;
-                }
-            }
-
-            $key = str_replace(array(':any', ':num'), array('.+', '[0-9]+'), $key);
-
-            if (preg_match('#^' . $key . '$#', $uri)) {
-                if (strpos($val, '$') !== false && strpos($key, '(') !== false) {
-                    $val = preg_replace('#^' . $key . '$#', $val, $uri);
-                }
-                return explode('/', $module . '/' . $val);
-            }
-        }
+        return [false, $file];
     }
 }
