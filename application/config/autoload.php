@@ -98,8 +98,6 @@ $config['classmap'] = [
     'CodeIgniter\HTTP\ResponseInterface'          => BASEPATH.'HTTP/ResponseInterface.php',
     'CodeIgniter\HTTP\CURLRequest'                => BASEPATH.'HTTP/CURLRequest.php',
     'CodeIgniter\Log\Logger'                      => BASEPATH.'Log/Logger.php',
-    'CodeIgniter\Log\LoggerInterface'             => BASEPATH.'Log/LoggerInterface.php',
-    'CodeIgniter\Log\LogLevel'                    => BASEPATH.'Log/LogLevel.php',
     'Laminas\Escaper\Escaper'                     => BASEPATH.'View/Escaper.php'
 ];
 

@@ -1,6 +1,19 @@
-<?php namespace CodeIgniter\Log;
+<?php
+
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\Log;
 
 use DateTime;
+use Psr\Log\LoggerInterface;
+use Throwable;
 
 /**
  * The CodeIgntier Logger
@@ -30,7 +43,7 @@ class Logger implements LoggerInterface
      * Used by the logThreshold Config setting to define
      * which errors to show.
      *
-     * @var array<string, integer>
+     * @var array<string, int>
      */
     protected $logLevels = [
         'emergency' => 1,
@@ -87,7 +100,6 @@ class Logger implements LoggerInterface
      */
     protected $cacheLogs = false;
 
-    //--------------------------------------------------------------------
 
     public function __construct(bool $debug = CI_DEBUG)
     {
@@ -124,8 +136,6 @@ class Logger implements LoggerInterface
         }
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * System is unusable.
      *
@@ -138,8 +148,6 @@ class Logger implements LoggerInterface
     {
         return $this->log('emergency', $message, $context);
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Action must be taken immediately.
@@ -157,8 +165,6 @@ class Logger implements LoggerInterface
         return $this->log('alert', $message, $context);
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * Critical conditions.
      *
@@ -174,8 +180,6 @@ class Logger implements LoggerInterface
         return $this->log('critical', $message, $context);
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * Runtime errors that do not require immediate action but should typically
      * be logged and monitored.
@@ -189,8 +193,6 @@ class Logger implements LoggerInterface
     {
         return $this->log('error', $message, $context);
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Exceptional occurrences that are not errors.
@@ -208,8 +210,6 @@ class Logger implements LoggerInterface
         return $this->log('warning', $message, $context);
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * Normal but significant events.
      *
@@ -222,8 +222,6 @@ class Logger implements LoggerInterface
     {
         return $this->log('notice', $message, $context);
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Interesting events.
@@ -240,8 +238,6 @@ class Logger implements LoggerInterface
         return $this->log('info', $message, $context);
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * Detailed debug information.
      *
@@ -255,8 +251,6 @@ class Logger implements LoggerInterface
         return $this->log('debug', $message, $context);
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * Logs with an arbitrary level.
      *
@@ -266,12 +260,13 @@ class Logger implements LoggerInterface
      *
      * @return bool
      */
-    public function log(string $level, $message, array $context = []): bool
+    public function log($level, $message, array $context = []): bool
     {
         if (is_numeric($level)) {
             $level = array_search((int) $level, $this->logLevels, true);
         }
 
+        // Does the app want to log this right now?
         if (! in_array($level, $this->loggableLevels, true)) {
             return false;
         }
@@ -347,8 +342,6 @@ class Logger implements LoggerInterface
 
         return is_int($result);
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Replaces any placeholders in the message with variables
