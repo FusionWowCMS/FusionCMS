@@ -140,20 +140,24 @@ var_dump($container->what); // -> hash: 5946210c9e93ae37891dfe96c3e39614 (custom
 
 #### [`SettingsContainerAbstract`](https://github.com/chillerlan/php-settings-container/blob/main/src/SettingsContainerAbstract.php)
 
-| method                                     | return                       | info                                                                                                            |
-|--------------------------------------------|------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `__construct(iterable $properties = null)` | -                            | calls `construct()` internally after the properties have been set                                               |
-| (protected) `construct()`                  | void                         | calls a method with trait name as replacement constructor for each used trait                                   |
-| `__get(string $property)`                  | mixed                        | calls `$this->{'get_'.$property}()` if such a method exists                                                     |
-| `__set(string $property, $value)`          | void                         | calls `$this->{'set_'.$property}($value)` if such a method exists                                               |
-| `__isset(string $property)`                | bool                         |                                                                                                                 |
-| `__unset(string $property)`                | void                         |                                                                                                                 |
-| `__toString()`                             | string                       | a JSON string                                                                                                   |
-| `toArray()`                                | array                        |                                                                                                                 |
-| `fromIterable(iterable $properties)`       | `SettingsContainerInterface` |                                                                                                                 |
-| `toJSON(int $jsonOptions = null)`          | string                       | accepts [JSON options constants](http://php.net/manual/json.constants.php)                                      |
-| `fromJSON(string $json)`                   | `SettingsContainerInterface` |                                                                                                                 |
-| `jsonSerialize()`                          | mixed                        | implements the [`JsonSerializable`](https://www.php.net/manual/en/jsonserializable.jsonserialize.php) interface |
+| method                                     | return                       | info                                                                                                                |
+|--------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| `__construct(iterable $properties = null)` | -                            | calls `construct()` internally after the properties have been set                                                   |
+| (protected) `construct()`                  | void                         | calls a method with trait name as replacement constructor for each used trait                                       |
+| `__get(string $property)`                  | mixed                        | calls `$this->{'get_'.$property}()` if such a method exists                                                         |
+| `__set(string $property, $value)`          | void                         | calls `$this->{'set_'.$property}($value)` if such a method exists                                                   |
+| `__isset(string $property)`                | bool                         |                                                                                                                     |
+| `__unset(string $property)`                | void                         |                                                                                                                     |
+| `__toString()`                             | string                       | a JSON string                                                                                                       |
+| `toArray()`                                | array                        |                                                                                                                     |
+| `fromIterable(iterable $properties)`       | `SettingsContainerInterface` |                                                                                                                     |
+| `toJSON(int $jsonOptions = null)`          | string                       | accepts [JSON options constants](http://php.net/manual/json.constants.php)                                          |
+| `fromJSON(string $json)`                   | `SettingsContainerInterface` |                                                                                                                     |
+| `jsonSerialize()`                          | mixed                        | implements the [`JsonSerializable`](https://www.php.net/manual/en/jsonserializable.jsonserialize.php) interface     |
+| `serialize()`                              | string                       | implements the [`Serializable`](https://www.php.net/manual/en/serializable.serialize.php) interface                 |
+| `unserialize(string $data)`                | void                         | implements the [`Serializable`](https://www.php.net/manual/en/serializable.unserialize.php) interface               |
+| `__serialize()`                            | array                        | implements the [`Serializable`](https://www.php.net/manual/en/language.oop5.magic.php#object.serialize) interface   |
+| `__unserialize(array $data)`               | void                         | implements the [`Serializable`](https://www.php.net/manual/en/language.oop5.magic.php#object.unserialize) interface |
 
 ## Disclaimer
 This might be either an utterly genius or completely stupid idea - you decide. However, i like it and it works.

@@ -7,12 +7,13 @@
  * @copyright    2018 Smiley
  * @license      MIT
  */
+declare(strict_types=1);
 
 namespace chillerlan\Settings;
 
-use ReflectionClass, ReflectionProperty;
-
-use function get_object_vars, json_decode, json_encode, method_exists, property_exists;
+use InvalidArgumentException, ReflectionClass, ReflectionProperty;
+use function array_keys, get_object_vars, is_object, json_decode,
+	json_encode, method_exists, property_exists, serialize, unserialize;
 use const JSON_THROW_ON_ERROR;
 
 abstract class SettingsContainerAbstract implements SettingsContainerInterface{
@@ -20,7 +21,7 @@ abstract class SettingsContainerAbstract implements SettingsContainerInterface{
 	/**
 	 * SettingsContainerAbstract constructor.
 	 */
-	public function __construct(iterable $properties = null){
+	public function __construct(iterable|null $properties = null){
 
 		if(!empty($properties)){
 			$this->fromIterable($properties);
@@ -120,7 +121,13 @@ abstract class SettingsContainerAbstract implements SettingsContainerInterface{
 	 * @inheritdoc
 	 */
 	public function toArray():array{
-		return get_object_vars($this);
+		$properties = [];
+
+		foreach(array_keys(get_object_vars($this)) as $key){
+			$properties[$key] = $this->__get($key);
+		}
+
+		return $properties;
 	}
 
 	/**
@@ -138,7 +145,7 @@ abstract class SettingsContainerAbstract implements SettingsContainerInterface{
 	/**
 	 * @inheritdoc
 	 */
-	public function toJSON(int $jsonOptions = null):string{
+	public function toJSON(int|null $jsonOptions = null):string{
 		return json_encode($this, ($jsonOptions ?? 0));
 	}
 
@@ -153,10 +160,81 @@ abstract class SettingsContainerAbstract implements SettingsContainerInterface{
 
 	/**
 	 * @inheritdoc
-	 * @noinspection PhpMixedReturnTypeCanBeReducedInspection
 	 */
-	public function jsonSerialize():mixed{
+	public function jsonSerialize():array{
 		return $this->toArray();
+	}
+
+	/**
+	 * Returns a serialized string representation of the object in its current state (except static/readonly properties)
+	 *
+	 * @inheritdoc
+	 * @see \chillerlan\Settings\SettingsContainerInterface::toArray()
+	 */
+	public function serialize():string{
+		return serialize($this);
+	}
+
+	/**
+	 * Restores the data (except static/readonly properties) from the given serialized object to the current instance
+	 *
+	 * @inheritdoc
+	 * @see \chillerlan\Settings\SettingsContainerInterface::fromIterable()
+	 */
+	public function unserialize(string $data):void{
+		$obj = unserialize($data);
+
+		if($obj === false || !is_object($obj)){
+			throw new InvalidArgumentException('The given serialized string is invalid');
+		}
+
+		$reflection = new ReflectionClass($obj);
+
+		if(!$reflection->isInstance($this)){
+			throw new InvalidArgumentException('The unserialized object does not match the class of this container');
+		}
+
+		$properties = $reflection->getProperties(~(ReflectionProperty::IS_STATIC | ReflectionProperty::IS_READONLY));
+
+		foreach($properties as $reflectionProperty){
+			$this->{$reflectionProperty->name} = $reflectionProperty->getValue($obj);
+		}
+
+	}
+
+	/**
+	 * Returns a serialized string representation of the object in its current state (except static/readonly properties)
+	 *
+	 * @inheritdoc
+	 * @see \chillerlan\Settings\SettingsContainerInterface::toArray()
+	 */
+	public function __serialize():array{
+
+		$properties = (new ReflectionClass($this))
+			->getProperties(~(ReflectionProperty::IS_STATIC | ReflectionProperty::IS_READONLY))
+		;
+
+		$data = [];
+
+		foreach($properties as $reflectionProperty){
+			$data[$reflectionProperty->name] = $reflectionProperty->getValue($this);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Restores the data from the given array to the current instance
+	 *
+	 * @inheritdoc
+	 * @see \chillerlan\Settings\SettingsContainerInterface::fromIterable()
+	 */
+	public function __unserialize(array $data):void{
+
+		foreach($data as $key => $value){
+			$this->{$key} = $value;
+		}
+
 	}
 
 }

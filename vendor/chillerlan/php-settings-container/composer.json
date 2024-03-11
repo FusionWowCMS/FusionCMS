@@ -27,7 +27,7 @@
 		"phan/phan": "^5.4",
 		"phpmd/phpmd": "^2.15",
 		"phpunit/phpunit": "^10.5",
-		"phpcsstandards/php_codesniffer": "^3.8"
+		"squizlabs/php_codesniffer": "^3.9"
 	},
 	"autoload": {
 		"psr-4": {

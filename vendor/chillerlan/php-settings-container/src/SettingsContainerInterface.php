@@ -7,15 +7,16 @@
  * @copyright    2018 Smiley
  * @license      MIT
  */
+declare(strict_types=1);
 
 namespace chillerlan\Settings;
 
-use JsonSerializable;
+use JsonSerializable, Serializable;
 
 /**
  * a generic container with magic getter and setter
  */
-interface SettingsContainerInterface extends JsonSerializable{
+interface SettingsContainerInterface extends JsonSerializable, Serializable{
 
 	/**
 	 * Retrieve the value of $property
@@ -40,31 +41,37 @@ interface SettingsContainerInterface extends JsonSerializable{
 	public function __unset(string $property):void;
 
 	/**
-	 * @see SettingsContainerInterface::toJSON()
+	 * @see \chillerlan\Settings\SettingsContainerInterface::toJSON()
 	 */
 	public function __toString():string;
 
 	/**
 	 * Returns an array representation of the settings object
+	 *
+	 * The values will be run through the magic __get(), which may also call custom getters.
 	 */
 	public function toArray():array;
 
 	/**
 	 * Sets properties from a given iterable
+	 *
+	 * The values will be run through the magic __set(), which may also call custom setters.
 	 */
 	public function fromIterable(iterable $properties):static;
 
 	/**
 	 * Returns a JSON representation of the settings object
 	 * @see \json_encode()
+	 * @see \chillerlan\Settings\SettingsContainerInterface::toArray()
 	 */
-	public function toJSON(int $jsonOptions = null):string;
+	public function toJSON(int|null $jsonOptions = null):string;
 
 	/**
 	 * Sets properties from a given JSON string
 	 *
 	 * @throws \Exception
 	 * @throws \JsonException
+	 * @see \chillerlan\Settings\SettingsContainerInterface::fromIterable()
 	 */
 	public function fromJSON(string $json):static;
 
