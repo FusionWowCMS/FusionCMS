@@ -1,18 +1,20 @@
-<?php $error_id = uniqid('error'); ?>
+<?php
 
+$errorId = uniqid('error');
+?>
 <!doctype html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex">
 
-    <title><?= htmlspecialchars($title, ENT_SUBSTITUTE, 'UTF-8') ?></title>
+    <title><?= esc($title) ?></title>
     <style type="text/css">
-        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'debug.css')) ?>
+        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__.DIRECTORY_SEPARATOR . 'debug.css')) ?>
     </style>
 
     <script type="text/javascript">
-        <?= file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'debug.js') ?>
+        <?= file_get_contents(__DIR__.DIRECTORY_SEPARATOR . 'debug.js') ?>
     </script>
 </head>
 <body onload="init()" class="exception">
@@ -20,9 +22,9 @@
 <!-- Header -->
 <div class="exception header">
     <div class="exception container">
-        <h1><?= htmlspecialchars($title, ENT_SUBSTITUTE, 'UTF-8'), ($exception->getCode() ? ' #'.$exception->getCode() : '') ?></h1>
+        <h1><?= esc($title), esc($exception->getCode() ? ' #'.$exception->getCode() : '') ?></h1>
         <p>
-            <?= htmlspecialchars($exception->getMessage(), ENT_SUBSTITUTE) ?>
+            <?= nl2br(esc($exception->getMessage())) ?>
             <a href="https://www.google.com/search?q=<?= urlencode($title.' '.preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
                rel="noreferrer" target="_blank">search &rarr;</a>
         </p>
@@ -31,7 +33,7 @@
 
 <!-- Source -->
 <div class="exception container">
-    <p><b><?= self::clean_path($file, $line) ?></b> at line <b><?= $line ?></b></p>
+    <p><b><?= esc(self::clean_path($file, $line)) ?></b> at line <b><?= esc($line) ?></b></p>
 
     <?php if (is_file($file)) : ?>
         <div class="source">
@@ -81,7 +83,7 @@
                             <?php if (isset($row['class'])) : ?>
                             &nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= $row['class'].$row['type'].$row['function'] ?>
                             <?php if (! empty($row['args'])) : ?>
-                            <?php $args_id = $error_id.'args'.$index ?>
+                            <?php $args_id = $errorId.'args'.$index ?>
                             ( <a href="#" onclick="return toggle('<?= $args_id ?>');">arguments</a> )
                         <div class="args" id="<?= $args_id ?>">
                             <table cellspacing="0">
