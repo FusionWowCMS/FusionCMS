@@ -2806,4 +2806,12 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		));
 	}
 
+    /**
+     * The name of the platform in use (mysqli, postgre, sqlite3, oci8, etc.)
+     */
+    public function getPlatform()
+    {
+        return $this->dbdriver;
+    }
+
 }
