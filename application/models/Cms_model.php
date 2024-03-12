@@ -29,30 +29,8 @@ class Cms_model extends CI_Model
     private function logVisit()
     {
         if (!$this->input->is_ajax_request() && !isset($_GET['is_json_ajax'])) {
-            $this->db->query("INSERT INTO visitor_log(`date`, `ip`, `timestamp`) VALUES(?, ?, ?)", array(date("Y-m-d"), $this->input->ip_address(), time()));
+            $this->db->query("INSERT INTO visitor_log(`date`, `ip`, `timestamp`) VALUES(?, ?, ?)", [date("Y-m-d"), $this->input->ip_address(), time()]);
         }
-
-        $session = array(
-            'ip_address' => $this->input->ip_address(),
-            'user_agent' => substr($this->input->user_agent() ?? 'unknown', 0, 120),
-        );
-
-        $this->db->where('ip_address', $session['ip_address']);
-        $this->db->update("ci_sessions", $session);
-
-        $this->getSession($session);
-
-        $data = array(
-            "ip_address" => $session['ip_address'],
-        );
-
-        if($session["user_agent"])
-        {
-            $data['user_agent'] = $session["user_agent"];
-        }
-
-        $this->db->where('ip_address', $session['ip_address']);
-        $this->db->update("ci_sessions", $data);
     }
 
     public function getModuleConfigKey($moduleId, $key)

@@ -13,6 +13,7 @@ namespace CodeIgniter\Session\Handlers;
 
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Session\Exceptions\SessionException;
+use MX\CI;
 use ReturnTypeWillChange;
 
 /**
@@ -185,6 +186,7 @@ class DatabaseHandler extends BaseHandler
             $insertData = [
                 'id'         => $this->idPrefix . $id,
                 'ip_address' => $this->ipAddress,
+                'user_agent' => substr(CI::$APP->input->user_agent() ?? 'unknown', 0, 120),
                 'timestamp'  => time(),
                 'data'       => $this->prepareData($data),
             ];
