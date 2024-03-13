@@ -29,7 +29,13 @@ class Cms_model extends CI_Model
     private function logVisit()
     {
         if (!$this->input->is_ajax_request() && !isset($_GET['is_json_ajax'])) {
-            $this->db->query("INSERT INTO visitor_log(`date`, `ip`, `timestamp`) VALUES(?, ?, ?)", [date("Y-m-d"), $this->input->ip_address(), time()]);
+            $data = [
+                'date'      => date("Y-m-d"),
+                'ip'        => $this->input->ip_address(),
+                'timestamp' => time()
+            ];
+
+            $this->db->on_duplicate('visitor_log', $data);
         }
     }
 
