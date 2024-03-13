@@ -2814,4 +2814,40 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
         return $this->dbdriver;
     }
 
+    function on_duplicate($table = '', $set = null )
+    {
+        if (! is_null($set))
+        {
+            $this->set($set);
+        }
+
+        if (count($this->qb_set) == 0)
+        {
+            if ($this->db_debug)
+            {
+                return $this->display_error('db_must_use_set');
+            }
+            return false;
+        }
+
+        if ($table == '')
+        {
+            if (! isset($this->qb_from[0]))
+            {
+                if ($this->db_debug)
+                {
+                    return $this->display_error('db_must_set_table');
+                }
+                return false;
+            }
+
+            $table = $this->qb_from[0];
+        }
+
+        $sql = $this->_duplicate_insert($this->protect_identifiers($table, true, null, false), $this->qb_set );
+
+        $this->_reset_write();
+        return $this->query($sql);
+    }
+
 }

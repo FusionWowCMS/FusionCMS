@@ -551,4 +551,24 @@ class CI_DB_mysqli_driver extends CI_DB {
 		$this->conn_id->close();
 	}
 
+    function _duplicate_insert($table, $values)
+    {
+        $updateStr = [];
+        $keyStr    = [];
+        $valStr    = [];
+
+        foreach($values as $key => $val)
+        {
+            $updateStr[] = $key." = ".$val;
+            $keyStr[]    = $key;
+            $valStr[]    = $val;
+        }
+
+        $sql  = "INSERT INTO ".$table." (".implode(', ', $keyStr).") ";
+        $sql .= "VALUES (".implode(', ', $valStr).") ";
+        $sql .= "ON DUPLICATE KEY UPDATE ".implode(', ', $updateStr);
+
+        return $sql;
+    }
+
 }
