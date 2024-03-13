@@ -39,7 +39,7 @@
                         <td class="text">
                             {if array_key_exists('extra', $log)}
                                 <a class="pull-right expand btn btn-default btn-xs" data-display="stack{$key}">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <i class="fa-duotone fa-magnifying-glass"></i>
                                 </a>
                             {/if}
 								{$log.content}

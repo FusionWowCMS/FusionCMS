@@ -8,7 +8,7 @@ var Donate = {
 	{
 		var string = $("#search_" + type).val();
 		
-		$("#donate_list_" + type).html('<i class="fa-solid fa-spinner fa-xl fa-spin"></i>');
+		$("#donate_list_" + type).html('<i class="fa-duotone fa-spinner fa-xl fa-spin"></i>');
 	
 		$.post(Config.URL + "donate/admin/search/" + type, {string: string, csrf_token_name: Config.CSRF}, function(data)
 		{

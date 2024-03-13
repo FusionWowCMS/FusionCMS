@@ -45,7 +45,7 @@
 														<div class="d-block" data-tip="<img src='{$url}application/images/stats/{$character.class}.gif' align='absbottom'/> {$character.name} (Lv{$character.level})">{$character.name}</div>
 														<div class="user-points d-block">
 															<span class="gold-points">
-																<i class="fa-solid fa-coins"></i>
+																<i class="fa-duotone fa-coins"></i>
 																{floor($character.money / 10000)} {lang("gold", "teleport")}
 															</span>
 														</div>

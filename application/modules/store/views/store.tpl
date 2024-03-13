@@ -164,7 +164,7 @@
 						
 						<div class="card">
 							<div id="cart">
-								<div class="card-header"><span class="fas fa-shopping-cart"></span> {lang("cart", "store")} (<span id="cart_item_count">0</span> {lang("items", "store")})</div>
+								<div class="card-header"><span class="fa-duotone fa-shopping-cart"></span> {lang("cart", "store")} (<span id="cart_item_count">0</span> {lang("items", "store")})</div>
 								<div class="card-body">
 									<div id="empty_cart">{lang("empty_cart", "store")}</div>
 									<div id="cart_items"></div>

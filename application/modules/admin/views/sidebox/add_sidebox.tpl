@@ -64,11 +64,11 @@
 
                         <div class="row row-cols-2 row-cols-md-6 justify-content-md-end">
                             <div class="col">
-                                <a href="javascript:void(0)" onclick="[...document.querySelectorAll('input[name=\'pages[]\']')].map(el => { if(el.value === '*') { return; } el.checked = true; })"><i class="fa-solid fa-toggle-on align-top"></i> Check all</a>
+                                <a href="javascript:void(0)" onclick="[...document.querySelectorAll('input[name=\'pages[]\']')].map(el => { if(el.value === '*') { return; } el.checked = true; })"><i class="fa-duotone fa-toggle-on align-top"></i> Check all</a>
                             </div>
 
                             <div class="col">
-                                <a href="javascript:void(0)" onclick="[...document.querySelectorAll('input[name=\'pages[]\']')].map(el => { if(el.value === '*') { return; } el.checked = false; })"><i class="fa-solid fa-toggle-off align-top"></i> Uncheck all</a>
+                                <a href="javascript:void(0)" onclick="[...document.querySelectorAll('input[name=\'pages[]\']')].map(el => { if(el.value === '*') { return; } el.checked = false; })"><i class="fa-duotone fa-toggle-off align-top"></i> Uncheck all</a>
                             </div>
 
                             <div class="col">

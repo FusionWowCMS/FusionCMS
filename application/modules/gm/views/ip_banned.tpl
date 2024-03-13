@@ -43,7 +43,7 @@
                                     <td>{date("Y/m/d H:i:s", $ip.unbandate)}</td>
                                     <td>{$ip.banreason}</td>
                                     <td>{$ip.bannedby}</td>
-                                    <td class="text-center"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Unban" href="javascript:void(0)" onClick="Gm.unbanIp('{$ip.ip}')" ><i class="fa-solid fa-lock-open"></i></a></td>
+                                    <td class="text-center"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Unban" href="javascript:void(0)" onClick="Gm.unbanIp('{$ip.ip}')" ><i class="fa-duotone fa-lock-open"></i></a></td>
                                 </tr>
                             {/foreach}
                         {/if}

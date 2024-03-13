@@ -5,12 +5,12 @@ use MX\MX_Controller;
 class Errorlogs extends MX_Controller
 {
     private static $levelsIcon = array(
-        'INFO'     => 'fa-solid fa-circle-info',
-        'ERROR'    => 'fa-solid fa-triangle-exclamation',
-        'CRITICAL' => 'fa-solid fa-triangle-exclamation',
-        'DEBUG'    => 'fa-solid fa-triangle-exclamation',
-        'WARNING'  => 'fa-solid fa-warning',
-        'ALL'      => 'fa-solid fa-minus',
+        'INFO'     => 'fa-duotone fa-circle-info',
+        'ERROR'    => 'fa-duotone fa-triangle-exclamation',
+        'CRITICAL' => 'fa-duotone fa-triangle-exclamation',
+        'DEBUG'    => 'fa-duotone fa-triangle-exclamation',
+        'WARNING'  => 'fa-duotone fa-warning',
+        'ALL'      => 'fa-duotone fa-minus',
     );
 
     private static $levelClasses = [

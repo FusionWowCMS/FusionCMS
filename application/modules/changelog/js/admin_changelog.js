@@ -144,8 +144,8 @@ var Changelog = {
 								'<td>' + data.author + '</td>' +
 								'<td>' + data.date + '</td>' +
 								'<td style="text-align:center;">' +
-									'<a class="btn btn-primary btn-sm" href="' + Config.URL + 'changelog/admin/edit/' + data.id + '" data-tip="Edit"><i class="fa-solid fa-pen-to-square"></i></a>&nbsp;'+
-									'<a class="btn btn-primary btn-sm" href="javascript:void(0)" onClick="Changelog.remove(' + data.id + ', this)" data-tip="Delete"><i class="fa-solid fa-trash-can"></i></a>'+
+									'<a class="btn btn-primary btn-sm" href="' + Config.URL + 'changelog/admin/edit/' + data.id + '" data-tip="Edit"><i class="fa-duotone fa-pen-to-square"></i></a>&nbsp;'+
+									'<a class="btn btn-primary btn-sm" href="javascript:void(0)" onClick="Changelog.remove(' + data.id + ', this)" data-tip="Delete"><i class="fa-duotone fa-trash-can"></i></a>'+
 								'</td>' +
 							'</tr>' +
 						'</table>');

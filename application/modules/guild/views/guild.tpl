@@ -39,7 +39,7 @@
 					<tbody>
 					<tr>
                         {if $leader}
-                            <td><a href="{$url}character/{$realmId}/{$leader.guid}">{$leader.name}</a> <i class="fa-solid fa-crown"></i></td>
+                            <td><a href="{$url}character/{$realmId}/{$leader.guid}">{$leader.name}</a> <i class="fa-duotone fa-crown"></i></td>
                             <td><img src="{$url}application/images/stats/{$leader.raceId}-{$leader.gender}.gif" width="20px"></td>
                             <td><img src="{$url}application/images/stats/{$leader.classId}.gif" width="20px"></td>
                             <td><img src="{$url}application/images/factions/{$leader.faction}.png" width="20px"></td>

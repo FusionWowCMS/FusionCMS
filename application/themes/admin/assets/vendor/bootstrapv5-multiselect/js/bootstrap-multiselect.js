@@ -449,7 +449,7 @@
             templates: {
                 button: '<button type="button" class="multiselect dropdown-toggle" data-bs-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
                 popupContainer: '<div class="multiselect-container dropdown-menu"></div>',
-                filter: '<div class="multiselect-filter d-flex align-items-center"><i class="fas fa-sm fa-search text-muted"></i><input type="search" class="multiselect-search form-control" /></div>',
+                filter: '<div class="multiselect-filter d-flex align-items-center"><i class="fa-duotone fa-sm fa-search text-muted"></i><input type="search" class="multiselect-search form-control" /></div>',
                 option: '<button type="button" class="multiselect-option dropdown-item"></button>',
                 divider: '<div class="dropdown-divider"></div>',
                 optionGroup: '<button type="button" class="multiselect-group dropdown-item"></button>',
@@ -1160,7 +1160,7 @@
                     else {
                         // Firefox does not support a clear button in search inputs right now therefore it must be added manually
                         if (this.isFirefox() && this.$filter.find(".multiselect-clear-filter").length === 0) {
-                            this.$filter.append("<i class='fas fa-times text-muted multiselect-clear-filter multiselect-moz-clear-filter'></i>");
+                            this.$filter.append("<i class='fa-duotone fa-times text-muted multiselect-clear-filter multiselect-moz-clear-filter'></i>");
                         }
 
                         this.$filter.find(".multiselect-clear-filter").on('click', $.proxy(function (event) {

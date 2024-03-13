@@ -43,7 +43,7 @@
                                     <td>{date("Y/m/d H:i:s", $account.unbandate)}</td>
                                     <td>{$account.banreason}</td>
                                     <td>{$account.bannedby}</td>
-                                    <td class="text-center"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Unban" href="javascript:void(0)" onClick="Gm.unbanAcc({$account.id}, this)" ><i class="fa-solid fa-lock-open"></i></a></td>
+                                    <td class="text-center"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Unban" href="javascript:void(0)" onClick="Gm.unbanAcc({$account.id}, this)" ><i class="fa-duotone fa-lock-open"></i></a></td>
                                 </tr>
                             {/foreach}
                         {/if}

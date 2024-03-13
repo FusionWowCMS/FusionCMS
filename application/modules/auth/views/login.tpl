@@ -7,12 +7,12 @@
             </br>
 
             <div class="input-group p-0 flex-row">
-                <label for="floatingUser" class="input-group-text" id="username" style="width:45px;"><i class="fas fa-user"></i></label>
+                <label for="floatingUser" class="input-group-text" id="username" style="width:45px;"><i class="fa-duotone fa-user"></i></label>
                 <input type="text" class="form-control username-input border-0" id="floatingUser" placeholder="{lang('login_label_user', 'auth')}" aria-describedby="username">
             </div>
 
             <div class="input-group p-0 mt-3 flex-row">
-                <label class="input-group-text cursor-pointer" id="password" style="width:45px;" data-input-id="floatingPassword" data-show="false" onClick="Auth.showPassword(this);"><i class="fas fa-eye-slash"></i></label>
+                <label class="input-group-text cursor-pointer" id="password" style="width:45px;" data-input-id="floatingPassword" data-show="false" onClick="Auth.showPassword(this);"><i class="fa-duotone fa-eye-slash"></i></label>
                 <input type="password" class="form-control password-input border-0" id="floatingPassword" placeholder="{lang('login_label_password', 'auth')}" aria-describedby="password">
             </div>
 
@@ -24,7 +24,7 @@
                         </label>
 
                         <span class="input-group-text cursor-pointer ms-0 rounded-0 rounded-bottom-start" id="captcha" style="width:40px;" data-captcha-id="captchaImage" onClick="Auth.refreshCaptcha(this);">
-                            <i class="fas fa-rotate"></i>
+                            <i class="fa-duotone fa-rotate"></i>
                         </span>
 
                         <div class="form-floating ms-0 flex-grow-1">

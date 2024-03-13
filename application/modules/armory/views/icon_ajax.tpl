@@ -1,5 +1,5 @@
 <span class="get_icon_{$id}">
-	<i class="fas fa-spinner fa-sm fa-spin"></i>
+	<i class="fa-duotone fa-spinner fa-sm fa-spin"></i>
 </span>
 
 <script type="text/javascript">

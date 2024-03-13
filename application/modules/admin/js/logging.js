@@ -9,7 +9,7 @@ var Logging = {
 		var module = $('#module').val();
 		var search = $('#search').val();
 
-		$("#log_list").html('<center><i class="fas fa-spinner fa-spin fa-2x"></i></center>');
+		$("#log_list").html('<center><i class="fa-duotone fa-spinner fa-spin fa-2x"></i></center>');
 
 		$.post(Config.URL + "admin/logging/search", {search: search, module: module, csrf_token_name: Config.CSRF}, function(data)
 		{

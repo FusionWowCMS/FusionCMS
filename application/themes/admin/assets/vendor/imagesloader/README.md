@@ -120,11 +120,11 @@ Dependecies:
             <div class="row mt-2">
               <div class="col-6 p-0 pr-1">
                 <button data-operation="rotateanticlockwise" 
-                        class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button"><span class="fas fa-undo-alt mr-2"></span>Rotate</button>
+                        class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button"><span class="fa-duotone fa-undo-alt mr-2"></span>Rotate</button>
               </div>
               <div class="col-6 p-0 pl-1">
                 <button data-operation="rotateclockwise" 
-                        class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button">Rotate<span class="fas fa-redo-alt ml-2"></span></button>
+                        class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button">Rotate<span class="fa-duotone fa-redo-alt ml-2"></span></button>
               </div>
             </div>
             <div class="row mt-2">

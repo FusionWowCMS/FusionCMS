@@ -129,7 +129,7 @@ class Admin extends MX_Controller
 
 		$output = $this->template->loadPage("admin_settings.tpl", $data);
 
-		$content = $this->administrator->box('<a href="' . $this->template->page_url . 'donate/admin">Donate admin</a> <i class="fa-solid fa-arrow-right"></i> Donation Settings', $output);
+		$content = $this->administrator->box('<a href="' . $this->template->page_url . 'donate/admin">Donate admin</a> <i class="fa-duotone fa-arrow-right"></i> Donation Settings', $output);
 
 		$this->administrator->view($content, "modules/donate/css/donate.css", "modules/donate/js/admin.js");
 	}

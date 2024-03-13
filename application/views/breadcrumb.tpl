@@ -5,7 +5,7 @@
 			<a {if !$item}class="d-none"{/if} href="{$url}{$link}">{$item}</a>
 		</li>
 		
-		{if $item != end($links)}<li class="breadcrumb-item"><i class="fas fa-angles-right"></i></li>{/if}
+		{if $item != end($links)}<li class="breadcrumb-item"><i class="fa-duotone fa-angles-right"></i></li>{/if}
 	{/foreach}
   </ol>
 </nav>

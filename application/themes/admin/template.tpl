@@ -503,7 +503,7 @@
 		{
 			$("#language_picker").fadeOut(250, function()
 			{
-				$(this).html('<div class="fa-2x text-center text-white"><i class="fas fa-spinner fa-spin"></i></div>').fadeIn(250, function()
+				$(this).html('<div class="fa-2x text-center text-white"><i class="fa-duotone fa-spinner fa-spin"></i></div>').fadeIn(250, function()
 				{
 					$.get(Config.URL + "sidebox_language_picker/language_picker/set/" + language, function()
 					{

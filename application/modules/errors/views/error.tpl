@@ -1,7 +1,7 @@
 <div class="text-center">
 	{if isset($is404) && $is404}
 
-		<h2 class="h1 mt-5">4 <i class="fas fa-cog fa-spin"></i> 4</h2>
+		<h2 class="h1 mt-5">4 <i class="fa-duotone fa-gear fa-spin"></i> 4</h2>
 		<h4 class="h4 mb-5">{lang("lost", "error")}</h4>
 		<p class="my-3">
 			{lang("404_long", "error")}

@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-sm-12 col-lg-12 mb-3">
         <div class="card">
         <header class="card-header">
-            Value list <p class="pull-right" style="margin: 0px;">Value <i class="fa-solid fa-plus" style="cursor:pointer;" onClick="Donate.addValue(); return false"></i></p>
+            Value list <p class="pull-right" style="margin: 0px;">Value <i class="fa-duotone fa-plus" style="cursor:pointer;" onClick="Donate.addValue(); return false"></i></p>
         </header>
             <div class="card-body">
                 <div class="table-responsive">

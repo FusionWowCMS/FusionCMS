@@ -37,10 +37,10 @@
 			<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="hour_interval" id="hour_interval" value="{$topsite.hour_interval}"/>
 			<div class="spinner-buttons input-group-btn btn-group-vertical">
 				<button type="button" class="btn spinner-up btn-xs btn-default">
-					<i class="fas fa-angle-up"></i>
+					<i class="fa-duotone fa-angle-up"></i>
 				</button>
 				<button type="button" class="btn spinner-down btn-xs btn-default">
-					<i class="fas fa-angle-down"></i>
+					<i class="fa-duotone fa-angle-down"></i>
 				</button>
 			</div>
 		</div>
@@ -56,10 +56,10 @@
 			<input class="spinner-input form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="points_per_vote" id="points_per_vote" value="{$topsite.points_per_vote}"/>
 			<div class="spinner-buttons input-group-btn btn-group-vertical">
 				<button type="button" class="btn spinner-up btn-xs btn-default">
-					<i class="fas fa-angle-up"></i>
+					<i class="fa-duotone fa-angle-up"></i>
 				</button>
 				<button type="button" class="btn spinner-down btn-xs btn-default">
-					<i class="fas fa-angle-down"></i>
+					<i class="fa-duotone fa-angle-down"></i>
 				</button>
 			</div>
 		</div>

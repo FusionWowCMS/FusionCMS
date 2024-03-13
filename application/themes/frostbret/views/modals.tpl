@@ -4,14 +4,14 @@
 		<form onKeyUp="Popup.login(); return false;" onSubmit="Popup.login(true); return false;">
 			<div class="card-body">	
 				<div class="input-group p-0 flex-row">
-					<label for="floatingUser2" class="input-group-text" id="username" style="width:40px;"><i class="fas fa-user"></i></label>
+					<label for="floatingUser2" class="input-group-text" id="username" style="width:40px;"><i class="fa-duotone fa-user"></i></label>
 					<input type="text" class="form-control username-input2 border-0" id="floatingUser2" placeholder="Username" aria-describedby="username">
 				</div>
 				
 				<div class="username-feedback2 ps-2"></div>
 				
 				<div class="input-group p-0 mt-3 flex-row">
-					<label class="input-group-text cursor-pointer" id="password" style="width:40px;" data-input-id="floatingPassword2" data-show="false" onClick="Popup.showPassword(this);"><i class="fas fa-eye-slash"></i></label>
+					<label class="input-group-text cursor-pointer" id="password" style="width:40px;" data-input-id="floatingPassword2" data-show="false" onClick="Popup.showPassword(this);"><i class="fa-duotone fa-eye-slash"></i></label>
 					<input type="password" class="form-control password-input2 border-0" id="floatingPassword2" placeholder="Password" aria-describedby="password">
 				</div>
 				
@@ -25,7 +25,7 @@
 						</label>
 		
 						<span class="input-group-text cursor-pointer ms-0 rounded-0 rounded-bottom-start" id="captcha" style="width:40px;" data-captcha-id="captchaImage2" onClick="Popup.refreshCaptcha(this);">
-							<i class="fas fa-rotate"></i>
+							<i class="fa-duotone fa-rotate"></i>
 						</span>
 		
 						<div class="form-floating ms-0 flex-grow-1">

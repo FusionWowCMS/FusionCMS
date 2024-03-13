@@ -20,7 +20,7 @@
                         </label>
 
                         <span class="input-group-text cursor-pointer ms-0 rounded-0 rounded-bottom-start" id="captcha" style="width:40px;" data-captcha-id="captchaImage" onClick="Auth.refreshCaptcha(this);">
-                            <i class="fas fa-rotate"></i>
+                            <i class="fa-duotone fa-rotate"></i>
                         </span>
 
                         <div class="form-floating ms-0 flex-grow-1">

@@ -4,7 +4,7 @@ var Orders = {
 	{
 		var string = $("#search_" + type).val();
 		
-		$("#order_list_" + type).html('<i class="fa-solid fa-spinner fa-xl"></i>');
+		$("#order_list_" + type).html('<i class="fa-duotone fa-spinner fa-xl"></i>');
 	
 		$.post(Config.URL + "store/admin_orders/search/" + type, {string: string, csrf_token_name: Config.CSRF}, function(data)
 		{

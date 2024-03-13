@@ -67,8 +67,8 @@
 						<ul class="list-unstyled">
 						{foreach from=$change_time key=k_type item=change_type}
 							{foreach from=$change_type item=change}
-								<li class="text-muted my-2 ms-3">{if hasPermission("canRemoveChange")}<a href="{$url}changelog/remove/{$change.change_id}"><i class="fa-solid fa-trash"></i></a>{/if}
-								<i class="fa-solid fa-circle-arrow-right"></i> <span class="fw-bold">{htmlspecialchars($k_type)}</span>: {htmlspecialchars($change.changelog)}</li>	
+								<li class="text-muted my-2 ms-3">{if hasPermission("canRemoveChange")}<a href="{$url}changelog/remove/{$change.change_id}"><i class="fa-duotone fa-trash"></i></a>{/if}
+								<i class="fa-duotone fa-circle-arrow-right"></i> <span class="fw-bold">{htmlspecialchars($k_type)}</span>: {htmlspecialchars($change.changelog)}</li>
 							{/foreach}
 						{/foreach}
 						</ul>

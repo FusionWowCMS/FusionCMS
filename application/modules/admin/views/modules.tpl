@@ -5,7 +5,7 @@
 				<!-- Files section -->
 				<form class="dropzone files-container nui-focus border-muted-300 dark:border-muted-700 hover:border-muted-400 focus:border-muted-400 dark:hover:border-muted-600 dark:focus:border-muted-700 group cursor-pointer rounded-lg border-[3px] border-dashed p-8 transition-colors duration-300">
 					<div class="fallback">
-					<i class="fa-solid fa-cloud-arrow-up"></i>
+					<i class="fa-duotone fa-cloud-arrow-up"></i>
 						<input name="module" id="module" type="file">
 					</div>
 				</form>

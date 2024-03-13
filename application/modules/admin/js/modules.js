@@ -117,7 +117,7 @@ var UploaderModule = UploaderModule || {};
 
                     createImageThumbnails: false,
 
-                    dictDefaultMessage: '<i class="fa-solid fa-cloud-arrow-up fa-3x"></i><br>Drop module here to upload.',
+                    dictDefaultMessage: '<i class="fa-duotone fa-cloud-arrow-up fa-3x"></i><br>Drop module here to upload.',
 
                     dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
 

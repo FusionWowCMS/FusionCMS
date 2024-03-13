@@ -39,7 +39,7 @@ window.theme.fn = {
 	PluginMultiSelect.defaults = {
 		templates: {
 			li: '<li><a class="dropdown-item" tabindex="0"><label style="display: block;"></label></a></li>',
-			filter: '<div class="input-group"><span class="input-group-prepend"><span class="input-group-text"><i class="fas fa-search"></i></span></span><input class="form-control multiselect-search" type="text"></div>'
+			filter: '<div class="input-group"><span class="input-group-prepend"><span class="input-group-text"><i class="fa-duotone fa-search"></i></span></span><input class="form-control multiselect-search" type="text"></div>'
 		}
 	};
 

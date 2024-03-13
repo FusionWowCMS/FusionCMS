@@ -505,7 +505,7 @@ var Store = {
 											'</div>' +
 											'<div class="item_realm col-3">' + realm + '</div>' +
 											'<a href="javascript:void(0)" onClick="Store.Cart.remove(' + id + ', ' + Store.Cart.count + ')" class="delete_item col-1">' +
-												'<i class="fas fa-trash"></i>' +
+												'<i class="fa-duotone fa-trash"></i>' +
 											'</a>' +
 											'<div class="clear"></div>' +
 										'</div>';
@@ -691,7 +691,7 @@ var Store = {
 
 				$("#checkout").fadeOut(150, function()
 				{
-					$("#checkout").html('<center><i class="fa-solid fa-spinner fa-xl fa-spin"></i></center>').fadeIn(150, function()
+					$("#checkout").html('<center><i class="fa-duotone fa-spinner fa-xl fa-spin"></i></center>').fadeIn(150, function()
 					{
 						$.post(Config.URL + "store/pay", {data: data, csrf_token_name: Config.CSRF}, function(data)
 						{

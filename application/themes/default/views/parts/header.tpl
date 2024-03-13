@@ -33,7 +33,7 @@
 			<div class="info-username">{($CI->user->isOnline()) ? $CI->user->getNickname() : lang('guest', 'sidebox_visitors')}</div>
 			<div class="info-dropdown">
 				<div class="dropdown">
-					<a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-bars"></i></a>
+					<a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-duotone fa-bars"></i></a>
 					{$user_dropdown}
 				</div>
 			</div>

@@ -27,11 +27,11 @@
 									
 									<td class="col-4 user-points">
 										{if $money}
-											<span class="gold-points"><i class="fa-solid fa-coins"></i> {$money["gold"]}</span>
-											<span class="silver-points"><i class="fa-solid fa-coins"></i> {$money["silver"]}</span>
-											<span class="copper-points"><i class="fa-solid fa-coins"></i> {$money["copper"]}</span>
+											<span class="gold-points"><i class="fa-duotone fa-coins"></i> {$money["gold"]}</span>
+											<span class="silver-points"><i class="fa-duotone fa-coins"></i> {$money["silver"]}</span>
+											<span class="copper-points"><i class="fa-duotone fa-coins"></i> {$money["copper"]}</span>
 										{else}
-											<span class="copper-points"><i class="fa-solid fa-coins"></i> 0</span>
+											<span class="copper-points"><i class="fa-duotone fa-coins"></i> 0</span>
 										{/if}
 									</td>
 								{else}

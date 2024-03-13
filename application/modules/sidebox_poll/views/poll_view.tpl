@@ -39,7 +39,7 @@
 
 						$("#poll_answers").fadeOut(300, function()
 						{
-							$(this).html('<i class="fas fa-spinner fa-pulse"></i>').fadeIn(150, function()
+							$(this).html('<i class="fa-duotone fa-spinner fa-pulse"></i>').fadeIn(150, function()
 							{
 								$.post(Config.URL + "sidebox_poll/poll/vote/" + questionid + "/" + id, {csrf_token_name: Config.CSRF}, function(data)
 								{
