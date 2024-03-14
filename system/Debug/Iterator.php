@@ -1,8 +1,25 @@
-<?php namespace CodeIgniter\Debug;
+<?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\Debug;
+
+use Closure;
+
+/**
+ * Iterator for debugging.
+ */
 class Iterator
 {
-
     /**
      * Stores the tests that we are to run.
      *
@@ -17,20 +34,17 @@ class Iterator
      */
     protected $results = [];
 
-    //--------------------------------------------------------------------
-
     /**
      * Adds a test to run.
      *
      * Tests are simply closures that the user can define any sequence of
      * things to happen during the test.
      *
-     * @param          $name
-     * @param \Closure $closure
+     * @param Closure(): mixed $closure
      *
      * @return $this
      */
-    public function add($name, \Closure $closure)
+    public function add(string $name, Closure $closure)
     {
         $name = strtolower($name);
 
@@ -39,60 +53,56 @@ class Iterator
         return $this;
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * Runs through all of the tests that have been added, recording
      * time to execute the desired number of iterations, and the approximate
      * memory usage used during those iterations.
      *
-     * @param int $iterations
-     *
-     * @return string
+     * @return string|null
      */
-    public function run($iterations = 1000, $output=true)
+    public function run(int $iterations = 1000, bool $output = true)
     {
-        foreach ($this->tests as $name => $test)
-        {
+        foreach ($this->tests as $name => $test) {
             // clear memory before start
             gc_collect_cycles();
 
-            $start     = microtime(true);
-            $start_mem = $max_memory = memory_get_usage(true);
+            $start    = microtime(true);
+            $startMem = $maxMemory = memory_get_usage(true);
 
-            for ($i = 0; $i < $iterations; $i++)
-            {
-                $result = call_user_func($test);
-
-                $max_memory = max($max_memory, memory_get_usage(true));
+            for ($i = 0; $i < $iterations; $i++) {
+                $result    = $test();
+                $maxMemory = max($maxMemory, memory_get_usage(true));
 
                 unset($result);
             }
 
             $this->results[$name] = [
                 'time'   => microtime(true) - $start,
-                'memory' => $max_memory - $start_mem,
+                'memory' => $maxMemory - $startMem,
                 'n'      => $iterations,
             ];
         }
 
-        if ($output)
-        {
+        if ($output) {
             return $this->getReport();
         }
+
+        return null;
     }
 
-    //--------------------------------------------------------------------
-
-    public function getReport()
+    /**
+     * Get results.
+     */
+    public function getReport(): string
     {
-        if (empty($this->results))
-        {
+        if ($this->results === []) {
             return 'No results to display.';
         }
 
+        helper('number');
+
         // Template
-        $tpl = "<table>
+        $tpl = '<table>
 			<thead>
 				<tr>
 					<td>Test</td>
@@ -103,24 +113,22 @@ class Iterator
 			<tbody>
 				{rows}
 			</tbody>
-		</table>";
+		</table>';
 
-        $rows = "";
+        $rows = '';
 
-        foreach ($this->results as $name => $result)
-        {
+        foreach ($this->results as $name => $result) {
+            $memory = number_to_size($result['memory'], 4);
+
             $rows .= "<tr>
 				<td>{$name}</td>
-				<td>".number_format($result['time'], 4)."</td>
-				<td>{$result['memory']}</td>
+				<td>" . number_format($result['time'], 4) . "</td>
+				<td>{$memory}</td>
 			</tr>";
         }
 
         $tpl = str_replace('{rows}', $rows, $tpl);
 
-        return $tpl ."<br/>";
+        return $tpl . '<br/>';
     }
-
-    //--------------------------------------------------------------------
-
 }

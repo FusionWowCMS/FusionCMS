@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace CodeIgniter\Exceptions;
 
+use Error;
+
 /**
- * Interface for Exceptions that has exception code as HTTP status code.
+ * Error: Critical conditions, like component unavailable, etc.
  */
-interface HTTPExceptionInterface
+class CriticalError extends Error
 {
 }

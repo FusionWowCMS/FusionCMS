@@ -1,5 +1,23 @@
-<?php namespace CodeIgniter\Debug\Toolbar\Collectors;
+<?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\Debug\Toolbar\Collectors;
+
+use App\Config\Services;
+
+/**
+ * Timers collector
+ */
 class Timers extends BaseCollector
 {
     /**
@@ -26,36 +44,30 @@ class Timers extends BaseCollector
      */
     protected $title = 'Timers';
 
-    //--------------------------------------------------------------------
-
     /**
      * Child classes should implement this to return the timeline data
      * formatted for correct usage.
-     *
-     * @return mixed
      */
     protected function formatTimelineData(): array
     {
         $data = [];
 
-        global $benchmark;
-        $rows = $benchmark->getTimers(6);
+        $benchmark = Services::timer(true);
+        $rows      = $benchmark->getTimers(6);
 
-        foreach ($rows as $name => $info)
-        {
-            if ($name == 'total_execution') continue;
+        foreach ($rows as $name => $info) {
+            if ($name === 'total_execution') {
+                continue;
+            }
 
             $data[] = [
-                'name' => ucwords(str_replace('_', ' ', $name)),
+                'name'      => ucwords(str_replace('_', ' ', $name)),
                 'component' => 'Timer',
                 'start'     => $info['start'],
-                'duration'  => $info['end'] - $info['start']
+                'duration'  => $info['end'] - $info['start'],
             ];
         }
 
         return $data;
     }
-
-    //--------------------------------------------------------------------
-
 }

@@ -14,8 +14,17 @@ declare(strict_types=1);
 namespace CodeIgniter\Exceptions;
 
 /**
- * Interface for Exceptions that has exception code as HTTP status code.
+ * Exception for automatic logging.
  */
-interface HTTPExceptionInterface
+class TestException extends CriticalError
 {
+    use DebugTraceableTrait;
+
+    /**
+     * @return static
+     */
+    public static function forInvalidMockClass(string $name)
+    {
+        return new static('"' . $name . '" is not a valid Mock class');
+    }
 }

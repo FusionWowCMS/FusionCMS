@@ -1,4 +1,19 @@
-<?php namespace CodeIgniter\Debug;
+<?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\Debug;
+
+use RuntimeException;
 
 /**
  * Class Timer
@@ -6,14 +21,10 @@
  * Provides a simple way to measure the amount of time
  * that elapses between two points.
  *
- * NOTE: All methods are static since the class is intended
- * to measure throughout an entire application's life cycle.
- *
- * @package CodeIgniter\Benchmark
+ * @see \CodeIgniter\Debug\TimerTest
  */
 class Timer
 {
-
     /**
      * List of all timers.
      *
@@ -21,27 +32,26 @@ class Timer
      */
     protected $timers = [];
 
-    //--------------------------------------------------------------------
-
     /**
      * Starts a timer running.
      *
      * Multiple calls can be made to this method so that several
      * execution points can be measured.
      *
-     * @param string $name  The name of this timer.
+     * @param string     $name The name of this timer.
+     * @param float|null $time Allows user to provide time.
+     *
+     * @return Timer
      */
-    public function start(string $name)
+    public function start(string $name, ?float $time = null)
     {
         $this->timers[strtolower($name)] = [
-            'start' => microtime(true),
+            'start' => ! empty($time) ? $time : microtime(true),
             'end'   => null,
         ];
 
         return $this;
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Stops a running timer.
@@ -49,15 +59,16 @@ class Timer
      * If the timer is not stopped before the timers() method is called,
      * it will be automatically stopped at that point.
      *
-     * @param string $name   The name of this timer.
+     * @param string $name The name of this timer.
+     *
+     * @return Timer
      */
     public function stop(string $name)
     {
         $name = strtolower($name);
 
-        if (empty($this->timers[$name]))
-        {
-            throw new \RuntimeException('Cannot stop timer: invalid name given.');
+        if (empty($this->timers[$name])) {
+            throw new RuntimeException('Cannot stop timer: invalid name given.');
         }
 
         $this->timers[$name]['end'] = microtime(true);
@@ -65,63 +76,76 @@ class Timer
         return $this;
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * Returns the duration of a recorded timer.
      *
-     * @param     $name         The name of the timer.
-     * @param int $decimals     Number of decimal places.
+     * @param string $name     The name of the timer.
+     * @param int    $decimals Number of decimal places.
      *
-     * @return null|float       Returns null if timer exists by that name.
-     *                          Returns a float representing the number of
-     *                          seconds elapsed while that timer was running.
+     * @return float|null Returns null if timer does not exist by that name.
+     *                    Returns a float representing the number of
+     *                    seconds elapsed while that timer was running.
      */
     public function getElapsedTime(string $name, int $decimals = 4)
     {
         $name = strtolower($name);
 
-        if (empty($this->timers[$name]))
-        {
+        if (empty($this->timers[$name])) {
             return null;
         }
 
         $timer = $this->timers[$name];
 
-        if (empty($timer['end']))
-        {
+        if (empty($timer['end'])) {
             $timer['end'] = microtime(true);
         }
 
-        return (float)number_format($timer['end'] - $timer['start'], $decimals);
+        return (float) number_format($timer['end'] - $timer['start'], $decimals, '.', '');
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Returns the array of timers, with the duration pre-calculated for you.
      *
-     * @param int $decimals     Number of decimal places
-     *
-     * @return array
+     * @param int $decimals Number of decimal places
      */
-    public function getTimers(int $decimals = 4)
+    public function getTimers(int $decimals = 4): array
     {
         $timers = $this->timers;
 
-        foreach ($timers as &$timer)
-        {
-            if (empty($timer['end']))
-            {
+        foreach ($timers as &$timer) {
+            if (empty($timer['end'])) {
                 $timer['end'] = microtime(true);
             }
 
-            $timer['duration'] = (float)number_format($timer['end'] - $timer['start'], $decimals);
+            $timer['duration'] = (float) number_format($timer['end'] - $timer['start'], $decimals);
         }
 
         return $timers;
     }
 
-    //--------------------------------------------------------------------
+    /**
+     * Checks whether or not a timer with the specified name exists.
+     */
+    public function has(string $name): bool
+    {
+        return array_key_exists(strtolower($name), $this->timers);
+    }
 
+    /**
+     * Executes callable and measures its time.
+     * Returns its return value if any.
+     *
+     * @param string            $name     The name of the timer
+     * @param callable(): mixed $callable callable to be executed
+     *
+     * @return mixed
+     */
+    public function record(string $name, callable $callable)
+    {
+        $this->start($name);
+        $returnValue = $callable();
+        $this->stop($name);
+
+        return $returnValue;
+    }
 }

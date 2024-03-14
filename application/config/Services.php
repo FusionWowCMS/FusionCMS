@@ -136,7 +136,7 @@ class Services
     {
         if (! $getShared)
         {
-            return new Exceptions();
+            return new Exceptions(new \App\Config\Exceptions());
         }
 
         return self::getSharedInstance('exceptions');

@@ -14,8 +14,12 @@ declare(strict_types=1);
 namespace CodeIgniter\Exceptions;
 
 /**
- * Interface for Exceptions that has exception code as HTTP status code.
+ * Interface for Exceptions that has exception code as exit code.
  */
-interface HTTPExceptionInterface
+interface HasExitCodeInterface
 {
+    /**
+     * Returns exit status code.
+     */
+    public function getExitCode(): int;
 }

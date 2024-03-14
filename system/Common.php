@@ -50,6 +50,34 @@ if (!function_exists('is_php')) {
 
 // ------------------------------------------------------------------------
 
+if (! function_exists('clean_path')) {
+    /**
+     * A convenience method to clean paths for
+     * a nicer looking output. Useful for exception
+     * handling, error logging, etc.
+     */
+    function clean_path(string $path): string
+    {
+        // Resolve relative paths
+        try {
+            $path = realpath($path) ?: $path;
+        } catch (ErrorException|ValueError $e) {
+            $path = 'error file path: ' . urlencode($path);
+        }
+
+        return match (true) {
+            str_starts_with($path, APPPATH) => 'APPPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(APPPATH)),
+            str_starts_with($path, BASEPATH) => 'BASEPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(BASEPATH)),
+            str_starts_with($path, SYSDIR) => 'SYSDIR' . DIRECTORY_SEPARATOR . substr($path, strlen(SYSDIR)),
+            str_starts_with($path, FCPATH) => 'FCPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(FCPATH)),
+            defined('VENDORPATH') && str_starts_with($path, VENDORPATH) => 'VENDORPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(VENDORPATH)),
+            default => $path,
+        };
+    }
+}
+
+// ------------------------------------------------------------------------
+
 if (!function_exists('is_really_writable')) {
     /**
      * Tests for file writability
@@ -724,6 +752,40 @@ if (!function_exists('route_to')) {
         global $routes;
 
         return $routes->reverseRoute($method, ...$params);
+    }
+}
+
+//--------------------------------------------------------------------
+
+if (! function_exists('env')) {
+    /**
+     * Allows user to retrieve values from the environment
+     * variables that have been set. Especially useful for
+     * retrieving values set from the .env file for
+     * use in config files.
+     *
+     * @param string|null $default
+     *
+     * @return bool|string|null
+     */
+    function env(string $key, $default = null)
+    {
+        $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key);
+
+        // Not found? Return the default value
+        if ($value === false) {
+            return $default;
+        }
+
+        // Handle any boolean values
+        return match (strtolower($value)) {
+            'true' => true,
+            'false' => false,
+            'empty' => '',
+            'null' => null,
+            default => $value,
+        };
+
     }
 }
 
