@@ -39,19 +39,6 @@ class Cms_model extends CI_Model
         }
     }
 
-    public function getModuleConfigKey($moduleId, $key)
-    {
-        $query = $this->db->query("SELECT m.id, m.module_id, m.key, m.value, m.date_added, m.date_changed FROM modules_configs m WHERE m.module_id = ? AND m.key = ?", array((int)$moduleId, (string)$key));
-
-        // Return results
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            return $result[0];
-        }
-
-        return null;
-    }
-
     public function getSideboxes(string $type = 'side', string $page = '*')
     {
         // Query: Prepare
@@ -83,9 +70,9 @@ class Cms_model extends CI_Model
     /**
      * Load the slider images
      *
-     * @return Array
+     * @return array|null
      */
-    public function getSlides()
+    public function getSlides(): ?array
     {
         $query = $this->db->query("SELECT * FROM image_slider ORDER BY `order` ASC");
 
@@ -105,7 +92,7 @@ class Cms_model extends CI_Model
     public function getLinks(string $type = "top"): ?array
     {
         if (in_array($type, array("top", "side", "bottom"))) {
-            $query = $this->db->query("SELECT * FROM menu WHERE type = ? ORDER BY `parent_id` ASC, `order` ASC", array($type));
+            $query = $this->db->query("SELECT * FROM menu WHERE type = ? ORDER BY `parent_id` ASC, `order` ASC", [$type]);
         } else {
             $query = $this->db->query("SELECT * FROM menu ORDER BY `order` ASC");
         }
@@ -120,10 +107,10 @@ class Cms_model extends CI_Model
     /**
      * Get the selected page from the database
      *
-     * @param  String $page
-     * @return Array
+     * @param string $page
+     * @return array|null
      */
-    public function getPage($page)
+    public function getPage(string $page): ?array
     {
         $this->db->select('*')->from('pages')->where('identifier', $page);
         $query = $this->db->get();
@@ -139,9 +126,9 @@ class Cms_model extends CI_Model
     /**
      * Get any old rank ID (to avoid foreign key errors)
      *
-     * @return Int
+     * @return bool|int
      */
-    public function getAnyOldRank()
+    public function getAnyOldRank(): bool|int
     {
         $query = $this->db->query("SELECT id FROM `ranks` ORDER BY id ASC LIMIT 1");
 
@@ -156,16 +143,15 @@ class Cms_model extends CI_Model
     /**
      * Get all pages
      *
-     * @return Array
+     * @return array|null
      */
-    public function getPages()
+    public function getPages(): ?array
     {
         $this->db->select('*')->from('pages');
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            return $result;
+            return $query->result_array();
         }
 
         return null;
@@ -174,16 +160,15 @@ class Cms_model extends CI_Model
     /**
      * Get all data from the realms table
      *
-     * @return Array
+     * @return array|null
      */
-    public function getRealms()
+    public function getRealms(): ?array
     {
         $this->db->select('*')->from('realms');
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            return $result;
+            return $query->result_array();
         }
 
         return null;
@@ -192,10 +177,10 @@ class Cms_model extends CI_Model
     /**
      * Get the realm database information
      *
-     * @param  Int $id
-     * @return Array
+     * @param Int $id
+     * @return array|null
      */
-    public function getRealm($id)
+    public function getRealm(int $id): ?array
     {
         $this->db->select('*')->from('realms')->where('id', $id);
         $query = $this->db->get();
@@ -211,7 +196,7 @@ class Cms_model extends CI_Model
     public function getBackups($id = false)
     {
         if ($id) {
-            $query = $this->db->query("SELECT backup_name FROM backup where id = ?", array($id));
+            $query = $this->db->query("SELECT backup_name FROM backup where id = ?", [$id]);
 
             if ($query->num_rows() > 0) {
                 $result = $query->result_array();
@@ -223,8 +208,7 @@ class Cms_model extends CI_Model
             $query = $this->db->query("SELECT * FROM backup ORDER BY `id` ASC");
 
             if ($query->num_rows() > 0) {
-                $result = $query->result_array();
-                return $result;
+                return $query->result_array();
             } else {
                 return false;
             }
@@ -246,12 +230,12 @@ class Cms_model extends CI_Model
 
     public function deleteBackups($id)
     {
-        $this->db->query("delete FROM backup WHERE id = ?", array($id));
+        $this->db->query("delete FROM backup WHERE id = ?", [$id]);
     }
 
     public function getTemplate($id)
     {
-        $query = $this->db->query("SELECT * FROM email_templates WHERE id= ? LIMIT 1", array($id));
+        $query = $this->db->query("SELECT * FROM email_templates WHERE id= ? LIMIT 1", [$id]);
 
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
@@ -268,16 +252,13 @@ class Cms_model extends CI_Model
             $this->db->select('*');
             $this->db->where('uid', $id);
             $this->db->where('read', 0);
-            $result = $this->db->count_all_results('notifications');
-
-            return $result;
+            return $this->db->count_all_results('notifications');
         } else {
             $this->db->select('*')->from('notifications')->where('uid', $id);
             $query = $this->db->get();
 
             if ($query->num_rows() > 0) {
-                $result = $query->result_array();
-                return $result;
+                return $query->result_array();
             }
         }
 
