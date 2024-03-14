@@ -28,7 +28,7 @@ class Top_model extends CI_Model
     {
         $this->connect();
 
-        $result = $this->connection->query("SELECT " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "name", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "gender", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "class", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "race", false, $this->realmId) . ", COUNT(character_achievement.achievement) AS achievement_points FROM  character_achievement LEFT OUTER JOIN " . table("characters", $this->realmId) . " ON " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . " = character_achievement.`guid` GROUP BY " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . " ORDER BY achievement_points DESC LIMIT ?", array($limit));
+        $result = $this->connection->query("SELECT " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "name", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "gender", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "class", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "race", false, $this->realmId) . ", COUNT(character_achievement.achievement) AS achievement_points FROM character_achievement RIGHT JOIN " . table("characters", $this->realmId) . " ON " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . " = character_achievement.`guid` GROUP BY " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . " ORDER BY achievement_points DESC LIMIT ?", [$limit]);
 
         return $this->getResult($result);
     }
@@ -37,7 +37,7 @@ class Top_model extends CI_Model
     {
         $this->connect();
 
-        $result = $this->connection->query('SELECT ' . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . ', ' . table('guild', $this->realmId) . '.' . column('guild', 'leaderguid', false, $this->realmId) . ', ' . table('guild', $this->realmId) . '.' . column('guild', 'name', false, $this->realmId) . ', COUNT(character_achievement.achievement) AS achievement_points FROM character_achievement LEFT JOIN ' . table('guild_member', $this->realmId) . ' ON ' . table('guild_member', $this->realmId) . '.' . column('guild_member', 'guid', false, $this->realmId) . ' = character_achievement.guid LEFT JOIN ' . table('guild', $this->realmId) . ' ON ' . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . ' = ' . table('guild_member', $this->realmId) . '.' . column('guild_member', 'guildid', false, $this->realmId) . '  WHERE ' . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . " <> '' GROUP BY " . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . ' ORDER BY achievement_points DESC LIMIT ?', array($limit));
+        $result = $this->connection->query('SELECT ' . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . ', ' . table('guild', $this->realmId) . '.' . column('guild', 'leaderguid', false, $this->realmId) . ', ' . table('guild', $this->realmId) . '.' . column('guild', 'name', false, $this->realmId) . ', COUNT(character_achievement.achievement) AS achievement_points FROM character_achievement LEFT JOIN ' . table('guild_member', $this->realmId) . ' ON ' . table('guild_member', $this->realmId) . '.' . column('guild_member', 'guid', false, $this->realmId) . ' = character_achievement.guid LEFT JOIN ' . table('guild', $this->realmId) . ' ON ' . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . ' = ' . table('guild_member', $this->realmId) . '.' . column('guild_member', 'guildid', false, $this->realmId) . '  WHERE ' . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . " <> '' GROUP BY " . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . ' ORDER BY achievement_points DESC LIMIT ?', [$limit]);
 
         if ($result && $result->num_rows() > 0) {
             $results = $result->result_array();
@@ -50,8 +50,6 @@ class Top_model extends CI_Model
 
             return $this->addrank($this->orderBy($results, 'achievement_points', 'desc'));
         }
-
-        unset($result);
 
         return false;
     }
@@ -87,7 +85,7 @@ class Top_model extends CI_Model
     {
         $this->connect();
 
-        $result = $this->connection->query("SELECT " . columns("characters", array("guid", "name", "level", "class", "race", "gender", "yesterdayKills")) . " FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "yesterdayKills", false, $this->realmId) . " > 0 and " . column("characters", "name", false, $this->realmId) . " != '' ORDER BY " . column("characters", "yesterdayKills", false, $this->realmId) . " DESC LIMIT ?", array($limit));
+        $result = $this->connection->query("SELECT " . columns("characters", ["guid", "name", "level", "class", "race", "gender", "yesterdayKills"]) . " FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "yesterdayKills", false, $this->realmId) . " > 0 and " . column("characters", "name", false, $this->realmId) . " != '' ORDER BY " . column("characters", "yesterdayKills", false, $this->realmId) . " DESC LIMIT ?", [$limit]);
 
         return $this->getResult($result);
     }
@@ -96,7 +94,7 @@ class Top_model extends CI_Model
     {
         $this->connect();
 
-        $result = $this->connection->query("SELECT " . columns("characters", array("guid", "name", "level", "class", "race", "gender", "totalKills")) . " FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "totalKills", false, $this->realmId) . " > 0 and " . column("characters", "name", false, $this->realmId) . " != '' ORDER BY " . column("characters", "totalKills", false, $this->realmId) . " DESC LIMIT ?", array($limit));
+        $result = $this->connection->query("SELECT " . columns("characters", ["guid", "name", "level", "class", "race", "gender", "totalKills"]) . " FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "totalKills", false, $this->realmId) . " > 0 and " . column("characters", "name", false, $this->realmId) . " != '' ORDER BY " . column("characters", "totalKills", false, $this->realmId) . " DESC LIMIT ?", [$limit]);
 
         return $this->getResult($result);
     }
@@ -105,7 +103,7 @@ class Top_model extends CI_Model
     {
         $this->connect();
 
-        $result = $this->connection->query("SELECT " . columns("characters", array("guid", "name", "level", "class", "race", "gender", "todayKills")) . " FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "todayKills", false, $this->realmId) . " > 0 and " . column("characters", "name", false, $this->realmId) . " != '' ORDER BY " . column("characters", "todayKills", false, $this->realmId) . " DESC LIMIT ?", array($limit));
+        $result = $this->connection->query("SELECT " . columns("characters", ["guid", "name", "level", "class", "race", "gender", "todayKills"]) . " FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "todayKills", false, $this->realmId) . " > 0 and " . column("characters", "name", false, $this->realmId) . " != '' ORDER BY " . column("characters", "todayKills", false, $this->realmId) . " DESC LIMIT ?", [$limit]);
 
         return $this->getResult($result);
     }
@@ -114,14 +112,14 @@ class Top_model extends CI_Model
     {
         $this->connect();
 
-        $query = $this->connection->query('SELECT ' . table('guild', $this->realmId) . '.' . column('guild', 'name', false, $this->realmId) . ' FROM ' . table('guild_member', $this->realmId) . ' RIGHT JOIN ' . table('guild', $this->realmId) . ' ON ' . table('guild_member', $this->realmId) . '.' . column('guild_member', 'guildid', false, $this->realmId) . ' = ' . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . ' WHERE guild_member.guid = ?', array($guid));
+        $query = $this->connection->query('SELECT ' . table('guild', $this->realmId) . '.' . column('guild', 'name', false, $this->realmId) . ' FROM ' . table('guild_member', $this->realmId) . ' RIGHT JOIN ' . table('guild', $this->realmId) . ' ON ' . table('guild_member', $this->realmId) . '.' . column('guild_member', 'guildid', false, $this->realmId) . ' = ' . table('guild', $this->realmId) . '.' . column('guild', 'guildid', false, $this->realmId) . ' WHERE guild_member.guid = ?', [$guid]);
 
         if ($query && $query->num_rows() > 0) {
             $row = $query->result_array();
 
             return $row[0]['name'];
         } else {
-            $query2 = $this->connection->query('SELECT ' . column('guild', 'name', false, $this->realmId) . ' FROM ' . table('guild', $this->realmId) . ' WHERE ' . column('guild', 'leaderguid', false, $this->realmId) . ' = ?', array($guid));
+            $query2 = $this->connection->query('SELECT ' . column('guild', 'name', false, $this->realmId) . ' FROM ' . table('guild', $this->realmId) . ' WHERE ' . column('guild', 'leaderguid', false, $this->realmId) . ' = ?', [$guid]);
 
             if ($query2 && $query2->num_rows() > 0) {
                 $row2 = $query2->result_array();
@@ -137,7 +135,7 @@ class Top_model extends CI_Model
     {
         $this->connect();
 
-        $query = $this->connection->query('SELECT ' . column('guild_member', 'guildid', false, $this->realmId) . ', COUNT(' . column('guild_member', 'guildid', false, $this->realmId) . ') AS Members FROM ' . table('guild_member', $this->realmId) . ' WHERE ' . column('guild_member', 'guildid', false, $this->realmId) . ' = ?', array($guildid));
+        $query = $this->connection->query('SELECT ' . column('guild_member', 'guildid', false, $this->realmId) . ', COUNT(' . column('guild_member', 'guildid', false, $this->realmId) . ') AS Members FROM ' . table('guild_member', $this->realmId) . ' WHERE ' . column('guild_member', 'guildid', false, $this->realmId) . ' = ?', [$guildid]);
 
         if ($query && $query->num_rows() > 0) {
             $row = $query->result_array();
@@ -167,8 +165,6 @@ class Top_model extends CI_Model
 
             return $players;
         }
-
-        unset($result);
 
         return false;
     }
