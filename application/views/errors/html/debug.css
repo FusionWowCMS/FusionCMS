@@ -19,7 +19,7 @@ body {
 }
 h1 {
     font-weight: lighter;
-    letter-spacing: 0.8;
+    letter-spacing: normal;
     font-size: 3rem;
     color: var(--dark-text-color);
     margin: 0;
@@ -44,7 +44,7 @@ p.lead {
     color: var(--dark-text-color);
 }
 .header .container {
-    padding: 1rem 1.75rem 1.75rem 1.75rem;
+    padding: 1rem 1.75rem 1.75rem;
 }
 .header h1 {
     font-size: 2.5rem;
@@ -112,7 +112,7 @@ p.lead {
 }
 .tabs a:link,
 .tabs a:visited {
-    padding: 0rem 1rem;
+    padding: 0 1rem;
     line-height: 2.7;
     text-decoration: none;
     color: var(--dark-text-color);
