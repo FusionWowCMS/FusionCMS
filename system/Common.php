@@ -420,41 +420,40 @@ if (!function_exists('show_error')) {
      * @param string
      * @return    void
      */
-    function show_error($message, int $status_code = 500, string $heading = 'An Error Was Encountered')
+    function show_error($message, int $status_code = 500, string $heading = '')
     {
         $status_code = abs($status_code);
         if ($status_code < 100) {
-            $exit_status = $status_code + 9; // 9 is EXIT__AUTO_MIN
             $status_code = 500;
-        } else {
-            $exit_status = 1; // EXIT_ERROR
         }
 
-        $exception = new Exceptions();
-        echo $exception->show_error($heading, $message, 'error_general', $status_code);
-        exit($exit_status);
+        throw new RuntimeException($message, $status_code);
     }
 }
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('show_404')) {
+if (! function_exists('show_404')) {
     /**
-     * 404 Page Handler
-     *
-     * This function is similar to the show_error() function above
-     * However, instead of the standard error template it displays
-     * 404 errors.
-     *
-     * @param string
-     * @param bool
-     * @return    void
+     * @param   string $page      Page URI
+     * @param   bool   $log_error Whether to log the error
      */
-    function show_404($page = '', $log_error = true)
+    function show_404(string $page = '', bool $log_error = true): void
     {
-        $exception = new Exceptions();
-        $exception->show_404($page, $log_error);
-        exit(4); // EXIT_UNKNOWN_FILE
+        if (is_cli()) {
+            $heading = 'Not Found';
+            $message = 'The controller/method pair you requested was not found.';
+        } else {
+            $heading = '404 Page Not Found';
+            $message = 'The page you requested was not found.';
+        }
+
+        // By default we log this, but allow a dev to skip it
+        if ($log_error) {
+            log_message('error', $heading . ': ' . $page);
+        }
+
+        throw new PageNotFoundException($heading . ': ' . $message);
     }
 }
 
