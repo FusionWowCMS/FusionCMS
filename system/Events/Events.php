@@ -74,7 +74,7 @@ class Events
             return;
         }
 
-        $events = APPPATH . 'Config' . DIRECTORY_SEPARATOR . 'Events.php';
+        $events = APPPATH . 'config' . DIRECTORY_SEPARATOR . 'Events.php';
         $files  = [];
 
         $files = array_filter(array_map(static function (string $file) {

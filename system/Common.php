@@ -14,7 +14,6 @@ use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\Database\ConnectionInterface;
-use CodeIgniter\Debug\Exceptions;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use Laminas\Escaper\Escaper;
 
