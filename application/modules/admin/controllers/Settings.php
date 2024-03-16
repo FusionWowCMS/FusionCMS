@@ -94,13 +94,13 @@ class Settings extends MX_Controller
         $config['totp_secret_name'] = $this->config->item('totp_secret_name');
 
         // Prepare my data
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
             'realms' => $this->realms->getRealms(),
             'emulators' => $this->getEmulators(),
             'expansions' => $this->realms->getExpansions(),
             'config' => $config
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("settings.tpl", $data);
@@ -282,6 +282,8 @@ class Settings extends MX_Controller
         $fusionConfig->set('rbac', $this->input->post('rbac'));
         $fusionConfig->set('battle_net', $this->input->post('battle_net'));
         $fusionConfig->set('battle_net_encryption', $this->input->post('battle_net_encryption'));
+        $fusionConfig->set('totp_secret', $this->input->post('totp_secret'));
+        $fusionConfig->set('totp_secret_name', $this->input->post('totp_secret_name'));
 
         $fusionConfig->save();
 

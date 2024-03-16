@@ -788,7 +788,9 @@ var Settings = {
 			account_encryption:$("#account_encryption").val(),
 			rbac:$("#rbac").val(),
 			battle_net:$("#battle_net").val(),
-			battle_net_encryption:$("#battle_net_encryption").val()
+			battle_net_encryption:$("#battle_net_encryption").val(),
+			totp_secret:$("#totp_secret").val(),
+			totp_secret_name:$("#totp_secret_name").val()
 		};
 
 		$.post(Config.URL + "admin/settings/saveAuthConfig", values, function(response)
