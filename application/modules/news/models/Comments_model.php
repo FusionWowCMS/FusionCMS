@@ -10,11 +10,10 @@ class Comments_model extends CI_Model
      */
     public function getComments($id)
     {
-        $this->db->select('*')->from('comments')->where('article_id', $id)->order_by('id', 'desc');
-        $query = $this->db->get();
+        $query = $this->db->table('comments')->select()->where('article_id', $id)->orderBy('id', 'desc')->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             foreach ($result as $key => $value) {
                 //Remove the empty comments since they are useless…
@@ -29,7 +28,7 @@ class Comments_model extends CI_Model
 
             return $result;
         } else {
-            return;
+            return [];
         }
     }
 
@@ -41,15 +40,14 @@ class Comments_model extends CI_Model
      */
     public function getLastComment($id)
     {
-        $this->db->select('*')->from('comments')->where('article_id', $id)->where('author_id', $this->user->getId())->order_by('id', 'desc')->limit(1);
-        $query = $this->db->get();
+        $query = $this->db->table('comments')->select()->where('article_id', $id)->where('author_id', $this->user->getId())->orderBy('id', 'desc')->limit(1)->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0];
         } else {
-            return;
+            return [];
         }
     }
 
@@ -60,7 +58,7 @@ class Comments_model extends CI_Model
      */
     public function addComment($comment)
     {
-        $this->db->insert("comments", $comment);
+        $this->db->table('comments')->insert($comment);
 
         $this->db->query("UPDATE articles SET comments = comments + 1 WHERE id=?", array($comment['article_id']));
     }
@@ -69,16 +67,16 @@ class Comments_model extends CI_Model
     {
         $query = $this->db->query("SELECT article_id FROM comments WHERE id=?", array($id));
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
         } else {
             die("Comment doesn't exist. Yay");
         }
 
-        $this->db->trans_start();
+        $this->db->transStart();
         $this->db->query("DELETE FROM comments WHERE id=?", array($id));
         $this->db->query("UPDATE articles SET comments = comments - 1 WHERE id=?", array($row[0]['article_id']));
-        $this->db->trans_complete();
+        $this->db->transComplete();
 
         return $row[0]['article_id'];
     }

@@ -11,16 +11,15 @@ class News_model extends CI_Model
      */
     public function getArticles($start = 0, $limit = 1)
     {
-        if ($start === true) {
-            $this->db->select('*');
-        } else {
-            $this->db->select('*');
-            $this->db->limit($limit, $start);
+        $builder = $this->db->table('articles');
+        $builder->select();
+        if ($start === false) {
+            $builder->limit($limit, $start);
         }
 
-        $this->db->order_by('id', 'desc');
-        $query = $this->db->get('articles');
-        $result = $query->result_array();
+        $builder->orderBy('id', 'desc');
+        $query = $builder->get();
+        $result = $query->getResultArray();
 
         // Did we have any results?
         if ($result) {
@@ -52,8 +51,8 @@ class News_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM articles WHERE id=?", array($id));
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0];
         } else {
@@ -69,14 +68,13 @@ class News_model extends CI_Model
      */
     public function getTags($articleId)
     {
-        $this->db->select('t.name');
-        $this->db->where('at.article_id', $articleId);
-        $this->db->where('at.tag_id = t.id');
-        $query = $this->db->get('tag t, article_tag at');
+        $query = $this->db->table('tag t, article_tag at')->select('t.name')
+                            ->where('at.article_id', $articleId)
+                            ->where('at.tag_id = t.id')
+                            ->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            return $result;
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -89,7 +87,7 @@ class News_model extends CI_Model
      */
     public function countArticles()
     {
-        return $this->db->count_all('articles');
+        return $this->db->table('articles')->countAll();
     }
 
     /**
@@ -105,11 +103,9 @@ class News_model extends CI_Model
             return false;
         }
 
-        $this->db->select('comments');
-        $this->db->where('id', $id);
-        $query = $this->db->get('articles');
+        $query = $this->db->table('articles')->select('comments')->where('id', $id)->get();
 
-        $result = $query->result_array();
+        $result = $query->getResultArray();
 
         // If comments are enabled
         if ($comment && count($result) && $result[0]['comments'] != -1) {
@@ -145,7 +141,7 @@ class News_model extends CI_Model
             'content'   => $content,
         );
 
-        $this->db->insert("articles", $data);
+        $this->db->table('articles')->insert($data);
 
         return true;
     }
@@ -177,15 +173,14 @@ class News_model extends CI_Model
 
         if ($data['comments'] == 0) {
             $query = $this->db->query("SELECT COUNT(*) as `total` FROM comments WHERE article_id=?", array($id));
-            $result = $query->result_array();
+            $result = $query->getResultArray();
 
             if ($result[0]['total'] != 0) {
                 $data['comments'] = $result[0]['total'];
             }
         }
 
-        $this->db->where('id', $id);
-        $this->db->update("articles", $data);
+        $this->db->table('articles')->where('id', $id)->update($data);
 
         return true;
     }
@@ -202,8 +197,7 @@ class News_model extends CI_Model
             return false;
         }
 
-        $this->db->where('id', $articleId);
-        $this->db->delete('articles');
+        $this->db->table('articles')->where('id', $articleId)->delete();
 
         return true;
     }

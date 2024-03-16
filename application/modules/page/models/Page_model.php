@@ -4,13 +4,10 @@ class Page_model extends CI_Model
 {
     public function getPages()
     {
-        $this->db->select('*')->from('pages')->order_by('id', 'desc');
-        $query = $this->db->get();
+        $query = $this->db->table('pages')->select()->orderBy('id', 'desc')->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-
-            return $result;
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -39,8 +36,8 @@ class Page_model extends CI_Model
     {
         $query = $this->db->query("SELECT `permission` FROM pages WHERE id = ?", [$id]);
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0]['permission'];
         } else {
@@ -50,36 +47,35 @@ class Page_model extends CI_Model
 
     public function create($headline, $identifier, $content)
     {
-        $data = array(
-            'name' => $headline,
-            'identifier' => $identifier,
-            'content' => $content,
+        $data = [
+            'name'        => $headline,
+            'identifier'  => $identifier,
+            'content'     => $content,
             'rank_needed' => $this->cms_model->getAnyOldRank()
-        );
+        ];
 
-        $this->db->insert("pages", $data);
+        $this->db->table('pages')->insert($data);
 
-        return $this->db->insert_id();
+        return $this->db->insertId();
     }
 
     public function update($id, $headline, $identifier, $content)
     {
-        $data = array(
-            'name' => $headline,
+        $data = [
+            'name'       => $headline,
             'identifier' => $identifier,
-            'content' => $content
-        );
+            'content'    => $content
+        ];
 
-        $this->db->where('id', $id);
-        $this->db->update("pages", $data);
+        $this->db->table('pages')->where('id', $id)->update($data);
     }
 
     public function getPage($id)
     {
         $query = $this->db->query("SELECT * FROM pages WHERE id=?", array($id));
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0];
         } else {
@@ -95,8 +91,8 @@ class Page_model extends CI_Model
             $query = $this->db->query("SELECT COUNT(*) as `total` FROM pages WHERE identifier=?", array($identifier));
         }
 
-        if ($query->num_rows()) {
-            $row = $query->result_array();
+        if ($query->getNumRows()) {
+            $row = $query->getResultArray();
 
             if ($row[0]['total']) {
                 return true;
