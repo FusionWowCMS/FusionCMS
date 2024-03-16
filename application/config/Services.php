@@ -16,6 +16,7 @@ use CodeIgniter\Security\Security;
 use CodeIgniter\Session\Handlers\Database\MySQLiHandler;
 use CodeIgniter\Session\Handlers\DatabaseHandler;
 use CodeIgniter\Session\Session;
+use CodeIgniter\Config\Format as FormatConfig;
 
 /**
  * Services Configuration file.
@@ -374,6 +375,8 @@ class Services
         {
             return new Format($config);
         }
+
+        $config ??= config(FormatConfig::class);
 
         return self::getSharedInstance('format', $config);
     }
