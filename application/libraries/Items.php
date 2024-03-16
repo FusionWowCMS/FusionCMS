@@ -136,8 +136,8 @@ class Items
         $query = $this->CI->db->query("SELECT * FROM item_template WHERE entry = ? LIMIT 1", [$item]);
 
         // Check for results
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array()[0];
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray()[0];
 
             // save to cache
             $this->CI->cache->save('items/item_' . $realm . '_' . $item, $row);
@@ -207,8 +207,8 @@ class Items
                     }
                 }
 
-                if ($query->num_rows() > 0) {
-                    $row = $query->result_array()[0];
+                if ($query->getNumRows() > 0) {
+                    $row = $query->getResultArray()[0];
 
                     $data = [
                          'item' => $this->getItemDataFromWorldDB($row)
@@ -464,8 +464,8 @@ class Items
             $query = CI::$APP->db->query("SELECT spellText FROM spelltext_en WHERE spellId = ? LIMIT 1", [$id]);
 
             // Check for results
-            if ($query->num_rows() > 0) {
-                $row = $query->result_array();
+            if ($query->getNumRows() > 0) {
+                $row = $query->getResultArray();
 
                 $data = $row[0]['spellText'];
             } else {

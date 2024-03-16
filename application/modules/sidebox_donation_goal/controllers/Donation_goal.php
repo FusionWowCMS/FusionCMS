@@ -57,8 +57,8 @@ class Donation_goal extends MX_Controller
 
         $query = $this->db->query("SELECT amount from monthly_income WHERE month=?", array(date("Y-m")));
 
-        if ($query->num_rows()) {
-            $row = $query->result_array();
+        if ($query->getNumRows()) {
+            $row = $query->getResultArray();
 
             return $row[0]['amount'];
         } else {
