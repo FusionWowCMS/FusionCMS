@@ -11,15 +11,9 @@
 
 namespace CodeIgniter\HTTP;
 
-use CodeIgniter\Cookie\Cookie;
-use CodeIgniter\Cookie\CookieStore;
-use CodeIgniter\Cookie\Exceptions\CookieException;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\I18n\Time;
-use CodeIgniter\Pager\PagerInterface;
-use CodeIgniter\Security\Exceptions\SecurityException;
-use Config\Cookie as CookieConfig;
-use Config\Services;
+use App\Config\Services;
 use DateTime;
 use DateTimeZone;
 use InvalidArgumentException;
@@ -51,13 +45,6 @@ trait ResponseTrait
      * @deprecated Will be protected. Use `getCSP()` instead.
      */
     public $CSP;
-
-    /**
-     * CookieStore instance.
-     *
-     * @var CookieStore
-     */
-    protected $cookieStore;
 
     /**
      * Set a cookie name prefix if you need to avoid collisions
@@ -103,15 +90,6 @@ trait ResponseTrait
      * @deprecated Use the dedicated Cookie class instead.
      */
     protected $cookieHTTPOnly = false;
-
-    /**
-     * Cookie SameSite setting
-     *
-     * @var string
-     *
-     * @deprecated Use the dedicated Cookie class instead.
-     */
-    protected $cookieSameSite = Cookie::SAMESITE_LAX;
 
     /**
      * Stores all cookies that were set in the response.
@@ -181,38 +159,6 @@ trait ResponseTrait
         $date->setTimezone(new DateTimeZone('UTC'));
 
         $this->setHeader('Date', $date->format('D, d M Y H:i:s') . ' GMT');
-
-        return $this;
-    }
-
-    /**
-     * Set the Link Header
-     *
-     * @see http://tools.ietf.org/html/rfc5988
-     *
-     * @return $this
-     *
-     * @todo Recommend moving to Pager
-     */
-    public function setLink(PagerInterface $pager)
-    {
-        $links = '';
-
-        if ($previous = $pager->getPreviousPageURI()) {
-            $links .= '<' . $pager->getPageURI($pager->getFirstPage()) . '>; rel="first",';
-            $links .= '<' . $previous . '>; rel="prev"';
-        }
-
-        if (($next = $pager->getNextPageURI()) && $previous) {
-            $links .= ',';
-        }
-
-        if ($next) {
-            $links .= '<' . $next . '>; rel="next",';
-            $links .= '<' . $pager->getPageURI($pager->getLastPage()) . '>; rel="last"';
-        }
-
-        $this->setHeader('Link', $links);
 
         return $this;
     }
@@ -444,7 +390,6 @@ trait ResponseTrait
         }
 
         $this->sendHeaders();
-        $this->sendCookies();
         $this->sendBody();
 
         return $this;
@@ -458,7 +403,7 @@ trait ResponseTrait
     public function sendHeaders()
     {
         // Have the headers already been sent?
-        if ($this->pretend || headers_sent()) {
+        if (headers_sent()) {
             return $this;
         }
 
@@ -469,7 +414,7 @@ trait ResponseTrait
         }
 
         // HTTP Status
-        header(sprintf('HTTP/%s %s %s', $this->getProtocolVersion(), $this->getStatusCode(), $this->getReasonPhrase()), true, $this->getStatusCode());
+        header(sprintf('HTTP/%s %s %s', $this->getProtocolVersion(), $this->getStatusCode(), $this->getReason()), true, $this->getStatusCode());
 
         // Send all of our headers
         foreach (array_keys($this->headers()) as $name) {
@@ -544,214 +489,6 @@ trait ResponseTrait
         $this->setStatusCode($code);
 
         return $this;
-    }
-
-    /**
-     * Set a cookie
-     *
-     * Accepts an arbitrary number of binds (up to 7) or an associative
-     * array in the first parameter containing all the values.
-     *
-     * @param array|Cookie|string $name     Cookie name / array containing binds / Cookie object
-     * @param string              $value    Cookie value
-     * @param string              $expire   Cookie expiration time in seconds
-     * @param string              $domain   Cookie domain (e.g.: '.yourdomain.com')
-     * @param string              $path     Cookie path (default: '/')
-     * @param string              $prefix   Cookie name prefix ('': the default prefix)
-     * @param bool|null           $secure   Whether to only transfer cookies via SSL
-     * @param bool|null           $httponly Whether only make the cookie accessible via HTTP (no javascript)
-     * @param string|null         $samesite
-     *
-     * @return $this
-     */
-    public function setCookie(
-        $name,
-        $value = '',
-        $expire = '',
-        $domain = '',
-        $path = '/',
-        $prefix = '',
-        $secure = null,
-        $httponly = null,
-        $samesite = null
-    ) {
-        if ($name instanceof Cookie) {
-            $this->cookieStore = $this->cookieStore->put($name);
-
-            return $this;
-        }
-
-        /** @var CookieConfig|null $cookieConfig */
-        $cookieConfig = config(CookieConfig::class);
-
-        if ($cookieConfig instanceof CookieConfig) {
-            $secure ??= $cookieConfig->secure;
-            $httponly ??= $cookieConfig->httponly;
-            $samesite ??= $cookieConfig->samesite;
-        }
-
-        if (is_array($name)) {
-            // always leave 'name' in last place, as the loop will break otherwise, due to ${$item}
-            foreach (['samesite', 'value', 'expire', 'domain', 'path', 'prefix', 'secure', 'httponly', 'name'] as $item) {
-                if (isset($name[$item])) {
-                    ${$item} = $name[$item];
-                }
-            }
-        }
-
-        if (is_numeric($expire)) {
-            $expire = $expire > 0 ? Time::now()->getTimestamp() + $expire : 0;
-        }
-
-        $cookie = new Cookie($name, $value, [
-            'expires'  => $expire ?: 0,
-            'domain'   => $domain,
-            'path'     => $path,
-            'prefix'   => $prefix,
-            'secure'   => $secure,
-            'httponly' => $httponly,
-            'samesite' => $samesite ?? '',
-        ]);
-
-        $this->cookieStore = $this->cookieStore->put($cookie);
-
-        return $this;
-    }
-
-    /**
-     * Returns the `CookieStore` instance.
-     *
-     * @return CookieStore
-     */
-    public function getCookieStore()
-    {
-        return $this->cookieStore;
-    }
-
-    /**
-     * Checks to see if the Response has a specified cookie or not.
-     */
-    public function hasCookie(string $name, ?string $value = null, string $prefix = ''): bool
-    {
-        $prefix = $prefix ?: Cookie::setDefaults()['prefix']; // to retain BC
-
-        return $this->cookieStore->has($name, $prefix, $value);
-    }
-
-    /**
-     * Returns the cookie
-     *
-     * @param string $prefix Cookie prefix.
-     *                       '': the default prefix
-     *
-     * @return array<string, Cookie>|Cookie|null
-     */
-    public function getCookie(?string $name = null, string $prefix = '')
-    {
-        if ((string) $name === '') {
-            return $this->cookieStore->display();
-        }
-
-        try {
-            $prefix = $prefix ?: Cookie::setDefaults()['prefix']; // to retain BC
-
-            return $this->cookieStore->get($name, $prefix);
-        } catch (CookieException $e) {
-            log_message('error', (string) $e);
-
-            return null;
-        }
-    }
-
-    /**
-     * Sets a cookie to be deleted when the response is sent.
-     *
-     * @return $this
-     */
-    public function deleteCookie(string $name = '', string $domain = '', string $path = '/', string $prefix = '')
-    {
-        if ($name === '') {
-            return $this;
-        }
-
-        $prefix = $prefix ?: Cookie::setDefaults()['prefix']; // to retain BC
-
-        $prefixed = $prefix . $name;
-        $store    = $this->cookieStore;
-        $found    = false;
-
-        /** @var Cookie $cookie */
-        foreach ($store as $cookie) {
-            if ($cookie->getPrefixedName() === $prefixed) {
-                if ($domain !== $cookie->getDomain()) {
-                    continue;
-                }
-
-                if ($path !== $cookie->getPath()) {
-                    continue;
-                }
-
-                $cookie = $cookie->withValue('')->withExpired();
-                $found  = true;
-
-                $this->cookieStore = $store->put($cookie);
-                break;
-            }
-        }
-
-        if (! $found) {
-            $this->setCookie($name, '', '', $domain, $path, $prefix);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns all cookies currently set.
-     *
-     * @return array<string, Cookie>
-     */
-    public function getCookies()
-    {
-        return $this->cookieStore->display();
-    }
-
-    /**
-     * Actually sets the cookies.
-     *
-     * @return void
-     */
-    protected function sendCookies()
-    {
-        if ($this->pretend) {
-            return;
-        }
-
-        $this->dispatchCookies();
-    }
-
-    private function dispatchCookies(): void
-    {
-        /** @var IncomingRequest $request */
-        $request = Services::request();
-
-        foreach ($this->cookieStore->display() as $cookie) {
-            if ($cookie->isSecure() && ! $request->isSecure()) {
-                throw SecurityException::forDisallowedAction();
-            }
-
-            $name    = $cookie->getPrefixedName();
-            $value   = $cookie->getValue();
-            $options = $cookie->getOptions();
-
-            if ($cookie->isRaw()) {
-                $this->doSetRawCookie($name, $value, $options);
-            } else {
-                $this->doSetCookie($name, $value, $options);
-            }
-        }
-
-        $this->cookieStore->clear();
     }
 
     /**

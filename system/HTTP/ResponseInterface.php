@@ -161,4 +161,26 @@ interface ResponseInterface
 
     //--------------------------------------------------------------------
 
+    // --------------------------------------------------------------------
+    // Formatter Methods
+    // --------------------------------------------------------------------
+
+    /**
+     * Converts the $body into JSON and sets the Content Type header.
+     *
+     * @param array|string $body
+     *
+     * @return $this
+     */
+    public function setJSON($body, bool $unencoded = false);
+
+    /**
+     * Converts $body into XML, and sets the correct Content-Type.
+     *
+     * @param array|string $body
+     *
+     * @return $this
+     */
+    public function setXML($body);
+
 }

@@ -26,6 +26,7 @@ namespace CodeIgniter\HTTP;
  */
 class Response extends Message implements ResponseInterface
 {
+    use ResponseTrait;
     /**
      * HTTP status codes
      *
