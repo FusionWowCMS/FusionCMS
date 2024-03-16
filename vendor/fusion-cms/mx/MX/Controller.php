@@ -8,9 +8,6 @@ use Characters_model;
 use CI_Cache;
 use CI_Calendar;
 use CI_Config;
-use CI_DB_forge;
-use CI_DB_query_builder;
-use CI_DB_utility;
 use CI_Driver_Library;
 use CI_Form_validation;
 use CI_FTP;
@@ -18,14 +15,12 @@ use CI_Image_lib;
 use CI_Input;
 use CI_Lang;
 use CI_Loader;
-use CI_Migration;
 use CI_Model;
 use CI_Output;
 use CI_Pagination;
 use CI_Parser;
 use CI_Router;
 use CI_Security;
-use CI_Session;
 use CI_Table;
 use CI_Trackback;
 use CI_Unit_test;
@@ -34,6 +29,9 @@ use CI_URI;
 use CI_Utf8;
 use CI_Zip;
 use Cms_model;
+use CodeIgniter\Database\BaseConnection;
+use CodeIgniter\Database\Forge;
+use CodeIgniter\Database\Migration;
 use CodeIgniter\Debug\Exceptions;
 use CodeIgniter\Debug\Timer;
 use CodeIgniter\Debug\Toolbar;
@@ -109,7 +107,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Input $input                    Pre-processes global input data for security
  * @property CI_Lang $lang                      Language Class
  * @property CI_Loader $load                    Loads framework components.
- * @property Logger $logger                        Logging Class
+ * @property Logger $logger                     Logging Class
  * @property CI_Model $model                    Model Class
  * @property CI_Output $output                  Responsible for sending final output to the browser.
  * @property CI_Router $router                  Parses URIs and determines routing
@@ -117,12 +115,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_URI $uri                        Parses URIs and determines routing
  * @property CI_Utf8 $utf8                      Provides support for UTF-8 environments
  ***************** DATABASE COMPONENTS *****************
- * @property CI_DB_forge $dbforge               Database Forge Class
- * @property CI_DB_query_builder $db            This is the platform-independent base Query Builder implementation class.
- * @property CI_DB_utility $dbutil              Database Utility Class
- ***************** CORE LIBRARIES *****************
+ * @property Forge $dbforge                     Database Forge Class
+ * @property BaseConnection $db                 This is the platform-independent base Query Builder implementation class.
+ * **************** CORE LIBRARIES *****************
  * @property CI_Cache $cache                    CodeIgniter Caching Class
- * @property CI_Session $session                CodeIgniter Session Class
  * @property CI_Calendar $calendar              This class enables the creation of calendars
  * @property CI_Driver_Library $driver          This class enables you to create "Driver" libraries that add runtime ability to extend the capabilities of a class via additional driver objects
  * @property Email $email                       Permits email to be sent using Mail, Sendmail, or SMTP.
@@ -130,7 +126,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Form_validation $form_validation Form Validation Class
  * @property CI_FTP $ftp                        FTP Class
  * @property CI_Image_lib $image_lib            Image Manipulation class
- * @property CI_Migration $migration            All migrations should implement this, forces up() and down() and gives access to the CI super-global.
+ * @property Migration $migration               All migrations should implement this, forces up() and down() and gives access to the CI super-global.
  * @property CI_Pagination $pagination          Pagination Class
  * @property CI_Parser $parser                  Parser Class
  * @property Toolbar $toolbar                   This class enables you to display benchmark, query, and other data in order to help with debugging and optimization.

@@ -454,23 +454,23 @@
         },
         {
             "name": "fusion-cms/mx",
-            "version": "2.0.3",
-            "version_normalized": "2.0.3.0",
+            "version": "2.0.4",
+            "version_normalized": "2.0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FusionWowCMS/MX.git",
-                "reference": "a26dcf472a9a13200e6907f193724596c57e37b3"
+                "reference": "8213c8b0d0cb16aa78e28a7cc616a45e6bf4bede"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FusionWowCMS/MX/zipball/a26dcf472a9a13200e6907f193724596c57e37b3",
-                "reference": "a26dcf472a9a13200e6907f193724596c57e37b3",
+                "url": "https://api.github.com/repos/FusionWowCMS/MX/zipball/8213c8b0d0cb16aa78e28a7cc616a45e6bf4bede",
+                "reference": "8213c8b0d0cb16aa78e28a7cc616a45e6bf4bede",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1.0"
             },
-            "time": "2024-03-10T12:27:18+00:00",
+            "time": "2024-03-16T14:23:24+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -495,7 +495,7 @@
             "description": "Modular Extensions - HMVC",
             "support": {
                 "issues": "https://github.com/FusionWowCMS/MX/issues",
-                "source": "https://github.com/FusionWowCMS/MX/tree/2.0.3"
+                "source": "https://github.com/FusionWowCMS/MX/tree/2.0.4"
             },
             "install-path": "../fusion-cms/mx"
         },

@@ -2,6 +2,8 @@
 
 use MX\CI;
 use CI_Loader;
+use App\Config\Database;
+use CodeIgniter\Database\CI_DB;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -132,22 +134,25 @@ class MX_Loader extends CI_Loader
      *
      * @return [type]                  [description]
      */
-    public function database($params = '', $return = false, $query_builder = null)
+    public function database($params = '', $return = false)
     {
-        if (
-            $return === false && $query_builder === null &&
-            isset(CI::$APP->db) && is_object(CI::$APP->db) && ! empty(CI::$APP->db->conn_id)
-        ) {
+        // Do we even need to load the database class?
+        if ($return === false && isset(CI::$APP->db))
+        {
             return false;
         }
 
-        require_once BASEPATH . 'database/DB' . EXT;
-
-        if ($return === true) {
-            return DB($params, $query_builder);
+        if ($params === '') {
+            $params = null;
         }
 
-        CI::$APP->db = DB($params, $query_builder);
+        $connection = Database::connect($params, false);
+
+        if ($return) {
+            return $connection;
+        }
+
+        CI::$APP->db = $connection;
 
         return $this;
     }
@@ -641,7 +646,7 @@ class MX_Loader extends CI_Loader
 
         /* autoload database & libraries */
         if (isset($autoload['libraries'])) {
-            if (!$db = CI::$APP->config->item('database') && in_array('database', $autoload['libraries'])) {
+            if (in_array('database', $autoload['libraries'])) {
                 $this->database();
 
                 $autoload['libraries'] = array_diff($autoload['libraries'], array('database'));
