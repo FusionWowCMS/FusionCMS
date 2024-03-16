@@ -193,7 +193,7 @@ class Crypto
                 'SELECT TRIM("\0" FROM %s) FROM %s WHERE username = ?',
                 column('account', 'salt'),
                 table('account')
-            ), [$username])->row_array()
+            ), [$username])->getRowArray()
         ) {
             $salt = current($saltUser); // get the stored salt
 
