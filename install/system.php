@@ -199,45 +199,59 @@ class Install
 
 		$config->save();
 
-		$db = fopen("../application/config/database.php", "w");
+		$db = fopen("../application/config/Database.php", "w");
 
 		$raw = '<?php
-$active_group = "cms";
-$query_builder = true;
 
-$db["cms"]["hostname"] = "'.$_POST['cms_hostname'].'";
-$db["cms"]["username"] = "'.$_POST['cms_username'].'";
-$db["cms"]["password"] = "'.$_POST['cms_password'].'";
-$db["cms"]["database"] = "'.$_POST['cms_database'].'";
-$db["cms"]["port"] 	   = '.(is_numeric($_POST['cms_port']) ? $_POST['cms_port'] : self::MYSQL_DEFAULT_PORT).';
-$db["cms"]["dbdriver"] = "mysqli";
-$db["cms"]["dbprefix"] = "";
-$db["cms"]["pconnect"] = false;
-$db["cms"]["db_debug"] = false;
-$db["cms"]["cache_on"] = false;
-$db["cms"]["cachedir"] = "";
-$db["cms"]["char_set"] = "utf8mb4";
-$db["cms"]["dbcollat"] = "utf8mb4_general_ci";
-$db["cms"]["swap_pre"] = "";
-$db["cms"]["autoinit"] = true;
-$db["cms"]["stricton"] = false;
+namespace App\Config;
 
-$db["account"]["hostname"] = "'.$_POST['realmd_hostname'].'";
-$db["account"]["username"] = "'.$_POST['realmd_username'].'";
-$db["account"]["password"] = "'.$_POST['realmd_password'].'";
-$db["account"]["database"] = "'.$_POST['realmd_database'].'";
-$db["account"]["port"]     = '.(is_numeric($_POST['realmd_port']) ? $_POST['realmd_port'] : self::MYSQL_DEFAULT_PORT).';
-$db["account"]["dbdriver"] = "mysqli";
-$db["account"]["dbprefix"] = "";
-$db["account"]["pconnect"] = false;
-$db["account"]["db_debug"] = false;
-$db["account"]["cache_on"] = false;
-$db["account"]["cachedir"] = "";
-$db["account"]["char_set"] = "utf8";
-$db["account"]["dbcollat"] = "utf8_general_ci";
-$db["account"]["swap_pre"] = "";
-$db["account"]["autoinit"] = false;
-$db["account"]["stricton"] = false;';
+use CodeIgniter\Database\Config;
+
+class Database extends Config
+{
+    public string $defaultGroup = "cms";
+
+    public array $cms = [
+        "DSN" => "",
+        "hostname" => "'.$_POST['cms_hostname'].'",
+        "username" => "'.$_POST['cms_username'].'",
+        "password" => "'.$_POST['cms_password'].'",
+        "database" => "'.$_POST['cms_database'].'",
+        "DBDriver" => "MySQLi",
+        "DBPrefix" => "",
+        "pConnect" => false,
+        "DBDebug" => true,
+        "charset" => "utf8mb4",
+        "DBCollat" => "utf8mb4_general_ci",
+        "swapPre" => "",
+        "encrypt" => false,
+        "compress" => false,
+        "strictOn" => false,
+        "failover" => [],
+        "port" => '.(is_numeric($_POST['cms_port']) ? $_POST['cms_port'] : self::MYSQL_DEFAULT_PORT).',
+    ];
+
+    public array $account = [
+        "DSN" => "",
+        "hostname" => "'.$_POST['realmd_hostname'].'",
+        "username" => "'.$_POST['realmd_username'].'",
+        "password" => "'.$_POST['realmd_password'].'",
+        "database" => "'.$_POST['realmd_database'].'",
+        "DBDriver" => "MySQLi",
+        "DBPrefix" => "",
+        "pConnect" => false,
+        "DBDebug" => false,
+        "charset" => "utf8",
+        "DBCollat" => "utf8_general_ci",
+        "swapPre" => "",
+        "encrypt" => false,
+        "compress" => false,
+        "strictOn" => false,
+        "failover" => [],
+        "port" => '.(is_numeric($_POST['realmd_port']) ? $_POST['realmd_port'] : self::MYSQL_DEFAULT_PORT).',
+    ];
+}
+';
 
 		fwrite($db, $raw);
 
