@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -11,8 +13,11 @@
 
 namespace CodeIgniter\Session\Handlers;
 
-use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Database\BaseBuilder;
+use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\Session\Exceptions\SessionException;
+use App\Config\Database;
+use App\Config\Session as SessionConfig;
 use MX\CI;
 use ReturnTypeWillChange;
 
@@ -40,6 +45,7 @@ class DatabaseHandler extends BaseHandler
     /**
      * The DB Connection instance.
      *
+     * @var BaseConnection
      */
     protected $db;
 
@@ -65,14 +71,12 @@ class DatabaseHandler extends BaseHandler
     /**
      * @throws SessionException
      */
-    public function __construct(BaseConfig $config, string $ipAddress)
+    public function __construct(SessionConfig $config, string $ipAddress)
     {
         parent::__construct($config, $ipAddress);
 
-        $CI =& get_instance();
-        isset($CI->db) OR $CI->load->database();
-        $this->db = $CI->db;
-
+        // Store Session configurations
+        $this->DBGroup = $config->DBGroup ?? config(Database::class)->defaultGroup;
         // Add sessionCookieName for multiple session cookies.
         $this->idPrefix = $config->cookieName . ':';
 
@@ -81,6 +85,7 @@ class DatabaseHandler extends BaseHandler
             throw SessionException::forMissingDatabaseTable();
         }
 
+        $this->db       = Database::connect($this->DBGroup);
         $this->platform = $this->db->getPlatform();
     }
 
@@ -92,7 +97,7 @@ class DatabaseHandler extends BaseHandler
      */
     public function open($path, $name): bool
     {
-        if (empty($this->db->conn_id) && ! $this->db->db_connect()) {
+        if (empty($this->db->connID)) {
             $this->db->initialize();
         }
 
@@ -120,19 +125,17 @@ class DatabaseHandler extends BaseHandler
             $this->sessionID = $id;
         }
 
-        // Prevent previous QB calls from messing with our queries
-        $this->db->reset_query();
-
-        $this->db
-            ->select('data')
-            ->from($this->table)
-            ->where('id', $this->idPrefix . $id);
+        $builder = $this->db->table($this->table)->where('id', $this->idPrefix . $id);
 
         if ($this->matchIP) {
-            $this->db->where('ip_address', $this->ipAddress);
+            $builder = $builder->where('ip_address', $this->ipAddress);
         }
 
-        if ( ! ($result = $this->db->get()) OR ($result = $result->row()) === NULL) {
+        $this->setSelect($builder);
+
+        $result = $builder->get()->getRow();
+
+        if ($result === null) {
             // PHP7 will reuse the same SessionHandler object after
             // ID regeneration, so we need to explicitly set this to
             // FALSE instead of relying on the default ...
@@ -148,6 +151,14 @@ class DatabaseHandler extends BaseHandler
         $this->rowExists   = true;
 
         return $result;
+    }
+
+    /**
+     * Sets SELECT clause
+     */
+    protected function setSelect(BaseBuilder $builder)
+    {
+        $builder->select('data');
     }
 
     /**
@@ -170,9 +181,6 @@ class DatabaseHandler extends BaseHandler
      */
     public function write($id, $data): bool
     {
-        // Prevent previous QB calls from messing with our queries
-        $this->db->reset_query();
-
         if ($this->lock === false) {
             return $this->fail();
         }
@@ -187,12 +195,10 @@ class DatabaseHandler extends BaseHandler
                 'id'         => $this->idPrefix . $id,
                 'ip_address' => $this->ipAddress,
                 'user_agent' => substr(CI::$APP->input->user_agent() ?? 'unknown', 0, 120),
-                'timestamp'  => time(),
                 'data'       => $this->prepareData($data),
             ];
 
-
-            if (! $this->db->insert($this->table, $insertData)) {
+            if (! $this->db->table($this->table)->set('timestamp', 'now()', false)->insert($insertData)) {
                 return $this->fail();
             }
 
@@ -202,19 +208,19 @@ class DatabaseHandler extends BaseHandler
             return true;
         }
 
-        $this->db->where('id', $this->idPrefix . $id);
+        $builder = $this->db->table($this->table)->where('id', $this->idPrefix . $id);
 
         if ($this->matchIP) {
-            $this->db->where('ip_address', $this->ipAddress);
+            $builder = $builder->where('ip_address', $this->ipAddress);
         }
 
-        $updateData = ['timestamp' => time()];
+        $updateData = [];
 
         if ($this->fingerprint !== md5($data)) {
             $updateData['data'] = $this->prepareData($data);
         }
 
-        if (! $this->db->update($this->table, $updateData)) {
+        if (! $builder->set('timestamp', 'now()', false)->update($updateData)) {
             return $this->fail();
         }
 
@@ -247,16 +253,13 @@ class DatabaseHandler extends BaseHandler
     public function destroy($id): bool
     {
         if ($this->lock) {
-            // Prevent previous QB calls from messing with our queries
-            $this->db->reset_query();
-
-            $this->db->where('id', $this->idPrefix . $id);
+            $builder = $this->db->table($this->table)->where('id', $this->idPrefix . $id);
 
             if ($this->matchIP) {
-                $this->db->where('ip_address', $this->ipAddress);
+                $builder = $builder->where('ip_address', $this->ipAddress);
             }
 
-            if (! $this->db->delete($this->table)) {
+            if (! $builder->delete()) {
                 return $this->fail();
             }
         }
@@ -281,12 +284,14 @@ class DatabaseHandler extends BaseHandler
     #[ReturnTypeWillChange]
     public function gc($max_lifetime)
     {
-        // Prevent previous QB calls from messing with our queries
-        $this->db->reset_query();
+        $separator = ' ';
+        $interval  = implode($separator, ['', "{$max_lifetime} second", '']);
 
-        return ($this->db->delete($this->table, 'timestamp < '. (time() - $max_lifetime)))
-            ? 1
-            : $this->fail();
+        return $this->db->table($this->table)->where(
+            'timestamp <',
+            "now() - INTERVAL {$interval}",
+            false
+        )->delete() ? 1 : $this->fail();
     }
 
     /**

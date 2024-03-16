@@ -1,5 +1,7 @@
 <?php
 
+use App\Config\Database;
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -17,13 +19,13 @@ if (!defined('BASEPATH')) {
 
 class Dbbackup
 {
-    private $CI;
+    private Controller $CI;
+
     public function __construct()
     {
         $this->CI = &get_instance();
         $this->CI->load->helper(['file', 'text', 'form', 'string']);
         $this->CI->load->model('cms_model');
-        $this->CI->load->dbutil();
 
         $this->CI->load->config('backups');
 
@@ -45,10 +47,7 @@ class Dbbackup
         $backups_time = $this->CI->config->item('backups_time');
 
         $date_ref = date("Y-m-d H:i:s", strtotime('-' . $backups_interval . $backups_time));
-        $this->CI->db->where('created_date >', $date_ref);
-        $this->CI->db->order_by('created_date', 'DESC');
-        $this->CI->db->limit(1);
-        $row = $this->CI->db->get('backup')->row();
+        $row = $this->CI->db->table('backup')->where('created_date >', $date_ref)->orderBy('created_date', 'DESC')->limit(1)->get()->getRow();
 
         if (!$row || $trigger) {
             if (!is_dir($db_backup_path) && $trigger) {
@@ -63,37 +62,36 @@ class Dbbackup
 
             $date = date("Y-m-d H:i:s");
             $file_name = date("Y_m_d_H_i_s");
-            $prefs = array(
-                'format' => 'zip',
-                'filename' => $file_name,
-                'add_drop' => true,
-                'add_insert' => true,
-                'foreign_key_checks' => false,
-                'newline' => "\n"
-            );
+
+            $prefs = [
+                'filename'           => $file_name,
+                'format'             => 'zip', // gzip, zip, txt
+                'add_drop'           => true,
+                'add_insert'         => true,
+                'newline'            => "\n",
+                'foreign_key_checks' => true,
+            ];
+
             //Backup your entire database
-            $backup = $this->CI->dbutil->backup($prefs);
+            $backup = Database::utils()->backup($prefs);
             $file = $db_backup_path . $file_name . '.zip';
 
             if (write_file($file, $backup)) {
-                $data = array(
+                $data = [
                     'backup_name' => $file_name,
                     'created_date' => $date
-                );
+                ];
 
-                $this->CI->db->insert('backup', $data);
+                $this->CI->db->table('backup')->insert($data);
 
-                $n_row = $this->CI->db->count_all('backup');
+                $n_row = $this->CI->db->table('backup')->countAll();
 
                 if ($n_row > $max_files) {
-                    $this->CI->db->limit($n_row - $max_files);
-                    $this->CI->db->order_by('created_date', 'ASC');
-                    $result = $this->CI->db->get('backup')->result();
+                    $result = $this->CI->db->table('backup')->orderBy('created_date', 'ASC')->limit($n_row - $max_files)->get()->getResult();
 
                     foreach ($result as $to_delete) {
                         //delete row from db table
-                        $this->CI->db->where('id', $to_delete->id);
-                        $this->CI->db->delete('backup');
+                        $this->CI->db->table('backup')->where('id', $to_delete->id)->delete();
 
                         // delete file from backup directory
                         $file_del = $db_backup_path . $to_delete->backup_name . '.zip';

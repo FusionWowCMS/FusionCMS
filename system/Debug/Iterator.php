@@ -99,7 +99,7 @@ class Iterator
             return 'No results to display.';
         }
 
-        helper('number');
+        get_instance()->load->helper('number');
 
         // Template
         $tpl = '<table>

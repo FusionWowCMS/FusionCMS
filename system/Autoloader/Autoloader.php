@@ -161,6 +161,23 @@ class Autoloader
         return $this;
     }
 
+    /**
+     * Get namespaces with prefixes as keys and paths as values.
+     *
+     * If a prefix param is set, returns only paths to the given prefix.
+     *
+     * @return         array<string, list<string>>|list<string>
+     * @phpstan-return ($prefix is null ? array<string, list<string>> : list<string>)
+     */
+    public function getNamespace(?string $prefix = null)
+    {
+        if ($prefix === null) {
+            return $this->prefixes;
+        }
+
+        return $this->prefixes[trim($prefix, '\\')] ?? [];
+    }
+
     //--------------------------------------------------------------------
 
     /**

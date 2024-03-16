@@ -9,11 +9,10 @@ class Store_model extends CI_Model
 									INNER JOIN store_groups ON store_items.group = store_groups.id
 									WHERE store_items.realm = ?
 									GROUP BY store_items.id
-									ORDER BY store_groups.orderNumber ASC, store_items.group ASC, store_items.id ASC;", array($realm));
+									ORDER BY store_groups.orderNumber ASC, store_items.group ASC, store_items.id ASC;", [$realm]);
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            return $result;
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -21,11 +20,10 @@ class Store_model extends CI_Model
 
     public function getItem($id)
     {
-        $this->db->select('*')->from('store_items')->where(array('id' => $id))->order_by('group', 'ASC');
-        $query = $this->db->get();
+        $query = $this->db->table('store_items')->select()->where(['id' => $id])->orderBy('group', 'ASC')->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0];
         } else {
@@ -35,11 +33,10 @@ class Store_model extends CI_Model
 
     public function getGroupTitle($id)
     {
-        $this->db->select('*')->from('store_groups')->where(array('id' => $id));
-        $query = $this->db->get();
+        $query = $this->db->table('store_groups')->select()->where(['id' => $id])->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0]['title'];
         } else {
@@ -49,11 +46,10 @@ class Store_model extends CI_Model
 
     public function getGroupId($title)
     {
-        $this->db->select('*')->from('store_groups')->where(array('title' => $title));
-        $query = $this->db->get();
+        $query = $this->db->table('store_groups')->select()->where(['title' => $title])->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0]['id'];
         } else {
@@ -63,33 +59,33 @@ class Store_model extends CI_Model
 
     public function logOrder($vp, $dp, $cart)
     {
-        $data = array(
-            'vp_cost' => $vp,
-            'dp_cost' => $dp,
-            'cart' => json_encode($cart),
+        $data = [
+            'vp_cost'   => $vp,
+            'dp_cost'   => $dp,
+            'cart'      => json_encode($cart),
             'completed' => 0,
-            'user_id' => $this->user->getId(),
+            'user_id'   => $this->user->getId(),
             'timestamp' => time()
-        );
+        ];
 
-        $this->db->insert('order_log', $data);
+        $this->db->table('order_log')->insert($data);
     }
 
     public function completeOrder()
     {
-        $this->db->query("UPDATE order_log SET completed='1' WHERE user_id=? ORDER BY id DESC LIMIT 1", array($this->user->getId()));
+        $this->db->query("UPDATE order_log SET completed = '1' WHERE user_id = ? ORDER BY id DESC LIMIT 1", [$this->user->getId()]);
     }
 
     public function getOrders($completed)
     {
         if ($completed) {
-            $query = $this->db->query("SELECT * FROM order_log WHERE completed=? ORDER BY id DESC LIMIT 10", array($completed));
+            $query = $this->db->query("SELECT * FROM order_log WHERE completed = ? ORDER BY id DESC LIMIT 10", [$completed]);
         } else {
-            $query = $this->db->query("SELECT * FROM order_log WHERE completed=? AND `timestamp` > ? ORDER BY id DESC", array($completed, time() - 60 * 60 * 24 * 7));
+            $query = $this->db->query("SELECT * FROM order_log WHERE completed = ? AND `timestamp` > ? ORDER BY id DESC", [$completed, time() - 60 * 60 * 24 * 7]);
         }
 
-        if ($query->num_rows()) {
-            return $query->result_array();
+        if ($query->getNumRows()) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -97,10 +93,10 @@ class Store_model extends CI_Model
 
     public function getOrder($id)
     {
-        $query = $this->db->query("SELECT * FROM order_log WHERE id=?", array($id));
+        $query = $this->db->query("SELECT * FROM order_log WHERE id = ?", [$id]);
 
-        if ($query->num_rows()) {
-            $row = $query->result_array();
+        if ($query->getNumRows()) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {
@@ -110,10 +106,10 @@ class Store_model extends CI_Model
 
     public function findByUserId($type, $string)
     {
-        $query = $this->db->query("SELECT * FROM order_log WHERE `user_id`=? AND `completed`=?", array($string, $type));
+        $query = $this->db->query("SELECT * FROM order_log WHERE `user_id` = ? AND `completed` = ?", [$string, $type]);
 
-        if ($query->num_rows()) {
-            $row = $query->result_array();
+        if ($query->getNumRows()) {
+            $row = $query->getResultArray();
 
             return $row;
         } else {
@@ -123,11 +119,11 @@ class Store_model extends CI_Model
 
     public function refund($user_id, $vp, $dp)
     {
-        $this->db->query("UPDATE account_data SET vp = vp + ?, dp = dp + ? WHERE id=?", array($vp, $dp, $user_id));
+        $this->db->query("UPDATE account_data SET vp = vp + ?, dp = dp + ? WHERE id = ?", [$vp, $dp, $user_id]);
     }
 
     public function deleteLog($id)
     {
-        $this->db->query("DELETE FROM order_log WHERE id=?", array($id));
+        $this->db->query("DELETE FROM order_log WHERE id = ?", [$id]);
     }
 }

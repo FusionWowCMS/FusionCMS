@@ -1,7 +1,10 @@
 <?php namespace CodeIgniter\Debug\Toolbar\Collectors;
 
+use App\Config\Database;
 use CI_DB;
 use CI_Model;
+use CodeIgniter\Database\Query;
+use CodeIgniter\I18n\Time;
 
 class DB extends BaseCollector
 {
@@ -30,11 +33,60 @@ class DB extends BaseCollector
     protected $title = 'Databases';
 
     /**
-     * Number of queries to show before making the additional queries togglable
+     * Array of database connections.
      *
-     * @var int
+     * @var array
      */
-    protected int $query_toggle_count = 25;
+    protected $connections;
+
+    /**
+     * The query instances that have been collected
+     * through the DBQuery Event.
+     *
+     * @var array
+     */
+    protected static $queries = [];
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->getConnections();
+    }
+
+    /**
+     * The static method used during Events to collect
+     * data.
+     *
+     * @internal
+     *
+     * @return void
+     */
+    public static function collect(Query $query)
+    {
+        // Provide default in case it's not set
+        $max = 100;
+
+        if (count(static::$queries) < $max) {
+            $queryString = $query->getQuery();
+
+            $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+
+            if (! is_cli()) {
+                // when called in the browser, the first two trace arrays
+                // are from the DB event trigger, which are unneeded
+                $backtrace = array_slice($backtrace, 2);
+            }
+
+            static::$queries[] = [
+                'query'     => $query,
+                'string'    => $queryString,
+                'duplicate' => in_array($queryString, array_column(static::$queries, 'string', null), true),
+                'trace'     => $backtrace,
+            ];
+        }
+    }
 
     //--------------------------------------------------------------------
 
@@ -46,84 +98,87 @@ class DB extends BaseCollector
      */
     public function display(): string
     {
-        $CI =& get_instance();
+        $output = '<table><thead><tr><th class="debug-bar-width6r">Time</th><th>Query String</th></tr></thead><tbody>';
+        $data            = [];
+        $data['queries'] = array_map(static function (array $query) {
+            $isDuplicate = $query['duplicate'] === true;
 
-        $output = "<table><tbody>";
+            $firstNonSystemLine = '';
 
-        $dbs = [];
+            foreach ($query['trace'] as $index => &$line) {
+                // simplify file and line
+                if (isset($line['file'])) {
+                    $line['file'] = clean_path($line['file']) . ':' . $line['line'];
+                    unset($line['line']);
+                } else {
+                    $line['file'] = '[internal function]';
+                }
 
-        // Let's determine which databases are currently connected to
-        foreach (get_object_vars($CI) as $name => $object)
+                // find the first trace line that does not originate from `system/`
+                if ($firstNonSystemLine === '' && !str_contains($line['file'], 'BASEPATH')) {
+                    $firstNonSystemLine = $line['file'];
+                }
+
+                // simplify function call
+                if (isset($line['class'])) {
+                    $line['function'] = $line['class'] . $line['type'] . $line['function'];
+                    unset($line['class'], $line['type']);
+                }
+
+                if (strrpos($line['function'], '{closure}') === false) {
+                    $line['function'] .= '()';
+                }
+
+                $line['function'] = str_repeat(chr(0xC2) . chr(0xA0), 8) . $line['function'];
+
+                // add index numbering padded with nonbreaking space
+                $indexPadded = str_pad(sprintf('%d', $index + 1), 3, ' ', STR_PAD_LEFT);
+                $indexPadded = preg_replace('/\s/', chr(0xC2) . chr(0xA0), $indexPadded);
+
+                $line['index'] = $indexPadded . str_repeat(chr(0xC2) . chr(0xA0), 4);
+            }
+
+            return [
+                'hover'      => $isDuplicate ? 'This query was called more than once.' : '',
+                'class'      => $isDuplicate ? 'duplicate' : '',
+                'duration'   => ((float) $query['query']->getDuration(5) * 1000) . ' ms',
+                'sql'        => $query['query']->debugToolbarDisplay(),
+                'trace'      => $query['trace'],
+                'trace-file' => $firstNonSystemLine,
+                'qid'        => md5($query['query'] . Time::now()->format('0.u00 U')),
+            ];
+        }, static::$queries);
+
+
+        foreach ($data['queries'] as $val)
         {
-            if (is_object($object))
+            $output .= '<tr class="'.$val['class'].'" title="'.$val['hover'].'" data-toggle="'.$val['qid'].'-trace">
+                            <td class="narrow">'.$val['duration'].'</td>
+                            <td>'.$val['sql'].'</td>
+                            <td class="debug-bar-alignRight"><strong>'.$val['trace-file'].'</strong></td>
+                        </tr>';
+
+            foreach ($val['trace'] as $trc)
             {
-                if ($object instanceof CI_DB)
-                {
-                    $dbs[get_class($CI).':$'.$name] = $object;
-                }
-                elseif ($object instanceof CI_Model)
-                {
-                    foreach (get_object_vars($object) as $mname => $mobject)
-                    {
-                        if ($mobject instanceof CI_DB)
-                        {
-                            $dbs[get_class($object).':$'.$mname] = $mobject;
-                        }
-                    }
-                }
+                $output .= '<tr class="muted debug-bar-ndisplay" id="'.$val['qid'].'-trace">
+                            <td></td>
+                            <td colspan="2">
+                                '.$trc['index'].'<strong>'.$trc['file'].'</strong><br/>
+                                '.$trc['function'].'<br/><br/>
+                            </td>
+                        </tr>';
             }
         }
-
-        if (count($dbs) === 0)
-        {
-            return '<tr><td>' .$CI->lang->line('profiler_no_db') ."</td></tr>";
-        }
-
-        // Load the text helper so we can highlight the SQL
-        $CI->load->helper('text');
-
-        // Key words we want bolded
-        $highlight = array('SELECT', 'DISTINCT', 'FROM', 'WHERE', 'AND', 'LEFT&nbsp;JOIN', 'ORDER&nbsp;BY', 'GROUP&nbsp;BY', 'LIMIT', 'INSERT', 'INTO', 'VALUES', 'UPDATE', 'OR&nbsp;', 'HAVING', 'OFFSET', 'NOT&nbsp;IN', 'IN', 'LIKE', 'NOT&nbsp;LIKE', 'COUNT', 'MAX', 'MIN', 'ON', 'AS', 'AVG', 'SUM', '(', ')');
-
-        $count = 0;
-
-        foreach ($dbs as $name => $db)
-        {
-            ++$count;
-
-            $hide_queries = (count($db->queries) > $this->query_toggle_count) ? ' display:none' : '';
-            $total_time = number_format(array_sum($db->query_times), 4).' '.$CI->lang->line('profiler_seconds');
-
-            $output .= '<legend>'.$CI->lang->line('profiler_database')
-                .': '.$db->database.' ('.$name.') '.$CI->lang->line('profiler_queries')
-                .': '.count($db->queries).' ('.$total_time.')'."</legend>\n\n\n";
-
-            if (count($db->queries) === 0)
-            {
-                $output .= '<tr><td>' .$CI->lang->line('profiler_no_queries') . "</td></tr>\n";
-            }
-            else
-            {
-                foreach ($db->queries as $key => $val)
-                {
-                    $time = number_format($db->query_times[$key], 4);
-                    $val = highlight_code($val);
-
-                    foreach ($highlight as $bold)
-                    {
-                        $val = str_replace($bold, '<strong>'.$bold.'</strong>', $val);
-                    }
-
-                    $output .= '<tr><td>'
-                        .$time.'</td><td>'
-                        .$val."</td></tr>\n";
-                }
-            }
-        }
-
         $output .= "</tbody></table>";
-
         return $output;
+    }
+
+    /**
+     * Gets the connections from the database config
+     */
+    private function getConnections(): void
+    {
+        $this->connections = Database::getConnections();
     }
 
     //--------------------------------------------------------------------

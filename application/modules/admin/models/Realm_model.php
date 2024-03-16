@@ -4,12 +4,12 @@ class Realm_model extends CI_Model
 {
     public function delete($id)
     {
-        $this->db->query("DELETE FROM realms WHERE id=?", array($id));
+        $this->db->query("DELETE FROM realms WHERE id=?", [$id]);
     }
 
     public function create($data)
     {
-        $this->db->insert("realms", $data);
+        $this->db->table('realms')->insert($data);
 
         if ($this->db->error()['message']) {
             die($this->db->error()['message']);
@@ -17,8 +17,8 @@ class Realm_model extends CI_Model
 
         $query = $this->db->query("SELECT id FROM realms ORDER BY id DESC LIMIT 1");
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['id'];
         }
@@ -26,7 +26,6 @@ class Realm_model extends CI_Model
 
     public function save($id, $data)
     {
-        $this->db->where('id', $id);
-        $this->db->update("realms", $data);
+        $this->db->table('realms')->where('id', $id)->update($data);
     }
 }

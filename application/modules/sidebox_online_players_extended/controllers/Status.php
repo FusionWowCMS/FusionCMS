@@ -1,11 +1,10 @@
 <?php
 
+use CodeIgniter\Database\BaseConnection;
 use MX\MX_Controller;
 
 class Status extends MX_Controller
 {
-    private $connection = null;
-
     public function __construct()
     {
         parent::__construct();
@@ -41,7 +40,7 @@ class Status extends MX_Controller
         $uptimes = $this->flush_uptime($realms);
 
         // Prepare data
-        $data = array(
+        $data = [
             "module" => "sidebox_online_players_extended",
             "realms" => $realms,
             "uptimes" => $uptimes,
@@ -49,12 +48,10 @@ class Status extends MX_Controller
             "realmlist" => $this->config->item('realmlist'),
             "show_uptime" => $this->config->item('show_uptime'),
             "bar_height" => $this->config->item('horizontal_bar_height'),
-        );
+        ];
 
         // Load the template file and format
-        $out = $this->template->loadPage("status.tpl", $data);
-
-        return $out;
+        return $this->template->loadPage("status.tpl", $data);
     }
 
     private function flush_uptime($realms)
@@ -68,10 +65,9 @@ class Status extends MX_Controller
 
     private function uptime($realm_id)
     {
-        $this->connection = $this->load->database("account", true);
-        $this->connection->where('realmid', $realm_id);
-        $query = $this->connection->get('uptime');
-        $last = $query->last_row('array');
+        $connection = $this->load->database("account", true);
+        $query = $connection->table('uptime')->where('realmid', $realm_id)->get();
+        $last = $query->getLastRow('array');
         if (isset($last)) {
             $first_date = new DateTime(date('Y-m-d h:i:s', $last['starttime']));
             $second_date = new DateTime(date('Y-m-d h:i:s'));

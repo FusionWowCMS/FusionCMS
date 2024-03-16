@@ -1,8 +1,10 @@
 <?php
 
+use CodeIgniter\Database\BaseConnection;
+
 class Gm_model extends CI_Model
 {
-    private $connection;
+    private BaseConnection $connection;
 
     /**
      * Get all tickets
@@ -37,9 +39,9 @@ class Gm_model extends CI_Model
                 }
             }
 
-            if($query->num_rows() > 0)
+            if($query->getNumRows() > 0)
             {
-                return $query->result_array();
+                return $query->getResultArray();
             }
             else 
             {
@@ -76,9 +78,9 @@ class Gm_model extends CI_Model
                 }
             }
 
-            if($query->num_rows() > 0)
+            if($query->getNumRows() > 0)
             {
-                $result = $query->result_array();
+                $result = $query->getResultArray();
                 return $result[0];
             }
             else 
@@ -105,12 +107,12 @@ class Gm_model extends CI_Model
 
         if(!$query)
         {
-            die($err = $realmConnection->error());
+            die($realmConnection->error());
         }
 
-        if($query->num_rows() > 0)
+        if($query->getNumRows() > 0)
         {
-            $result = $query->result_array();
+            $result = $query->getResultArray();
             
             if($result[0]['total'])
             {
@@ -137,9 +139,9 @@ class Gm_model extends CI_Model
         if($realmConnection && $accountId)
         {
             $query = $realmConnection->query("SELECT COUNT(*) banCount FROM ".table("account_banned")." WHERE ".column("account_banned", "id")." = ?", [$accountId]);
-            if($query->num_rows() > 0)
+            if($query->getNumRows() > 0)
             {
-                $result = $query->result_array();
+                $result = $query->getResultArray();
                 return $result[0];
             }
             else
@@ -204,8 +206,8 @@ class Gm_model extends CI_Model
     public function getAccountsBan($realmConnection, $status)
     {
         $query = $realmConnection->query("SELECT " . column("account_banned", "id") . " AS id, " . column("account_banned", "bandate") . " AS bandate, " . column("account_banned", "unbandate") . " AS unbandate, " . column("account_banned", "bannedby") . " AS bannedby, " . column("account_banned", "banreason") . " AS banreason, " . column("account_banned", "active") . " AS active FROM " . table("account_banned") . " WHERE " . column("account_banned", "active") . " = ?", [$status]);
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -224,8 +226,8 @@ class Gm_model extends CI_Model
     {
         if ($realmConnection) {
             $query = $realmConnection->query("SELECT " . column("ip_banned", "ip") . " AS ip, " . column("ip_banned", "bandate") . " AS bandate, " . column("ip_banned", "unbandate") . " AS unbandate, " . column("ip_banned", "bannedby") . " AS bannedby, " . column("ip_banned", "banreason") . " AS banreason FROM " . table("ip_banned"));
-            if ($query->num_rows() > 0) {
-                return $query->result_array();
+            if ($query->getNumRows() > 0) {
+                return $query->getResultArray();
             }
         }
 

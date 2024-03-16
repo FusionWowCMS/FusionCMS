@@ -93,9 +93,9 @@ final class ExceptionHandler extends BaseExceptionHandler implements ExceptionHa
 
         // Determine possible directories of error views
         $addPath = ($request instanceof IncomingRequest ? 'html' : 'cli') . DIRECTORY_SEPARATOR;
-        $path    = $this->viewPath . $addPath;
-        $altPath = rtrim(APPPATH.'views', '\\/ ')
-            . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR . $addPath;
+        $path    = str_replace('/', DIRECTORY_SEPARATOR, $this->viewPath . $addPath);
+        $altPath = str_replace('/', DIRECTORY_SEPARATOR, rtrim(APPPATH.'views', '\\/ ')
+            . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR . $addPath);
 
         // Determine the views
         $view    = $this->determineView($exception, $path);

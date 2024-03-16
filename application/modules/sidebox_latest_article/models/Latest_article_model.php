@@ -4,16 +4,14 @@ class latest_article_model extends CI_Model
 {
     public function getArticles($start = 0, $limit = 1)
     {
-        if ($start === true) {
-            $this->db->select('*');
-        } else {
-            $this->db->select('*');
-            $this->db->limit($limit, $start);
+        $builder = $this->db->table('articles')->select('*');
+        if ($start === false) {
+            $builder->limit($limit, $start);
         }
 
-        $this->db->order_by('id', 'desc');
-        $query = $this->db->get('articles');
-        $result = $query->result_array();
+        $builder->orderBy('id', 'desc');
+        $query = $builder->get();
+        $result = $query->getResultArray();
 
         // Did we have any results?
         if ($result) {

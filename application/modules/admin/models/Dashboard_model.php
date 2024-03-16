@@ -16,7 +16,7 @@ class Dashboard_model extends CI_Model
             $query = $this->db->query("SELECT COUNT(DISTINCT ip) as `total` FROM visitor_log WHERE `date` >= ?", array($date));
         }
 
-        $row = $query->result_array();
+        $row = $query->getResultArray();
 
         return $row[0]['total'];
     }
@@ -31,7 +31,7 @@ class Dashboard_model extends CI_Model
 
         $query = $this->db->query("SELECT COUNT(*) as `total` FROM visitor_log WHERE `date` >= ?", array($date));
 
-        $row = $query->result_array();
+        $row = $query->getResultArray();
 
         return $row[0]['total'];
     }
@@ -46,8 +46,8 @@ class Dashboard_model extends CI_Model
 
         $query = $this->db->query("SELECT amount FROM monthly_income WHERE month=?", array($date));
 
-        if ($query->num_rows()) {
-            $row = $query->result_array();
+        if ($query->getNumRows()) {
+            $row = $query->getResultArray();
 
             return $row[0]['amount'];
         } else {
@@ -65,8 +65,8 @@ class Dashboard_model extends CI_Model
 
         $query = $this->db->query("SELECT amount FROM monthly_votes WHERE month=?", array($date));
 
-        if ($query->num_rows()) {
-            $row = $query->result_array();
+        if ($query->getNumRows()) {
+            $row = $query->getResultArray();
 
             return $row[0]['amount'];
         } else {
@@ -89,8 +89,8 @@ class Dashboard_model extends CI_Model
             $query = $this->db->query("SELECT amount FROM daily_signups WHERE `date` >= ? AND `date` < ?", [$date, $next]);
         }
 
-        if ($query->num_rows()) {
-            $row = $query->result_array();
+        if ($query->getNumRows()) {
+            $row = $query->getResultArray();
 
             $total = 0;
 
@@ -114,8 +114,8 @@ class Dashboard_model extends CI_Model
 
         $query = $this->db->query("SELECT amount FROM daily_signups WHERE `date` >= ?", array($date));
 
-        if ($query->num_rows()) {
-            $row = $query->result_array();
+        if ($query->getNumRows()) {
+            $row = $query->getResultArray();
 
             return $row[0]['amount'];
         } else {
@@ -133,8 +133,8 @@ class Dashboard_model extends CI_Model
             
         }
 
-        if ($query->num_rows()) {
-            return $query->result_array();
+        if ($query->getNumRows()) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -145,8 +145,8 @@ class Dashboard_model extends CI_Model
     {
         $query = $this->db->query("SELECT id, name, display_name, enabled, type, creator, description, date_added FROM modules WHERE enabled = 1");
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         }
 
         return null;
@@ -156,8 +156,8 @@ class Dashboard_model extends CI_Model
     {
         $query = $this->db->query("SELECT id, name, display_name, enabled, type, creator, description, date_added FROM modules WHERE enabled = 0");
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         }
 
         return null;
@@ -202,8 +202,8 @@ class Dashboard_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM email_log ORDER BY timestamp DESC");
 
-        if ($query->num_rows()) {
-            return $query->result_array();
+        if ($query->getNumRows()) {
+            return $query->getResultArray();
         } else {
             return false;
         }

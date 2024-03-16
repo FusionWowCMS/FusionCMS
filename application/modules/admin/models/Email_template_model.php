@@ -6,8 +6,8 @@ class Email_template_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM email_templates");
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row;
         } else {
@@ -19,9 +19,9 @@ class Email_template_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM email_templates WHERE id= ? LIMIT 1", array($id));
 
-        if ($query->num_rows() > 0)
+        if ($query->getNumRows() > 0)
 		{
-            $row = $query->result_array();
+            $row = $query->getResultArray();
             return $row[0];
         } else {
             return false;

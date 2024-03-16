@@ -16,22 +16,22 @@ class Logger_model extends CI_Model
             return null;
         }
 
-        $this->db->select('*');
+        $builder = $this->db->table('logs')->select('*');
         if ($logType != "") {
-            $this->db->where('type', $logType);
+            $builder->where('type', $logType);
         }
-        $this->db->order_by('time', 'DESC');
+        $builder->orderBy('time', 'DESC');
         if ($limit > 0 && $offset == 0) {
-            $this->db->limit($limit);
+            $builder->limit($limit);
         }
         if ($limit > 0 && $offset > 0) {
-            $this->db->limit($limit, $offset);
+            $builder->limit($limit, $offset);
         }
-        $query = $this->db->get('logs');
+        $query = $builder->get();
 
         // Get the results
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return null;
         }
@@ -39,11 +39,10 @@ class Logger_model extends CI_Model
 
     public function getLogCount()
     {
-        $this->db->select("COUNT(id) 'count'");
-        $query = $this->db->get('logs');
+        $query = $this->db->table('logs')->select("COUNT(id) 'count'")->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             return $result[0]['count'];
         }
 
@@ -57,22 +56,22 @@ class Logger_model extends CI_Model
 
     public function getGMLogsDb(string $logType = "", int $offset = 0, int $limit = 0): ?array
     {
-        $this->db->select('*');
+        $builder = $this->db->table('gm_log')->select();
         if ($logType != "") {
-            $this->db->where('type', $logType);
+            $builder->where('type', $logType);
         }
-        $this->db->order_by('time', 'DESC');
+        $builder->orderBy('time', 'DESC');
         if ($limit > 0 && $offset == 0) {
-            $this->db->limit($limit);
+            $builder->limit($limit);
         }
         if ($limit > 0 && $offset > 0) {
-            $this->db->limit($limit, $offset);
+            $builder->limit($limit, $offset);
         }
-        $query = $this->db->get('gm_log');
+        $query = $builder->get();
 
         // Get the results
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return null;
         }

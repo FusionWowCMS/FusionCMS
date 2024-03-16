@@ -6,18 +6,18 @@ class Paypal_model extends CI_Model
 {
     public function __construct()
     {
-        $this->load->config("paypal");
-        $this->load->model("donate_model");
+        $this->load->config('paypal');
+        $this->load->model('donate_model');
 
         parent::__construct();
     }
 
     public function getSpecifyDonate($id): array|bool
     {
-        $query = $this->db->select("*")->where("id", $id)->get("paypal_donate");
+        $query = $this->db->table('paypal_donate')->select()->where('id', $id)->get();
 
-        if ($query && $query->num_rows() > 0) {
-            $rows = $query->result_array();
+        if ($query && $query->getNumRows() > 0) {
+            $rows = $query->getResultArray();
             return $rows[0];
         }
 
@@ -26,10 +26,10 @@ class Paypal_model extends CI_Model
 
     public function getDonations(): array|bool
     {
-        $query = $this->db->select("*")->get("paypal_donate");
+        $query = $this->db->table('paypal_donate')->select()->get();
 
-        if ($query && $query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query && $query->getNumRows() > 0) {
+            return $query->getResultArray();
         }
 
         return false;
@@ -37,10 +37,10 @@ class Paypal_model extends CI_Model
 
     public function getStatus($id): array|bool|string
     {
-        $query = $this->db->select("*")->where("payment_id", $id)->get("paypal_logs");
+        $query = $this->db->table('paypal_logs')->select("*")->where('payment_id', $id)->get();
 
-        if ($query && $query->num_rows() > 0) {
-            $rows = $query->result_array();
+        if ($query && $query->getNumRows() > 0) {
+            $rows = $query->getResultArray();
             return $rows[0]["status"];
         }
 
@@ -49,25 +49,24 @@ class Paypal_model extends CI_Model
 
     public function setStatus($id, $status): void
     {
-        $data = array('status' => $status);
-        $this->db->where('payment_id', $id)->update('paypal_logs', $data);
+        $data = ['status' => $status];
+        $this->db->table('paypal_logs')->where('payment_id', $id)->update($data);
     }
 
     public function setError($id, $error): void
     {
-        $data = array('error' => $error);
-        $this->db->where('payment_id', $id)->update('paypal_logs', $data);
+        $data = ['error' => $error];
+        $this->db->table('paypal_logs')->where('payment_id', $id)->update($data);
     }
 
     public function setCanceled($token, $status): void
     {
-        $data = array('status' => $status);
-        $this->db->where('token', $token)->update('paypal_logs', $data);
+        $data = ['status' => $status];
+        $this->db->table('paypal_logs')->where('token', $token)->update($data);
     }
     
     public function update_payment($payment_id, $payment_data): void
     {
-        $this->db->where('payment_id', $payment_id);
-        $this->db->update('paypal_logs', $payment_data);
+        $this->db->table('paypal_logs')->where('payment_id', $payment_id)->update($payment_data);
     }
 }

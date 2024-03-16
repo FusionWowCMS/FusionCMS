@@ -7,18 +7,13 @@
 
 class Login_model extends CI_Model
 {
-    public function __construct()
-    {
-    }
-
     public function getIP($ip)
     {
-        $this->db->where('ip_address', $ip);
-        $query = $this->db->get('failed_logins');
+        $query = $this->db->table('failed_logins')->where('ip_address', $ip)->get();
 
-		if($query->num_rows() > 0)
+		if($query->getNumRows() > 0)
 		{
-            $result = $query->result_array();
+            $result = $query->getResultArray();
             return $result[0];
         } else {
             return 0;
@@ -27,18 +22,16 @@ class Login_model extends CI_Model
 
     public function insertIP($data)
     {
-        $this->db->insert('failed_logins', $data);
+        $this->db->table('failed_logins')->insert($data);
     }
 
     public function updateIP($ip, $data)
     {
-        $this->db->where('ip_address', $ip);
-        $this->db->update('failed_logins', $data);
+        $this->db->table('failed_logins')->where('ip_address', $ip)->update($data);
     }
 
     public function deleteIP($ip)
     {
-        $this->db->where('ip_address', $ip);
-        $this->db->delete('failed_logins');
+        $this->db->table('failed_logins')->where('ip_address', $ip)->delete();
     }
 }

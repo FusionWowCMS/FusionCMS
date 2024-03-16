@@ -35,9 +35,8 @@ class Vote_model extends CI_Model
         } else {
             $query = $this->db->query("SELECT * FROM vote_sites");
 
-            if ($query->num_rows()) {
-                $result = $query->result_array();
-                return $result;
+            if ($query->getNumRows()) {
+                return $query->getResultArray();
             } else {
                 return false;
             }
@@ -57,8 +56,8 @@ class Vote_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM vote_sites WHERE id=?", array($id));
 
-        if ($query->num_rows()) {
-            $result = $query->result_array();
+        if ($query->getNumRows()) {
+            $result = $query->getResultArray();
 
             return $result[0];
         } else {
@@ -73,8 +72,8 @@ class Vote_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM vote_sites WHERE vote_url LIKE '%" . $url . "%'");
 
-        if ($query->num_rows()) {
-            $result = $query->result_array();
+        if ($query->getNumRows()) {
+            $result = $query->getResultArray();
 
             return $result[0];
         } else {
@@ -85,14 +84,14 @@ class Vote_model extends CI_Model
     public function getVoteLog($vote_site_id, $user_ip, $time_back, $ipLock = false)
     {
         if (!$ipLock) {
-            $this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where(array('ip' => $user_ip, 'time > ' => $time_back, 'user_id' => $this->user->getId()));
+            $builder = $this->db->table('vote_log')->select()->where('vote_site_id', $vote_site_id)->where(['ip' => $user_ip, 'time > ' => $time_back, 'user_id' => $this->user->getId()]);
         } else {
-            $this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where(array('user_id' => $this->user->getId(), 'time > ' => $time_back));
+            $builder = $this->db->table('vote_log')->select()->where('vote_site_id', $vote_site_id)->where(['user_id' => $this->user->getId(), 'time > ' => $time_back]);
         }
 
-        $query = $this->db->get();
+        $query = $builder->get();
 
-        if ($query->num_rows() > 0) {
+        if ($query->getNumRows() > 0) {
             //Voted already
             return false;
         } else {
@@ -103,7 +102,7 @@ class Vote_model extends CI_Model
     private function deleteOld()
     {
         $time_back = time() - (24 * 60 * 60);
-        $this->db->query("DELETE FROM vote_log WHERE `time` < (SELECT MAX(hour_interval) * 3600 FROM vote_sites)", array($time_back));
+        $this->db->query("DELETE FROM vote_log WHERE `time` < (SELECT MAX(hour_interval) * 3600 FROM vote_sites)", [$time_back]);
     }
 
     public function getNextTime($canVote, $vote_site_id)
@@ -117,15 +116,15 @@ class Vote_model extends CI_Model
 
             // Check for account or not
             if (!$this->config->item('vote_ip_lock') && !$vote_site['callback_enabled']) {
-                $this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where(array('ip' => $user_ip, 'time > ' => $time_back, 'user_id' => $this->user->getId()));
+                $builder = $this->db->table('vote_log')->select()->where('vote_site_id', $vote_site_id)->where(['ip' => $user_ip, 'time > ' => $time_back, 'user_id' => $this->user->getId()]);
             } else {
-                $this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where(array('user_id' => $this->user->getId(), 'time > ' => $time_back));
+                $builder = $this->db->table('vote_log')->select()->where('vote_site_id', $vote_site_id)->where(['user_id' => $this->user->getId(), 'time > ' => $time_back]);
             }
 
-            $query = $this->db->get();
+            $query = $builder->get();
 
-            if ($query->num_rows()) {
-                $row = $query->result_array();
+            if ($query->getNumRows()) {
+                $row = $query->getResultArray();
 
                 $nextTime = $row[0]['time'] + ($time_interval * 60 * 60);
                 $untilNext = $nextTime - time();
@@ -140,17 +139,17 @@ class Vote_model extends CI_Model
     public function vote_log($user_id, $user_ip, $voteSiteId)
     {
         //Insert into the logs.
-        $data = array(
+        $data = [
             'vote_site_id' => $voteSiteId,
-            'user_id' => $user_id,
-            'ip' => $user_ip,
-            'time' => time()
-        );
+            'user_id'      => $user_id,
+            'ip'           => $user_ip,
+            'time'         => time()
+        ];
 
-        $insert = $this->db->insert('vote_log', $data);
+        $insert = $this->db->table('vote_log')->insert($data);
 
         if ($insert) {
-            $this->db->query("UPDATE account_data SET total_votes = total_votes + 1 WHERE id = ?", array($this->user->getId()));
+            $this->db->query("UPDATE account_data SET total_votes = total_votes + 1 WHERE id = ?", [$this->user->getId()]);
 
             //Return true if we voted
             return true;
@@ -162,7 +161,7 @@ class Vote_model extends CI_Model
     public function updateVp($user_id, $extra_vp)
     {
         //Update account vp
-        $this->db->query("UPDATE account_data SET `vp` = vp + ? WHERE id=?", array($extra_vp, $user_id));
+        $this->db->query("UPDATE account_data SET `vp` = vp + ? WHERE id = ?", [$extra_vp, $user_id]);
 
         //Update the session
         Services::session()->set('vp', $this->user->getVp() + $extra_vp);
@@ -172,14 +171,14 @@ class Vote_model extends CI_Model
 
     private function updateMonthlyVotes()
     {
-        $query = $this->db->query("SELECT COUNT(*) AS `total` FROM monthly_votes WHERE month=?", array(date("Y-m")));
+        $query = $this->db->query("SELECT COUNT(*) AS `total` FROM monthly_votes WHERE month = ?", [date("Y-m")]);
 
-        $row = $query->result_array();
+        $row = $query->getResultArray();
 
         if ($row[0]['total']) {
-            $this->db->query("UPDATE monthly_votes SET amount = amount + 1 WHERE month=?", array(date("Y-m")));
+            $this->db->query("UPDATE monthly_votes SET amount = amount + 1 WHERE month=?", [date("Y-m")]);
         } else {
-            $this->db->query("INSERT INTO monthly_votes(month, amount) VALUES(?, ?)", array(date("Y-m"), 1));
+            $this->db->query("INSERT INTO monthly_votes(month, amount) VALUES(?, ?)", [date("Y-m"), 1]);
         }
     }
 
@@ -226,7 +225,7 @@ class Vote_model extends CI_Model
 
         $query = $this->db->query($sql, array($vote_site_id, $time_back));
 
-        if ($query->num_rows() > 0) {
+        if ($query->getNumRows() > 0) {
             //Voted already
             return false;
         } else {
@@ -236,17 +235,16 @@ class Vote_model extends CI_Model
 
     public function add($data)
     {
-        $this->db->insert("vote_sites", $data);
+        $this->db->table('vote_sites')->insert($data);
     }
 
     public function edit($id, $data)
     {
-        $this->db->where('id', $id);
-        $this->db->update('vote_sites', $data);
+        $this->db->table('vote_sites')->where('id', $id)->update($data);
     }
 
     public function delete($id)
     {
-        $this->db->query("DELETE FROM vote_sites WHERE id=?", array($id));
+        $this->db->query("DELETE FROM vote_sites WHERE id = ?", [$id]);
     }
 }

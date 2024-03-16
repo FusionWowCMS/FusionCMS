@@ -1,8 +1,10 @@
 <?php
 
+use CodeIgniter\Database\BaseConnection;
+
 class Tooltip_model extends CI_Model
 {
-    private $connection;
+    private BaseConnection $connection;
 
     /**
      * Connect to the character database
@@ -22,7 +24,7 @@ class Tooltip_model extends CI_Model
         $this->connect($realmId);
 
         $query = $this->connection->query('SELECT COUNT(*) AS total FROM ' . table('characters', $realmId) . ' WHERE ' . column('characters', 'guid', false, $realmId) . '= ?', [$characterId]);
-        $row = $query->result_array();
+        $row = $query->getResultArray();
 
         if ($row[0]['total'] > 0) {
             return true;
@@ -40,8 +42,8 @@ class Tooltip_model extends CI_Model
 
         $query = $this->connection->query(query('get_character', $realmId), [$characterId]);
 
-        if ($query && $query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query && $query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {
@@ -69,13 +71,13 @@ class Tooltip_model extends CI_Model
             }
         }
 
-        if ($query && $query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query && $query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             $query = $this->connection->query("SELECT " . column("guild", "name", true, $realmId) . " FROM " . table("guild", $realmId) . " WHERE " . column("guild", "guildid", false, $realmId) . "= ?", [$row[0]['guildid']]);
 
-            if ($query && $query->num_rows() > 0) {
-                $row = $query->result_array();
+            if ($query && $query->getNumRows() > 0) {
+                $row = $query->getResultArray();
 
                 return $row[0]['name'];
             } else {
@@ -91,8 +93,8 @@ class Tooltip_model extends CI_Model
                 }
             }
 
-            if ($query2 && $query2->num_rows() > 0) {
-                $row2 = $query2->result_array();
+            if ($query2 && $query2->getNumRows() > 0) {
+                $row2 = $query2->getResultArray();
 
                 return $row2[0]['guildid'];
             } else {

@@ -1,5 +1,6 @@
 <?php namespace Config;
 
+use App\Config\Services;
 use CodeIgniter\Events\Events;
 use MX\CI;
 
@@ -58,5 +59,15 @@ Events::on('post_controller_constructor', static function () {
                 redirect('news');
             }
         }
+    }
+
+    /*
+     * --------------------------------------------------------------------
+     * Debug Toolbar Listeners.
+     * --------------------------------------------------------------------
+     * If you delete, they will no longer be collected.
+     */
+    if (CI::$APP->config->item('enable_profiler') === true && ! is_cli()) {
+        Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\DB::collect');
     }
 });

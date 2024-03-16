@@ -17,7 +17,7 @@ class Activation_model extends CI_Model
             'key' => $key
         ];
 
-        $this->db->insert("pending_accounts", $data);
+        $this->db->table('pending_accounts')->insert($data);
 
         return $key;
     }
@@ -26,9 +26,9 @@ class Activation_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM pending_accounts WHERE `key` = ?", [$key]);
 
-        if($query->num_rows())
+        if($query->getNumRows())
         {
-            $row = $query->result_array();
+            $row = $query->getResultArray();
 
             if(isset($row[0]['password']))
                 $row[0]['password'] = $this->decrypt($row[0]['username'], $row[0]['password']);

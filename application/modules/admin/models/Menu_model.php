@@ -6,8 +6,8 @@ class Menu_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM menu ORDER BY `order` ASC");
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -17,8 +17,8 @@ class Menu_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM menu WHERE id = ?", [$id]);
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             return $result[0];
         } else {
             return false;
@@ -38,8 +38,7 @@ class Menu_model extends CI_Model
 
     public function edit($id, $data)
     {
-        $this->db->where('id', $id);
-        $this->db->update('menu', $data);
+        $this->db->table('menu')->where('id', $id)->update($data);
     }
 
     public function add($name, $link, $type, $side, $dropdown, $parent_id)
@@ -54,10 +53,10 @@ class Menu_model extends CI_Model
             "rank" => $this->cms_model->getAnyOldRank()
         );
 
-        $this->db->insert("menu", $data);
+        $this->db->table('menu')->insert($data);
 
         $query = $this->db->query("SELECT id FROM menu ORDER BY id DESC LIMIT 1");
-        $row = $query->result_array();
+        $row = $query->getResultArray();
 
         $this->db->query("UPDATE menu SET `order` = ? WHERE id = ?", [$row[0]['id'], $row[0]['id']]);
 
@@ -80,8 +79,8 @@ class Menu_model extends CI_Model
     {
         $query = $this->db->query("SELECT `permission` FROM menu WHERE id = ?", [$id]);
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0]['permission'];
         } else {
@@ -91,13 +90,10 @@ class Menu_model extends CI_Model
 
     public function getPages()
     {
-        $this->db->select('id, name, identifier')->from('pages')->order_by('id', 'desc');
-        $query = $this->db->get();
+        $query = $this->db->table('pages')->select('id, name, identifier')->orderBy('id', 'desc')->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-
-            return $result;
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -107,8 +103,8 @@ class Menu_model extends CI_Model
     {
         $query = $this->db->query("SELECT `order` FROM menu WHERE `id`=? LIMIT 1", [$id]);
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['order'];
         } else {
@@ -120,8 +116,8 @@ class Menu_model extends CI_Model
     {
         $query = $this->db->query("SELECT `order`, id FROM menu WHERE `order` < ? ORDER BY `order` DESC LIMIT 1", [$order]);
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {
@@ -133,8 +129,8 @@ class Menu_model extends CI_Model
     {
         $query = $this->db->query("SELECT `order`, id FROM menu WHERE `order` > ? ORDER BY `order` ASC LIMIT 1", [$order]);
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {

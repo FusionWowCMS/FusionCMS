@@ -2,27 +2,24 @@
 
 class Visitor_model extends CI_Model
 {
-    private $db;
-
     public function __construct()
     {
         parent::__construct();
-        $this->db = $this->load->database("cms", true);
     }
 
     public function get()
     {
         $time = time() - 60 * 5;
-        //$query = $this->db->query("SELECT DISTINCT ip_address,user_agent,data,timestamp FROM ci_sessions WHERE timestamp > ? AND data != ''", array($time));
-        
-        $this->db->select('*');
-        $this->db->from('ci_sessions');
-        $this->db->where('timestamp >', $time);
-        $this->db->like('data', 'uid');
-        $query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        $query = $this->db
+                ->table('ci_sessions')
+                ->select()
+                ->where('timestamp >', $time)
+                ->like('data', 'uid')
+                ->get();
+
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -31,10 +28,10 @@ class Visitor_model extends CI_Model
     public function getCount()
     {
         $time = time() - 60 * 5;
-        $query = $this->db->query("SELECT COUNT(DISTINCT ip_address,user_agent,data,timestamp) AS `total` FROM ci_sessions WHERE timestamp > ?", array($time));
+        $query = $this->db->query("SELECT COUNT(DISTINCT ip_address, user_agent, data, timestamp) AS `total` FROM ci_sessions WHERE timestamp > ?", [$time]);
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['total'];
         } else {
@@ -45,10 +42,10 @@ class Visitor_model extends CI_Model
     public function getGuestCount()
     {
         $time = time() - 60 * 5;
-        $query = $this->db->query("SELECT COUNT(DISTINCT ip_address,user_agent,data,timestamp) AS `total` FROM ci_sessions WHERE timestamp > ? AND data NOT LIKE '%uid%'", array($time));
+        $query = $this->db->query("SELECT COUNT(DISTINCT ip_address, user_agent, data, timestamp) AS `total` FROM ci_sessions WHERE timestamp > ? AND data NOT LIKE '%uid%'", [$time]);
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['total'];
         } else {

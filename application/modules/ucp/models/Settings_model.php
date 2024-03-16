@@ -4,15 +4,15 @@ class Settings_model extends CI_Model
 {
     public function saveSettings($values)
     {
-        $this->db->update('account_data', $values, ['id' => $this->user->getId()]);
+        $this->db->table('account_data')->update($values, ['id' => $this->user->getId()]);
     }
 
     public function get_all_avatars()
     {
-		$query = $this->db->get('avatars');
+		$query = $this->db->table('avatars')->get();
 		
-		if($query->num_rows() > 0) {
-			return $query->result_array();
+		if($query->getNumRows() > 0) {
+			return $query->getResultArray();
 		}
 		
 		return false;
@@ -25,12 +25,11 @@ class Settings_model extends CI_Model
 			return false;
 		}
 		
-		$this->db->where('id', $id);
-		$query = $this->db->get('avatars');
+		$query = $this->db->table('avatars')->where('id', $id)->get();
 		
-		if($query->num_rows() > 0)
+		if($query->getNumRows() > 0)
         {
-			return $query->result_array()[0];
+			return $query->getResultArray()[0];
 		}
 		
 		return false;

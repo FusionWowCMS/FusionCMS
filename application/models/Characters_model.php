@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Database\BaseConnection;
 use MX\CI;
 
 /**
@@ -12,7 +13,7 @@ use MX\CI;
 
 class Characters_model
 {
-    private $db;
+    private BaseConnection $db;
     private $config;
     private $realmId;
 
@@ -58,8 +59,7 @@ class Characters_model
         // Make sure we're connected
         $this->connect();
 
-        $this->db->select($fields)->from(table('characters', $this->realmId))->where($where);
-        $query = $this->db->get();
+        $query = $this->db->table(table('characters', $this->realmId))->select($fields)->where($where)->get();
 
         if ($this->db->error()) {
             $error = $this->db->error();
@@ -68,8 +68,8 @@ class Characters_model
             }
         }
 
-        $rows = $query->result_array();
-        if ($query->num_rows() > 0) {
+        $rows = $query->getResultArray();
+        if ($query->getNumRows() > 0) {
             if($removeGMs) {
                 foreach ($rows as $key => $character) {
                     if (CI::$APP->external_account_model->getRank($character['account']) > 0) {
@@ -125,8 +125,8 @@ class Characters_model
             }
         }
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             // Assign the online count
             $online = $row[0]['total'];
@@ -156,8 +156,8 @@ class Characters_model
             }
         }
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['total'];
         } else {
@@ -201,8 +201,8 @@ class Characters_model
             }
         }
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['guid'];
         } else {
@@ -229,8 +229,8 @@ class Characters_model
             }
         }
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['online'];
         } else {
@@ -257,8 +257,8 @@ class Characters_model
             }
         }
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['name'];
         } else {
@@ -285,15 +285,15 @@ class Characters_model
             }
         }
 
-        if($query->num_rows() > 0)
+        if($query->getNumRows() > 0)
         {
-            $row = $query->result_array();
+            $row = $query->getResultArray();
 
             return $row[0];
         }
         else
         {
-            return false;
+            return [];
         }
     }
 
@@ -316,8 +316,8 @@ class Characters_model
             }
         }
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             if (in_array($row[0]['race'], get_instance()->realms->getAllianceRaces())) {
                 return 1;
@@ -350,8 +350,8 @@ class Characters_model
             }
         }
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             if ($row[0]['total'] == 1) {
                 return true;
@@ -383,8 +383,8 @@ class Characters_model
             }
         }
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             if ($row[0]['total'] == 1) {
                 return true;
@@ -406,8 +406,8 @@ class Characters_model
     public function getGold($account, $guid)
     {
         $query = $this->db->query("SELECT " . column("characters", "money", true, $this->realmId) . " FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "account", false, $this->realmId) . " = ? AND " . column("characters", "guid", false, $this->realmId) . " = ?", array($account, $guid));
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             return $result[0]["money"];
         } else {
             return false;

@@ -2,21 +2,17 @@
 
 class Custom_model extends CI_Model
 {
-    private $db;
-
     public function __construct()
     {
         parent::__construct();
-        $this->db = $this->load->database("cms", true);
     }
 
     public function getCustomData($id)
     {
-        $this->db->select('*')->from('sideboxes_custom')->where('sidebox_id', $id)->limit(1);
-        $query = $this->db->get();
+        $query = $this->db->table('sideboxes_custom')->select('*')->where('sidebox_id', $id)->limit(1)->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             return $result[0];
         } else {
             return false;

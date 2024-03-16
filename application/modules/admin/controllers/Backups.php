@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Backups Controller Class
+ * @property cms_model $cms_model cms_model Class
+ */
 class Backups extends MX_Controller
 {
     public function __construct()
@@ -33,11 +37,11 @@ class Backups extends MX_Controller
         $config['backups_max_keep'] = $this->config->item('backups_max_keep');
 
         // Prepare my data
-        $data = array(
+        $data = [
             'backups' => $backups,
             'config' => $config,
             'url' => $this->template->page_url
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("backups.tpl", $data);
@@ -135,7 +139,7 @@ class Backups extends MX_Controller
             foreach ($lines as $line) {
                 $statement .= $line;
                 if (substr(trim($line), -1) === ';') {
-                    $this->db->simple_query($statement);
+                    $this->db->simpleQuery($statement);
                     $statement = '';
                 }
             }

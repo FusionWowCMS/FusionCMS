@@ -8,10 +8,10 @@ class Guild_model extends CI_Model
         $realm->getCharacters()->connect();
         $connection = $realm->getCharacters()->getConnection();
 
-        $query = $connection->query(query('get_guild', $realm->getId()), array($guildId));
+        $query = $connection->query(query('get_guild', $realm->getId()), [$guildId]);
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             return $result[0];
         } else {
             return false;
@@ -23,10 +23,10 @@ class Guild_model extends CI_Model
         $realm->getCharacters()->connect();
         $connection = $realm->getCharacters()->getConnection();
 
-        $query = $connection->query(query('get_guild_members', $realm->getId()), array($guildId));
+        $query = $connection->query(query('get_guild_members', $realm->getId()), [$guildId]);
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -36,7 +36,7 @@ class Guild_model extends CI_Model
     {
         $realm = $this->realms->getRealm($realmId);
 
-        $data = $realm->getCharacters()->getCharacters(columns("characters", array("guid", "name", "race", "class", "gender", "level"), $realmId), array(column("characters", "guid", false, $realmId) => $memberId));
+        $data = $realm->getCharacters()->getCharacters(columns("characters", ["guid", "name", "race", "class", "gender", "level"], $realmId), [column("characters", "guid", false, $realmId) => $memberId]);
 
         return $data[0];
     }

@@ -1,9 +1,11 @@
 <?php
 
+use CodeIgniter\Database\BaseConnection;
+
 class Data_model extends CI_Model
 {
     public $realm;
-    private $connection;
+    private BaseConnection $connection;
     private bool|string $emuStr = false;
 
     public function GetStatement($key): false|string
@@ -105,8 +107,8 @@ class Data_model extends CI_Model
 
         $result = $this->connection->query($this->GetStatement('TopArenaTeams'), [$type, $count]);
 
-        if ($result && $result->num_rows() > 0) {
-            $teams = $result->result_array();
+        if ($result && $result->getNumRows() > 0) {
+            $teams = $result->getResultArray();
 
             // Get the team members
             if ($teams) {
@@ -130,8 +132,8 @@ class Data_model extends CI_Model
 
         $result = $this->connection->query($this->GetStatement('TeamMembers'), [$team]);
 
-        if ($result && $result->num_rows() > 0) {
-            return $result->result_array();
+        if ($result && $result->getNumRows() > 0) {
+            return $result->getResultArray();
         }
 
         unset($result);
@@ -144,8 +146,8 @@ class Data_model extends CI_Model
 
         $result = $this->connection->query($this->GetStatement('TopHKPlayers'), [$count]);
 
-        if ($result && $result->num_rows() > 0) {
-            $players = $result->result_array();
+        if ($result && $result->getNumRows() > 0) {
+            $players = $result->getResultArray();
 
             // Add rank
             $i = 1;

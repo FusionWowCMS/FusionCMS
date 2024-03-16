@@ -27,7 +27,7 @@ class Logging_model extends CI_Model
         }
 
         // prevent sql injection
-        $module = $this->db->escape_str($module);
+        $module = $this->db->escapeString($module);
 
         if ($search) {
             $query = $this->db->query("SELECT * FROM `logs` WHERE " . (($module) ? "`module` = '" . $module . "' AND " : "") . " (`user_id` = ? OR `ip` = ?)", array($userId, $search));
@@ -36,8 +36,8 @@ class Logging_model extends CI_Model
         }
 
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -45,19 +45,23 @@ class Logging_model extends CI_Model
 
     public function getLogs($id = false, $offset = 0, $limit = 0)
     {
-        $this->db->select("*");
-        $this->db->where('user_id', $id);
-        $this->db->order_by('time', 'DESC');
+        if (!is_numeric($id) || !is_numeric($limit) || !is_numeric($offset)) {
+            return null;
+        }
+
+        $builder = $this->db->table('logs')->select();
+        $builder->where('user_id', $id);
+        $builder->orderBy('time', 'DESC');
         if ($limit > 0 && $offset == 0) {
-            $this->db->limit($limit);
+            $builder->limit($limit);
         }
         if ($limit > 0 && $offset > 0) {
-            $this->db->limit(($offset + $limit), $offset);
+            $builder->limit(($offset + $limit), $offset);
         }
-        $query = $this->db->get('logs');
+        $query = $builder->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return null;
         }

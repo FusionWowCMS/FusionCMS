@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -16,6 +18,7 @@ use CodeIgniter\Session\Handlers\DatabaseHandler;
 /**
  * Session handler for MySQLi
  *
+ * @see \CodeIgniter\Session\Handlers\Database\MySQLiHandlerTest
  */
 class MySQLiHandler extends DatabaseHandler
 {
@@ -25,7 +28,7 @@ class MySQLiHandler extends DatabaseHandler
     protected function lockSession(string $sessionID): bool
     {
         $arg = md5($sessionID . ($this->matchIP ? '_' . $this->ipAddress : ''));
-        if ($this->db->query("SELECT GET_LOCK('{$arg}', 300) AS ci_session_lock")->row()->ci_session_lock) {
+        if ($this->db->query("SELECT GET_LOCK('{$arg}', 300) AS ci_session_lock")->getRow()->ci_session_lock) {
             $this->lock = $arg;
 
             return true;
@@ -43,7 +46,7 @@ class MySQLiHandler extends DatabaseHandler
             return true;
         }
 
-        if ($this->db->query("SELECT RELEASE_LOCK('{$this->lock}') AS ci_session_lock")->row()->ci_session_lock) {
+        if ($this->db->query("SELECT RELEASE_LOCK('{$this->lock}') AS ci_session_lock")->getRow()->ci_session_lock) {
             $this->lock = false;
 
             return true;

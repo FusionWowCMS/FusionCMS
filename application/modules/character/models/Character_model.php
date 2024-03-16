@@ -1,9 +1,11 @@
 <?php
 
+use CodeIgniter\Database\BaseConnection;
+
 class Character_model extends CI_Model
 {
     public $realm;
-    private $connection;
+    private BaseConnection $connection;
     private $id;
     private $realmId;
 
@@ -41,7 +43,7 @@ class Character_model extends CI_Model
         $this->connect();
 
         $query = $this->connection->query("SELECT COUNT(*) AS total FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "guid", false, $this->realmId) . "= ?", array($this->id));
-        $row = $query->result_array();
+        $row = $query->getResultArray();
 
         if ($row[0]['total'] > 0) {
             return true;
@@ -59,8 +61,8 @@ class Character_model extends CI_Model
 
         $query = $this->connection->query(query('get_character', $this->realmId), array($this->id));
 
-        if ($query && $query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query && $query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {
@@ -84,8 +86,8 @@ class Character_model extends CI_Model
 
         $query = $this->connection->query("SELECT " . allColumns("character_stats", $this->realmId) . " FROM " . table("character_stats", $this->realmId) . " WHERE " . column("character_stats", "guid", false, $this->realmId) . "= ?", array($this->id));
 
-        if ($query && $query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query && $query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {
@@ -102,10 +104,8 @@ class Character_model extends CI_Model
 
         $query = $this->connection->query(query("get_inventory_item", $this->realmId), array($this->id));
 
-        if ($query && $query->num_rows() > 0) {
-            $row = $query->result_array();
-
-            return $row;
+        if ($query && $query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -123,8 +123,8 @@ class Character_model extends CI_Model
 
         $query = $this->connection->query("SELECT " . allColumns("item_instance_transmog", $this->realmId) . ", item_instance.itemEntry FROM " . table("item_instance_transmog", $this->realmId) . " Left JOIN item_instance ON " . table("item_instance_transmog", $this->realmId) . '.' .column("item_instance_transmog", "itemGuid", false, $this->realmId) . " = item_instance.guid WHERE item_instance.owner_guid = ?", [$character_guid]);
 
-        if ($query && $query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query && $query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return [];
         }
@@ -144,8 +144,8 @@ class Character_model extends CI_Model
         }
 
 
-        if ($query && $query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query && $query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['guildid'];
         } else {
@@ -159,8 +159,8 @@ class Character_model extends CI_Model
             }
 
 
-            if ($query2 && $query2->num_rows() > 0) {
-                $row2 = $query2->result_array();
+            if ($query2 && $query2->getNumRows() > 0) {
+                $row2 = $query2->getResultArray();
 
                 return $row2[0]['guildid'];
             } else {
@@ -178,8 +178,8 @@ class Character_model extends CI_Model
 
             $query = $this->connection->query("SELECT " . column("guild", "name", true, $this->realmId) . " FROM " . table("guild", $this->realmId) . " WHERE " . column("guild", "guildid", false, $this->realmId) . "= ?", array($id));
 
-            if ($query && $query->num_rows() > 0) {
-                $row = $query->result_array();
+            if ($query && $query->getNumRows() > 0) {
+                $row = $query->getResultArray();
 
                 return $row[0]['name'];
             } else {

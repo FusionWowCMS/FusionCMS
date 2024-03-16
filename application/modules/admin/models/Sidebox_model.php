@@ -6,7 +6,7 @@ class Sidebox_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM sideboxes ORDER BY `order` ASC");
 
-        return $query->result_array();
+        return $query->getResultArray();
     }
 
     public function add($data)
@@ -16,10 +16,10 @@ class Sidebox_model extends CI_Model
         }
         $data['rank_needed'] = $this->cms_model->getAnyOldRank();
 
-        $this->db->insert("sideboxes", $data);
+        $this->db->table('sideboxes')->insert($data);
 
         $query = $this->db->query("SELECT id FROM sideboxes ORDER BY id DESC LIMIT 1");
-        $row = $query->result_array();
+        $row = $query->getResultArray();
 
         $this->db->query("UPDATE sideboxes SET `order`=? WHERE id=?", array($row[0]['id'], $row[0]['id']));
 
@@ -32,8 +32,7 @@ class Sidebox_model extends CI_Model
             unset($data["content"]);
         }
 
-        $this->db->where('id', $id);
-        $this->db->update('sideboxes', $data);
+        $this->db->table('sideboxes')->where('id', $id)->update($data);
     }
 
     public function delete($id)
@@ -59,8 +58,8 @@ class Sidebox_model extends CI_Model
     {
         $query = $this->db->query("SELECT `permission` FROM sideboxes WHERE id = ?", [$id]);
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0]['permission'];
         } else {
@@ -72,30 +71,29 @@ class Sidebox_model extends CI_Model
     {
         $query = $this->db->query("SELECT id FROM sideboxes ORDER BY id DESC LIMIT 1");
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             $data = array(
                 'sidebox_id' => $row[0]['id'],
                 'content' => $text
             );
 
-            $this->db->insert("sideboxes_custom", $data);
+            $this->db->table('sideboxes_custom')->insert($data);
         }
     }
 
     public function editCustom($id, $text)
     {
-        if ($this->db->query("SELECT sidebox_id FROM sideboxes_custom WHERE sidebox_id=?", array($id))->num_rows()) {
-            $this->db->where('sidebox_id', $id);
-            $this->db->update('sideboxes_custom', array('content' => $text));
+        if ($this->db->query("SELECT sidebox_id FROM sideboxes_custom WHERE sidebox_id=?", array($id))->getNumRows()) {
+            $this->db->table('sideboxes_custom')->where('sidebox_id', $id)->update(['content' => $text]);
         } else {
             $data = array(
                 'sidebox_id' => $id,
                 'content' => $text
             );
 
-            $this->db->insert("sideboxes_custom", $data);
+            $this->db->table('sideboxes_custom')->insert( $data);
         }
     }
 
@@ -103,8 +101,8 @@ class Sidebox_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM sideboxes WHERE id=? LIMIT 1", array($id));
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {
@@ -116,8 +114,8 @@ class Sidebox_model extends CI_Model
     {
         $query = $this->db->query("SELECT content FROM sideboxes_custom WHERE sidebox_id=? LIMIT 1", array($id));
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['content'];
         } else {
@@ -129,8 +127,8 @@ class Sidebox_model extends CI_Model
     {
         $query = $this->db->query("SELECT `order` FROM sideboxes WHERE `id`=? LIMIT 1", array($id));
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['order'];
         } else {
@@ -142,8 +140,8 @@ class Sidebox_model extends CI_Model
     {
         $query = $this->db->query("SELECT `order`, id FROM sideboxes WHERE `order` < ? ORDER BY `order` DESC LIMIT 1", array($order));
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {
@@ -155,8 +153,8 @@ class Sidebox_model extends CI_Model
     {
         $query = $this->db->query("SELECT `order`, id FROM sideboxes WHERE `order` > ? ORDER BY `order` ASC LIMIT 1", array($order));
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {

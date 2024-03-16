@@ -4,20 +4,20 @@ class Changelog_model extends CI_Model
 {
     public function add($data)
     {
-        $this->db->insert("changelog", $data);
+        $this->db->table('changelog')->insert($data);
     }
 
     public function getChangelog($limit = false)
     {
         if ($limit) {
-            $query = $this->db->query("SELECT * FROM changelog c, changelog_type t WHERE c.type = t.id ORDER BY c.time DESC LIMIT ?", array($limit));
+            $query = $this->db->query("SELECT * FROM changelog c, changelog_type t WHERE c.type = t.id ORDER BY c.time DESC LIMIT ?", [$limit]);
         } else {
             // This query also gets the type from the foreign key.
             $query = $this->db->query("SELECT * FROM changelog c, changelog_type t WHERE c.type = t.id ORDER BY c.time DESC");
         }
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -28,10 +28,10 @@ class Changelog_model extends CI_Model
         if (!$id) {
             return false;
         } else {
-            $query = $this->db->query("SELECT * FROM changelog c, changelog_type t WHERE c.type = t.id AND c.change_id = ?", array($id));
+            $query = $this->db->query("SELECT * FROM changelog c, changelog_type t WHERE c.type = t.id AND c.change_id = ?", [$id]);
 
-            if ($query->num_rows() > 0) {
-                $result = $query->result_array();
+            if ($query->getNumRows() > 0) {
+                $result = $query->getResultArray();
                 return $result[0];
             } else {
                 return false;
@@ -43,8 +43,8 @@ class Changelog_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM changelog_type ORDER BY id ASC");
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }
@@ -52,35 +52,35 @@ class Changelog_model extends CI_Model
 
     public function addCategory($name)
     {
-        $this->db->query("INSERT INTO changelog_type(typeName) VALUES(?)", array($name));
+        $this->db->query("INSERT INTO changelog_type(typeName) VALUES(?)", [$name]);
     }
 
     public function deleteChange($id)
     {
-        $this->db->query("DELETE FROM changelog WHERE change_id = ?", array($id));
+        $this->db->query("DELETE FROM changelog WHERE change_id = ?", [$id]);
     }
 
     public function deleteCategory($id)
     {
-        $this->db->query("DELETE FROM changelog WHERE type = ?", array($id));
-        $this->db->query("DELETE FROM changelog_type WHERE id = ?", array($id));
+        $this->db->query("DELETE FROM changelog WHERE type = ?", [$id]);
+        $this->db->query("DELETE FROM changelog_type WHERE id = ?", [$id]);
     }
 
     public function addChange($text, $category)
     {
-        $data = array(
+        $data = [
             "changelog" => $text,
             "author" => $this->user->getNickname(),
             "type" => $category,
             "time" => time()
-        );
+        ];
 
-        $this->db->insert("changelog", $data);
+        $this->db->table('changelog')->insert($data);
 
         $query = $this->db->query("SELECT change_id FROM changelog ORDER BY change_id DESC LIMIT 1");
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0]['change_id'];
         } else {
@@ -90,13 +90,11 @@ class Changelog_model extends CI_Model
 
     public function saveCategory($id, $data)
     {
-        $this->db->where('id', $id);
-        $this->db->update('changelog_type', $data);
+        $this->db->table('changelog_type')->where('id', $id)->update($data);
     }
 
     public function edit($id, $data)
     {
-        $this->db->where('change_id', $id);
-        $this->db->update('changelog', $data);
+        $this->db->table('changelog')->where('change_id', $id)->update($data);
     }
 }

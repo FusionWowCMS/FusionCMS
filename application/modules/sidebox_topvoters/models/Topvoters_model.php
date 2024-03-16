@@ -2,13 +2,9 @@
 
 class Topvoters_model extends CI_Model
 {
-    private $db;
-
     public function __construct()
     {
         parent::__construct();
-
-        $this->db = $this->load->database("cms", true);
     }
 
     public function getThisWeekAccounts($limit = 5)
@@ -17,8 +13,8 @@ class Topvoters_model extends CI_Model
 
         $query = $this->db->query("Select COUNT(`vote_log`.`user_id`) AS vote, `vote_log`.`user_id`, `account_data`.`nickname` FROM `vote_log` Right Join `account_data` ON `account_data`.`id` = `vote_log`.`user_id` WHERE `time` > ? GROUP BY `vote_log`.`user_id` ORDER BY vote DESC LIMIT ?;", [strtotime($weekRange[0]), $limit]);
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }

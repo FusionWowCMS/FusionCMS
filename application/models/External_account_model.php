@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Services;
+use CodeIgniter\Database\BaseConnection;
 use MX\CI;
 
 /**
@@ -13,7 +14,7 @@ use MX\CI;
 
 class External_account_model extends CI_Model
 {
-    private $connection;
+    private BaseConnection $connection;
     private $id;
     private $username;
     private $password;
@@ -101,8 +102,8 @@ class External_account_model extends CI_Model
         if (!$query)
             show_error('Database Error occurs: ' . $this->connection->error()['message'] . "<br/>Please check website database `realms.emulator` in 'field list' <b>(make sure you selected right emulator.)</b>");
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             $result = $result[0];
 
             $this->id = $result['id'];
@@ -160,7 +161,7 @@ class External_account_model extends CI_Model
             $data[column("account", "last_ip")] = $this->input->ip_address();
         }
 
-        $userId = $this->connection->insert(table("account"), $data);
+        $userId = $this->connection->table(table("account"))->insert($data);
 
         if (preg_match("/^cmangos/i", get_class($this->realms->getEmulator())))
         {
@@ -171,7 +172,7 @@ class External_account_model extends CI_Model
                 'loginSource' => '0'
             ];
 
-            $this->connection->insert(table("account_logons"), $ip_data);
+            $this->connection->table(table("account_logons"))->insert($ip_data);
         }
 
         $userId = $this->user->getId($username);
@@ -186,7 +187,7 @@ class External_account_model extends CI_Model
             ];
             list($hash, $battleData) = $this->setBattleNetPassword($email, $password, $battleData);
 
-            $this->connection->insert(table("battlenet_accounts"), $battleData);
+            $this->connection->table(table("battlenet_accounts"))->insert($battleData);
 
             $this->connection->query("UPDATE account SET battlenet_account = $userId, battlenet_index = 1 WHERE id = $userId", [$userId]);
         }
@@ -199,7 +200,7 @@ class External_account_model extends CI_Model
                 'granted'      => 1,
                 'realmId'      => -1
             ];
-            $this->connection->insert('rbac_account_permissions', $rbac_data);
+            $this->connection->table('rbac_account_permissions')->insert($rbac_data);
         }
 
         $this->updateDailySignUps();
@@ -209,7 +210,7 @@ class External_account_model extends CI_Model
     {
         $query = $this->db->query("SELECT COUNT(*) AS `total` FROM daily_signups WHERE `date`=?", [date("Y-m-d")]);
 
-        $row = $query->result_array();
+        $row = $query->getResultArray();
 
         if ($row[0]['total']) {
             $this->db->query("UPDATE daily_signups SET amount = amount + 1 WHERE `date`=?", [date("Y-m-d")]);
@@ -230,16 +231,16 @@ class External_account_model extends CI_Model
 
         $query = $this->connection->query(query("get_banned"), [$id]);
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } elseif (query('get_ip_banned')) {
             //check if the ip is banned
             $query = $this->connection->query(query("get_ip_banned"), [$this->input->ip_address(), time()]);
 
-            if ($query->num_rows() > 0) {
-                $row = $query->result_array();
+            if ($query->getNumRows() > 0) {
+                $row = $query->getResultArray();
 
                 return $row[0];
             } else {
@@ -267,8 +268,8 @@ class External_account_model extends CI_Model
 
         $query = $this->connection->query(query("get_rank"), [$value]);
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             if ($row[0]["gmlevel"] == "") {
                 $row[0]["gmlevel"] = 0;
@@ -290,7 +291,7 @@ class External_account_model extends CI_Model
     {
         $this->connect();
 
-        $count = $this->connection->from(table("account"))->where([column("account", "username") => $username])->count_all_results();
+        $count = $this->connection->table(table("account"))->where([column("account", "username") => $username])->countAllResults();
 
         if ($count) {
             return true;
@@ -309,7 +310,7 @@ class External_account_model extends CI_Model
         $this->connect();
 
         $query = $this->connection->query("SELECT COUNT(*) as `total` FROM " . table("account"));
-        $row = $query->result_array();
+        $row = $query->getResultArray();
 
         return $row[0]['total'];
     }
@@ -324,7 +325,7 @@ class External_account_model extends CI_Model
     {
         $this->connect();
 
-        $count = $this->connection->from(table("account"))->where([column("account", "id") => $id])->count_all_results();
+        $count = $this->connection->table(table("account"))->where([column("account", "id") => $id])->countAllResults();
 
         if ($count) {
             return true;
@@ -343,7 +344,7 @@ class External_account_model extends CI_Model
     {
         $this->connect();
 
-        $count = $this->connection->from(table("account"))->where([column("account", "email") => $email])->count_all_results();
+        $count = $this->connection->table(table("account"))->where([column("account", "email") => $email])->countAllResults();
 
         if ($count) {
             return true;
@@ -361,15 +362,16 @@ class External_account_model extends CI_Model
     {
         $this->connect();
 
-        $this->connection->where(column("account", "username"), $oldUsername);
-        $this->connection->update(table("account"), [column("account", "username") => $newUsername]);
+        $this->connection->table(table("account"))->where(column("account", "username"), $oldUsername)->update([column("account", "username") => $newUsername]);
     }
 
     public function setPassword($username, $email, $newPassword)
     {
         $this->connect();
 
-        $this->connection->where(column("account", "username"), $username);
+        $builder = $this->connection->table(table("account"));
+
+        $builder->where(column("account", "username"), $username);
 
         $data = [];
 
@@ -385,14 +387,13 @@ class External_account_model extends CI_Model
 
         list($hash, $data) = $this->setAccountPassword($encryption, $username, $newPassword, $data);
 
-        $this->connection->update(table("account"), $data);
+        $builder->update($data);
 
         $userId = $this->user->getId($username);
 
         // Battlenet accounts
         if ($this->config->item('battle_net')) {
-            $this->connection->flush_cache();
-            $this->connection->where(column("battlenet_accounts", "email"), strtoupper($email));
+            $builder = $this->connection->table(table("battlenet_accounts"))->where(column("battlenet_accounts", "email"), strtoupper($email));
 
             $battleData = [
                 column("battlenet_accounts", "last_ip") => $this->input->ip_address(),
@@ -400,7 +401,7 @@ class External_account_model extends CI_Model
             ];
             list($hash, $battleData) = $this->setBattleNetPassword($email, $newPassword, $battleData);
 
-            $this->connection->update(table("battlenet_accounts"), $battleData);
+            $builder->update($battleData);
         }
 
         CI::$APP->plugins->onChangePassword($userId, $hash);
@@ -410,44 +411,41 @@ class External_account_model extends CI_Model
     {
         $this->connect();
 
-        $this->connection->where(column("account", "username"), $username);
-        $this->connection->update(table("account"), [column("account", "email") => $newEmail]);
+        $this->connection->table(table("account"))->where(column("account", "username"), $username)->update([column("account", "email") => $newEmail]);
     }
 
     public function setExpansion($newExpansion, $username = false)
     {
         $this->connect();
 
+        $builder = $this->connection->table(table("account"));
+
         if ($username)
         {
             // Update only the expansion column for the given username
-            $this->connection->where(column("account", "username"), $username);
+            $builder->where(column("account", "username"), $username);
         }
 
         // Update the 'expansion' column for all users
-        $this->connection->update(table("account"), [column("account", "expansion") => $newExpansion]);
+        $builder->update([column("account", "expansion") => $newExpansion]);
     }
 
     public function setRank($userId, $newRank)
     {
         $this->connect();
 
-        $this->connection->where(column("account", "id"), $userId);
-
         if (preg_match("/^trinity/i", get_class($this->realms->getEmulator()))) {
-            $this->connection->update(table("account_access"), [column("account_access", "SecurityLevel") => $newRank]);
+            $this->connection->table(table("account_access"))->where(column("account", "id"), $userId)->update([column("account_access", "SecurityLevel") => $newRank]);
         } elseif (preg_match("/^cmangos/i", get_class($this->realms->getEmulator()))) {
-            $this->connection->update(table("account"), [column("account", "gmlevel") => $newRank]);
+            $this->connection->table(table("account"))->where(column("account", "id"), $userId)->update([column("account", "gmlevel") => $newRank]);
         } else {
-            $this->connection->update(table("account_access"), [column("account_access", "gmlevel") => $newRank]);
+            $this->connection->table(table("account_access"))->where(column("account", "id"), $userId)->update([column("account_access", "gmlevel") => $newRank]);
         }
     }
 
     public function setLastIp($userId, $ip)
     {
         $this->connect();
-
-        $this->connection->where(column("account", "id"), $userId);
 
         if (preg_match("/^cmangos/i", get_class($this->realms->getEmulator()))) {
             $data = [
@@ -457,9 +455,9 @@ class External_account_model extends CI_Model
                 'loginSource' => '0'
             ];
 
-            $this->connection->insert(table("account_logons"), $data);
+            $this->connection->table(table("account_logons"))->insert($data);
         } else {
-            $this->connection->update(table("account"), [column("account", "last_ip") => $ip]);
+            $this->connection->table(table("account"))->where(column("account", "id"), $userId)->update([column("account", "last_ip") => $ip]);
         }
     }
 
@@ -475,11 +473,10 @@ class External_account_model extends CI_Model
         } else {
             $this->connect();
 
-            $this->connection->select(column("account", "id", true))->from(table("account"))->where(column("account", "username"), $username);
-            $query = $this->connection->get();
+            $query = $this->connection->table(table("account"))->select(column("account", "id", true))->where(column("account", "username"), $username)->get();
 
-            if ($query->num_rows() > 0) {
-                $result = $query->result_array();
+            if ($query->getNumRows() > 0) {
+                $result = $query->getResultArray();
 
                 return $result[0]["id"];
             } else {
@@ -502,11 +499,10 @@ class External_account_model extends CI_Model
         } else {
             $this->connect();
 
-            $this->connection->select(column("account", "username", true))->from(table("account"))->where([column("account", "id") => $id]);
-            $query = $this->connection->get();
+            $query = $this->connection->table(table("account"))->select(column("account", "username", true))->where([column("account", "id") => $id])->get();
 
-            if ($query->num_rows() > 0) {
-                $result = $query->result_array();
+            if ($query->getNumRows() > 0) {
+                $result = $query->getResultArray();
 
                 return $result[0]["username"];
             } else {
@@ -535,11 +531,10 @@ class External_account_model extends CI_Model
 
         $this->connect();
 
-        $this->connection->select($fields)->from(table("account"))->where([column("account", "id") => $id]);
-        $query = $this->connection->get();
+        $query = $this->connection->table(table("account"))->select($fields)->where([column("account", "id") => $id])->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
 
             return $result[0];
         } else {
@@ -563,11 +558,13 @@ class External_account_model extends CI_Model
             } else {
                 $this->connect();
 
-                $this->connection->select(column("account", "username", true) . ',' . column("account", "email") . ',' . column("account", "joindate"))->from(table("account"))->where([column("account", "id") => $id]);
-                $query = $this->connection->get();
+                $query = $this->connection->table(table("account"))
+                    ->select(column("account", "username", true) . ',' . column("account", "email") . ',' . column("account", "joindate"))
+                    ->where([column("account", "id") => $id])
+                    ->get();
 
-                if ($query->num_rows() > 0) {
-                    $result = $query->result_array();
+                if ($query->getNumRows() > 0) {
+                    $result = $query->getResultArray();
                     $this->account_cache[$id] = $result[0];
 
                     return $result[0]["email"];
@@ -591,11 +588,11 @@ class External_account_model extends CI_Model
             } else {
                 $this->connect();
 
-                $this->connection->select(column("account", "id"))->from(table("account"))->where([column("account", "email") => $email]);
-                $query = $this->connection->get();
+                ;
+                $query = $this->connection->table(table("account"))->select(column("account", "id"))->where([column("account", "email") => $email])->get();
 
-                if ($query->num_rows() > 0) {
-                    $result = $query->result_array();
+                if ($query->getNumRows() > 0) {
+                    $result = $query->getResultArray();
                     $this->account_cache[$email] = $result[0];
 
                     return $result[0]["id"];

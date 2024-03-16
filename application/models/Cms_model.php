@@ -9,7 +9,7 @@ use App\Config\Services;
 
 class Cms_model extends CI_Model
 {
-    private $db;
+    //private $db;
     /**
      * Connect to the database
      */
@@ -17,7 +17,7 @@ class Cms_model extends CI_Model
     {
         parent::__construct();
 
-        $this->db = $this->load->database("cms", true);
+        //$this->db = $this->load->database("cms", true);
 
         $this->logVisit();
 
@@ -35,16 +35,16 @@ class Cms_model extends CI_Model
                 'timestamp' => time()
             ];
 
-            $this->db->on_duplicate('visitor_log', $data);
+            $this->db->table('visitor_log')->upsert($data);
         }
     }
 
     public function getSideboxes(string $type = 'side', string $page = '*')
     {
         // Query: Prepare
-        $query = $this->db->from('sideboxes')
+        $query = $this->db->newQuery()->from('sideboxes')
                           ->select('*')
-                          ->order_by('order', 'ASC');
+                          ->orderBy('order', 'ASC');
 
         // Query: Filter (Type)
         if($type && in_array($type, ['top', 'side', 'bottom']))
@@ -52,17 +52,17 @@ class Cms_model extends CI_Model
 
         // Query: Filter (Page)
         if($page && $page !== '*')
-            $query = $query->group_start()
+            $query = $query->groupStart()
                            ->like('pages', str_replace(':page', $page, '":page"'), 'both')
-                           ->or_like('pages', '"*"', 'both')
-                           ->group_end();
+                           ->orLike('pages', '"*"', 'both')
+                           ->groupEnd();
 
         // Query: Execute
         $query = $query->get();
 
         // Query: Make sure we have results
-        if($query->num_rows())
-            return $query->result_array();
+        if($query->getNumRows())
+            return $query->getResultArray();
 
         return [];
     }
@@ -76,8 +76,8 @@ class Cms_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM image_slider ORDER BY `order` ASC");
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         }
 
         return null;
@@ -97,8 +97,8 @@ class Cms_model extends CI_Model
             $query = $this->db->query("SELECT * FROM menu ORDER BY `order` ASC");
         }
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         }
 
         return null;
@@ -112,11 +112,10 @@ class Cms_model extends CI_Model
      */
     public function getPage(string $page): ?array
     {
-        $this->db->select('*')->from('pages')->where('identifier', $page);
-        $query = $this->db->get();
+        $query = $this->db->table('pages')->select('*')->where('identifier', $page)->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             return $result[0];
         }
 
@@ -132,8 +131,8 @@ class Cms_model extends CI_Model
     {
         $query = $this->db->query("SELECT id FROM `ranks` ORDER BY id ASC LIMIT 1");
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             return $result[0]['id'];
         }
 
@@ -147,11 +146,10 @@ class Cms_model extends CI_Model
      */
     public function getPages(): ?array
     {
-        $this->db->select('*')->from('pages');
-        $query = $this->db->get();
+        $query = $this->db->table('pages')->select()->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         }
 
         return null;
@@ -164,11 +162,10 @@ class Cms_model extends CI_Model
      */
     public function getRealms(): ?array
     {
-        $this->db->select('*')->from('realms');
-        $query = $this->db->get();
+        $query = $this->db->table('realms')->select()->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         }
 
         return null;
@@ -182,11 +179,10 @@ class Cms_model extends CI_Model
      */
     public function getRealm(int $id): ?array
     {
-        $this->db->select('*')->from('realms')->where('id', $id);
-        $query = $this->db->get();
+        $query = $this->db->table('realms')->select()->where('id', $id)->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             return $result[0];
         }
 
@@ -198,8 +194,8 @@ class Cms_model extends CI_Model
         if ($id) {
             $query = $this->db->query("SELECT backup_name FROM backup where id = ?", [$id]);
 
-            if ($query->num_rows() > 0) {
-                $result = $query->result_array();
+            if ($query->getNumRows() > 0) {
+                $result = $query->getResultArray();
                 return $result[0]['backup_name'];
             } else {
                 return false;
@@ -207,8 +203,8 @@ class Cms_model extends CI_Model
         } else {
             $query = $this->db->query("SELECT * FROM backup ORDER BY `id` ASC");
 
-            if ($query->num_rows() > 0) {
-                return $query->result_array();
+            if ($query->getNumRows() > 0) {
+                return $query->getResultArray();
             } else {
                 return false;
             }
@@ -217,11 +213,10 @@ class Cms_model extends CI_Model
 
     public function getBackupCount()
     {
-        $this->db->select("COUNT(id) 'count'");
-        $query = $this->db->get('backup');
+        $query = $this->db->table('backup')->select("COUNT(id) 'count'")->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getResultArray();
             return $result[0]['count'];
         }
 
@@ -237,8 +232,8 @@ class Cms_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM email_templates WHERE id= ? LIMIT 1", [$id]);
 
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray();
 
             return $row[0];
         } else {
@@ -249,16 +244,12 @@ class Cms_model extends CI_Model
     public function getNotifications($id, $count = false)
     {
         if ($count) {
-            $this->db->select('*');
-            $this->db->where('uid', $id);
-            $this->db->where('read', 0);
-            return $this->db->count_all_results('notifications');
+            return $this->db->table('notifications')->select()->where('uid', $id)->where('read', 0)->countAllResults();
         } else {
-            $this->db->select('*')->from('notifications')->where('uid', $id);
-            $query = $this->db->get();
+            $query = $this->db->table('notifications')->select()->where('uid', $id)->get();
 
-            if ($query->num_rows() > 0) {
-                return $query->result_array();
+            if ($query->getNumRows() > 0) {
+                return $query->getResultArray();
             }
         }
 
@@ -267,12 +258,12 @@ class Cms_model extends CI_Model
 
     public function setReadNotification($id, $uid, $all = false)
     {
-        $this->db->set('read', 1);
+        $builder = $this->db->table('notifications')->set('read', 1);
         if (!$all) {
-            $this->db->where('id', $id);
+            $builder->where('id', $id);
         }
-        $this->db->where('uid', $uid);
-        $this->db->update('notifications');
+        $builder->where('uid', $uid);
+        $builder->update();
     }
 
     private function setLangugage()
@@ -301,12 +292,13 @@ class Cms_model extends CI_Model
 
     private function getSession($session)
     {
-        $this->db->where('ip_address', $session['ip_address']);
-        $this->db->where('user_agent', $session['user_agent']);
-        $query = $this->db->get("ci_sessions");
+        $builder = $this->db->table("ci_sessions");
+        $builder->where('ip_address', $session['ip_address']);
+        $builder->where('user_agent', $session['user_agent']);
+        $query = $builder->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
             return false;
         }

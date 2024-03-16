@@ -346,9 +346,8 @@ class Admin extends MX_Controller
     private function uptime($realm_id)
     {
         $this->connection = $this->load->database("account", true);
-        $this->connection->where('realmid', $realm_id);
-        $query = $this->connection->get('uptime');
-        $last = $query->last_row('array');
+        $query = $this->connection->table('uptime')->where('realmid', $realm_id)->get();
+        $last = $query->getLastRow('array');
         if (isset($last)) {
             $first_date = new DateTime(date('Y-m-d h:i:s', $last['starttime']));
             $second_date = new DateTime(date('Y-m-d h:i:s'));

@@ -1,38 +1,36 @@
 <?php
 
+use CodeIgniter\Database\BaseConnection;
+
 class Password_recovery_model extends CI_Model
 {
-    private $connection;
+    private BaseConnection $connection;
 
     public function __construct()
     {
         if (empty($this->connection))
         {
-            $this->connection = $this->load->database("account", true);
+            $this->connection = $this->load->database('account', true);
         }
     }
 
     public function get_username($email)
     {
-        $this->connection->select(column("account", "username"));
-        $this->connection->from(table("account"));
-        $this->connection->where(column("account", "email"), $email);
-        $query = $this->connection->get();
-        $result = $query->result_array();
-        return $result[0][column("account", "username")];
+        $builder = $this->connection->table(table('account'))->select(column('account', 'username'));
+        $builder->where(column('account', 'email'), $email);
+        $query = $builder->get();
+        $result = $query->getResultArray();
+        return $result[0][column('account', 'username')];
     }
 
     public function get_token($token)
     {
         if ($token)
         {
-            $this->db->select("*");
-            $this->db->from("password_recovery_key");
-            $this->db->where("recoverykey", $token);
-            $query = $this->db->get();
+            $query = $this->db->table('password_recovery_key')->select()->where('recoverykey', $token)->get();
 
-            $result = $query->result_array();
-            if (isset($result[0]["recoverykey"]) == $token)
+            $result = $query->getResultArray();
+            if (isset($result[0]['recoverykey']) == $token)
             {
                 return $result[0];
             } else {
@@ -51,14 +49,14 @@ class Password_recovery_model extends CI_Model
         }
 
         $data = [
-            "recoverykey" => $token,
-            "username" => $username,
-            "email" => $email,
-            "ip" => $ip,
-            "time" => time(),
+            'recoverykey' => $token,
+            'username' => $username,
+            'email' => $email,
+            'ip' => $ip,
+            'time' => time(),
         ];
 
-        $this->db->insert("password_recovery_key", $data);
+        $this->db->table('password_recovery_key')->insert($data);
         return true;
     }
 
@@ -69,8 +67,7 @@ class Password_recovery_model extends CI_Model
             return false;
         }
 
-        $this->db->where("recoverykey", $token);
-        $this->db->delete("password_recovery_key");
+        $this->db->table('password_recovery_key')->where('recoverykey', $token)->delete();
         return true;
     }
 }

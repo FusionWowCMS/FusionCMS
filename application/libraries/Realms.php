@@ -69,25 +69,45 @@ class Realms
                     "realm_port" => $realm['realm_port'],
 
                     // Database settings
-                    "world" => array(
+                    "world" => [
+                        'DSN'      => '',
                         "hostname" => (array_key_exists("override_hostname_world", $realm) && !empty($realm['override_hostname_world'])) ? $realm['override_hostname_world'] : $realm['hostname'],
                         "username" => (array_key_exists("override_username_world", $realm) && !empty($realm['override_username_world'])) ? $realm['override_username_world'] : $realm['username'],
                         "password" => (array_key_exists("override_password_world", $realm) && !empty($realm['override_password_world'])) ? $realm['override_password_world'] : $realm['password'],
                         "database" => $realm['world_database'],
-                        "dbdriver" => "mysqli",
-                        "port" => (array_key_exists("override_port_world", $realm) && !empty($realm['override_port_world'])) ? $realm['override_port_world'] : 3306,
-                        "pconnect" => false,
-                    ),
+                        "DBDriver" => "MySQLi",
+                        'DBPrefix' => '',
+                        "port" => (array_key_exists("override_port_world", $realm) && !empty($realm['override_port_world'])) ? (int) $realm['override_port_world'] : 3306,
+                        "pConnect" => false,
+                        'DBDebug'  => false,
+                        'charset'  => 'utf8',
+                        'DBCollat' => 'utf8_general_ci',
+                        'swapPre'  => '',
+                        'encrypt'  => false,
+                        'compress' => false,
+                        'strictOn' => false,
+                        'failover' => [],
+                    ],
 
-                    "characters" => array(
+                    "characters" => [
+                        'DSN'      => '',
                         "hostname" => (array_key_exists("override_hostname_char", $realm) && !empty($realm['override_hostname_char'])) ? $realm['override_hostname_char'] : $realm['hostname'],
                         "username" => (array_key_exists("override_username_char", $realm) && !empty($realm['override_username_char'])) ? $realm['override_username_char'] : $realm['username'],
                         "password" => (array_key_exists("override_password_char", $realm) && !empty($realm['override_password_char'])) ? $realm['override_password_char'] : $realm['password'],
                         "database" => $realm['char_database'],
-                        "dbdriver" => "mysqli",
-                        "port" => (array_key_exists("override_port_char", $realm) && !empty($realm['override_port_char'])) ? $realm['override_port_char'] : 3306,
-                        "pconnect" => false,
-                    )
+                        "DBDriver" => "MySQLi",
+                        'DBPrefix' => '',
+                        "port" => (array_key_exists("override_port_char", $realm) && !empty($realm['override_port_char'])) ? (int) $realm['override_port_char'] : 3306,
+                        "pConnect" => false,
+                        'DBDebug'  => false,
+                        'charset'  => 'utf8',
+                        'DBCollat' => 'utf8_general_ci',
+                        'swapPre'  => '',
+                        'encrypt'  => false,
+                        'compress' => false,
+                        'strictOn' => false,
+                        'failover' => [],
+                    ]
                 );
 
                 // Initialize the realm object

@@ -9,6 +9,10 @@
  * the LICENSE file that was distributed with this source code.
  */
 
+use CodeIgniter\Database\BaseBuilder;
+use CodeIgniter\Database\BaseConnection;
+use CodeIgniter\Database\Forge;
+use CodeIgniter\Database\Migration;
 use CodeIgniter\Debug\Exceptions;
 use CodeIgniter\Debug\Timer;
 use CodeIgniter\Debug\Toolbar;
@@ -39,7 +43,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Input $input                    Pre-processes global input data for security
  * @property CI_Lang $lang                      Language Class
  * @property CI_Loader $load                    Loads framework components.
- * @property Logger $logger                        Logging Class
+ * @property Logger $logger                     Logging Class
  * @property CI_Model $model                    Model Class
  * @property CI_Output $output                  Responsible for sending final output to the browser.
  * @property CI_Router $router                  Parses URIs and determines routing
@@ -47,9 +51,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_URI $uri                        Parses URIs and determines routing
  * @property CI_Utf8 $utf8                      Provides support for UTF-8 environments
  ***************** DATABASE COMPONENTS *****************
- * @property CI_DB_forge $dbforge               Database Forge Class
- * @property CI_DB_query_builder $db            This is the platform-independent base Query Builder implementation class.
- * @property CI_DB_utility $dbutil              Database Utility Class
+ * @property Forge $dbforge                     Database Forge Class
+ * @property BaseConnection $db                 This is the platform-independent base Query Builder implementation class.
  ***************** CORE LIBRARIES *****************
  * @property CI_Cache $cache                    CodeIgniter Caching Class
  * @property CI_Calendar $calendar              This class enables the creation of calendars
@@ -59,7 +62,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Form_validation $form_validation Form Validation Class
  * @property CI_FTP $ftp                        FTP Class
  * @property CI_Image_lib $image_lib            Image Manipulation class
- * @property CI_Migration $migration            All migrations should implement this, forces up() and down() and gives access to the CI super-global.
+ * @property Migration $migration               All migrations should implement this, forces up() and down() and gives access to the CI super-global.
  * @property CI_Pagination $pagination          Pagination Class
  * @property CI_Parser $parser                  Parser Class
  * @property Toolbar $toolbar                   This class enables you to display benchmark, query, and other data in order to help with debugging and optimization.
@@ -124,7 +127,7 @@ class CI_Model
         //	If you're here because you're getting an error message
         //	saying 'Undefined Property: system/core/Model.php', it's
         //	most likely a typo in your model code.
-        return get_instance()->{$key};
+        return get_instance()->$key;
     }
 
 }

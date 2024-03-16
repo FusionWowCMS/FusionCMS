@@ -36,6 +36,12 @@
  * @since	Version 1.0.0
  * @filesource
  */
+
+use App\Config\Database;
+use CodeIgniter\Database\BaseConnection;
+use CodeIgniter\Database\CI_DB;
+use CodeIgniter\Database\CI_DB_forge;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -368,68 +374,38 @@ class CI_Loader {
 	 *
 	 * @param	mixed	$params		Database configuration options
 	 * @param	bool	$return 	Whether to return the database object
-	 * @param	bool	$query_builder	Whether to enable Query Builder
 	 *					(overrides the configuration setting)
 	 *
 	 * @return	object|bool	Database object if $return is set to TRUE,
 	 *					FALSE on failure, CI_Loader instance in any other case
 	 */
-	public function database($params = '', $return = false, $query_builder = null)
+	public function database($params = '', $return = false)
 	{
-		// Grab the super object
-		$CI =& get_instance();
+        // Grab the super object
+        $CI =& get_instance();
 
-		// Do we even need to load the database class?
-		if ($return === false && $query_builder === null && isset($CI->db) && is_object($CI->db) && ! empty($CI->db->conn_id))
+        // Do we even need to load the database class?
+		if ($return === false && isset($CI->db))
 		{
 			return false;
 		}
 
-		require_once(BASEPATH.'database/DB.php');
+        if ($params === '') {
+            $params = null;
+        }
 
-		if ($return === true)
-		{
-			return DB($params, $query_builder);
-		}
+        // Initialize the db variable. Needed to prevent
+        // reference errors with some configurations
+        $CI->db = null;
 
-		// Initialize the db variable. Needed to prevent
-		// reference errors with some configurations
-		$CI->db = '';
+        $connection = Database::connect($params, false);
 
-		// Load the DB class
-		$CI->db =& DB($params, $query_builder);
-		return $this;
-	}
+        if ($return) {
+            return $connection;
+        }
 
-	// --------------------------------------------------------------------
+        $CI->db = $connection;
 
-	/**
-	 * Load the Database Utilities Class
-	 *
-	 * @param	object	$db	Database object
-	 * @param	bool	$return	Whether to return the DB Utilities class object or not
-	 * @return	object
-	 */
-	public function dbutil($db = null, $return = false)
-	{
-		$CI =& get_instance();
-
-		if ( ! is_object($db) OR ! ($db instanceof CI_DB))
-		{
-			class_exists('CI_DB', false) OR $this->database();
-			$db =& $CI->db;
-		}
-
-		require_once(BASEPATH.'database/DB_utility.php');
-		require_once(BASEPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_utility.php');
-		$class = 'CI_DB_'.$db->dbdriver.'_utility';
-
-		if ($return === true)
-		{
-			return new $class($db);
-		}
-
-		$CI->dbutil = new $class($db);
 		return $this;
 	}
 
@@ -445,35 +421,21 @@ class CI_Loader {
 	public function dbforge($db = null, $return = false)
 	{
 		$CI =& get_instance();
-		if ( ! is_object($db) OR ! ($db instanceof CI_DB))
+
+		if (! is_object($db) OR ! ($db instanceof BaseConnection))
 		{
 			class_exists('CI_DB', false) OR $this->database();
 			$db =& $CI->db;
 		}
 
-		require_once(BASEPATH.'database/DB_forge.php');
-		require_once(BASEPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_forge.php');
-
-		if ( ! empty($db->subdriver))
-		{
-			$driver_path = BASEPATH.'database/drivers/'.$db->dbdriver.'/subdrivers/'.$db->dbdriver.'_'.$db->subdriver.'_forge.php';
-			if (file_exists($driver_path))
-			{
-				require_once($driver_path);
-				$class = 'CI_DB_'.$db->dbdriver.'_'.$db->subdriver.'_forge';
-			}
-		}
-		else
-		{
-			$class = 'CI_DB_'.$db->dbdriver.'_forge';
-		}
+        $class = Database::forge($db);
 
 		if ($return === true)
 		{
-			return new $class($db);
+			return new $class;
 		}
 
-		$CI->dbforge = new $class($db);
+		$CI->dbforge = new $class;
 		return $this;
 	}
 

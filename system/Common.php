@@ -9,7 +9,13 @@
  * the LICENSE file that was distributed with this source code.
  */
 
+use App\Config\Database;
+use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Config\Factories;
+use CodeIgniter\Database\BaseConnection;
+use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Debug\Exceptions;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use Laminas\Escaper\Escaper;
 
 defined('BASEPATH') or exit('No direct script access allowed');
@@ -310,6 +316,28 @@ if (!function_exists('get_config2')) {
         }
 
         return $config;
+    }
+}
+
+
+if (! function_exists('config')) {
+    /**
+     * More simple way of getting config instances from Factories
+     *
+     * @template ConfigTemplate of BaseConfig
+     *
+     * @param class-string<ConfigTemplate>|string $name
+     *
+     * @return         ConfigTemplate|null
+     * @phpstan-return ($name is class-string<ConfigTemplate> ? ConfigTemplate : object|null)
+     */
+    function config(string $name, bool $getShared = true)
+    {
+        if ($getShared) {
+            return Factories::get('config', $name);
+        }
+
+        return Factories::config($name, ['getShared' => $getShared]);
     }
 }
 
@@ -751,6 +779,33 @@ if (!function_exists('route_to')) {
         global $routes;
 
         return $routes->reverseRoute($method, ...$params);
+    }
+}
+
+//--------------------------------------------------------------------
+
+if (! function_exists('db_connect')) {
+    /**
+     * Grabs a database connection and returns it to the user.
+     *
+     * This is a convenience wrapper for \Config\Database::connect()
+     * and supports the same parameters. Namely:
+     *
+     * When passing in $db, you may pass any of the following to connect:
+     * - group name
+     * - existing connection instance
+     * - array of database configuration values
+     *
+     * If $getShared === false then a new connection instance will be provided,
+     * otherwise it will all calls will return the same instance.
+     *
+     * @param array|ConnectionInterface|string|null $db
+     *
+     * @return BaseConnection
+     */
+    function db_connect($db = null, bool $getShared = true)
+    {
+        return Database::connect($db, $getShared);
     }
 }
 
