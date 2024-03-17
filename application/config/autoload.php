@@ -101,6 +101,9 @@ $config['classmap'] = [
     'Laminas\Escaper\Escaper'                     => BASEPATH.'View/Escaper.php'
 ];
 
+if(!file_exists(WRITEPATH . 'install/.lock'))
+    return;
+
 /*
 | -------------------------------------------------------------------
 |  Auto-load Packges

@@ -1,0 +1,8 @@
+# Disable directory listing
+Options -Indexes
+IndexIgnore *
+
+# allow access json files
+<Files ~ "\.(json)$">
+    allow from all
+</Files>

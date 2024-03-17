@@ -1,0 +1,12 @@
+{
+    "name": "Installer",
+    "description": "Installer FusionCMS",
+    "version": "1.0.0",
+    "date": "2024-03-17",
+    "author": {
+        "name": "FusionCMS",
+        "website": "https:\/\/fusion-hub.com"
+    },
+
+    "enabled": true
+}

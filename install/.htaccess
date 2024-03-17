@@ -1,5 +1,0 @@
-RewriteEngine On
-
-RewriteCond %{REQUEST_URI} ^(.*/)
-RewriteCond %{DOCUMENT_ROOT}%1/.lock -f
-RewriteRule .* - [R=404,L]

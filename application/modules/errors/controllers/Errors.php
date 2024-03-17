@@ -6,6 +6,9 @@ class Errors extends MX_Controller
 {
     public function index()
     {
-        $this->template->show404();
+        if (isset($this->template))
+            $this->template->show404();
+        else
+            show_404();
     }
 }

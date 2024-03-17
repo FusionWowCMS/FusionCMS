@@ -1,11 +1,5 @@
 <?php
 
-if(file_exists("install") && !file_exists("install/.lock"))
-{
-    header("Location: install");
-    die();
-}
-
 // Used by the debug toolbar. Do not remove.
 $startMemory = memory_get_usage();
 
