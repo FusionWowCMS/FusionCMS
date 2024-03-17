@@ -128,8 +128,7 @@ class Exceptions
         $this->request = Services::request();
 
         if ($this->config->log === true && ! in_array($statusCode, $this->config->ignoreCodes, true)) {
-            $uri       = get_instance()->config->base_url() . get_instance()->uri->uri_string();
-            $routeInfo = '[Method: ' . $this->request->getMethod() . ', Route: ' . $uri . ']';
+            $routeInfo = '[Method: ' . $this->request->getMethod();
 
             log_message('critical', get_class($exception) . ": {message}\n{routeInfo}\nin {exFile} on line {exLine}.\n{trace}", [
                 'message'   => $exception->getMessage(),

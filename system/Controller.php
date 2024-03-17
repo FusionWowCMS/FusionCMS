@@ -10,7 +10,6 @@
  */
 
 use CodeIgniter\Database\BaseConnection;
-use CodeIgniter\Database\CI_DB_forge;
 use CodeIgniter\Database\Forge;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Debug\Exceptions;

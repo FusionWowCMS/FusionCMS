@@ -447,7 +447,7 @@ if (!function_exists('show_error')) {
      * @param string
      * @return    void
      */
-    function show_error($message, int $status_code = 500, string $heading = '')
+    function show_error($message, int $status_code = 500)
     {
         $status_code = abs($status_code);
         if ($status_code < 100) {
