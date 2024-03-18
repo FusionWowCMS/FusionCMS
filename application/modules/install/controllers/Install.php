@@ -446,18 +446,13 @@ class Database extends Config
             try {
                 if ($connection->getVersion())
                     $connection = db_connect($worldConfig);
-            } catch (Exception $e) {
-                die('Characters Connection Error (' . $e->getCode() . ') ' . $e->getMessage());
             } catch (DatabaseException $e) {
                 die('Characters Connection Error (' . $e->getCode() . ') ' . $e->getMessage());
             }
 
             // Connect to world database
             try {
-                if ($connection->getVersion())
-                    die('1');
-            } catch (Exception $e) {
-                die('World Connection Error (' . $e->getCode() . ') ' . $e->getMessage());
+                $connection->getVersion();
             } catch (DatabaseException $e) {
                 die('World Connection Error (' . $e->getCode() . ') ' . $e->getMessage());
             }
@@ -489,7 +484,11 @@ class Database extends Config
             ];
 
             // Everything is correct. Insert realm
-            $this->db->query(str_replace(array_keys($data), array_values($data), $statement));
+            try {
+                $this->db->query(str_replace(array_keys($data), array_values($data), $statement));
+            } catch (DatabaseException $e) {
+                die('Realms Import Error (' . $e->getCode() . ') ' . $e->getMessage());
+            }
         }
 
         die('1');
