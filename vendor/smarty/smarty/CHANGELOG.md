@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.5.1] - 2024-03-18
+
+
+## [4.5.0] - 2024-03-18
+
+
+### Changed
+- Using unregistered static class methods in expressions now also triggers a deprecation notice because we will drop support for this in the next major release [#813](https://github.com/smarty-php/smarty/issues/813)
+
 ## [4.4.1] - 2024-02-26
 - Fixed internal release-tooling
 
