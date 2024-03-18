@@ -927,16 +927,16 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v4.4.1",
+            "version": "v4.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "f4152e9b814ae2369b6e4935c05e1e0c3654318d"
+                "reference": "42b869e3a098b1c8ee07922ccded0e5a5dceadcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/f4152e9b814ae2369b6e4935c05e1e0c3654318d",
-                "reference": "f4152e9b814ae2369b6e4935c05e1e0c3654318d",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/42b869e3a098b1c8ee07922ccded0e5a5dceadcd",
+                "reference": "42b869e3a098b1c8ee07922ccded0e5a5dceadcd",
                 "shasum": ""
             },
             "require": {
@@ -987,9 +987,9 @@
             "support": {
                 "forum": "https://github.com/smarty-php/smarty/discussions",
                 "issues": "https://github.com/smarty-php/smarty/issues",
-                "source": "https://github.com/smarty-php/smarty/tree/v4.4.1"
+                "source": "https://github.com/smarty-php/smarty/tree/v4.5.1"
             },
-            "time": "2024-02-26T13:58:37+00:00"
+            "time": "2024-03-18T14:19:07+00:00"
         }
     ],
     "packages-dev": [],
