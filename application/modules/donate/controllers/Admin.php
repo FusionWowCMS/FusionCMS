@@ -154,7 +154,7 @@ class Admin extends MX_Controller
         {
             if ($this->donate_model->addValue($price, $points))
             {
-                $last = $this->db->select('id')->order_by('id',"desc")->limit(1)->get('paypal_donate')->result_array()[0]['id'];
+                $last = $this->db->table('paypal_donate')->select('id')->orderBy('id',"desc")->limit(1)->getResultArray()[0]['id'];
                 die($last);
             }
             else
