@@ -67,8 +67,8 @@ class Acl_model extends CI_Model
     public function getAccountRolesPermissions(int $userId = 0, int $default_group = 1)
     {
         // Query: Prepare
-        $query =  $this->db->newQuery()->select('agr.module')
-            ->from('acl_group_roles agr, acl_account_groups aag')
+        $query =  $this->db->table('acl_group_roles agr, acl_account_groups aag')
+            ->select('agr.module')
 
             # Filter by account id
             ->where('aag.account_id', $userId)

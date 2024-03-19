@@ -42,7 +42,7 @@ class Cms_model extends CI_Model
     public function getSideboxes(string $type = 'side', string $page = '*')
     {
         // Query: Prepare
-        $query = $this->db->newQuery()->from('sideboxes')
+        $query = $this->db->table('sideboxes')
                           ->select('*')
                           ->orderBy('order', 'ASC');
 
