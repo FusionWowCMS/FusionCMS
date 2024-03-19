@@ -201,7 +201,7 @@ class Pay extends MX_Controller
             // Loop through all characters
             foreach ($characters as $character => $items) {
                 $characterName = $this->realms->getRealm($realm)->getCharacters()->getConnection()->query(query("get_charactername_by_guid"), [$character]);
-                $characterName = $characterName->result_array();
+                $characterName = $characterName->getResultArray();
 
                 $this->realms->getRealm($realm)->getEmulator()->sendItems($characterName[0]['name'], $this->config->item("store_subject"), $this->config->item("store_body"), $items);
             }
