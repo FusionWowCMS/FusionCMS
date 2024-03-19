@@ -130,7 +130,7 @@ class Menu extends MX_Controller
         $link = $this->menu_model->getMenuLink($id);
 
         if (!$link) {
-            show_error("There is no link with ID " . $id);
+            show_error("There is no link with ID " . $id, 400);
 
             die();
         }

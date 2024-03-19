@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CodeIgniter\Debug;
 
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\Exceptions\GeneralException;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -138,6 +139,11 @@ final class ExceptionHandler extends BaseExceptionHandler implements ExceptionHa
             )
         ) {
             $view = 'error_exception.php';
+        }
+
+        // General Errors
+        if ($exception instanceof GeneralException) {
+            return 'error_general.php';
         }
 
         // 404 Errors

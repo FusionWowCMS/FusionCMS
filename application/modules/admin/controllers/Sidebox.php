@@ -171,7 +171,7 @@ class Sidebox extends MX_Controller
 
         // Invalid sidebox
         if(!$sidebox)
-            show_error('There is no sidebox with ID ' . $id);
+            show_error('There is no sidebox with ID ' . $id, 400);
 
         // Format pages
         $sidebox['pages'] = json_decode($sidebox['pages'], true);

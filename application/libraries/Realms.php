@@ -140,7 +140,7 @@ class Realms
             }
         }
 
-        show_error("There is no realm with ID " . $id);
+        show_error("There is no realm with ID " . $id, 400);
         return null;
     }
 

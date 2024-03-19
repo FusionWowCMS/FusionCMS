@@ -14,6 +14,7 @@ use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\Database\ConnectionInterface;
+use CodeIgniter\Exceptions\GeneralException;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use Laminas\Escaper\Escaper;
 
@@ -442,19 +443,18 @@ if (!function_exists('show_error')) {
      * This function will send the error page directly to the
      * browser and exit.
      *
-     * @param string
-     * @param int
-     * @param string
+     * @param string $message
+     * @param int $status_code
      * @return    void
      */
-    function show_error($message, int $status_code = 500)
+    function show_error(string $message, int $status_code = 500)
     {
         $status_code = abs($status_code);
         if ($status_code < 100) {
             $status_code = 500;
         }
 
-        throw new RuntimeException($message, $status_code);
+        throw new GeneralException($message, $status_code);
     }
 }
 

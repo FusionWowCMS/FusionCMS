@@ -122,7 +122,7 @@ class Admin extends MX_Controller
         $teleport_location = $this->teleport_model->teleportLocationExists($id);
 
         if (!$teleport_location) {
-            show_error("There is no teleport location with ID " . $id);
+            show_error("There is no teleport location with ID " . $id, 400);
 
             die();
         }

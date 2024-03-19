@@ -116,7 +116,7 @@ class Admin extends MX_Controller
         $topsite = $this->vote_model->getTopsite($id);
 
         if (!$topsite) {
-            show_error("There is no topsite with ID " . $id);
+            show_error("There is no topsite with ID " . $id, 400);
 
             die();
         }

@@ -268,7 +268,7 @@ class Admin extends MX_Controller
     {
         if (!extension_loaded('soap'))
         {
-            show_error('SOAP not installed');
+            show_error('SOAP not installed', 501);
         }
 
         $realms = $this->realms->getRealms();

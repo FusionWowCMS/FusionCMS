@@ -97,7 +97,7 @@ class Admin extends MX_Controller
         $change = $this->changelog_model->getChange($id);
 
         if (!$change) {
-            show_error("There is no change with ID " . $id);
+            show_error("There is no change with ID " . $id, 400);
 
             die();
         }

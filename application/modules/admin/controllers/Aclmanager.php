@@ -70,7 +70,7 @@ class Aclmanager extends MX_Controller
         $group = $this->acl_model->getGroup($id);
 
         if (!$group) {
-            show_error("There is no group with ID " . $id);
+            show_error("There is no group with ID " . $id, 400);
 
             die();
         }

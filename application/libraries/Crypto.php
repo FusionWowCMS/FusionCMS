@@ -7,7 +7,7 @@ class Crypto
     public function __construct()
     {
         if (!extension_loaded('gmp')) { // make sure it's loaded
-            show_error('GMP extension is not enabled.');
+            show_error('GMP extension is not enabled.', 501);
         }
     }
 

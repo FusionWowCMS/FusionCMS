@@ -93,7 +93,7 @@ class Slider extends MX_Controller
         $slide = $this->slider_model->getSlide($id);
 
         if (!$slide) {
-            show_error("There is no slide with ID " . $id);
+            show_error("There is no slide with ID " . $id, 400);
 
             die();
         }

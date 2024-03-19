@@ -298,7 +298,7 @@ class Admin_items extends MX_Controller
         $item = $this->items_model->getItem($id);
 
         if (!$item) {
-            show_error("There is no item with ID " . $id);
+            show_error("There is no item with ID " . $id, 400);
 
             die();
         }
