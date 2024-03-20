@@ -20,14 +20,14 @@
                                 <div class="form-group row mb-3">
                                     <label class="col-sm-2 col-form-label" for="headline_{$flag}">Headline</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" id="headline_{$flag}" __headline__="{$language}" value="{$article.headline[$language]}">
+                                        <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" id="headline_{$flag}" __headline__="{$language}" value="{if isset($article.headline[$language])}{$article.headline[$language]}{/if}">
                                     </div>
                                 </div>
                             </form>
                             <div class="form-group row mb-3">
                                 <label class="col-sm-2 col-form-label" for="description_{$flag}">Content</label>
                                 <div class="col-sm-10">
-                                    <textarea name="description_{$flag}" class="tinymce_{$flag} form-control max-h-52 nui-focus border-muted-300 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full border bg-white font-monospace transition-all duration-300 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 min-h-[2.5rem] text-sm leading-[1.6] rounded-xl resize-none p-2" id="description_{$flag}" __content__="{$language}" cols="30" rows="10">{$article.content[$language]}</textarea>
+                                    <textarea name="description_{$flag}" class="tinymce_{$flag} form-control max-h-52 nui-focus border-muted-300 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full border bg-white font-monospace transition-all duration-300 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 min-h-[2.5rem] text-sm leading-[1.6] rounded-xl resize-none p-2" id="description_{$flag}" __content__="{$language}" cols="30" rows="10">{if isset($article.content[$language])}{$article.content[$language]}{/if}</textarea>
                                 </div>
                             </div>
                         </div>
