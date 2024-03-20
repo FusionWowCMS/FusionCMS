@@ -57,28 +57,6 @@ var Accounts = {
 		});
 	},
 
-	moduleState: function(arrowObj, id)
-	{
-		var obj = $('#'+id);
-		var arrow = $('#'+arrowObj);
-		if (obj.attr("style") == "display: none;")
-		{
-			obj.slideToggle(100);
-			arrow.css("-webkit-transform", "rotate(90deg)");
-			arrow.css("-moz-transform", "rotate(90deg)");
-			arrow.css("-o-transform", "rotate(90deg)");
-			arrow.css("-ms-transform", "rotate(90deg)");
-		}
-		else
-		{
-			obj.slideToggle(300);
-			arrow.css("-webkit-transform", "rotate(0deg)");
-			arrow.css("-moz-transform", "rotate(0deg)");
-			arrow.css("-o-transform", "rotate(0deg)");
-			arrow.css("-ms-transform", "rotate(0deg)");
-		}
-	},
-	
 	loadMore: function(id)
 	{
 
