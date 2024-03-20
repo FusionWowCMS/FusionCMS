@@ -45,11 +45,11 @@ class News_model extends CI_Model
      * Get the article with the specified id.
      *
      * @param  $id
-     * @return bool
+     * @return bool|array
      */
-    public function getArticle($id)
+    public function getArticle($id): bool|array
     {
-        $query = $this->db->query("SELECT * FROM articles WHERE id=?", array($id));
+        $query = $this->db->table('articles')->select()->where('id', $id)->get();
 
         if ($query->getNumRows() > 0) {
             $result = $query->getResultArray();
@@ -66,7 +66,7 @@ class News_model extends CI_Model
      * @param  $articleId
      * @return array|bool
      */
-    public function getTags($articleId)
+    public function getTags($articleId): bool|array
     {
         $query = $this->db->table('tag t, article_tag at')->select('t.name')
                             ->where('at.article_id', $articleId)
@@ -83,9 +83,9 @@ class News_model extends CI_Model
     /**
      * Count the articles
      *
-     * @return Int
+     * @return int|string
      */
-    public function countArticles()
+    public function countArticles(): int|string
     {
         return $this->db->table('articles')->countAll();
     }

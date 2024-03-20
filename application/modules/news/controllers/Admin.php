@@ -114,13 +114,13 @@ class Admin extends MX_Controller
         $this->administrator->setTitle($title);
 
         // Prepare my data
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
             "defaultLanguage" => $this->config->item('language'),
             "languages" => $this->language->getAllLanguages(),
             "abbreviationLanguage" => $this->language->getAbbreviationByLanguage($this->language->getLanguage()),
             'article' => $article
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("admin_edit.tpl", $data);
