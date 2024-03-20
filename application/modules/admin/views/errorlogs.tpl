@@ -78,5 +78,7 @@
         $('#delete-log, #delete-all-log').click(function () {
             return confirm('Are you sure?');
         });
+
+        $('input[type="search"]').addClass('form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 h-10 text-sm leading-5 rounded-xl !bg-muted-100 dark:!bg-muted-700 focus:!bg-white dark:focus:!bg-muted-900 mb-3');
     });
 </script>
