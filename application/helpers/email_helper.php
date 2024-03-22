@@ -31,14 +31,14 @@ function sendMail(string $receiver, string $subject, string $username, string $m
 
     // Pass the custom SMTP settings if any
     if ($CI->config->item('smtp_protocol') == 'smtp') {
-        $config = array(
+        $config = [
             'protocol'   => $CI->config->item('smtp_protocol'),
             'SMTPHost'   => $CI->config->item('smtp_host'),
             'SMTPUser'   => $CI->config->item('smtp_user'),
             'SMTPPass'   => $CI->config->item('smtp_pass'),
             'SMTPPort'   => $CI->config->item('smtp_port'),
             'SMTPCrypto' => $CI->config->item('smtp_crypto')
-        );
+        ];
     }
 
     // Configuration
@@ -71,13 +71,13 @@ function sendMail(string $receiver, string $subject, string $username, string $m
         die("cannot be send");
     }
 
-    $data2 = array(
+    $data2 = [
         'uid' => $CI->external_account_model->getIdByEmail($receiver),
         'email' => $receiver,
         'subject' => $subject,
         'message' => $message,
-        'timestamp' => time(),
-    );
+        'timestamp' => time()
+    ];
 
-    $CI->db->insert('email_log', $data2);
+    $CI->db->table('email_log', )->insert($data2);
 }
