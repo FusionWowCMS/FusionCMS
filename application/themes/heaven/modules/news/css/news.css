@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------------------*/
 /* Owl Carousel (custom)
 /*-------------------------------------------------------------------------*/
-.owl-carousel {}
+/*.owl-carousel {}*/
 
 .owl-carousel.owl-dots-inside\[pos\:top\] .owl-dots,
 .owl-carousel.owl-dots-inside\[pos\:bottom\] .owl-dots {
@@ -227,7 +227,7 @@
 
 /* Item: Info
 /*---------------------------------------------------------------*/
-.page-news .item.type-news.-lg .item-info {}
+/*.page-news .item.type-news.-lg .item-info {}*/
 
 /* Info (buttons) */
 .page-news .item.type-news.-lg .item-info .info-buttons {
@@ -243,7 +243,7 @@
 
 	/* Item: Info
 	/*---------------------------------------------------------------*/
-	.page-news .item.type-news.-lg .item-info {}
+	/*.page-news .item.type-news.-lg .item-info {}*/
 
 	/* Info (buttons) */
 	.page-news .item.type-news.-lg .item-info .info-buttons {
@@ -363,7 +363,7 @@
 /*-------------------------------------------------------------------------*/
 /* News: Item (full)
 /*-------------------------------------------------------------------------*/
-.page-news .item.type-news.-full {}
+/*.page-news .item.type-news.-full {}*/
 
 /* Item: Head
 /*---------------------------------------------------------------*/
@@ -502,7 +502,7 @@
 /* News: Item (full): Responsive
 /*---------------------------------------------------------------*/
 @media screen and (min-width: 1200px) { /* xl */
-	.page-news .item.type-news.-full {}
+	/*.page-news .item.type-news.-full {}*/
 
 	/* Item: Body
 	/*---------------------------------------------------------------*/
@@ -515,7 +515,7 @@
 /*-------------------------------------------------------------------------*/
 /* News: Comments
 /*-------------------------------------------------------------------------*/
-.page-news [news-comments] {}
+/*.page-news [news-comments] {}*/
 
 /* News: Comments: Area
 /*---------------------------------------------------------------*/
@@ -596,7 +596,7 @@
 	vertical-align: middle;
 }
 
-.page-news [news-comments] .comments_area .comments .comment strong {}
+/*.page-news [news-comments] .comments_area .comments .comment strong {}*/
 
 .page-news [news-comments] .comments_area .comments .comment strong a {
 	color: var(--color-idle);

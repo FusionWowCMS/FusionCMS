@@ -22,7 +22,7 @@
 	padding: 0;
 }
 
-.page-ucp .avatars .my_avatar {}
+/*.page-ucp .avatars .my_avatar {}*/
 
 .page-ucp .avatars .my_avatar.avatar_current {
 	border-color: #75ceee;

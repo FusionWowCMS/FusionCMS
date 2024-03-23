@@ -1,11 +1,11 @@
 /*-------------------------------------------------------------------------*/
 /* [Sidebox] Top PvP
 /*-------------------------------------------------------------------------*/
-.sidebox.sidebox-toppvp {}
+/*.sidebox.sidebox-toppvp {}
 
 .sidebox.sidebox-toppvp #toppvp {}
 
-.sidebox.sidebox-toppvp #toppvp .realm {}
+.sidebox.sidebox-toppvp #toppvp .realm {}*/
 
 /* [Sidebox] Top PvP: Realm name
 /*---------------------------------------------------------------*/
@@ -74,9 +74,9 @@
 }
 
 /* Table: Head */
-.sidebox.sidebox-toppvp #toppvp .realm table thead {}
+/*.sidebox.sidebox-toppvp #toppvp .realm table thead {}
 
-.sidebox.sidebox-toppvp #toppvp .realm table thead tr {}
+.sidebox.sidebox-toppvp #toppvp .realm table thead tr {}*/
 
 .sidebox.sidebox-toppvp #toppvp .realm table thead tr th {
 	color: var(--color-primary);
@@ -91,9 +91,9 @@
 }
 
 /* Table: Body */
-.sidebox.sidebox-toppvp #toppvp .realm table tbody {}
+/*.sidebox.sidebox-toppvp #toppvp .realm table tbody {}
 
-.sidebox.sidebox-toppvp #toppvp .realm table tbody tr {}
+.sidebox.sidebox-toppvp #toppvp .realm table tbody tr {}*/
 
 .sidebox.sidebox-toppvp #toppvp .realm table tbody tr td {
 	padding: var(--toppvp-gap) 0;

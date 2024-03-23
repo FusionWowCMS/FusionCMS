@@ -96,9 +96,9 @@
 	margin: 3rem 0 0;
 }
 
-.page-register .register-content form .form-group {}
+/*.page-register .register-content form .form-group {}
 
-.page-register .register-content form .form-group input {}
+.page-register .register-content form .form-group input {}*/
 
 /* Form (captcha) */
 .page-register .register-content form .form-group input + img {
