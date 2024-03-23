@@ -48,6 +48,10 @@ a:active {
 	position: absolute;
 	right: 0;
 	top: 0;
+	background: #FFF;
+	border-bottom: 1px solid #E9E9E6;
+	border-top: 3px solid #EDEDED;
+	z-index: 1000;
 }
 
 /* Layout Base - Inner Wrapper */
@@ -3873,12 +3877,6 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 	}
 }
 /* Header */
-.header {
-	background: #FFF;
-	border-bottom: 1px solid #E9E9E6;
-	border-top: 3px solid #EDEDED;
-	z-index: 1000;
-}
 
 .header .logo {
 	float: left;
@@ -4291,6 +4289,7 @@ html.header-dark .header .separator {
 
 	.header.header-nav-menu .header-nav {
 		float: left;
+		display: block !important;
 	}
 
 	.header.header-nav-menu .header-nav.header-nav-dark-dropdown {
@@ -4334,10 +4333,6 @@ html.header-dark .header .separator {
 
 	.header.header-nav-menu .header-nav.header-nav-dark-dropdown .header-social-icons {
 		margin-top: 70px;
-	}
-
-	.header.header-nav-menu .header-nav {
-		display: block !important;
 	}
 
 	.header.header-nav-menu .header-nav-main {
