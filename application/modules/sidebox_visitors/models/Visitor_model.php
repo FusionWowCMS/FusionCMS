@@ -2,11 +2,6 @@
 
 class Visitor_model extends CI_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function get()
     {
         $time = time() - 60 * 5;
