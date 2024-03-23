@@ -23,7 +23,7 @@
 
 /* Content: Flex
 /*---------------------------------------------------------------*/
-.section-content > .container {}
+/*.section-content > .container {}*/
 
 .section-content > .container > .row {
 	--bs-gutter-x: var(--margin-primary);

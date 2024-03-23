@@ -119,7 +119,7 @@
 	justify-content: center;
 }
 
-.footer .navbar .navbar-nav .nav-item {}
+/*.footer .navbar .navbar-nav .nav-item {}*/
 
 .footer .navbar .navbar-nav .nav-item .nav-link {
 	color: var(--link-primary-idle);
