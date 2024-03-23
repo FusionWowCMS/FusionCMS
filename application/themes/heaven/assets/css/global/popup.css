@@ -93,5 +93,5 @@
 	margin: 0 0.5rem;
 }
 
-.popup-box .popup-buttons .popup-button.type-action {}
+/*.popup-box .popup-buttons .popup-button.type-action {}*/
 .popup-box .popup-buttons .popup-button.type-cancel {-webkit-filter: grayscale(0.3); filter: grayscale(0.3);}

@@ -290,11 +290,11 @@
 
 /* Header: Navbar: Nav
 /*-----------------------------------------------------*/
-.header .navbar .navbar-nav {}
+/*.header .navbar .navbar-nav {}*/
 
 /* Header: Navbar: Nav: Item
 /*-------------------------------------------*/
-.header .navbar .navbar-nav .nav-item {}
+/*.header .navbar .navbar-nav .nav-item {}*/
 
 /* Item (idle) */
 .header .navbar .navbar-nav .nav-item .nav-link {
@@ -366,7 +366,7 @@
 
 	/* Header: Navbar: Nav: Item
 	/*-------------------------------------------*/
-	.header .navbar .navbar-nav .nav-item {}
+	/*.header .navbar .navbar-nav .nav-item {}*/
 
 	/* Item (separator) */
 	.header .navbar .navbar-nav .nav-item::after {
@@ -402,10 +402,10 @@
 
 	/* Header: Navbar: Nav: Dropdown
 	/*-------------------------------------------*/
-	.header .navbar .navbar-nav .dropdown {}
+	/*.header .navbar .navbar-nav .dropdown {}*/
 
 	/* Dropdown (toggle) */
-	.header .navbar .navbar-nav .dropdown .dropdown-toggle {}
+	/*.header .navbar .navbar-nav .dropdown .dropdown-toggle {}*/
 
 	.header .navbar .navbar-nav .dropdown .dropdown-toggle .dropdown-arrow {
 		--arrow-rotate: 45deg;
@@ -516,11 +516,11 @@
 @media screen and (min-width: 1440px) { /* xl+ */
 	/* Header: Navbar: Nav
 	/*-----------------------------------------------------*/
-	.header .navbar .navbar-nav {}
+	/*.header .navbar .navbar-nav {}*/
 
 	/* Header: Navbar: Nav: Item
 	/*-------------------------------------------*/
-	.header .navbar .navbar-nav .nav-item {}
+	/*.header .navbar .navbar-nav .nav-item {}*/
 
 	/* Item (idle) */
 	.header .navbar .navbar-nav .nav-item .nav-link {

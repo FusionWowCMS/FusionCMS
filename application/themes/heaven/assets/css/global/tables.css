@@ -8,9 +8,9 @@ table {
 
 /* Table: Head
 /*---------------------------------------------------------------*/
-table thead {}
+/*table thead {}
 
-table thead tr {}
+table thead tr {}*/
 
 table thead tr th {
 	vertical-align: middle;
@@ -18,9 +18,9 @@ table thead tr th {
 
 /* Table: Body
 /*---------------------------------------------------------------*/
-table tbody {}
+/*table tbody {}
 
-table tbody tr {}
+table tbody tr {}*/
 
 table tbody tr td {
 	vertical-align: middle;
@@ -99,9 +99,9 @@ table tbody tr td {
 
 /* Nice table: Head
 /*---------------------------------------------------------------*/
-.nice_table thead {}
+/*.nice_table thead {}
 
-.nice_table thead tr {}
+.nice_table thead tr {}*/
 
 .nice_table thead tr th,
 .nice_table tbody tr:first-child td {
@@ -119,7 +119,7 @@ table tbody tr td {
 
 /* Nice table: Body
 /*---------------------------------------------------------------*/
-.nice_table tbody {}
+/*.nice_table tbody {}*/
 
 .nice_table tbody tr {
 	-webkit-transition: all 300ms ease-in-out;

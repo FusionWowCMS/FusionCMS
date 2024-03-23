@@ -74,7 +74,7 @@
 
 /* [Popup] SweetAlert: Icon
 /*---------------------------------------------------------------*/
-.swal2-container .swal2-popup .swal2-icon {}
+/*.swal2-container .swal2-popup .swal2-icon {}*/
 
 /* Icon (success) */
 .swal2-container .swal2-popup .swal2-icon.swal2-success .swal2-success-fix,
@@ -196,7 +196,7 @@
 	background-color: var(--glassmorphism-background-color);
 }
 
-.dropdown .dropdown-menu li {}
+/*.dropdown .dropdown-menu li {}*/
 
 /* [BS] Dropdown: Menu: Item (idle)
 /*-----------------------------------------------------*/
@@ -259,7 +259,7 @@
 /* [BS] Dropdown: Responsive
 /*---------------------------------------------------------------*/
 @media screen and (min-width: 768px) { /* md */
-	.dropdown {}
+	/*.dropdown {}*/
 
 	.dropdown .dropdown-menu li .dropdown-item {
 		font-size: 1rem;
@@ -327,7 +327,7 @@
 /*-------------------------------------------------------------------------*/
 /* [BS] Accordion
 /*-------------------------------------------------------------------------*/
-.accordion {}
+/*.accordion {}*/
 
 /* [BS] Accordion: Item
 /*---------------------------------------------------------------*/
@@ -346,7 +346,7 @@
 
 /* [BS] Accordion: Item: Header
 /*-----------------------------------------------------*/
-.accordion .accordion-item .accordion-header {}
+/*.accordion .accordion-item .accordion-header {}*/
 
 /* Button (idle) */
 .accordion .accordion-item .accordion-header .accordion-button {
@@ -498,7 +498,7 @@
 
 /* [BS] Nav pills: Item
 /*---------------------------------------------------------------*/
-.nav-pills .nav-item {}
+/*.nav-pills .nav-item {}*/
 
 /* [BS] Nav pills: Item: Link (idle)
 /*-----------------------------------------------------*/
@@ -559,7 +559,7 @@
 /*-------------------------------------------------------------------------*/
 /* [BS] Input group
 /*-------------------------------------------------------------------------*/
-.input-group {}
+/*.input-group {}*/
 
 .input-group .input-group-text {
 	color: #5b5b78;
@@ -595,7 +595,7 @@
 
 /* [BS] Pagination: Item
 /*---------------------------------------------------------------*/
-.pagination .page-item {}
+/*.pagination .page-item {}*/
 
 .pagination .page-item.disabled {
 	cursor: not-allowed;
@@ -699,7 +699,7 @@
 
 /* [BS] Nav tabs: Item
 /*---------------------------------------------------------------*/
-.nav-tabs .nav-item {}
+/*.nav-tabs .nav-item {}*/
 
 /* [BS] Nav tabs: Item: Link (idle)
 /*-----------------------------------------------------*/

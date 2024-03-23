@@ -47,9 +47,9 @@
 
 /* Wall: Owl
 /*---------------------------------------------------------------*/
-.section-wall .owl-carousel {}
+/*.section-wall .owl-carousel {}
 
-.section-wall .owl-carousel .owl-stage-outer {}
+.section-wall .owl-carousel .owl-stage-outer {}*/
 
 .section-wall .owl-carousel .owl-stage-outer .owl-stage {
 	display: -webkit-box;
@@ -255,11 +255,11 @@
 @media screen and (min-width: 1200px) { /* xl */
 	/* Wall: Slider
 	/*---------------------------------------------------------------*/
-	.section-wall .wall-slider {}
+	/*.section-wall .wall-slider {}*/
 
 	/* Wall: Slider: Item
 	/*-----------------------------------------------------*/
-	.section-wall .wall-slider .slider-item {}
+	/*.section-wall .wall-slider .slider-item {}*/
 
 	.section-wall .wall-slider .slider-item .item-title {
 		font-size: 3.75rem;
