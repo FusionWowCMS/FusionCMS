@@ -1,9 +1,9 @@
 /*-------------------------------------------------------------------------*/
 /* Widgets
 /*-------------------------------------------------------------------------*/
-.section-widgets {}
+/*.section-widgets {}
 
-.section-widgets [widget] {}
+.section-widgets [widget] {}*/
 
 .section-widgets [widget] iframe {
 	width: 100%;

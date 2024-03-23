@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------------------*/
 /* Alert
 /*-------------------------------------------------------------------------*/
-[alert-container] {}
+/*[alert-container] {}*/
 
 [alert-container] .alert {
 	width: 100%;
@@ -69,7 +69,7 @@
 	padding-right: 0;
 }
 
-[alert-container] .alert .alert-col.alert-col-2 .alert-text {}
+/*[alert-container] .alert .alert-col.alert-col-2 .alert-text {}*/
 
 [alert-container] .alert .alert-col.alert-col-2 .alert-text center[style] {display: none;}
 

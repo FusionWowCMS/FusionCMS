@@ -196,7 +196,7 @@
 
 /* News article: Head
 /*---------------------------------------------------------------*/
-.news-article .article-head {}
+/*.news-article .article-head {}*/
 
 /* News article: Body
 /*---------------------------------------------------------------*/
@@ -272,15 +272,15 @@
 
 /* News article: Tags
 /*---------------------------------------------------------------*/
-.news-article .article-tags {}
+/*.news-article .article-tags {}*/
 
 /* News article: First (VARIATION)
 /*---------------------------------------------------------------*/
-.news-article.first-item {}
+/*.news-article.first-item {}*/
 
 /* News article: Single (VARIATION)
 /*---------------------------------------------------------------*/
-.news-article.is-single {}
+/*.news-article.is-single {}*/
 
 .news-article.is-single .article-body {
 	margin: 0;
@@ -359,7 +359,7 @@
 
 /* News Comment: Head
 /*---------------------------------------------------------------*/
-.news-article .Comment-head {}
+/*.news-article .Comment-head {}*/
 
 /* News Comment: Body
 /*---------------------------------------------------------------*/

@@ -11,7 +11,7 @@
 	-ms-flex-positive: 1;
 }
 
-.section-content > .container {}
+/*.section-content > .container {}*/
 
 .section-content > .container > .row {
 	margin-left: 0;
@@ -21,8 +21,9 @@
 .section-content > .container > .row > .col-sm-12 {
 	padding-left: 0;
 	padding-right: 0;
-} .section-content > .container > .row #left  {}
-  .section-content > .container > .row #right {}
+}
+/*.section-content > .container > .row #left  {}
+.section-content > .container > .row #right {}*/
 
 /* Content: Responsive
 /*---------------------------------------------------------------*/

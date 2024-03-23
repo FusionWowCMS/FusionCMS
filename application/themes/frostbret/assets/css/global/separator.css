@@ -76,7 +76,7 @@
 
 /* Separator: Arrow down
 /*---------------------------------------------------------------*/
-[separator-arrow-down] {}
+/*[separator-arrow-down] {}*/
 
 [separator-arrow-down] [separator-arrow] {
 	top: -26px;
@@ -88,7 +88,7 @@
 
 /* Separator: Arrow up
 /*---------------------------------------------------------------*/
-[separator-arrow-up] {}
+/*[separator-arrow-up] {}*/
 
 [separator-arrow-up] [separator-arrow] {
 	top: -20px;

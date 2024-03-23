@@ -8,12 +8,12 @@
 	background-color: #0a0e13;
 }
 
-.footer .container-fluid {}
+/*.footer .container-fluid {}
 
 .footer .container-fluid .row {}
 
 .footer .container-fluid .row.row-1 {}
-.footer .container-fluid .row.row-2 {}
+.footer .container-fluid .row.row-2 {}*/
 .footer .container-fluid .row.row-3 {background-color: rgba(0, 0, 0, 0.3);}
 
 .footer .container-fluid .row .col-sm-12 {

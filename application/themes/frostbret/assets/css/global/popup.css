@@ -43,8 +43,8 @@
 	margin: 0 0.5rem !important;
 }
 
-.popup-box .popup-links .popup-link#confirm_hide   {opacity: 0.7;}
-.popup-box .popup-links .popup-link#confirm_button {}
+.popup-box .popup-links .popup-link#confirm_hide {opacity: 0.7;}
+/*.popup-box .popup-links .popup-link#confirm_button {}*/
 
 /*-------------------------------------------------------------------------*/
 /* Popup login
@@ -89,9 +89,9 @@
 	width: 100%;
 } .popup-login .popup-content .divider + table {text-align: center;}
 
-.popup-login .popup-content table tbody {}
+/*.popup-login .popup-content table tbody {}
 
-.popup-login .popup-content table tbody tr {}
+.popup-login .popup-content table tbody tr {}*/
 
 .popup-login .popup-content table tbody tr td {
 	vertical-align: middle;

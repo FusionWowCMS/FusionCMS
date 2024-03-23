@@ -7,11 +7,11 @@
 	margin: var(--margin-primary) 0 5rem 0;
 }
 
-.section-pageheader .container {}
+/*.section-pageheader .container {}
 
 .section-pageheader .container .row {}
 
-.section-pageheader .container .row .col-md-12 {}
+.section-pageheader .container .row .col-md-12 {}*/
 
 .section-pageheader .container .row .col-md-12 .pageheader-title {
 	color: #edfbff;
@@ -47,9 +47,9 @@
 
 /* Page header: Basic
 /*---------------------------------------------------------------*/
-.section-pageheader.is-basic .container {}
+/*.section-pageheader.is-basic .container {}
 
-.section-pageheader.is-basic .container .row {}
+.section-pageheader.is-basic .container .row {}*/
 
 .section-pageheader.is-basic .container .row .col-md-12 {
 	flex: 0 0 100%;
@@ -201,7 +201,7 @@
 
 /* Page sub header: Title
 /*---------------------------------------------------------------*/
-.page-subheader .subheader-title {}
+/*.page-subheader .subheader-title {}*/
 
 .page-subheader .subheader-title span {
 	color: #edfbff;

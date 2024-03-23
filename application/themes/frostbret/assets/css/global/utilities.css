@@ -288,7 +288,7 @@
     -moz-box-shadow: 0 0 0 2px rgba(11, 11, 10, 0.25), 0 0 15px 0 rgba(11, 11, 10, 0.25)!important;
 }
 
-.accordion {}
+/*.accordion {}*/
 .accordion .accordion-item {
 	border:none;
 	border-radius:0;
@@ -296,7 +296,7 @@
 	-webkit-border-radius:0;
 	background-color:transparent;
 }
-.accordion .accordion-item .accordion-header {}
+/*.accordion .accordion-item .accordion-header {}*/
 .accordion .accordion-item .accordion-header .accordion-button {
 	color:#9cbdd3;
 	font-style:inherit;

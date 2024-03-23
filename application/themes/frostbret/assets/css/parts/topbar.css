@@ -108,7 +108,7 @@
 
 /* Membership bar: Profile
 /*-----------------------------------------------------*/
-.section-topbar .membership-bar .membership-bar-profile {}
+/*.section-topbar .membership-bar .membership-bar-profile {}*/
 
 .section-topbar .membership-bar .membership-bar-profile .profile-avatar {
 	width: 52px;
@@ -146,12 +146,12 @@
 	text-shadow: 0 1px 1px rgba(9, 16, 28, 0.94);
 }
 
-.section-topbar .membership-bar .membership-bar-info .info-welcome      {}
+/*.section-topbar .membership-bar .membership-bar-info .info-welcome      {}*/
 .section-topbar .membership-bar .membership-bar-info .info-welcome span {color: #a1c1e6;}
 
 .section-topbar .membership-bar .membership-bar-info .info-coins                     {color: #51657c;}
 .section-topbar .membership-bar .membership-bar-info .info-coins span                {color: #7a8ea4;}
-.section-topbar .membership-bar .membership-bar-info .info-coins span i              {}
+/*.section-topbar .membership-bar .membership-bar-info .info-coins span i              {}*/
 .section-topbar .membership-bar .membership-bar-info .info-coins span i[text-gold]   {color: #f8c64e;}
 .section-topbar .membership-bar .membership-bar-info .info-coins span i[text-silver] {color: #c3c3c3;}
 

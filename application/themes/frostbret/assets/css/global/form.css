@@ -588,7 +588,7 @@ input[type='submit'][disabled] {
 	margin-top: -1rem;
 }
 
-.page_form table tbody {}
+/*.page_form table tbody {}*/
 
 .page_form table tbody tr {
 	display: block;
