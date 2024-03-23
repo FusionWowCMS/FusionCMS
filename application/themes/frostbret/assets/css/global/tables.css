@@ -4,6 +4,7 @@
 .nice_table {
 	border-spacing: 0 !important;
 	border-collapse: collapse;
+	width: 100%;
 }
 
 /*nice_table thead {}
@@ -20,13 +21,6 @@ nice_table thead tr {}*/
 
 .nice_table tbody tr td {
 	vertical-align: middle;
-}
-
-/*-------------------------------------------------------------------------*/
-/* Nice nice_table
-/*-------------------------------------------------------------------------*/
-.nice_table {
-	width: 100%;
 }
 
 /* Nice nice_table: Head
