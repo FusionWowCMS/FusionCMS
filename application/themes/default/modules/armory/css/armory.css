@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------------------*/
 /* Armory
 /*-------------------------------------------------------------------------*/
-.box.type-armory {}
+/*.box.type-armory {}*/
 
 /* Armory: Subbody
 /*---------------------------------------------------------------*/
@@ -27,7 +27,7 @@
 
 /* Armory: Table
 /*---------------------------------------------------------------*/
-.box.type-armory .dataTables_wrapper {}
+/*.box.type-armory .dataTables_wrapper {}*/
 
 .box.type-armory .dataTables_wrapper .row + .row + .row {
 	margin: var(--margin-primary) 0 0 0;
@@ -61,7 +61,7 @@
 /* Armory: Responsive
 /*---------------------------------------------------------------*/
 @media screen and (min-width: 768px) { /* Desktop */
-	.box.type-armory {}
+	/*.box.type-armory {}*/
 
 	/* Armory: Fields
 	/*---------------------------------------------------------------*/

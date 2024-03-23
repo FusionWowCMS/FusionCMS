@@ -1,11 +1,11 @@
 /*-------------------------------------------------------------------------*/
 /* [Sidebox] Top PvP
 /*-------------------------------------------------------------------------*/
-.box.type-toppvp {}
+/*.box.type-toppvp {}
 
 .box.type-toppvp #toppvp {}
 
-.box.type-toppvp #toppvp .realm {}
+.box.type-toppvp #toppvp .realm {}*/
 
 /* [Sidebox] Top PvP: Realm name
 /*---------------------------------------------------------------*/
@@ -66,9 +66,9 @@
 	width: 100%;
 }
 
-.box.type-toppvp #toppvp .realm table tbody {}
+/*.box.type-toppvp #toppvp .realm table tbody {}
 
-.box.type-toppvp #toppvp .realm table tbody tr {}
+.box.type-toppvp #toppvp .realm table tbody tr {}*/
 
 .box.type-toppvp #toppvp .realm table tbody tr td {
 	padding: 0.3rem;
