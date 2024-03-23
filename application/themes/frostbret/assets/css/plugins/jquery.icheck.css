@@ -33,11 +33,12 @@
 	border-radius: 50%;
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
-} .iradio                  {background-position: 100% 0;}
-  .iradio.hover            {background-position: 100% -28px;}
-  .iradio.checked          {background-position: 100% -56px;}
-  .iradio.disabled         {background-position: 100% -84px;}
-  .iradio.checked.disabled {background-position: 100% -112px;}
+	background-position: 100% 0;
+}
+.iradio.hover            {background-position: 100% -28px;}
+.iradio.checked          {background-position: 100% -56px;}
+.iradio.disabled         {background-position: 100% -84px;}
+.iradio.checked.disabled {background-position: 100% -112px;}
 
 /* iCheck: Checkbox
 /*---------------------------------------------------------------*/
