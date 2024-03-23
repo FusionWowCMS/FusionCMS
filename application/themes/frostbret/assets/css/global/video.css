@@ -19,7 +19,6 @@
 	width: 2224px;
 	height: 1151px;
 	top: 0;
-	left: 0;
 	content: '';
 	position: absolute;
 	background-color: transparent;
@@ -43,7 +42,6 @@
 	width: 2224px;
 	height: 1151px;
 	top: 0;
-	left: 0;
 	display: block;
 	position: absolute;
 
