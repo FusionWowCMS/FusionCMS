@@ -42,10 +42,6 @@ span.wh-icon-text {
 	text-shadow: 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000, -2px 0 #000, -1px 0 #000, 0px 0 #000, 1px 0 0 #000;
 }
 
-#store > form[onsubmit="return false"] > div {}
-
-#store > form[onsubmit="return false"] > div > label {}
-
 #store > form[onsubmit="return false"] > div > div {
 	font-size: 0;
 	white-space: nowrap;
