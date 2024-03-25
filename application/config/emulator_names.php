@@ -7,6 +7,7 @@ $emulators = [
     'trinity_legion'           => 'TrinityCore - Legion (7.x.x)',
     'trinity_cata'             => 'TrinityCore - Cataclysm (4.3.4)',
     'trinity_wotlkclassic'     => 'TrinityCore - Wotlk Classic (3.4.3)',
+    'trinity_cataclassic'      => 'TrinityCore - Cataclysm Classic (4.4.0)',
     'trinity_old'              => 'TrinityCore (3.3.5a) Old Base',
     'skyfire'                  => 'Skyfire (5.4.8)',
     'azerothcore'              => 'AzerothCore (3.3.5a)',
