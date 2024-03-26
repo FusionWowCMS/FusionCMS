@@ -12,7 +12,6 @@ class Admin extends MX_Controller
     {
         // Make sure to load the administrator library!
         $this->load->library('administrator');
-        $this->load->helper('tinymce_helper');
         $this->load->model('page_model');
 
         requirePermission("canViewAdmin");

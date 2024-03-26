@@ -7,7 +7,5 @@ function TinyMCE()
 {
     $CI = &get_instance();
 
-    $data = array("url" => pageURL);
-
-    return $CI->smarty->view($CI->template->view_path . "tinymce.tpl", $data, true);
+    return $CI->smarty->view($CI->template->view_path . 'tinymce.tpl', ['url' => pageURL], true);
 }

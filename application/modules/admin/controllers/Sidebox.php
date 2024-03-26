@@ -15,7 +15,6 @@ class Sidebox extends MX_Controller
         // Make sure to load the administrator library!
         $this->load->library('administrator');
         $this->load->model('sidebox_model');
-        $this->load->helper('tinymce_helper');
 
         parent::__construct();
 

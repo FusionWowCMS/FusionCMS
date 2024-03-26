@@ -156,7 +156,7 @@ $autoload['drivers'] = [''];
 |   $autoload['helper'] = ['url', 'file'];
 */
 
-$autoload['helper'] = ['url', 'emulator', 'form', 'text', 'lang', 'breadcumb', 'permission'];
+$autoload['helper'] = ['url', 'emulator', 'form', 'text', 'lang', 'breadcumb', 'permission', 'tinymce'];
 
 
 /*

@@ -13,7 +13,6 @@ class Admin extends MX_Controller
         // Make sure to load the administrator library!
         $this->load->library('administrator');
         $this->load->model('news_model');
-        $this->load->helper('tinymce_helper');
 
         //Load upload library
         $this->load->library('upload');
