@@ -36,8 +36,8 @@ class Crypto
         $verifier = str_pad(gmp_export(gmp_powm($g, $h, $N), 1, GMP_LSW_FIRST), 32, chr(0), STR_PAD_RIGHT);
 
         return [
-            "salt" => $salt,
-            "verifier" => $verifier
+            'salt' => $salt,
+            'verifier' => $verifier
         ];
     }
 
@@ -66,8 +66,8 @@ class Crypto
         $verifier = str_pad(gmp_export(gmp_powm($g, $h, $N), 1, GMP_LSW_FIRST), 128, chr(0), STR_PAD_RIGHT);
 
         return [
-            "salt" => $salt,
-            "verifier" => $verifier
+            'salt' => $salt,
+            'verifier' => $verifier
         ];
     }
 
@@ -107,8 +107,8 @@ class Crypto
         $verifier =  str_pad(gmp_export(gmp_powm($g, $x, $N), 1, GMP_LSW_FIRST), 256, chr(0), STR_PAD_RIGHT);
 
         return [
-            "salt" => $salt,
-            "verifier" => $verifier
+            'salt' => $salt,
+            'verifier' => $verifier
         ];
     }
 
@@ -129,7 +129,7 @@ class Crypto
         }
 
         return [
-            "verifier" => sha1(strtoupper($username) . ':' . strtoupper($password))
+            'verifier' => sha1(strtoupper($username) . ':' . strtoupper($password))
         ];
     }
 
@@ -149,7 +149,7 @@ class Crypto
         }
 
         return [
-            "verifier" => strtoupper(bin2hex(strrev(hex2bin(strtoupper(hash("sha256", strtoupper(hash("sha256", strtoupper($email)) . ":" . strtoupper($password))))))))
+            'verifier' => strtoupper(bin2hex(strrev(hex2bin(strtoupper(hash("sha256", strtoupper(hash("sha256", strtoupper($email)) . ":" . strtoupper($password))))))))
         ];
     }
 
@@ -174,10 +174,10 @@ class Crypto
 
         $verifier = strtoupper(gmp_strval(gmp_powm($g, $h, $N), 16));
 
-        return array(
-            "salt" => $salt,
-            "verifier" => $verifier
-        );
+        return [
+            'salt' => $salt,
+            'verifier' => $verifier
+        ];
     }
 
     /**
