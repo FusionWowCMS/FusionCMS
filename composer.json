@@ -1,6 +1,7 @@
 {
     "description": "Fusion CMS",
     "name": "fusionwowcms/fusioncms",
+    "license": "GPL-3.0-or-later",
     "type": "project",
     "homepage": "https://github.com/FusionWowCMS/FusionCMS",
     "support": {
