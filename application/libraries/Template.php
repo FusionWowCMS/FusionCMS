@@ -394,7 +394,7 @@ class Template
             "menu_top" => $this->getMenu("top"),
             "menu_side" => $this->getMenu("side"),
             "menu_bottom" => $this->getMenu("bottom"),
-            "path" => base_url() . APPPATH,
+            "path" => base_url() . basename(APPPATH) . '/',
             "favicon" => $this->theme_data['favicon'],
             "minify_js" => !$this->CI->config->item('enable_minify_js'),
             "minify_css" => !$this->CI->config->item('enable_minify_css'),
