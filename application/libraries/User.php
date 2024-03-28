@@ -330,7 +330,7 @@ class User
      */
     public function getAvatar(false|int $id = false): string
     {
-        return base_url().APPPATH . "images/avatar/". $this->CI->internal_user_model->getAvatar($id);
+        return base_url() . basename(APPPATH) . "/images/avatar/". $this->CI->internal_user_model->getAvatar($id);
     }
 
     /**

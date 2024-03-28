@@ -1,8 +1,5 @@
 <?php
 
-if (! defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
 /*
 | -------------------------------------------------------------------
 | AUTO-LOADER
@@ -65,7 +62,7 @@ $config['psr4'] = [
     'App'             => realpath(APPPATH),
     'App\Config'      => APPPATH.'config',
     'App\Controllers' => APPPATH.'Controllers',
-    'CodeIgniter'     => realpath(BASEPATH)
+    'CodeIgniter'     => realpath(SYSTEMPATH)
 ];
 
 /**
@@ -85,20 +82,20 @@ $config['psr4'] = [
  *   ];
  */
 $config['classmap'] = [
-    'CodeIgniter\Debug\Timer'                     => BASEPATH.'Debug/Timer.php',
-    'CodeIgniter\Debug\Iterator'                  => BASEPATH.'Debug/Iterator.php',
-    'CodeIgniter\Debug\Exceptions'                => BASEPATH.'Debug/Exceptions.php',
-    'CodeIgniter\Events\Events'                   => BASEPATH.'Events/Events.php',
-    'CodeIgniter\HTTP\Message'                    => BASEPATH.'HTTP/Message.php',
-    'CodeIgniter\HTTP\Request'                    => BASEPATH.'HTTP/Request.php',
-    'CodeIgniter\HTTP\IncomingRequest'            => BASEPATH.'HTTP/IncomingRequest.php',
-    'CodeIgniter\HTTP\RequestInterface'           => BASEPATH.'HTTP/RequestInterface.php',
-    'CodeIgniter\HTTP\URI'                        => BASEPATH.'HTTP/URI.php',
-    'CodeIgniter\HTTP\Response'                   => BASEPATH.'HTTP/Response.php',
-    'CodeIgniter\HTTP\ResponseInterface'          => BASEPATH.'HTTP/ResponseInterface.php',
-    'CodeIgniter\HTTP\CURLRequest'                => BASEPATH.'HTTP/CURLRequest.php',
-    'CodeIgniter\Log\Logger'                      => BASEPATH.'Log/Logger.php',
-    'Laminas\Escaper\Escaper'                     => BASEPATH.'View/Escaper.php'
+    'CodeIgniter\Debug\Timer'                     => SYSTEMPATH . 'Debug/Timer.php',
+    'CodeIgniter\Debug\Iterator'                  => SYSTEMPATH . 'Debug/Iterator.php',
+    'CodeIgniter\Debug\Exceptions'                => SYSTEMPATH . 'Debug/Exceptions.php',
+    'CodeIgniter\Events\Events'                   => SYSTEMPATH . 'Events/Events.php',
+    'CodeIgniter\HTTP\Message'                    => SYSTEMPATH . 'HTTP/Message.php',
+    'CodeIgniter\HTTP\Request'                    => SYSTEMPATH . 'HTTP/Request.php',
+    'CodeIgniter\HTTP\IncomingRequest'            => SYSTEMPATH . 'HTTP/IncomingRequest.php',
+    'CodeIgniter\HTTP\RequestInterface'           => SYSTEMPATH . 'HTTP/RequestInterface.php',
+    'CodeIgniter\HTTP\URI'                        => SYSTEMPATH . 'HTTP/URI.php',
+    'CodeIgniter\HTTP\Response'                   => SYSTEMPATH . 'HTTP/Response.php',
+    'CodeIgniter\HTTP\ResponseInterface'          => SYSTEMPATH . 'HTTP/ResponseInterface.php',
+    'CodeIgniter\HTTP\CURLRequest'                => SYSTEMPATH . 'HTTP/CURLRequest.php',
+    'CodeIgniter\Log\Logger'                      => SYSTEMPATH . 'Log/Logger.php',
+    'Laminas\Escaper\Escaper'                     => SYSTEMPATH . 'View/Escaper.php'
 ];
 
 if(!file_exists(WRITEPATH . 'install/.lock'))

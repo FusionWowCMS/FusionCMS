@@ -10,15 +10,18 @@
  */
 
 use App\Config\Database;
+use App\Config\Services;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Exceptions\GeneralException;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\Exceptions\RedirectException;
+use CodeIgniter\HTTP\IncomingRequest;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
 use Laminas\Escaper\Escaper;
-
-defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Common Functions
@@ -73,8 +76,8 @@ if (! function_exists('clean_path')) {
 
         return match (true) {
             str_starts_with($path, APPPATH) => 'APPPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(APPPATH)),
-            str_starts_with($path, BASEPATH) => 'BASEPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(BASEPATH)),
-            str_starts_with($path, SYSDIR) => 'SYSDIR' . DIRECTORY_SEPARATOR . substr($path, strlen(SYSDIR)),
+            str_starts_with($path, ROOTPATH) => 'ROOTPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(ROOTPATH)),
+            str_starts_with($path, SYSTEMPATH) => 'SYSTEMPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(SYSTEMPATH)),
             str_starts_with($path, FCPATH) => 'FCPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(FCPATH)),
             defined('VENDORPATH') && str_starts_with($path, VENDORPATH) => 'VENDORPATH' . DIRECTORY_SEPARATOR . substr($path, strlen(VENDORPATH)),
             default => $path,
@@ -153,12 +156,13 @@ if (!function_exists('load_class')) {
 
         // Look for the class first in the local application/libraries folder
         // then in the native system/libraries folder
-        foreach (array(APPPATH, BASEPATH) as $path) {
-            if (file_exists($path . $directory . '/' . $class . '.php')) {
+        foreach (array(APPPATH, SYSTEMPATH) as $path) {
+            if (file_exists($path . $directory . DIRECTORY_SEPARATOR . $class . '.php')) {
                 $name = 'CI_' . $class;
 
                 if (class_exists($name, false) === false) {
-                    require_once($path . $directory . '/' . $class . '.php');
+
+                    require_once($path . $directory . DIRECTORY_SEPARATOR . $class . '.php');
                 }
 
                 break;
@@ -166,11 +170,11 @@ if (!function_exists('load_class')) {
         }
 
         // Is the request a class extension? If so we load it too
-        if (file_exists(APPPATH . $directory . '/' . config_item('subclass_prefix') . $class . '.php')) {
+        if (file_exists(APPPATH . $directory . DIRECTORY_SEPARATOR . config_item('subclass_prefix') . $class . '.php')) {
             $name = config_item('subclass_prefix') . $class;
 
             if (class_exists($name, false) === false) {
-                require_once(APPPATH . $directory . '/' . $name . '.php');
+                require_once(APPPATH . $directory . DIRECTORY_SEPARATOR . $name . '.php');
             }
         }
 
@@ -291,17 +295,15 @@ if (!function_exists('get_config2')) {
         static $config;
 
         if (empty($config[$file])) {
-            $file_path = rtrim(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, FCPATH), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . basename(APPPATH) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . $file . '.php';
+            $file_path = rtrim(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, ROOTPATH), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . basename(APPPATH) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . $file . '.php';
             $found = false;
+
             if (file_exists($file_path)) {
                 $found = true;
                 $config[$file] = require($file_path);
             }
 
-            // Is the config file in the environment folder?
-            if (file_exists($file_path = str_replace('config', 'config' . DIRECTORY_SEPARATOR . ENVIRONMENT, $file_path))) {
-                $config[$file] = require($file_path);
-            } elseif (!$found) {
+            if (!$found) {
                 set_status_header(503);
                 echo 'The configuration file ' . $file . '.php does not exist.';
                 exit(3); // EXIT_CONFIG
@@ -510,7 +512,7 @@ if (!function_exists('log_message')) {
      */
     function log_message(string $level, $message, array $context = [])
     {
-        return \App\Config\Services::logger(false)->log($level, $message, $context);
+        return Services::logger(false)->log($level, $message, $context);
     }
 }
 
@@ -999,7 +1001,7 @@ if (!function_exists('get_csrf_hash')) {
      */
     function get_csrf_hash()
     {
-        $security = \App\Config\Services::security(null, true);
+        $security = Services::security(null, true);
 
         return $security->getCSRFHash();
     }

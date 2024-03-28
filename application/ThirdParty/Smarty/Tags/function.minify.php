@@ -27,7 +27,7 @@ function smarty_tag_minify(array $params = [])
 
     // Define: ROOTURL
     if(!defined('MIN_ROOTURL'))
-        define('MIN_ROOTURL', rtrim(base_url(str_replace(['\\', MIN_DS, basename(APPPATH)], ['/', '/', ''], APPPATH)), '/') . '/');
+        define('MIN_ROOTURL', rtrim(base_url(str_replace(['\\', MIN_DS, basename(APPPATH)], ['/', '/', ''], basename(APPPATH))), '/') . '/');
 
     // Define: ROOTPATH
     if(!defined('MIN_ROOTPATH'))

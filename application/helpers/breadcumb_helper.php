@@ -11,10 +11,10 @@ function breadcrumb(array $items): string
 {
     $CI = &get_instance();
 
-    $data = array(
+    $data = [
         "links" => $items,
         "url" => pageURL
-    );
+    ];
 
     $breadcrumbView = "application/" . $CI->template->theme_path . "views/breadcrumb.tpl";
 
@@ -26,6 +26,6 @@ function breadcrumb(array $items): string
     else
     {
         // Load default
-        return $CI->smarty->view($CI->template->view_path . "breadcrumb.tpl", $data, true);
+        return $CI->smarty->view($CI->template->view_path . 'breadcrumb.tpl', $data, true);
     }
 }
