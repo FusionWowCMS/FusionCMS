@@ -927,16 +927,16 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v5.0.0",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "e161babbd49840de2ae7a5e358e59f52d66c1f0a"
+                "reference": "bbd09c7bfaa6c2c091adc4568a944f765bb4f1d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/e161babbd49840de2ae7a5e358e59f52d66c1f0a",
-                "reference": "e161babbd49840de2ae7a5e358e59f52d66c1f0a",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/bbd09c7bfaa6c2c091adc4568a944f765bb4f1d9",
+                "reference": "bbd09c7bfaa6c2c091adc4568a944f765bb4f1d9",
                 "shasum": ""
             },
             "require": {
@@ -991,9 +991,9 @@
             "support": {
                 "forum": "https://github.com/smarty-php/smarty/discussions",
                 "issues": "https://github.com/smarty-php/smarty/issues",
-                "source": "https://github.com/smarty-php/smarty/tree/v5.0.0"
+                "source": "https://github.com/smarty-php/smarty/tree/v5.0.2"
             },
-            "time": "2024-03-25T11:28:59+00:00"
+            "time": "2024-03-28T10:23:18+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
