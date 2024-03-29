@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.2] - 2024-03-28
+- Fix Smarty::assign() not returning $this when called with an array as first parameter [#972](https://github.com/smarty-php/smarty/pull/972)
+
+
+## [5.0.1] - 2024-03-27
+- Fix error in Smarty\Smarty::compileAllTemplates() by including missing FilesystemIterator class [#966](https://github.com/smarty-php/smarty/issues/966)  
+
+
 ## [5.0.0] - 2024-03-25
 - Fixed that scoped variables would overwrite parent scope [#952](https://github.com/smarty-php/smarty/issues/952)
 - Removed publicly accessible `$tpl->_var_stack` variable
