@@ -39,7 +39,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap">
 		<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css" />
 
-		{minify files=array("application/css/default.css", "application/css/tooltip.css", "application/vendor/node_modules/bootstrap/dist/css/bootstrap.min.css", "application/vendor/node_modules/sweetalert2/dist/sweetalert2.min.css", "application/vendor/node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "application/vendor/node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "{$full_theme_path}vendor/MagnificPopup/css/magnific-popup.css", "{$full_theme_path}assets/css/style.css", "{$full_theme_path}assets/css/custom.css") type='css' output='writable/cache/data/minify/all.min.css' disable={$minify_css}}
+		{minify files=array("application/css/default.css", "application/css/tooltip.css", "node_modules/bootstrap/dist/css/bootstrap.min.css", "node_modules/sweetalert2/dist/sweetalert2.min.css", "node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "{$full_theme_path}vendor/MagnificPopup/css/magnific-popup.css", "{$full_theme_path}assets/css/style.css", "{$full_theme_path}assets/css/custom.css") type='css' output='writable/cache/data/minify/all.min.css' disable={$minify_css}}
 
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css">
 
@@ -58,7 +58,7 @@
 		<!-- Header CSS.End -->
 
 		<!-- Header JS.Start -->
-		{minify files=array("application/js/jquery-3.6.0.min.js", "application/js/jquery.placeholder.min.js", "application/js/jquery.sort.js", "application/vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "application/vendor/node_modules/sweetalert2/dist/sweetalert2.all.min.js", "application/vendor/node_modules/owl.carousel/dist/owl.carousel.min.js", "{$full_theme_path}vendor/Marquee/jquery.marquee.min.js", "{$full_theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "application/js/main.js", "application/js/cookie.js", "{$full_theme_path}assets/js/slider.js", "application/js/ui.js", "application/js/language.js", "application/js/tooltip.js") type='js' output='writable/cache/data/minify/all.min.js' disable={$minify_js}}
+		{minify files=array("application/js/jquery-3.6.0.min.js", "application/js/jquery.placeholder.min.js", "application/js/jquery.sort.js", "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "node_modules/sweetalert2/dist/sweetalert2.all.min.js", "node_modules/owl.carousel/dist/owl.carousel.min.js", "{$full_theme_path}vendor/Marquee/jquery.marquee.min.js", "{$full_theme_path}vendor/MagnificPopup/js/jquery.magnific-popup.min.js", "application/js/main.js", "application/js/cookie.js", "{$full_theme_path}assets/js/slider.js", "application/js/ui.js", "application/js/language.js", "application/js/tooltip.js") type='js' output='writable/cache/data/minify/all.min.js' disable={$minify_js}}
 
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 

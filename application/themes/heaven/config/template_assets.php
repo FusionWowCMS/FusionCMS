@@ -27,10 +27,10 @@ $assets = [
                         '@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap")',
                         '@import url("https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css")',
                         '@import url("https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css")',
-                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'vendor' . DS . 'node_modules' . DS . 'bootstrap' . DS . 'dist' . DS . 'css' . DS . 'bootstrap.min.css'),
-                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'vendor' . DS . 'node_modules' . DS . 'sweetalert2' . DS . 'dist' . DS . 'sweetalert2.min.css'),
-                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'vendor' . DS . 'node_modules' . DS . 'owl.carousel' . DS . 'dist' . DS . 'assets' . DS . 'owl.carousel.min.css'),
-                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'vendor' . DS . 'node_modules' . DS . 'owl.carousel' . DS . 'dist' . DS . 'assets' . DS . 'owl.theme.default.min.css'),
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'bootstrap' . DS . 'dist' . DS . 'css' . DS . 'bootstrap.min.css'),
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'sweetalert2' . DS . 'dist' . DS . 'sweetalert2.min.css'),
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'owl.carousel' . DS . 'dist' . DS . 'assets' . DS . 'owl.carousel.min.css'),
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'owl.carousel' . DS . 'dist' . DS . 'assets' . DS . 'owl.theme.default.min.css'),
 
                         # Theme stylesheet files
                         T_ROOT_PATH . 'assets' . DS . 'css' . DS . 'style.css'
@@ -63,7 +63,7 @@ $assets = [
                 'files' => array_merge(
                     [
                         # jQuery
-                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'vendor' . DS . 'node_modules' . DS . 'jquery' . DS . 'dist' . DS . 'jquery.min.js'),
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'jquery' . DS . 'dist' . DS . 'jquery.min.js'),
 
                         # CMS javascript files (Base libraries)
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'js' . DS . 'flux.min.js'),
@@ -79,9 +79,9 @@ $assets = [
 
                         # CMS dependencies
                         'https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js',
-                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'vendor' . DS . 'node_modules' . DS . 'bootstrap' . DS . 'dist' . DS . 'js' . DS . 'bootstrap.bundle.min.js'),
-                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'vendor' . DS . 'node_modules' . DS . 'sweetalert2' . DS . 'dist' . DS . 'sweetalert2.all.min.js'),
-                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'vendor' . DS . 'node_modules' . DS . 'owl.carousel' . DS . 'dist' . DS . 'owl.carousel.min.js'),
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'bootstrap' . DS . 'dist' . DS . 'js' . DS . 'bootstrap.bundle.min.js'),
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'sweetalert2' . DS . 'dist' . DS . 'sweetalert2.all.min.js'),
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'owl.carousel' . DS . 'dist' . DS . 'owl.carousel.min.js'),
 
                         # Theme javascript files (Theme libraries)
                         T_ROOT_PATH . 'assets' . DS . 'js' . DS . 'app.js'
