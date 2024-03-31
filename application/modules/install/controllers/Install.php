@@ -20,8 +20,8 @@ class Install extends MX_Controller
         $this->csrf_protection(false);
 
         $data = [
-            'css' => APPPATH . 'modules/install/css/install.css',
-            'INSTALL_PATH' => APPPATH . 'modules/install/'
+            'css' => basename(APPPATH) . '/modules/install/css/install.css',
+            'INSTALL_PATH' => basename(APPPATH) . '/modules/install/'
         ];
 
        die($this->load->view('install', $data, true));
