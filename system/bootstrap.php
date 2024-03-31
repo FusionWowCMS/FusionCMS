@@ -87,7 +87,7 @@ require_once SYSTEMPATH . 'Common.php';
  */
 
 require SYSTEMPATH.'Autoloader/Autoloader.php';
-require APPPATH .'config/Autoload.php';
+require APPPATH .'config/autoload.php';
 require APPPATH .'config/Services.php';
 
 // Use Config\Services as CodeIgniter\Services
