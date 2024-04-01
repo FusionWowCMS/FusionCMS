@@ -27,4 +27,4 @@ $lang['character_is_online'] = "Sie können diese Funktion nicht verwenden, der 
 $lang['no_camamand'] = "Der Realm unterstützt diesen Dienst nicht." ;
 $lang['dont_enough_Donation_Points'] = "Sie haben nicht genügend Spendenpunkte." ;
 $lang['no_service'] = "Der ausgewählte Dienst ist ungültig.";
-$lang['no_selected_service'] = "Etwas ist schief gelaufen, bitte versuchen Sie es erneut.“ ;
+$lang['no_selected_service'] = "Etwas ist schief gelaufen, bitte versuchen Sie es erneut.";
