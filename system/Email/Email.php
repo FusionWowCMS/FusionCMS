@@ -13,6 +13,7 @@ namespace CodeIgniter\Email;
 
 use CodeIgniter\Events\Events;
 use CodeIgniter\Log\LoggerInterface;
+use CodeIgniter\I18n\Time;
 use ErrorException;
 
 /**
@@ -709,10 +710,20 @@ class Email
     public function setAttachmentCID($filename)
     {
         foreach ($this->attachments as $i => $attachment) {
+            // For file path.
             if ($attachment['name'][0] === $filename) {
                 $this->attachments[$i]['multipart'] = 'related';
 
                 $this->attachments[$i]['cid'] = uniqid(basename($attachment['name'][0]) . '@', true);
+
+                return $this->attachments[$i]['cid'];
+            }
+
+            // For buffer string.
+            if ($attachment['name'][1] === $filename) {
+                $this->attachments[$i]['multipart'] = 'related';
+
+                $this->attachments[$i]['cid'] = uniqid(basename($attachment['name'][1]) . '@', true);
 
                 return $this->attachments[$i]['cid'];
             }
@@ -1240,13 +1251,13 @@ class Email
                     . $this->prepQuotedPrintable($this->body) . $this->newline . $this->newline
                     . '--' . $altBoundary . '--' . $this->newline . $this->newline;
 
-                if (!empty($relBoundary)) {
+                if (isset($relBoundary)) {
                     $body .= $this->newline . $this->newline;
                     $this->appendAttachments($body, $relBoundary, 'related');
                 }
 
                 // multipart/mixed attachments
-                if (!empty($atcBoundary)) {
+                if (isset($atcBoundary)) {
                     $body .= $this->newline . $this->newline;
                     $this->appendAttachments($body, $atcBoundary, 'mixed');
                 }
@@ -1687,7 +1698,7 @@ class Email
             $success = $this->{$method}();
         } catch (ErrorException $e) {
             $success = false;
-            $this->logger->error('Email: '.$method.' throwed '.$e->getMessage());
+            log_message('error', 'Email: ' . $method . ' throwed ' . $e);
         }
 
         if (!$success) {
@@ -2072,8 +2083,8 @@ class Email
             // See https://bugs.php.net/bug.php?id=39598 and http://php.net/manual/en/function.fwrite.php#96951
             if ($result === 0) {
                 if ($timestamp === 0) {
-                    $timestamp = time();
-                } elseif ($timestamp < (time() - $this->SMTPTimeout)) {
+                    $timestamp = Time::now()->getTimestamp();
+                } elseif ($timestamp < (Time::now()->getTimestamp() - $this->SMTPTimeout)) {
                     $result = false;
 
                     break;
