@@ -43,7 +43,11 @@ class Activation_model extends CI_Model
 
     public function remove($id, $username, $email)
     {
-        $this->db->query("DELETE FROM pending_accounts WHERE id = ? OR username = ? OR email = ?", [$id, $username, $email]);
+        $this->db->table('pending_accounts')
+                 ->where('id', $id)
+                 ->where('username', $username)
+                 ->where('email', $email)
+                 ->delete();
     }
 
     /**

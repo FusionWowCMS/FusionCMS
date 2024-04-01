@@ -212,6 +212,7 @@ class Register extends MX_Controller
         if(!$key)
         {
             $this->template->box(lang("invalid_key", "register"), lang("invalid_key_long", "register"), true);
+            return;
         }
 
         $account = $this->activation_model->getAccount($key);
@@ -219,6 +220,7 @@ class Register extends MX_Controller
         if(!$account)
         {
             $this->template->box(lang("invalid_key", "register"), lang("invalid_key_long", "register"), true);
+            return;
         }
 
         $this->activation_model->remove($account['id'], $account['username'], $account['email']);
