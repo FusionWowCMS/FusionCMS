@@ -228,7 +228,8 @@ class Register extends MX_Controller
         $this->external_account_model->createAccount($account['username'], $account['password'], $account['email']);
 
         // Log in
-        $this->user->setUserDetails($account['username'], $account['password']);
+        $password = $this->user->getAccountPassword($account['username'], $account['password']);
+        $this->user->setUserDetails($account['username'], $password["verifier"]);
 
         // Show success message
         $data = [
