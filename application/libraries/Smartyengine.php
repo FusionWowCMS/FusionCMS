@@ -96,7 +96,7 @@ class Smartyengine extends Smarty
             'get_instance', 'base_url', 'config', 'config_item', 'form_open', 'form_open_multipart',
             'form_hidden', 'form_input', 'form_password', 'form_upload', 'form_submit', 'form_error',
             'form_multiselect', 'character_limiter', 'word_limiter', 'word_censor', 'highlight_code',
-            'highlight_phrase', 'word_wrap', 'ellipsize', 'form_close', 'set_value',
+            'highlight_phrase', 'word_wrap', 'ellipsize', 'form_close', 'set_value', 'anchor',
 
             # FusionCMS
             'lang',
