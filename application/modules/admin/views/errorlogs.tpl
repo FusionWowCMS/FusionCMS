@@ -29,7 +29,7 @@
                 </tr>
                 </thead>
                 <tbody>
-				{foreach from=$logs key=key item=$log}
+				{foreach from=$logs key=key item=log}
                     <tr data-display="stack{$key}">
                         <td class="text-{$log.class}">
                             <i class="{$log.icon}" aria-hidden="true"></i>
