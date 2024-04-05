@@ -15,28 +15,29 @@ class Online extends MX_Controller
     {
         $this->template->setTitle(lang("online_players", "online"));
 
+        $cache = $this->cache->get("online_module");
+
         // Perform ajax call to refresh if expired
-        if ($this->cache->hasExpired("online_module")) {
+        if ($cache !== false) {
+            $page = $cache;
+        } else {
             // Prepare data
-            $data = array(
+            $data = [
                 "module" => "online",
                 "image_path" => $this->template->image_path
-            );
+            ];
 
             // Load the template file and format
             $ajax = $this->template->loadPage("ajax.tpl", $data);
 
             // Load the topsite page and format the page contents
-            $data2 = array(
+            $data2 = [
                 "module" => "default",
                 "headline" => lang("online_players", "online"),
                 "content" => $ajax
-            );
+            ];
 
             $page = $this->template->loadPage("page.tpl", $data2);
-        } else {
-            $cache = $this->cache->get("online_module");
-            $page = $cache;
         }
 
         //Load the template form
