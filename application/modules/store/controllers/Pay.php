@@ -296,10 +296,10 @@ class Pay extends MX_Controller
             $query = preg_replace("/\{CHARACTER\}/", "?", $query);
             $query = preg_replace("/\{REALM\}/", "?", $query);
 
-            $db->trans_start();
+            $db->transStart();
             $db->query($query, $data);
-            $db->trans_complete();
-            if ($db->trans_status() === FALSE)
+            $db->transComplete();
+            if ($db->transStatus() === false)
                 return false;
         }
         return true;
