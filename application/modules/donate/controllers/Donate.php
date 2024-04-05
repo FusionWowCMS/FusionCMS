@@ -256,7 +256,7 @@ class Donate extends MX_Controller
                 'token' => $token,
             ];
 
-            $this->db->insert('paypal_logs', $dataInsert);
+            $this->db->table('paypal_logs')->insert($dataInsert);
         } catch (PayPalConnectionException $e) {
             log_message('error', $e);
 
