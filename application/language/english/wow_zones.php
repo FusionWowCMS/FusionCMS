@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The zones are exported from Area DBC 10.2.5 52902
+ * The zones are exported from Area DBC 10.2.6.53989
  */
 
 $lang['zones'] = array(
@@ -8719,4 +8719,28 @@ $lang['zones'] = array(
 15098   => "The High Gate",
 15105   => "Amirdrassil",
 15109   => "Sound Room - Audio Smoketest",
+15115   => "Bel'ameth",
+15116   => "Singing Fen",
+15117   => "Shoreline Roots",
+15118   => "Sprigling Gloam",
+15119   => "Meandering Rootlands",
+15120   => "Haven Cascades",
+15121   => "Belanaar",
+15122   => "Viridescent Thicket",
+15123   => "Whorlwing Basin",
+15124   => "Springrain River",
+15125   => "Twisting Wood",
+15126   => "Fields of Reverie",
+15127   => "Summerjoy Shoal",
+15128   => "Arlithrien Lodge",
+15129   => "Twilight Watchtower",
+15130   => "Dawning Watchtower",
+15131   => "Evenfall Watchtower",
+15132   => "Terrace of the Moon",
+15135   => "The Silver Feather",
+15136   => "Keen-Edge Hall",
+15137   => "Crafter's Gallery",
+15138   => "Turn of the Tide",
+15139   => "Root-Bound Sanctuary",
+15151   => "Azerothian Archives",
 );
