@@ -483,8 +483,8 @@ class Exceptions
                 $file = 'APPPATH' . DIRECTORY_SEPARATOR . substr($file, strlen(APPPATH));
                 break;
 
-            case str_starts_with($file, SYSDIR):
-                $file = 'SYSDIR' . DIRECTORY_SEPARATOR . substr($file, strlen(SYSDIR));
+            case str_starts_with($file, SYSTEMPATH):
+                $file = 'SYSTEMPATH' . DIRECTORY_SEPARATOR . substr($file, strlen(SYSTEMPATH));
                 break;
 
             case str_starts_with($file, FCPATH):
