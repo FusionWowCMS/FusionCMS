@@ -59,9 +59,8 @@
  *   `];
  */
 $config['psr4'] = [
-    'App'             => realpath(APPPATH),
+    APP_NAMESPACE     => APPPATH,
     'App\Config'      => APPPATH.'config',
-    'App\Controllers' => APPPATH.'Controllers',
     'CodeIgniter'     => realpath(SYSTEMPATH)
 ];
 
@@ -82,18 +81,6 @@ $config['psr4'] = [
  *   ];
  */
 $config['classmap'] = [
-    'CodeIgniter\Debug\Timer'                     => SYSTEMPATH . 'Debug/Timer.php',
-    'CodeIgniter\Debug\Iterator'                  => SYSTEMPATH . 'Debug/Iterator.php',
-    'CodeIgniter\Debug\Exceptions'                => SYSTEMPATH . 'Debug/Exceptions.php',
-    'CodeIgniter\Events\Events'                   => SYSTEMPATH . 'Events/Events.php',
-    'CodeIgniter\HTTP\Message'                    => SYSTEMPATH . 'HTTP/Message.php',
-    'CodeIgniter\HTTP\Request'                    => SYSTEMPATH . 'HTTP/Request.php',
-    'CodeIgniter\HTTP\IncomingRequest'            => SYSTEMPATH . 'HTTP/IncomingRequest.php',
-    'CodeIgniter\HTTP\RequestInterface'           => SYSTEMPATH . 'HTTP/RequestInterface.php',
-    'CodeIgniter\HTTP\URI'                        => SYSTEMPATH . 'HTTP/URI.php',
-    'CodeIgniter\HTTP\Response'                   => SYSTEMPATH . 'HTTP/Response.php',
-    'CodeIgniter\HTTP\ResponseInterface'          => SYSTEMPATH . 'HTTP/ResponseInterface.php',
-    'CodeIgniter\HTTP\CURLRequest'                => SYSTEMPATH . 'HTTP/CURLRequest.php',
     'CodeIgniter\Log\Logger'                      => SYSTEMPATH . 'Log/Logger.php',
     'Laminas\Escaper\Escaper'                     => SYSTEMPATH . 'View/Escaper.php'
 ];
