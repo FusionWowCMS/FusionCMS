@@ -2,7 +2,7 @@
 
 if (! defined('BASEPATH')) exit('No direct script access allowed');
 
-use App\Config\Services;
+use Config\Services;
 
 /**
  * Send mail

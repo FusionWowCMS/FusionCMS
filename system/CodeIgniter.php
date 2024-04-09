@@ -1,6 +1,6 @@
 <?php
 
-use App\Config\Services;
+use CodeIgniter\Config\Services;
 use CodeIgniter\Config\DotEnv;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
@@ -84,7 +84,7 @@ if (! is_file(COMPOSER_PATH)) {
 
 /*if (config_item('csrf_protection') === true && ! is_cli())
 {
-    $security = \App\Config\Services::security();
+    $security = \Config\Services::security();
 
     $security->CSRFVerify();
 }*/

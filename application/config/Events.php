@@ -1,6 +1,6 @@
 <?php namespace Config;
 
-use App\Config\Services;
+use CodeIgniter\Config\Services;
 use CodeIgniter\Events\Events;
 use MX\CI;
 

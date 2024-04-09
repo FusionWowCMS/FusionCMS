@@ -1,6 +1,6 @@
 <?php
 
-use App\Config\Services;
+use Config\Services;
 
 class Vote_model extends CI_Model
 {

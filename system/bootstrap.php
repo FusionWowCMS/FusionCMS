@@ -12,7 +12,7 @@
 
 // The path to the application directory.
 use App\Config\Paths;
-use App\Config\Services;
+use CodeIgniter\Config\Services;
 
 if (! defined('APPPATH')) {
     /**
@@ -88,10 +88,9 @@ require_once SYSTEMPATH . 'Common.php';
 
 require SYSTEMPATH.'Autoloader/Autoloader.php';
 require APPPATH .'config/autoload.php';
-require APPPATH .'config/Services.php';
-
-// Use Config\Services as CodeIgniter\Services
-class_alias('App\Config\Services', 'CodeIgniter\Services');
+require_once SYSTEMPATH . 'Config/BaseService.php';
+require_once SYSTEMPATH . 'Config/Services.php';
+require_once APPPATH . 'Config/Services.php';
 
 $loader = Services::autoloader();
 $loader->initialize(get_config2('autoload'));

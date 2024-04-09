@@ -10,7 +10,7 @@
  */
 
 use App\Config\Database;
-use App\Config\Services;
+use CodeIgniter\Config\Services;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Database\BaseConnection;
@@ -908,7 +908,7 @@ if (!function_exists('service')) {
      *
      * These are equal:
      *  - $timer = service('timer')
-     *  - $timer = App\Config\Services::timer();
+     *  - $timer = Config\Services::timer();
      *
      * @param string $name
      * @param        ...$params
@@ -917,7 +917,7 @@ if (!function_exists('service')) {
      */
     function service(string $name, ...$params)
     {
-        return App\Config\Services::$name(...$params);
+        return CodeIgniter\Config\Services::$name(...$params);
     }
 }
 
@@ -930,7 +930,7 @@ if (!function_exists('sharedService')) {
         // meets the number the method expects, since
         // we have to add a 'true' as the final value
         // to return a shared instance.
-        $mirror = new ReflectionMethod('App\Config\Services', $name);
+        $mirror = new ReflectionMethod('Config\Services', $name);
         $count = -$mirror->getNumberOfParameters();
 
         $params = array_pad($params, $count + 1, null);
@@ -939,7 +939,7 @@ if (!function_exists('sharedService')) {
         // we are getting a shared instance.
         array_push($params, true);
 
-        return App\Config\Services::$name(...$params);
+        return CodeIgniter\Config\Services::$name(...$params);
     }
 }
 

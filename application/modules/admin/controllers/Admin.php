@@ -1,6 +1,6 @@
 <?php
 
-use App\Config\Services;
+use Config\Services;
 use MX\MX_Controller;
 
 /**
@@ -22,7 +22,7 @@ class Admin extends MX_Controller
 
     public function index()
     {
-        $benchmark = \App\Config\Services::timer(true);
+        $benchmark = \Config\Services::timer(true);
         $benchmark->start('admin_execution');
 
         $this->administrator->setTitle("Dashboard");

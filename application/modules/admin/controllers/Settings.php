@@ -1,6 +1,6 @@
 <?php
 
-use App\Config\Services;
+use Config\Services;
 use MX\MX_Controller;
 
 class Settings extends MX_Controller

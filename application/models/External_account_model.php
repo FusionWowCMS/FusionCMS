@@ -1,6 +1,6 @@
 <?php
 
-use App\Config\Services;
+use Config\Services;
 use CodeIgniter\Database\BaseConnection;
 use MX\CI;
 
