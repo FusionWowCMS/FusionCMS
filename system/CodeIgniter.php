@@ -1,9 +1,7 @@
 <?php
 
 use CodeIgniter\Config\Services;
-use CodeIgniter\Config\DotEnv;
 use CodeIgniter\Events\Events;
-use CodeIgniter\Exceptions\FrameworkException;
 
 /**
  * System Initialization File
@@ -48,34 +46,6 @@ if (is_file(APPPATH . 'config/Boot/' . ENVIRONMENT . '.php')) {
 
     exit(EXIT_ERROR); // EXIT_ERROR
     // @codeCoverageIgnoreEnd
-}
-
-/*
- * ------------------------------------------------------
- *  Set custom exception handling
- * ------------------------------------------------------
- */
-Services::exceptions(true)->initialize();
-
-// Run this check for manual installations
-if (! is_file(COMPOSER_PATH)) {
-    $requiredExtensions = [
-        'intl',
-        'json',
-        'mbstring',
-    ];
-
-    $missingExtensions = [];
-
-    foreach ($requiredExtensions as $extension) {
-        if (! extension_loaded($extension)) {
-            $missingExtensions[] = $extension;
-        }
-    }
-
-    if ($missingExtensions !== []) {
-        throw FrameworkException::forMissingExtension(implode(', ', $missingExtensions));
-    }
 }
 
 //--------------------------------------------------------------------

@@ -13,6 +13,7 @@
 // The path to the application directory.
 use App\Config\Paths;
 use CodeIgniter\Config\Services;
+use CodeIgniter\Exceptions\FrameworkException;
 
 if (! defined('APPPATH')) {
     /**
@@ -96,8 +97,37 @@ $loader = Services::autoloader();
 $loader->initialize(get_config2('autoload'));
 $loader->register();    // Register the loader with the SPL autoloader stack.
 
-// Now load Composer's if it's available
-if (file_exists(COMPOSER_PATH))
-{
-    require COMPOSER_PATH;
+/*
+ * ---------------------------------------------------------------
+ * SET EXCEPTION AND ERROR HANDLERS
+ * ---------------------------------------------------------------
+ */
+
+Services::exceptions()->initialize();
+
+/*
+ * ---------------------------------------------------------------
+ * CHECK SYSTEM FOR MISSING REQUIRED PHP EXTENSIONS
+ * ---------------------------------------------------------------
+ */
+
+// Run this check for manual installations
+if (! is_file(COMPOSER_PATH)) {
+    $missingExtensions = [];
+
+    foreach ([
+                 'intl',
+                 'json',
+                 'mbstring',
+             ] as $extension) {
+        if (! extension_loaded($extension)) {
+            $missingExtensions[] = $extension;
+        }
+    }
+
+    if ($missingExtensions !== []) {
+        throw FrameworkException::forMissingExtension(implode(', ', $missingExtensions));
+    }
+
+    unset($missingExtensions);
 }
