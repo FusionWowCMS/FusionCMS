@@ -682,7 +682,6 @@ var Store = {
 						{
 							$(this).attr("data-available", "0");
 							Store.Cart.list[i].character = $(this).val();
-							console.log(Store.Cart.list[i].character)
 						}
 					});
 				}
@@ -706,7 +705,7 @@ var Store = {
 									Store.Cart.dpCost = 0;
 									Store.Cart.count = 0;
 
-									Store.updatePrice();
+									Store.Cart.updatePrice();
 									$("#cart_item_count").html('0');
 								});
 							});
