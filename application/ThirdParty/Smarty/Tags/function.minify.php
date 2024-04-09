@@ -2,7 +2,7 @@
 
 # Import required classes
 use MX\CI;
-use CodeIgniter\Config\Services;
+use Config\Services;
 use MatthiasMullie\Minify;
 
 /**

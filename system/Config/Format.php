@@ -2,7 +2,7 @@
 
 namespace CodeIgniter\Config;
 
-use CodeIgniter\Config\Services;
+use Config\Services;
 use CodeIgniter\Format\FormatterInterface;
 use CodeIgniter\Format\JSONFormatter;
 use CodeIgniter\Format\XMLFormatter;

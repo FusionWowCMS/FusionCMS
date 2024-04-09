@@ -11,7 +11,6 @@
 
 namespace CodeIgniter\Session;
 
-use CodeIgniter\Config\Services;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\I18n\Time;
 use MX\CI;

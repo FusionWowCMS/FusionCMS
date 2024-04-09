@@ -10,17 +10,13 @@
  */
 
 use App\Config\Database;
-use CodeIgniter\Config\Services;
+use Config\Services;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Exceptions\GeneralException;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use CodeIgniter\HTTP\Exceptions\RedirectException;
-use CodeIgniter\HTTP\IncomingRequest;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
 use Laminas\Escaper\Escaper;
 
 /**
@@ -904,42 +900,24 @@ if (!function_exists('esc')) {
 
 if (!function_exists('service')) {
     /**
-     * Allows cleaner access to the Services config file.
+     * Allows cleaner access to the Services Config file.
+     * Always returns a SHARED instance of the class, so
+     * calling the function multiple times should always
+     * return the same instance.
      *
      * These are equal:
      *  - $timer = service('timer')
-     *  - $timer = Config\Services::timer();
+     *  - $timer = \CodeIgniter\Config\Services::timer();
      *
-     * @param string $name
-     * @param        ...$params
-     *
-     * @return mixed
+     * @param array|bool|float|int|object|string|null ...$params
      */
-    function service(string $name, ...$params)
+    function service(string $name, ...$params): ?object
     {
-        return CodeIgniter\Config\Services::$name(...$params);
-    }
-}
+        if ($params === []) {
+            return Services::get($name);
+        }
 
-//--------------------------------------------------------------------
-
-if (!function_exists('sharedService')) {
-    function sharedService(string $name, ...$params)
-    {
-        // Ensure the number of params we are passing
-        // meets the number the method expects, since
-        // we have to add a 'true' as the final value
-        // to return a shared instance.
-        $mirror = new ReflectionMethod('Config\Services', $name);
-        $count = -$mirror->getNumberOfParameters();
-
-        $params = array_pad($params, $count + 1, null);
-
-        // We add true as the final parameter to ensure
-        // we are getting a shared instance.
-        array_push($params, true);
-
-        return CodeIgniter\Config\Services::$name(...$params);
+        return Services::$name(...$params);
     }
 }
 

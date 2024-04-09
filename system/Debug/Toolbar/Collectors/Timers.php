@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace CodeIgniter\Debug\Toolbar\Collectors;
 
-use CodeIgniter\Config\Services;
+use Config\Services;
 
 /**
  * Timers collector

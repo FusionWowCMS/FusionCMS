@@ -13,7 +13,7 @@ namespace CodeIgniter\HTTP;
 
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\I18n\Time;
-use CodeIgniter\Config\Services;
+use Config\Services;
 use DateTime;
 use DateTimeZone;
 use InvalidArgumentException;
