@@ -13,6 +13,9 @@ class Install extends MX_Controller
 
         if(file_exists(WRITEPATH . 'install/.lock'))
             show_404();
+
+        # Load: Helpers
+        $this->load->helper('url');
     }
 
     public function index()

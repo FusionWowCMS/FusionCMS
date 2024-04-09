@@ -219,7 +219,9 @@ const Ajax = {
 
                                 setTimeout(function () {
                                     Memory.clear();
-                                    window.location = "../";
+
+                                    // Display actions
+                                    $('#install_after_actions').fadeIn();
                                 }, 500);
                             }
                         });

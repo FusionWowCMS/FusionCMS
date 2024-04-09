@@ -189,7 +189,9 @@
 														<p class="font-alt text-base font-normal leading-normal text-muted-500 dark:text-muted-400"> <b>{{dear_customer}}</b>, {{fusion_info}} </p>
 													</div>
 													<div class="installer_navigation mt-6 flex items-center justify-between gap-2">
-														<button type="button" class="next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">{{start_installer}}</button>
+														<a href="<?= base_url('install/upgrade') ?>" target="_blank" class="m-0 is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Upgrade</a>
+														<span class="text-muted-500 dark:text-muted-400">OR</span>
+														<button type="button" class="m-0 next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">{{start_installer}}</button>
 													</div>
 												</div>
 											</div>
@@ -778,9 +780,12 @@
 
 										<section class="box big step" style="display:none;">
 											<h2 class="text-white"> {{installing}}</h2>
-											<span class="text-white" id="install">
-
-										</span>
+											<span class="text-white" id="install"></span>
+											<div id="install_after_actions" class="mt-6 flex items-center justify-between gap-2 text-nowrap" style="display:none">
+												<a href="<?= base_url('install/upgrade') ?>" class="m-0 is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Upgrade</a>
+												<span class="text-muted-500 dark:text-muted-400">OR</span>
+												<a href="<?= base_url() ?>" class="m-0 is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Go to website</a>
+											</div>
 										</section>
 									</aside>
 								</div>

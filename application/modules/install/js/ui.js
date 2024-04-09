@@ -343,7 +343,7 @@ const UI = {
                 return;
             }
 
-            $('#progressbar .nui-progress-bar').width((id - 1) * 14.285 + '%');
+            $('#progressbar .nui-progress-bar').width((id - 1) * (100 / $('.step').length) + '%');
 
             const showRequestedStep = function () {
                 // Save the current step's fields
