@@ -91,7 +91,7 @@ class Smartyengine extends Smarty
      */
     private function php_functions_extend(): void
     {
-        $functions = array_merge(array_diff(get_defined_functions()['internal'], ['reset', 'key', 'end']) , [
+        $functions = array_merge(array_diff(get_defined_functions()['internal'], ['reset', 'key', 'end', 'preg_match', 'preg_match_all']) , [
             # Codeigniter
             'get_instance', 'base_url', 'config', 'config_item', 'form_open', 'form_open_multipart',
             'form_hidden', 'form_input', 'form_password', 'form_upload', 'form_submit', 'form_error',
@@ -121,10 +121,22 @@ class Smartyengine extends Smarty
         function smarty_modifier_end(object|array $array): mixed {
             return end($array);
         }
+        function smarty_modifier_preg_match($pattern, $input, $flags = null, $offset = null): mixed {
+            preg_match($pattern, $input, $matches, $flags, $offset);
+
+            return $matches;
+        }
+        function smarty_modifier_preg_match_all($pattern, $input, $flags = null, $offset = null): mixed {
+            preg_match_all($pattern, $input, $matches, $flags, $offset);
+
+            return $matches;
+        }
 
         $this->registerPlugin(Smarty::PLUGIN_MODIFIER, 'reset', 'smarty_modifier_reset');
         $this->registerPlugin(Smarty::PLUGIN_MODIFIER, 'key', 'smarty_modifier_key');
         $this->registerPlugin(Smarty::PLUGIN_MODIFIER, 'end', 'smarty_modifier_end');
+        $this->registerPlugin(Smarty::PLUGIN_MODIFIER, 'preg_match', 'smarty_modifier_preg_match');
+        $this->registerPlugin(Smarty::PLUGIN_MODIFIER, 'preg_match_all', 'smarty_modifier_preg_match_all');
     }
 }
 // END Smarty Class
