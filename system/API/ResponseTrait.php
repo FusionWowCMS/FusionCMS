@@ -11,7 +11,7 @@
 
 namespace CodeIgniter\API;
 
-use Config\Services;
+use App\Config\Services;
 use CodeIgniter\Format\FormatterInterface;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\ResponseInterface;

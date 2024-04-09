@@ -1,6 +1,6 @@
 <?php namespace CodeIgniter\Debug\Toolbar\Collectors;
 
-use Config\Services;
+use App\Config\Services;
 
 class Logs extends BaseCollector
 {

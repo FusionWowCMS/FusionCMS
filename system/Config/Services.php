@@ -34,7 +34,7 @@ use CodeIgniter\Session\Handlers\DatabaseHandler;
 use CodeIgniter\Session\Session;
 use CodeIgniter\Config\Format as FormatConfig;
 use CodeIgniter\Typography\Typography;
-use Config\Services as AppServices;
+use App\Config\Services as AppServices;
 
 /**
  * Services Configuration file.

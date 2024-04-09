@@ -12,7 +12,7 @@
 
 // The path to the application directory.
 use App\Config\Paths;
-use Config\Services;
+use App\Config\Services;
 use CodeIgniter\Exceptions\FrameworkException;
 
 if (! defined('APPPATH')) {

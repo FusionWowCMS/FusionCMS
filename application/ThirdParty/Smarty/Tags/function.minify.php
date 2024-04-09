@@ -2,7 +2,7 @@
 
 # Import required classes
 use MX\CI;
-use Config\Services;
+use App\Config\Services;
 use MatthiasMullie\Minify;
 
 /**

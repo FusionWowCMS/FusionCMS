@@ -1,6 +1,6 @@
 <?php
 
-use Config\Services;
+use App\Config\Services;
 use CodeIgniter\Session\Session;
 
 if (!defined('BASEPATH')) {

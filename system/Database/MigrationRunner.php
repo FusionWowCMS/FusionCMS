@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace CodeIgniter\Database;
 
-use Config\Services;
+use App\Config\Services;
 use CodeIgniter\CLI\CLI;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\ConfigException;

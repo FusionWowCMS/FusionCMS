@@ -11,7 +11,7 @@
 
 namespace CodeIgniter\HTTP;
 
-use Config\Services;
+use App\Config\Services;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 
 /**

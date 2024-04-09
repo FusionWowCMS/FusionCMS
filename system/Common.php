@@ -10,7 +10,7 @@
  */
 
 use App\Config\Database;
-use Config\Services;
+use App\Config\Services;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Database\BaseConnection;

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace CodeIgniter\Debug;
 
-use Config\Services;
+use App\Config\Services;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Exceptions\HasExitCodeInterface;
 use CodeIgniter\Exceptions\HTTPExceptionInterface;

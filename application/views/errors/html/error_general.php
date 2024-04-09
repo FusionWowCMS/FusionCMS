@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-use Config\Services;
+use App\Config\Services;
 
 $response = Services::response();
 $response->setStatusCode($code);

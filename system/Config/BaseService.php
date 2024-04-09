@@ -40,7 +40,7 @@ use CodeIgniter\Session\Session;
 use CodeIgniter\Typography\Typography;
 use Config\Optimize;
 use App\Config\Exceptions as ConfigExceptions;
-use Config\Services as AppServices;
+use App\Config\Services as AppServices;
 use Config\Format as ConfigFormat;
 use InvalidArgumentException;
 

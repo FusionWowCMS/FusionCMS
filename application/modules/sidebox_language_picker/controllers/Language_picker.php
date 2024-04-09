@@ -1,6 +1,6 @@
 <?php
 
-use Config\Services;
+use App\Config\Services;
 use MX\MX_Controller;
 
 class Language_picker extends MX_Controller

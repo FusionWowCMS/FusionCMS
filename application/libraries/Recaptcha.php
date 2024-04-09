@@ -1,6 +1,6 @@
 <?php (! defined('BASEPATH')) and exit('No direct script access allowed');
 
-use Config\Services;
+use App\Config\Services;
 
 /**
  * @package FusionCMS

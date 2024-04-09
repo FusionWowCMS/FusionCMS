@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 # Import required classes
-use Config\Services;
+use App\Config\Services;
 use \VisualAppeal\AutoUpdate;
 use MX\MX_Controller;
 

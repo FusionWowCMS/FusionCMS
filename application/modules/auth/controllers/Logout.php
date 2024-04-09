@@ -1,6 +1,6 @@
 <?php
 
-use Config\Services;
+use App\Config\Services;
 use MX\MX_Controller;
 
 class Logout extends MX_Controller
