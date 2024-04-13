@@ -22,7 +22,7 @@ class Admin extends MX_Controller
 
     public function index()
     {
-        $benchmark = \Config\Services::timer(true);
+        $benchmark = Services::timer(true);
         $benchmark->start('admin_execution');
 
         $this->administrator->setTitle("Dashboard");
