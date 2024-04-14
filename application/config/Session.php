@@ -67,7 +67,7 @@ class Session extends BaseConfig
      * WARNING: If you're using the database driver, don't forget to update
      *          your session table's PRIMARY KEY when changing this setting.
      */
-    public bool $matchIP = true;
+    public bool $matchIP = false;
 
     /**
      * --------------------------------------------------------------------------

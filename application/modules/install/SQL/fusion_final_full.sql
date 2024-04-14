@@ -511,7 +511,7 @@ CREATE TABLE `ci_sessions`  (
   `user_agent` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `data` mediumblob NOT NULL,
-  PRIMARY KEY (`id`, `ip_address`) USING BTREE,
+  PRIMARY KEY (`id`) USING BTREE,
   INDEX `ci_sessions_timestamp`(`timestamp`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
 
