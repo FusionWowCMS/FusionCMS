@@ -263,6 +263,12 @@
 							</a>
 						</li>
 						{/if}
+						<li>
+							<a href="{$url}install/upgrade" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
+								<i class="fa-duotone fa-arrow-up-from-arc"></i>
+								<span class="whitespace-nowrap font-sans text-sm block">Importer data (Upgrade)</span>
+							</a>
+						</li>
 						{if hasPermission("updateCms", "admin")}
 						<li>
 							<a href="{$url}admin/updater" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
