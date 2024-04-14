@@ -189,8 +189,6 @@
 														<p class="font-alt text-base font-normal leading-normal text-muted-500 dark:text-muted-400"> <b>{{dear_customer}}</b>, {{fusion_info}} </p>
 													</div>
 													<div class="installer_navigation mt-6 flex items-center justify-between gap-2">
-														<a href="<?= base_url('install/upgrade') ?>" target="_blank" class="m-0 is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">Upgrade</a>
-														<span class="text-muted-500 dark:text-muted-400">OR</span>
 														<button type="button" class="m-0 next is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 w-full">{{start_installer}}</button>
 													</div>
 												</div>
