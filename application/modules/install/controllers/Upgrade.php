@@ -20,13 +20,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Upgrade extends MX_Controller
 {
     # Statements
-    private $statements;
+    private array $statements;
 
     public function __construct()
     {
+        parent::__construct();
+
         # Make sure CMS is installed
         if(!file_exists(WRITEPATH . 'install' . DIRECTORY_SEPARATOR . '.lock'))
-            die($this->load->view('errors/html/error_general', ['heading' => 'Upgrade failed!', 'message' => 'Please install the FusionCMS before attempting to upgrade!'], true));
+            die($this->load->view('errors/html/error_general', ['heading' => 'Upgrade failed!', 'message' => 'Please install the FusionCMS before attempting to upgrade!', 'code' => 403], true));
 
         # user: Is online
         if(!$this->user->isOnline())
