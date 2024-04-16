@@ -38,6 +38,7 @@ class Admin extends MX_Controller
             'version' => $this->administrator->getVersion(),
             'php_version' => phpversion(),
             'ci_version' => CI_VERSION,
+            'os' => $this->getOsName(),
             'theme_value' => $this->config->item('theme'),
             'unique' => $this->getUnique(),
             'views' => $this->getViews(),
@@ -398,5 +399,23 @@ class Admin extends MX_Controller
             return true;
 
         return false;
+    }
+
+	private function getOsName(): string
+	{
+        if (strtoupper(substr(PHP_OS_FAMILY, 0, 3)) === 'WIN') {
+            $os = substr(php_uname('v'), strpos(strtolower(php_uname('v')), 'windows'), -1);
+        } else {
+            $build = '';
+
+            if (strpos(php_uname('v'), 'Ubuntu'))
+                $build = 'Ubuntu';
+            else if (strpos(php_uname('v'), 'Debian'))
+                $build = 'Debian';
+
+            $os = PHP_OS_FAMILY . $build;
+        }
+
+        return $os;
 	}
 }

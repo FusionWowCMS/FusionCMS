@@ -91,20 +91,20 @@
                                 <div class="grid grid-cols-12 gap-4">
                                     <div class="col-span-12 md:col-span-4">
                                         <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-4">
-                                            
+
                                             <div class="mb-1 flex items-center justify-between">
                                                 <h5 class="font-heading text-sm font-medium leading-tight text-muted-500 dark:text-muted-400">
                                                     <span>Income this month</span>
                                                 </h5>
                                                 <div class="relative inline-flex shrink-0 items-center justify-center h-8 w-8 rounded-full bg-success-100 text-success-500 dark:bg-success-500/20 dark:text-success-400 dark:border-success-500 dark:border-2">
-                                                    
+
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
                                                         <g fill="currentColor">
                                                             <path d="M240 104L128 224L80 104l48-64h56Z" opacity=".2"/>
                                                             <path d="m246 98.73l-56-64a8 8 0 0 0-6-2.73H72a8 8 0 0 0-6 2.73l-56 64a8 8 0 0 0 .17 10.73l112 120a8 8 0 0 0 11.7 0l112-120a8 8 0 0 0 .13-10.73ZM222.37 96H180l-36-48h36.37ZM74.58 112l30.13 75.33L34.41 112Zm89.6 0L128 202.46L91.82 112ZM96 96l32-42.67L160 96Zm85.42 16h40.17l-70.3 75.33ZM75.63 48H112L76 96H33.63Z"/>
                                                         </g>
                                                     </svg>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="mb-2">
@@ -131,25 +131,25 @@
 												{/if}
                                                 <span class="text-muted-400 text-xs">since last month</span>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="col-span-12 md:col-span-4">
                                         <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-4">
-                                            
+
                                             <div class="mb-1 flex items-center justify-between">
                                                 <h5 class="font-heading text-sm font-medium leading-tight text-muted-500 dark:text-muted-400">
                                                     <span>Votes this month</span>
                                                 </h5>
                                                 <div class="relative inline-flex shrink-0 items-center justify-center h-8 w-8 rounded-full bg-yellow-100 text-yellow-500 dark:border-2 dark:border-yellow-500 dark:bg-yellow-500/20 dark:text-yellow-400">
-                                                    
+
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
                                                         <g fill="currentColor">
                                                             <path d="m94.81 192l-29.45 22.24a8 8 0 0 1-12.81-4.51L40.19 154.1a8 8 0 0 1 1.66-6.86l30.31-36.33C71 134.25 76.7 161.43 94.81 192Zm119.34-44.76l-30.31-36.33c1.21 23.34-4.54 50.52-22.65 81.09l29.45 22.24a8 8 0 0 0 12.81-4.51l12.36-55.63a8 8 0 0 0-1.66-6.86Z" opacity=".2"/>
                                                             <path d="M152 224a8 8 0 0 1-8 8h-32a8 8 0 0 1 0-16h32a8 8 0 0 1 8 8Zm-24-112a12 12 0 1 0-12-12a12 12 0 0 0 12 12Zm95.62 43.83l-12.36 55.63a16 16 0 0 1-25.51 9.11L158.51 200h-61l-27.26 20.57a16 16 0 0 1-25.51-9.11l-12.36-55.63a16.09 16.09 0 0 1 3.32-13.71l28.56-34.26a123.07 123.07 0 0 1 8.57-36.67c12.9-32.34 36-52.63 45.37-59.85a16 16 0 0 1 19.6 0c9.34 7.22 32.47 27.51 45.37 59.85a123.07 123.07 0 0 1 8.57 36.67l28.56 34.26a16.09 16.09 0 0 1 3.32 13.71ZM99.43 184h57.14c21.12-37.54 25.07-73.48 11.74-106.88C156.55 47.64 134.49 29 128 24c-6.51 5-28.57 23.64-40.33 53.12c-13.31 33.4-9.36 69.34 11.76 106.88Zm-15 5.85q-16.15-29.35-19.6-57.69L48 152.36L60.36 208l.18-.13ZM208 152.36l-16.83-20.2q-3.42 28.28-19.56 57.69l23.85 18l.18.13Z"/>
                                                         </g>
                                                     </svg>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="mb-2">
@@ -176,25 +176,25 @@
 												{/if}
                                                 <span class="text-muted-400 text-xs">since last month</span>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="col-span-12 md:col-span-4">
                                         <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-4">
-                                            
+
                                             <div class="mb-1 flex items-center justify-between">
                                                 <h5 class="font-heading text-sm font-medium leading-tight text-muted-500 dark:text-muted-400">
                                                     <span>Registrations this month</span>
                                                 </h5>
                                                 <div class="relative inline-flex shrink-0 items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-500 dark:bg-primary-500/20 dark:text-primary-400 dark:border-primary-500 dark:border-2">
-                                                    
+
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-cd102a71>
                                                         <g fill="currentColor">
                                                             <path d="M136 69.09v101.82l-93.76 28.76A8 8 0 0 1 32 192V48a8 8 0 0 1 10.24-7.67Z" opacity=".2"/>
                                                             <path d="m220.54 86.66l-176.06-54A16 16 0 0 0 24 48v144a16 16 0 0 0 16 16a16 16 0 0 0 4.52-.65L128 181.73V192a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16v-29.9l28.54-8.75A16.09 16.09 0 0 0 232 138v-36a16.09 16.09 0 0 0-11.46-15.34ZM128 165l-88 27V48l88 27Zm48 27h-32v-15.18l32-9.82Zm40-54h-.11L144 160.08V79.92l71.89 22h.11v36Z"/>
                                                         </g>
                                                     </svg>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="mb-2">
@@ -221,7 +221,7 @@
 												{/if}
                                                 <span class="text-muted-400 text-xs">since last month</span>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
 									{if $graphMonthly}
@@ -250,7 +250,7 @@
                                                     </select>
                                                 </small>
                                             </h2>
-		                                
+
                                             <div id="visitorsSelectorItems" class="chart-data-selector-items mt-3">
                                                 <div class="chart chart-sm chart-hidden" data-graph-rel="Monthly" id="graphMonthly" style="height: 200px;"></div>
                                                 <div class="chart chart-sm chart-active" data-graph-rel="Daily" id="graphDaily" style="height: 200px;"></div>
@@ -380,7 +380,7 @@
                             <div class="ltablet:col-span-3 col-span-12 lg:col-span-3">
                                 <div class="ptablet:grid-cols-2 ltablet:flex ltablet:flex-col grid gap-4 lg:flex lg:flex-col">
                                     <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-6">
-                                        
+
                                         <div class="flex h-full flex-col">
                                             <div class="mb-4 flex items-center">
                                                 <div class="flex-1">
@@ -400,7 +400,7 @@
                                                             <div class="rounded-full flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
                                                                 <img src="{$avatar}" class="h-12 w-12 max-h-full max-w-full object-cover shadow-sm dark:border-transparent">
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -458,6 +458,14 @@
                                                                 <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> CMS version </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$version}</span></div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="router-link-active router-link-exact-active group flex items-center justify-between">
+                                                            <p class="font-alt text-sm font-normal leading-normal leading-normal">
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> OS </span>
+                                                            </p>
+                                                            <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$os}</span></div>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -555,7 +563,7 @@
 <script type="text/javascript">
     var checkSoap = {
         check: function() {
-            $.get(Config.URL + "admin/checkSoap", function(data) {        
+            $.get(Config.URL + "admin/checkSoap", function(data) {
                 try {
                     if(data.includes("Something")) {
                         $("#soapcheck").html('<div class="relative"><div class="nui-card nui-card-curved nui-card-white p-6"><div class="flex w-full flex-col gap-4 sm:flex-row"><svg data-v-26e5b7b0="" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="icon h-10 w-10 shrink-0" width="1em" height="1em" viewBox="0 0 256 256"><defs><linearGradient id="iconifyVue0" x1="99.687%" x2="39.836%" y1="15.801%" y2="97.438%"><stop offset="0%" stop-color="#0052CC"></stop><stop offset="92.3%" stop-color="#2684FF"></stop></linearGradient></defs><path fill="url(#iconifyVue0)" d="M75.793 117.95c-3.82-4.08-9.77-3.85-12.367 1.342L.791 244.565a7.488 7.488 0 0 0 6.697 10.838h87.228a7.22 7.22 0 0 0 6.699-4.14c18.808-38.89 7.413-98.018-25.622-133.314Z"></path><path fill="#2681FF" d="M121.756 4.011c-35.033 55.505-32.721 116.979-9.646 163.13l42.06 84.121a7.488 7.488 0 0 0 6.697 4.14h87.227a7.488 7.488 0 0 0 6.697-10.838S137.445 9.837 134.493 3.964c-2.64-5.258-9.344-5.33-12.737.047Z"></path></svg><div><h4 class="nui-heading nui-heading-md nui-weight-semibold nui-lead-tight after:text-muted-800 mb-4 dark:text-white"><span class="text-danger-500">Soap Checker</span></h4><p class="nui-paragraph nui-paragraph-sm nui-weight-normal nui-lead-normal"><span class="text-danger-500 line-clamp-4"><strong>Oh no!</strong><br/> Looks like a realm has a soap problem!</span></p><div class="flex items-center justify-between pt-4"><div class="flex gap-2"><a href="'+ Config.URL +'admin/checkSoap" class="router-link-active router-link-exact-active bg-muted-100 hover:bg-muted-200 dark:bg-muted-700 dark:hover:bg-muted-900 text-primary-500 rounded-lg px-4 py-2 font-sans text-sm font-medium underline-offset-4 transition-colors duration-300 hover:underline"> Details </a></div></div></div></div></div></div>');
