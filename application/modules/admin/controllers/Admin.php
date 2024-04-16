@@ -385,8 +385,8 @@ class Admin extends MX_Controller
         return $result;
     }
 
-	private function getLatestVersion()
-	{
+    private function getLatestVersion(): bool
+    {
         $response = Services::curlrequest()->get('https://raw.githubusercontent.com/FusionWowCMS/FusionCMS/master/application/config/version.php');
         $content = $response->getBody();
         if ($content)
@@ -394,7 +394,9 @@ class Admin extends MX_Controller
         else
             $newVersion = false;
 
-        if($this->template->compareVersions($newVersion, $this->config->item('FusionCMSVersion'), true))
+        if ($this->template->compareVersions($newVersion, $this->config->item('FusionCMSVersion'), true))
             return true;
+
+        return false;
 	}
 }
