@@ -5,18 +5,22 @@
 		<title>Upgrade - FusionCMS</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="shortcut icon" href="<?=$INSTALL_PATH?>images/favicon.png" />
-		<link rel="stylesheet" href="<?=$css?>" />
+		<link rel="shortcut icon" href="<?= $INSTALL_PATH ?>images/favicon.png" />
+		<link rel="stylesheet" href="<?= $css ?>" />
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/Kraken/3.8.2/js/html5.min.js"></script>
-		<script src="./../node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="<?= base_url() ?>node_modules/jquery/dist/jquery.min.js"></script>
 		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
-		<script src="<?=$INSTALL_PATH?>js/lang.js"></script>
-		<script src="<?=$INSTALL_PATH?>js/ui.js"></script>
-		<script src="<?=$INSTALL_PATH?>js/upgrade.js"></script>
-		<script src="<?=$INSTALL_PATH?>js/memory.js"></script>
+		<script src="<?= $INSTALL_PATH ?>js/lang.js"></script>
+		<script src="<?= $INSTALL_PATH ?>js/ui.js"></script>
+		<script src="<?= $INSTALL_PATH ?>js/upgrade.js"></script>
+		<script src="<?= $INSTALL_PATH ?>js/memory.js"></script>
 		<script>
+		    const Config = {
+		        url: '<?= base_url() ?>'
+		    };
+
 			$(document).ready(function()
 			{
 				UI.initialize();
@@ -55,7 +59,7 @@
 				<div class="dark:bg-muted-800 absolute start-0 top-0 h-16 w-full bg-white">
 					<div class="relative flex h-16 w-full items-center justify-between px-4">
 						<div class="flex items-center">
-							<img class="border-muted-200 dark:border-muted-700 flex w-56 items-center justify-center border-r pe-6" src="<?=$INSTALL_PATH?>images/fusion.svg" alt="FusionCMS">
+							<img class="border-muted-200 dark:border-muted-700 flex w-56 items-center justify-center border-r pe-6" src="<?= $INSTALL_PATH ?>images/fusion.svg" alt="FusionCMS">
 							<div class="hidden items-center gap-2 ps-6 font-sans sm:flex" _lang_='{"step": "{{step}}"}' _step_>
 								<p class="text-muted-500 dark:text-muted-400" _step_number_>{{step}} 1: </p>
 								<h2 class="text-muted-800 font-semibold dark:text-white" _step_name_>{{language}}</h2>
@@ -97,7 +101,7 @@
 									<aside class="flex items-center justify-center py-8 mx-auto w-full max-w-md">
 										<section class="box big step">
 											<div class="flex flex-col py-2">
-												<img src="<?=$INSTALL_PATH?>images/fusion.svg">
+												<img src="<?= $INSTALL_PATH ?>images/fusion.svg">
 												<div class="mx-auto mt-4">
 													<div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md shadow-muted-300/30 dark:shadow-muted-800/30 shadow-xl p-6 mt-4">
 														<div class="mx-auto mb-4 max-w-xs text-center">
@@ -108,7 +112,7 @@
 																<div class="relative my-4 flex items-center justify-center px-3">
 																	<div class="relative">
 																		<input type="radio" id="language_selection_en" class="peer absolute start-0 top-0 z-20 h-full w-full cursor-pointer opacity-0" onclick="setLanguage('en')">
-																		<div class="border-muted-200 peer-checked:border-primary-500 dark:border-muted-600 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-300"><img class="h-10 w-10 rounded-full" src="./../application/images/flags2/en.svg" alt="flag icon"></div>
+																		<div class="border-muted-200 peer-checked:border-primary-500 dark:border-muted-600 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-300"><img class="h-10 w-10 rounded-full" src="<?= base_url() ?>application/images/flags2/en.svg" alt="flag icon"></div>
 																		<div class="bg-primary-500 dark:border-muted-800 absolute -end-1 -top-1 hidden h-7 w-7 items-center justify-center rounded-full border-4 border-white text-white peer-checked:flex">
 																			<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="icon h-3 w-3" width="1em" height="1em" viewBox="0 0 24 24">
 																				<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path>
@@ -119,7 +123,7 @@
 																<div class="relative my-4 flex items-center justify-center px-3">
 																	<div class="relative">
 																		<input type="radio" id="language_selection_fa" class="peer absolute start-0 top-0 z-20 h-full w-full cursor-pointer opacity-0" onclick="setLanguage('fa')">
-																		<div class="border-muted-200 peer-checked:border-primary-500 dark:border-muted-600 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-300"><img class="h-10 w-10 rounded-full" src="./../application/images/flags2/ir.svg" alt="flag icon"></div>
+																		<div class="border-muted-200 peer-checked:border-primary-500 dark:border-muted-600 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-300"><img class="h-10 w-10 rounded-full" src="<?= base_url() ?>application/images/flags2/ir.svg" alt="flag icon"></div>
 																		<div class="bg-primary-500 dark:border-muted-800 absolute -end-1 -top-1 hidden h-7 w-7 items-center justify-center rounded-full border-4 border-white text-white peer-checked:flex">
 																			<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="icon h-3 w-3" width="1em" height="1em" viewBox="0 0 24 24">
 																				<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path>
@@ -130,7 +134,7 @@
 																<div class="relative my-4 flex items-center justify-center px-3">
 																	<div class="relative">
 																		<input type="radio" id="language_selection_pt-BR" class="peer absolute start-0 top-0 z-20 h-full w-full cursor-pointer opacity-0" onclick="setLanguage('pt-BR')">
-																		<div class="border-muted-200 peer-checked:border-primary-500 dark:border-muted-600 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-300"><img class="h-10 w-10 rounded-full" src="./../application/images/flags2/br.svg" alt="flag icon"></div>
+																		<div class="border-muted-200 peer-checked:border-primary-500 dark:border-muted-600 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-300"><img class="h-10 w-10 rounded-full" src="<?= base_url() ?>application/images/flags2/br.svg" alt="flag icon"></div>
 																		<div class="bg-primary-500 dark:border-muted-800 absolute -end-1 -top-1 hidden h-7 w-7 items-center justify-center rounded-full border-4 border-white text-white peer-checked:flex">
 																			<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="icon h-3 w-3" width="1em" height="1em" viewBox="0 0 24 24">
 																				<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path>

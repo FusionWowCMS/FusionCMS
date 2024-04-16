@@ -34,7 +34,7 @@ const Ajax = {
 				if (!name)
                     return;
 
-                $("#realm_field").append("<div class=\"realmHeader\"><a onclick='Ajax.Realms.show(this);'><img class='realmExtend' src='../application/modules/install/images/icons/ic_plus.png' /> " + name + "</a> <img class='realmDelete' src='../application/modules/install/images/icons/ic_delete.png' onclick='Ajax.Realms.deleteRealm(this);' /></div><div class='realmForm' style='display: none;'></div>");
+                $("#realm_field").append("<div class=\"realmHeader\"><a onclick='Ajax.Realms.show(this);'><img class='realmExtend' src='" + Config.url + "application/modules/install/images/icons/ic_plus.png' /> " + name + "</a> <img class='realmDelete' src='" + Config.url + "application/modules/install/images/icons/ic_delete.png' onclick='Ajax.Realms.deleteRealm(this);' /></div><div class='realmForm' style='display: none;'></div>");
                 $("#realm_field .realmForm").html($("#loader").html()).find('#realmName').val(name);
                 UI.Tooltip.refresh();
             });
@@ -55,14 +55,14 @@ const Ajax = {
 
 			if (div.attr("data-active") == "true") {
                 div.next('.realmForm').slideUp(200, function () {
-                    div.find('img.realmExtend').attr('src', "../application/modules/install/images/icons/ic_plus.png");
+                    div.find('img.realmExtend').attr('src', Config.url + "application/modules/install/images/icons/ic_plus.png");
                     div.removeAttr("data-active");
                 });
 
                 Ajax.Realms.saveAll();
             } else {
                 div.next('.realmForm').slideDown(200, function () {
-                    div.find('img.realmExtend').attr('src', "../application/modules/install/images/icons/ic_minus.png");
+                    div.find('img.realmExtend').attr('src', Config.url + "application/modules/install/images/icons/ic_minus.png");
                     div.attr("data-active", "true");
                 });
             }

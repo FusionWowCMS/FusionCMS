@@ -47,7 +47,7 @@ const Language = (() => {
         xObj.overrideMimeType('application/json');
 
         // Request JSON file
-        xObj.open('GET', '../application/modules/install/languages/' + file + '.json', false);
+        xObj.open('GET', Config.url + 'application/modules/install/languages/' + file + '.json', false);
 
         // Call `callback` function
         xObj.onreadystatechange = () => {
