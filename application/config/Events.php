@@ -1,8 +1,9 @@
-<?php namespace Config;
+<?php
 
-use App\Config\Services;
-use CodeIgniter\Events\Events;
+namespace Config;
+
 use MX\CI;
+use CodeIgniter\Events\Events;
 
 /*
  * --------------------------------------------------------------------
@@ -21,55 +22,73 @@ use MX\CI;
  *      Events::on('create', [$myInstance, 'myMethod']);
  */
 
-Events::on('post_controller_constructor', static function () {
-    if (isset(CI::$APP->template)) {
-        //Get Module Name
-        $moduleName = CI::$APP->template->getModuleName();
-
-        //Get Module Data from Template Library
-        $module = CI::$APP->template->getModuleData();
-
-        // Is the module enabled?
-        if (!isset($module['enabled']) || !$module['enabled']) {
-            redirect("errors");
-        }
-
-        // Default to a current version
-        if (!array_key_exists("min_required_version", $module)) {
-            $module['min_required_version'] = CI::$APP->config->item('FusionCMSVersion');
-        }
-
-        // Does the module get the correct version?
-        if (version_compare($module['min_required_version'], CI::$APP->config->item('FusionCMSVersion'), '>')) {
-            show_error("The module <b>" . strtolower($moduleName) . "</b> requires FusionCMS v" . $module['min_required_version'] . ", please update at https://github.com/FusionWowCMS/FusionCMS");
-        }
-
-        // Check Cookie
-        if (isset(CI::$APP->user) && !CI::$APP->user->isOnline()) {
-            $username = CI::$APP->input->cookie("fcms_username");
-            $password = CI::$APP->input->cookie("fcms_password");
-
-            if ($password && CI::$APP->config->item('account_encryption') != 'SPH' && column('account', 'verifier') && column('account', 'salt')) { // Emulator Uses SRP6 Encryption.
-                $password = urldecode(preg_replace('~.(?:fcms_password=([^;]+))?~', '$1', @$_SERVER['HTTP_COOKIE'])); // Fix for HTTP_COOKIE Error.
-            }
-
-            if ($username && $password) {
-                $check = CI::$APP->user->setUserDetails($username, $password);
-
-                if ($check == 0 && strtolower(str_replace(CI::$APP->config->item('controller_suffix') ?? '', '', CI::$APP->router->fetch_module())) !== 'api') {
-                    redirect('news');
-                }
-            }
-        }
-    }
-
+Events::on('pre_controller', static function () {
     /*
      * --------------------------------------------------------------------
      * Debug Toolbar Listeners.
      * --------------------------------------------------------------------
      * If you delete, they will no longer be collected.
      */
-    if (CI::$APP->config->item('enable_profiler') === true && ! is_cli()) {
+    if(CI::$APP->config->item('enable_profiler') === true && !is_cli())
         Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\DB::collect');
+
+    /*
+     * --------------------------------------------------------------------
+     * FusionCMS Listeners.
+     * --------------------------------------------------------------------
+     * Validate module and minimum required version. | Handle cookie login.
+     */
+
+    // SKIP! Template class not found!
+    if(!isset(CI::$APP->template))
+        return;
+
+    // Module: Initialize
+    $module = [
+        'name' => CI::$APP->template->getModuleName(),
+        'data' => CI::$APP->template->getModuleData()
+    ];
+
+    // Module: Disabled
+    if(!isset($module['data']['enabled']) || (isset($module['data']['enabled']) && !$module['data']['enabled']))
+        show_404();
+
+    // Module: Patch | Set min_required_version
+    if(!isset($module['data']['min_required_version']))
+        $module['data']['min_required_version'] = CI::$APP->config->item('FusionCMSVersion');
+
+    // Module: Requires higher FusionCMS version
+    if(version_compare($module['data']['min_required_version'], CI::$APP->config->item('FusionCMSVersion'), '>'))
+        show_error(str_replace(['$1', '$2', '$3'], [$module['name'], $module['data']['min_required_version'], 'https://github.com/FusionWowCMS/FusionCMS'], 'The module <b>$1</b> requires FusionCMS v$2, Please update at $3'));
+
+    // SKIP! No need to go any further!
+    if(!isset(CI::$APP->user) || (isset(CI::$APP->user) && CI::$APP->user->isOnline()))
+        return;
+
+    // Username: Read cookie
+    $username = CI::$APP->input->cookie('fcms_username');
+
+    // Password: Read cookie
+    $password = CI::$APP->input->cookie('fcms_password');
+
+    // Password: Emulator Uses SRP6 Encryption | Fix for HTTP_COOKIE Error
+    if($password && column('account', 'verifier') && column('account', 'salt') && CI::$APP->config->item('account_encryption') != 'SPH')
+        $password = urldecode(preg_replace('~.(?:fcms_password=([^;]+))?~', '$1', @$_SERVER['HTTP_COOKIE'])); // Thanks to M3 (Asterixobelix)
+
+    // Hooray! Username and Password found!
+    if($username && $password)
+    {
+        // User: Set details
+        $user = CI::$APP->user->setUserDetails($username, $password);
+
+        // Redirect: Initialize
+        $redirect = true;
+
+        // Redirect: False
+        if(in_array(strtolower(str_replace(CI::$APP->config->item('controller_suffix') ?? '', '', CI::$APP->router->fetch_module())), ['api']))
+            $redirect = false;
+
+        if($user == 0 && $redirect)
+            redirect(str_replace(base_url(), '', current_url()) ?? CI::$APP->router->default_controller);
     }
 });
