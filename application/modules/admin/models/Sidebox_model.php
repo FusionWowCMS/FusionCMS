@@ -42,16 +42,15 @@ class Sidebox_model extends CI_Model
         $this->db->query("DELETE FROM sideboxes WHERE id = ?", [$id]);
     }
 
-    public function setPermission($id, $group_id)
+    public function setPermission($id)
     {
         $this->db->query("UPDATE sideboxes SET `permission` = ? WHERE id = ?", [$id, $id]);
-        $this->db->query("INSERT INTO acl_group_roles(`group_id`, `name`, `module`) VALUES(?, ?, '--SIDEBOX--')", [$group_id, $id]);
     }
 
     public function deletePermission($id)
     {
-        $this->db->query("UPDATE sideboxes SET `permission`='' WHERE id = ?", [$id]);
-        $this->db->query("DELETE FROM acl_group_roles WHERE module = '--SIDEBOX--' AND name = ?", [$id]);
+        $this->db->query("UPDATE sideboxes SET `permission` = '' WHERE id = ?", [$id]);
+        $this->db->query("DELETE FROM acl_group_roles WHERE module = '--SIDEBOX--' AND role_name = ?", [$id]);
     }
 
     public function hasPermission($id)

@@ -66,9 +66,6 @@ class Menu_model extends CI_Model
     public function setPermission($id)
     {
         $this->db->query("UPDATE menu SET `permission` = ? WHERE id = ?", [$id, $id]);
-
-        foreach($this->acl_model->getGroups() as $group)
-            $this->db->query("INSERT INTO acl_group_roles(`group_id`, `role_name`, `module`) VALUES (?, ?, '--MENU--')", [$group['id'], $id]);
     }
 
     public function deletePermission($id)
