@@ -15,8 +15,8 @@ class Slider extends MX_Controller
         $this->load->model('slider_model');
 
         parent::__construct();
-		
-		require_once('application/libraries/ConfigEditor.php');
+
+        require_once('application/libraries/ConfigEditor.php');
 
         requirePermission("viewSlider");
     }
@@ -30,7 +30,7 @@ class Slider extends MX_Controller
 
         if ($slides) {
             foreach ($slides as $key => $value) {
-                $slides[$key]['image'] = preg_replace("/{path}/", "", $value['image']);
+                $slides[$key]['image'] = preg_replace("/{image_path}/", "", $value['image']);
 
                 if (strlen($slides[$key]['image']) > 15) {
                     $slides[$key]['image'] = "..." . mb_substr($slides[$key]['image'], strlen($slides[$key]['image']) - 15, 15);
@@ -75,9 +75,8 @@ class Slider extends MX_Controller
             die("Image can't be empty");
         }
 
-        if (!preg_match("/http:\/\//", $data['image'])) {
-            $data['image'] = "{path}" . $data['image'];
-        }
+        if(!filter_var($data['image'], FILTER_VALIDATE_URL))
+            $data['image'] = '{image_path}' . $data['image'];
 
         $this->slider_model->add($data);
 
@@ -215,9 +214,8 @@ class Slider extends MX_Controller
         $data["body"] = $this->input->post("text_body");
         $data["footer"] = $this->input->post("text_footer");
 
-        if (!preg_match("/http:\/\//", $data['image'])) {
-            $data['image'] = "{path}" . $data['image'];
-        }
+        if(!filter_var($data['image'], FILTER_VALIDATE_URL))
+            $data['image'] = '{image_path}' . $data['image'];
 
         $this->slider_model->edit($id, $data);
 
