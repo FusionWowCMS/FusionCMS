@@ -546,21 +546,11 @@ class Updater extends MX_Controller
             }
             else
             {
-                // Keep track of skip
-                $skip = !isset($packages[$this->version]) ? false : true;
-
                 // Loop through packages
                 foreach($packages as $key => $package)
                 {
                     // We're gonna need rest of packages
-                    if($skip && $key == $this->version)
-                    {
-                        $skip = false;
-                        continue;
-                    }
-
-                    // Skip installed updates
-                    if($skip)
+                    if(version_compare($this->version, $key, '>='))
                         continue;
 
                     // Add package
