@@ -827,7 +827,7 @@ class Upgrade extends MX_Controller
 
                     '003' => [
                         'select' => [
-                            'table'   => 'commentary',
+                            'table'   => 'news_comments',
                             'columns' => ['id', 'id_new', 'author', 'commentary', 'date']
                         ],
 
