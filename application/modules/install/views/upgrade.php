@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<title>Upgrade - FusionCMS</title>
@@ -25,11 +25,26 @@
 			{
 				UI.initialize();
 				Memory.populate();
-			})
+
+                let theme=localStorage.getItem("mode")||" dark";
+                document.documentElement.classList.add(theme);
+
+                const Theme = {
+                    moon: $("#moon"), sun: $("#sun"), Light: function () {
+                        document.documentElement.classList.remove("dark"), document.documentElement.classList.add("light"), window.localStorage.setItem("mode", "light"), Theme.moon.removeClass("-translate-y-1/2").addClass("translate-y-[-150%]").removeClass("opacity-100").addClass("opacity-0"), Theme.sun.removeClass("translate-y-[-150%]").addClass("-translate-y-1/2").removeClass("opacity-0"), theme = "light"
+                    }, Dark: function () {
+                        document.documentElement.classList.remove("light"), document.documentElement.classList.add("dark"), window.localStorage.setItem("mode", "dark"), Theme.moon.addClass("-translate-y-1/2").removeClass("translate-y-[-150%]").addClass("opacity-100").removeClass("opacity-0"), Theme.sun.addClass("translate-y-[-150%]").removeClass("-translate-y-1/2").addClass("opacity-0"), theme = "dark"
+                    }
+                };
+                theme === "dark" ? Theme.Dark() : Theme.Light();
+
+                const modeBtn=document.getElementById("mode");modeBtn.onchange=e=>{
+                theme === "dark" ? Theme.Light():Theme.Dark()};
+            })
 		</script>
 	</head>
 
-	<body class="dark">
+	<body>
 		<div id="popup_bg"></div>
 
 		<!-- confirm box -->
@@ -86,6 +101,19 @@
 								</ul>
 							</div>
 						</div>
+                        <div class="flex items-center justify-end gap-4">
+                            <label for="mode" class="nui-focus relative block h-9 w-9 shrink-0 overflow-hidden rounded-full transition-all duration-300 focus-visible:outline-2 dark:ring-offset-muted-900">
+                                <input type="checkbox" id="mode" class="absolute start-0 top-0 z-[2] h-full w-full cursor-pointer opacity-0">
+                                <span class="bg-white dark:bg-muted-800  border border-muted-300 dark:border-muted-700 relative block h-9 w-9 rounded-full">
+                                    <svg id="sun" viewbox="0 0 24 24" class="pointer-events-none absolute start-1/2 top-1/2 block h-5 w-5 text-yellow-400 transition-all duration-300 translate-x-[-50%] opacity-0 rtl:translate-x-[50%] translate-y-[-150%]">
+                                        <g fill="currentColor" stroke="currentColor" class="stroke-2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></g>
+                                    </svg>
+                                    <svg id="moon" viewbox="0 0 24 24" class="pointer-events-none absolute start-1/2 top-1/2 block h-5 w-5 text-yellow-400 transition-all duration-300 translate-x-[-45%] opacity-100 rtl:translate-x-[45%] -translate-y-1/2">
+                                        <path fill="currentColor" stroke="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="stroke-2"></path>
+                                    </svg>
+                                </span>
+                            </label>
+                        </div>
 						<div class="absolute inset-x-0 bottom-0 z-10 w-full">
 							<div id="progressbar" aria-valuenow="14.285714285714285" aria-valuemax="100" class="nui-progress nui-progress-xs nui-progress-default nui-progress-primary nui-progress-full">
 								<div class="nui-progress-bar" style="width: 0;"></div>
@@ -255,7 +283,6 @@
 				</div>
 			</div>
 		</div>
-
 		<script>
 			Language.init();
 
