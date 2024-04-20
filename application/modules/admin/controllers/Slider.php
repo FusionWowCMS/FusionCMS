@@ -75,7 +75,7 @@ class Slider extends MX_Controller
             die("Image can't be empty");
         }
 
-        if(!filter_var($data['image'], FILTER_VALIDATE_URL))
+        if(!filter_var($data['image'], FILTER_VALIDATE_URL) && strpos($data['image'], '{image_path}') === false)
             $data['image'] = '{image_path}' . $data['image'];
 
         $this->slider_model->add($data);
@@ -214,7 +214,7 @@ class Slider extends MX_Controller
         $data["body"] = $this->input->post("text_body");
         $data["footer"] = $this->input->post("text_footer");
 
-        if(!filter_var($data['image'], FILTER_VALIDATE_URL))
+        if(!filter_var($data['image'], FILTER_VALIDATE_URL) && strpos($data['image'], '{image_path}') === false)
             $data['image'] = '{image_path}' . $data['image'];
 
         $this->slider_model->edit($id, $data);
