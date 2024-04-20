@@ -30,7 +30,7 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 		<!-- Header CSS.Start -->
-		<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css" />
+		<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css" />
 		{minify files=array("application/css/default.css", "application/css/tooltip.css", "node_modules/bootstrap/dist/css/bootstrap.min.css", "node_modules/sweetalert2/dist/sweetalert2.min.css", "node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "{$full_theme_path}css/cms.css", "{$full_theme_path}css/main.css") type='css' output='writable/cache/data/minify/all.min.css' disable={$minify_css}}
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css">
 

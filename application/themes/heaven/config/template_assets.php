@@ -25,7 +25,7 @@ $assets = [
 
                         # CMS dependencies
                         '@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap")',
-                        '@import url("https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css")',
+                        '@import url("https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css")',
                         '@import url("https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css")',
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'bootstrap' . DS . 'dist' . DS . 'css' . DS . 'bootstrap.min.css'),
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'sweetalert2' . DS . 'dist' . DS . 'sweetalert2.min.css'),
