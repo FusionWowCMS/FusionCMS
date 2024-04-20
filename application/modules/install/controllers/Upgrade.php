@@ -1103,6 +1103,12 @@ class Upgrade extends MX_Controller
         {
             // SQL: Append columns
             $sql .= str_replace([':colName', ':colVal'], [$col, $structure['insert']['columns'][$key]], '`:colName` AS `:colVal`, ');
+
+            if ($data['cms'] == 'bcms2' && $col == 'created_at') {
+
+                // SQL: Replace date to timestamp
+                $sql = str_replace(['`created_at` AS `timestamp`, '], 'unix_timestamp(`created_at`) AS `timestamp`, ', $sql);
+            }
         }
 
         // SQL: Format
