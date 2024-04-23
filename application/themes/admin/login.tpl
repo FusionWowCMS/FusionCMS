@@ -81,7 +81,8 @@
 					    moon:$("#moon"),sun:$("#sun"),Light:function(){
 					   document.documentElement.classList.remove("dark"),document.documentElement.classList.add("light"),window.localStorage.setItem("mode","light"),Theme.moon.removeClass("-translate-y-1/2").addClass("translate-y-[-150%]").removeClass("opacity-100").addClass("opacity-0"),Theme.sun.removeClass("translate-y-[-150%]").addClass("-translate-y-1/2").removeClass("opacity-0"),theme="light"},Dark:function(){
 					   document.documentElement.classList.remove("light"),document.documentElement.classList.add("dark"),window.localStorage.setItem("mode","dark"),Theme.moon.addClass("-translate-y-1/2").removeClass("translate-y-[-150%]").addClass("opacity-100").removeClass("opacity-0"),Theme.sun.addClass("translate-y-[-150%]").removeClass("-translate-y-1/2").addClass("opacity-0"),theme="dark"}};"dark"==theme?Theme.Dark():Theme.Light();
-					</script>            </div>
+					</script>
+                </div>
                 <div>
                     <h2 class="font-heading text-3xl font-medium mt-6 text-muted-800 dark:text-white">
                         Welcome back {$username}. 
