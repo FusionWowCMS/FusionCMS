@@ -110,21 +110,21 @@ class News extends MX_Controller
         {
             $this->news_articles[$key]['title'] = xml_convert(langColumn($article['headline']));
             $this->news_articles[$key]['content'] = xml_convert(langColumn($article['content']));
-            $this->news_articles[$key]['link'] = base_url().'news/view/'.$article['id'];
+            $this->news_articles[$key]['link'] = base_url() . 'news/view/'.$article['id'];
             $this->news_articles[$key]['date'] = date(DATE_RSS, $article['timestamp']);
             $this->news_articles[$key]['author'] = $this->user->getNickname($article['author_id']);
             $this->news_articles[$key]['tags'] = $this->news_model->getTags($article['id']);
         }
 
         $data['link'] = $this->config->site_url();
-        $data['domain'] = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
-        $data['feed_url'] = base_url().'news/rss';
+        $data['domain'] = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'];
+        $data['feed_url'] = base_url() . 'news/rss';
         $data['page_description'] = $this->config->item('rss_description');
         $data['page_language'] = $this->config->item('rss_lang');
         $data['articles'] = $this->news_articles;
 
         header('Content-Type: text/xml; charset=UTF-8');
-        echo $this->template->loadPage('rss.tpl', $data);
+        die($this->template->loadPage('rss.tpl', $data));
     }
 
     private function displayPage()
