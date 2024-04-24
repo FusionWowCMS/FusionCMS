@@ -1,0 +1,19 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+*.php text eol=lf
+*.y   text eol=lf
+*.lex text eol=lf
+
+# exclude from git export
+/tests export-ignore
+/utilities export-ignore
+/docker-compose.yml export-ignore
+/.github export-ignore
+/run_tests_for_all_php_versions.sh export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/make-release.sh export-ignore
+/phpunit.sh export-ignore
+/phpunit.xml export-ignore
+/TODO.md export-ignore

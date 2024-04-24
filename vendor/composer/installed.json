@@ -963,17 +963,17 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v5.0.2",
-            "version_normalized": "5.0.2.0",
+            "version": "v5.1.0",
+            "version_normalized": "5.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "bbd09c7bfaa6c2c091adc4568a944f765bb4f1d9"
+                "reference": "8d53d3cbf2a986f392d680349be0fc22661bf16c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/bbd09c7bfaa6c2c091adc4568a944f765bb4f1d9",
-                "reference": "bbd09c7bfaa6c2c091adc4568a944f765bb4f1d9",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/8d53d3cbf2a986f392d680349be0fc22661bf16c",
+                "reference": "8d53d3cbf2a986f392d680349be0fc22661bf16c",
                 "shasum": ""
             },
             "require": {
@@ -984,14 +984,14 @@
                 "phpunit/phpunit": "^8.5 || ^7.5",
                 "smarty/smarty-lexer": "^4.0.2"
             },
-            "time": "2024-03-28T10:23:18+00:00",
+            "time": "2024-04-22T22:22:15+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "5.0.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "src/functions.php"
@@ -1030,7 +1030,7 @@
             "support": {
                 "forum": "https://github.com/smarty-php/smarty/discussions",
                 "issues": "https://github.com/smarty-php/smarty/issues",
-                "source": "https://github.com/smarty-php/smarty/tree/v5.0.2"
+                "source": "https://github.com/smarty-php/smarty/tree/v5.1.0"
             },
             "install-path": "../smarty/smarty"
         },

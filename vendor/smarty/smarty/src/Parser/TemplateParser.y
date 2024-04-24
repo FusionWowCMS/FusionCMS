@@ -290,9 +290,7 @@ literal_e1(A) ::= . {
 }
                       // Smarty tag
 template       ::= template smartytag(B). {
-      if ($this->compiler->has_code) {
-          $this->current_buffer->append_subtree($this, $this->mergePrefixCode(B));
-      }
+     $this->current_buffer->append_subtree($this, $this->mergePrefixCode(B));
      $this->compiler->has_variable_string = false;
      $this->block_nesting_level = $this->compiler->getTagStackCount();
 }
@@ -665,12 +663,21 @@ expr(res)        ::= expr(e1) scond(c). {
     res = c . e1 . ')';
 }
 
-expr(res)        ::= expr(e1) ISIN array(a).  {
-    res = 'in_array('.e1.','.a.')';
+isin(res)  ::= ISIN(o). {
+    static $isin = [
+        'isin' => 'in_array(',
+        'isnotin' => '!in_array(',
+    ];
+   $op = strtolower(str_replace(' ', '', o));
+   res = $isin[$op];
 }
 
-expr(res)        ::= expr(e1) ISIN value(v).  {
-    res = 'in_array('.e1.',(array)'.v.')';
+expr(res)        ::= expr(e1) isin(c) array(a).  {
+    res = c . e1.','.a.')';
+}
+
+expr(res)        ::= expr(e1) isin(c) value(v).  {
+    res = c . e1.',(array)'.v.')';
 }
 
 // null coalescing
@@ -798,7 +805,7 @@ value(res)    ::= varindexed(vi) DOUBLECOLON static_class_access(r). {
                   // Smarty tag
 value(res)       ::= smartytag(st). {
     $prefixVar = $this->compiler->getNewPrefixVariable();
-    $tmp = $this->compiler->appendCode('<?php ob_start();?>', st);
+    $tmp = $this->compiler->appendCode('<?php ob_start();?>', (string) st);
     $this->compiler->appendPrefixCode($this->compiler->appendCode($tmp, "<?php {$prefixVar} = ob_get_clean();?>"));
     res = $prefixVar;
 }

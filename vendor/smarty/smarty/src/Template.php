@@ -555,6 +555,9 @@ class Template extends TemplateBase {
 	 */
 	public function getStreamVariable($variable)
 	{
+
+		trigger_error("Using stream variables (\`\{\$foo:bar\}\`)is deprecated.", E_USER_DEPRECATED);
+
 		$_result = '';
 		$fp = fopen($variable, 'r+');
 		if ($fp) {
@@ -601,7 +604,6 @@ class Template extends TemplateBase {
 	 * @return bool cache status
 	 * @throws \Exception
 	 * @throws \Smarty\Exception
-	 * @link https://www.smarty.net/docs/en/api.is.cached.tpl
 	 *
 	 * @api  Smarty::isCached()
 	 */

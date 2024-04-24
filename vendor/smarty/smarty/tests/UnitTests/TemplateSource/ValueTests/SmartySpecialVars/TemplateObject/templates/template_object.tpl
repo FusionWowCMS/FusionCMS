@@ -1,0 +1,1 @@
+{if $smarty.template_object instanceof \Smarty\Template}okay{/if}
