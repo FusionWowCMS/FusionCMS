@@ -36,6 +36,9 @@ $assets = [
                         T_ROOT_PATH . 'assets' . DS . 'css' . DS . 'style.css'
                     ],
 
+                    # Autoload theme variations stylesheet files
+                    glob(T_ROOT_PATH . 'assets' . DS . 'variations' . DS . '*' . DS . 'css' . DS . 'style.css'),
+
                     # Autoload theme modules stylesheet files (sidebox)
                     glob(T_ROOT_PATH . 'modules' . DS . 'sidebox_*' . DS . 'css' . DS . '*.css')
                 )

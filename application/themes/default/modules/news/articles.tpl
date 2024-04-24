@@ -26,11 +26,11 @@
 		{$classes[] = 'has-tags'}
 	{/if}
 
-	{if key(reset($articles)) == $key}
+	{if $item@first}
 		{$classes[] = 'first-item'}
 	{/if}
 
-	{if !isset($articles[$key + 1])}
+	{if $item@last}
 		{$classes[] = 'last-item'}
 	{/if}
 
@@ -38,7 +38,7 @@
 	{$item.SEOurl = urlencode(str_replace('/', '-', $item.headline))}
 
 	{* Default thumbnail (only for first item) *}
-	{if !$item.type && !$is_single && key(reset($articles)) == $key}
+	{if !$item.type && !$is_single && $item@first}
 		{* Set type *}
 		{$item.type = 1}
 

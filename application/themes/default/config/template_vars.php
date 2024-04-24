@@ -46,7 +46,7 @@ CI::$APP->smarty->assign('showSideboxes', $showSideboxes);
 CI::$APP->smarty->assign('MY_image_path', T_BASE_URL . 'assets/images/');
 
 // Assign slider image path to smarty template
-CI::$APP->smarty->assign('slider_image_path', T_BASE_URL . 'assets/images/slides/');
+CI::$APP->smarty->assign('slider_image_path', T_BASE_URL . str_replace('/{variation}', ($config['variation'] == 'wotlk' ? '' : '/variations/' . $config['variation']), 'assets/{variation}/images/slides/'));
 
 // Assign body classes to smarty template
 CI::$APP->smarty->assign('body_class', implode(' ', [
