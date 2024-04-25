@@ -26,7 +26,7 @@
 								{/if}
 							{/capture}
 
-							<img width="1296" height="391" alt="{if $slide.header}{$slide.header} {/if}{if $slide.body}{$slide.body} {/if}{if $slide.footer}{$slide.footer}{/if}" src="{$slider_image_path}{basename($slide.image)}" title="{$caption}" {if key(reset($slider)) != $key}style="display:none"{/if} />
+							<img width="1296" height="391" alt="{if $slide.header}{$slide.header} {/if}{if $slide.body}{$slide.body} {/if}{if $slide.footer}{$slide.footer}{/if}" src="{$slider_image_path}{basename($slide.image)}" title="{$caption}" {if !$slide@first}style="display:none"{/if} />
 						{/foreach}
 					</div>
 				</div>
