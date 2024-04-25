@@ -13,7 +13,7 @@ class News_model extends CI_Model
     {
         $builder = $this->db->table('articles');
         $builder->select();
-        if ($start === false) {
+        if ($start !== true) {
             $builder->limit($limit, $start);
         }
 

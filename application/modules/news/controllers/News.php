@@ -200,6 +200,8 @@ class News extends MX_Controller
         $config['last_link'] = 'Last';
         $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
         $config['first_tag_close'] = '</span></li>';
+        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['last_tag_close'] = '</span></li>';
         $config['prev_link'] = '&laquo';
         $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
         $config['prev_tag_close'] = '</span></li>';
