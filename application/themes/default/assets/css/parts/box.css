@@ -12,6 +12,7 @@
 	--box-shadow: inset 0 0 0 1px rgba(255, 255, 190, 0.01), 0 0 5px 0 rgba(0, 0, 0, 0.21), 0 1px 1px 0 rgba(0, 0, 0, 0.25);
 
 	--box-head-text-shadow: 0 0 6px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(0, 0, 0, 0.35);
+	--box-body-text-shadow: 0 0 6px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(0, 0, 0, 0.65);
 
 	--box-background-main: rgba(13, 13, 12, 0.65);
 	--box-background-overlay: rgba(7, 59, 97, 0.04);
@@ -177,6 +178,8 @@
 
 	z-index: 9;
 	padding: var(--box-padding);
+
+	text-shadow: var(--box-body-text-shadow);
 }
 
 .box .box-body iframe {
