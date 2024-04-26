@@ -80,7 +80,7 @@
 				CSRF: getCookie('csrf_cookie_name'),
 				language: "{$activeLanguage}",
 
-				UseFusionTooltip: {if $use_fcms_tooltip}1{else}0{/if},
+				UseFusionTooltip: true,
 
 				Slider: {
 					interval: {$slider_interval},

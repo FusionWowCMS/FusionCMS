@@ -88,7 +88,7 @@
 				image_path: "{$image_path}",
 				CSRF: getCookie('csrf_cookie_name'),
 				language: "{$activeLanguage}",
-				UseFusionTooltip: 1,
+				UseFusionTooltip: true,
 				
 				Slider: {
 					interval: {$slider_interval},

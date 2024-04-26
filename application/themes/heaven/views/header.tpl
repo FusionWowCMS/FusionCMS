@@ -73,7 +73,7 @@
 				language: '{$activeLanguage}',
 				image_path: '{$MY_image_path}',
 				theme_path: '{str_replace(basename($APPPATH)|cat:'/', '', $theme_path)}',
-				UseFusionTooltip: 1,
+				UseFusionTooltip: true,
 
 				Slider: {
 					effect: {($slider_style) ? $slider_style : "''"},
