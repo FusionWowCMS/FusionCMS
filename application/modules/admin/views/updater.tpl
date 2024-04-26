@@ -109,7 +109,7 @@
 				</div>
 
 				<div class="space-y-6">
-					{if $logs && is_array($logs)}
+					{if $logs && $logs|is_array}
 						{$first = true}
 
 						<ul id="logs-tab" class="nav nav-pills" role="tablist">
@@ -191,7 +191,7 @@
 					<div class="flex flex-column gap-3">
 						<div><h4 class="font-heading text-sm font-light leading-tight text-muted-800 dark:text-white"><span>Modules:</span></h4></div>
 						<div class="overflow-x-hidden overflow-y-auto" style="height: 206px;">
-							{if $server_modules && is_array($server_modules)}
+							{if $server_modules && $server_modules|is_array}
 								{foreach from=$server_modules key=key item=item}
 									<span class="text-muted-500 dark:text-muted-400 bg-muted-200 dark:bg-muted-700/40 inline-flex h-6 items-center justify-center rounded-full px-3 font-sans text-xs font-medium m-1">{$item}</span>
 								{/foreach}
@@ -218,7 +218,7 @@
 					<div class="flex flex-column gap-3">
 						<div><h4 class="font-heading text-sm font-light leading-tight text-muted-800 dark:text-white"><span>Extensions:</span></h4></div>
 						<div class="overflow-x-hidden overflow-y-auto" style="height: 206px;">
-							{if $php_extensions && is_array($php_extensions)}
+							{if $php_extensions && $php_extensions|is_array}
 								{foreach from=$php_extensions key=key item=item}
 									<span class="text-muted-500 dark:text-muted-400 bg-muted-200 dark:bg-muted-700/40 inline-flex h-6 items-center justify-center rounded-full px-3 font-sans text-xs font-medium m-1">{$item}</span>
 								{/foreach}

@@ -30,20 +30,20 @@
 			{foreach from=$config item=option key=label}
 			<div class="form-group row">
 				{if $label != "source"}
-					{if is_array($option) && ctype_digit(implode('', array_keys($option)))}
+					{if $option|is_array && ctype_digit(implode('', array_keys($option)))}
 						<label class="col-sm-2 col-form-label" for="{$label}">{ucfirst(preg_replace("/_/", " ", $label))}</label>
 						<div class="col-sm-10">
 							<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" value="{foreach from=$option item=value}{$value}{if !$value@last},{/if}{/foreach}" id="{$label}" name="{$label}" />
 						</div>
-					{elseif is_array($option)}	
+					{elseif $option|is_array}
 						<label class="col-sm-2 col-form-label" for="{$label}"><b>{ucfirst(preg_replace("/_/", " ", $label))}</b></label>
 						{foreach from=$option item=sub_option key=sub_label}		
-							{if is_array($sub_option) && ctype_digit(implode('', array_keys($sub_option)))}
+							{if $sub_option|is_array && ctype_digit(implode('', array_keys($sub_option)))}
 								<label class="col-sm-2 col-form-label" for="{$label}-{$sub_label}">{ucfirst(preg_replace("/_/", " ", $sub_label))}</label>
 								<div class="col-sm-10">
 									<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" value="{foreach from=$sub_option item=value}{$value}{if !$value@last},{/if}{/foreach}" id="{$label}-{$sub_label}" name="{$label}-{$sub_label}" />
 								</div>
-							{elseif is_array($sub_option)}
+							{elseif $sub_option|is_array}
 								<label class="col-sm-2 col-form-label" for="{$label}-{$sub_label}"><b>{ucfirst(preg_replace("/_/", " ", $sub_label))}</b></label>
 							{elseif $sub_option === true}
 								<label class="col-sm-2 col-form-label" for="{$label}-{$sub_label}">{ucfirst(preg_replace("/_/", " ", $sub_label))}</label>

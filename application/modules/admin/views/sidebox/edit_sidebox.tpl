@@ -45,7 +45,7 @@
             </div>
 
             {* Pages.Start *}
-            {if isset($pages) && is_array($pages) && count($pages)}
+            {if isset($pages) && $pages|is_array && count($pages)}
                 <div class="form-group row mb-3">
                     <label class="col-sm-2 col-form-label">Pages</label>
                     <div class="col-sm-10">
@@ -53,7 +53,7 @@
                             {foreach from=$pages item=item}
                                 <div class="col">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="pages[]" id="page_{$item}" value="{$item}" {if is_array($sidebox.pages) && in_array($item, $sidebox.pages)}checked{/if} {if is_array($sidebox.pages) && in_array('*', $sidebox.pages)}disabled{/if} />
+                                        <input class="form-check-input" type="checkbox" name="pages[]" id="page_{$item}" value="{$item}" {if $sidebox.pages|is_array && in_array($item, $sidebox.pages)}checked{/if} {if $sidebox.pages|is_array && in_array('*', $sidebox.pages)}disabled{/if} />
                                         <label class="form-check-label" for="page_{$item}">{$item}</label>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
 
                             <div class="col">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="pages[]" id="page_*" value="*" onclick="[...document.querySelectorAll('input[name=\'pages[]\']')].map(el => { if(el.value === '*') { return; } if(this.checked) { el.disabled = true; } else { el.disabled = false; } })" {if is_array($sidebox.pages) && in_array('*', $sidebox.pages)}checked{/if} />
+                                    <input class="form-check-input" type="checkbox" name="pages[]" id="page_*" value="*" onclick="[...document.querySelectorAll('input[name=\'pages[]\']')].map(el => { if(el.value === '*') { return; } if(this.checked) { el.disabled = true; } else { el.disabled = false; } })" {if $sidebox.pages|is_array && in_array('*', $sidebox.pages)}checked{/if} />
                                     <label class="form-check-label" for="page_*">Visible in all pages</label>
                                 </div>
                             </div>

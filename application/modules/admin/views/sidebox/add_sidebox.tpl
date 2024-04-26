@@ -45,7 +45,7 @@
             </div>
 
             {* Pages.Start *}
-            {if isset($pages) && is_array($pages) && count($pages)}
+            {if isset($pages) && $pages|is_array && count($pages)}
                 <div class="form-group row mb-3">
                     <label class="col-sm-2 col-form-label">Pages</label>
                     <div class="col-sm-10">
