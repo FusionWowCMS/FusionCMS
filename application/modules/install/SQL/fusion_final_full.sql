@@ -911,6 +911,8 @@ CREATE TABLE `pending_accounts` (
   `username` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `secret_key` VARCHAR(255) DEFAULT NULL,
+  `secret_iv` VARCHAR(255) DEFAULT NULL,
   `timestamp` int(11) DEFAULT NULL,
   `ip` varchar(255) DEFAULT NULL,
   `key` varchar(255) DEFAULT NULL,
