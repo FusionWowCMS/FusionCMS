@@ -13,7 +13,7 @@ class Activation_model extends CI_Model
 
         $data = [
             'username' => $username,
-            'password' =>  $this->encrypt($username, $password, $_key, $_iv),
+            'password' =>  $this->encrypt($password, $_key, $_iv),
             'secret_key' =>  $_key,
             'secret_iv' =>  $_iv,
             'email' => $email,
@@ -36,7 +36,7 @@ class Activation_model extends CI_Model
             $row = $query->getResultArray();
 
             if(isset($row[0]['password']))
-                $row[0]['password'] = $this->decrypt($row[0]['username'], $row[0]['password'], $row[0]['secret_key'], $row[0]['secret_iv']);
+                $row[0]['password'] = $this->decrypt($row[0]['password'], $row[0]['secret_key'], $row[0]['secret_iv']);
 
             return $row[0];
         }
@@ -59,12 +59,11 @@ class Activation_model extends CI_Model
      * Basic two-way encryption
      * @param string $string
      * @param string $action
-     * @param string $username
      * @param string $secret_key
      * @param string $secret_iv
      * @return bool|string $output
      */
-    private function crypt(string $string, string $action, string $username, string $secret_key, string $secret_iv): bool|string
+    private function crypt(string $string, string $action, string $secret_key, string $secret_iv): bool|string
     {
         $encrypt_method = 'AES-256-CBC';
 
@@ -87,27 +86,25 @@ class Activation_model extends CI_Model
 
     /**
      * Creates a hash of the password we enter
-     * @param string $username
      * @param string $password
      * @param string $secret_key
      * @param string $secret_iv
      * @return bool|string
      */
-    private function encrypt(string $username, string $password, string $secret_key, string $secret_iv): bool|string
+    private function encrypt(string $password, string $secret_key, string $secret_iv): bool|string
     {
-        return $this->crypt($password, 'e', $username, $secret_key, $secret_iv);
+        return $this->crypt($password, 'e', $secret_key, $secret_iv);
     }
 
     /**
      * Decrypt hashed password we enter
-     * @param string $username
      * @param string $password
      * @param string $secret_key
      * @param string $secret_iv
      * @return bool|string
      */
-    private function decrypt(string $username, string $password, string $secret_key, string $secret_iv): bool|string
+    private function decrypt(string $password, string $secret_key, string $secret_iv): bool|string
     {
-        return $this->crypt($password, 'd', $username, $secret_key, $secret_iv);
+        return $this->crypt($password, 'd', $secret_key, $secret_iv);
     }
 }
