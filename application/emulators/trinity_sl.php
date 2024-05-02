@@ -6,7 +6,7 @@ defined('BASEPATH') or die('Silence is golden.');
 
 /**
  * @package FusionCMS
- * @version 6.x
+ * @version 8.x
  */
 
 /**
@@ -19,12 +19,12 @@ class Trinity_sl implements Emulator
     /**
      * Whether or not this emulator supports remote console
      */
-    protected $hasConsole = true;
+    protected bool $hasConsole = true;
 
     /**
      * Whether or not this emulator supports character stats
      */
-    protected $hasStats = true;
+    protected bool $hasStats = true;
 
     /**
      * Console object
@@ -34,7 +34,7 @@ class Trinity_sl implements Emulator
     /**
      * Array of table names
      */
-    protected $tables = array(
+    protected array $tables = [
         'account'                  => 'account',
         'account_access'           => 'account_access',
         'account_banned'           => 'account_banned',
@@ -47,14 +47,14 @@ class Trinity_sl implements Emulator
         'guild_member'             => 'guild_member',
         'guild'                    => 'guild',
         'gm_tickets'               => 'gm_bug'
-    );
+    ];
 
     /**
      * Array of column names
      */
-    protected $columns = array(
+    protected array $columns = [
 
-        'account' => array(
+        'account' => [
             'id'           => 'id',
             'username'     => 'username',
             'salt'         => 'salt',
@@ -64,23 +64,23 @@ class Trinity_sl implements Emulator
             'last_ip'      => 'last_ip',
             'last_login'   => 'last_login',
             'expansion'    => 'expansion',
-        ),
+        ],
 
-        'account_access' => array(
+        'account_access' => [
             'id'      => 'AccountId',
             'gmlevel' => 'SecurityLevel'
-        ),
+        ],
 
-        'account_banned' => array(
+        'account_banned' => [
             'id'        => 'id',
             'banreason' => 'banreason',
             'active'    => 'active',
             'bandate'   => 'bandate',
             'unbandate' => 'unbandate',
             'bannedby'  => 'bannedby'
-        ),
+        ],
 
-        'battlenet_accounts' => array(
+        'battlenet_accounts' => [
             'id'            => 'id',
             'email'         => 'email',
             'salt'          => 'salt',
@@ -89,17 +89,17 @@ class Trinity_sl implements Emulator
             'joindate'      => 'joindate',
             'last_ip'       => 'last_ip',
             'last_login'    => 'last_login'
-        ),
+        ],
 
-        'ip_banned' => array(
+        'ip_banned' => [
             'ip'        => 'ip',
             'bandate'   => 'bandate',
             'unbandate' => 'unbandate',
             'bannedby'  => 'bannedby',
             'banreason' => 'banreason',
-        ),
+        ],
 
-        'characters' => array(
+        'characters' => [
             'guid'             => 'guid',
             'account'          => 'account',
             'name'             => 'name',
@@ -120,9 +120,9 @@ class Trinity_sl implements Emulator
             'position_z'       => 'position_z',
             'orientation'      => 'orientation',
             'map'              => 'map'
-        ),
+        ],
 
-        'item_template' => array(
+        'item_template' => [
             'entry'                   => 'entry',
             'name'                    => 'name',
             'Quality'                 => 'Quality',
@@ -131,9 +131,9 @@ class Trinity_sl implements Emulator
             'ItemLevel'               => 'ItemLevel',
             'class'                   => 'class',
             'subclass'                => 'subclass'
-        ),
+        ],
 
-        'character_stats' => array(
+        'character_stats' => [
             'guid'          => 'guid',
             'maxhealth'     => 'maxhealth',
             'maxpower1'     => 'maxpower1',
@@ -142,6 +142,7 @@ class Trinity_sl implements Emulator
             'maxpower4'     => 'maxpower4',
             'maxpower5'     => 'maxpower5',
             'maxpower6'     => 'maxpower6',
+            'maxpower7'     => 'maxpower7',
             'strength'      => 'strength',
             'agility'       => 'agility',
             'stamina'       => 'stamina',
@@ -156,38 +157,38 @@ class Trinity_sl implements Emulator
             'attackPower'   => 'attackPower',
             'spellPower'    => 'spellPower',
             'resilience'    => 'resilience'
-        ),
+        ],
 
-        'item_instance_transmog' => array(
+        'item_instance_transmog' => [
             'itemGuid'       => 'itemGuid',
             'transmogrifyId' => 'itemModifiedAppearanceAllSpecs'
-        ),
+        ],
 
-        'guild' => array(
+        'guild' => [
             'guildid'    => 'guildid',
             'name'       => 'name',
             'leaderguid' => 'leaderguid'
-        ),
+        ],
 
-        'guild_member' => array(
+        'guild_member' => [
             'guildid' => 'guildid',
             'guid'    => 'guid'
-        ),
+        ],
 
-        'gm_tickets' => array(
+        'gm_tickets' => [
             'ticketId'   => 'Id',
             'guid'       => 'playerGuid',
             'message'    => 'note',
             'createTime' => 'createTime',
             'completed'  => 'comment',
             'closedBy'   => 'closedBy'
-        )
-    );
+        ]
+    ];
 
     /**
      * Array of queries
      */
-    protected $queries = array(
+    protected array $queries = [
         'get_ip_banned'             => 'SELECT ip, bandate, bannedby, banreason, unbandate FROM ip_banned WHERE ip=? AND unbandate > ?',
         'get_character'             => 'SELECT * FROM characters WHERE guid=?',
         'get_rank'                  => 'SELECT AccountId id, SecurityLevel gmlevel, RealmID RealmID FROM account_access WHERE AccountId=?',
@@ -197,7 +198,7 @@ class Trinity_sl implements Emulator
         'get_inventory_item'        => 'SELECT slot slot, item item, itemEntry itemEntry, enchantments enchantments FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0',
         'get_guild_members'         => 'SELECT m.guildid guildid, m.guid guid, c.name name, c.race race, c.class class, c.gender gender, c.level level, m.rank member_rank, r.rname rname, r.rights rights FROM guild_member m JOIN guild_rank r ON m.guildid = r.guildid AND m.rank = r.rid JOIN characters c ON c.guid = m.guid WHERE m.guildid = ? ORDER BY r.rights DESC',
         'get_guild'                 => 'SELECT guildid guildid, name guildName, leaderguid leaderguid, motd motd, createdate createdate FROM guild WHERE guildid = ?'
-    );
+    ];
 
     public function __construct($config)
     {
@@ -326,10 +327,10 @@ class Trinity_sl implements Emulator
      */
     public function sendItems($character, $subject, $body, $items)
     {
-        $item_command = array();
+        $item_command = [];
         $mail_id = 0;
         $item_count = 0;
-        $item_stacks = array();
+        $item_stacks = [];
 
         foreach ($items as $i) {
             // Check if item has been added
@@ -338,12 +339,12 @@ class Trinity_sl implements Emulator
                 $item_row = CI::$APP->realms->getRealm($this->config['id'])->getWorld()->getItem($i['id']);
 
                 // Add the item to the stacks array
-                $item_stacks[$i['id']] = array(
+                $item_stacks[$i['id']] = [
                     'id'        => $i['id'],
-                    'count'     => array(1),
+                    'count'     => [1],
                     'stack_id'  => 0,
                     'max_count' => $item_row['stackable'],
-                );
+                ];
 
                 continue;
             }
@@ -398,7 +399,7 @@ class Trinity_sl implements Emulator
      */
     public function send($command, $realm = false)
     {
-        $blacklistCommands = array('account set', 'server shutdown', 'server exit', 'server restart', 'disable add', 'disable remove');
+        $blacklistCommands = ['account set', 'server shutdown', 'server exit', 'server restart', 'disable add', 'disable remove'];
 
         foreach ($blacklistCommands as $blacklist) {
             if (strpos($command, $blacklist))
@@ -406,12 +407,12 @@ class Trinity_sl implements Emulator
         }
 
         $client = new SoapClient(null,
-            array(
+            [
                 'location' => 'http://' . $this->config['hostname'] . ':' . $this->config['console_port'],
                 'uri'      => 'urn:TC',
                 'login'    => $this->config['console_username'],
                 'password' => $this->config['console_password'],
-            )
+            ]
         );
 
         try {

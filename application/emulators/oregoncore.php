@@ -13,12 +13,12 @@ class Oregoncore implements Emulator
     /**
      * Whether or not this emulator supports remote console
      */
-    protected $hasConsole = true;
+    protected bool $hasConsole = true;
 
     /**
      * Whether or not this emulator supports character stats
      */
-    protected $hasStats = false;
+    protected bool $hasStats = false;
 
     /**
      * Console object
@@ -28,7 +28,7 @@ class Oregoncore implements Emulator
     /**
      * Array of table names
      */
-    protected $tables = array(
+    protected $tables = [
         "account"            => "account",
         "account_access"     => "account_access",
         "account_banned"     => "account_banned",
@@ -38,14 +38,14 @@ class Oregoncore implements Emulator
         "guild_member"       => "guild_member",
         "guild"              => "guild",
         "gm_tickets"         => "gm_tickets"
-    );
+    ];
 
     /**
      * Array of column names
      */
-    protected $columns = array(
+    protected array $columns = [
 
-        "account" => array(
+        "account" => [
             "id"            => "id",
             "username"      => "username",
             "sha_pass_hash" => "sha_pass_hash",
@@ -57,23 +57,23 @@ class Oregoncore implements Emulator
             "v"             => "v",
             "s"             => "s",
             "sessionkey"    => "sessionkey"
-        ),
+        ],
 
-        "account_access" => array(
+        "account_access" => [
             "id"      => "id",
             "gmlevel" => "gmlevel"
-        ),
+        ],
 
-        "account_banned" => array(
+        "account_banned" => [
             "id"        => "id",
             "banreason" => "banreason",
             "active"    => "active",
             "bandate"   => "bandate",
             "unbandate" => "unbandate",
             "bannedby"  => "bannedby"
-        ),
+        ],
 
-        "characters" => array(
+        "characters" => [
             "guid"             => "guid",
             "account"          => "account",
             "name"             => "name",
@@ -92,9 +92,9 @@ class Oregoncore implements Emulator
             "totalKills"       => "totalKills",
             "arenaPoints"      => "arenaPoints",
             "totalHonorPoints" => "totalHonorPoints"
-        ),
+        ],
 
-        "item_template" => array(
+        "item_template" => [
             "entry"         => "entry",
             "name"          => "name",
             "Quality"       => "Quality",
@@ -103,34 +103,34 @@ class Oregoncore implements Emulator
             "ItemLevel"     => "ItemLevel",
             "class"         => "class",
             "subclass"      => "subclass"
-        ),
+        ],
 
-        "character_stats" => array(),
+        "character_stats" => [],
 
-        "guild" => array(
+        "guild" => [
             "guildid"    => "guildid",
             "name"       => "name",
             "leaderguid" => "leaderguid"
-        ),
+        ],
 
-        "guild_member" => array(
+        "guild_member" => [
             "guildid"  => "guildid",
             "guid"     => "guid"
-        ),
+        ],
 
-        "gm_tickets" => array(
+        "gm_tickets" => [
             "ticketId" => "guid",
             "guid" => "playerGuid",
             "message" => "message",
             "createTime" => "createtime",
             "completed" => "closed",
-        )
-    );
+        ]
+    ];
 
     /**
      * Array of queries
      */
-    protected $queries = array(
+    protected array $queries = [
         "get_ip_banned"             => "SELECT ip, bandate, bannedby, banreason, unbandate FROM ip_banned WHERE ip=? AND unbandate > ?",
         "pvp_character"             => "SELECT * FROM characters WHERE totalKills > 0 ORDER BY totalKills DESC LIMIT ",
         "get_character"             => "SELECT * FROM characters WHERE guid=?",
@@ -142,7 +142,7 @@ class Oregoncore implements Emulator
         "get_inventory_item"        => "SELECT slot slot, item item, item_template itemEntry, enchantments enchantments FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0",
         "get_guild_members"         => "SELECT m.guildid guildid, m.guid guid, c.name name, c.race race, c.class class, c.gender gender, c.level level, m.rank rank, r.rname rname, r.rights rights FROM guild_member m, guild_rank r, characters c WHERE m.guildid = r.guildid AND m.rank = r.rid AND c.guid = m.guid AND m.guildid = ? ORDER BY r.rights DESC",
         "get_guild"                 => "SELECT guildid guildid, name guildName, leaderguid leaderguid, motd motd, createdate createdate FROM guild WHERE guildid = ?"
-    );
+    ];
 
     public function __construct($config)
     {
@@ -254,10 +254,10 @@ class Oregoncore implements Emulator
      */
     public function sendItems($character, $subject, $body, $items)
     {
-        $item_command = array();
+        $item_command = [];
         $mail_id = 0;
         $item_count = 0;
-        $item_stacks = array();
+        $item_stacks = [];
 
         foreach($items as $i)
         {
@@ -281,12 +281,12 @@ class Oregoncore implements Emulator
                 $item_row = get_instance()->realms->getRealm($this->config['id'])->getWorld()->getItem($i['id']);
 
                 // Add the item to the stacks array
-                $item_stacks[$i['id']] = array(
+                $item_stacks[$i['id']] = [
                     'id' => $i['id'],
-                    'count' => array(1),
+                    'count' => [1],
                     'stack_id' => 0,
                     'max_count' => $item_row['stackable']
-                );
+                ];
             }
         }
 
@@ -334,7 +334,7 @@ class Oregoncore implements Emulator
      */
     public function send($command, $realm = false)
     {
-        $blacklistCommands = array('account set', 'server shutdown', 'server exit', 'server restart', 'disable add', 'disable remove');
+        $blacklistCommands = ['account set', 'server shutdown', 'server exit', 'server restart', 'disable add', 'disable remove'];
 
         foreach ($blacklistCommands as $blacklist) {
             if (strpos($command, $blacklist))
@@ -342,12 +342,12 @@ class Oregoncore implements Emulator
         }
 
         $client = new SoapClient(NULL,
-            array(
+            [
                 "location" => "http://".$this->config['hostname'].":".$this->config['console_port'],
                 "uri" => "urn:Oregon",
                 'login' => $this->config['console_username'],
                 'password' => $this->config['console_password']
-            )
+            ]
         );
 
         try {
