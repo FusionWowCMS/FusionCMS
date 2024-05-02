@@ -28,11 +28,12 @@ class Skyfire implements Emulator
     /**
      * Array of table names
      */
-    protected $tables = array(
+    protected $tables = [
         "account"                  => "account",
         "account_access"           => "account_access",
         "account_banned"           => "account_banned",
         'ip_banned'                => 'ip_banned',
+        'battlenet_accounts'       => 'battlenet_accounts',
         "characters"               => "characters",
         "item_template"            => "item_template",
         "item_instance_transmog"   => "item_instance_transmog",
@@ -40,7 +41,7 @@ class Skyfire implements Emulator
         "guild_member"             => "guild_member",
         "guild"                    => "guild",
         "gm_tickets"               => "gm_tickets"
-    );
+    ];
 
     /**
      * Array of column names

@@ -34,7 +34,7 @@ class Trinity_cataclassic implements Emulator
     /**
      * Array of table names
      */
-    protected $tables = array(
+    protected $tables = [
         'account'                  => 'account',
         'account_access'           => 'account_access',
         'account_banned'           => 'account_banned',
@@ -47,7 +47,7 @@ class Trinity_cataclassic implements Emulator
         'guild_member'             => 'guild_member',
         'guild'                    => 'guild',
         'gm_tickets'               => 'gm_bug'
-    );
+    ];
 
     /**
      * Array of column names

@@ -33,6 +33,7 @@ class Trinity_old implements Emulator
         "account_access"  => "account_access",
         "account_banned"  => "account_banned",
         'ip_banned'       => 'ip_banned',
+        'battlenet_accounts'       => 'battlenet_accounts',
         "characters"      => "characters",
         "item_template"   => "item_template",
         "character_stats" => "character_stats",
