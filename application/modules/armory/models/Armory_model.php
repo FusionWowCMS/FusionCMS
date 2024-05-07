@@ -8,7 +8,7 @@ class Armory_model extends CI_Model
     private BaseConnection $w_connection;
 
     public function get_items($searchString, $limit, $offset, $realmId = 1)
-    {        
+    {
         //Connect to the world database
         $realm = $this->realms->getRealm($realmId);
 
@@ -16,7 +16,6 @@ class Armory_model extends CI_Model
         if ($realm->getExpansionId() > 4)
             return false;
 
-        $realm->getWorld()->connect();
         $this->w_connection = $realm->getWorld()->getConnection();
 
         $searchString = $this->w_connection->escapeString($searchString);
@@ -39,7 +38,6 @@ class Armory_model extends CI_Model
         if ($realm->getExpansionId() > 4)
             return 0;
 
-        $realm->getWorld()->connect();
         $this->w_connection = $realm->getWorld()->getConnection();
         
         $string = $this->w_connection->escapeString($string);
@@ -51,7 +49,7 @@ class Armory_model extends CI_Model
     {
         //Connect to the character database
         $realm = $this->realms->getRealm($realmId);
-        $realm->getCharacters()->connect();
+
         $this->c_connection = $realm->getCharacters()->getConnection();
 
         $searchString = $this->c_connection->escapeString($searchString);
@@ -68,7 +66,7 @@ class Armory_model extends CI_Model
     public function get_guilds_count($string, $realmId)
     {
         $realm = $this->realms->getRealm($realmId);
-        $realm->getCharacters()->connect();
+
         $this->c_connection = $realm->getCharacters()->getConnection();
         
         $string = $this->c_connection->escapeString($string);
@@ -79,7 +77,7 @@ class Armory_model extends CI_Model
     public function get_characters($searchString, $limit, $offset, $realmId = 1)
     {
         $realm = $this->realms->getRealm($realmId);
-        $realm->getCharacters()->connect();
+
         $this->c_connection = $realm->getCharacters()->getConnection();
 
         $searchString = $this->c_connection->escapeString($searchString);
@@ -98,7 +96,7 @@ class Armory_model extends CI_Model
     public function get_characters_count($string, $realmId)
     {
         $realm = $this->realms->getRealm($realmId);
-        $realm->getCharacters()->connect();
+
         $this->c_connection = $realm->getCharacters()->getConnection();
         
         $string = $this->c_connection->escapeString($string);
