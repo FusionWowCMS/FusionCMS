@@ -26,8 +26,8 @@
         <thead>
             <tr>
 				<th>{lang("name", "armory")}</th>
-				<th class="text-center">{lang("level", "armory")}</th>
-				<th class="text-center">{lang("required", "armory")}</th>
+				<th>{lang("level", "armory")}</th>
+				<th>{lang("required", "armory")}</th>
 				<th>{lang("type", "armory")}</th>
 			</tr>
         </thead>
@@ -49,8 +49,8 @@
         <thead>
             <tr>
 				<th>{lang("name", "armory")}</th>
-				<th class="text-center">{lang("members", "armory")}</th>
-				<th class="text-center">{lang("owner", "armory")}</th>
+				<th>{lang("members", "armory")}</th>
+				<th>{lang("owner", "armory")}</th>
 			</tr>
         </thead>
         <tbody></tbody>
