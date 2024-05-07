@@ -5,9 +5,9 @@
         
             <select class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mx-1" id="realm" name="realm" onchange="Search.toggle();return false;">
                 <option value="0" disabled>{lang("realm", "armory")}</option>
-                {for $i = 0; $i<count((array)$realms); $i++}
-                    <option {if $i == 0}selected{/if} value="{$realms[$i]->getId()}">{$realms[$i]->getName()}</option>				
-                {/for}
+                {foreach from=$realms item=realm}
+                    <option {if $realm@first}selected{/if} value="{$realm->getId()}">{$realm->getName()}</option>
+                {/foreach}
             </select>
         
             <select class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mx-1" id="table" name="table" onchange="Search.toggle();return false;">
