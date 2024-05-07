@@ -34,11 +34,13 @@ If applicable, add screenshots to help explain your problem.
  - Browser [e.g. stock browser, safari]
  - Version [e.g. 22]
 
-**Host information (please complete the following information):**
- - OS: [e.g. Windows 10, Linux Ubuntu 23.10.1]
+**Website information (please complete the following information):**
+ - Host OS: [e.g. Windows 10, Linux Ubuntu 23.10.1]
  - PHP version [e.g. 8.3]
  - MySQL version[e.g. 8.0]
  - CMS version[e.g. 9.0.3]
+ - Expansion [e.g. Mists of Pandaria, Wotlk, Cataclysm, ...]
+ - Selected Emulator [e.g. Skyfire, TrinityCore - DragonFlight, AzerothCore, Vmangos, ...]
 
 **Additional context**
 Add any other context about the problem here.
