@@ -84,6 +84,7 @@ class Armory_model extends CI_Model
 
         $builder = $this->c_connection->table(table("characters", $realmId))->select(columns("characters", ["guid", "name", "race", "gender", "class", "level"], $realmId));
         $builder->like(column("characters", "name", false, $realmId), ucfirst($searchString));
+        $builder->limit($limit, $offset);
         $result = $builder->get();
 
         if ($result->getNumRows() > 0) {
