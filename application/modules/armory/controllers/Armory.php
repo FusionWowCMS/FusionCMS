@@ -24,7 +24,7 @@ class Armory extends MX_Controller
 
         $this->weapon_sub = lang('weapon_sub', 'wow_tooltip');
         $this->armor_sub = lang('armor_sub', 'wow_tooltip');
-        $this->slots = $this->config->item("slots");
+        $this->slots = lang('slots', 'wow_tooltip');
     }
 
     public function index()
