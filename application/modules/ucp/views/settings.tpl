@@ -62,7 +62,7 @@
 					</div>
 				
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label" for="new_password_confirm">Confirm Password</label>
+						<label class="col-sm-3 col-form-label" for="new_password_confirm">{lang("new_password_confirm", "ucp")}</label>
 						<div class="col-sm-9">
 							<input class="form-control" type="password" id="new_password_confirm" name="new_password_confirm" placeholder="{lang("new_password_confirm", "ucp")}" autocomplete="new-password">
 						</div>

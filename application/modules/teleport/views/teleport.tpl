@@ -24,7 +24,7 @@
 		{include file="../../ucp/views/ucp_navigation.tpl"}
 		
 		<div class="col-lg-8 py-lg-5 pb-5 pb-lg-0">
-			<div class="section-header">Teleport <span>Hub</span></div>
+			<div class="section-header">{lang("teleport_hub", "teleport")}</div>
 			<div class="section-body">
 				<div class="row">
 					<div class="col-sm-12 col-lg-6">
