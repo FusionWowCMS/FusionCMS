@@ -22,6 +22,7 @@ use CodeIgniter\HTTP\UserAgent;
 use CodeIgniter\Log\Logger;
 use CodeIgniter\Typography\Typography;
 use Encryption\Encryption;
+use Smarty\Smarty;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
