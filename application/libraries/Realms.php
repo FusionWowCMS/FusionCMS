@@ -330,6 +330,19 @@ class Realms
     }
 
     /**
+     * Get all class names
+     *
+     * @return array
+     */
+    public function getClassList(): array
+    {
+        if (!($this->classes)) {
+            $this->loadConstants();
+        }
+        return $this->classes;
+    }
+
+    /**
      * Get all item class names
      *
      * @return array
