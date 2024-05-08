@@ -9,7 +9,7 @@ class Activation_model extends CI_Model
         $key  = sha1($username . $email . $password . time() . $random_string);
 
         $_key = hash('sha256', bin2hex(random_bytes(50)));
-        $_iv  = substr(hash('sha256', bin2hex(random_bytes(50)), 0, 16));
+        $_iv  = substr(hash('sha256', bin2hex(random_bytes(50))), 0, 16);
 
         $data = [
             'username' => $username,
