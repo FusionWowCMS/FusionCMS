@@ -2,6 +2,7 @@
   "dependencies": {
     "bootstrap": "^5.3.0",
     "owl.carousel": "github:OwlCarousel2/OwlCarousel2",
-    "sweetalert2": "^11.7.18"
+    "sweetalert2": "^11.7.18",
+    "vanilla-lazyload": "^19.1.3"
   }
 }
