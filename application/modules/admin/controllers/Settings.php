@@ -191,7 +191,7 @@ class Settings extends MX_Controller
                 'SMTPHost'   => $this->input->post('host'),
                 'SMTPUser'   => $this->input->post('user'),
                 'SMTPPass'   => $this->input->post('pass'),
-                'SMTPPort'   => $this->input->post('port'),
+                'SMTPPort'   => (int)$this->input->post('port'),
                 'SMTPCrypto' => $this->input->post('crypto'),
             );
         }

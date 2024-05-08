@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -12,7 +14,6 @@
 namespace CodeIgniter\Email;
 
 use CodeIgniter\Events\Events;
-use CodeIgniter\Log\LoggerInterface;
 use CodeIgniter\I18n\Time;
 use ErrorException;
 
@@ -21,6 +22,7 @@ use ErrorException;
  *
  * Permits email to be sent using Mail, Sendmail, or SMTP.
  *
+ * @see \CodeIgniter\Email\EmailTest
  */
 class Email
 {
@@ -295,7 +297,7 @@ class Email
     /**
      * Raw debug messages
      *
-     * @var string[]
+     * @var list<string>
      */
     private array $debugMessageRaw = [];
 
@@ -395,10 +397,6 @@ class Email
     protected static $func_overload;
 
     /**
-     * Logger instance to record error messages and awarnings.
-     * @var LoggerInterface
-     */
-    protected $logger;
 
     /**
      * Constructor - Sets Email Preferences
@@ -438,7 +436,7 @@ class Email
             }
         }
 
-        $this->charset = strtoupper($this->charset);
+        $this->charset  = strtoupper($this->charset);
         $this->SMTPAuth = isset($this->SMTPUser[0], $this->SMTPPass[0]);
 
         return $this;
@@ -663,14 +661,14 @@ class Email
     public function attach($file, $disposition = '', $newname = null, $mime = '')
     {
         if ($mime === '') {
-            if (strpos($file, '://') === false && !is_file($file)) {
-                $this->setErrorMessage('lang:email_attachment_missing', $file);
+            if (! str_contains($file, '://') && ! is_file($file)) {
+                $this->setErrorMessage('Unable to locate the following email attachment: "' . $file . '"');
 
                 return false;
             }
 
-            if (!$fp = @fopen($file, 'rb')) {
-                $this->setErrorMessage('lang:email_attachment_unreadable', $file);
+            if (! $fp = @fopen($file, 'rb')) {
+                $this->setErrorMessage('Unable to open this attachment: "' . $file . '"');
 
                 return false;
             }
@@ -752,8 +750,8 @@ class Email
      */
     protected function stringToArray($email)
     {
-        if (!is_array($email)) {
-            return (str_contains($email, ',')) ? preg_split('/[\s,]/', $email, -1, PREG_SPLIT_NO_EMPTY) : (array)trim($email);
+        if (! is_array($email)) {
+            return (str_contains($email, ',')) ? preg_split('/[\s,]/', $email, -1, PREG_SPLIT_NO_EMPTY) : (array) trim($email);
         }
 
         return $email;
@@ -912,7 +910,7 @@ class Email
     {
         $timezone = date('Z');
         $operator = ($timezone[0] === '-') ? '-' : '+';
-        $timezone = abs($timezone);
+        $timezone = abs((int) $timezone);
         $timezone = floor($timezone / 3600) * 100 + ($timezone % 3600) / 60;
 
         return sprintf('%s %s%04d', date('D, j M Y H:i:s'), $operator, $timezone);
@@ -933,15 +931,15 @@ class Email
      */
     public function validateEmail($email)
     {
-        if (!is_array($email)) {
-            $this->setErrorMessage('lang:email_must_be_array');
+        if (! is_array($email)) {
+            $this->setErrorMessage('The email validation method must be passed an array.');
 
             return false;
         }
 
         foreach ($email as $val) {
-            if (!$this->isValidEmail($val)) {
-                $this->setErrorMessage('lang:email_invalid_address', $val);
+            if (! $this->isValidEmail($val)) {
+                $this->setErrorMessage('Invalid email address: ' . $val);
 
                 return false;
             }
@@ -1556,8 +1554,8 @@ class Email
             $this->setFrom($this->fromEmail, $this->fromName);
         }
 
-        if (!isset($this->headers['From'])) {
-            $this->setErrorMessage('lang:email_no_from');
+        if (! isset($this->headers['From'])) {
+            $this->setErrorMessage('Cannot send mail with no "From" header.');
 
             return false;
         }
@@ -1571,7 +1569,7 @@ class Email
             && empty($this->BCCArray) && ! isset($this->headers['Bcc'])
             && ! isset($this->headers['Cc'])
         ) {
-            $this->setErrorMessage('lang:email_no_recipients');
+            $this->setErrorMessage('You must include recipients: To, Cc, or Bcc');
 
             return false;
         }
@@ -1659,10 +1657,7 @@ class Email
     {
         $this->finalBody = preg_replace_callback(
             '/\{unwrap\}(.*?)\{\/unwrap\}/si',
-            [
-                $this,
-                'removeNLCallback',
-            ],
+            $this->removeNLCallback(...),
             $this->finalBody
         );
     }
@@ -1670,7 +1665,9 @@ class Email
     /**
      * Strip line-breaks via callback
      *
-     * @param string $matches
+     * @used-by unwrapSpecials()
+     *
+     * @param list<string> $matches
      *
      * @return string
      */
@@ -1701,8 +1698,8 @@ class Email
             log_message('error', 'Email: ' . $method . ' throwed ' . $e);
         }
 
-        if (!$success) {
-            $message = 'lang:email_send_failure_' . ($protocol === 'mail' ? 'PHPMail' : ucfirst($protocol));
+        if (! $success) {
+            $message = ($protocol === 'mail' ? 'Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.' : 'Unable to send email using SMTP. Your server might not be configured to send mail using this method.');
 
             log_message('error', 'Email: ' . $message);
             log_message('error', $this->printDebuggerRaw());
@@ -1712,7 +1709,7 @@ class Email
             return false;
         }
 
-        $this->setErrorMessage('lang:email_sent', $protocol);
+        $this->setErrorMessage('Your message has been successfully sent using the following protocol: ' . $protocol);
 
         return true;
     }
@@ -1788,8 +1785,8 @@ class Email
         $status = pclose($fp);
 
         if ($status !== 0) {
-            $this->setErrorMessage('lang:email_exit_status', $status);
-            $this->setErrorMessage('lang:email_no_socket');
+            $this->setErrorMessage('Exit status code: ' . $status);
+            $this->setErrorMessage('Unable to open a socket to Sendmail. Please check settings.');
 
             return false;
         }
@@ -1805,7 +1802,7 @@ class Email
     protected function sendWithSmtp()
     {
         if ($this->SMTPHost === '') {
-            $this->setErrorMessage('lang:email_no_hostname');
+            $this->setErrorMessage('You did not specify a SMTP hostname.');
 
             return false;
         }
@@ -1857,8 +1854,8 @@ class Email
         $this->setErrorMessage($reply);
         $this->SMTPEnd();
 
-        if (!str_starts_with($reply, '250')) {
-            $this->setErrorMessage('lang:email_smtp_error', $reply);
+        if (! str_starts_with($reply, '250')) {
+            $this->setErrorMessage('The following SMTP error was encountered: ' . $reply);
 
             return false;
         }
@@ -1905,8 +1902,8 @@ class Email
             $this->SMTPTimeout
         );
 
-        if (!is_resource($this->SMTPConnect)) {
-            $this->setErrorMessage('lang:email_smtp_error', $errno . ' ' . $errstr);
+        if (! is_resource($this->SMTPConnect)) {
+            $this->setErrorMessage('The following SMTP error was encountered: ' . $errno . ' ' . $errstr);
 
             return false;
         }
@@ -1927,7 +1924,7 @@ class Email
             );
 
             if ($crypto !== true) {
-                $this->setErrorMessage('lang:email_smtp_error', $this->getSMTPData());
+                $this->setErrorMessage('The following SMTP error was encountered: ' . $this->getSMTPData());
 
                 return false;
             }
@@ -1998,8 +1995,8 @@ class Email
         $this->debugMessage[]    = '<pre>' . $cmd . ': ' . $reply . '</pre>';
         $this->debugMessageRaw[] = $cmd . ': ' . $reply;
 
-        if ($resp === null || ((int)static::substr($reply, 0, 3) !== $resp)) {
-            $this->setErrorMessage('lang:email_smtp_error', $reply);
+        if ($resp === null || ((int) static::substr($reply, 0, 3) !== $resp)) {
+            $this->setErrorMessage('The following SMTP error was encountered: ' . $reply);
 
             return false;
         }
@@ -2021,7 +2018,7 @@ class Email
         }
 
         if ($this->SMTPUser === '' && $this->SMTPPass === '') {
-            $this->setErrorMessage('lang:email_no_smtp_unpw');
+            $this->setErrorMessage('Error: You must assign an SMTP username and password.');
 
             return false;
         }
@@ -2029,12 +2026,12 @@ class Email
         $this->sendData('AUTH LOGIN');
         $reply = $this->getSMTPData();
 
-        if (strpos($reply, '503') === 0) {    // Already authenticated
+        if (str_starts_with($reply, '503')) {    // Already authenticated
             return true;
         }
 
-        if (strpos($reply, '334') !== 0) {
-            $this->setErrorMessage('lang:email_failed_smtp_login', $reply);
+        if (! str_starts_with($reply, '334')) {
+            $this->setErrorMessage('Failed to send AUTH LOGIN command. Error: ' . $reply);
 
             return false;
         }
@@ -2042,8 +2039,8 @@ class Email
         $this->sendData(base64_encode($this->SMTPUser));
         $reply = $this->getSMTPData();
 
-        if (strpos($reply, '334') !== 0) {
-            $this->setErrorMessage('lang:email_smtp_auth_un', $reply);
+        if (! str_starts_with($reply, '334')) {
+            $this->setErrorMessage('Failed to authenticate password. Error: ' . $reply);
 
             return false;
         }
@@ -2051,8 +2048,8 @@ class Email
         $this->sendData(base64_encode($this->SMTPPass));
         $reply = $this->getSMTPData();
 
-        if (strpos($reply, '235') !== 0) {
-            $this->setErrorMessage('lang:email_smtp_auth_pw', $reply);
+        if (! str_starts_with($reply, '235')) {
+            $this->setErrorMessage('Failed to authenticate password. Error: ' . $reply);
 
             return false;
         }
@@ -2098,8 +2095,8 @@ class Email
             $timestamp = 0;
         }
 
-        if (!is_int($result)) {
-            $this->setErrorMessage('lang:email_smtp_data_failure', $data);
+        if (! is_int($result)) {
+            $this->setErrorMessage('Unable to send data: ' . $data);
 
             return false;
         }
