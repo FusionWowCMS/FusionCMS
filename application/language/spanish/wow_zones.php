@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The zones are exported from Area DBC 11.0.0.54361
+ * The zones are exported from Area DBC 11.0.0.54605
  */
 
 $lang['zones'] = [
@@ -8817,4 +8817,8 @@ $lang['zones'] = [
     15385 => "Sunrise Shadow",
     15386 => "Sunken Shield",
     15387 => "Warband Camp",
+    15450 => "Keeper's Breath",
+    15451 => "Untamed Valley",
+    15453 => "Rock Bottom Inn",
+    15460 => "Sanctified Grounds",
 ];
