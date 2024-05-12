@@ -1,0 +1,38 @@
+{
+	"name": "Sidebox: shoutbox",
+	"description": "Let users express themselves in the public shoutbox",
+	"version": "2.0.0",
+	"date": "2024-05-12",
+	"author": {
+		"name": "FusionCMS",
+		"website": "http://fusion-hub.com"
+	},
+
+	"permissions": {
+		"shout": { "default": true, "description": "Add a shout" },
+		"removeShout": { "default": false, "description": "Remove a shout" },
+		"shoutAsStaff": { "default": false, "description": "Have a staff icon next to your name" }
+	},
+
+	"roles": {
+		"use": {
+			"description": "Use the shoutbox",
+
+			"permissions": {
+				"shout": true
+			}
+		},
+
+		"moderate": {
+			"description": "Manage the shouts",
+			"dangerLevel": 1,
+
+			"permissions": {
+				"removeShout": true,
+				"shoutAsStaff": true
+			}
+		}
+	},
+
+	"enabled": true
+}

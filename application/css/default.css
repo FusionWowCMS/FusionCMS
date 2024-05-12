@@ -375,11 +375,16 @@ input[type="radio"] {
 
 #shoutbox form textarea {
     margin-top: 5px;
-    height: 16px;
+    height: 40px;
+    width: 92%;
+    max-width: 92%;
 }
 
 #shoutbox form input[type="submit"] {
     margin-top: 4px;
+    float: right;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #shoutbox .shout {
@@ -396,6 +401,7 @@ input[type="radio"] {
 #shoutbox .shout .shout_date {
     float: right;
     font-size: 10px;
+    z-index: 9;
 }
 
 

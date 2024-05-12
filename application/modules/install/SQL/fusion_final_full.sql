@@ -982,6 +982,22 @@ CREATE TABLE `realms`  (
 -- ----------------------------
 -- Records of realms
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `shouts`
+-- ----------------------------
+DROP TABLE IF EXISTS `shouts`;
+CREATE TABLE `shouts` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `author` int(30) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `date` int(10) NOT NULL,
+  `is_gm` SMALLINT(5) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `FK_shouts_account_data` (`author`),
+  CONSTRAINT `FK_shouts_account_data` FOREIGN KEY (`author`) REFERENCES `account_data` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 -- ----------------------------
 -- Table structure for sideboxes
 -- ----------------------------
