@@ -210,12 +210,6 @@ class Items
                 if ($query->getNumRows() > 0) {
                     $row = $query->getResultArray()[0];
 
-                    $data = [
-                         'item' => $this->getItemDataFromWorldDB($row)
-                    ];
-
-                    $row['htmlTooltip'] = CI::$APP->smarty->view(CI::$APP->template->view_path . "tooltip.tpl", $data, true);
-
                     // check if item is on Wowhead
                     $item_wowhead = $this->getItemWowHead($item, $realm, 'all', false);
 
@@ -229,6 +223,14 @@ class Items
                     } else {
                         $row['icon'] = 'inv_misc_questionmark';
                     }
+
+                    $data = [
+                        'item' => $this->getItemDataFromWorldDB($row),
+                        'icon' => $row['icon'],
+                        'api_item_icons' => $this->CI->config->item('api_item_icons')
+                    ];
+
+                    $row['htmlTooltip'] = CI::$APP->smarty->view(CI::$APP->template->view_path . "tooltip.tpl", $data, true);
 
                     // Cache it forever
                     $this->CI->cache->save("items/item_" . $realm . "_" . $item, $row);

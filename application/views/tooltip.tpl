@@ -1,4 +1,8 @@
+<pp style="visibility: visible; background-image: url({$api_item_icons}/medium/{$icon}.jpg);">
+<div></div>
+</pp>
 <!--nstart-->
+
 <span class='q{$item.quality}' style='font-size: 16px'>{$item.name}</span><br />
 <!--nend-->
 
