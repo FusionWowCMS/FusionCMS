@@ -83,13 +83,7 @@ The FusionCMS source is released under the [GNU AGPL v3](https://github.com/Fusi
 
 ## Sponsor this project
 
-<img src="https://raw.githubusercontent.com/Nightprince/cryptoicons/master/SVG/btc.svg" width="15" height="15"> BTC: 18yAioyePZYdvmiqMafFDP5AJ5iRCoGSP
-
-<img src="https://raw.githubusercontent.com/Nightprince/cryptoicons/master/SVG/eth.svg" width="15" height="15"> ETH(ERC20): 0x8Dfe266213BCBc94AEB5002cbaC3fF102a45C2d1
-
-<img src="https://raw.githubusercontent.com/Nightprince/cryptoicons/master/SVG/usdt.svg" width="15" height="15"> USDT(TRC20): TZ1jRQu8Z3bwVDhxZz2EuR4N278E1oD2fM
-
-<img src="https://raw.githubusercontent.com/Nightprince/cryptoicons/master/SVG/ton.svg" width="15" height="15"> TON: EQBUvnyxEEryVdUI9ir8Dd1EvpWGqAP9nKNXBWyWgyF2DTdz
+[Donate with Cryptocurrency](https://paylink.payment4.com/en/Fusion%20CMS/007d3e04-643d-4105-b113-d37ad09e747e)
 
 ## Authors & Contributors
 
