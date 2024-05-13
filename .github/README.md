@@ -48,8 +48,8 @@ its ease of use and development, safe and secure codebase and dedication to simp
 | MySQL / Mariadb Server                 | >= 5.6 / 10.3                                                                                                         |
 
 ### Security Tips
-
-Read the [Security Tips](SECURITY.md).
+> [!IMPORTANT]
+> Read the [Security Tips](SECURITY.md).
 
 ### Installation
 
@@ -82,8 +82,8 @@ contributions you make are **greatly appreciated**.
 The FusionCMS source is released under the [GNU AGPL v3](https://github.com/FusionWowCMS/FusionCMS/blob/main/LICENSE)
 
 ## Sponsor this project
-
-[Donate with Cryptocurrency](https://paylink.payment4.com/en/Fusion%20CMS/007d3e04-643d-4105-b113-d37ad09e747e)
+> [!TIP]
+> [Donate with Cryptocurrency](https://paylink.payment4.com/en/Fusion%20CMS/007d3e04-643d-4105-b113-d37ad09e747e)
 
 ## Authors & Contributors
 
