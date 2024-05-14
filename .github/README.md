@@ -7,7 +7,7 @@
 <h3 align="center">FusionCMS</h3>
 
   <p align="center">
-    <a href="https://docs.fusiongen.net/"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/FusionWowCMS/FusionCMS/wiki"><strong>Explore the docs »</strong></a>
     <br/>
     <br/>
     <a href="https://github.com/FusionWowCMS/FusionCMS/issues">Report Bug</a>
