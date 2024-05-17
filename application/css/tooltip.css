@@ -11,19 +11,14 @@
 }
 #fusion_tooltip pp, #fusion_tooltip pp {
     position: absolute;
-    left: -44px;
+    left: -65px !important;
     top: -18px;
     width: 44px;
     height: 44px;
-    background: 4px 4px no-repeat;
     margin: 0;
     padding: 0;
-}
-#fusion_tooltip pp, #fusion_tooltip pp {
+    background: 4px 4px no-repeat;
     background-color: #0f0f0f !important;
-    left: -65px !important;
-    height: 44px !important;
-    width: 44px !important;
 }
 #fusion_tooltip pp div, .fusion_tooltip pp div {
     height: 42px !important;
