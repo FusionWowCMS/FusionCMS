@@ -9,7 +9,7 @@
     z-index: 9999999;
     padding:1rem;
 }
-#fusion_tooltip pp, #fusion_tooltip pp {
+#fusion_tooltip pp, .fusion_tooltip pp {
     position: absolute;
     left: -65px !important;
     top: -18px;
