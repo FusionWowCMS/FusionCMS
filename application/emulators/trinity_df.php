@@ -206,58 +206,62 @@ class Trinity_df implements Emulator
     /**
      * Get the name of a table
      *
-     * @param  String $name
-     * @return String
+     * @param String $name
+     * @return string|null
      */
-    public function getTable($name)
+    public function getTable($name): string|null
     {
-        if (!isset($this->tables[$name])) {
-            return null;
+        if (array_key_exists($name, $this->tables)) {
+            return $this->tables[$name];
         }
-        return $this->tables[$name];
+
+        return null;
     }
 
     /**
      * Get the name of a column
      *
-     * @param  String $table
-     * @param  String $name
-     * @return String
+     * @param String $table
+     * @param String $name
+     * @return string|null
      */
-    public function getColumn($table, $name)
+    public function getColumn($table, $name): string|null
     {
-        if (!isset($this->columns[$table][$name])) {
-            return null;
+        if (array_key_exists($table, $this->columns) && array_key_exists($name, $this->columns[$table])) {
+            return $this->columns[$table][$name];
         }
-        return $this->columns[$table][$name];
+
+        return null;
     }
 
     /**
      * Get a set of all columns
      *
-     * @param  String $name
-     * @return String
+     * @param $table
+     * @return array|string|null
      */
-    public function getAllColumns($table)
+    public function getAllColumns($table): array|string|null
     {
-        if (!isset($this->columns[$table])) {
-            return null;
+        if (array_key_exists($table, $this->columns)) {
+            return $this->columns[$table];
         }
-        return $this->columns[$table];
+
+        return null;
     }
 
     /**
      * Get a pre-defined query
      *
-     * @param  String $name
-     * @return String
+     * @param String $name
+     * @return string|null
      */
-    public function getQuery($name)
+    public function getQuery($name): string|null
     {
-        if (!isset($this->queries[$name])) {
-            return null;
+        if (array_key_exists($name, $this->queries)) {
+            return $this->queries[$name];
         }
-        return $this->queries[$name];
+
+        return null;
     }
 
     /**
@@ -265,7 +269,7 @@ class Trinity_df implements Emulator
      *
      * @return Boolean
      */
-    public function hasConsole()
+    public function hasConsole(): bool
     {
         return $this->hasConsole;
     }
@@ -275,7 +279,7 @@ class Trinity_df implements Emulator
      *
      * @return Boolean
      */
-    public function hasStats()
+    public function hasStats(): bool
     {
         return $this->hasStats;
     }
