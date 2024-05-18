@@ -39,6 +39,7 @@ class Admin extends MX_Controller
             'php_version' => phpversion(),
             'ci_version' => CI_VERSION,
             'os' => $this->getOsName(),
+            'php_sapi' => PHP_SAPI,
             'theme_value' => $this->config->item('theme'),
             'unique' => $this->getUnique(),
             'views' => $this->getViews(),
