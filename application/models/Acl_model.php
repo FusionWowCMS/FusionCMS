@@ -67,21 +67,44 @@ class Acl_model extends CI_Model
      */
     public function getAccountRolesPermissions(int $userId = 0, int $default_group = 1)
     {
-        // Query: Prepare
-        $query = $this->db->table('acl_group_roles agr, acl_account_groups aag');
+        // Groups: Initialize
+        $groups = (array)$this->getGroupsByUser($userId);
 
-        // Query: Select
-        $query = $query->select(['agr.role_name', 'agr.module']);
+        // Logged in: Initialize
+        $loggedIn = $userId && $default_group === $this->config->item('default_player_group');
 
-        // Query: Filter by account id
-        if($userId && ($default_group > (CI::$APP->config->item('default_player_group') + 1)))
-            $query = $query->where('aag.account_id', $userId);
+        // Player only: Initialize
+        $player_only = $loggedIn && in_array($this->config->item('default_player_group'), array_column($groups, 'id'));
 
-        // Query: Filter by group
-        $query = $query->groupStart()
-                       ->where('aag.group_id = agr.group_id')
-                       ->orWhere('agr.group_id', $default_group)
-                       ->groupEnd();
+        if($player_only)
+        {
+            // Query: Prepare
+            $query = $this->db->table('acl_group_roles agr');
+
+            // Query: Select
+            $query = $query->select(['agr.role_name', 'agr.module']);
+
+            // Query: Filter by group
+            $query = $query->where('agr.group_id', $default_group);
+        }
+        else
+        {
+            // Query: Prepare
+            $query = $this->db->table('acl_group_roles agr, acl_account_groups aag');
+
+            // Query: Select
+            $query = $query->select(['agr.role_name', 'agr.module']);
+
+            // Query: Filter by account id
+            if($userId)
+                $query = $query->where('aag.account_id', $userId);
+
+            // Query: Filter by group
+            $query = $query->groupStart()
+                           ->where('aag.group_id = agr.group_id')
+                           ->orWhere('agr.group_id', $default_group)
+                           ->groupEnd();
+        }
 
         // Query: Distinct
         $query = $query->distinct();
