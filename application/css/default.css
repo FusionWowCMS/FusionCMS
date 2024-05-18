@@ -374,10 +374,8 @@ input[type="radio"] {
 }
 
 #shoutbox form textarea {
-    margin-top: 5px;
     height: 40px;
-    width: 92%;
-    max-width: 92%;
+    width: 100%;
 }
 
 #shoutbox form input[type="submit"] {
