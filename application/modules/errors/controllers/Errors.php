@@ -9,6 +9,6 @@ class Errors extends MX_Controller
         if (isset($this->template))
             $this->template->show404();
         else
-            show_404();
+            show_404('', false);
     }
 }

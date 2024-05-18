@@ -12,7 +12,7 @@ class Install extends MX_Controller
         parent::__construct();
 
         if(file_exists(WRITEPATH . 'install/.lock'))
-            show_404();
+            show_404('install', false);
 
         # Load: Helpers
         $this->load->helper('url');

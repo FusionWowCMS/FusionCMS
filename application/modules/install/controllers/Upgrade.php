@@ -36,7 +36,7 @@ class Upgrade extends MX_Controller
 
         # User: Is owner
         if(!$this->user->isOwner())
-            show_404();
+            show_404('upgrade', false);
 
         # Load: Helpers
         $this->load->helper('url');

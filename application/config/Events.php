@@ -51,7 +51,7 @@ Events::on('pre_controller', static function () {
 
     // Module: Disabled
     if(!isset($module['data']['enabled']) || (isset($module['data']['enabled']) && !$module['data']['enabled']))
-        show_404();
+        show_404($module['name'], false);
 
     // Module: Patch | Set min_required_version
     if(!isset($module['data']['min_required_version']))

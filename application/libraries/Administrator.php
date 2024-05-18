@@ -37,7 +37,7 @@ class Administrator
         $this->currentPage = '';
 
         if (!$this->CI->user->isStaff()) {
-            show_404();
+            show_404('admin', false);
         }
 
         $this->showLogIn();
