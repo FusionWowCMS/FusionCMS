@@ -1,6 +1,7 @@
 <?php
 
 use CodeIgniter\Database\BaseConnection;
+use MX\CI;
 
 /**
  * @package FusionCMS
@@ -73,7 +74,7 @@ class Acl_model extends CI_Model
         $query = $query->select(['agr.role_name', 'agr.module']);
 
         // Query: Filter by account id
-        if($userId)
+        if($userId && ($default_group > (CI::$APP->config->item('default_player_group') + 1)))
             $query = $query->where('aag.account_id', $userId);
 
         // Query: Filter by group
