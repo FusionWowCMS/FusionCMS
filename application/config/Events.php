@@ -4,7 +4,6 @@ namespace Config;
 
 use App\Config\Services;
 use CodeIgniter\Exceptions\FrameworkException;
-use CodeIgniter\HotReloader\HotReloader;
 use MX\CI;
 use CodeIgniter\Events\Events;
 

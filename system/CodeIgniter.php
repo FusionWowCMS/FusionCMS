@@ -22,9 +22,6 @@ const CI_VERSION = '4.4.3';
 
 $appConfig ??= config(App::class);
 
-// Set default locale on the server
-Locale::setDefault($appConfig->defaultLocale ?? 'en');
-
 // Set default timezone on the server
 date_default_timezone_set($appConfig->appTimezone ?? 'UTC');
 
@@ -432,6 +429,11 @@ $response->setBody($output);
  * This is what they've been waiting for!
  */
 $response->send();
+
+//--------------------------------------------------------------------
+// Set default locale on the server
+//--------------------------------------------------------------------
+Locale::setDefault($appConfig->defaultLocale ?? 'en');
 
 //--------------------------------------------------------------------
 // Is there a post-system event?

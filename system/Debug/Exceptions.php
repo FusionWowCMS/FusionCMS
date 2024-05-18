@@ -22,7 +22,6 @@ use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Config\Exceptions as ExceptionsConfig;
-use Config\Paths;
 use ErrorException;
 use Psr\Log\LogLevel;
 use Throwable;
@@ -181,7 +180,7 @@ class Exceptions
             }
 
             if (! headers_sent()) {
-                header(sprintf('HTTP/%s %s %s', $this->request->getProtocolVersion(), $this->response->getStatusCode(), $this->response->getReasonPhrase()), true, $statusCode);
+                header(sprintf('HTTP/%s %s %s', $this->request->getProtocolVersion(), $this->response->getStatusCode(), $this->response->getReason()), true, $statusCode);
             }
 
             if (!str_contains($this->request->getHeaderLine('accept'), 'text/html')) {
