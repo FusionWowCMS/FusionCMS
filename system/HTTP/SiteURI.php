@@ -14,7 +14,7 @@ namespace CodeIgniter\HTTP;
 use BadMethodCallException;
 use CodeIgniter\Exceptions\ConfigException;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
-use Config\App;
+use App\Config\App;
 
 /**
  * URI for the application site
@@ -192,7 +192,7 @@ class SiteURI extends URI
     {
         // It's possible the user forgot a trailing slash on their
         // baseURL, so let's help them out.
-        $baseURL = rtrim($configApp->baseURL, '/ ') . '/';
+        $baseURL = rtrim(base_url(), '/ ') . '/';
 
         // Validate baseURL
         if (filter_var($baseURL, FILTER_VALIDATE_URL) === false) {

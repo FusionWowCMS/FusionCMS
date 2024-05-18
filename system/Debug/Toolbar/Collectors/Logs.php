@@ -1,7 +1,23 @@
-<?php namespace CodeIgniter\Debug\Toolbar\Collectors;
+<?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\Debug\Toolbar\Collectors;
 
 use App\Config\Services;
 
+/**
+ * Loags collector
+ */
 class Logs extends BaseCollector
 {
     /**
@@ -35,35 +51,49 @@ class Logs extends BaseCollector
      */
     protected $data;
 
-    //--------------------------------------------------------------------
-
     /**
      * Returns the data of this collector to be formatted in the toolbar
      */
     public function display(): string
     {
-        $logger = Services::logger(true);
-        $logs = $logger->logCache;
+        $data = [
+            'logs' => $this->collectLogs(),
+        ];
 
-        if (empty($logs) || ! is_array($logs))
-        {
-            return '<p>Nothing was logged. If you were expecting logged items, ensure that LoggerConfig file has the correct threshold set.</p>';
-        }
-
-        $output = "<table><theader><tr><th>Severity</th><th>Message</th></tr></theader><tbody>";
-
-        foreach ($logs as $log)
-        {
-            $output .= "<tr>";
-            $output .= "<td>{$log['level']}</td>";
-            $output .= "<td>".htmlspecialchars($log['msg'], ENT_SUBSTITUTE, 'UTF-8')."</td>";
-            $output .= "</tr>";
-        }
-
-        return $output."</tbody></table>";
+        return get_instance()->smarty->view(realpath(SYSTEMPATH) . DIRECTORY_SEPARATOR . 'Debug'  . DIRECTORY_SEPARATOR . 'Toolbar' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . '_logs.tpl', $data, true);
     }
 
-    //--------------------------------------------------------------------
+    /**
+     * Does this collector actually have any data to display?
+     */
+    public function isEmpty(): bool
+    {
+        $this->collectLogs();
 
+        return empty($this->data);
+    }
 
+    /**
+     * Display the icon.
+     *
+     * Icon from https://icons8.com - 1em package
+     */
+    public function icon(): string
+    {
+        return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACYSURBVEhLYxgFJIHU1FSjtLS0i0D8AYj7gEKMEBkqAaAFF4D4ERCvAFrwH4gDoFIMKSkpFkB+OTEYqgUTACXfA/GqjIwMQyD9H2hRHlQKJFcBEiMGQ7VgAqCBvUgK32dmZspCpagGGNPT0/1BLqeF4bQHQJePpiIwhmrBBEADR1MRfgB0+WgqAmOoFkwANHA0FY0CUgEDAwCQ0PUpNB3kqwAAAABJRU5ErkJggg==';
+    }
+
+    /**
+     * Ensures the data has been collected.
+     *
+     * @return array
+     */
+    protected function collectLogs()
+    {
+        if (! empty($this->data)) {
+            return $this->data;
+        }
+
+        return $this->data = Services::logger(true)->logCache ?? [];
+    }
 }

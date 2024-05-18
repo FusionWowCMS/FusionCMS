@@ -13,7 +13,7 @@ namespace CodeIgniter\HTTP;
 
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\Superglobals;
-use Config\App;
+use App\Config\App;
 
 /**
  * Creates SiteURI using superglobals.

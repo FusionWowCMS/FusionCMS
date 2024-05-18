@@ -2,6 +2,7 @@
 
 use App\Config\Services;
 use CodeIgniter\Events\Events;
+use App\Config\App;
 
 /**
  * System Initialization File
@@ -18,6 +19,14 @@ use CodeIgniter\Events\Events;
  *
  */
 const CI_VERSION = '4.4.3';
+
+$appConfig ??= config(App::class);
+
+// Set default locale on the server
+Locale::setDefault($appConfig->defaultLocale ?? 'en');
+
+// Set default timezone on the server
+date_default_timezone_set($appConfig->appTimezone ?? 'UTC');
 
 //--------------------------------------------------------------------
 // Start the Benchmark
@@ -65,7 +74,7 @@ if (is_file(APPPATH . 'config/Boot/' . ENVIRONMENT . '.php')) {
 
 $request = is_cli()
     ? Services::clirequest()
-    : Services::request();
+    : Services::request($appConfig);
 $request->setProtocolVersion($_SERVER['SERVER_PROTOCOL']);
 $response = Services::response();
 
@@ -405,10 +414,16 @@ $output = str_replace('{elapsed_time}', $totalTime, $output);
 // Display the Debug Toolbar?
 //--------------------------------------------------------------------
 
-if ($CI->config->item('enable_profiler') === true) {
-    $toolbar = Services::toolbar();
-    $output .= $toolbar->run();
-}
+$toolbar = Services::toolbar();
+$data = $toolbar->run($startTime, $totalTime, $request, $response);
+$script = $toolbar->prepare($data, $request, $response);
+
+$output = preg_replace(
+    '/<head>/',
+    '<head>' . $script,
+    $output,
+    1
+);
 
 $response->setBody($output);
 

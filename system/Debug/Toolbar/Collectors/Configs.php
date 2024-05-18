@@ -65,5 +65,13 @@ class Configs extends BaseCollector
         return $output;
     }
 
-    //--------------------------------------------------------------------
+    /**
+     * Display the icon.
+     *
+     * Icon from https://icons8.com - 1em package
+     */
+    public function icon(): string
+    {
+        return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAApklEQVR4nO2VTQqDMBBG38pLVLc9gKdwUze1R8wBBLH3iYdwGQmMMBSCP2PRhQ/cfJPMAzMauNlIBQxA2Pl46ZHEG5oHJUkyL9pLWNp/qqBU9fJIwQt4Aq2qt5LVVsFnxaE2FoFTWQc8gBzoVe4sggwYJYuNZwrJRllzXYFTWS+S2Px71CtqVhzy2yJARjE1pnGEr/+hbeF8gf/377oySvzShXPDLxPJ17CFAAylTAAAAABJRU5ErkJggg==';
+    }
 }

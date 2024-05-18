@@ -17,6 +17,7 @@ return array(
     'MatthiasMullie\\PathConverter\\' => array($vendorDir . '/matthiasmullie/path-converter/src'),
     'MatthiasMullie\\Minify\\' => array($vendorDir . '/matthiasmullie/minify/src'),
     'Laminas\\Escaper\\' => array($vendorDir . '/laminas/laminas-escaper/src'),
+    'Kint\\' => array($vendorDir . '/kint-php/kint/src'),
     'Desarrolla2\\Cache\\' => array($vendorDir . '/desarrolla2/cache/src'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
     'CodeIgniter\\' => array($baseDir . '/system'),

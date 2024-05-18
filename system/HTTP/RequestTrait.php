@@ -13,7 +13,7 @@ namespace CodeIgniter\HTTP;
 
 use CodeIgniter\Exceptions\ConfigException;
 use CodeIgniter\Validation\FormatRules;
-use Config\App;
+use App\Config\App;
 use RuntimeException;
 
 /**

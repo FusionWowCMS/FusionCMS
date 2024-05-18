@@ -156,7 +156,7 @@ $autoload['helper'] = ['url', 'emulator', 'form', 'text', 'lang', 'breadcumb', '
 |
 */
 
-$autoload['config'] = ['language', 'version', 'acl_defaults', 'fusion', 'message', 'backups', 'cdn', 'captcha', 'social_media', 'performance', 'wow_db', 'wow_expansions', 'profiler', 'auth'];
+$autoload['config'] = ['language', 'version', 'acl_defaults', 'fusion', 'message', 'backups', 'cdn', 'captcha', 'social_media', 'performance', 'wow_db', 'wow_expansions', 'auth'];
 
 
 /*

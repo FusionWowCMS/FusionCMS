@@ -14,7 +14,15 @@ declare(strict_types=1);
 namespace CodeIgniter\Config;
 
 use App\Config\Migrations;
-use CodeIgniter\HTTP\{CLIRequest, CURLRequest, IncomingRequest, Response, ResponseInterface, URI};
+use App\Config\Paths;
+use CodeIgniter\HTTP\{CLIRequest,
+    CURLRequest,
+    IncomingRequest,
+    Negotiate,
+    RequestInterface,
+    Response,
+    ResponseInterface,
+    URI};
 use App\Config\Exceptions as ExceptionsConfig;
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Database\MigrationRunner;
@@ -35,6 +43,9 @@ use CodeIgniter\Session\Session;
 use CodeIgniter\Config\Format as FormatConfig;
 use CodeIgniter\Typography\Typography;
 use App\Config\Services as AppServices;
+use App\Config\App;
+use Config\ContentSecurityPolicy as ContentSecurityPolicyConfig;
+use Config\ContentSecurityPolicy as CSPConfig;
 
 /**
  * Services Configuration file.
@@ -70,6 +81,22 @@ class Services extends BaseService
         }
 
         return new CLIRequest(new URI());
+    }
+
+    /**
+     * Content Security Policy
+     *
+     * @return ContentSecurityPolicy
+     */
+    public static function csp(?CSPConfig $config = null, bool $getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('csp', $config);
+        }
+
+        $config ??= config(ContentSecurityPolicyConfig::class);
+
+        return new ContentSecurityPolicy($config);
     }
 
     /**
@@ -207,14 +234,14 @@ class Services extends BaseService
      *
      * @deprecated The parameter $getShared are deprecated.
      */
-    public static function request(bool $getShared = false)
+    public static function request(?App $config = null, bool $getShared = false)
     {
         if ($getShared) {
-            return static::getSharedInstance('request');
+            return static::getSharedInstance('request', $config);
         }
 
         // @TODO remove the following code for backward compatibility
-        return AppServices::incomingrequest($getShared);
+        return AppServices::incomingrequest($config, $getShared);
     }
 
     /**
@@ -224,12 +251,12 @@ class Services extends BaseService
      *
      * @internal
      */
-    public static function createRequest(bool $isCli = false): void
+    public static function createRequest(App $config, bool $isCli = false): void
     {
         if ($isCli) {
             $request = AppServices::clirequest();
         } else {
-            $request = AppServices::incomingrequest();
+            $request = AppServices::incomingrequest($config);
 
             // guess at protocol if needed
             $request->setProtocolVersion($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1');
@@ -246,13 +273,13 @@ class Services extends BaseService
      *
      * @internal
      */
-    public static function incomingrequest(bool $getShared = true)
+    public static function incomingrequest(?App $config = null, bool $getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('request');
+            return static::getSharedInstance('request', $config);
         }
 
-        return new IncomingRequest(
+        return new IncomingRequest($config,
             new URI()
         );
     }
@@ -402,6 +429,24 @@ class Services extends BaseService
         }
 
         return new Typography();
+    }
+
+    /**
+     * The Negotiate class provides the content negotiation features for
+     * working the request to determine correct language, encoding, charset,
+     * and more.
+     *
+     * @return Negotiate
+     */
+    public static function negotiator(?RequestInterface $request = null, bool $getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('negotiator', $request);
+        }
+
+        $request ??= AppServices::get('request');
+
+        return new Negotiate($request);
     }
 
 }

@@ -2,6 +2,9 @@
 
 namespace Config;
 
+use App\Config\Services;
+use CodeIgniter\Exceptions\FrameworkException;
+use CodeIgniter\HotReloader\HotReloader;
 use MX\CI;
 use CodeIgniter\Events\Events;
 
@@ -23,14 +26,28 @@ use CodeIgniter\Events\Events;
  */
 
 Events::on('pre_controller', static function () {
+    if (ENVIRONMENT !== 'testing') {
+        if (ini_get('zlib.output_compression')) {
+            throw FrameworkException::forEnabledZlibOutputCompression();
+        }
+
+        while (ob_get_level() > 0) {
+            ob_end_flush();
+        }
+
+        ob_start(static fn ($buffer) => $buffer);
+    }
+
     /*
      * --------------------------------------------------------------------
      * Debug Toolbar Listeners.
      * --------------------------------------------------------------------
      * If you delete, they will no longer be collected.
      */
-    if(CI::$APP->config->item('enable_profiler') === true && !is_cli())
-        Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\DB::collect');
+    if (CI_DEBUG && ! is_cli()) {
+        Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect');
+        Services::toolbar()->respond();
+    }
 
     /*
      * --------------------------------------------------------------------

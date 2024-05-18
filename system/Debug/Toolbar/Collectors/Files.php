@@ -1,5 +1,21 @@
-<?php namespace CodeIgniter\Debug\Toolbar\Collectors;
+<?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\Debug\Toolbar\Collectors;
+
+/**
+ * Files collector
+ */
 class Files extends BaseCollector
 {
     /**
@@ -26,58 +42,65 @@ class Files extends BaseCollector
      */
     protected $title = 'Files';
 
-    //--------------------------------------------------------------------
-
     /**
      * Returns any information that should be shown next to the title.
-     *
-     * @return string
      */
     public function getTitleDetails(): string
     {
-        return '( '.(int)count(get_included_files()).' )';
+        return '( ' . count(get_included_files()) . ' )';
     }
 
-    //--------------------------------------------------------------------
-
     /**
-     * Builds and returns the HTML needed to fill a tab to display
-     * within the Debug Bar
-     *
-     * @return string
+     * Returns the data of this collector to be formatted in the toolbar
      */
     public function display(): string
     {
-        $output = "<table><tbody>";
+        $rawFiles  = get_included_files();
+        $coreFiles = [];
+        $userFiles = [];
 
-        $files = get_included_files();
+        foreach ($rawFiles as $file) {
+            $path = clean_path($file);
 
-        $count = 0;
-
-        foreach ($files as $file)
-        {
-            ++$count;
-
-            $path = $this->cleanPath($file);
-
-            if (strpos($path, 'BASEPATH') !== false)
-            {
-                $output .= "<tr class='muted'>";
+            if (str_contains($path, 'SYSTEMPATH')) {
+                $coreFiles[] = [
+                    'path' => $path,
+                    'name' => basename($file),
+                ];
+            } else {
+                $userFiles[] = [
+                    'path' => $path,
+                    'name' => basename($file),
+                ];
             }
-            else
-            {
-                $output .= "<tr>";
-            }
-
-            $output .= "<td style='width: 20em;'>". htmlspecialchars(str_replace('.php', '', basename($file)), ENT_SUBSTITUTE, 'UTF-8')."</td>";
-            $output .= "<td>".htmlspecialchars($path, ENT_SUBSTITUTE, 'UTF-8')."</td>";
-            $output .= "</tr>";
         }
 
-        $output .= "</tbody></table>";
+        sort($userFiles);
+        sort($coreFiles);
 
-        return $output;
+        $data = [
+            'coreFiles' => $coreFiles,
+            'userFiles' => $userFiles,
+        ];
+
+        return get_instance()->smarty->view(realpath(SYSTEMPATH) . DIRECTORY_SEPARATOR . 'Debug'  . DIRECTORY_SEPARATOR . 'Toolbar' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . '_files.tpl', $data, true);
     }
 
-    //--------------------------------------------------------------------
+    /**
+     * Displays the number of included files as a badge in the tab button.
+     */
+    public function getBadgeValue(): int
+    {
+        return count(get_included_files());
+    }
+
+    /**
+     * Display the icon.
+     *
+     * Icon from https://icons8.com - 1em package
+     */
+    public function icon(): string
+    {
+        return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGBSURBVEhL7ZQ9S8NQGIVTBQUncfMfCO4uLgoKbuKQOWg+OkXERRE1IAXrIHbVDrqIDuLiJgj+gro7S3dnpfq88b1FMTE3VZx64HBzzvvZWxKnj15QCcPwCD5HUfSWR+JtzgmtsUcQBEva5IIm9SwSu+95CAWbUuy67qBa32ByZEDpIaZYZSZMjjQuPcQUq8yEyYEb8FSerYeQVGbAFzJkX1PyQWLhgCz0BxTCekC1Wp0hsa6yokzhed4oje6Iz6rlJEkyIKfUEFtITVtQdAibn5rMyaYsMS+a5wTv8qeXMhcU16QZbKgl3hbs+L4/pnpdc87MElZgq10p5DxGdq8I7xrvUWUKvG3NbSK7ubngYzdJwSsF7TiOh9VOgfcEz1UayNe3JUPM1RWC5GXYgTfc75B4NBmXJnAtTfpABX0iPvEd9ezALwkplCFXcr9styiNOKc1RRZpaPM9tcqBwlWzGY1qPL9wjqRBgF5BH6j8HWh2S7MHlX8PrmbK+k/8PzjOOzx1D3i1pKTTAAAAAElFTkSuQmCC';
+    }
 }

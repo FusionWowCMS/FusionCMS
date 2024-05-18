@@ -1,5 +1,10 @@
 <?php namespace CodeIgniter\HTTP;
 
+use CodeIgniter\Config\Services;
+use CodeIgniter\HTTP\Exceptions\HTTPException;
+use App\Config\App;
+use Locale;
+
 /**
  * Class IncomingRequest
  *
@@ -89,18 +94,61 @@ class IncomingRequest extends Request
      */
     protected $cookieHTTPOnly = false;
 
+    /**
+     * Negotiator
+     *
+     * @var Negotiate|null
+     */
+    protected $negotiator;
+
+    /**
+     * The default Locale this request
+     * should operate under.
+     *
+     * @var string
+     */
+    protected $defaultLocale;
+
+    /**
+     * The current locale of the application.
+     * Default value is set in app/Config/App.php
+     *
+     * @var string
+     */
+    protected $locale;
+
+    /**
+     * Stores the valid locale codes.
+     *
+     * @var array
+     */
+    protected $validLocales = [];
+
     //--------------------------------------------------------------------
 
-    public function __construct($uri = null, $body = 'php://input')
+    public function __construct($config, $uri = null, $body = 'php://input')
     {
-        // Get our body from php://input
-        global $config;
-        if ($body == 'php://input')
-        {
+        $config ??= config(App::class);
+
+        if (
+            $body === 'php://input'
+            // php://input is not available with enctype="multipart/form-data".
+            // See https://www.php.net/manual/en/wrappers.php.php#wrappers.php.input
+            && ! str_contains($this->getHeaderLine('Content-Type'), 'multipart/form-data')
+            && (int) $this->getHeaderLine('Content-Length') <= $this->getPostMaxSize()
+        ) {
+            // Get our body from php://input
             $body = file_get_contents('php://input');
         }
 
+        // If file_get_contents() returns false or empty string, set null.
+        if ($body === false || $body === '') {
+            $body = null;
+        }
+
         $this->body = $body;
+
+        $this->validLocales = $config->supportedLocales;
 
         parent::__construct($config, $uri);
 
@@ -113,6 +161,39 @@ class IncomingRequest extends Request
         $this->cookiePath     = config_item('cookie_path');
         $this->cookieSecure   = config_item('cookie_secure');
         $this->cookieHTTPOnly = config_item('cookie_httponly');
+
+        $this->detectLocale($config);
+    }
+
+    private function getPostMaxSize(): int
+    {
+        $postMaxSize = ini_get('post_max_size');
+
+        return match (strtoupper(substr($postMaxSize, -1))) {
+            'G'     => (int) str_replace('G', '', $postMaxSize) * 1024 ** 3,
+            'M'     => (int) str_replace('M', '', $postMaxSize) * 1024 ** 2,
+            'K'     => (int) str_replace('K', '', $postMaxSize) * 1024,
+            default => (int) $postMaxSize,
+        };
+    }
+
+    /**
+     * Handles setting up the locale, perhaps auto-detecting through
+     * content negotiation.
+     *
+     * @param App $config
+     *
+     * @return void
+     */
+    public function detectLocale($config)
+    {
+        $this->locale = $this->defaultLocale = $config->defaultLocale;
+
+        if (! $config->negotiateLocale) {
+            return;
+        }
+
+        $this->setLocale($this->negotiate('language', $config->supportedLocales));
     }
 
     //--------------------------------------------------------------------
@@ -344,6 +425,54 @@ class IncomingRequest extends Request
         return false;
     }
 
+    /**
+     * Sets the locale string for this request.
+     *
+     * @return IncomingRequest
+     */
+    public function setLocale(string $locale)
+    {
+        // If it's not a valid locale, set it
+        // to the default locale for the site.
+        if (! in_array($locale, $this->validLocales, true)) {
+            $locale = $this->defaultLocale;
+        }
+
+        $this->locale = $locale;
+        Locale::setDefault($locale);
+
+        return $this;
+    }
+
+    /**
+     * Set the valid locales.
+     *
+     * @return $this
+     */
+    public function setValidLocales(array $locales)
+    {
+        $this->validLocales = $locales;
+
+        return $this;
+    }
+
+    /**
+     * Gets the current locale, with a fallback to the default
+     * locale if none is set.
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Returns the default locale as set in app/Config/App.php
+     */
+    public function getDefaultLocale(): string
+    {
+        return $this->defaultLocale;
+    }
+
     //--------------------------------------------------------------------
 
     /**
@@ -504,7 +633,24 @@ class IncomingRequest extends Request
         return $this->removeRelativeDirectory($uri);
     }
 
-    //--------------------------------------------------------------------
+    /**
+     * Provides a convenient way to work with the Negotiate class
+     * for content negotiation.
+     */
+    public function negotiate(string $type, array $supported, bool $strictMatch = false): string
+    {
+        if ($this->negotiator === null) {
+            $this->negotiator = Services::negotiator($this, true);
+        }
+
+        return match (strtolower($type)) {
+            'media'    => $this->negotiator->media($supported, $strictMatch),
+            'charset'  => $this->negotiator->charset($supported),
+            'encoding' => $this->negotiator->encoding($supported),
+            'language' => $this->negotiator->language($supported),
+            default    => throw HTTPException::forInvalidNegotiationType($type),
+        };
+    }
 
     /**
      * Remove relative directory (../) and multi slashes (///)

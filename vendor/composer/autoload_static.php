@@ -9,6 +9,7 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '3917c79c5052b270641b5a200963dbc2' => __DIR__ . '/..' . '/kint-php/kint/init.php',
         'c15d4a1253e33e055d05e547c61dcb71' => __DIR__ . '/..' . '/smarty/smarty/src/functions.php',
     );
 
@@ -41,6 +42,10 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'L' => 
         array (
             'Laminas\\Escaper\\' => 16,
+        ),
+        'K' => 
+        array (
+            'Kint\\' => 5,
         ),
         'D' => 
         array (
@@ -97,6 +102,10 @@ class ComposerStaticInit728f96e67824ff0c88d9b31fcd5c7681
         'Laminas\\Escaper\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
+        ),
+        'Kint\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kint-php/kint/src',
         ),
         'Desarrolla2\\Cache\\' => 
         array (

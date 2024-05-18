@@ -38,6 +38,7 @@ use CodeIgniter\Router\Router;
 use CodeIgniter\Security\Security;
 use CodeIgniter\Session\Session;
 use CodeIgniter\Typography\Typography;
+use App\Config\App;
 use Config\Optimize;
 use App\Config\Exceptions as ConfigExceptions;
 use App\Config\Services as AppServices;
@@ -65,16 +66,16 @@ use InvalidArgumentException;
  * @see http://www.infoq.com/presentations/Simple-Made-Easy
  *
  * @method static CLIRequest                 clirequest($getShared = true)
- * @method static void                       createRequest(bool $isCli = false)
+ * @method static void                       createRequest(?App $config = null, bool $isCli = false)
  * @method static CURLRequest                curlrequest($options = [], ResponseInterface $response = null, $getShared = true)
  * @method static Email                      email($config = null, $getShared = true)
  * @method static Exceptions                 exceptions(ConfigExceptions $config = null, $getShared = true)
  * @method static Format                     format(ConfigFormat $config = null, $getShared = true)
- * @method static IncomingRequest            incomingrequest(bool $getShared = true)
+ * @method static IncomingRequest            incomingrequest(?App $config = null, bool $getShared = true)
  * @method static Iterator                   iterator($getShared = true)
  * @method static Logger                     logger($getShared = true)
  * @method static MigrationRunner            migrations(Migrations $config = null, ConnectionInterface $db = null, $getShared = true)
- * @method static IncomingRequest|CLIRequest request($getShared = true)
+ * @method static IncomingRequest|CLIRequest request(?App $config = null, $getShared = true)
  * @method static ResponseInterface          response($getShared = true)
  * @method static Router                     router(RouteCollectionInterface $routes = null, $getShared = true)
  * @method static RouteCollection            routes($getShared = true)

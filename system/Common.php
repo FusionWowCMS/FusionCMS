@@ -9,6 +9,7 @@
  * the LICENSE file that was distributed with this source code.
  */
 
+use App\Config\App;
 use App\Config\Database;
 use App\Config\Services;
 use CodeIgniter\Config\BaseConfig;
@@ -30,6 +31,21 @@ use Laminas\Escaper\Escaper;
  * @author      EllisLab Dev Team
  * @link        https://codeigniter.com/userguide3/
  */
+
+if (! function_exists('app_timezone')) {
+    /**
+     * Returns the timezone the application has been set to display
+     * dates in. This might be different than the timezone set
+     * at the server level, as you often want to stores dates in UTC
+     * and convert them on the fly for the user.
+     */
+    function app_timezone(): string
+    {
+        $config = config(App::class);
+
+        return $config->appTimezone;
+    }
+}
 
 // ------------------------------------------------------------------------
 

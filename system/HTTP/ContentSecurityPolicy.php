@@ -11,8 +11,8 @@
 
 namespace CodeIgniter\HTTP;
 
-use Config\App;
-use Config\ContentSecurityPolicy as ContentSecurityPolicyConfig;
+use App\Config\App;
+use App\Config\ContentSecurityPolicy as ContentSecurityPolicyConfig;
 
 /**
  * Provides tools for working with the Content-Security-Policy header

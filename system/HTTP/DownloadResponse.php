@@ -13,7 +13,7 @@ namespace CodeIgniter\HTTP;
 
 use CodeIgniter\Exceptions\DownloadException;
 use CodeIgniter\Files\File;
-use Config\App;
+use App\Config\App;
 use Config\Mimes;
 
 /**
