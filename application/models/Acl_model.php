@@ -70,13 +70,13 @@ class Acl_model extends CI_Model
         // Groups: Initialize
         $groups = (array)$this->getGroupsByUser($userId);
 
-        // Logged in: Initialize
-        $loggedIn = $userId && $default_group === $this->config->item('default_player_group');
+        // Auth: Initialize | Keep track of user authentication status
+        $auth = $userId && $default_group === $this->config->item('default_player_group');
 
         // Player only: Initialize
-        $player_only = $loggedIn && in_array($this->config->item('default_player_group'), array_column($groups, 'id'));
+        $player_only = $auth && count($groups) == 1 && in_array($this->config->item('default_player_group'), array_column($groups, 'id'));
 
-        if($player_only)
+        if(!$auth || $player_only)
         {
             // Query: Prepare
             $query = $this->db->table('acl_group_roles agr');
