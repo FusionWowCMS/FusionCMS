@@ -40,6 +40,7 @@ class Admin extends MX_Controller
             'ci_version' => CI_VERSION,
             'os' => $this->getOsName(),
             'php_sapi' => PHP_SAPI,
+            'server_software' => $_SERVER['SERVER_SOFTWARE'],
             'theme_value' => $this->config->item('theme'),
             'unique' => $this->getUnique(),
             'views' => $this->getViews(),
