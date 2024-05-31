@@ -22,7 +22,6 @@
 * [Getting Started](#getting-started)
     * [Prerequisites](#prerequisites)
     * [Security Tips](#security-tips)
-    * [Installation](#installation)
 * [Contributing](#contributing)
 * [License](#license)
 * [Authors](#authors)
@@ -50,10 +49,6 @@ its ease of use and development, safe and secure codebase and dedication to simp
 ### Security Tips
 > [!IMPORTANT]
 > Read the [Security Tips](SECURITY.md).
-
-### Installation
-
-Read the [installation guide](INSTALL.md).
 
 ## Contributing
 
