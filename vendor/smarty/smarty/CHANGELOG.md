@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.3.0] - 2024-05-30
+- Fix warning when calling hasVariable for an undefined variable [#977](https://github.com/smarty-php/smarty/issues/977)
+- Added `$smarty->prependTemplateDir()` method [#1022](https://github.com/smarty-php/smarty/issues/1022)
+
+
+## [5.2.0] - 2024-05-28
+- Fixed a code injection vulnerability in extends-tag. This addresses CVE-2024-35226.
+- Added `$smarty->setCacheModifiedCheck()` setter for cache_modified_check
+- Added a PSR-4 loading script to allow Smarty to be used without Composer [#1017](https://github.com/smarty-php/smarty/pull/1017)
+
+
 ## [5.1.0] - 2024-04-22
 - Prevent deprecation notices during compilation in PHP8.3 [#996](https://github.com/smarty-php/smarty/issues/996)
 - Fix that getTemplateVars would return an array of objects instead of the assigned variables values [#994](https://github.com/smarty-php/smarty/issues/994)
@@ -16,15 +27,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Internal compiler classes always return a string (the internal has_code flag has been removed for simplicity) [#918](https://github.com/smarty-php/smarty/pull/918)
 - Fix invalid classnames in Runtime code for foreach [#1000](https://github.com/smarty-php/smarty/issues/1000)
 
+## [5.0.2] - 2024-03-28
+- Fix Smarty::assign() not returning $this when called with an array as first parameter [#972](https://github.com/smarty-php/smarty/pull/972)
 
 ## [5.0.1] - 2024-03-27
 - Fix error in Smarty\Smarty::compileAllTemplates() by including missing FilesystemIterator class [#966](https://github.com/smarty-php/smarty/issues/966)  
 
-
 ## [5.0.0] - 2024-03-25
 - Fixed that scoped variables would overwrite parent scope [#952](https://github.com/smarty-php/smarty/issues/952)
 - Removed publicly accessible `$tpl->_var_stack` variable
-
 
 ### Fixed
 - Too many shorthand attributes error when using a modifier as a function with more than 3 parameters in an expression [#949](https://github.com/smarty-php/smarty/issues/949)
