@@ -85,6 +85,11 @@ class Settings extends MX_Controller
         $config['api_item_custom'] = $this->config->item('api_item_custom');
         $config['wow_db'] = $this->config->item('wow_db');
 
+        // API link to get item data
+        $config['api_item_data'] = $this->config->item('api_item_data');
+        $config['api_item_data_custom'] = $this->config->item('api_item_data_custom');
+        $config['wow_item_db'] = $this->config->item('wow_item_db');
+
         // auth configuration
         $config['account_encryption'] = $this->config->item('account_encryption');
         $config['rbac'] = $this->config->item('rbac');
@@ -231,10 +236,12 @@ class Settings extends MX_Controller
         $fusionConfig = new ConfigEditor("application/config/wow_db.php");
 
         $api_item_icons = $this->input->post('api_item_icons');
+        $api_item_data = $this->input->post('api_item_data');
         $custom_link = $this->input->post('custom_link');
 
         $fusionConfig->set('api_item_custom', $api_item_icons == 'custom');
         $fusionConfig->set('api_item_icons', $api_item_icons == 'custom' ? $custom_link : $api_item_icons);
+        $fusionConfig->set('api_item_data', $api_item_data);
 
         if ((empty($api_item_icons) && empty($custom_link)) || ($api_item_icons == 'custom') && empty($custom_link))
             die('The link cannot be empty');

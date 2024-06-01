@@ -44,7 +44,7 @@ class Items
         ];
 
         // Get the item XML data
-        $response = Services::curlrequest()->get('https://www.wowhead.com/item=' . $item . '&xml', $options);
+        $response = Services::curlrequest()->get($this->CI->config->item('api_item_data') . 'item=' . $item . '&xml', $options);
         $data = $response->getBody();
 
         if (!empty($data)) {

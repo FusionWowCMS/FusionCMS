@@ -410,6 +410,7 @@ var Settings = {
 	{
 		var values = {
 			api_item_icons:$("#api_item_icons").val(),
+			api_item_data:$("#api_item_data").val(),
 			custom_link:$("#custom_link").val()
 		};
 
