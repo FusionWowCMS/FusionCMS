@@ -24,6 +24,7 @@
  $lang['red'] = "Soquete Vermelho";
  $lang['yellow'] = "Soquete Amarelo";
  $lang['blue'] = "Soquete Azul";
+$lang['prismatic'] = "Soquete Prismatic";
  $lang['restores'] = "Equipamento: Restaura";
  $lang['increases'] = "Equipamento: Aumenta o seu";
  $lang['by'] = "por";

@@ -21,6 +21,7 @@ $lang['meta'] = "Ranura meta";
 $lang['red'] = "Ranura roja";
 $lang['yellow'] = "Ranura amarilla";
 $lang['blue'] = "Ranura azul";
+$lang['prismatic'] = "Ranura Prismatic";
 $lang['restores'] = "Equipar: Restaura";
 $lang['increases'] = "Equipar: Aumenta tu";
 $lang['by'] = "por";

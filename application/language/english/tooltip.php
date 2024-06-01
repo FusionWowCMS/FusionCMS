@@ -21,6 +21,7 @@ $lang['meta'] = "Meta Socket";
 $lang['red'] = "Red Socket";
 $lang['yellow'] = "Yellow Socket";
 $lang['blue'] = "Blue Socket";
+$lang['prismatic'] = "Prismatic Socket";
 $lang['restores'] = "Equip: Restores";
 $lang['increases'] = "Equip: Increases your";
 $lang['by'] = "by";
