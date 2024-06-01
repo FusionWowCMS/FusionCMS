@@ -25,6 +25,7 @@ $lang['prismatic'] = "Prismatic Socket";
 $lang['cogwheel'] = "Cogwheel Socket";
 $lang['domination'] = "Domination Socket";
 $lang['hydraulic'] = "Hydraulic Socket";
+$lang['primordial'] = "Primordial Socket";
 $lang['restores'] = "Equip: Restores";
 $lang['increases'] = "Equip: Increases your";
 $lang['by'] = "by";

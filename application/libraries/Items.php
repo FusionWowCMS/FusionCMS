@@ -331,6 +331,7 @@ class Items
             $cogwheel   = "<span class='socket-cogwheel q0'>" . lang("cogwheel", "tooltip") . "</span><br />";
             $domination   = "<span class='socket-domination q0'>" . lang("domination", "tooltip") . "</span><br />";
             $hydraulic   = "<span class='socket-hydraulic q0'>" . lang("hydraulic", "tooltip") . "</span><br />";
+            $primordial   = "<span class='socket-primordial q0'>" . lang("primordial", "tooltip") . "</span><br />";
 
             for ($i = 1; $i < 3; $i++) {
                 $output .= match ($item['socketColor_' . $i]) {
@@ -342,6 +343,7 @@ class Items
                     16 => $hydraulic,
                     32 => $cogwheel,
                     1048576 => $domination,
+                    8388608 => $primordial,
                 };
             }
 
