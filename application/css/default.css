@@ -503,6 +503,8 @@ input[type="radio"] {
 .q8, .q8 a { color: #ffff98 ! important; } /* Light yellow (item set bonuses) */
 .q9, .q9 a { color: #71D5FF ! important; } /* Light blue (glyph type) */
 .q10, .q10 a { color: #ff4040 ! important; } /* Red (requirement not met, error) */
+.q13, .q13 a { color: #ffff98 ! important; } /* Azerite */
+.q14, .q14 a { color: #8788ee ! important; } /* Minor Power */
 
 /* Gems colors */
 .gem1 {color: #9d9d9d !important}
