@@ -28,7 +28,7 @@ if(!defined('CI_METHOD'))
 
 # Define: Theme base url
 if(!defined('T_BASE_URL'))
-    define('T_BASE_URL', rtrim(base_url(str_replace(['\\', DS], '/', APPPATH) . 'themes/' . CI::$APP->config->item('theme')), '/') . '/');
+    define('T_BASE_URL', rtrim(base_url(str_replace(['\\', DS], '/', basename(APPPATH)) . '/themes/' . CI::$APP->config->item('theme')), '/') . '/');
 
 # Define: Theme base path
 if(!defined('T_ROOT_PATH'))
