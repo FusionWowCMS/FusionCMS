@@ -328,6 +328,7 @@ class Items
             $yellow = "<span class='socket-yellow q0'>" . lang("yellow", "tooltip") . "</span><br />";
             $blue   = "<span class='socket-blue q0'>" . lang("blue", "tooltip") . "</span><br />";
             $prismatic   = "<span class='socket-prismatic q0'>" . lang("prismatic", "tooltip") . "</span><br />";
+            $cogwheel   = "<span class='socket-cogwheel q0'>" . lang("cogwheel", "tooltip") . "</span><br />";
 
             for ($i = 1; $i < 3; $i++) {
                 $output .= match ($item['socketColor_' . $i]) {
@@ -336,6 +337,7 @@ class Items
                     4 => $yellow,
                     8 => $blue,
                     14 => $prismatic,
+                    32 => $cogwheel,
                 };
             }
 

@@ -522,6 +522,7 @@ input[type="radio"] {
 .socket-yellow     { padding-left: 20px; background: url(../images/misc/socket_yellow.gif) no-repeat left center; }
 .socket-blue       { padding-left: 20px; background: url(../images/misc/socket_blue.gif) no-repeat left center; }
 .socket-prismatic  { padding-left: 20px; background: url(../images/misc/socket-prismatic.gif) no-repeat left center; }
+.socket-cogwheel   { padding-left: 20px; background: url(../images/misc/socket-cogwheel.gif) no-repeat left center; }
 
 .moneygold {
     display: inline-block;
