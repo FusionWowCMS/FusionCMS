@@ -23,6 +23,7 @@ $lang['yellow'] = "Ranura amarilla";
 $lang['blue'] = "Ranura azul";
 $lang['prismatic'] = "Ranura Prismatic";
 $lang['cogwheel'] = "Ranura Cogwheel";
+$lang['domination'] = "Ranura Domination";
 $lang['restores'] = "Equipar: Restaura";
 $lang['increases'] = "Equipar: Aumenta tu";
 $lang['by'] = "por";
