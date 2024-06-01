@@ -517,13 +517,14 @@ input[type="radio"] {
 .gem14 {color: #fff !important}
 
 /* Sockets */
-.socket-meta       { padding-left: 20px; background: url(../images/misc/socket_meta.gif) no-repeat left center; }
-.socket-red        { padding-left: 20px; background: url(../images/misc/socket_red.gif) no-repeat left center; }
-.socket-yellow     { padding-left: 20px; background: url(../images/misc/socket_yellow.gif) no-repeat left center; }
-.socket-blue       { padding-left: 20px; background: url(../images/misc/socket_blue.gif) no-repeat left center; }
-.socket-prismatic  { padding-left: 20px; background: url(../images/misc/socket-prismatic.gif) no-repeat left center; }
-.socket-cogwheel   { padding-left: 20px; background: url(../images/misc/socket-cogwheel.gif) no-repeat left center; }
+.socket-meta         { padding-left: 20px; background: url(../images/misc/socket_meta.gif) no-repeat left center; }
+.socket-red          { padding-left: 20px; background: url(../images/misc/socket_red.gif) no-repeat left center; }
+.socket-yellow       { padding-left: 20px; background: url(../images/misc/socket_yellow.gif) no-repeat left center; }
+.socket-blue         { padding-left: 20px; background: url(../images/misc/socket_blue.gif) no-repeat left center; }
+.socket-prismatic    { padding-left: 20px; background: url(../images/misc/socket-prismatic.gif) no-repeat left center; }
+.socket-cogwheel     { padding-left: 20px; background: url(../images/misc/socket-cogwheel.gif) no-repeat left center; }
 .socket-domination   { padding-left: 20px; background: url(../images/misc/socket-domination.gif) no-repeat left center; }
+.socket-hydraulic    { padding-left: 20px; background: url(../images/misc/socket-hydraulic.gif) no-repeat left center; }
 
 .moneygold {
     display: inline-block;
