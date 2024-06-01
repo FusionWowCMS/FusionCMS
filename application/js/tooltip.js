@@ -174,7 +174,7 @@ function Tooltip()
 	 	/**
 	 	 * Loading HTML
 	 	 */
-	 	this.loading = "Loading...";
+	 	this.loading = "<i class=\"fa-duotone fa-spinner-third fa-spin\"></i> Loading...";
 
 	 	/**
 	 	 * Runtime cache
@@ -293,7 +293,7 @@ function Tooltip()
 		/**
 		 * Loading HTML
 		 */
-		this.loading = "Loading...";
+		this.loading = "<i class=\"fa-duotone fa-spinner-third fa-spin\"></i> Loading...";
 
 		/**
 		 * Runtime cache
