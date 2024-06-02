@@ -187,6 +187,7 @@
   flex-direction: row;
   align-items: center;
   flex: 0 0 auto;
+  filter: brightness(0) invert(0.6);
 }
 #debug-bar #toolbar-position:hover,
 #debug-bar #toolbar-theme:hover {
@@ -401,10 +402,6 @@
 }
 #debug-bar .muted:hover td {
   color: #434343;
-}
-#debug-bar #toolbar-position,
-#debug-bar #toolbar-theme {
-  filter: brightness(0) invert(0.6);
 }
 #debug-bar .ci-label.active {
   background-color: #DFDFDF;
