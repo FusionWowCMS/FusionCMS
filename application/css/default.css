@@ -527,6 +527,17 @@ input[type="radio"] {
 .socket-hydraulic    { padding-left: 20px; background: url(../images/misc/socket-hydraulic.gif) no-repeat left center; }
 .socket-primordial   { padding-left: 20px; background: url(../images/misc/socket-primordial.gif) no-repeat left center; }
 .socket-tinker       { padding-left: 20px; background: url(../images/misc/socket-tinker.gif) no-repeat left center; }
+.socket-relic-iron   { padding-left: 20px; background: url(../images/misc/socket-relic-iron.png) no-repeat left center; }
+.socket-relic-blood  { padding-left: 20px; background: url(../images/misc/socket-relic-blood.png) no-repeat left center; }
+.socket-relic-shadow { padding-left: 20px; background: url(../images/misc/socket-relic-shadow.png) no-repeat left center; }
+.socket-relic-fel    { padding-left: 20px; background: url(../images/misc/socket-relic-fel.png) no-repeat left center; }
+.socket-relic-arcane { padding-left: 20px; background: url(../images/misc/socket-relic-arcane.png) no-repeat left center; }
+.socket-relic-frost  { padding-left: 20px; background: url(../images/misc/socket-relic-frost.png) no-repeat left center; }
+.socket-relic-fire   { padding-left: 20px; background: url(../images/misc/socket-relic-fire.png) no-repeat left center; }
+.socket-relic-water  { padding-left: 20px; background: url(../images/misc/socket-relic-water.png) no-repeat left center; }
+.socket-relic-life   { padding-left: 20px; background: url(../images/misc/socket-relic-life.png) no-repeat left center; }
+.socket-relic-storm  { padding-left: 20px; background: url(../images/misc/socket-relic-storm.png) no-repeat left center; }
+.socket-relic-holy   { padding-left: 20px; background: url(../images/misc/socket-relic-holy.png) no-repeat left center; }
 
 .moneygold {
     display: inline-block;
