@@ -344,6 +344,9 @@ class Items
             $relic_life       = "<span class='socket-relic-life q0'>" . lang("relic-life", "tooltip") . "</span><br />";
             $relic_storm      = "<span class='socket-relic-storm q0'>" . lang("relic-storm", "tooltip") . "</span><br />";
             $relic_holy       = "<span class='socket-relic-holy q0'>" . lang("relic-holy", "tooltip") . "</span><br />";
+            $red_punchcard    = "<span class='socket-red q0'>" . lang("red_punchcard", "tooltip") . "</span><br />";
+            $yellow_punchcard = "<span class='socket-yellow q0'>" . lang("yellow_punchcard", "tooltip") . "</span><br />";
+            $blue_punchcard   = "<span class='socket-blue q0'>" . lang("blue_punchcard", "tooltip") . "</span><br />";
 
             for ($i = 1; $i < 3; $i++) {
                 $output .= match ($item['socketColor_' . $i]) {
@@ -365,6 +368,9 @@ class Items
                     16384 => $relic_life,
                     32768 => $relic_storm,
                     65536 => $relic_holy,
+                    131072 => $red_punchcard,
+                    262144 => $yellow_punchcard,
+                    524288 => $blue_punchcard,
                     1048576 => $domination,
                     4194304 => $tinker,
                     8388608 => $primordial,
