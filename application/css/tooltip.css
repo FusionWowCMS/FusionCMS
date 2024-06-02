@@ -25,6 +25,9 @@
     width: 42px !important;
     border: 1px solid #1e1e1e !important;
 }
+#fusion_tooltip table tbody tr td table tbody tr td:first-child {
+    padding-right: 30px;
+}
 .character-tooltip .icon-frame.frame-56 {
     position: absolute;
     left: -88px;
