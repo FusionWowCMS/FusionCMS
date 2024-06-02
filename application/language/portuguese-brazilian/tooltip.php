@@ -29,6 +29,7 @@ $lang['cogwheel'] = "Soquete Cogwheel";
 $lang['domination'] = "Soquete Domination";
 $lang['hydraulic'] = "Soquete Hydraulic";
 $lang['primordial'] = "Soquete Primordial";
+$lang['tinker'] = "Soquete Tinker";
 $lang['restores'] = "Equipamento: Restaura";
 $lang['increases'] = "Equipamento: Aumenta o seu";
 $lang['by'] = "por";

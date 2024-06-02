@@ -26,6 +26,7 @@ $lang['cogwheel'] = "Ranura Cogwheel";
 $lang['domination'] = "Ranura Domination";
 $lang['hydraulic'] = "Ranura Hydraulic";
 $lang['primordial'] = "Ranura Primordial";
+$lang['tinker'] = "Ranura Tinker";
 $lang['restores'] = "Equipar: Restaura";
 $lang['increases'] = "Equipar: Aumenta tu";
 $lang['by'] = "por";

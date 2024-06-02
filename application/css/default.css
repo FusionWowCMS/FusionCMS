@@ -526,6 +526,7 @@ input[type="radio"] {
 .socket-domination   { padding-left: 20px; background: url(../images/misc/socket-domination.gif) no-repeat left center; }
 .socket-hydraulic    { padding-left: 20px; background: url(../images/misc/socket-hydraulic.gif) no-repeat left center; }
 .socket-primordial   { padding-left: 20px; background: url(../images/misc/socket-primordial.gif) no-repeat left center; }
+.socket-tinker       { padding-left: 20px; background: url(../images/misc/socket-tinker.gif) no-repeat left center; }
 
 .moneygold {
     display: inline-block;

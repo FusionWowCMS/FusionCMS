@@ -323,15 +323,16 @@ class Items
         if (array_key_exists("socketColor_1", $item)) {
             $output = "";
 
-            $meta   = "<span class='socket-meta q0'>" . lang("meta", "tooltip") . "</span><br />";
-            $red    = "<span class='socket-red q0'>" . lang("red", "tooltip") . "</span><br />";
-            $yellow = "<span class='socket-yellow q0'>" . lang("yellow", "tooltip") . "</span><br />";
-            $blue   = "<span class='socket-blue q0'>" . lang("blue", "tooltip") . "</span><br />";
-            $prismatic   = "<span class='socket-prismatic q0'>" . lang("prismatic", "tooltip") . "</span><br />";
-            $cogwheel   = "<span class='socket-cogwheel q0'>" . lang("cogwheel", "tooltip") . "</span><br />";
-            $domination   = "<span class='socket-domination q0'>" . lang("domination", "tooltip") . "</span><br />";
-            $hydraulic   = "<span class='socket-hydraulic q0'>" . lang("hydraulic", "tooltip") . "</span><br />";
-            $primordial   = "<span class='socket-primordial q0'>" . lang("primordial", "tooltip") . "</span><br />";
+            $meta             = "<span class='socket-meta q0'>" . lang("meta", "tooltip") . "</span><br />";
+            $red              = "<span class='socket-red q0'>" . lang("red", "tooltip") . "</span><br />";
+            $yellow           = "<span class='socket-yellow q0'>" . lang("yellow", "tooltip") . "</span><br />";
+            $blue             = "<span class='socket-blue q0'>" . lang("blue", "tooltip") . "</span><br />";
+            $prismatic        = "<span class='socket-prismatic q0'>" . lang("prismatic", "tooltip") . "</span><br />";
+            $cogwheel         = "<span class='socket-cogwheel q0'>" . lang("cogwheel", "tooltip") . "</span><br />";
+            $domination       = "<span class='socket-domination q0'>" . lang("domination", "tooltip") . "</span><br />";
+            $hydraulic        = "<span class='socket-hydraulic q0'>" . lang("hydraulic", "tooltip") . "</span><br />";
+            $primordial       = "<span class='socket-primordial q0'>" . lang("primordial", "tooltip") . "</span><br />";
+            $tinker           = "<span class='socket-tinker q0'>" . lang("tinker", "tooltip") . "</span><br />";
 
             for ($i = 1; $i < 3; $i++) {
                 $output .= match ($item['socketColor_' . $i]) {
@@ -343,6 +344,7 @@ class Items
                     16 => $hydraulic,
                     32 => $cogwheel,
                     1048576 => $domination,
+                    4194304 => $tinker,
                     8388608 => $primordial,
                 };
             }
