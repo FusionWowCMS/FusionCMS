@@ -320,67 +320,47 @@ class Items
      */
     private function getSockets(array $item): bool|string
     {
-        if (array_key_exists("socketColor_1", $item)) {
-            $output = "";
-
-            $meta             = "<span class='socket-meta q0'>" . lang("meta", "tooltip") . "</span><br />";
-            $red              = "<span class='socket-red q0'>" . lang("red", "tooltip") . "</span><br />";
-            $yellow           = "<span class='socket-yellow q0'>" . lang("yellow", "tooltip") . "</span><br />";
-            $blue             = "<span class='socket-blue q0'>" . lang("blue", "tooltip") . "</span><br />";
-            $prismatic        = "<span class='socket-prismatic q0'>" . lang("prismatic", "tooltip") . "</span><br />";
-            $cogwheel         = "<span class='socket-cogwheel q0'>" . lang("cogwheel", "tooltip") . "</span><br />";
-            $domination       = "<span class='socket-domination q0'>" . lang("domination", "tooltip") . "</span><br />";
-            $hydraulic        = "<span class='socket-hydraulic q0'>" . lang("hydraulic", "tooltip") . "</span><br />";
-            $primordial       = "<span class='socket-primordial q0'>" . lang("primordial", "tooltip") . "</span><br />";
-            $tinker           = "<span class='socket-tinker q0'>" . lang("tinker", "tooltip") . "</span><br />";
-            $relic_iron       = "<span class='socket-relic-iron q0'>" . lang("relic-iron", "tooltip") . "</span><br />";
-            $relic_blood      = "<span class='socket-relic-blood q0'>" . lang("relic-blood", "tooltip") . "</span><br />";
-            $relic_shadow     = "<span class='socket-relic-shadow q0'>" . lang("relic-shadow", "tooltip") . "</span><br />";
-            $relic_fel        = "<span class='socket-relic-fel q0'>" . lang("relic-fel", "tooltip") . "</span><br />";
-            $relic_arcane     = "<span class='socket-relic-arcane q0'>" . lang("relic-arcane", "tooltip") . "</span><br />";
-            $relic_frost      = "<span class='socket-relic-frost q0'>" . lang("relic-frost", "tooltip") . "</span><br />";
-            $relic_fire       = "<span class='socket-relic-fire q0'>" . lang("relic-fire", "tooltip") . "</span><br />";
-            $relic_water      = "<span class='socket-relic-water q0'>" . lang("relic-water", "tooltip") . "</span><br />";
-            $relic_life       = "<span class='socket-relic-life q0'>" . lang("relic-life", "tooltip") . "</span><br />";
-            $relic_storm      = "<span class='socket-relic-storm q0'>" . lang("relic-storm", "tooltip") . "</span><br />";
-            $relic_holy       = "<span class='socket-relic-holy q0'>" . lang("relic-holy", "tooltip") . "</span><br />";
-            $red_punchcard    = "<span class='socket-red q0'>" . lang("red_punchcard", "tooltip") . "</span><br />";
-            $yellow_punchcard = "<span class='socket-yellow q0'>" . lang("yellow_punchcard", "tooltip") . "</span><br />";
-            $blue_punchcard   = "<span class='socket-blue q0'>" . lang("blue_punchcard", "tooltip") . "</span><br />";
-
-            for ($i = 1; $i < 3; $i++) {
-                $output .= match ($item['socketColor_' . $i]) {
-                    1 => $meta,
-                    2 => $red,
-                    4 => $yellow,
-                    8 => $blue,
-                    14 => $prismatic,
-                    16 => $hydraulic,
-                    32 => $cogwheel,
-                    64 => $relic_iron,
-                    128 => $relic_blood,
-                    256 => $relic_shadow,
-                    512 => $relic_fel,
-                    1024 => $relic_arcane,
-                    2048 => $relic_frost,
-                    4096 => $relic_fire,
-                    8192 => $relic_water,
-                    16384 => $relic_life,
-                    32768 => $relic_storm,
-                    65536 => $relic_holy,
-                    131072 => $red_punchcard,
-                    262144 => $yellow_punchcard,
-                    524288 => $blue_punchcard,
-                    1048576 => $domination,
-                    4194304 => $tinker,
-                    8388608 => $primordial,
-                };
-            }
-
-            return $output;
-        } else {
+        if (!array_key_exists("socketColor_1", $item)) {
             return false;
         }
+
+        $sockets = [
+            1 => "meta",
+            2 => "red",
+            4 => "yellow",
+            8 => "blue",
+            14 => "prismatic",
+            16 => "hydraulic",
+            32 => "cogwheel",
+            64 => "relic-iron",
+            128 => "relic-blood",
+            256 => "relic-shadow",
+            512 => "relic-fel",
+            1024 => "relic-arcane",
+            2048 => "relic-frost",
+            4096 => "relic-fire",
+            8192 => "relic-water",
+            16384 => "relic-life",
+            32768 => "relic-storm",
+            65536 => "relic-holy",
+            131072 => "red-punchcard",
+            262144 => "yellow-punchcard",
+            524288 => "blue-punchcard",
+            1048576 => "domination",
+            4194304 => "tinker",
+            8388608 => "primordial",
+        ];
+
+        $output = "";
+
+        for ($i = 1; $i < 3; $i++) {
+            $color = $item['socketColor_' . $i];
+            if (isset($sockets[$color])) {
+                $output .= "<span class='socket-{$sockets[$color]} q0'>" . lang($sockets[$color], "tooltip") . "</span><br />";
+            }
+        }
+
+        return $output;
     }
 
     /**
