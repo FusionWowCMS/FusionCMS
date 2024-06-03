@@ -453,83 +453,53 @@ class Realms
         $race = $races[$character['race']] ?? null;
 
         $raceId = $character['race'];
-        $faction = null;
-
         $gender = ($character['gender']) ? "f" : "m";
 
-		if($class == "Death knight")
-		{
-			$level = 70;
-			$class = "Deathknight";
-		}
-        else if ($class == "Demon Hunter") {
+        $faction = null;
+
+        $classLevel70 = [
+            "Death knight" => "Deathknight",
+            "Demon Hunter" => "Demonhunter",
+            "Monk" => "Monk"
+        ];
+
+        $raceLevel70 = [
+            "Worgen",
+            "Goblin",
+            "Pandaren",
+            "Dark Iron Dwarf",
+            "Highmountain Tauren",
+            "Lightforged Dranei",
+            "Mag'har Orc",
+            "Mechagnome",
+            "Kul Tiran",
+            "Zandalari Troll",
+            "Vulpera",
+            "Void elf",
+            "Dracthyr"
+        ];
+
+        $level = $character['level'] < 30 ? 1 : ($character['level'] < 65 ? 60 : 70); // If character is below 30, use lvl 1 image below 65 use lvl 60 image and +65 use lvl70 image
+
+        if (in_array($race, $raceLevel70)) {
             $level = 70;
-            $class = "Demonhunter";
-		}
-		else if($class == "Monk")
-		{
-			$level = 70;
-		}
-		else
-		{
-			// If character is below 30, use lv 1 image
-			if($character['level'] < 30)
-			{
-				$level = 1;
-			}
-
-			// If character is below 65, use lv 60 image
-			elseif($character['level'] < 65)
-			{
-				$level = 60;
-			}
-
-			// 65+, use lvl70 image
-			else
-			{
-				$level = 70;
-			}
-		}
-
-		if($race == "Pandaren")
-		{
-			$level = 70;
-			$class = $class == "Monk" ? "Monk" : null;
-
-			if ($raceId == 24)
-			    $faction = 'n';
-			else if ($raceId == 25)
-			    $faction = 'a';
-			else if ($raceId == 26)
-			    $faction = 'h';
-		}
-		else if($race == "Dracthyr")
-		{
-			$level = 70;
-			$class = null;
-
-			if ($raceId == 52)
-			    $faction = 'a';
-			else if ($raceId == 70)
-			    $faction = 'h';
-		}
-		else if($race == "Worgen" || $race == "Goblin" || $race == "Dark Iron Dwarf" || $race == "Highmountain Tauren" || $race == "Lightforged Dranei" ||
-		        $race == "Mag'har Orc" || $race == "Mechagnome" || $race == "Kul Tiran" || $race == "Zandalari Troll" || $race == "Vulpera" || $race == "Void elf")
-		{
-			$level = 70;
-			$class = null;
-		}
-
-        if (in_array($race, array("Blood elf", "Night elf", "Void elf", "Zandalari Troll", "Kul Tiran", "Mag'har Orc", "Lightforged Dranei", "Highmountain Tauren", "Dark Iron Dwarf"))) {
-            $race = preg_replace("/ /", "", $race);
+            $class = null;
         }
 
+        if (array_key_exists($class, $classLevel70)) {
+            $level = 70;
+            $class = $classLevel70[$class];
+        }
+
+        if ($race == "Pandaren") {
+            $faction = ($raceId == 24) ? 'n' : (($raceId == 25) ? 'a' : 'h');
+        } elseif ($race == "Dracthyr") {
+            $faction = ($raceId == 52) ? 'a' : 'h';
+        }
+
+        $race = preg_replace("/ /", "", $race);
         $file = ($class ? $class . "-" : '') . strtolower($race) . "-" . $gender . "-" . $level . ($faction ? "-" . $faction : '');
 
-        if (!file_exists("application/images/avatars/" . $file . ".gif")) {
-            return "default";
-        } else {
-            return $file;
-        }
+        return file_exists('application/images/avatars/' . $file . '.gif') ? $file : 'default';
     }
 }
