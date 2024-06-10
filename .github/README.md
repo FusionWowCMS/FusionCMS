@@ -50,6 +50,22 @@ its ease of use and development, safe and secure codebase and dedication to simp
 > [!IMPORTANT]
 > Read the [Security Tips](SECURITY.md).
 
+### Supported emulators
+
+| Emulator                                 | Status                                                                                                           |
+|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| TrinityCore old base                     | ✅ |
+| TrinityCore SRP6                         | ✅ |
+| TrinityCore SRP6 v2                      | ✅ |
+| TrinityCore Classic (TBC, Wotlk, Cata)   | ✅ |
+| Skyfire                                  | ✅ |
+| AzerothCore old base                     | ✅ |
+| AzerothCore SRP6                         | ✅ |
+| Cmangos                                  | ✅ |
+| Vmangos                                  | ✅ |
+| Mangos one - two - three                 | ✅ |
+| OregonCore                               | ✅ |
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any
