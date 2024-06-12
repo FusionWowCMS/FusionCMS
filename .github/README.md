@@ -52,8 +52,8 @@ its ease of use and development, safe and secure codebase and dedication to simp
 
 ### Supported emulators
 
-| Emulator                                 | Status                                                                                                           |
-|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Emulator                                 | Status |
+|------------------------------------------|:--------:|
 | TrinityCore old base                     | ✅ |
 | TrinityCore SRP6                         | ✅ |
 | TrinityCore SRP6 v2                      | ✅ |
@@ -65,6 +65,23 @@ its ease of use and development, safe and secure codebase and dedication to simp
 | Vmangos                                  | ✅ |
 | Mangos one - two - three                 | ✅ |
 | OregonCore                               | ✅ |
+
+### Supported expansions
+
+| Emulator                             | Status |
+|--------------------------------------|:--------:|
+| Classic                              | ✅ |
+| TBC                                  | ✅ |
+| Wotlk                                | ✅ |
+| Cataclysm                            | ✅ |
+| Mists of Pandaria                    | ✅ |
+| Warlords of Draenor                  | ✅ |
+| Legion                               | ✅ |
+| Battle For Azeroth                   | ✅ |
+| Shadowlands                          | ✅ |
+| Calssic (TBC , Wotlk, Cataclysm)     | ✅ |
+| Dragonflight                         | ✅ |
+| The War Within                       | ✅ |
 
 ## Contributing
 
