@@ -31,25 +31,6 @@
 FusionCMS is a free, open-source content management system. Server owners all around the world rely upon FusionCMS for
 its ease of use and development, safe and secure codebase and dedication to simplicity.
 
-## Getting Started
-
-### Download
-
-[Latest release](https://github.com/FusionWowCMS/FusionCMS/releases/latest)
-
-### Prerequisites
-
-| Requirements                           | Description                                                                                                           |
-|----------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| PHP 8.1.0 or above                     | (enable Extensions: php_mysqli, php_curl, php_openssl, php_soap, php_mbstring, php_json, php_zip, php_gd and php_gmp) |
-| Apache / Nginx                         | (enable modules: mod_rewrite, mod_headers, mod_expires, mod_deflate, mod_filter)                                      |
-| Pre installed World of Warcraft Server | (with the databases of: Auth, Characters and World)                                                                   |
-| MySQL / Mariadb Server                 | >= 5.6 / 10.3                                                                                                         |
-
-### Security Tips
-> [!IMPORTANT]
-> Read the [Security Tips](SECURITY.md).
-
 ### Supported emulators
 
 | Emulator                                 | Status |
@@ -82,6 +63,25 @@ its ease of use and development, safe and secure codebase and dedication to simp
 | Calssic (TBC , Wotlk, Cataclysm)     | ✅ |
 | Dragonflight                         | ✅ |
 | The War Within                       | ✅ |
+
+## Getting Started
+
+### Download
+
+[Latest release](https://github.com/FusionWowCMS/FusionCMS/releases/latest)
+
+### Prerequisites
+
+| Requirements                           | Description                                                                                                           |
+|----------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| PHP 8.1.0 or above                     | (enable Extensions: php_mysqli, php_curl, php_openssl, php_soap, php_mbstring, php_json, php_zip, php_gd and php_gmp) |
+| Apache / Nginx                         | (enable modules: mod_rewrite, mod_headers, mod_expires, mod_deflate, mod_filter)                                      |
+| Pre installed World of Warcraft Server | (with the databases of: Auth, Characters and World)                                                                   |
+| MySQL / Mariadb Server                 | >= 5.6 / 10.3                                                                                                         |
+
+### Security Tips
+> [!IMPORTANT]
+> Read the [Security Tips](SECURITY.md).
 
 ## Contributing
 
