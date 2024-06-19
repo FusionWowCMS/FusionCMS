@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The zones are exported from Area DBC 11.0.0.54935
+ * The zones are exported from Area DBC 11.0.0.55185
  */
 
 $lang['zones'] = [
@@ -8826,4 +8826,5 @@ $lang['zones'] = [
     15513 => "Pocket Dimension",
     15514 => "Silkwood Grotto",
     15517 => "The Royal Apothecary",
+    15525 => "The Great Sea",
 ];
