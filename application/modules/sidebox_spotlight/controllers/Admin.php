@@ -16,7 +16,7 @@ class Admin extends MX_Controller
 
         parent::__construct();
 
-        requirePermission("canViewAdmin", "sidebox_Spotlight");
+        requirePermission("canViewAdmin", "sidebox_spotlight");
     }
 
     public function index()
