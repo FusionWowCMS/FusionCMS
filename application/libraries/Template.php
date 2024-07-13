@@ -21,9 +21,9 @@ class Template
 {
     private $CI;
     private string $title;
-    private false|string $custom_description;
-    private false|string $custom_keywords;
-    private false|string $custom_page;
+    private bool|string $custom_description;
+    private bool|string $custom_keywords;
+    private bool|string $custom_page;
     public string $theme_path;
     public string $full_theme_path;
     public string $image_path;
@@ -222,10 +222,10 @@ class Template
      * Loads the template
      *
      * @param String $content The page content
-     * @param false|String $css Full path to your css file
-     * @param false|String $js Full path to your js file
+     * @param bool|String $css Full path to your css file
+     * @param bool|String $js Full path to your js file
      */
-    public function view(string $content, false|string $css = false, false|string $js = false)
+    public function view(string $content, bool|string $css = false, bool|string $js = false)
     {
         // Avoid loading the main site in the ACP layout
         if ($this->CI->input->get('is_acp'))
@@ -254,7 +254,7 @@ class Template
             redirect($this->CI->template->page_url . "auth/security");
         }
 
-        $this->CI->output->set_output($output);
+        return $this->CI->output->set_output($output);
     }
 
     /**
@@ -366,11 +366,11 @@ class Template
     /**
      * Gets the header completely loaded.
      *
-     * @param false|string $css
-     * @param false|string $js
+     * @param bool|string $css
+     * @param bool|string $js
      * @return mixed
      */
-    private function getHeader(false|string $css = false, false|string $js = false): mixed
+    private function getHeader(bool|string $css = false, bool|string $js = false): mixed
     {
         header('X-XSS-Protection: 1; mode=block');
         header('X-Frame-Options: SAMEORIGIN');
@@ -559,11 +559,11 @@ class Template
      * @param String $title
      * @param String $body
      * @param Boolean $full
-     * @param false|string $css
-     * @param false|string $js
+     * @param bool|string $css
+     * @param bool|string $js
      * @return String
      */
-    public function box(string $title, string $body, bool $full = false, false|string $css = false, false|string $js = false): string
+    public function box(string $title, string $body, bool $full = false, bool|string $css = false, bool|string $js = false): string
     {
         $data = array(
             "module" => "default",
@@ -595,7 +595,7 @@ class Template
         $links = $this->CI->cms_model->getLinks($side);
         $moduleName = $this->getModuleName();
 
-        foreach ((array) $links as $item)
+        foreach ($links as $item)
         {
             if ($item['permission'] && !hasViewPermission($item['permission'], "--MENU--"))
                 continue;
@@ -603,6 +603,17 @@ class Template
             // Xss protect out names
             $item['name']   = $this->format(langColumn($item['name']), false, false);
             $item['active'] = false;
+
+            // Hard coded PM count
+            if($item['link'] == "messages")
+            {
+                $count = $this->CI->cms_model->getMessagesCount();
+
+                if($count > 0)
+                {
+                    $item['name'] .= " <b>(".$count.")</b>";
+                }
+            }
 
             if (!preg_match("/^\/|[a-z][a-z0-9+\-.]*:/i", $item['link']))
             {
@@ -686,9 +697,9 @@ class Template
     /**
      * Show an error message
      *
-     * @param false|String $error
+     * @param bool|String $error
      */
-    public function showError(false|string $error = false)
+    public function showError(bool|string $error = false)
     {
         $message = $this->loadPage("error.tpl", [
             'module' => 'errors',

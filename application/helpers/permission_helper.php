@@ -4,11 +4,11 @@
  * Check if a user has permission to do a certain task
  *
  * @param String $permissionName
- * @param false|String $moduleName
- * @param false|Int $userId
+ * @param bool|String $moduleName
+ * @param bool|Int $userId
  * @return Boolean
  */
-function hasPermission(string $permissionName, false|string $moduleName = false, false|int $userId = false): bool
+function hasPermission(string $permissionName, bool|string $moduleName = false, bool|int $userId = false): bool
 {
     static $CI;
 
@@ -44,7 +44,7 @@ function hasViewPermission(string $permissionName, string $moduleName): bool|nul
  * @param false|String $moduleName
  * @return Boolean
  */
-function requirePermission(string $permissionName, false|string $moduleName = false): bool
+function requirePermission(string $permissionName, bool|string $moduleName = false): bool
 {
     static $CI;
 

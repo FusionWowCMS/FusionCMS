@@ -252,11 +252,11 @@ class External_account_model extends CI_Model
     /**
      * Get the rank
      *
-     * @param false|String $value
-     * @param Boolean $isUsername
+     * @param bool|String $value
+     * @param bool $isUsername
      * @return int
      */
-    public function getRank(false|string $value = false, bool $isUsername = false)
+    public function getRank(bool|string $value = false, bool $isUsername = false): int
     {
         $this->connect();
 
@@ -287,7 +287,7 @@ class External_account_model extends CI_Model
      * @param String $username
      * @return Boolean
      */
-    public function usernameExists(string $username)
+    public function usernameExists(string $username): bool
     {
         $this->connect();
 
@@ -305,7 +305,7 @@ class External_account_model extends CI_Model
      *
      * @return Int
      */
-    public function getAccountCount()
+    public function getAccountCount(): int
     {
         $this->connect();
 
@@ -318,10 +318,10 @@ class External_account_model extends CI_Model
     /**
      * Check if an user id exists
      *
-     * @param  Int $id
-     * @return Boolean
+     * @param int $id
+     * @return bool
      */
-    public function userExists($id)
+    public function userExists(int $id): bool
     {
         $this->connect();
 
@@ -337,10 +337,10 @@ class External_account_model extends CI_Model
     /**
      * Check if an email exists
      *
-     * @param String $email
-     * @return Boolean
+     * @param string $email
+     * @return bool
      */
-    public function emailExists(string $email)
+    public function emailExists(string $email): bool
     {
         $this->connect();
 

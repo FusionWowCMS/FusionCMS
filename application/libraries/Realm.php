@@ -94,10 +94,10 @@ class Realm
     /**
      * Get the number of online players
      *
-     * @param false|String $faction horde/alliance
+     * @param bool|String $faction horde/alliance
      * @return Int
      */
-    public function getOnline(false|string $faction = false): int
+    public function getOnline(bool|string $faction = false): int
     {
         if (!$faction) {
             if (!empty($this->online)) {
@@ -144,10 +144,10 @@ class Realm
     /**
      * Get the number of characters that belongs to a certain account
      *
-     * @param false|Int $account
+     * @param bool|Int $account
      * @return Int
      */
-    public function getCharacterCount(false|int $account = false): int
+    public function getCharacterCount(bool|int $account = false): int
     {
         // Default to the current user
         if (!$account) {
@@ -173,10 +173,10 @@ class Realm
     /**
      * Get the percentage of online/cap
      *
-     * @param false|String $faction horde/alliance
+     * @param bool|String $faction horde/alliance
      * @return Int
      */
-    public function getPercentage(false|string $faction = false): int
+    public function getPercentage(bool|string $faction = false): int
     {
         $online = $faction ? $this->getOnline($faction) : $this->getOnline();
         $cap = $faction ? $this->getOnline() : $this->getCap();

@@ -33,10 +33,10 @@ class Acl
      * Require the user to have a specific permission
      *
      * @param String $permissionName
-     * @param false|String $moduleName
+     * @param bool|String $moduleName
      * @return bool
      */
-    public function requirePermission(string $permissionName, false|string $moduleName = false): bool
+    public function requirePermission(string $permissionName, bool|string $moduleName = false): bool
     {
         if (!$this->hasPermission($permissionName, $moduleName)) {
             $this->CI->template->showError(lang("permission_denied", "error"));
@@ -79,11 +79,11 @@ class Acl
      * Check if the user has a specific permission
      *
      * @param String $permissionName
-     * @param false|String $moduleName
-     * @param false|Int $userId
+     * @param bool|String $moduleName
+     * @param bool|Int $userId
      * @return Boolean
      */
-    public function hasPermission(string $permissionName, false|string $moduleName = false, false|int $userId = false): bool
+    public function hasPermission(string $permissionName, bool|string $moduleName = false, bool|int $userId = false): bool
     {
         // SKIP! No permission required
         if(!$permissionName)

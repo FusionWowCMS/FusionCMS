@@ -222,10 +222,10 @@ class Administrator
      * Loads the template
      *
      * @param String $content The page content
-     * @param false|String $css Full path to your css file
-     * @param false|String $js Full path to your js file
+     * @param bool|String $css Full path to your css file
+     * @param bool|String $js Full path to your js file
      */
-    public function view(string $content, false|string $css = false, false|string $js = false)
+    public function view(string $content, bool|string $css = false, bool|string $js = false)
     {
         if ($this->CI->input->is_ajax_request() && isset($_GET['is_json_ajax']) && $_GET['is_json_ajax'] == 1) {
             $array = array(
@@ -235,7 +235,7 @@ class Administrator
                 "css" => $css
             );
 
-            die(json_encode($array));
+            return json_encode($array);
         }
 
         $menu = $this->menu;
@@ -279,7 +279,7 @@ class Administrator
         // Load the main template
         $output = $this->CI->smarty->view($this->theme_path . "template.tpl", $data, true);
 
-        $this->CI->output->set_output($output);
+        return $this->CI->output->set_output($output);
     }
 
     /**
@@ -288,11 +288,11 @@ class Administrator
      * @param String $title
      * @param String $body
      * @param Boolean $full
-     * @param false|String $css
-     * @param false|String $js
+     * @param bool|String $css
+     * @param bool|String $js
      * @return String
      */
-    public function box(string $title, string $body, bool $full = false, false|string $css = false, false|string $js = false)
+    public function box(string $title, string $body, bool $full = false, bool|string $css = false, bool|string $js = false)
     {
         $data = array(
             "headline" => $title,

@@ -290,10 +290,10 @@ class User
     /**
      * Check if the account is banned or active
      *
-     * @param false|int $id
+     * @param bool|int $id
      * @return String
      */
-    public function getAccountStatus(false|int $id = false): string
+    public function getAccountStatus(bool|int $id = false): string
     {
         if (!$id) {
             $id = $this->id;
@@ -315,20 +315,20 @@ class User
     /**
      * Get the nickname
      *
-     * @param false|Int $id
+     * @param bool|Int $id
      * @return string|null
      */
-    public function getNickname(false|int $id = false): string | null
+    public function getNickname(bool|int $id = false): string | null
     {
         return $this->CI->internal_user_model->getNickname($id);
     }
 
     /**
      * Get the user's avatar
-     * @param false|Int $id
+     * @param bool|Int $id
      * @return string
      */
-    public function getAvatar(false|int $id = false): string
+    public function getAvatar(bool|int $id = false): string
     {
         return base_url() . basename(APPPATH) . "/images/avatar/". $this->CI->internal_user_model->getAvatar($id);
     }
@@ -336,7 +336,7 @@ class User
     /**
      * Get the user's avatar id
      */
-    public function getAvatarId($id = false)
+    public function getAvatarId(bool|int $id = false)
     {
         return $this->CI->internal_user_model->getAvatarId($id);
     }
@@ -628,12 +628,12 @@ class User
     }
 
     /**
-	 * Set the avatar id of the user
-	 * @param $newAvatarId
-	 */
-	public function setAvatar($newAvatarId): void
+     * Set the avatar id of the user
+     * @param $newAvatarId
+     */
+    public function setAvatar($newAvatarId): void
     {
-		$this->avatarId = $newAvatarId;
-		$this->CI->internal_user_model->setAvatar($this->id, $newAvatarId);
-	}
+        $this->avatarId = $newAvatarId;
+        $this->CI->internal_user_model->setAvatar($this->id, $newAvatarId);
+    }
 }
