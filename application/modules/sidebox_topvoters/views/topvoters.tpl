@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="{$css}">
+<script type="text/javascript">document.querySelector('#topvoters-css') || document.head.appendChild(Object.assign(document.createElement('link'), { id: 'topvoters-css', rel: 'stylesheet', type: 'text/css', href: '{$css}' }));</script>
+
 <section class="sidebox-topvoters is-widget">
     <div glow=""></div>
     <div class="topvoters-row">

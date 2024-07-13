@@ -27,7 +27,7 @@ class Topvoters extends MX_Controller
                 'url'      => $this->template->page_url,
                 'module'   => 'sidebox_topvoters',
                 'accounts' => $this->topvoters_model->getThisWeekAccounts($this->config->item("limit")),
-                'css'      => APPPATH . 'modules/sidebox_topvoters/css/topvoters.css'
+                'css'      => base_url(basename(APPPATH) . '/modules/sidebox_topvoters/css/topvoters.css')
             ];
 
             $page = $this->template->loadPage("topvoters.tpl", $data);
