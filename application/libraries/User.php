@@ -290,10 +290,10 @@ class User
     /**
      * Check if the account is banned or active
      *
-     * @param bool $id
+     * @param false|int $id
      * @return String
      */
-    public function getAccountStatus(bool $id = false): string
+    public function getAccountStatus(false|int $id = false): string
     {
         if (!$id) {
             $id = $this->id;
