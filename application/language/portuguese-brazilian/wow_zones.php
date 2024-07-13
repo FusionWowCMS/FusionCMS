@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The zones are exported from Area DBC 11.0.0.55185
+ * The zones are exported from Area DBC 11.0.2.55522
  */
 
 $lang['zones'] = [
@@ -8827,4 +8827,14 @@ $lang['zones'] = [
     15514 => "Silkwood Grotto",
     15517 => "The Royal Apothecary",
     15525 => "The Great Sea",
+    15544 => "Tenir's Ascent",
+    15545 => "Mereldar",
+    15546 => "Veneration Grounds",
+    15547 => "Beledar's Bounty",
+    15548 => "The Hungering Pool",
+    15549 => "Dayspring Fields",
+    15550 => "Stagnant Mire",
+    15551 => "The Fangs",
+    15552 => "The Undersea",
+    15667 => "Delves",
 ];
