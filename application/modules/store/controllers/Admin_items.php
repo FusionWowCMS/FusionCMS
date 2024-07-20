@@ -1,5 +1,6 @@
 <?php
 
+use App\Config\Services;
 use MX\MX_Controller;
 
 // todo: NO PERMISSIONS!
@@ -274,7 +275,8 @@ class Admin_items extends MX_Controller
             $data["tooltip"] = 1;
             $data["quality"] = $item_data['Quality'];
             if (!preg_match("/inv_.+/i", $data["icon"])) {
-                $data["icon"] = file_get_contents($this->template->page_url . "icon/get/" . $data["realm"] . "/" . $data["itemid"]);
+                $response = Services::curlrequest()->get($this->template->page_url . "icon/get/" . $data["realm"] . "/" . $data["itemid"]);
+                $data["icon"] = $response->getBody();
             }
         }
 
