@@ -7,11 +7,11 @@ class Icon extends MX_Controller
     /**
      * Get an item's icon display name
      *
-     * @param false|Int $realm
-     * @param false|Int $item
+     * @param bool|Int $realm
+     * @param bool|Int $item
      * @return String
      */
-    public function get(false|int $realm = false, false|int $item = false): string
+    public function get(bool|int $realm = false, bool|int $item = false): string
     {
         // Check if item ID and realm is valid
         if ($item && is_numeric($item) && $realm) {
