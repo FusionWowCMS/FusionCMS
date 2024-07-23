@@ -34,7 +34,7 @@ const Ajax = {
 				if (!name)
                     return;
 
-                $("#realm_field").append("<div class=\"realmHeader\"><a onclick='Ajax.Realms.show(this);'><img class='realmExtend' src='" + Config.url + "application/modules/install/images/icons/ic_plus.png' /> " + name + "</a> <img class='realmDelete' src='" + Config.url + "application/modules/install/images/icons/ic_delete.png' onclick='Ajax.Realms.deleteRealm(this);' /></div><div class='realmForm' style='display: none;'></div>");
+                $("#realm_field").append("<div class=\"realmHeader\" data-active=\"true\"><a onclick='Ajax.Realms.show(this);'><img class='realmExtend' src='" + Config.url + "application/modules/install/images/icons/ic_minus.png' /> " + name + "</a> <img class='realmDelete' src='" + Config.url + "application/modules/install/images/icons/ic_delete.png' onclick='Ajax.Realms.deleteRealm(this);' /></div><div class='realmForm'></div>");
                 $("#realm_field .realmForm").html($("#loader").html()).find('#realmName').val(name);
                 UI.Tooltip.refresh();
             });
