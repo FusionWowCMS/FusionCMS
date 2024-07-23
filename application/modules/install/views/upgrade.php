@@ -277,7 +277,7 @@
 						<a href="https://github.com/FusionWowCMS/Themes" target="_blank">{{themes}}</a> -
 						<a href="https://github.com/FusionWowCMS/Themes/issues" target="_blank">{{support}}</a>
 						<p>
-							{{copyright}}
+                            © <?= date('Y') ?> FusionCMS. {{copyright}}
 						</p>
 					</div>
 				</div>
