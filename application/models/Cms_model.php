@@ -304,8 +304,25 @@ class Cms_model extends CI_Model
         }
     }
 
+    /**
+     * Get the number of unread messages
+     * @return int
+     */
     public function getMessagesCount(): int
     {
+        $builder = $this->db->table('private_message');
+        $builder->select('COUNT(*) as `total`');
+        $builder->where('user_id', $this->user->getId());
+        $builder->where('read', 0);
+        $query = $builder->get();
+
+        if($query->getNumRows() > 0)
+        {
+            $result = $query->getResultArray();
+
+            return $result[0]['total'];
+        }
+
         return 0;
     }
 }

@@ -1,0 +1,28 @@
+#pm_spot {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#pm_username_autocomplete {
+    position:absolute;
+    width:450px;
+    color:#666;
+    background-color:#fff;
+    border:1px solid #999;
+    border-radius:2px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    margin-left:5px;
+    margin-top:-7px;
+    display:none;
+}
+
+#pm_username_autocomplete a {
+    display:block;
+    padding:8px;
+    border-bottom:1px solid #ccc;
+}
+
+#pm_username_autocomplete a:last-child {
+    border-bottom:none;
+}

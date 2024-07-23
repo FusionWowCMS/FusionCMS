@@ -1,0 +1,30 @@
+{
+    "name": "Private messages",
+    "description": "Allows users to communicate privately with in your site",
+	"version": "2.1.0",
+	"date": "2024-07-23",
+    "author": {
+        "name": "FusionCMS",
+        "website": "https://github.com/FusionWowCMS/FusionCMS"
+    },
+
+    "permissions": {
+        "view": {"default" : true, "description": "View the private messages" },
+        "reply": {"default" : true, "description": "Respond to a private message" },
+        "compose": {"default" : true, "description": "Compose a new private message" }
+    },
+
+    "roles": {
+        "use": {
+            "description": "Use the private messaging system",
+
+            "permissions": {
+                "view": true,
+                "reply": true,
+                "compose": true
+            }
+        }
+    },
+    
+    "enabled": true
+}

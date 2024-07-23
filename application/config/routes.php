@@ -102,6 +102,12 @@ $route['news/comments/add/(:num)'] = "news/comments/add/$1";
 // Profile
 $route['profile/(:num)'] = "profile/index/$1";
 
+// Messages
+$route['messages/page/(:any)'] = "Messages/index/$1";
+$route['messages/page/(:num)/(:num)'] = "Messages/index/$1/$2";
+$route['messages/read/(:num)'] = "Messages/Read/index/$1";
+$route['messages/create/(:num)'] = "Messages/Create/index/$1";
+
 // Armory
 $route['character/(:num)'] = "character/index/$1";
 $route['character/(:num)/(:any)'] = "character/index/$1/$2";

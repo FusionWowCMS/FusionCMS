@@ -1,0 +1,16 @@
+#messages_pagination a {
+    color:#666;
+    margin:5px;
+}
+
+#messages_pagination a:hover {
+    color:#000000;
+    text-decoration:none;
+}
+
+#messages_pagination {
+    text-align:center;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:10px;
+}

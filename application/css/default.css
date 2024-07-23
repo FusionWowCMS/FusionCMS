@@ -414,6 +414,10 @@ input[type="radio"] {
     clear: both;
 }
 
+.tox-statusbar__branding {
+    display: none;
+}
+
 
 /* Characters remaining counter */
 

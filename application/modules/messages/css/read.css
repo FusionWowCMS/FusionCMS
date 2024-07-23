@@ -1,0 +1,4 @@
+.card-title {
+    display: flex;
+    justify-content: space-between;
+}
