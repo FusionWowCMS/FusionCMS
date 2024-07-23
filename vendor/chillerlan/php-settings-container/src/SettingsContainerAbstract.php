@@ -11,15 +11,17 @@ declare(strict_types=1);
 
 namespace chillerlan\Settings;
 
-use InvalidArgumentException, ReflectionClass, ReflectionProperty;
-use function array_keys, get_object_vars, is_object, json_decode,
-	json_encode, method_exists, property_exists, serialize, unserialize;
+use InvalidArgumentException, JsonException, ReflectionClass, ReflectionProperty;
+use function array_keys, get_object_vars, is_object, json_decode, json_encode,
+	json_last_error_msg, method_exists, property_exists, serialize, unserialize;
 use const JSON_THROW_ON_ERROR;
 
 abstract class SettingsContainerAbstract implements SettingsContainerInterface{
 
 	/**
 	 * SettingsContainerAbstract constructor.
+	 *
+	 * @phpstan-param array<string, mixed> $properties
 	 */
 	public function __construct(iterable|null $properties = null){
 
@@ -146,13 +148,20 @@ abstract class SettingsContainerAbstract implements SettingsContainerInterface{
 	 * @inheritdoc
 	 */
 	public function toJSON(int|null $jsonOptions = null):string{
-		return json_encode($this, ($jsonOptions ?? 0));
+		$json = json_encode($this, ($jsonOptions ?? 0));
+
+		if($json === false){
+			throw new JsonException(json_last_error_msg());
+		}
+
+		return $json;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
 	public function fromJSON(string $json):static{
+		/** @phpstan-var array<string, mixed> $data */
 		$data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
 		return $this->fromIterable($data);
@@ -160,6 +169,7 @@ abstract class SettingsContainerAbstract implements SettingsContainerInterface{
 
 	/**
 	 * @inheritdoc
+	 * @return array<string, mixed>
 	 */
 	public function jsonSerialize():array{
 		return $this->toArray();
@@ -228,6 +238,8 @@ abstract class SettingsContainerAbstract implements SettingsContainerInterface{
 	 *
 	 * @inheritdoc
 	 * @see \chillerlan\Settings\SettingsContainerInterface::fromIterable()
+	 *
+	 * @param array<string, mixed> $data
 	 */
 	public function __unserialize(array $data):void{
 
