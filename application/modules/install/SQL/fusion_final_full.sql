@@ -112,7 +112,6 @@ INSERT INTO `acl_group_roles` (`group_id`, `role_name`, `module`) VALUES
 (2, '19', '--MENU--'),
 (2, '6', '--MENU--'),
 (2, 'updateAccount', 'ucp'),
-(2, 'use', 'messages'),
 (2, 'use', 'news'),
 (2, 'use', 'sidebox_language_picker'),
 (2, 'use', 'sidebox_poll'),
