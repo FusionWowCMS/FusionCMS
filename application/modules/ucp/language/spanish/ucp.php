@@ -20,6 +20,8 @@ $lang['account_characters'] = "Personajes de la Cuenta";
 $lang['nickname'] = "Apodo";
 $lang['change_nickname'] = "Cambiar Apodo";
 
+$lang['username'] = "Nombre de usuario";
+
 $lang['location'] = "Ubicación";
 $lang['change_location'] = "Cambiar Ubicación";
 

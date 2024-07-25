@@ -25,6 +25,8 @@ $lang['account_characters'] = "Personagens da Conta";
 $lang['nickname'] = "Apelido";
 $lang['change_nickname'] = "Alterar Nome";
 
+$lang['username'] = "Nome de usuário";
+
 $lang['location'] = "Localização";
 $lang['change_location'] = "Alterar Localização";
 

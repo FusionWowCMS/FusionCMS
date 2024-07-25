@@ -20,7 +20,8 @@ class Ucp extends MX_Controller
         $this->template->setTitle(lang("user_panel", "ucp"));
 
         $data = array(
-            "username" => $this->user->getNickname(),
+            "username" => $this->user->getUsername(),
+            "nickname" => $this->user->getNickname(),
             "vp" => $this->internal_user_model->getVp(),
             "dp" => $this->internal_user_model->getDp(),
             "url" => $this->template->page_url,

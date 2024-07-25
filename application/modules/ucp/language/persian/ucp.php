@@ -20,6 +20,8 @@ $lang['account_characters'] = "کاراکترهای حساب";
 $lang['nickname'] = "نام";
 $lang['change_nickname'] = "تغییر نام";
 
+$lang['username'] = "نام کاربری";
+
 $lang['location'] = "منطقه";
 $lang['change_location'] = "تغییر منطقه";
 
