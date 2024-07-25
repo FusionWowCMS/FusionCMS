@@ -1,6 +1,6 @@
 <section id="update_status">
     <div style="text-align:center;margin-bottom:10px;">
-        <i class="fa-duotone fa-spinner fa-pulse"></i>
+        <i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i>
     </div>
 </section>
 

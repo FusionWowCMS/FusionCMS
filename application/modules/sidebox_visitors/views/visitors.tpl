@@ -4,7 +4,7 @@
 		show: function(link)
 		{
 			$(link).parent().fadeOut(100);
-			$("#all_visitors").html('<i class="fa-duotone fa-spinner fa-pulse"></i>').show();
+			$("#all_visitors").html('<i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i>').show();
 
 			$.get(Config.URL + "sidebox_visitors/visitors/getAll", function(data)
 			{
