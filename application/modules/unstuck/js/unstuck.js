@@ -16,8 +16,11 @@ const Unstuck = {
 
         $(`[data-character]`).each(function() {
             const nextElement = $(this).next();
-            if (nextElement.hasClass('sbHolder') || nextElement.hasClass('selectboxit-container')) {
+            const parentElement = $(this).parent();
+            if (nextElement.hasClass('sbHolder')) {
                 nextElement.hide();
+            } else if (parentElement.hasClass('selectboxit-container')) {
+                parentElement.hide();
             } else {
                 $(this).hide();
             }
