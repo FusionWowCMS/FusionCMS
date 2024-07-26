@@ -15,12 +15,26 @@ const Unstuck = {
         const realmId = $('select[id="realm"]').val();
 
         $(`[data-character]`).each(function() {
-            $(this).next().hide();
+            const nextElement = $(this).next();
+            if (nextElement.hasClass('sbHolder') || nextElement.hasClass('selectboxit-container')) {
+                nextElement.hide();
+            } else {
+                $(this).hide();
+            }
         });
-        $(`select[id="character_select_${realmId}"]`).next().show();
+
+        const selectedElement = $(`select[id="character_select_${realmId}"]`);
+
+        const nextSelectedElement = selectedElement.next();
+        if (nextSelectedElement.hasClass('sbHolder') || nextSelectedElement.hasClass('selectboxit-container')) {
+            nextSelectedElement.show();
+        } else {
+            selectedElement.show();
+        }
 
         this.User.realm = realmId;
     },
+
     CharacterChanged: function (selectField, realmId) {
         const selected = $(selectField).find('option:selected');
 
