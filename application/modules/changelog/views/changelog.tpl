@@ -55,32 +55,26 @@
 </div>
 {/if}
 
-{if $changes}
-<div id="changelog">
-<section class="section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-12">
-                   <div class="p-4 shadow rounded">
-					{foreach from=$changes key=k item=change_time}
+<div class="row justify-content-center">
+	{if $changes}
+		<div class="col-lg-12">
+			<div class="p-4 shadow rounded">
+				{foreach from=$changes key=k item=change_time}
 					<h5>{lang("changes_made_on", "changelog")} {$k}</h5>
-						<ul class="list-unstyled">
+					<ul class="list-unstyled">
 						{foreach from=$change_time key=k_type item=change_type}
 							{foreach from=$change_type item=change}
 								<li class="my-2 ms-3">{if hasPermission("canRemoveChange")}<a href="{$url}changelog/remove/{$change.change_id}"><i class="fa-duotone fa-trash"></i></a>{/if}
-								<i class="fa-duotone fa-circle-arrow-right"></i> <span class="fw-bold">{htmlspecialchars($k_type)}</span>: {htmlspecialchars($change.changelog)}</li>
+									<i class="fa-duotone fa-circle-arrow-right"></i> <span class="fw-bold">{htmlspecialchars($k_type)}</span>: {htmlspecialchars($change.changelog)}</li>
 							{/foreach}
 						{/foreach}
-						</ul>
-					{/foreach}
-					</div>
-				</div>
+					</ul>
+				{/foreach}
 			</div>
 		</div>
-		{else}
-			<div id="changelog">
-				<center style="padding:10px;">{lang("no_changes", "changelog")}</center>
-			</div>
-		{/if}
-</section>
+	{else}
+		<div id="changelog">
+			<center style="padding:10px;">{lang("no_changes", "changelog")}</center>
+		</div>
+	{/if}
 </div>
