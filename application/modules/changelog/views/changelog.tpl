@@ -1,6 +1,6 @@
 <div class="row">
 {if hasPermission("canAddChange")}
-<div class="col-lg-3 mb-3">
+<div class="col-lg-12 mb-3">
 	{if hasPermission("canAddChange")}
 		<a href="javascript:void(0)" onClick="$('#category_form').hide();$('#change_form').fadeToggle(150)" class="btn-sm nice_button">{lang("new_change", "changelog")}</a>
 	{/if}
@@ -9,7 +9,7 @@
 		<a href="javascript:void(0)" onClick="$('#change_form').hide();$('#category_form').fadeToggle(150)" class="btn-sm nice_button">{lang("new_category", "changelog")}</a>
 	{/if}
 </div>
-<div class="col-lg-9">
+<div class="col-lg-12">
 	<div id="changelog_add">
 		{if hasPermission("canAddChange")}
 		<form id="change_form" onSubmit="Changelog.addChange(); return false" style="display:none;">
@@ -60,14 +60,14 @@
 <section class="section">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-lg-9">
+				<div class="col-lg-12">
                    <div class="p-4 shadow rounded">
 					{foreach from=$changes key=k item=change_time}
 					<h5>{lang("changes_made_on", "changelog")} {$k}</h5>
 						<ul class="list-unstyled">
 						{foreach from=$change_time key=k_type item=change_type}
 							{foreach from=$change_type item=change}
-								<li class="text-muted my-2 ms-3">{if hasPermission("canRemoveChange")}<a href="{$url}changelog/remove/{$change.change_id}"><i class="fa-duotone fa-trash"></i></a>{/if}
+								<li class="my-2 ms-3">{if hasPermission("canRemoveChange")}<a href="{$url}changelog/remove/{$change.change_id}"><i class="fa-duotone fa-trash"></i></a>{/if}
 								<i class="fa-duotone fa-circle-arrow-right"></i> <span class="fw-bold">{htmlspecialchars($k_type)}</span>: {htmlspecialchars($change.changelog)}</li>
 							{/foreach}
 						{/foreach}
