@@ -13,7 +13,7 @@
 #select_location {
 	width:350px;
 	float:left;
-	background-image:url(../images/map.png);
+	background-image:url(../../../../../modules/teleport/images/map.png);
 	background-repeat:no-repeat;
 	background-position:top left;
 	min-height:195px;
