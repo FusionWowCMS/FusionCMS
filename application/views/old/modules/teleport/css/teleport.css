@@ -42,7 +42,7 @@
 
 .character, .location {
 	padding:10px;
-	height: 38px;
+	height: unset !important;
 }
 
 .character .character_name, .location .location_name {

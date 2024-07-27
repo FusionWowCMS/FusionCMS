@@ -17,10 +17,10 @@
 		initializeTeleport();
 	});
 </script>
-<section id="teleport">
+<form id="teleport">
 	<section id="select_character">
 		<div class="online_realm_button">{lang("select_char", "teleport")}</div>
-		
+
 		{if $total}
 			{foreach from=$characters item=realm}
 				<div class="teleport_realm_divider">{$realm.realmName}</div>
@@ -28,13 +28,13 @@
 					<div class="select_character">
 						<div class="character store_item">
 							<section class="character_buttons">
-								<a href="javascript:void(0)" class="nice_button" onClick="Teleport.selectCharacter(this, {$realm.realmId}, {$character.guid}, '{$character.name}', {$character.money / 10000}, '{$character.race}')">
+								<a href="javascript:void(0);" class="nice_button" onClick="Teleport.selectCharacter(this, {$realm.realmId}, {$character.guid}, '{$character.name}', {$character.money / 10000}, '{$character.race}')">
 									{lang("select", "teleport")}
 								</a>
 							</section>
-			
+
 							<img class="item_icon" width="36" height="36" src="{$url}application/images/avatars/{$character.avatar}.gif" align="absmiddle" data-tip="<img src='{$url}application/images/stats/{$character.class}.gif' align='absbottom'/> {$character.name} (Lv{$character.level})">
-			
+
 							<a class="character_name" data-tip="<img src='{$url}application/images/stats/{$character.class}.gif' align='absbottom'/> {$character.name} (Lv{$character.level})">{$character.name}</a>
 							<br /><img src="{$url}application/images/icons/coins.png" align="absmiddle"> {floor($character.money / 10000)} {lang("gold", "teleport")}
 							<div class="clear"></div>
@@ -43,14 +43,15 @@
 				{/foreach}
 			{/foreach}
 		{else}
-			<center style="padding-top:10px;"><b>{lang("no_chars", "teleport")}</b></center>
+			<p class="text-center"><b>{lang("no_chars", "teleport")}</b></p>
 		{/if}
 	</section>
 	<div class="vertical_divider"></div>
-	<section id="select_location">
+	<section class="location-select" id="select_location">
+		<div class="online_realm_button">{lang("teleport_hub", "teleport")}</div>
 		{if $locations}
 			{foreach from=$locations item=location}
-				<div class="location" data-realm="{$location.realm}" data-faction="{$location.required_faction}">
+				<div class="location-select location" data-realm="{$location.realm}" data-faction="{$location.required_faction}">
 					<section class="location_buttons">
 						<a href="javascript:void(0)" onClick="Teleport.buy({$location.id}, this)" class="nice_button">
 							{if $location.vpCost}
@@ -74,9 +75,9 @@
 				</div>
 			{/foreach}
 		{else}
-			<center style="padding-top:10px;"><b>{lang("no_locations", "teleport")}</b></center>
+			<p class="text-center"><b>{lang("no_locations", "teleport")}</b></p>
 		{/if}
 	</section>
 
 	<div class="clear"></div>
-</section>
+</form>

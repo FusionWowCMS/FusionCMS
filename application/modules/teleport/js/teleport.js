@@ -87,10 +87,14 @@ var Teleport = {
 		$(".item_group").each(function()
 		{
 			$(this).removeClass("item_group").addClass("character-select");
-			$(this).find(".nice_active").removeClass("nice_active").html("Select");
+			$(this).removeClass("item_group").addClass("select_character");
+			$(this).find(".nice_active").removeClass("nice_active").html(lang("select", "teleport"));
 		});
 
 		$(button).parents("tr").removeClass("character-select").addClass("item_group");
+
+		$(button).parents(".select_character").removeClass("select_character").addClass("item_group");
+
 		$(button).addClass("nice_active").html(lang("selected", "teleport"));
 
 		this.hideLocations(function()
@@ -224,6 +228,7 @@ var Teleport = {
 			{
 				$(".item_group").each(function()
 				{
+					$(this).removeClass("item_group").addClass("select_character");
 					$(this).removeClass("item_group").addClass("character-select");
 					$(this).find(".nice_active").removeClass("nice_active").html(lang("select", "teleport"));
 				});
