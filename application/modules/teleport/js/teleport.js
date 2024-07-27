@@ -52,22 +52,37 @@ var Teleport = {
 	{
 		Teleport.Character.initialize(name, guid, gold);
 
-		var factions = {
-			1:1,
-			2:2,
-			3:1,
-			4:1,
-			5:2,
-			6:2,
-			7:1,
-			8:2,
-			9:2,
-			10:2,
-			11:1,
-			22:1
+		const factions = {
+			1: 1,
+			3: 1,
+			4: 1,
+			7: 1,
+			11: 1,
+			22: 1,
+			25: 1,
+			29: 1,
+			30: 1,
+			32: 1,
+			34: 1,
+			37: 1,
+			52: 1,
+			2: 2,
+			5: 2,
+			6: 2,
+			8: 2,
+			9: 2,
+			10: 2,
+			26: 2,
+			27: 2,
+			28: 2,
+			31: 2,
+			35: 2,
+			36: 2,
+			70: 2,
+			24: 3,
 		};
 
-		var race = factions[race];
+		const faction = factions[race];
 
 		$(".item_group").each(function()
 		{
@@ -80,7 +95,7 @@ var Teleport = {
 
 		this.hideLocations(function()
 		{
-			Teleport.showLocations(realm, race);
+			Teleport.showLocations(realm, faction);
 		});
 	},
 

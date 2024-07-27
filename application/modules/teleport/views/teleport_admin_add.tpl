@@ -146,6 +146,7 @@
 			<option value="0">Any</option>
 			<option value="1">Alliance</option>
 			<option value="2">Horde</option>
+			<option value="3">Neutral</option>
 		</select>
 		</div>
 		</div>

@@ -157,6 +157,7 @@
 			<option value="0" {if $teleport_location.required_faction == 0}selected{/if}>Any</option>
 			<option value="1" {if $teleport_location.required_faction == 1}selected{/if}>Alliance</option>
 			<option value="2" {if $teleport_location.required_faction == 2}selected{/if}>Horde</option>
+			<option value="3" {if $teleport_location.required_faction == 3}selected{/if}>Neutral</option>
 		</select>
 		</div>
 		</div>
