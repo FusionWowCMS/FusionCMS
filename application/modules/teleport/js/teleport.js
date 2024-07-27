@@ -105,41 +105,41 @@ var Teleport = {
 		setTimeout(callback, 220);
 	},
 	
-	showLocations: function(realm, race)
+	showLocations: function(realm, factionId)
 	{
-		var field = $(".location-select[data-realm='" + realm + "']:first");
+		const field = $(".location-select[data-realm='" + realm + "']:first");
 
-		var faction = field.attr("data-faction");
+		const faction = field.attr("data-faction");
 
-		if(faction == 0 || faction == race)
+		if(faction == 0 || faction == factionId)
 		{
 			field.show(100, function()
 			{
-				Teleport.showLocation(this, realm, race);
+				Teleport.showLocation(this, realm, factionId);
 			});
 		}
 		else
 		{
-			Teleport.showLocation(field, realm, race);
+			Teleport.showLocation(field, realm, factionId);
 		}
 	},
 
-	showLocation: function(field, realm, race)
+	showLocation: function(field, realm, faction)
 	{
 		try
 		{
-			var nextField = $(field).next(".location-select[data-realm='" + realm + "']");
+			const nextField = $(field).next(".location-select[data-realm='" + realm + "']");
 
-			if(nextField.attr("data-faction") == 0 || nextField.attr("data-faction") == race)
+			if(nextField.attr("data-faction") == 0 || nextField.attr("data-faction") == faction)
 			{
 				nextField.show(100, function()
 				{
-					Teleport.showLocation(this, realm, race);
+					Teleport.showLocation(this, realm, faction);
 				});
 			}
 			else
 			{
-				Teleport.showLocation(nextField[0], realm, race);
+				Teleport.showLocation(nextField[0], realm, faction);
 			}
 		}
 		catch(error)
@@ -150,7 +150,7 @@ var Teleport = {
 
 	buy: function(id, button)
 	{
-		var price = $(button).html().replace(/\<.*\/?\>/g, ""),
+		let price = $(button).html().replace(/\<.*\/?\>/g, ""),
 			canTeleport = false;
 
 		if(freeRegex.test(price))
