@@ -57,9 +57,8 @@ class Skyfire implements Emulator
             "last_ip"       => "last_ip",
             "last_login"    => "last_login",
             "expansion"     => "expansion",
-            "v"             => "v",
-            "s"             => "s",
-            "sessionkey"    => "sessionkey",
+            'salt'          => 'salt',
+            'verifier'      => 'verifier',
         ],
 
         "account_access" => [
