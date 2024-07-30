@@ -5,6 +5,12 @@ use chillerlan\QRCode\QRCode;
 class GoogleAuthenticator
 {
     protected int $_codeLength = 6;
+    private $CI;
+
+    public function __construct()
+    {
+        $this->CI = &get_instance();
+    }
 
     /**
      * Create new secret.
@@ -17,7 +23,7 @@ class GoogleAuthenticator
      */
     public function createSecret(int $secretLength = 16): string
     {
-        $validChars = $this->_getBase32LookupTable();
+        $validChars = $this->getBase32LookupTable();
 
         // Valid secret lengths are 80 to 640 bits
         if ($secretLength < 16 || $secretLength > 128) {
@@ -47,6 +53,29 @@ class GoogleAuthenticator
     }
 
     /**
+     * Create new Totp Aes.
+     */
+    public function createTotpAes(string $secret): string
+    {
+        $decoded = $this->Base32Decode($secret);
+
+        $masterKey = $this->CI->config->item('TOTPMasterSecret');
+
+        $IV_SIZE_BYTES = 16;
+        $TAG_SIZE_BYTES = 16;
+        if (strlen($decoded) + $IV_SIZE_BYTES + $TAG_SIZE_BYTES > 128) {
+            die('no');
+            //die('The provided two-factor authentication secret is too long.');
+        }
+
+        if ($masterKey) {
+            $secret = openssl_encrypt($secret, 'aes-256-gcm', $masterKey, OPENSSL_RAW_DATA, random_bytes($IV_SIZE_BYTES), $tag);
+        }
+
+        return $secret;
+    }
+
+    /**
      * Calculate the code, with given secret and point in time.
      *
      * @param string $secret
@@ -60,7 +89,7 @@ class GoogleAuthenticator
             $timeSlice = floor(time() / 30);
         }
 
-        $secretKey = $this->_base32Decode($secret);
+        $secretKey = $this->Base32Decode($secret);
 
         // Pack time into binary string
         $time = chr(0).chr(0).chr(0).chr(0).pack('N*', $timeSlice);
@@ -80,6 +109,27 @@ class GoogleAuthenticator
         $modulo = pow(10, $this->_codeLength);
 
         return str_pad($value % $modulo, $this->_codeLength, '0', STR_PAD_LEFT);
+    }
+
+    function generateTOTPCode($key)
+    {
+        // Assuming $key is the encrypted data
+        $timestamp = floor(time() / 30);
+        $binaryTimestamp = pack('N*', 0) . pack('N*', $timestamp);
+
+        // Generate HMAC-SHA1 hash of the timestamp using the key
+        $hash = hash_hmac('sha1', $binaryTimestamp, $key, true);
+
+        // Extract a 4-byte dynamic binary code from the hash
+        $offset = ord($hash[19]) & 0xf;
+        $code = (
+                ((ord($hash[$offset + 0]) & 0x7f) << 24) |
+                ((ord($hash[$offset + 1]) & 0xff) << 16) |
+                ((ord($hash[$offset + 2]) & 0xff) << 8) |
+                (ord($hash[$offset + 3]) & 0xff)
+            ) % 1000000;
+
+        return str_pad($code, 6, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -108,18 +158,23 @@ class GoogleAuthenticator
      */
     public function verifyCode(string $secret, string $code, int $discrepancy = 1, int $currentTimeSlice = null): bool
     {
-        if ($currentTimeSlice === null) {
-            $currentTimeSlice = floor(time() / 30);
-        }
+        if ($this->CI->config->item('totp_secret_name') == 'totp_secret') {
+            $expectedCode = $this->generateTOTPCode($secret);
+            return hash_equals($expectedCode, $code);
+        } else {
+            if ($currentTimeSlice === null) {
+                $currentTimeSlice = floor(time() / 30);
+            }
 
-        if (strlen($code) != 6) {
-            return false;
-        }
+            if (strlen($code) != 6) {
+                return false;
+            }
 
-        for ($i = -$discrepancy; $i <= $discrepancy; ++$i) {
-            $calculatedCode = $this->getCode($secret, $currentTimeSlice + $i);
-            if ($this->timingSafeEquals($calculatedCode, $code)) {
-                return true;
+            for ($i = -$discrepancy; $i <= $discrepancy; ++$i) {
+                $calculatedCode = $this->getCode($secret, $currentTimeSlice + $i);
+                if ($this->timingSafeEquals($calculatedCode, $code)) {
+                    return true;
+                }
             }
         }
 
@@ -147,17 +202,17 @@ class GoogleAuthenticator
      *
      * @return bool|string
      */
-    protected function _base32Decode($secret): bool|string
+    public function Base32Decode($secret): bool|string
     {
         if (empty($secret)) {
             return '';
         }
 
-        $base32chars = $this->_getBase32LookupTable();
+        $base32chars = $this->getBase32LookupTable();
         $base32charsFlipped = array_flip($base32chars);
 
         $paddingCharCount = substr_count($secret, $base32chars[32]);
-        $allowedValues = array(6, 4, 3, 1, 0);
+        $allowedValues = [6, 4, 3, 1, 0];
         if (!in_array($paddingCharCount, $allowedValues)) {
             return false;
         }
@@ -192,7 +247,7 @@ class GoogleAuthenticator
      *
      * @return array
      */
-    protected function _getBase32LookupTable(): array
+    protected function getBase32LookupTable(): array
     {
         return array(
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', //  7

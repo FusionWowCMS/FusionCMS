@@ -11,7 +11,7 @@ if (! defined('BASEPATH')) {
  * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
-$config['account_encryption'] = "SPH"; // SPH, SRP, SRP6
+$config['account_encryption'] = "SRP6"; // SPH, SRP, SRP6
 
 $config['rbac'] = true;
 
@@ -21,4 +21,6 @@ $config['battle_net_encryption'] = "SPH"; // SRP6_V2, SRP6_V1, SPH
 
 $config['totp_secret'] = true;
 
-$config['totp_secret_name'] = "token_key"; // token_key, totp_secret
+$config['totp_secret_name'] = "totp_secret"; // token_key, totp_secret
+
+$config['TOTPMasterSecret'] = ""; // for totp_secret

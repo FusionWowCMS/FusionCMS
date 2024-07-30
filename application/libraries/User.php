@@ -526,8 +526,14 @@ class User
      */
     public function setTotpSecret(string|null $secret, int $userId = 0): void
     {
-        if ($userId)
-            $this->CI->external_account_model->getConnection()->query('UPDATE '.table('account').' SET ' . $this->CI->config->item('totp_secret_name') . ' = ? WHERE id = ?', [$secret, $userId]);
+        if ($userId) {
+            if ($this->CI->config->item('totp_secret_name') == 'totp_secret') {
+                $google_obj = new GoogleAuthenticator();
+                $secret = $google_obj->createTotpAes($secret);
+            }
+
+            $this->CI->external_account_model->getConnection()->query('UPDATE ' . table('account') . ' SET ' . $this->CI->config->item('totp_secret_name') . ' = ? WHERE id = ?', [$secret, $userId]);
+        }
 
         Services::session()->set('totp_secret', $secret);
     }

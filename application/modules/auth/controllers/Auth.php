@@ -272,11 +272,10 @@ class Auth extends MX_Controller
         if ($result)
             $this->user->setTotpSecret($secret); // save to session
 
-
         $data = [
             'status' => $result,
             'icon' => ($result) ? 'success' : 'error',
-            'text' => ($result) ? lang("changes_saved", "security") : lang('six_digit_not_true', 'security')
+            'text' => ($result) ? lang("verified", "security") : lang('six_digit_not_true', 'security')
         ];
 
         die(json_encode($data));
