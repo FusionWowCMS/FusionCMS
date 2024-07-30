@@ -39,7 +39,8 @@ its ease of use and development, safe and secure codebase and dedication to simp
 | TrinityCore SRP6                         | ✅ |
 | TrinityCore SRP6 v2                      | ✅ |
 | TrinityCore Classic (TBC, Wotlk, Cata)   | ✅ |
-| Skyfire                                  | ✅ |
+| Skyfire SRP6                             | ✅ |
+| Skyfire old base                         | ✅ |
 | AzerothCore old base                     | ✅ |
 | AzerothCore SRP6                         | ✅ |
 | Cmangos                                  | ✅ |
