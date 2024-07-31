@@ -123,13 +123,13 @@
                                         <thead></thead>
                                         {foreach from=$realm.totalKills item=character}
                                             <tr>
-                                                <td class="col-1">
+                                                <td class="col-1 rank">
                                                     {if $character.rank == 1 || $character.rank == 2 || $character.rank == 3}
                                                         <img width="16px" height="16px"
                                                              src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
                                                     {/if}
                                                 </td>
-                                                <td class="col-1 stats_name">
+                                                <td class="col-2 stats_name">
                                                     <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif"
                                                          width="20px">
                                                     <img src="{$url}application/images/stats/{$character.class}.gif"
@@ -164,13 +164,13 @@
                                         <thead></thead>
                                         {foreach from=$realm.yesterdayKills item=character}
                                             <tr>
-                                                <td class="col-1">
+                                                <td class="col-1 rank">
                                                     {if $character.rank == 1 || $character.rank == 2 || $character.rank == 3}
                                                         <img width="16px" height="16px"
                                                              src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
                                                     {/if}
                                                 </td>
-                                                <td class="col-1 stats_name">
+                                                <td class="col-2 stats_name">
                                                     <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif"
                                                          width="20px">
                                                     <img src="{$url}application/images/stats/{$character.class}.gif"
@@ -206,13 +206,13 @@
                                         <thead></thead>
                                         {foreach from=$realm.todayKills item=character}
                                             <tr>
-                                                <td class="col-1">
+                                                <td class="col-1 rank">
                                                     {if $character.rank == 1 || $character.rank == 2 || $character.rank == 3}
                                                         <img width="16px" height="16px"
                                                              src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
                                                     {/if}
                                                 </td>
-                                                <td class="col-1 stats_name">
+                                                <td class="col-2 stats_name">
                                                     <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif"
                                                          width="20px">
                                                     <img src="{$url}application/images/stats/{$character.class}.gif"
@@ -261,13 +261,13 @@
                                         <thead></thead>
                                         {foreach from=$realm.achivements item=character}
                                             <tr>
-                                                <td class="col-1">
+                                                <td class="col-1 rank">
                                                     {if $character.rank == 1 || $character.rank == 2 || $character.rank == 3}
                                                         <img width="16px" height="16px"
                                                              src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
                                                     {/if}
                                                 </td>
-                                                <td class="col-1 stats_name">
+                                                <td class="col-2 stats_name">
                                                     <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif"
                                                          width="20px">
                                                     <img src="{$url}application/images/stats/{$character.class}.gif"
@@ -314,13 +314,13 @@
                                         <thead></thead>
                                         {foreach from=$realm.guilds item=guild}
                                             <tr>
-                                                <td class="col-1">
+                                                <td class="col-1 rank">
                                                     {if $guild.rank == 1 || $guild.rank == 2 || $guild.rank == 3}
                                                         <img width="16px" height="16px"
                                                              src="{$url}application/modules/sidebox_top/images/{$guild.rank}.ico"/>
                                                     {/if}
                                                 </td>
-                                                <td class="col-1 stats_name">
+                                                <td class="col-2 stats_name">
                                                     <img src="{$url}application/modules/sidebox_top/images/faction-{$guild.faction}.jpg"
                                                          width="20px"/>
                                                 </td>
