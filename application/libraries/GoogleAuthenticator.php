@@ -63,13 +63,15 @@ class GoogleAuthenticator
 
         $IV_SIZE_BYTES = 16;
         $TAG_SIZE_BYTES = 16;
+        $tag = null;
+
         if (strlen($secret) + $IV_SIZE_BYTES + $TAG_SIZE_BYTES > 128) {
             die('no');
             //die('The provided two-factor authentication secret is too long.');
         }
 
         if ($masterKey) {
-            $secret = openssl_encrypt($secret, 'aes-256-gcm', $masterKey, OPENSSL_RAW_DATA, random_bytes($IV_SIZE_BYTES));
+            $secret = openssl_encrypt($secret, 'aes-256-gcm', $masterKey, OPENSSL_RAW_DATA, random_bytes($IV_SIZE_BYTES), $tag);
         }
 
         return $secret;
