@@ -527,7 +527,7 @@ class User
     public function setTotpSecret(string|null $secret, int $userId = 0): void
     {
         if ($userId) {
-            if ($this->CI->config->item('totp_secret_name') == 'totp_secret') {
+            if ($this->CI->config->item('totp_secret_name') == 'totp_secret' && $secret != null) {
                 $google_obj = new GoogleAuthenticator();
                 $secret = $google_obj->createTotpAes($secret);
             }

@@ -62,8 +62,14 @@ class Security extends MX_Controller
 
             $google_obj = new GoogleAuthenticator();
 
-            if (!$google_obj->verifyCode($secret, $auth_code))
-                die('no');
+            if ($this->config->item('totp_secret_name') == 'totp_secret' && $secret != null) {
+                $encrypted = $google_obj->createTotpAes($secret);
+                if (!$google_obj->verifyCode($encrypted, $auth_code))
+                    die('no');
+            } else {
+                if (!$google_obj->verifyCode($secret, $auth_code))
+                    die('no');
+            }
 
             $this->user->setTotpSecret($secret, $this->user->getId());
         } else {

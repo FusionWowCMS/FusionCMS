@@ -57,19 +57,19 @@ class GoogleAuthenticator
      */
     public function createTotpAes(string $secret): string
     {
-        $decoded = $this->Base32Decode($secret);
+        $secret = $this->Base32Decode($secret);
 
         $masterKey = $this->CI->config->item('TOTPMasterSecret');
 
         $IV_SIZE_BYTES = 16;
         $TAG_SIZE_BYTES = 16;
-        if (strlen($decoded) + $IV_SIZE_BYTES + $TAG_SIZE_BYTES > 128) {
+        if (strlen($secret) + $IV_SIZE_BYTES + $TAG_SIZE_BYTES > 128) {
             die('no');
             //die('The provided two-factor authentication secret is too long.');
         }
 
         if ($masterKey) {
-            $secret = openssl_encrypt($secret, 'aes-256-gcm', $masterKey, OPENSSL_RAW_DATA, random_bytes($IV_SIZE_BYTES), $tag);
+            $secret = openssl_encrypt($secret, 'aes-256-gcm', $masterKey, OPENSSL_RAW_DATA, random_bytes($IV_SIZE_BYTES));
         }
 
         return $secret;
