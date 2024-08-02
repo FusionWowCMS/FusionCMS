@@ -1,5 +1,8 @@
 name: PHP Composer
 
+env:
+  PHP_VERSION: '8.3'
+
 on:
   push:
     branches: [ "main" ]
@@ -15,7 +18,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+          php-version: ${{ env.PHP_VERSION }}
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
