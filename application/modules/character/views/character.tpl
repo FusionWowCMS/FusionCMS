@@ -59,7 +59,7 @@
 <!-- Character Main.End -->
 <hr class="my-5" />
 <!-- Character Bars.Start -->
-<div class="row my-5">
+<div class="row my-5" id="bars">
 	<div class="col-6">
 		{if isset($stats.maxhealth)}
 			{if $stats.maxhealth && $stats.maxhealth != "Unknown"}
@@ -94,7 +94,7 @@
 <!-- Character Bars.End -->
 
 <!--Characters Attributes.Start -->
-<div class="row">
+<div class="row" id="attributes">
 	<div class="col-md-6">
 		<div class="section-header">{lang("attributes", "character")}</div>
 		<div class="section-body">
