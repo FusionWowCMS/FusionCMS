@@ -114,7 +114,7 @@ class Install extends MX_Controller
 
     private function checkPhpVersion()
     {
-        die(version_compare(PHP_VERSION, '8.1.0', '>=') ? '1' : '0');
+        die(version_compare(PHP_VERSION, '8.3.0', '>=') ? '1' : '0');
     }
 
     private function setAndCheckDbConnection()

@@ -3,7 +3,7 @@
         'name' => 'fusionwowcms/fusioncms',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a5d11e09e9c08f8580496a1c53ea43b4308dfc6e',
+        'reference' => '0173218f21eee9c74074b55d7e7ab363e2f23148',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -85,7 +85,7 @@
         'fusionwowcms/fusioncms' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a5d11e09e9c08f8580496a1c53ea43b4308dfc6e',
+            'reference' => '0173218f21eee9c74074b55d7e7ab363e2f23148',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
