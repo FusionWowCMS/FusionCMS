@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
 {if $sideboxes_top}
-{foreach from=$sideboxes_top item=$sidebox}
+{foreach from=$sideboxes_top item=sidebox}
 	<div class="col-md-12 col-lg-12" widget="{$sidebox.type}">
 		<section class="sidebox sidebox-{$sidebox.type} {if $sidebox@last}last-row{/if}">
 		

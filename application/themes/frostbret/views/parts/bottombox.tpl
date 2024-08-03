@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row g-4 justify-content-center">
 		{if $sideboxes_bottom}
-		{foreach from=$sideboxes_bottom item=$sidebox}
+		{foreach from=$sideboxes_bottom item=sidebox}
 			<div class="col-md-12 col-lg-4" widget="{$sidebox.type}">
 				<section class="sidebox sidebox-{$sidebox.type} {if $sidebox@last}last-row{/if}">
 				

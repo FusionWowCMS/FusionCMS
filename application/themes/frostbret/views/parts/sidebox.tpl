@@ -1,6 +1,6 @@
 <!-- Sidebox.Start -->
 {if $sideboxes}
-	{foreach from=$sideboxes item=$sidebox}
+	{foreach from=$sideboxes item=sidebox}
 		<section class="sidebox sidebox-{$sidebox.type} {if $sidebox@last}last-row{/if}">
 
 			<h3 class="sidebox-head text-ellipsis">
