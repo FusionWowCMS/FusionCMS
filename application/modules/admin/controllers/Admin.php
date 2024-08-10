@@ -92,7 +92,7 @@ class Admin extends MX_Controller
     {
         $data['this'] = $this->dashboard_model->getIncome("this");
         $data['last'] = $this->dashboard_model->getIncome("last");
-        $data['growth'] = ($data['this'] > 0 && $data['last'] > 0) ? ((($data['this'] - $data['last']) / $data['last']) * 100) : 0;
+        $data['growth'] = ($data['this'] > 0 && $data['last'] > 0) ? round((($data['this'] - $data['last']) / $data['last']) * 100, 2) : 0;
 
         return $data;
     }
@@ -101,7 +101,7 @@ class Admin extends MX_Controller
     {
         $data['this'] = $this->dashboard_model->getVotes("this");
         $data['last'] = $this->dashboard_model->getVotes("last");
-        $data['growth'] = ($data['this'] > 0 && $data['last'] > 0) ? ((($data['this'] - $data['last']) / $data['last']) * 100) : 0;
+        $data['growth'] = ($data['this'] > 0 && $data['last'] > 0) ? round((($data['this'] - $data['last']) / $data['last']) * 100, 2) : 0;
 
         return $data;
     }
@@ -112,7 +112,7 @@ class Admin extends MX_Controller
         $data['month'] = $this->dashboard_model->getSignupsDaily("month");
         $data['this'] = $this->dashboard_model->getSignupsMonthly("this");
         $data['last'] = $this->dashboard_model->getSignupsMonthly("last");
-        $data['growth'] = ($data['this'] > 0 && $data['last'] > 0) ? ((($data['this'] - $data['last']) / $data['last']) * 100) : 0;
+        $data['growth'] = ($data['this'] > 0 && $data['last'] > 0) ? round((($data['this'] - $data['last']) / $data['last']) * 100, 2) : 0;
 
         $cache = $this->cache->get("total_accounts");
 
