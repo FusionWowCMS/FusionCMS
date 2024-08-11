@@ -9,14 +9,34 @@
 }
 
 .cooldown-ico {
-    height: 87px;
-    width: 87px;
-    border: none;
-    background: url(../images/not_active.png) no-repeat;
+    width: 87px !important;
+    height: 87px !important;
+
+    border: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    -webkit-filter: grayscale(1) !important;
+    filter: grayscale(1) !important;
+
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+
+    background-color: transparent !important;
+    background-image: url('../images/active.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+
+    -webkit-transition: all 300ms ease-in-out !important;
+    -o-transition: all 300ms ease-in-out !important;
+    transition: all 300ms ease-in-out !important;
 }
 
-.cooldown-ico:hover {
-    background: url(../images/active.png) no-repeat;
+.cooldown-ico:hover,
+.cooldown-ico:active {
+    -webkit-filter: none !important;
+    filter: none !important;
 }
 
 .description-small {
