@@ -1,1 +1,0 @@
-{config_load 'test.conf' 'section2'}{#title#} {#sec1#} {#sec2#}

@@ -1,1 +1,0 @@
-{textformat}hello world{/textformat}

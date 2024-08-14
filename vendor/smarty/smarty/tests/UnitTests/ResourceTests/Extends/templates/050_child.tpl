@@ -1,1 +1,0 @@
-{$notfoo="notbar"}

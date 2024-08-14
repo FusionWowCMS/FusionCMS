@@ -1060,7 +1060,7 @@
                     "dev-master": "5.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/functions.php"

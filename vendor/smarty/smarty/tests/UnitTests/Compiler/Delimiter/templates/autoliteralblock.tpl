@@ -1,1 +1,0 @@
-{ dummyblock}foo{ /dummyblock}

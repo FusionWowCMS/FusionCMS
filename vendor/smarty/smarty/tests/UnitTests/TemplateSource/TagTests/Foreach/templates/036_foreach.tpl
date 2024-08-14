@@ -1,1 +1,0 @@
-{if !isset($smarty.foreach.name.index)}false{/if}

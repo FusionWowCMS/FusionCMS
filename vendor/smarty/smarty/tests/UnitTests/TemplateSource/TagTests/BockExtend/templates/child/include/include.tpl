@@ -1,1 +1,0 @@
-include child:{include './include/include.tpl'}

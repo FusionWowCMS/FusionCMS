@@ -1,2 +1,0 @@
-{strip}
- {call 'c'}

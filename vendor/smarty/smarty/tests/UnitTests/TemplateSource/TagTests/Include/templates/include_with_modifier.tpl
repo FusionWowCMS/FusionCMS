@@ -1,1 +1,0 @@
-{include|upper file="helloworld.tpl"}

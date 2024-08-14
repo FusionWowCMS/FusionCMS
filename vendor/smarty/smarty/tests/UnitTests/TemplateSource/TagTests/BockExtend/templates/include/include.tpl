@@ -1,1 +1,0 @@
-include grand:{include './include/include.tpl'}

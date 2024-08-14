@@ -1,1 +1,0 @@
-{scriptblock}hello world{/scriptblock}

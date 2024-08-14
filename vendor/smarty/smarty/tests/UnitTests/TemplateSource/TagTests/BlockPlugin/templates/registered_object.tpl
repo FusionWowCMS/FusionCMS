@@ -1,1 +1,0 @@
-{myobject->objectfunc}hello world{/myobject->objectfunc}

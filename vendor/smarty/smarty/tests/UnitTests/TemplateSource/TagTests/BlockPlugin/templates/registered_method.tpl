@@ -1,1 +1,0 @@
-{blockpluginmethod}hello world{/blockpluginmethod}

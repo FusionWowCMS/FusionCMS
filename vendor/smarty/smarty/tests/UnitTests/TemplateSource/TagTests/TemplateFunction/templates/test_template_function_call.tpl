@@ -1,1 +1,0 @@
-{call name=template_func1}

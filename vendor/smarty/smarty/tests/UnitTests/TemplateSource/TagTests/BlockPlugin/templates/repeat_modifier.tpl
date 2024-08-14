@@ -1,1 +1,0 @@
-{testblock}{/testblock|strlen}
