@@ -1894,12 +1894,35 @@ class Email
             $ssl = 'ssl://';
         }
 
+        /*
+
         $this->SMTPConnect = fsockopen(
             $ssl . $this->SMTPHost,
             $this->SMTPPort,
             $errno,
             $errstr,
             $this->SMTPTimeout
+        );
+
+        */
+
+        // Context: Stream context create
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer'       => false,
+                'verify_peer_name'  => false,
+                'allow_self_signed' => true
+            ]
+        ]);
+
+        // @SMTPConnect: Stream socket client
+        $this->SMTPConnect = stream_socket_client(
+            $ssl . $this->SMTPHost . ':' . $this->SMTPPort,
+            $errno,
+            $errstr,
+            $this->SMTPTimeout,
+            STREAM_CLIENT_CONNECT,
+            $context
         );
 
         if (! is_resource($this->SMTPConnect)) {
