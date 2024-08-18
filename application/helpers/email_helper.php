@@ -79,5 +79,5 @@ function sendMail(string $receiver, string $subject, string $username, string $m
         'timestamp' => time()
     ];
 
-    $CI->db->table('email_log', )->insert($data2);
+    $CI->db->table('email_log')->insert($data2);
 }
