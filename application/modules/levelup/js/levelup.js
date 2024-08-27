@@ -15,9 +15,25 @@ const LevelUp = {
         const realmId = $('select[id="realm"]').val();
 
         $(`[data-character]`).each(function() {
-            $(this).next().hide();
+            const nextElement = $(this).next();
+            const parentElement = $(this).parent();
+            if (nextElement.hasClass('sbHolder')) {
+                nextElement.hide();
+            } else if (parentElement.hasClass('selectboxit-container')) {
+                parentElement.hide();
+            } else {
+                $(this).hide();
+            }
         });
-        $(`select[id="character_select_${realmId}"]`).next().show();
+
+        const selectedElement = $(`select[id="character_select_${realmId}"]`);
+
+        const nextSelectedElement = selectedElement.next();
+        if (nextSelectedElement.hasClass('sbHolder') || nextSelectedElement.hasClass('selectboxit-container')) {
+            nextSelectedElement.show();
+        } else {
+            selectedElement.show();
+        }
 
         this.User.realm = realmId;
     },
