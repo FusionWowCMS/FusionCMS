@@ -37,9 +37,8 @@
 
 		<!-- Header CSS.Start -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap">
-		<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css" />
 
-		{minify files=array("application/css/default.css", "application/css/tooltip.css", "node_modules/bootstrap/dist/css/bootstrap.min.css", "node_modules/sweetalert2/dist/sweetalert2.min.css", "node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "{$full_theme_path}vendor/MagnificPopup/css/magnific-popup.css", "{$full_theme_path}assets/css/style.css", "{$full_theme_path}assets/css/custom.css") type='css' output='writable/cache/data/minify/all.min.css' disable={$minify_css}}
+		{minify files=array("application/css/default.css", "application/css/tooltip.css", "application/fonts/fontawesome/v6.6.0/css/all.css", "node_modules/bootstrap/dist/css/bootstrap.min.css", "node_modules/sweetalert2/dist/sweetalert2.min.css", "node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "{$full_theme_path}vendor/MagnificPopup/css/magnific-popup.css", "{$full_theme_path}assets/css/style.css", "{$full_theme_path}assets/css/custom.css") type='css' output='writable/cache/data/minify/all.min.css' disable={$minify_css}}
 
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css">
 
