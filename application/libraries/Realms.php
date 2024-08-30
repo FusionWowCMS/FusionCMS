@@ -119,7 +119,7 @@ class Realms
     /**
      * Get the realm objects
      *
-     * @return Array
+     * @return Realm[]
      */
     public function getRealms(): array
     {
