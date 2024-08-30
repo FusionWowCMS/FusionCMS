@@ -15,12 +15,13 @@ export const setInnerHtml = (elem, html) => {
     const parser = new DOMParser()
     const parsed = parser.parseFromString(html, `text/html`)
     const head = parsed.querySelector('head')
-    head &&
+    if (head) {
       Array.from(head.childNodes).forEach((child) => {
         elem.appendChild(child)
       })
+    }
     const body = parsed.querySelector('body')
-    body &&
+    if (body) {
       Array.from(body.childNodes).forEach((child) => {
         if (child instanceof HTMLVideoElement || child instanceof HTMLAudioElement) {
           elem.appendChild(child.cloneNode(true)) // https://github.com/sweetalert2/sweetalert2/issues/2507
@@ -28,6 +29,7 @@ export const setInnerHtml = (elem, html) => {
           elem.appendChild(child)
         }
       })
+    }
   }
 }
 
@@ -73,18 +75,22 @@ const removeCustomClasses = (elem, params) => {
 export const applyCustomClass = (elem, params, className) => {
   removeCustomClasses(elem, params)
 
-  if (params.customClass && params.customClass[className]) {
-    if (typeof params.customClass[className] !== 'string' && !params.customClass[className].forEach) {
-      warn(
-        `Invalid type of customClass.${className}! Expected string or iterable object, got "${typeof params.customClass[
-          className
-        ]}"`
-      )
-      return
-    }
-
-    addClass(elem, params.customClass[className])
+  if (!params.customClass) {
+    return
   }
+
+  const customClass = params.customClass[/** @type {keyof SweetAlertCustomClass} */ (className)]
+
+  if (!customClass) {
+    return
+  }
+
+  if (typeof customClass !== 'string' && !customClass.forEach) {
+    warn(`Invalid type of customClass.${className}! Expected string or iterable object, got "${typeof customClass}"`)
+    return
+  }
+
+  addClass(elem, customClass)
 }
 
 /**
@@ -145,10 +151,18 @@ export const toggleClass = (target, classList, condition) => {
   classList.forEach((className) => {
     if (Array.isArray(target)) {
       target.forEach((elem) => {
-        condition ? elem.classList.add(className) : elem.classList.remove(className)
+        if (condition) {
+          elem.classList.add(className)
+        } else {
+          elem.classList.remove(className)
+        }
       })
     } else {
-      condition ? target.classList.add(className) : target.classList.remove(className)
+      if (condition) {
+        target.classList.add(className)
+      } else {
+        target.classList.remove(className)
+      }
     }
   })
 }
@@ -207,14 +221,22 @@ export const applyNumericalStyle = (elem, property, value) => {
  * @param {string} display
  */
 export const show = (elem, display = 'flex') => {
-  elem && (elem.style.display = display)
+  if (!elem) {
+    return
+  }
+
+  elem.style.display = display
 }
 
 /**
  * @param {HTMLElement | null} elem
  */
 export const hide = (elem) => {
-  elem && (elem.style.display = 'none')
+  if (!elem) {
+    return
+  }
+
+  elem.style.display = 'none'
 }
 
 /**
@@ -250,7 +272,11 @@ export const setStyle = (parent, selector, property, value) => {
  * @param {string} display
  */
 export const toggle = (elem, condition, display = 'flex') => {
-  condition ? show(elem, display) : hide(elem)
+  if (condition) {
+    show(elem, display)
+  } else {
+    hide(elem)
+  }
 }
 
 /**

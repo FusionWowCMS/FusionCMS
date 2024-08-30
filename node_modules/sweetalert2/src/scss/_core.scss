@@ -206,7 +206,7 @@ div:where(.swal2-container) {
       cursor: pointer;
     }
 
-    &.swal2-confirm {
+    &:where(.swal2-confirm) {
       order: $swal2-confirm-button-order;
       border: $swal2-confirm-button-border;
       border-radius: $swal2-confirm-button-border-radius;
@@ -215,12 +215,12 @@ div:where(.swal2-container) {
       color: $swal2-confirm-button-color;
       font-size: $swal2-confirm-button-font-size;
 
-      &:focus {
+      &:focus-visible {
         box-shadow: $swal2-confirm-button-focus-box-shadow;
       }
     }
 
-    &.swal2-deny {
+    &:where(.swal2-deny) {
       order: $swal2-deny-button-order;
       border: $swal2-deny-button-border;
       border-radius: $swal2-deny-button-border-radius;
@@ -229,12 +229,12 @@ div:where(.swal2-container) {
       color: $swal2-deny-button-color;
       font-size: $swal2-deny-button-font-size;
 
-      &:focus {
+      &:focus-visible {
         box-shadow: $swal2-deny-button-focus-box-shadow;
       }
     }
 
-    &.swal2-cancel {
+    &:where(.swal2-cancel) {
       order: $swal2-cancel-button-order;
       border: $swal2-cancel-button-border;
       border-radius: $swal2-cancel-button-border-radius;
@@ -243,18 +243,18 @@ div:where(.swal2-container) {
       color: $swal2-cancel-button-color;
       font-size: $swal2-cancel-button-font-size;
 
-      &:focus {
+      &:focus-visible {
         box-shadow: $swal2-cancel-button-focus-box-shadow;
       }
     }
 
     &.swal2-default-outline {
-      &:focus {
+      &:focus-visible {
         box-shadow: $swal2-button-focus-box-shadow;
       }
     }
 
-    &:focus {
+    &:focus-visible {
       outline: $swal2-button-focus-outline;
     }
 
@@ -323,7 +323,7 @@ div:where(.swal2-container) {
       color: $swal2-close-button-hover-color;
     }
 
-    &:focus {
+    &:focus-visible {
       outline: $swal2-close-button-focus-outline;
       box-shadow: $swal2-close-button-focus-box-shadow;
     }
