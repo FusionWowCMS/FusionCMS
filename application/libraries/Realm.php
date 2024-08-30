@@ -262,6 +262,18 @@ class Realm
         return array_key_exists($id, $expansions) ? $expansions[$id] : 'default';
     }
 
+    public function getExpansionRaces(): array
+    {
+        $expansion_races = $this->CI->config->item('expansion_races');
+        return $expansion_races[$this->getExpansionId()] ?? [];
+    }
+
+    public function getExpansionClasses(): array
+    {
+        $expansion_class = $this->CI->config->item('expansion_class');
+        return $expansion_class[$this->getExpansionId()] ?? [];
+    }
+
     /**
      * Check if the realm is up and running
      *
