@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The zones are exported from Area DBC 11.0.2.55959
+ * The zones are exported from Area DBC 11.0.5.56487
  */
 
 $lang['zones'] = [
@@ -8837,5 +8837,7 @@ $lang['zones'] = [
     15551 => "The Fangs",
     15552 => "The Undersea",
     15667 => "Delves",
+    15780 => "Forbidden Reach - (11.0.5 Version) - Dracthyr for All",
     15786 => "Hallowfall",
+    15913 => "Blackrock Depths",
 ];
