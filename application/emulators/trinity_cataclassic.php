@@ -46,7 +46,9 @@ class Trinity_cataclassic implements Emulator
         'character_stats'          => 'character_stats',
         'guild_member'             => 'guild_member',
         'guild'                    => 'guild',
-        'gm_tickets'               => 'gm_bug'
+        'gm_tickets'               => 'gm_bug',
+        'arena_team'               => 'arena_team',
+        'arena_team_member'        => 'arena_team_member',
     ];
 
     /**
@@ -175,7 +177,31 @@ class Trinity_cataclassic implements Emulator
             'guid'    => 'guid'
         ],
 
-        'gm_tickets' => []
+        'gm_tickets' => [],
+
+        'arena_team' => [
+            'arenaTeamId'  => 'arenaTeamId',
+            'teamName'     => 'name',
+            'captainGuid'  => 'captainGuid',
+            'teamRating'   => 'rating',
+            'teamRank'     => 'rank',
+            'teamType'     => 'type',
+            'seasonGames'  => 'seasonGames',
+            'seasonWins'   => 'seasonWins',
+            'weekGames'    => 'weekGames',
+            'weekWins'     => 'weekWins',
+        ],
+
+        'arena_team_member' => [
+            'arenaTeamId'   => 'arenaTeamId',
+            'guid'          => 'guid',
+            'rating'        => 'personalRating',
+            'seasonGames'   => 'seasonGames',
+            'seasonWins'    => 'seasonWins',
+            'weekGames'     => 'weekGames',
+            'weekWins'      => 'weekWins',
+            'teamType'      => 'type',
+        ]
     ];
 
     /**
@@ -191,7 +217,9 @@ class Trinity_cataclassic implements Emulator
         'find_guilds'               => 'SELECT g.guildid guildid, g.name name, COUNT(g_m.guid) GuildMemberCount, g.leaderguid leaderguid, c.name leaderName FROM guild g, guild_member g_m, characters c WHERE g.leaderguid = c.guid AND g_m.guildid = g.guildid AND g.name LIKE ? GROUP BY g.guildid',
         'get_inventory_item'        => 'SELECT slot slot, item item, itemEntry itemEntry, enchantments enchantments FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0',
         'get_guild_members'         => 'SELECT m.guildid guildid, m.guid guid, c.name name, c.race race, c.class class, c.gender gender, c.level level, m.rank member_rank, r.rname rname, r.rights rights FROM guild_member m JOIN guild_rank r ON m.guildid = r.guildid AND m.rank = r.rid JOIN characters c ON c.guid = m.guid WHERE m.guildid = ? ORDER BY r.rights DESC',
-        'get_guild'                 => 'SELECT guildid guildid, name guildName, leaderguid leaderguid, motd motd, createdate createdate FROM guild WHERE guildid = ?'
+        'get_guild'                 => 'SELECT guildid guildid, name guildName, leaderguid leaderguid, motd motd, createdate createdate FROM guild WHERE guildid = ?',
+        'get_arena_team'            => 'SELECT `arena_team_member`.`arenaTeamId` AS arenateamid, `arena_team`.`name` AS teamName, `arena_team`.`rating` AS teamRating, `arena_team`.`rank` AS teamRank FROM `arena_team_member`, `arena_team` WHERE `arena_team_member`.`guid` = ? AND `arena_team`.`arenaTeamId` = `arena_team_member`.`arenaTeamId` AND `arena_team`.`type` = ? LIMIT 1',
+        'get_arena_team_member'     => 'SELECT `arena_team_member`.`guid`, `arena_team_member`.`personalRating` AS rating, `arena_team_member`.`seasonGames` AS games, `arena_team_member`.`seasonWins` AS wins, `characters`.`name`, `characters`.`class`, `characters`.`race`, `characters`.`level` FROM `arena_team_member` RIGHT JOIN `characters` ON `characters`.`guid` = `arena_team_member`.`guid` WHERE `arena_team_member`.`arenateamid` = ? ORDER BY guid ASC'
     ];
 
     public function __construct($config)

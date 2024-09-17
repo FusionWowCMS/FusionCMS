@@ -37,7 +37,10 @@ class Oregoncore implements Emulator
         "character_stats"    => "character_stats",
         "guild_member"       => "guild_member",
         "guild"              => "guild",
-        "gm_tickets"         => "gm_tickets"
+        "gm_tickets"         => "gm_tickets",
+        'arena_team'         => 'arena_team',
+        'arena_team_member'  => 'arena_team_member',
+        'arena_team_stats'   => 'arena_team_member',
     ];
 
     /**
@@ -124,6 +127,32 @@ class Oregoncore implements Emulator
             "message" => "message",
             "createTime" => "createtime",
             "completed" => "closed",
+        ],
+
+        'arena_team' => [
+            'arenaTeamId'  => 'arenateamid',
+            'teamName'     => 'name',
+            'captainGuid'  => 'captainguid',
+            'teamType'     => 'type',
+        ],
+
+        'arena_team_member' => [
+            'arenaTeamId'   => 'arenateamid',
+            'guid'          => 'guid',
+            'rating'        => 'personal_rating',
+            'games'         => 'played_season',
+            'wins'          => 'wons_season',
+            'weekGames'     => 'played_week',
+            'weekWins'      => 'wons_week',
+            'teamType'      => 'type',
+        ],
+
+        'arena_team_stats' => [
+            'arenaTeamId'  => 'arenateamid',
+            'teamRating'   => 'rating',
+            'teamRank'     => 'rank',
+            'seasonGames'  => 'games',
+            'seasonWins'   => 'wins',
         ]
     ];
 
@@ -141,7 +170,10 @@ class Oregoncore implements Emulator
         "find_guilds"               => "SELECT g.guildid guildid, g.name name, COUNT(g_m.guid) GuildMemberCount, g.leaderguid leaderguid, c.name leaderName FROM guild g, guild_member g_m, characters c WHERE g.leaderguid = c.guid AND g_m.guildid = g.guildid AND g.name LIKE ? GROUP BY g.guildid",
         "get_inventory_item"        => "SELECT slot slot, item item, item_template itemEntry, enchantments enchantments FROM character_inventory, item_instance WHERE character_inventory.item = item_instance.guid AND character_inventory.slot >= 0 AND character_inventory.slot <= 18 AND character_inventory.guid=? AND character_inventory.bag=0",
         "get_guild_members"         => "SELECT m.guildid guildid, m.guid guid, c.name name, c.race race, c.class class, c.gender gender, c.level level, m.rank rank, r.rname rname, r.rights rights FROM guild_member m, guild_rank r, characters c WHERE m.guildid = r.guildid AND m.rank = r.rid AND c.guid = m.guid AND m.guildid = ? ORDER BY r.rights DESC",
-        "get_guild"                 => "SELECT guildid guildid, name guildName, leaderguid leaderguid, motd motd, createdate createdate FROM guild WHERE guildid = ?"
+        "get_guild"                 => "SELECT guildid guildid, name guildName, leaderguid leaderguid, motd motd, createdate createdate FROM guild WHERE guildid = ?",
+        'get_arena_team'            => 'SELECT `arena_team_member`.`arenateamid`, `arena_team`.`name` AS teamName, `arena_team_stats`.`rating` AS teamRating, `arena_team_stats`.`rank` AS teamRank FROM `arena_team_member`, `arena_team`, `arena_team_stats` WHERE `arena_team_member`.`guid` = ? AND `arena_team`.`arenateamid` = `arena_team_member`.`arenateamid` AND `arena_team`.`arenateamid` = `arena_team_stats`.`arenateamid` AND `arena_team`.`type` = ? LIMIT 1',
+        'get_arena_team_member'     => 'SELECT `arena_team_member`.`guid`, `arena_team_member`.`personal_rating` AS rating, `arena_team_member`.`played_season` AS games, `arena_team_member`.`wons_season` AS wins, `characters`.`name`, `characters`.`class`, `characters`.`race`, `characters`.`level` FROM `arena_team_member` RIGHT JOIN `characters` ON `characters`.`guid` = `arena_team_member`.`guid` WHERE `arena_team_member`.`arenateamid` = ? ORDER BY guid ASC'
+
     ];
 
     public function __construct($config)
