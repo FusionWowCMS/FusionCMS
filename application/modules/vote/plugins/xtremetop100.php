@@ -13,10 +13,11 @@ require_once APPPATH . 'modules/vote/plugins/classes/VoteCallbackPlugin.php';
 
 class Xtremetop100 extends VoteCallbackPlugin
 {
-    public $url            = "xtremetop100.com";
-    public $voteLinkFormat = "{vote_link}-{user_id}";
+    public string $name = "Xtremetop100";
+    public string $url = "xtremetop100.com";
+    public string $voteLinkFormat = "{vote_link}-{user_id}";
 
-    protected function checkAccess()
+    protected function checkAccess(): bool
     {
         return $this->CI->input->ip_address() == gethostbyname('xtremetop100.com');
     }

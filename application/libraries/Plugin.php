@@ -6,7 +6,7 @@ if (!defined('BASEPATH')) {
 
 /**
  * @package FusionCMS
- * @author  Jesper Lindström
+ * @author  Jesper LindstrÃ¶m
  * @author  Xavier Geerinck
  * @author  Elliott Robbins
  * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
@@ -18,7 +18,7 @@ class Plugin
 {
     protected $CI;
     public $module_name;
-    private $vars = array();
+    private array $vars = [];
 
     /**
      * Get the instance of CI and load the plugin name

@@ -13,10 +13,11 @@ require_once(APPPATH . 'modules/vote/plugins/classes/VoteCallbackPlugin.php');
 
 class Topg extends VoteCallbackPlugin
 {
-    public $url = "topg.org";
-    public $voteLinkFormat = "{vote_link}-{user_id}";
+    public string $name = "Topg";
+    public string $url = "topg.org";
+    public string $voteLinkFormat = "{vote_link}-{user_id}";
 
-    protected function checkAccess()
+    protected function checkAccess(): bool
     {
         return $this->CI->input->ip_address() == gethostbyname('monitor.topg.org');
     }

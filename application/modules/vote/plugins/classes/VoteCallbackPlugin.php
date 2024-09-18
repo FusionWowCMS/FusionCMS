@@ -10,8 +10,9 @@
 
 abstract class VoteCallbackPlugin extends Plugin
 {
-    public $url = 'undefined';
-    public $voteLinkFormat = 'undefined';
+    public string $name = 'undefined';
+    public string $url = 'undefined';
+    public string $voteLinkFormat = 'undefined';
 
     abstract protected function readUserId();
     abstract protected function checkAccess();

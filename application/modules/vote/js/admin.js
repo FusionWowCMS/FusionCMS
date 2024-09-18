@@ -138,7 +138,7 @@ var Topsites = {
 				}
 				
 				if ( ! $('#vote_sitename').val())
-					$('#vote_sitename').val(data.url);
+					$('#vote_sitename').val(data.name);
 				
 				if (data.callback_support) {
 					$('#vote_url').attr('data-format', data.votelink_format);

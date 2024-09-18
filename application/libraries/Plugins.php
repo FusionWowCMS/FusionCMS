@@ -6,7 +6,7 @@ if (!defined('BASEPATH')) {
 
 /**
  * @package FusionCMS
- * @author  Jesper Lindström
+ * @author  Jesper LindstrÃ¶m
  * @author  Xavier Geerinck
  * @author  Elliott Robbins
  * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
@@ -16,7 +16,7 @@ if (!defined('BASEPATH')) {
 
 class Plugins
 {
-    private $plugins = array();
+    private array $plugins = [];
     private $CI;
     public $module_name;
 
@@ -45,10 +45,10 @@ class Plugins
     /**
      * Scope hack for setting configs
      *
-     * @param  String
-     * @return Array
+     * @param string $filename
+     * @return array|null
      */
-    private function getConfig($filename)
+    private function getConfig(string $filename): ?array
     {
         $filename = 'application/modules/' . $this->module_name . '/plugins/' . $filename . '_config.php';
         if (!file_exists($filename)) {
@@ -56,15 +56,16 @@ class Plugins
         }
 
         include($filename);
-        return (isset($config) ? $config : null);
+
+        return ($config ?? null);
     }
 
     /**
      * Returns all loaded plugins.
      *
-     * @return Array
+     * @return array
      */
-    public function getPlugins()
+    public function getPlugins(): array
     {
         return $this->plugins;
     }
@@ -72,10 +73,10 @@ class Plugins
     /**
      * Checks to see if the specified plugin is loaded.
      *
-     * @param  String
+     * @param string $name
      * @return bool
      */
-    public function isLoaded($name)
+    public function isLoaded(string $name): bool
     {
         $ret = false;
         foreach ($this->plugins as $plugin) {
@@ -91,16 +92,17 @@ class Plugins
     /**
      * Call a function in each of the loaded plugin classes if the method exists.
      *
-     * @param  mixed
+     * @param $func
+     * @param $args
      * @return array
      */
     public function __call($func, $args)
     {
-        $ret = array();
+        $ret = [];
         foreach ($this->plugins as $plugin) {
             // Does the method exist, and is it public?
-            if (method_exists($plugin, $func) && is_callable(array($plugin, $func))) {
-                $ret[$plugin->name] = call_user_func_array(array($plugin, $func), $args);
+            if (method_exists($plugin, $func) && is_callable([$plugin, $func])) {
+                $ret[$plugin->name] = call_user_func_array([$plugin, $func], $args);
             }
         }
 
@@ -110,10 +112,10 @@ class Plugins
     /**
      * Sets a variable in all the loaded plugins
      *
-     * @param String
-     * @param mixed
+     * @param string $name
+     * @param mixed $value
      */
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value)
     {
         foreach ($this->plugins as $plugin) {
             $plugin->$name = $value;
@@ -123,10 +125,10 @@ class Plugins
     /**
      * Gets any variables that exist under the passed name for all plugins.
      *
-     * @param  String
+     * @param string $name
      * @return mixed
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         $ret = array();
         foreach ($this->plugins as $plugin) {

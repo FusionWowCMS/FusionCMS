@@ -2,8 +2,6 @@
 
 use MX\MX_Controller;
 
-// todo: NO PERMISSIONS!
-
 /**
  * Admin Vote Controller Class
  * @property vote_model $vote_model vote_model Class
@@ -29,10 +27,10 @@ class Admin extends MX_Controller
         $topsites = $this->vote_model->getVoteSites();
 
         // Prepare my data
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
             'topsites' => $topsites
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("admin.tpl", $data);
@@ -85,9 +83,9 @@ class Admin extends MX_Controller
         $this->administrator->setTitle('New topsite');
 
         // Prepare my data
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("admin_add.tpl", $data);
@@ -117,18 +115,16 @@ class Admin extends MX_Controller
 
         if (!$topsite) {
             show_error("There is no topsite with ID " . $id, 400);
-
-            die();
         }
 
         // Change the title
         $this->administrator->setTitle($topsite['vote_sitename']);
 
         // Prepare my data
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
             'topsite' => $topsite
-        );
+        ];
 
         $autofill = $this->getAutoFillData($topsite['vote_url']);
         if ($autofill['callback_support']) {
@@ -215,7 +211,7 @@ class Admin extends MX_Controller
     {
         $url = strtolower($url);
         if (! preg_match('#^https?://.+$#', $url)) {
-            $url = 'http://' . $url;
+            $url = 'https://' . $url;
         }
 
         $host = parse_url($url, PHP_URL_HOST);
@@ -225,14 +221,13 @@ class Admin extends MX_Controller
             return false;
         }
 
-        // remove www. from hostname
-        $name = preg_replace('/^(?:www\.)?(.+)$/', '$1', $host);
-
-        $data = array(
-            'name' => $name,
+        $data = [
             'callback_support' => false,
             'image' => null,
-        );
+        ];
+
+        // remove www. from hostname
+        $name = preg_replace('/^(?:www\.)?(.+)$/', '$1', $host);
 
         // check if image exists for this site
         if ($files = glob(APPPATH . 'modules/vote/images/vote_sites/' . $name . '.*')) {
@@ -247,15 +242,14 @@ class Admin extends MX_Controller
                 $data['callback_support'] = true;
                 $data['votelink_format'] = $plugin->voteLinkFormat;
                 $data['url'] = $plugin->url;
+                $data['name'] = $plugin->name;
 
                 $tpl = strtolower(get_class($plugin)) . '.tpl';
                 if (! file_exists(APPPATH . 'modules/vote/views/callbackHelp/' . $tpl)) {
                     $tpl = 'default.tpl';
                 }
 
-                $data['callback_help'] = $this->template->loadPage('callbackHelp/' . $tpl, array(
-                    'callback_url' => base_url() . 'vote/callback/' . $name
-                ));
+                $data['callback_help'] = $this->template->loadPage('callbackHelp/' . $tpl, ['callback_url' => base_url() . 'vote/callback/' . $data['name']]);
             }
         }
 
