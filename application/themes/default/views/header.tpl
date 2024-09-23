@@ -51,27 +51,33 @@
 		<!-- Load styles -->
 		{minify type="css" files=$assets.css.parts.all.files output="{$assets.css.path}{$assets.css.parts.all.name}?v={$theme_configs.config.version}" disable="{$minify_css}"}
 		{foreach from=$assets.css.parts.module.files item=file}<link type="text/css" rel="stylesheet" href="{if $cdn_link != false}{str_replace(base_url(), $cdn_link, $file)}{else}{$file}{/if}?v={$theme_configs.config.version}" />{/foreach}
-		{if !is_array($extra_css)}
-			<link type="text/css" rel="stylesheet" href="{$path}{$extra_css}?v={$theme_configs.config.version}">
-		{else}
-			{strip}
-				{foreach from=$extra_css item=css}
-					<link type="text/css" rel="stylesheet" href="{$path}{$css}?v={$theme_configs.config.version}">
-				{/foreach}
-			{/strip}
+
+		{if $extra_css}
+			{if !is_array($extra_css)}
+				<link type="text/css" rel="stylesheet" href="{$path}{$extra_css}?v={$theme_configs.config.version}">
+			{else}
+				{strip}
+					{foreach from=$extra_css item=css}
+						<link type="text/css" rel="stylesheet" href="{$path}{$css}?v={$theme_configs.config.version}">
+					{/foreach}
+				{/strip}
+			{/if}
 		{/if}
 
 		<!-- Load scripts -->
 		{minify type="js" files=$assets.js.parts.all.files output="{$assets.js.path}{$assets.js.parts.all.name}?v={$theme_configs.config.version}" disable="{$minify_js}"}
 		{foreach from=$assets.js.parts.module.files item=file}<script type="text/javascript" src="{if $cdn_link != false}{str_replace(base_url(), $cdn_link, $file)}{else}{$file}{/if}?v={$theme_configs.config.version}"></script>{/foreach}
-		{if !is_array($extra_js)}
-			<script type="text/javascript" src="{$path}{$extra_js}?v={$theme_configs.config.version}"></script>
-		{else}
-			{strip}
-				{foreach from=$extra_js item=js}
-					<script type="text/javascript" src="{$path}{$js}?v={$theme_configs.config.version}"></script>
-				{/foreach}
-			{/strip}
+
+		{if $extra_js}
+			{if !is_array($extra_js)}
+				<script type="text/javascript" src="{$path}{$extra_js}?v={$theme_configs.config.version}"></script>
+			{else}
+				{strip}
+					{foreach from=$extra_js item=js}
+						<script type="text/javascript" src="{$path}{$js}?v={$theme_configs.config.version}"></script>
+					{/foreach}
+				{/strip}
+			{/if}
 		{/if}
 
 		<!--[if lt IE 9]>
