@@ -225,7 +225,7 @@ class Template
      * @param bool|String $css Full path to your css file
      * @param bool|String $js Full path to your js file
      */
-    public function view(string $content, bool|string $css = false, bool|string $js = false)
+    public function view(string $content, bool|string|array $css = false, bool|string|array $js = false)
     {
         // Avoid loading the main site in the ACP layout
         if ($this->CI->input->get('is_acp'))
@@ -261,11 +261,11 @@ class Template
      * Handles the normal loading.
      *
      * @param  $content
-     * @param  $css
-     * @param  $js
+     * @param bool|string|array $css
+     * @param bool|string|array $js
      * @return mixed
      */
-    private function handleNormalPage($content, $css, $js): mixed
+    private function handleNormalPage($content, bool|string|array$css, bool|string|array$js): mixed
     {
         //Load the sideboxes
         $sideboxes        = $this->loadSideboxes();
@@ -282,7 +282,7 @@ class Template
         }
 
         // Gather the theme data
-        $theme_data = array(
+        $theme_data = [
             "currentPage" => $url,
             "url" => $this->page_url,
             "theme_path" => "application/" . $this->theme_path,
@@ -301,7 +301,7 @@ class Template
             "sideboxes" => $sideboxes,
             "sideboxes_top" => $sideboxes_top,
             "sideboxes_bottom" => $sideboxes_bottom
-        );
+        ];
 
         // Load the main template
         return $this->CI->smarty->view($this->theme_path . "template.tpl", $theme_data, true);
@@ -311,13 +311,13 @@ class Template
      * When an ajax request is made to a page, it calls this.
      *
      * @param string $content
-     * @param string $css
-     * @param string $js
+     * @param bool|string|array $css
+     * @param bool|string|array $js
      * @return string
      */
-    private function handleAjaxRequest(string $content = "", string $css = "", string $js = ""): string
+    private function handleAjaxRequest(string $content = "", bool|string|array $css = "", bool|string|array $js = ""): string
     {
-        $array = array(
+        $array = [
             "title" => $this->title . $this->CI->config->item('title'),
             "content" => $content,
             "js" => $js,
@@ -325,7 +325,7 @@ class Template
             "slider" => $this->isSliderShown(),
             "serverName" => $this->CI->config->item('server_name'),
             "language" => $this->CI->language->getClientData()
-        );
+        ];
 
         return json_encode($array);
     }
@@ -370,7 +370,7 @@ class Template
      * @param bool|string $js
      * @return mixed
      */
-    private function getHeader(bool|string $css = false, bool|string $js = false): mixed
+    private function getHeader(bool|string|array $css = false, bool|string|array $js = false): mixed
     {
         header('X-XSS-Protection: 1; mode=block');
         header('X-Frame-Options: SAMEORIGIN');

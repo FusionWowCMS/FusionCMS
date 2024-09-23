@@ -34,17 +34,16 @@
 		{minify files=array("application/css/default.css", "application/css/tooltip.css", "node_modules/bootstrap/dist/css/bootstrap.min.css", "node_modules/sweetalert2/dist/sweetalert2.min.css", "node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "{$full_theme_path}css/cms.css", "{$full_theme_path}css/main.css") type='css' output='writable/cache/data/minify/all.min.css' disable={$minify_css}}
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css">
 
-		{if $extra_css}<link rel="stylesheet" href="{$path}{$extra_css}">{/if}
-		{*	{if !is_array($extra_css)}
-				<link rel="stylesheet" href="{$path}{$extra_css}">
-			{else}
-				{strip}
-					{foreach from=$extra_css item=css}
-						<link rel="stylesheet" href="{$path}{$css}">
-					 {/foreach}
-				{/strip}
-			{/if}
-		{/if} *}
+
+		{if !is_array($extra_css)}
+			<link type="text/css" rel="stylesheet" href="{$path}{$extra_css}">
+		{else}
+			{strip}
+				{foreach from=$extra_css item=css}
+					<link type="text/css" rel="stylesheet" href="{$path}{$css}">
+				{/foreach}
+			{/strip}
+		{/if}
 
 		<!-- Header CSS.End -->
 
@@ -53,17 +52,15 @@
 
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
-		{if $extra_js}<script type="text/javascript" src="{$path}{$extra_js}"></script>{/if}
-		{*	{if !is_array($extra_js)}
-				<script type="text/javascript" src="{$path}{$extra_js}"></script>
-			{else}
-				{strip}
-					{foreach from=$extra_js item=js}
-						<script type="text/javascript" src="{$path}{$js}"></script>
-					 {/foreach}
-				{/strip}
-			{/if}
-		{/if} *}
+		{if !is_array($extra_js)}
+			<script type="text/javascript" src="{$path}{$extra_js}"></script>
+		{else}
+			{strip}
+				{foreach from=$extra_js item=js}
+					<script type="text/javascript" src="{$path}{$js}"></script>
+				{/foreach}
+			{/strip}
+		{/if}
 
 		<!-- Header JS.End -->
 
