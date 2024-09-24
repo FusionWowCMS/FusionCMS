@@ -239,6 +239,8 @@ class Items
 
         $item['name'] = $itemDB['name'];
 
+        $item['isHeroic'] = $this->hasFlag(8, $flags);
+
         // Support custom colors
         if (preg_match("/\|cff/", $itemDB['name'])) {
             while (preg_match("/\|cff/", $item['name'])) {

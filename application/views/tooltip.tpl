@@ -4,6 +4,8 @@
 <!--nstart-->
 
 <span class='q{$item.quality}' style='font-size: 16px'>{$item.name}</span><br />
+
+{if $item.isHeroic}<div class="q2">Heroic</div>{/if}
 <!--nend-->
 
 {if $item.bind}{$item.bind}<br />{/if}
