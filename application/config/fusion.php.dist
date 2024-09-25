@@ -88,6 +88,7 @@ $config['has_smtp'] = 0;
 | 7 = Battle for Azeroth/BFA
 | 8 = Shadowlands/SL
 | 9 = Dragonflight/DF
+| 10 = The War Within/ TWW
 |
 */
 $config['max_expansion'] = "0";
