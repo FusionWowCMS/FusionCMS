@@ -1,0 +1,13 @@
+{
+	"name": "Sidebox: Countdown",
+	"version": "1.0.0",
+	"date": "2024-09-25",
+	"min_required_version": "9.1.1",
+	"description": "Displays a spotlight",
+	"author": {
+		"name": "FusionCMS",
+		"website": "https://github.com/FusionWowCMS/FusionCMS"
+	},
+
+	"enabled": true
+}
