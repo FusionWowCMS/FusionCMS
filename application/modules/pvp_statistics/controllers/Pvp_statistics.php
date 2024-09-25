@@ -19,47 +19,56 @@ class Pvp_statistics extends MX_Controller
 
     public function index(int|bool $RealmId = false)
     {
-        $this->template->setTitle("PVP Statistics");
+        $cache = $this->cache->get("pvp_statistics");
 
-        $user_id = $this->user->getId();
+        if ($cache !== false) {
+            $page = $cache;
+        } else {
+            $this->template->setTitle("PVP Statistics");
 
-        $data = [
-            'user_id'           => $user_id,
-            'realms_count'      => !isset($this->realms),
-            'selected_realm'    => $RealmId,
-            'url'               => $this->template->page_url,
-        ];
+            $user_id = $this->user->getId();
 
-        // Get the realms
-        if (!isset($this->realms) > 0) {
-            foreach ($this->realms->getRealms() as $realm) {
-                //Set the first realm as realmid
-                if (!$RealmId) {
-                    $RealmId = $realm->getId();
-                    $data['selected_realm'] = $RealmId;
+            $data = [
+                'user_id'           => $user_id,
+                'realms_count'      => !isset($this->realms),
+                'selected_realm'    => $RealmId,
+                'url'               => $this->template->page_url,
+            ];
+
+            // Get the realms
+            if (!isset($this->realms) > 0) {
+                foreach ($this->realms->getRealms() as $realm) {
+                    //Set the first realm as realmid
+                    if (!$RealmId) {
+                        $RealmId = $realm->getId();
+                        $data['selected_realm'] = $RealmId;
+                    }
+
+                    $data['realms'][$realm->getId()] = ['name' => $realm->getName()];
                 }
-
-                $data['realms'][$realm->getId()] = ['name' => $realm->getName()];
             }
+
+            //Set the realmid for the data model
+            $this->data_model->setRealm($RealmId);
+
+            //Get the top teams
+            $data['Teams2'] = $this->data_model->getTeams($this->config->item("arena_teams_limit"), 2);
+            $data['Teams3'] = $this->data_model->getTeams($this->config->item("arena_teams_limit"), 3);
+            $data['Teams5'] = $this->data_model->getTeams($this->config->item("arena_teams_limit"), 5);
+
+            //Get Top Honorable Kills Players
+            $data['TopHK'] = $this->data_model->getTopHKPlayers($this->config->item("hk_players_limit"));
+
+            // Get Factions
+            $data['allianceRaces'] = get_instance()->realms->getAllianceRaces();
+            $data['hordeRaces'] = get_instance()->realms->getHordeRaces();
+
+            $page = $this->template->loadPage("pvp_statistics.tpl", $data);
+
+            // Cache
+            $this->cache->save("pvp_statistics", $page, strtotime($this->config->item("cache_time")));
         }
 
-        //Set the realmid for the data model
-        $this->data_model->setRealm($RealmId);
-
-        //Get the top teams
-        $data['Teams2'] = $this->data_model->getTeams($this->config->item("arena_teams_limit"), 2);
-        $data['Teams3'] = $this->data_model->getTeams($this->config->item("arena_teams_limit"), 3);
-        $data['Teams5'] = $this->data_model->getTeams($this->config->item("arena_teams_limit"), 5);
-
-        //Get Top Honorable Kills Players
-        $data['TopHK'] = $this->data_model->getTopHKPlayers($this->config->item("hk_players_limit"));
-
-        // Get Factions
-        $data['allianceRaces'] = get_instance()->realms->getAllianceRaces();
-        $data['hordeRaces'] = get_instance()->realms->getHordeRaces();
-
-        $output = $this->template->loadPage("pvp_statistics.tpl", $data);
-
-        $this->template->box("PVP Statistics", $output, true, "modules/pvp_statistics/css/style.css", "modules/pvp_statistics/js/scripts.js");
+        $this->template->box("PVP Statistics", $page, true, "modules/pvp_statistics/css/style.css", "modules/pvp_statistics/js/scripts.js");
     }
 }
