@@ -35,7 +35,7 @@
 				{foreach from=$TopHK item=character}
 				<tr>
 					<td>{$character.rank}</td>
-					<td><a data-tip="View character 2v2" href="{$url}character/{$selected_realm}/{$character.guid}">{$character.name}</a></td>
+					<td><a data-tip="View character" href="{$url}character/{$selected_realm}/{$character.guid}">{$character.name}</a></td>
 					<td>{$character.level}</td>
 					<td>{$character.kills}</td>
 					<td><img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif" width="20" height="20"></td>
