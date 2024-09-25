@@ -10,8 +10,6 @@ class Data_model extends CI_Model
 
     public function GetStatement($key): false|string
     {
-        $statements = [];
-
         if (!$this->emuStr) {
             return false;
         }
@@ -79,13 +77,7 @@ class Data_model extends CI_Model
     {
         $this->realm = $this->realms->getRealm($id);
 
-        $replace = [
-            '_sph',
-            '_soap',
-            '_rbac'
-        ];
-        //Remove the sph/soap/rbac
-        $this->emuStr = str_replace($replace, '', $this->realm->getConfig('emulator'));
+        $this->emuStr = $this->realm->getConfig('emulator');
     }
 
     /**
@@ -101,7 +93,7 @@ class Data_model extends CI_Model
      *            TOP ARENA FUNCTIONS
      ***************************************/
 
-    public function getTeams(int $count = 5, int $type = 2)
+    public function getTeams(int $count = 5, int $type = 2): array|bool
     {
         $this->connect();
 
@@ -126,7 +118,7 @@ class Data_model extends CI_Model
         return false;
     }
 
-    public function getTeamMembers($team)
+    public function getTeamMembers($team): array|bool
     {
         $this->connect();
 
@@ -140,7 +132,7 @@ class Data_model extends CI_Model
         return false;
     }
 
-    public function getTopHKPlayers(int $count = 10)
+    public function getTopHKPlayers(int $count = 10): array|bool
     {
         $this->connect();
 
