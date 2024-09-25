@@ -7,7 +7,7 @@ use MX\MX_Controller;
  */
 class Countdown extends MX_Controller
 {
-    const string DS = DIRECTORY_SEPARATOR;
+    /*const string DS = DIRECTORY_SEPARATOR;*/
 
     private static string $moduleUrl;
     private static string $moduleName;
