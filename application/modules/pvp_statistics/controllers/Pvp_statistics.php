@@ -23,12 +23,12 @@ class Pvp_statistics extends MX_Controller
 
         $user_id = $this->user->getId();
 
-        $data = array(
+        $data = [
             'user_id'           => $user_id,
             'realms_count'      => !isset($this->realms),
             'selected_realm'    => $RealmId,
             'url'               => $this->template->page_url,
-        );
+        ];
 
         // Get the realms
         if (!isset($this->realms) > 0) {
@@ -39,7 +39,7 @@ class Pvp_statistics extends MX_Controller
                     $data['selected_realm'] = $RealmId;
                 }
 
-                $data['realms'][$realm->getId()] = array('name' => $realm->getName());
+                $data['realms'][$realm->getId()] = ['name' => $realm->getName()];
             }
         }
 
@@ -53,6 +53,10 @@ class Pvp_statistics extends MX_Controller
 
         //Get Top Honorable Kills Players
         $data['TopHK'] = $this->data_model->getTopHKPlayers($this->config->item("hk_players_limit"));
+
+        // Get Factions
+        $data['allianceRaces'] = get_instance()->realms->getAllianceRaces();
+        $data['hordeRaces'] = get_instance()->realms->getHordeRaces();
 
         $output = $this->template->loadPage("pvp_statistics.tpl", $data);
 

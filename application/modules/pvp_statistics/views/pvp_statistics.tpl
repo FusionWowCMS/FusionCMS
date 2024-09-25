@@ -55,14 +55,15 @@
 			<tr>
 				<td>{lang("rank", "pvp_statistics")}</td>
 				<td>{lang("name", "pvp_statistics")}</td>
-				<td>{lang("rating", "pvp_statistics")}</td>
 				<td>{lang("members", "pvp_statistics")}</td>
+				<td>{lang("faction", "pvp_statistics")}</td>
+				<td>{lang("season_wins", "pvp_statistics")}</td>
+				<td>{lang("rating", "pvp_statistics")}</td>
 			</tr>
 			{foreach from=$Teams2 key=key item=team}
                 <tr>
 					<td>{$key + 1}</td>
                 	<td>{$team.name}</td>
-                	<td>{$team.rating} Rating</td>
                     <td>{if $team.members}
                         {foreach from=$team.members key=key item=member}
                             <a href="{$url}character/{$selected_realm}/{$member.guid}" data-tip="<font style='font-weight: bold;'>{$member.name}</font><br />Games played: {$member.games}<br />Games won: {$member.wins}<br />Personal Rating: {$member.rating}" id="team-member">
@@ -70,6 +71,15 @@
                             </a>
                         {/foreach}
                     {/if}</td>
+					<td>
+						{if in_array($team.race, $allianceRaces)}
+							<img src='{$url}application/images/factions/1.png' align='absbottom'/>
+						{elseif in_array($team.race, $hordeRaces)}
+							<img src='{$url}application/images/factions/2.png' align='absbottom'/>
+						{/if}
+					</td>
+					<td>{$team.seasonWins}</td>
+					<td>{$team.rating} {lang("rating", "pvp_statistics")}</td>
 				</tr>
             {/foreach}
         {else}
@@ -83,14 +93,15 @@
 			<tr>
 				<td>{lang("rank", "pvp_statistics")}</td>
 				<td>{lang("name", "pvp_statistics")}</td>
-				<td>{lang("rating", "pvp_statistics")}</td>
 				<td>{lang("members", "pvp_statistics")}</td>
+				<td>{lang("faction", "pvp_statistics")}</td>
+				<td>{lang("season_wins", "pvp_statistics")}</td>
+				<td>{lang("rating", "pvp_statistics")}</td>
 			</tr>
 			{foreach from=$Teams3 key=key item=team}
                 <tr>
 					<td>{$key + 1}</td>
                 	<td>{$team.name}</td>
-                	<td>{$team.rating} Rating</td>
                     <td>{if $team.members}
                         {foreach from=$team.members key=key item=member}
                             <a href="{$url}character/{$selected_realm}/{$member.guid}" data-tip="<font style='font-weight: bold;'>{$member.name}</font><br>Games played: {$member.games}<br>Games won: {$member.wins}<br>Personal Rating: {$member.rating}" id="team-member">
@@ -98,6 +109,15 @@
                             </a>
                         {/foreach}
                     {/if}</td>
+					<td>
+						{if in_array($team.race, $allianceRaces)}
+							<img src='{$url}application/images/factions/1.png' align='absbottom'/>
+						{elseif in_array($team.race, $hordeRaces)}
+							<img src='{$url}application/images/factions/2.png' align='absbottom'/>
+						{/if}
+					</td>
+					<td>{$team.seasonWins}</td>
+					<td>{$team.rating} {lang("rating", "pvp_statistics")}</td>
 				</tr>
             {/foreach}
         {else}
@@ -111,14 +131,15 @@
 			<tr>
 				<td>{lang("rank", "pvp_statistics")}</td>
 				<td>{lang("name", "pvp_statistics")}</td>
-				<td>{lang("rating", "pvp_statistics")}</td>
 				<td>{lang("members", "pvp_statistics")}</td>
+				<td>{lang("faction", "pvp_statistics")}</td>
+				<td>{lang("season_wins", "pvp_statistics")}</td>
+				<td>{lang("rating", "pvp_statistics")}</td>
 			</tr>
 			{foreach from=$Teams5 key=key item=team}
                 <tr>
 					<td>{$key + 1}</td>
                 	<td>{$team.name}</td>
-                	<td>{$team.rating} Rating</td>
                     <td>{if $team.members}
                         {foreach from=$team.members key=key item=member}
                             <a href="{$url}character/{$selected_realm}/{$member.guid}" data-tip="<font style='font-weight: bold;'>{$member.name}</font><br />Games played: {$member.games}<br />Games won: {$member.wins}<br />Personal Rating: {$member.rating}" id="team-member">
@@ -126,6 +147,15 @@
                             </a>
                         {/foreach}
                     {/if}</td>
+					<td>
+						{if in_array($team.race, $allianceRaces)}
+							<img src='{$url}application/images/factions/1.png' align='absbottom'/>
+						{elseif in_array($team.race, $hordeRaces)}
+							<img src='{$url}application/images/factions/2.png' align='absbottom'/>
+						{/if}
+					</td>
+					<td>{$team.seasonWins}</td>
+					<td>{$team.rating} {lang("rating", "pvp_statistics")}</td>
 				</tr>
             {/foreach}
         {else}

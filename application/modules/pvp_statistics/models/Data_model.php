@@ -48,7 +48,8 @@ class Data_model extends CI_Model
             default:
             {
                 $statements = [
-                    'TopArenaTeams' => "SELECT `arenaTeamId` AS arenateamid, `rating`, `rank`, `name`, `captainGuid` AS captain, `type` FROM `arena_team` WHERE `type` = ? ORDER BY rating DESC LIMIT ?;",
+                    'TopArenaTeams' => "SELECT `arenaTeamId` AS arenateamid, `rating`, `rank`, `arena_team`.`name`, `captainGuid` AS captain, `seasonWins`, `type`, `characters`.`race` AS race FROM `arena_team` RIGHT JOIN `characters` ON `characters`.`guid` = `arena_team`.`captainGuid` WHERE `type` = ? ORDER BY rating DESC LIMIT ?;",
+
                     'TeamMembers' => "SELECT 
                                     `arena_team_member`.`arenaTeamId` AS arenateamid, 
                                     `arena_team_member`.`guid` AS guid, 
