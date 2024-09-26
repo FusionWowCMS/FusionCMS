@@ -27,6 +27,7 @@ class Realms
     private $classes_en;
     private $itemtype_en;
     private array $zones;
+    private array $maps;
     private array $hordeRaces;
     private array $allianceRaces;
 
@@ -36,12 +37,13 @@ class Realms
     {
         $this->CI = &get_instance();
 
-        $this->races = array();
-        $this->classes = array();
-        $this->zones = array();
-        $this->realms = array();
-        $this->hordeRaces = array();
-        $this->allianceRaces = array();
+        $this->races = [];
+        $this->classes = [];
+        $this->zones = [];
+        $this->maps = [];
+        $this->realms = [];
+        $this->hordeRaces = [];
+        $this->allianceRaces = [];
 
         // Load the realm object
         require_once('application/libraries/Realm.php');
@@ -207,6 +209,16 @@ class Realms
     }
 
     /**
+     * Load the wow_maps config and populate the maps array
+     */
+    private function loadMaps(): void
+    {
+        $this->CI->config->load('wow_maps');
+
+        $this->maps = $this->CI->config->item('maps');
+    }
+
+    /**
      * Get the alliance race IDs
      *
      * @return Array
@@ -330,6 +342,25 @@ class Realms
     }
 
     /**
+     * Get the map name by map ID
+     *
+     * @param int $mapId
+     * @return string
+     */
+    public function getMap(int $mapId): string
+    {
+        if (!($this->maps)) {
+            $this->loadMaps();
+        }
+
+        if (array_key_exists($mapId, $this->maps)) {
+            return $this->maps[$mapId];
+        } else {
+            return "Unknown location";
+        }
+    }
+
+    /**
      * Get all class names
      *
      * @return array
@@ -390,7 +421,7 @@ class Realms
             show_error("The entered emulator (" . $this->defaultEmulator . ") doesn't exist in application/emulators/");
         }
 
-        $config = array();
+        $config = [];
         $config['id'] = 1;
 
         // Initialize the objects
@@ -403,7 +434,7 @@ class Realms
     public function getExpansions(): array
     {
         $expansions = $this->CI->config->item('expansions_name_en');
-        $return = array();
+        $return = [];
 
         foreach ($expansions as $key => $value)
         {
