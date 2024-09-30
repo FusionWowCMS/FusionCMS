@@ -17,8 +17,7 @@ $lang['no_realm_selected'] = "Bitte wählen Sie einen Bereich aus";
 $lang['want_to_buy'] = "Möchten Sie einen Kauf tätigen?";
 $lang['processing'] = "Wird verarbeitet...";
 $lang['purchase'] = "purchase";
-
-
+$lang['char_levelup'] = "Character Level Up";
 $lang['not_support'] = "El reino no admite ese servicio.";
 $lang['character_does_not_exist'] = "El carácter seleccionado no existe." ;
 $lang['character_does_not_belong_account'] = "El personaje seleccionado no pertenece a tu cuenta." ;

@@ -22,7 +22,7 @@ $lang['no_realm_selected'] = "Por favor, selecione um reino";
 $lang['want_to_buy'] = "Você deseja fazer uma compra?";
 $lang['processing'] = "Processando...";
 $lang['purchase'] = "comprar";
-
+$lang['char_levelup'] = "Character Level Up";
 $lang['not_support'] = "O reino não suporta esse serviço.";
 $lang['character_does_not_exist'] = "O personagem selecionado não existe." ;  
 $lang['character_does_not_belong_account'] =  "O personagem selecionado não pertence à sua conta." ;

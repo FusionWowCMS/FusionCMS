@@ -17,8 +17,7 @@ $lang['no_realm_selected'] = "لطفا یک قلمرو انتخاب کنید";
 $lang['want_to_buy'] = "آیا می خواهید خریدی انجام دهید؟";
 $lang['processing'] = "در حال پردازش...";
 $lang['purchase'] = "خرید";
-
-
+$lang['char_levelup'] = "لول آپ کاراکتر";
 $lang['not_support'] = "قلمرو آن سرویس را پشتیبانی نمی کند.";
 $lang['character_does_not_exist'] = "کاراکتر انتخاب شده وجود ندارد." ;
 $lang['character_does_not_belong_account'] = "کاراکتر انتخاب شده به حساب شما تعلق ندارد." ;
