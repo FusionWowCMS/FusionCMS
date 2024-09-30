@@ -19,7 +19,7 @@ class Pvp_statistics extends MX_Controller
 
     public function index(int|bool $RealmId = false)
     {
-        $cache = $this->cache->get("pvp_statistics");
+        $cache = $this->cache->get('pvp_statistics_' . $RealmId);
 
         if ($cache !== false) {
             $page = $cache;
@@ -66,7 +66,7 @@ class Pvp_statistics extends MX_Controller
             $page = $this->template->loadPage("pvp_statistics.tpl", $data);
 
             // Cache
-            $this->cache->save("pvp_statistics", $page, strtotime($this->config->item("cache_time")));
+            $this->cache->save('pvp_statistics_' . $RealmId, $page, strtotime($this->config->item("cache_time")));
         }
 
         $this->template->box("PVP Statistics", $page, true, "modules/pvp_statistics/css/style.css", "modules/pvp_statistics/js/scripts.js");
