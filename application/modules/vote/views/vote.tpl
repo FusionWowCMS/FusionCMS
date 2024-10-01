@@ -18,7 +18,7 @@
 								<div class="card h-100 cursor-pointer card-hover {if !$vote_site.canVote}card-disabled{/if}" {if $vote_site.canVote}onClick="Vote.open({$vote_site.id}, {$vote_site.hour_interval});"{/if}>
 									<div class="card-header text-center">
 										{if $vote_site.vote_image}
-											<img src="{$vote_site.vote_image}" alt="{$vote_site.vote_sitename}">
+											<img src="{$vote_site.vote_image}" alt="{$vote_site.vote_sitename}" width="100%">
 										{else}
 											{$vote_site.vote_sitename}
 										{/if}
