@@ -37,7 +37,7 @@ class Admin extends MX_Controller
         $content = $this->administrator->box('spotlight', $output);
 
         // Output my content. The method accepts the same arguments as template->view
-        $this->administrator->view($content, false, "modules/sidebox_Spotlight/assets/js/admin.js");
+        $this->administrator->view($content, false, "modules/sidebox_spotlight/assets/js/admin.js");
     }
 
     public function create()
@@ -108,7 +108,7 @@ class Admin extends MX_Controller
         $content = $this->administrator->box('spotlight', $output);
 
         // Output my content. The method accepts the same arguments as template->view
-        $this->administrator->view($content, false, "modules/sidebox_Spotlight/assets/js/admin.js");
+        $this->administrator->view($content, false, "modules/sidebox_spotlight/assets/js/admin.js");
     }
 
     public function save($id = false)
