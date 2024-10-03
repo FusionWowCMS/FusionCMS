@@ -9,10 +9,10 @@ var Spotlight = {
 	 * Links for the ajax requests
 	 */
 	Links: {
-		remove: "sidebox_Spotlight/admin/delete/",
-		create: "sidebox_Spotlight/admin/create/",
-		move: "sidebox_Spotlight/admin/move/",
-		save: "sidebox_Spotlight/admin/save/",
+		remove: "sidebox_spotlight/admin/delete/",
+		create: "sidebox_spotlight/admin/create/",
+		move: "sidebox_spotlight/admin/move/",
+		save: "sidebox_spotlight/admin/save/",
 	},
 
 	/**
@@ -42,7 +42,7 @@ var Spotlight = {
 
 				$.get(Config.URL + removeLink + id, function (data) {
 					console.log(data);
-					window.location = Config.URL + "sidebox_Spotlight/admin";
+					window.location = Config.URL + "sidebox_spotlight/admin";
 
 				});
 			}
@@ -66,7 +66,7 @@ var Spotlight = {
 
 		$.post(Config.URL + this.Links.create, values, function (data) {
 			if (data == "yes") {
-				window.location = Config.URL + "sidebox_Spotlight/admin";
+				window.location = Config.URL + "sidebox_spotlight/admin";
 			} else {
 				console.log(data);
 				Swal.fire({
@@ -127,7 +127,7 @@ var Spotlight = {
 
 		$.post(Config.URL + this.Links.save + id, values, function (data) {
 			if (data == "yes") {
-				window.location = Config.URL + "sidebox_Spotlight/admin";
+				window.location = Config.URL + "sidebox_spotlight/admin";
 			} else {
 				console.log(data);
 				Swal.fire({
