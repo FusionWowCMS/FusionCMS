@@ -71,14 +71,17 @@ its ease of use and development, safe and secure codebase and dedication to simp
 
 [Latest release](https://github.com/FusionWowCMS/FusionCMS/releases/latest)
 
+### Installation
+Read the [Installation Guide](https://github.com/FusionWowCMS/FusionCMS/wiki/Installation-Guide).
+
 ### Prerequisites
 
-| Requirements                           | Description                                                                                                           |
-|----------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| PHP 8.3.0 or above                     | (enable Extensions: php_mysqli, php_curl, php_openssl, php_soap, php_mbstring, php_json, php_zip, php_gd, php_intl and php_gmp) |
-| Apache / Nginx                         | (enable modules: mod_rewrite, mod_headers, mod_expires, mod_deflate, mod_filter)                                      |
-| Pre installed World of Warcraft Server | (with the databases of: Auth, Characters and World)                                                                   |
-| MySQL / Mariadb Server                 | >= 5.6 / 10.3                                                                                                         |
+| Requirements                           | Description                                                                                |
+|----------------------------------------|--------------------------------------------------------------------------------------------|
+| PHP 8.3.0 or above                     | (Extensions: mysqli, curl, openssl, soap, mbstring, json, zip, gd, intl and gmp)           |
+| Apache / Nginx                         | (Modules: mod_rewrite, mod_headers, mod_expires, mod_deflate, mod_filter)                  |
+| Pre installed World of Warcraft Server | (with the databases of: Auth, Characters and World)                                        |
+| MySQL / Mariadb Server                 | >= 5.6 / 10.3                                                                              |
 
 ### Security Tips
 > [!IMPORTANT]
