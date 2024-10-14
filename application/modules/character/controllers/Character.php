@@ -261,7 +261,7 @@ class Character extends MX_Controller
         $slotsItems = $this->character_model->getItems();
 
         // Item slots
-        $slots = array(
+        $slots = [
             0 => "head",
             1 => "neck",
             2 => "shoulders",
@@ -280,8 +280,11 @@ class Character extends MX_Controller
             15 => "mainhand",
             16 => "offhand",
             17 => "ranged",
-            18 => "tabard"
-        );
+            18 => "tabard",
+            19 => "chest(robe)",
+            20 => "mainhand(new)",
+            21 => "offhand(new)",
+        ];
 
         if (is_array($slotsItems)) {
             // Loop through to assign the items
@@ -308,7 +311,14 @@ class Character extends MX_Controller
                         $image = "finger";
                         break;
                     case "back":
+                    case "chest(robe)":
                         $image = "chest";
+                        break;
+                    case "mainhand(new)":
+                        $image = "mainhand";
+                        break;
+                    case "offhand(new)":
+                        $image = "offhand";
                         break;
                 }
 
