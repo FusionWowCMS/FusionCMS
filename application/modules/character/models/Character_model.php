@@ -42,7 +42,7 @@ class Character_model extends CI_Model
     {
         $this->connect();
 
-        $query = $this->connection->query("SELECT COUNT(*) AS total FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "guid", false, $this->realmId) . "= ?", array($this->id));
+        $query = $this->connection->query("SELECT COUNT(*) AS total FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "guid", false, $this->realmId) . "= ?", [$this->id]);
         $row = $query->getResultArray();
 
         if ($row[0]['total'] > 0) {
@@ -59,7 +59,7 @@ class Character_model extends CI_Model
     {
         $this->connect();
 
-        $query = $this->connection->query(query('get_character', $this->realmId), array($this->id));
+        $query = $this->connection->query(query('get_character', $this->realmId), [$this->id]);
 
         if ($query && $query->getNumRows() > 0) {
             $row = $query->getResultArray();
@@ -84,7 +84,7 @@ class Character_model extends CI_Model
     {
         $this->connect();
 
-        $query = $this->connection->query("SELECT " . allColumns("character_stats", $this->realmId) . " FROM " . table("character_stats", $this->realmId) . " WHERE " . column("character_stats", "guid", false, $this->realmId) . "= ?", array($this->id));
+        $query = $this->connection->query("SELECT " . allColumns("character_stats", $this->realmId) . " FROM " . table("character_stats", $this->realmId) . " WHERE " . column("character_stats", "guid", false, $this->realmId) . "= ?", [$this->id]);
 
         if ($query && $query->getNumRows() > 0) {
             $row = $query->getResultArray();
@@ -102,7 +102,7 @@ class Character_model extends CI_Model
     {
         $this->connect();
 
-        $query = $this->connection->query(query("get_inventory_item", $this->realmId), array($this->id));
+        $query = $this->connection->query(query("get_inventory_item", $this->realmId), [$this->id]);
 
         if ($query && $query->getNumRows() > 0) {
             return $query->getResultArray();
@@ -134,7 +134,7 @@ class Character_model extends CI_Model
     {
         $this->connect();
 
-        $query = $this->connection->query("SELECT " . column("guild_member", "guildid", true, $this->realmId) . " FROM " . table("guild_member", $this->realmId) . " WHERE " . column("guild_member", "guid", false, $this->realmId) . "= ?", array($this->id));
+        $query = $this->connection->query("SELECT " . column("guild_member", "guildid", true, $this->realmId) . " FROM " . table("guild_member", $this->realmId) . " WHERE " . column("guild_member", "guid", false, $this->realmId) . "= ?", [$this->id]);
 
         if ($this->connection->error()) {
             $error = $this->connection->error();
@@ -149,7 +149,7 @@ class Character_model extends CI_Model
 
             return $row[0]['guildid'];
         } else {
-            $query2 = $this->connection->query("SELECT " . column("guild", "guildid", true, $this->realmId) . " FROM " . table("guild", $this->realmId) . " WHERE " . column("guild", "leaderguid", false, $this->realmId) . "= ?", array($this->id));
+            $query2 = $this->connection->query("SELECT " . column("guild", "guildid", true, $this->realmId) . " FROM " . table("guild", $this->realmId) . " WHERE " . column("guild", "leaderguid", false, $this->realmId) . "= ?", [$this->id]);
 
             if ($this->connection->error()) {
                 $error = $this->connection->error();
@@ -176,7 +176,7 @@ class Character_model extends CI_Model
         } else {
             $this->connect();
 
-            $query = $this->connection->query("SELECT " . column("guild", "name", true, $this->realmId) . " FROM " . table("guild", $this->realmId) . " WHERE " . column("guild", "guildid", false, $this->realmId) . "= ?", array($id));
+            $query = $this->connection->query("SELECT " . column("guild", "name", true, $this->realmId) . " FROM " . table("guild", $this->realmId) . " WHERE " . column("guild", "guildid", false, $this->realmId) . "= ?", [$this->id]);
 
             if ($query && $query->getNumRows() > 0) {
                 $row = $query->getResultArray();

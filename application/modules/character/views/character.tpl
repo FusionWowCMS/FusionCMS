@@ -1,22 +1,22 @@
 <!-- Character Top.Start -->
 <div class="row top-bar">
-	<div class="col-avatar">
-		<div class="avatar">
-			<img src="{$url}application/images/avatars/{$avatar}.gif"/>
-		</div>
-	</div>
-	<div class="col-9 col-md-10 ps-4">
-		<div class="d-flex h-100 align-items-center">
-			<span class="h1 color-c{$class}">{$name}</span>
-			<div class="border-start border-2 ms-3 ps-3">
-				<div class=""> {$raceName} {$className}</div>
-				<div class="">{if $guildName}<a href="{$url}guild/{$realmId}/{$guild}">❮{$guildName}❯</a>{/if} {$realmName}</div>
-			</div>
-		</div>
-	</div>
+    <div class="col-avatar">
+        <div class="avatar">
+            <img src="{$url}application/images/avatars/{$avatar}.gif"/>
+        </div>
+    </div>
+    <div class="col-9 col-md-10 ps-4">
+        <div class="d-flex h-100 align-items-center">
+            <span class="h1 color-c{$class}">{$name}</span>
+            <div class="border-start border-2 ms-3 ps-3">
+                <div class=""> {$raceName} {$className}</div>
+                <div class="">{if $guildName}<a href="{$url}guild/{$realmId}/{$guild}">❮{$guildName}❯</a>{/if} {$realmName}</div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Character Top.End -->
-<hr class="my-5" />
+<hr class="my-5"/>
 <!-- Character Main.Start -->
 <div class="row {if $faction == 1}bg-faction alliance{elseif $faction == 2}bg-faction horde{/if}">
 	<div class="col-items">

@@ -21,9 +21,8 @@
     background-image: url(../../../images/misc/bg_alliance_complete.png);
 }
 
-.col-avatar,
-.col-items {
-	width:70px !important;
+.col-avatar, .col-items {
+	width:70px;
 }
 
 .col-main {
