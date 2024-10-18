@@ -84,13 +84,17 @@ class Edit extends MX_Controller
      */
     private function loadConfigs()
     {
-        foreach (glob("application/modules/" . $this->module . "/config/*") as $file) {
-            if ($file == 'application/modules/' . $this->module . '/config/routes.php')
+        $configPath = "application/modules/{$this->module}/config/";
+
+        foreach (glob("{$configPath}*") as $file) {
+            if (in_array(basename($file), ['routes.php', 'Event.php'])) {
                 continue;
+            }
 
             $this->getConfig($file);
         }
     }
+
 
     /**
      * Load the config into the function variable scope and assign it to the configs array

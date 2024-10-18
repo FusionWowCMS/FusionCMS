@@ -77,6 +77,16 @@ Events::on('pre_controller', static function () {
     if(version_compare($module['data']['min_required_version'], CI::$APP->config->item('FusionCMSVersion'), '>'))
         show_error(str_replace(['$1', '$2', '$3'], [$module['name'], $module['data']['min_required_version'], 'https://github.com/FusionWowCMS/FusionCMS'], 'The module <b>$1</b> requires FusionCMS v$2, Please update at $3'));
 
+    // Events files: Find modules Events files
+    if($eventFiles = glob(rtrim(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, realpath(APPPATH)), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'Event.' . pathinfo(__FILE__, PATHINFO_EXTENSION)))
+    {
+        // Events files: Loop through
+        foreach($eventFiles as $eventFile)
+        {
+            require_once($eventFile);
+        }
+    }
+
     // SKIP! No need to go any further!
     if(!isset(CI::$APP->user) || (isset(CI::$APP->user) && CI::$APP->user->isOnline()))
         return;
