@@ -116,7 +116,7 @@ class Items
      * @param String $type
      * @return bool|string|array
      */
-    public function getItemDB(int $item, $realm, string $type): mixed
+    public function getItemDB(int $item, $realm, string $type, bool $enableCache = true): mixed
     {
         // Get the item ID
         $query = $this->CI->db->query("SELECT * FROM item_template WHERE entry = ? LIMIT 1", [$item]);
@@ -126,7 +126,8 @@ class Items
             $row = $query->getResultArray()[0];
 
             // save to cache
-            $this->CI->cache->save('items/item_' . $realm . '_' . $item, $row);
+            if ($enableCache)
+                $this->CI->cache->save('items/item_' . $realm . '_' . $item, $row);
 
             return $this->getItemType($type, $row);
         }
@@ -185,18 +186,25 @@ class Items
             if ($query->getNumRows() > 0) {
                 $row = $query->getResultArray()[0];
 
-                // check if item is on Wowhead
-                $item_wowhead = $this->getItemWowHead($item, $realm, 'all', false);
+                // First get icon from Fusion CMS Item template
+                $item_template = $this->getItemDB($item, $realm, 'all', false);
 
-                if ($item_wowhead) {
-                    $row['icon'] = $item_wowhead['icon'];
-                    $row['displayid'] = $item_wowhead['displayid'];
-
-                    if (!array_key_exists('htmlTooltip', $row)) {
-                        $row['htmlTooltip'] = $item_wowhead['htmlTooltip'];
-                    }
+                if ($item_template) {
+                    $row['icon'] = $item_template['icon'];
                 } else {
-                    $row['icon'] = 'inv_misc_questionmark';
+                    // check if item is on Wowhead
+                    $item_wowhead = $this->getItemWowHead($item, $realm, 'all', false);
+
+                    if ($item_wowhead) {
+                        $row['icon'] = $item_wowhead['icon'];
+                        $row['displayid'] = $item_wowhead['displayid'];
+
+                        if (!array_key_exists('htmlTooltip', $row)) {
+                            $row['htmlTooltip'] = $item_wowhead['htmlTooltip'];
+                        }
+                    } else {
+                        $row['icon'] = 'inv_misc_questionmark';
+                    }
                 }
 
                 $data = [
