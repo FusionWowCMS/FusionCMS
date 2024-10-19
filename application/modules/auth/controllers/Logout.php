@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Services;
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 class Logout extends MX_Controller
@@ -27,7 +28,7 @@ class Logout extends MX_Controller
 
         Services::session()->destroy();
 
-        $this->plugins->onLogout();
+        Events::trigger('onLogout');
 
         redirect($this->template->page_url);
     }

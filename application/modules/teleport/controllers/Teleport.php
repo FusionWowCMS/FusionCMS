@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -135,7 +136,7 @@ class Teleport extends MX_Controller
                         //Change the location of our user
                         $this->teleport_model->setLocation($location['x'], $location['y'], $location['z'], $location['orientation'], $location['mapId'], $characterGuid, $realmConnection->getConnection());
 
-                        $this->plugins->onTeleport($this->user->getId(), $characterGuid, $teleport_exists['vpCost'], $teleport_exists['dpCost'], $teleport_exists['goldCost'], $location['x'], $location['y'], $location['z'], $location['orientation'], $location['mapId']);
+                        Events::trigger('onTeleport', $this->user->getId(), $characterGuid, $teleport_exists['vpCost'], $teleport_exists['dpCost'], $teleport_exists['goldCost'], $location['x'], $location['y'], $location['z'], $location['orientation'], $location['mapId']);
 
                         die("1");
                     } else {

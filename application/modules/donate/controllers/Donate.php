@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Services;
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 //API Container
@@ -135,6 +136,8 @@ class Donate extends MX_Controller
                 // update income
                 $this->donate_model->updateMonthlyIncome($specify_donate['price']);
 
+                Events::trigger('onSuccessDonate', $this->user->getId(), $specify_donate);
+
                 redirect(base_url('/donate/success'));
             }
         } catch (Exception $e) {
@@ -142,6 +145,8 @@ class Donate extends MX_Controller
             $this->paypal_model->setError($payment_id, $e);
 
             log_message('error', $e);
+
+            Events::trigger('onErrorDonate', $payment_id, $e);
 
             redirect(base_url('/donate/error'));
         }

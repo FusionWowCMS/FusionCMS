@@ -9,9 +9,9 @@
  * @link    http://fusion-hub.com
  */
 
-require_once APPPATH . 'modules/vote/plugins/classes/VoteCallbackPlugin.php';
+require_once(APPPATH . 'modules/vote/libraries/classes/VoteCallback.php');
 
-class Xtremetop100 extends VoteCallbackPlugin
+class Xtremetop100 extends VoteCallback
 {
     public string $name = "Xtremetop100";
     public string $url = "xtremetop100.com";

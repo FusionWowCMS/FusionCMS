@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -18,7 +19,7 @@ class Changelog extends MX_Controller
         requirePermission("view");
     }
 
-    public function index()
+    public function index(): void
     {
         clientLang("changes_made_on", "changelog");
 
@@ -86,7 +87,7 @@ class Changelog extends MX_Controller
 
         $this->dblogger->createLog("admin", "add", "Created category", ['Name' => $name]);
 
-        $this->plugins->onAddCategory($id, $name);
+        Events::trigger('onAddCategoryChangelog', $id, $name);
 
         redirect('changelog');
     }
@@ -110,7 +111,7 @@ class Changelog extends MX_Controller
 
         $this->dblogger->createLog("admin", "add", "Created change", ['ID' => $id]);
 
-        $this->plugins->onAddChange($id, $change, $category);
+        Events::trigger('onAddChangelog', $id, $change, $category);
 
         die($id . "");
 
@@ -135,7 +136,7 @@ class Changelog extends MX_Controller
 
         $this->dblogger->createLog("admin", "delete", "Deleted change", ['ID' => $id]);
 
-        $this->plugins->onDeleteChange($id);
+        Events::trigger('onDeleteChangelog', $id);
 
         $this->index();
     }

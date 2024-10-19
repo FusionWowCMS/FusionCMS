@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Services;
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 class Language_picker extends MX_Controller
@@ -31,7 +32,7 @@ class Language_picker extends MX_Controller
             Services::session()->set(['language' => $language]);
         }
 
-        $this->plugins->onSetLanguage($this->user->getId(), $language);
+        Events::trigger('onSetLanguage', $this->user->getId(), $language);
 
         die();
     }

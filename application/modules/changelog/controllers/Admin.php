@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -62,7 +63,7 @@ class Admin extends MX_Controller
         // Add log
         $this->dblogger->createLog("admin", "add", "Created category", ['Category' => $name]);
 
-        $this->plugins->onAddCategory($id, $name);
+        Events::trigger('onAddCategoryChangelog', $id, $name);
     }
 
     public function addChange($id)
@@ -81,7 +82,7 @@ class Admin extends MX_Controller
         // Add log
         $this->dblogger->createLog("admin", "add", 'Created change', ['Change' => $data['changelog'] . ' (' . $id . ')']);
 
-        $this->plugins->onAddChange($data['id'], $data['changelog'], $data['type']);
+        Events::trigger('onAddChangelog', $data['id'], $data['changelog'], $data['type']);
 
         die(json_encode($data));
     }
@@ -134,7 +135,7 @@ class Admin extends MX_Controller
         // Add log
         $this->dblogger->createLog("admin", "delete", "Deleted change", ['ID' => $id]);
 
-        $this->plugins->onDeleteChange($id);
+        Events::trigger('onAddChangelog', $id);
     }
 
     public function deleteCategory($id = false)
@@ -151,7 +152,7 @@ class Admin extends MX_Controller
         // Add log
         $this->dblogger->createLog("admin", "delete", "Deleted category", ['ID' => $id]);
 
-        $this->plugins->onDeleteCategory($id);
+        Events::trigger('onDeleteCategoryChangelog', $id);
     }
 
     public function save($id = false)
@@ -169,7 +170,7 @@ class Admin extends MX_Controller
         // Add log
 		$this->dblogger->createLog("admin", "edit", "Edited change", ['ID' => $id]);
 
-        $this->plugins->onEditChange($id, $data['changelog']);
+        Events::trigger('onEditChangelog', $id, $data['changelog']);
     }
 
     public function saveCategory($id = false)
@@ -187,6 +188,6 @@ class Admin extends MX_Controller
         // Add log
         $this->dblogger->createLog("admin", "edit", "Edited category", ['ID' => $id]);
 
-        $this->plugins->onSaveCategory($id, $data['typeName']);
+        Events::trigger('onSaveCategoryChangelog', $id, $data['typeName']);
     }
 }

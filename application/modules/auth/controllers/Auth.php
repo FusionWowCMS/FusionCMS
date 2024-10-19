@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Services;
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -171,7 +172,9 @@ class Auth extends MX_Controller
                 }
 
                 $this->external_account_model->setLastIp($this->user->getId(), $this->input->ip_address());
-                $this->plugins->onLogin($this->input->post('username'));
+
+                Events::trigger('onLogin', $username);
+
                 $this->login_model->deleteIP($ip_address);
                 $this->dblogger->createLog("user", "login", "Login");
             }

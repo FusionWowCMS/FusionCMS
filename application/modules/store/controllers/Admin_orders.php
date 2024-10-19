@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -150,7 +151,7 @@ class Admin_orders extends MX_Controller
             // Add log
             $this->dblogger->createLog("admin", "refund", "Refunded order", ['ID' => $id, 'User' =>  $order['user_id'], 'VP' =>  $order['vp_cost'], 'DP' =>  $order['dp_cost']]);
 
-            $this->plugins->onRefund($id, $order['user_id'], $order['vp_cost'], $order['dp_cost']);
+            Events::trigger('onRefundStore', $id, $order['user_id'], $order['vp_cost'], $order['dp_cost']);
         } else {
             die("Invalid order");
         }

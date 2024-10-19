@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -100,7 +101,7 @@ class Comments extends MX_Controller
                 // Add log
                 $this->dblogger->createLog("user", "add", "Added comment", ['ID' => $id]);
 
-                $this->plugins->onAddComment($id, $message);
+                Events::trigger('onAddComment', $id, $message);
 
                 // Get last comment
                 $comment_arr = $this->comments_model->getLastComment($id);
@@ -149,7 +150,7 @@ class Comments extends MX_Controller
         // Add log
 		$this->dblogger->createLog("admin", "delete", "Deleted comment", ['ID' => $id]);
 
-        $this->plugins->onDeleteComment($id, $articleId);
+        Events::trigger('onDeleteComment', $id, $articleId);
 
         die('Success');
     }

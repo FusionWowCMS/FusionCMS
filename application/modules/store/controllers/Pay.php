@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -212,7 +213,7 @@ class Pay extends MX_Controller
 
         $this->store_model->completeOrder();
 
-        $this->plugins->onCompleteOrder($cart);
+        Events::trigger('onCompleteOrderStore', $cart);
 
         // Output the content
         die($output);

@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -62,11 +63,11 @@ class Vote extends MX_Controller
 
     public function site()
     {
-        $api = array(
+        $api = [
             "user_id" => $this->user->getId(),
             "username" => $this->user->getUsername(),
             "user_ip" => $this->input->ip_address()
-        );
+        ];
 
         $vote_site_id = $this->input->post('id'); //The site where we are voting for.
 
@@ -86,7 +87,8 @@ class Vote extends MX_Controller
 
             //Update the vp if needed or else just go to the url if we got vote callback enabled.
             if ($vote_site['callback_enabled']) {
-                $vote_url = preg_replace("/\{user_id\}/", $this->user->getId(), $vote_site['vote_url']);
+                $vote_url = preg_replace("/\{user_id\}/", $api['user_id'], $vote_site['vote_url']);
+                $vote_url = preg_replace("/\{username\}/", $api['username'], $vote_url);
 
                 if ($isFireFox) {
                     die($vote_url);
@@ -98,7 +100,7 @@ class Vote extends MX_Controller
 
                 $this->vote_model->updateVp($this->user->getId(), $vote_site['points_per_vote']);
 
-                $this->plugins->onVote($api['user_id'], $vote_site);
+                Events::trigger('onVote', $api['user_id'], $api['username'], $vote_site);
 
                 if ($isFireFox) {
                     die($vote_site['vote_url']);

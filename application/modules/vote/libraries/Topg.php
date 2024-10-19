@@ -9,13 +9,13 @@
  * @link    http://fusion-hub.com
  */
 
-require_once(APPPATH . 'modules/vote/plugins/classes/VoteCallbackPlugin.php');
+require_once(APPPATH . 'modules/vote/libraries/classes/VoteCallback.php');
 
-class Topg extends VoteCallbackPlugin
+class Topg extends VoteCallback
 {
     public string $name = "Topg";
     public string $url = "topg.org";
-    public string $voteLinkFormat = "{vote_link}-{user_id}";
+    public string $voteLinkFormat = "{vote_link}-{username}";
 
     protected function checkAccess(): bool
     {

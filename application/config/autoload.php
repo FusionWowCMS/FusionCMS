@@ -113,7 +113,7 @@ $autoload['packages'] = [];
 |   $autoload['libraries'] = ['database', 'cache', 'security'];
 */
 
-$autoload['libraries'] = ['security', 'cache', 'database', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'dblogger', 'plugins', 'dbbackup', 'captcha', 'recaptcha', 'items', 'crypto'];
+$autoload['libraries'] = ['security', 'cache', 'database', 'smartyengine' => 'smarty', 'template', 'language', 'realms', 'acl', 'user', 'dblogger', 'dbbackup', 'captcha', 'recaptcha', 'items', 'crypto'];
 
 /*
 | -------------------------------------------------------------------

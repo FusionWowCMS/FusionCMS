@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 class Settings extends MX_Controller
@@ -119,7 +120,7 @@ class Settings extends MX_Controller
             } else {
                 $this->user->setLanguage($values['language']);
 
-                $this->plugins->onSetLanguage($this->user->getId(), $values['language']);
+                Events::trigger('onSetLanguage', $this->user->getId(), $values['language']);
             }
         }
 
@@ -142,7 +143,7 @@ class Settings extends MX_Controller
 
         $this->settings_model->saveSettings($values);
 
-        $this->plugins->onSaveSettings($this->user->getId(), $values);
+        Events::trigger('onSaveSettingsAccount', $this->user->getId(), $values);
 
         die("1");
     }

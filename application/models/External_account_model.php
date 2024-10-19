@@ -2,6 +2,7 @@
 
 use App\Config\Services;
 use CodeIgniter\Database\BaseConnection;
+use CodeIgniter\Events\Events;
 use MX\CI;
 
 /**
@@ -404,7 +405,7 @@ class External_account_model extends CI_Model
             $builder->update($battleData);
         }
 
-        CI::$APP->plugins->onChangePassword($userId, $hash);
+        Events::trigger('onChangePassword', $userId, $hash);
     }
 
     public function setEmail($username, $newEmail)

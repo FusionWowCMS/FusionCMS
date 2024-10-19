@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -84,7 +85,7 @@ class Admin extends MX_Controller
         // Add log
         $this->dblogger->createLog("admin", "add", "Added teleport location", ['Name' => $data['name']]);
 
-        $this->plugins->onAddTeleport($data);
+        Events::trigger('onAddTeleport', $data);
 
         die('yes');
     }
@@ -174,7 +175,7 @@ class Admin extends MX_Controller
         // Add log
         $this->dblogger->createLog("admin", "edit", "Edited teleport location", ['Name' => $data['name']]);
 
-        $this->plugins->onEditTeleport($id, $data);
+        Events::trigger('onEditTeleport', $id, $data);
 
         die('yes');
     }
@@ -193,6 +194,6 @@ class Admin extends MX_Controller
         // Add log
 		$this->dblogger->createLog("admin", "delete", "Deleted teleport location", ['ID' => $id]);
 
-        $this->plugins->onDeleteTeleport($id);
+        Events::trigger('onDeleteTeleport', $id);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -155,7 +156,7 @@ class Admin extends MX_Controller
         // Add log
         $this->dblogger->createLog("admin", "delete", "Deleted news", ['news' => $id]);
 
-        $this->plugins->onDelete($id);
+        Events::trigger('onDeleteNews', $id);
     }
 
     public function create($id = false)
@@ -294,7 +295,7 @@ class Admin extends MX_Controller
             // Add log
             $this->dblogger->createLog("admin", "edit", "Edited a news", ['news' => $headline]);
 
-            $this->plugins->onUpdate($id, $type, $type_content, $comments, $headline, $content);
+            Events::trigger('onUpdateNews', $id, $type, $type_content, $comments, $headline, $content);
         } else {
             if ($type == 1) {
                 $type_content = json_encode($type_content);
@@ -305,9 +306,8 @@ class Admin extends MX_Controller
             // Add log
             $this->dblogger->createLog("admin", "add", "Created a news", ['news' => $headline]);
 
-            $this->plugins->onCreate($type, $type_content, $comments, $headline, $content);
+            Events::trigger('onCreateNews', $type, $type_content, $comments, $headline, $content);
         }
-
 
         $this->cache->delete('news_*.cache');
 

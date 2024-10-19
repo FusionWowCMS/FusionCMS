@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -105,7 +106,7 @@ class Admin extends MX_Controller
         // Add log
 		$this->dblogger->createLog("admin", "add", "Created poll", ['Poll' => $data['question']]);
 
-        $this->plugins->onCreatePoll($id, $data['question'], $answers);
+        Events::trigger('onCreatePoll', $id, $data['question'], $answers);
 
         die("yes");
     }
@@ -124,6 +125,6 @@ class Admin extends MX_Controller
         // Add log
         $this->dblogger->createLog("admin", "delete", "Deleted poll", ['ID' => $id]);
 
-        $this->plugins->onDeletePoll($id);
+        Events::trigger('onDeletePoll', $id);
     }
 }
