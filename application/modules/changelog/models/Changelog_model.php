@@ -50,9 +50,11 @@ class Changelog_model extends CI_Model
         }
     }
 
-    public function addCategory($name)
+    public function addCategory($name): int|string
     {
         $this->db->query("INSERT INTO changelog_type(typeName) VALUES(?)", [$name]);
+
+        return $this->db->insertID();
     }
 
     public function deleteChange($id)
