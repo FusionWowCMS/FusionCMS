@@ -98,9 +98,9 @@
 }
 
 .box.type-news .news-thumbnail + .news-content {
-	margin: -webkit-calc(var(--margin-primary) * 2) 0 0 0;
-	margin: -moz-calc(var(--margin-primary) * 2) 0 0 0;
-	margin: calc(var(--margin-primary) * 2) 0 0 0;
+	margin: -webkit-calc(var(--margin-primary) * 2) 0 0;
+	margin: -moz-calc(var(--margin-primary) * 2) 0 0;
+	margin: calc(var(--margin-primary) * 2) 0 0;
 }
 
 /* News: Buttons
@@ -111,9 +111,9 @@
 
 	gap: var(--margin-primary);
 
-	margin: -webkit-calc(var(--margin-primary) * 2) 0 0 0;
-	margin: -moz-calc(var(--margin-primary) * 2) 0 0 0;
-	margin: calc(var(--margin-primary) * 2) 0 0 0;
+	margin: -webkit-calc(var(--margin-primary) * 2) 0 0;
+	margin: -moz-calc(var(--margin-primary) * 2) 0 0;
+	margin: calc(var(--margin-primary) * 2) 0 0;
 
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -130,9 +130,9 @@
 
 	color: var(--box-color-06);
 
-	margin: -webkit-calc(var(--margin-primary) * 2) 0 0 0;
-	margin: -moz-calc(var(--margin-primary) * 2) 0 0 0;
-	margin: calc(var(--margin-primary) * 2) 0 0 0;
+	margin: -webkit-calc(var(--margin-primary) * 2) 0 0;
+	margin: -moz-calc(var(--margin-primary) * 2) 0 0;
+	margin: calc(var(--margin-primary) * 2) 0 0;
 
 	padding: var(--news-metadata-padding);
 
