@@ -189,17 +189,15 @@ class Crypto
      */
     public function salt(string $username, bool $hex = false): string
     {
-        if ($saltUser = CI::$APP->external_account_model->getConnection()->query(sprintf(
-                'SELECT TRIM("\0" FROM %s) FROM %s WHERE username = ?',
-                column('account', 'salt'),
-                table('account')
-            ), [$username])->getRowArray()
-        ) {
-            $salt = current($saltUser); // get the stored salt
+        // Retrieve salt for the user if it exists
+        $saltUser = CI::$APP->external_account_model->getConnection()
+            ->table(table('account'))
+            ->select('TRIM("\0" FROM ' . column('account', 'salt') . ') as salt')
+            ->where('username', $username)
+            ->get()->getRowArray();
 
-            if ($salt) { // if it exists
-                return $salt;
-            }
+        if ($saltUser && isset($saltUser['salt']) && $saltUser['salt']) {
+            return $saltUser['salt']; // Return the existing salt
         }
 
         if ($hex) {
