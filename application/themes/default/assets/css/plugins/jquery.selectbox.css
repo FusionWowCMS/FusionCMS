@@ -82,9 +82,9 @@
 	width: var(--sbHolder-toggle-size);
 	height: var(--sbHolder-toggle-size);
 
-	margin: -webkit-calc(var(--sbHolder-toggle-size) / 2 * -1) 0 0 0;
-	margin: -moz-calc(var(--sbHolder-toggle-size) / 2 * -1) 0 0 0;
-	margin: calc(var(--sbHolder-toggle-size) / 2 * -1) 0 0 0;
+	margin: -webkit-calc(var(--sbHolder-toggle-size) / 2 * -1) 0 0;
+	margin: -moz-calc(var(--sbHolder-toggle-size) / 2 * -1) 0 0;
+	margin: calc(var(--sbHolder-toggle-size) / 2 * -1) 0 0;
 
 	content: '';
 	position: absolute;
@@ -107,9 +107,9 @@
 }
 
 .sbHolder .sbToggle.sbToggleOpen::before {
-	margin: -webkit-calc(var(--sbHolder-toggle-size) / 2) 0 0 0;
-	margin: -moz-calc(var(--sbHolder-toggle-size) / 2) 0 0 0;
-	margin: calc(var(--sbHolder-toggle-size) / 2) 0 0 0;
+	margin: -webkit-calc(var(--sbHolder-toggle-size) / 2) 0 0;
+	margin: -moz-calc(var(--sbHolder-toggle-size) / 2) 0 0;
+	margin: calc(var(--sbHolder-toggle-size) / 2) 0 0;
 }
 
 /* Selectbox: Field

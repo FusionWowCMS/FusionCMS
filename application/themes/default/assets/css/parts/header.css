@@ -127,9 +127,9 @@
 	width: 100%;
 	height: auto;
 
-	margin: -webkit-calc(var(--userbar-avatar-size) / 2) 0 0 0;
-	margin: -moz-calc(var(--userbar-avatar-size) / 2) 0 0 0;
-	margin: calc(var(--userbar-avatar-size) / 2) 0 0 0;
+	margin: -webkit-calc(var(--userbar-avatar-size) / 2) 0 0;
+	margin: -moz-calc(var(--userbar-avatar-size) / 2) 0 0;
+	margin: calc(var(--userbar-avatar-size) / 2) 0 0;
 
 	display: -webkit-box;
 	display: -ms-flexbox;
