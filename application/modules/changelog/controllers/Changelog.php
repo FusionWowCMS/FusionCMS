@@ -114,8 +114,6 @@ class Changelog extends MX_Controller
         Events::trigger('onAddChangelog', $id, $change, $category);
 
         die($id . "");
-
-        $this->index();
     }
 
     /**
