@@ -287,6 +287,9 @@ class Items
         $item['dps'] = $this->getDPS($item['damage_min'], $item['damage_max'], $item['speed']);
         $item['sockets'] = $this->getSockets($itemDB);
 
+        if (isset($item['socketBonus']))
+            $item['socketBonus'] = $itemDB['socketBonus'];
+
         return $item;
     }
 
