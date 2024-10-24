@@ -1,16 +1,13 @@
 #item_space .item_bg {
 	margin-left:5px;
 	width:300px;
-	float:left;
 }
 
 #item_space .item {
 	width:70px;
 	height:70px;
 	float:left;
-	margin:10px;
-	margin-right:0px;
-	margin-top:12px;
+	margin: 12px 0 10px 10px;
 }
 
 #item_space .item a {
