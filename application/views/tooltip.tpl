@@ -34,7 +34,13 @@
 {if $item.shadow_res}+ {$item.shadow_res} {lang("shadow", "tooltip")}<br />{/if}
 {if $item.arcane_res}+ {$item.arcane_res} {lang("arcane", "tooltip")}<br />{/if}
 
-{if $item.sockets}{$item.sockets}{/if}
+<div class="q2" id="item-enchantments"></div>
+
+<div id="item-sockets">
+	{if $item.sockets}{$item.sockets}{/if}
+</div>
+
+<div class="q0" id="item-socket-bonus"></div>
 
 {if $item.durability}{lang("durability", "tooltip")} {$item.durability} / {$item.durability}<br />{/if}
 {if $item.required}{lang("requires_level", "tooltip")} {$item.required}<br />{/if}

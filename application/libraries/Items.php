@@ -114,6 +114,7 @@ class Items
      * @param Int $item
      * @param $realm
      * @param String $type
+     * @param bool $enableCache
      * @return bool|string|array
      */
     public function getItemDB(int $item, $realm, string $type, bool $enableCache = true): mixed
