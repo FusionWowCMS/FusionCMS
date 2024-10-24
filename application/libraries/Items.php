@@ -338,7 +338,7 @@ class Items
         for ($i = 1; $i < 3; $i++) {
             $color = $item['socketColor_' . $i];
             if (isset($sockets[$color])) {
-                $output .= "<span class='socket-{$sockets[$color]} q0'>" . lang($sockets[$color], "tooltip") . "</span><br />";
+                $output .= "<span class='socket-slot socket-{$sockets[$color]} q0' data-socket-color='{$color}'>" . lang($sockets[$color], "tooltip") . "</span><br />";
             }
         }
 
