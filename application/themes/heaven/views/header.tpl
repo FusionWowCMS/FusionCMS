@@ -68,18 +68,6 @@
 		{minify type="js" files=$assets.js.parts.all.files output="{$assets.js.path}{$assets.js.parts.all.name}?v={$theme_configs.config.version}" disable="{$minify_js}"}
 		{foreach from=$assets.js.parts.module.files item=file}<script type="text/javascript" src="{if $cdn_link != false}{str_replace(base_url(), $cdn_link, $file)}{else}{$file}{/if}?v={$theme_configs.config.version}"></script>{/foreach}
 
-		{if $extra_js}
-			{if !is_array($extra_js)}
-				<script type="text/javascript" src="{$path}{$extra_js}?v={$theme_configs.config.version}"></script>
-			{else}
-				{strip}
-					{foreach from=$extra_js item=js}
-						<script type="text/javascript" src="{$path}{$js}?v={$theme_configs.config.version}"></script>
-					{/foreach}
-				{/strip}
-			{/if}
-		{/if}
-
 		<!--[if lt IE 9]>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -115,6 +103,18 @@
 			{* Initialize UI *}
 			UI.initialize();
 		</script>
+
+		{if $extra_js}
+			{if !is_array($extra_js)}
+				<script type="text/javascript" src="{$path}{$extra_js}?v={$theme_configs.config.version}"></script>
+			{else}
+			    {strip}
+			        {foreach from=$extra_js item=js}
+			        	<script type="text/javascript" src="{$path}{$js}?v={$theme_configs.config.version}"></script>
+			        {/foreach}
+			    {/strip}
+			{/if}
+		{/if}
 
 		{if $analytics}
 			<!-- Google tag (gtag.js) -->

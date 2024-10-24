@@ -61,17 +61,6 @@
 
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
-		{if $extra_js}
-			{if !is_array($extra_js)}
-				<script type="text/javascript" src="{$path}{$extra_js}"></script>
-			{else}
-				{strip}
-					{foreach from=$extra_js item=js}
-						<script type="text/javascript" src="{$path}{$js}"></script>
-					{/foreach}
-				{/strip}
-			{/if}
-		{/if}
 
 		<!-- Header JS.End -->
 
@@ -115,4 +104,15 @@
 				})();
 			{/if}
 		</script>
+		{if $extra_js}
+			{if !is_array($extra_js)}
+				<script type="text/javascript" src="{$path}{$extra_js}"></script>
+			{else}
+			    {strip}
+			        {foreach from=$extra_js item=js}
+			            <script type="text/javascript" src="{$path}{$js}"></script>
+			        {/foreach}
+			    {/strip}
+			{/if}
+		{/if}
 	</head>
