@@ -6,6 +6,8 @@
 <span class='q{$item.quality}' style='font-size: 16px'>{$item.name}</span><br />
 
 {if $item.isHeroic}<div class="q2">Heroic</div>{/if}
+
+{if $item.level}<span class='q'>{lang("item_level", "tooltip")} {$item.level}</span><br />{/if}
 <!--nend-->
 
 {if $item.bind}{$item.bind}<br />{/if}
@@ -44,7 +46,6 @@
 
 {if $item.durability}{lang("durability", "tooltip")} {$item.durability} / {$item.durability}<br />{/if}
 {if $item.required}{lang("requires_level", "tooltip")} {$item.required}<br />{/if}
-{if $item.level}{lang("item_level", "tooltip")} {$item.level}<br />{/if}
 
 {if count($item.attributes.spells) > 0}
 	{foreach from=$item.attributes.spells item=attribute}
