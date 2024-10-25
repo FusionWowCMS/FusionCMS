@@ -244,11 +244,11 @@ class Items
             return lang("unknown_item", "tooltip");
         }
 
-        $flags = $this->getFlags($itemDB['Flags']);
+        $flags = $itemDB['Flags'];
 
         $item['name'] = $itemDB['name'];
 
-        $item['isHeroic'] = $this->hasFlag(8, $flags);
+        $item['isHeroic'] = ($flags & ItemFlags::ITEM_FLAG_HEROIC_TOOLTIP);
 
         // Support custom colors
         if (preg_match("/\|cff/", $itemDB['name'])) {
@@ -259,7 +259,7 @@ class Items
 
         $item['quality'] = $itemDB['Quality'];
         $item['bind'] = $bind[$itemDB['bonding']];
-        $item['unique'] = ($this->hasFlag(524288, $flags)) ? "Unique-Equipped" : null;
+        $item['unique'] = ($flags & ItemFlags::ITEM_FLAG_UNIQUE_EQUIPPABLE) ? "Unique-Equipped" : null;
         $item['slot'] = $slots[$itemDB['InventoryType']];
         $item['durability'] = $itemDB['MaxDurability'];
         $item['armor'] = (array_key_exists("armor", $itemDB)) ? $itemDB['armor'] : false;
@@ -504,41 +504,6 @@ class Items
     }
 
     /**
-     * Get flags as an array
-     *
-     * @param int $flags
-     * @return array
-     */
-    private function getFlags(int $flags): array
-    {
-        $bits = [];
-
-        for ($i = 1; $i <= $flags; $i *= 2) {
-            if (($i & $flags) > 0) {
-                $bits[] = $i;
-            }
-        }
-
-        return $bits;
-    }
-
-    /**
-     * Check if our flag array contains the flag
-     *
-     * @param int $flag
-     * @param array $flags
-     * @return bool
-     */
-    private function hasFlag(int $flag, array $flags): bool
-    {
-        if (in_array($flag, $flags)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Helper function to get an item type
      */
     private function getItemType(string $type, array $data): mixed
@@ -650,3 +615,40 @@ class Items
         return (int)filter_var($nodes->item(0)->textContent, FILTER_SANITIZE_NUMBER_INT);
     }
 }
+
+class ItemFlags
+{
+    public const ITEM_FLAG_NO_PICKUP                         = 0x00000001;
+    public const ITEM_FLAG_CONJURED                          = 0x00000002;
+    public const ITEM_FLAG_HAS_LOOT                          = 0x00000004;
+    public const ITEM_FLAG_HEROIC_TOOLTIP                    = 0x00000008;
+    public const ITEM_FLAG_DEPRECATED                        = 0x00000010;
+    public const ITEM_FLAG_NO_USER_DESTROY                   = 0x00000020;
+    public const ITEM_FLAG_PLAYERCAST                        = 0x00000040;
+    public const ITEM_FLAG_NO_EQUIP_COOLDOWN                 = 0x00000080;
+    public const ITEM_FLAG_LEGACY                            = 0x00000100;
+    public const int ITEM_FLAG_IS_WRAPPER                        = 0x00000200;
+    public const int ITEM_FLAG_USES_RESOURCES                    = 0x00000400;
+    public const int ITEM_FLAG_MULTI_DROP                        = 0x00000800;
+    public const int ITEM_FLAG_ITEM_PURCHASE_RECORD              = 0x00001000;
+    public const int ITEM_FLAG_PETITION                          = 0x00002000;
+    public const int ITEM_FLAG_HAS_TEXT                          = 0x00004000;
+    public const int ITEM_FLAG_NO_DISENCHANT                     = 0x00008000;
+    public const int ITEM_FLAG_REAL_DURATION                     = 0x00010000;
+    public const int ITEM_FLAG_NO_CREATOR                        = 0x00020000;
+    public const int ITEM_FLAG_IS_PROSPECTABLE                   = 0x00040000;
+    public const int ITEM_FLAG_UNIQUE_EQUIPPABLE                 = 0x00080000;
+    public const int ITEM_FLAG_DISABLE_AUTO_QUOTES               = 0x00100000;
+    public const int ITEM_FLAG_IGNORE_DEFAULT_ARENA_RESTRICTIONS = 0x00200000;
+    public const int ITEM_FLAG_NO_DURABILITY_LOSS                = 0x00400000;
+    public const int ITEM_FLAG_USE_WHEN_SHAPESHIFTED             = 0x00800000;
+    public const int ITEM_FLAG_HAS_QUEST_GLOW                    = 0x01000000;
+    public const int ITEM_FLAG_HIDE_UNUSABLE_RECIPE              = 0x02000000;
+    public const int ITEM_FLAG_NOT_USEABLE_IN_ARENA              = 0x04000000;
+    public const int ITEM_FLAG_IS_BOUND_TO_ACCOUNT               = 0x08000000;
+    public const int ITEM_FLAG_NO_REAGENT_COST                   = 0x10000000;
+    public const int ITEM_FLAG_IS_MILLABLE                       = 0x20000000;
+    public const int ITEM_FLAG_REPORT_TO_GUILD_CHAT              = 0x40000000;
+    public const int ITEM_FLAG_NO_PROGRESSIVE_LOOT               = 0x80000000;
+}
+
