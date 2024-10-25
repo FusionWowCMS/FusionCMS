@@ -249,6 +249,7 @@ class Items
         $item['name'] = $itemDB['name'];
 
         $item['isHeroic'] = ($flags & ItemFlags::ITEM_FLAG_HEROIC_TOOLTIP);
+        $item['account_wide'] = ($flags & ItemFlags::ITEM_FLAG_IS_BOUND_TO_ACCOUNT);
 
         // Support custom colors
         if (preg_match("/\|cff/", $itemDB['name'])) {

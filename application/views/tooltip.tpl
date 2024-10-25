@@ -10,6 +10,7 @@
 {if $item.level}<span class='q'>{lang("item_level", "tooltip")} {$item.level}</span><br />{/if}
 <!--nend-->
 
+{if $item.account_wide}Account Bound<br />{/if}
 {if $item.bind}{$item.bind}<br />{/if}
 {if $item.unique}{$item.unique}<br />{/if}
 {if $item.slot}<div style='float:left;'>{$item.slot}</div>{/if}
