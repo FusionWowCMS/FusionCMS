@@ -48,7 +48,7 @@
 {if $item.durability}{lang("durability", "tooltip")} {$item.durability} / {$item.durability}<br />{/if}
 {if $item.required}{lang("requires_level", "tooltip")} {$item.required}<br />{/if}
 
-{if $item.AllowableClass}Classes: {foreach from=$item.AllowableClass key=classId item=className}<a href="https://www.wowhead.com/class={$classId}" class="color-c{$classId}">{$className}</a>{if !$className@last}, {/if}{/foreach}<br />{/if}
+{if count($item.AllowableClass) > 0}Classes: {foreach from=$item.AllowableClass key=classId item=className}<a href="https://www.wowhead.com/class={$classId}" class="color-c{$classId}">{$className}</a>{if !$className@last}, {/if}{/foreach}<br />{/if}
 
 {if count($item.attributes.spells) > 0}
 	{foreach from=$item.attributes.spells item=attribute}

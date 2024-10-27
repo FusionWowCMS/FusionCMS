@@ -268,8 +268,7 @@ class Items
         $item['armor'] = (array_key_exists("armor", $itemDB)) ? $itemDB['armor'] : false;
         $item['required'] = $itemDB['RequiredLevel'];
 
-        if ($itemDB['AllowableClass'] > 0)
-            $item['AllowableClass'] = $this->getClassesFromMask($itemDB['AllowableClass'], $this->CI->config->item('classes_en'));
+        $item['AllowableClass'] = $itemDB['AllowableClass'] > 0 ? $this->getClassesFromMask($itemDB['AllowableClass'], $this->CI->config->item('classes_en')) : null;
 
         $item['level'] = $itemDB['ItemLevel'];
         $item['type'] = $this->getType($itemDB['class'], $itemDB['subclass']);
