@@ -20,6 +20,8 @@ class Items
     public function __construct()
     {
         $this->CI = &get_instance();
+
+        $this->CI->config->load('wow_constants');
     }
 
     /**
@@ -265,6 +267,10 @@ class Items
         $item['durability'] = $itemDB['MaxDurability'];
         $item['armor'] = (array_key_exists("armor", $itemDB)) ? $itemDB['armor'] : false;
         $item['required'] = $itemDB['RequiredLevel'];
+
+        if ($itemDB['AllowableClass'] > 0)
+            $item['AllowableClass'] = $this->getClassesFromMask($itemDB['AllowableClass'], $this->CI->config->item('classes_en'));
+
         $item['level'] = $itemDB['ItemLevel'];
         $item['type'] = $this->getType($itemDB['class'], $itemDB['subclass']);
         $item['damage_type'] = (array_key_exists("dmg_type1", $itemDB)) ? $damages[$itemDB['dmg_type1']] : false;
@@ -615,19 +621,32 @@ class Items
         // Find stackable
         return (int)filter_var($nodes->item(0)->textContent, FILTER_SANITIZE_NUMBER_INT);
     }
+
+    function getClassesFromMask($allowableClass, $classList): array
+    {
+        $allowedClasses = [];
+
+        foreach ($classList as $bit => $className) {
+            if ($allowableClass & (1 << ($bit - 1))) {
+                $allowedClasses[$bit] = $className;
+            }
+        }
+
+        return $allowedClasses;
+    }
 }
 
 class ItemFlags
 {
-    public const ITEM_FLAG_NO_PICKUP                         = 0x00000001;
-    public const ITEM_FLAG_CONJURED                          = 0x00000002;
-    public const ITEM_FLAG_HAS_LOOT                          = 0x00000004;
-    public const ITEM_FLAG_HEROIC_TOOLTIP                    = 0x00000008;
-    public const ITEM_FLAG_DEPRECATED                        = 0x00000010;
-    public const ITEM_FLAG_NO_USER_DESTROY                   = 0x00000020;
-    public const ITEM_FLAG_PLAYERCAST                        = 0x00000040;
-    public const ITEM_FLAG_NO_EQUIP_COOLDOWN                 = 0x00000080;
-    public const ITEM_FLAG_LEGACY                            = 0x00000100;
+    public const int ITEM_FLAG_NO_PICKUP                         = 0x00000001;
+    public const int ITEM_FLAG_CONJURED                          = 0x00000002;
+    public const int ITEM_FLAG_HAS_LOOT                          = 0x00000004;
+    public const int ITEM_FLAG_HEROIC_TOOLTIP                    = 0x00000008;
+    public const int ITEM_FLAG_DEPRECATED                        = 0x00000010;
+    public const int ITEM_FLAG_NO_USER_DESTROY                   = 0x00000020;
+    public const int ITEM_FLAG_PLAYERCAST                        = 0x00000040;
+    public const int ITEM_FLAG_NO_EQUIP_COOLDOWN                 = 0x00000080;
+    public const int ITEM_FLAG_LEGACY                            = 0x00000100;
     public const int ITEM_FLAG_IS_WRAPPER                        = 0x00000200;
     public const int ITEM_FLAG_USES_RESOURCES                    = 0x00000400;
     public const int ITEM_FLAG_MULTI_DROP                        = 0x00000800;
