@@ -122,7 +122,7 @@ class Items
     public function getItemFusionDB(int $item, $realm, string $type, bool $enableCache = true): mixed
     {
         // Get the item ID
-        $query = $this->CI->db->table('item_template')->where('entry', $item);
+        $query = $this->CI->db->table('item_template')->where('entry', $item)->get();
 
         // Check for results
         if ($query->getNumRows() > 0) {
@@ -236,68 +236,76 @@ class Items
      */
     private function parseItemData($itemDB)
     {
-        // Assign them
-        $bind = lang("bind", "wow_tooltip");
-        $slots = lang("slots", "wow_tooltip");
-        $damages = lang("damages", "wow_tooltip");
-
         // No item was found
         if (!$itemDB || $itemDB == "empty") {
             return lang("unknown_item", "tooltip");
         }
 
+        // Assign them
+        $bind = lang("bind", "wow_tooltip");
+        $slots = lang("slots", "wow_tooltip");
+        $damages = lang("damages", "wow_tooltip");
+
         $flags = $itemDB['Flags'];
 
-        $item['name'] = $itemDB['name'];
-
-        $item['isHeroic'] = ($flags & ItemFlags::ITEM_FLAG_HEROIC_TOOLTIP);
-        $item['account_wide'] = ($flags & ItemFlags::ITEM_FLAG_IS_BOUND_TO_ACCOUNT);
-
-        // Support custom colors
-        if (preg_match("/\|cff/", $itemDB['name'])) {
-            while (preg_match("/\|cff/", $item['name'])) {
-                $item['name'] = preg_replace("/\|cff([A-Za-z0-9]{6})(.*)(\|cff)?/", '<span style="color:#$1;">$2</span>', $item['name']);
-            }
-        }
-
-        $item['quality'] = $itemDB['Quality'];
-        $item['bind'] = $bind[$itemDB['bonding']];
-        $item['unique'] = ($flags & ItemFlags::ITEM_FLAG_UNIQUE_EQUIPPABLE) ? "Unique-Equipped" : null;
-        $item['slot'] = $slots[$itemDB['InventoryType']];
-        $item['durability'] = $itemDB['MaxDurability'];
-        $item['armor'] = (array_key_exists("armor", $itemDB)) ? $itemDB['armor'] : false;
-        $item['required'] = $itemDB['RequiredLevel'];
-
-        $item['AllowableClass'] = $itemDB['AllowableClass'] > 0 ? $this->getClassesFromMask($itemDB['AllowableClass'], $this->CI->config->item('classes_en')) : null;
-
-        $item['level'] = $itemDB['ItemLevel'];
-        $item['type'] = $this->getType($itemDB['class'], $itemDB['subclass']);
-        $item['damage_type'] = (array_key_exists("dmg_type1", $itemDB)) ? $damages[$itemDB['dmg_type1']] : false;
-
-        if (array_key_exists("dmg_min1", $itemDB)) {
-            $item['damage_min'] = $itemDB['dmg_min1'];
-            $item['damage_max'] = $itemDB['dmg_max1'];
-        } else {
-            $item['damage_min'] = false;
-            $item['damage_max'] = false;
-        }
-
-        $item['spells'] = $this->getSpells($itemDB);
-        $item['attributes'] = $this->getAttributes($itemDB);
-        $item['holy_res'] = (array_key_exists("holy_res", $itemDB)) ? $itemDB['holy_res'] : $this->getAttributeById(53, $itemDB);
-        $item['fire_res'] = (array_key_exists("fire_res", $itemDB)) ? $itemDB['fire_res'] : $this->getAttributeById(51, $itemDB);
-        $item['nature_res'] = (array_key_exists("nature_res", $itemDB)) ? $itemDB['nature_res'] : $this->getAttributeById(55, $itemDB);
-        $item['frost_res'] = (array_key_exists("frost_res", $itemDB)) ? $itemDB['frost_res'] : $this->getAttributeById(52, $itemDB);
-        $item['shadow_res'] = (array_key_exists("shadow_res", $itemDB)) ? $itemDB['shadow_res'] : $this->getAttributeById(54, $itemDB);
-        $item['arcane_res'] = (array_key_exists("arcane_res", $itemDB)) ? $itemDB['arcane_res'] : $this->getAttributeById(56, $itemDB);
-        $item['speed'] = ($itemDB['delay'] > 0) ? ($itemDB['delay'] / 1000) . "0" : 0;
-        $item['dps'] = $this->getDPS($item['damage_min'], $item['damage_max'], $item['speed']);
-        $item['sockets'] = $this->getSockets($itemDB);
-
-        if (isset($itemDB['socketBonus']))
-            $item['socketBonus'] = $itemDB['socketBonus'];
+        $item = [
+            'name'           => $this->formatItemName($itemDB['name']),
+            'isHeroic'       => ($flags & ItemFlags::ITEM_FLAG_HEROIC_TOOLTIP),
+            'account_wide'   => ($flags & ItemFlags::ITEM_FLAG_IS_BOUND_TO_ACCOUNT),
+            'quality'        => $itemDB['Quality'],
+            'bind'           => $bind[$itemDB['bonding']] ?? null,
+            'unique'         => ($flags & ItemFlags::ITEM_FLAG_UNIQUE_EQUIPPABLE) ? "Unique-Equipped" : null,
+            'slot'           => $slots[$itemDB['InventoryType']] ?? null,
+            'durability'     => $itemDB['MaxDurability'] ?? null,
+            'armor'          => array_key_exists('armor', $itemDB) ? $itemDB['armor'] : false,
+            'required'       => $itemDB['RequiredLevel'] ?? null,
+            'AllowableClass' => $this->getAllowedClasses($itemDB),
+            'level'          => $itemDB['ItemLevel'] ?? null,
+            'type'           => $this->getType($itemDB['class'], $itemDB['subclass']),
+            'damage_type'    => array_key_exists("dmg_type1", $itemDB) ? $damages[$itemDB['dmg_type1']] : false,
+            'damage_min'     => array_key_exists("dmg_min1", $itemDB) ? $itemDB['dmg_min1'] : false,
+            'damage_max'     => array_key_exists("dmg_max1", $itemDB) ? $itemDB['dmg_max1'] : false,
+            'spells'         => $this->getSpells($itemDB),
+            'attributes'     => $this->getAttributes($itemDB),
+            'resistances'    => $this->getResistances($itemDB),
+            'speed'          => $this->calculateSpeed($itemDB['delay']),
+            'dps'            => $this->getDPS($itemDB['dmg_min1'] ?? false, $itemDB['dmg_max1'] ?? false, $itemDB['delay']),
+            'sockets'        => $this->getSockets($itemDB),
+            'socketBonus'    => $itemDB['socketBonus'] ?? null
+        ];
 
         return $item;
+    }
+
+    private function formatItemName($name)
+    {
+        // Support custom colors
+        while (preg_match("/\|cff/", $name)) {
+            $name = preg_replace("/\|cff([A-Za-z0-9]{6})(.*)(\|cff)?/", '<span style="color:#$1;">$2</span>', $name);
+        }
+        return $name;
+    }
+
+    private function getAllowedClasses($itemDB): ?array
+    {
+        return $itemDB['AllowableClass'] > 0 ? $this->getClassesFromMask($itemDB['AllowableClass'], $this->CI->config->item('classes_en')) : null;
+    }
+
+    private function calculateSpeed($delay): int|string
+    {
+        return ($delay > 0) ? ($delay / 1000) . '0' : 0;
+    }
+
+    private function getResistances($itemDB): array
+    {
+        return [
+            lang('holy', 'tooltip')   => array_key_exists('holy_res',   $itemDB) ? $itemDB['holy_res']   : $this->getAttributeById(53, $itemDB),
+            lang('nature', 'tooltip') => array_key_exists('nature_res', $itemDB) ? $itemDB['nature_res'] : $this->getAttributeById(55, $itemDB),
+            lang('fire', 'tooltip')   => array_key_exists("fire_res",   $itemDB) ? $itemDB['fire_res']   : $this->getAttributeById(51, $itemDB),
+            lang('frost', 'tooltip')  => array_key_exists('frost_res',  $itemDB) ? $itemDB['frost_res']  : $this->getAttributeById(52, $itemDB),
+            lang('shadow', 'tooltip') => array_key_exists('shadow_res', $itemDB) ? $itemDB['shadow_res'] : $this->getAttributeById(54, $itemDB),
+            lang('arcane', 'tooltip') => array_key_exists('arcane_res', $itemDB) ? $itemDB['arcane_res'] : $this->getAttributeById(56, $itemDB),
+        ];
     }
 
     /**
@@ -308,7 +316,7 @@ class Items
      */
     private function getSockets(array $item): bool|string
     {
-        if (!array_key_exists("socketColor_1", $item)) {
+        if (!array_key_exists('socketColor_1', $item)) {
             return false;
         }
 
@@ -339,7 +347,7 @@ class Items
             8388608 => "primordial",
         ];
 
-        $output = "";
+        $output = '';
 
         for ($i = 1; $i < 3; $i++) {
             $color = $item['socketColor_' . $i];

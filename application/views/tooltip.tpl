@@ -30,12 +30,9 @@
 	{/foreach}
 {/if}
 
-{if $item.holy_res}+ {$item.holy_res} {lang("holy", "tooltip")}<br />{/if}
-{if $item.nature_res}+ {$item.nature_res} {lang("nature", "tooltip")}<br />{/if}
-{if $item.fire_res}+ {$item.fire_res} {lang("fire", "tooltip")}<br />{/if}
-{if $item.frost_res}+ {$item.frost_res} {lang("frost", "tooltip")}<br />{/if}
-{if $item.shadow_res}+ {$item.shadow_res} {lang("shadow", "tooltip")}<br />{/if}
-{if $item.arcane_res}+ {$item.arcane_res} {lang("arcane", "tooltip")}<br />{/if}
+{foreach from=$item.resistances key=resistance_name item=resistance_value}
+	{if $resistance_value}+{$resistance_value} {$resistance_name}<br />{/if}
+{/foreach}
 
 <div class="q2" id="item-enchantments"></div>
 
@@ -43,7 +40,7 @@
 	{if $item.sockets}{$item.sockets}{/if}
 </div>
 
-<div class="q0" id="item-socket-bonus"></div>
+<div class="q0" id="item-socket-bonus" data-socket-bonus="{if $item.socketBonus}{$item.socketBonus}{/if}"></div>
 
 {if $item.durability}{lang("durability", "tooltip")} {$item.durability} / {$item.durability}<br />{/if}
 {if $item.required}{lang("requires_level", "tooltip")} {$item.required}<br />{/if}
