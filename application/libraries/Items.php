@@ -119,10 +119,10 @@ class Items
      * @param bool $enableCache
      * @return bool|string|array
      */
-    public function getItemDB(int $item, $realm, string $type, bool $enableCache = true): mixed
+    public function getItemFusionDB(int $item, $realm, string $type, bool $enableCache = true): mixed
     {
         // Get the item ID
-        $query = $this->CI->db->query("SELECT * FROM item_template WHERE entry = ? LIMIT 1", [$item]);
+        $query = $this->CI->db->table('item_template')->where('entry', $item);
 
         // Check for results
         if ($query->getNumRows() > 0) {
@@ -152,89 +152,89 @@ class Items
 
         if ($cache !== false) {
             return $this->getItemType($type, $cache);
-        } else {
-            // Load the realm
-            $realmObj = $this->CI->realms->getRealm($realm);
+        }
 
-            // In patch 6.x.x and higher, item_template table has been removed from world DB.
-            if ($realmObj->getExpansionId() > 4) {
-                // check if item is in cache
-                $item_in_cache = $this->getItemCache($item, $realm, $type);
+        $realmObj = $this->CI->realms->getRealm($realm);
+        if ($realmObj->getExpansionId() > 4) {
+            return $this->getItemDataFromApi($item, $realm, $type);
+        }
 
-                if ($item_in_cache) {
-                    return $item_in_cache;
-                } else {
-                    // check if item is in database
-                    $item_in_db = $this->getItemDB($item, $realm, $type);
+        return $this->getItemDataFromWorldDB($item, $realm, $type);
+    }
 
-                    if ($item_in_db) {
-                        return $item_in_db;
-                    } else {
-                        // check if item is on Wowhead
-                        return $this->getItemWowHead($item, $realm, $type);
-                    }
-                }
+    private function getItemDataFromApi(int $item, int $realm, string $type): mixed
+    {
+        if ($itemCache = $this->getItemCache($item, $realm, $type)) {
+            return $itemCache;
+        }
+        if ($itemDb = $this->getItemFusionDB($item, $realm, $type)) {
+            return $itemDb;
+        }
+        return $this->getItemWowHead($item, $realm, $type);
+    }
+
+    private function getItemDataFromWorldDB(int $item, int $realm, string $type): mixed
+    {
+        $realmObj = $this->CI->realms->getRealm($realm);
+
+        $db = $this->CI->load->database($realmObj->getConfig('world'), true);
+        $query = $db->query(query('get_item', $realm), [$item]);
+
+        if ($db->error()) {
+            $error = $db->error();
+            if ($error['code'] != 0) {
+                die($error["message"]);
             }
+        }
 
-            $db = $this->CI->load->database($realmObj->getConfig('world'), true);
-            $query = $db->query(query('get_item', $realm), [$item]);
+        if ($query->getNumRows() > 0) {
+            $row = $query->getResultArray()[0];
 
-            if ($db->error()) {
-                $error = $db->error();
-                if ($error['code'] != 0) {
-                    die($error["message"]);
-                }
-            }
+            // First get icon from Fusion CMS Item template
+            $item_template = $this->getItemFusionDB($item, $realm, 'all', false);
 
-            if ($query->getNumRows() > 0) {
-                $row = $query->getResultArray()[0];
-
-                // First get icon from Fusion CMS Item template
-                $item_template = $this->getItemDB($item, $realm, 'all', false);
-
-                if ($item_template) {
-                    $row['icon'] = $item_template['icon'];
-                } else {
-                    // check if item is on Wowhead
-                    $item_wowhead = $this->getItemWowHead($item, $realm, 'all', false);
-
-                    if ($item_wowhead) {
-                        $row['icon'] = $item_wowhead['icon'];
-                        $row['displayid'] = $item_wowhead['displayid'];
-
-                        if (!array_key_exists('htmlTooltip', $row)) {
-                            $row['htmlTooltip'] = $item_wowhead['htmlTooltip'];
-                        }
-                    } else {
-                        $row['icon'] = 'inv_misc_questionmark';
-                    }
-                }
-
-                $data = [
-                    'item' => $this->getItemDataFromWorldDB($row),
-                    'icon' => $row['icon'],
-                    'api_item_icons' => $this->CI->config->item('api_item_icons')
-                ];
-
-                $row['htmlTooltip'] = CI::$APP->smarty->view(CI::$APP->template->view_path . "tooltip.tpl", $data, true);
-
-                // Cache it forever
-                $this->CI->cache->save("items/item_" . $realm . "_" . $item, $row);
-
-                return $this->getItemType($type, $row);
+            if ($item_template) {
+                $row['icon'] = $item_template['icon'];
             } else {
-                // Cache it for 24 hours
-                $this->CI->cache->save("items/item_" . $realm . "_" . $item, 'empty', 60 * 60 * 24);
+                // check if item is on Wowhead
+                $item_wowhead = $this->getItemWowHead($item, $realm, 'all', false);
 
-                return false;
+                if ($item_wowhead) {
+                    $row['icon'] = $item_wowhead['icon'];
+                    $row['displayid'] = $item_wowhead['displayid'];
+
+                    if (!array_key_exists('htmlTooltip', $row)) {
+                        $row['htmlTooltip'] = $item_wowhead['htmlTooltip'];
+                    }
+                } else {
+                    $row['icon'] = 'inv_misc_questionmark';
+                }
             }
+
+            $data = [
+                'item' => $this->parseItemData($row),
+                'icon' => $row['icon'],
+                'api_item_icons' => $this->CI->config->item('api_item_icons')
+            ];
+
+            $row['htmlTooltip'] = CI::$APP->smarty->view(CI::$APP->template->view_path . "tooltip.tpl", $data, true);
+
+            // Cache it forever
+            $this->CI->cache->save("items/item_" . $realm . "_" . $item, $row);
+
+            return $this->getItemType($type, $row);
+        } else {
+            // Cache it for 24 hours
+            $this->CI->cache->save("items/item_" . $realm . "_" . $item, 'empty', 60 * 60 * 24);
+
+            return false;
         }
     }
 
     /**
      * Gather all data item needed
      */
-    private function getItemDataFromWorldDB($itemDB)
+    private function parseItemData($itemDB)
     {
         // Assign them
         $bind = lang("bind", "wow_tooltip");
