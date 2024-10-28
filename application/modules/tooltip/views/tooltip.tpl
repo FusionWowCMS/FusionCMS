@@ -1,3 +1,3 @@
-<div style="max-width:350px;">
+<div class="tooltip-container">
 {$item}
 </div>
