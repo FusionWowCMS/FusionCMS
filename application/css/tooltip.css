@@ -9,7 +9,7 @@
     z-index: 9999999;
     padding:1rem;
 }
-#fusion_tooltip, .tooltip-container {
+#fusion_tooltip .tooltip-container {
     max-width:350px;
     min-width: 200px;
 }
