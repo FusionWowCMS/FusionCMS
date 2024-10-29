@@ -83,9 +83,17 @@ class External_account_model extends CI_Model
                     unset($columns[column('account', 'verifier')]);
                     unset($columns[column('account', 'salt')]);
                 }
-            } elseif ($encryption == 'SRP6' || $encryption == 'SRP') {
+            } elseif ($encryption == 'SRP') {
                 if (column('account', 'sha_pass_hash')){
                     unset($columns[column('account', 'sha_pass_hash')]);
+                }
+            } elseif ($encryption == 'SRP6') {
+                if (column('account', 'sha_pass_hash')){
+                    unset($columns[column('account', 'sha_pass_hash')]);
+                }
+                if (column('account', 'v') && column('account', 's')){
+                    unset($columns[column('account', 'v')]);
+                    unset($columns[column('account', 's')]);
                 }
             }
 
