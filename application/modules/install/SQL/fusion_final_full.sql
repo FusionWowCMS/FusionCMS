@@ -528,7 +528,7 @@ CREATE TABLE `ci_sessions`  (
   `id` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   `ip_address` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   `user_agent` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `timestamp` timestamp DEFAULT CURRENT_TIMESTAMP NOT null,
   `data` mediumblob NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ci_sessions_timestamp`(`timestamp`) USING BTREE
