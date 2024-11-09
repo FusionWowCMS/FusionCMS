@@ -239,9 +239,13 @@ class Pay extends MX_Controller
      */
     private function handleQuery($query_raw, string $database, int $character, int $realm): bool
     {
-        $queries = explode(";", $query_raw);
+        $queries = explode(';', rtrim($query_raw, ';'));
 
         foreach ($queries as $query) {
+            // STOP! No need to go any further..
+            if(!$query)
+                continue;
+
             switch ($database) {
                 case "cms":
                     $db = $this->load->database("cms", true);
@@ -298,7 +302,7 @@ class Pay extends MX_Controller
             $query = preg_replace("/\{REALM\}/", "?", $query);
 
             $db->transStart();
-            $db->query($query, $data);
+            try { $db->query($query, $data); } catch(Exception $e) { return false; }
             $db->transComplete();
             if ($db->transStatus() === false)
                 return false;
