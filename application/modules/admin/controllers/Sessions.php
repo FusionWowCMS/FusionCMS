@@ -41,7 +41,7 @@ class Sessions extends MX_Controller
                 }
 
                 $date = new DateTime();
-                $date->setTimestamp($value["timestamp"]);
+                $date->setTimestamp((int)$value["timestamp"]);
 
                 $user_agent->parse($value['user_agent'] ?? '');
 
