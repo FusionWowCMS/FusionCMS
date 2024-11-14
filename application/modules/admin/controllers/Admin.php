@@ -352,8 +352,8 @@ class Admin extends MX_Controller
         $query = $this->connection->table('uptime')->where('realmid', $realm_id)->get();
         $last = $query->getLastRow('array');
         if (isset($last)) {
-            $first_date = new DateTime(date('Y-m-d h:i:s', $last['starttime']));
-            $second_date = new DateTime(date('Y-m-d h:i:s'));
+            $first_date = new DateTime(date('Y-m-d H:i:s', $last['starttime']));
+            $second_date = new DateTime(date('Y-m-d H:i:s'));
 
             $difference = $first_date->diff($second_date);
 
