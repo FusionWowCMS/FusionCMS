@@ -40,6 +40,6 @@
         "fusion-cms/rest-api-sdk-php": "^2.0",
         "chillerlan/php-qrcode": "^5.0",
         "laminas/laminas-escaper": "^2.6",
-        "kint-php/kint": "^5.0.4"
+        "kint-php/kint": "^6.0"
     }
 }
