@@ -1,7 +1,7 @@
 {
     "name": "kint-php/kint",
-    "description": "Kint - debugging tool for PHP developers",
-    "keywords": ["kint", "php", "debug"],
+    "description": "Kint - Advanced PHP dumper",
+    "keywords": ["dump", "debug"],
     "type": "library",
     "homepage": "https://kint-php.github.io/kint/",
     "license": "MIT",
@@ -16,13 +16,12 @@
         }
     ],
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.4"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3",
         "phpunit/phpunit": "^9",
-        "phpspec/prophecy-phpunit": "^2",
-        "symfony/finder": ">=4.0",
+        "symfony/finder": ">=7",
         "seld/phar-utils": "^1",
         "vimeo/psalm": "^5"
     },
@@ -39,7 +38,7 @@
     },
     "config": {
         "platform": {
-            "php": "8.2"
+            "php": "8.3"
         }
     },
     "scripts": {
@@ -54,7 +53,7 @@
             "@format:js",
             "@format:sass"
         ],
-        "format:php": "php-cs-fixer fix",
+        "format:php": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix",
         "format:js": "npm run format:js",
         "format:sass": "npm run format:sass",
         "build": [
@@ -65,7 +64,12 @@
         "build:sass": "npm run build:sass",
         "build:js": "npm run build:js",
         "build:php": "php ./build.php",
-        "analyze": "psalm --show-info=false"
+        "analyze": [
+            "@analyze:php",
+            "@analyze:js"
+        ],
+        "analyze:php": "psalm --no-cache",
+        "analyze:js": "npm run analyze:js"
     },
     "suggest": {
         "kint-php/kint-helpers": "Provides extra helper functions",
