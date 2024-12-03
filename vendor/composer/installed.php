@@ -167,9 +167,9 @@
             ),
         ),
         'smarty/smarty' => array(
-            'pretty_version' => 'v5.4.1',
-            'version' => '5.4.1.0',
-            'reference' => 'cd58df7a2603b7d925e5db5c9d50f10987695fd3',
+            'pretty_version' => 'v5.4.2',
+            'version' => '5.4.2.0',
+            'reference' => '642a97adcc2bf6c1b2458d6afeeb36ae001c1c2f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../smarty/smarty',
             'aliases' => array(),
