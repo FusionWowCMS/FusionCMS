@@ -40,16 +40,13 @@ class Sessions extends MX_Controller
                     $sessions[$key]['nickname'] = $this->getNickname($session);
                 }
 
-                $date = new DateTime();
-                $date->setTimestamp($value["timestamp"]);
-
                 $user_agent->parse($value['user_agent'] ?? '');
 
                 $sessions[$key]['os'] = $this->getPlatform($value['user_agent']);
                 $sessions[$key]['osName'] = $user_agent->getPlatform();
                 $sessions[$key]['browser'] = $this->getBrowser($value['user_agent']);
                 $sessions[$key]['browserName'] = $user_agent->getBrowser();
-                $sessions[$key]['date'] = $date->format("d.m.y H:i:s");
+                $sessions[$key]['date'] = $value["timestamp"];
             }
         }
 
