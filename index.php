@@ -55,7 +55,7 @@ require_once SYSTEMPATH . 'Config/DotEnv.php';
 
 // Define ENVIRONMENT
 if (! defined('ENVIRONMENT')) {
-    define('ENVIRONMENT', env('CI_ENVIRONMENT', 'production'));
+    define('ENVIRONMENT', env('CI_ENVIRONMENT', 'development'));
 }
 
 // Load Config Cache

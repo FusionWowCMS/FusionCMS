@@ -147,7 +147,7 @@ class DotEnv
         }
 
         // Does it begin with a quote?
-        if ($this->strpbrk($value[0], '"\'') !== false)
+        if (strpbrk($value[0], '"\'') !== false)
         {
             // value starts with a quote
             $quote        = $value[0];
