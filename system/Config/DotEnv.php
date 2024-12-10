@@ -1,5 +1,25 @@
-<?php namespace CodeIgniter\Config;
+<?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of CodeIgniter 4 framework.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace CodeIgniter\Config;
+
+use InvalidArgumentException;
+
+/**
+ * Environment-specific configuration
+ *
+ * @see \CodeIgniter\Config\DotEnvTest
+ */
 class DotEnv
 {
     /**
@@ -9,124 +29,108 @@ class DotEnv
      */
     protected $path;
 
-    //--------------------------------------------------------------------
-
     /**
      * Builds the path to our file.
-     *
-     * @param string $path
-     * @param string $file
      */
-    public function __construct(string $path, $file = '.env')
+    public function __construct(string $path, string $file = '.env')
     {
-        if ( ! is_string($file))
-        {
-            $file = '.env';
-        }
-
-        $this->path = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$file;
+        $this->path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * The main entry point, will load the .env file and process it
      * so that we end up with all settings in the PHP environment vars
      * (i.e. getenv(), $_ENV, and $_SERVER)
      */
-    public function load()
+    public function load(): bool
     {
-        // We don't want to enforce the presence of a .env file,
-        // they should be optional.
-        if ( ! is_file($this->path))
-        {
-            return;
+        $vars = $this->parse();
+
+        return $vars !== null;
+    }
+
+    /**
+     * Parse the .env file into an array of key => value
+     */
+    public function parse(): ?array
+    {
+        // We don't want to enforce the presence of a .env file, they should be optional.
+        if (! is_file($this->path)) {
+            return null;
         }
 
-        // Ensure file is readable
-        if ( ! is_readable($this->path))
-        {
-            throw new \InvalidArgumentException("The .env file is not readable: {$this->path}");
+        // Ensure the file is readable
+        if (! is_readable($this->path)) {
+            throw new InvalidArgumentException("The .env file is not readable: {$this->path}");
         }
+
+        $vars = [];
 
         $lines = file($this->path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-        foreach ($lines as $line)
-        {
+        foreach ($lines as $line) {
             // Is it a comment?
-            if (strpos(trim($line), '#') === 0)
-            {
+            if (str_starts_with(trim($line), '#')) {
                 continue;
             }
 
-            // If there is an equal sign, then we know we
-            // are assigning a variable.
-            if (strpos($line, '=') !== false)
-            {
-                $this->setVariable($line);
+            // If there is an equal sign, then we know we are assigning a variable.
+            if (str_contains($line, '=')) {
+                [$name, $value] = $this->normaliseVariable($line);
+                $vars[$name]    = $value;
+                $this->setVariable($name, $value);
             }
         }
-    }
 
-    //--------------------------------------------------------------------
+        return $vars;
+    }
 
     /**
      * Sets the variable into the environment. Will parse the string
      * first to look for {name}={value} pattern, ensure that nested
      * variables are handled, and strip it of single and double quotes.
      *
-     * @param string $name
-     * @param string $value
+     * @return void
      */
     protected function setVariable(string $name, string $value = '')
     {
-        list($name, $value) = $this->normaliseVariable($name, $value);
-
-        // Don't overwrite existing environment variables.
-        if ( ! is_null($this->getVariable($name)))
-        {
-            return;
+        if (! getenv($name, true)) {
+            putenv("{$name}={$value}");
         }
 
-        putenv("$name=$value");
-        $_ENV[$name] = $value;
-        $_SERVER[$name] = $value;
-    }
+        if (empty($_ENV[$name])) {
+            $_ENV[$name] = $value;
+        }
 
-    //--------------------------------------------------------------------
+        if (empty($_SERVER[$name])) {
+            $_SERVER[$name] = $value;
+        }
+    }
 
     /**
      * Parses for assignment, cleans the $name and $value, and ensures
      * that nested variables are handled.
-     *
-     * @param string $name
-     * @param string $value
-     *
-     * @return array
      */
     public function normaliseVariable(string $name, string $value = ''): array
     {
-        // Split our compound string into it's parts.
-        if (strpos($name, '=') !== false)
-        {
-            list($name, $value) = explode('=', $name, 2);
+        // Split our compound string into its parts.
+        if (str_contains($name, '=')) {
+            [$name, $value] = explode('=', $name, 2);
         }
 
         $name  = trim($name);
         $value = trim($value);
 
-        // Sanitise the name
-        $name = str_replace(['export', '\'', '"'], '', $name);
+        // Sanitize the name
+        $name = preg_replace('/^export[ \t]++(\S+)/', '$1', $name);
+        $name = str_replace(['\'', '"'], '', $name);
 
-        // Sanitise the value
-        $value = $this->sanitiseValue($value);
-
+        // Sanitize the value
+        $value = $this->sanitizeValue($value);
         $value = $this->resolveNestedVariables($value);
 
         return [$name, $value];
     }
-
-    //--------------------------------------------------------------------
 
     /**
      * Strips quotes from the environment variable value.
@@ -134,31 +138,27 @@ class DotEnv
      * This was borrowed from the excellent phpdotenv with very few changes.
      * https://github.com/vlucas/phpdotenv
      *
-     * @param string $value
-     *
-     * @return string
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    protected function sanitiseValue(string $value): string
+    protected function sanitizeValue(string $value): string
     {
-        if ( ! $value)
-        {
+        if ($value === '') {
             return $value;
         }
 
         // Does it begin with a quote?
-        if ($this->strpbrk($value[0], '"\'') !== false)
-        {
+        if (strpbrk($value[0], '"\'') !== false) {
             // value starts with a quote
-            $quote        = $value[0];
+            $quote = $value[0];
+
             $regexPattern = sprintf(
                 '/^
                 %1$s          # match a quote at the start of the value
                 (             # capturing sub-pattern used
                  (?:          # we do not need to capture this
-                  [^%1$s\\\\] # any character other than a quote or backslash
-                  |\\\\\\\\   # or two backslashes together
-                  |\\\\%1$s   # or an escaped quote e.g \"
+                 [^%1$s\\\\] # any character other than a quote or backslash
+                 |\\\\\\\\   # or two backslashes together
+                 |\\\\%1$s   # or an escaped quote e.g \"
                  )*           # as many characters that match the previous rules
                 )             # end of the capturing sub-pattern
                 %1$s          # and the closing quote
@@ -166,27 +166,22 @@ class DotEnv
                 /mx',
                 $quote
             );
-            $value        = preg_replace($regexPattern, '$1', $value);
-            $value        = str_replace("\\$quote", $quote, $value);
-            $value        = str_replace('\\\\', '\\', $value);
-        }
-        else
-        {
-            $parts = explode(' #', $value, 2);
 
+            $value = preg_replace($regexPattern, '$1', $value);
+            $value = str_replace("\\{$quote}", $quote, $value);
+            $value = str_replace('\\\\', '\\', $value);
+        } else {
+            $parts = explode(' #', $value, 2);
             $value = trim($parts[0]);
 
             // Unquoted values cannot contain whitespace
-            if (preg_match('/\s+/', $value) > 0)
-            {
-                throw new \InvalidArgumentException('.env values containing spaces must be surrounded by quotes.');
+            if (preg_match('/\s+/', $value) > 0) {
+                throw new InvalidArgumentException('.env values containing spaces must be surrounded by quotes.');
             }
         }
 
         return $value;
     }
-
-    //--------------------------------------------------------------------
 
     /**
      *  Resolve the nested variables.
@@ -196,31 +191,20 @@ class DotEnv
      *
      * This was borrowed from the excellent phpdotenv with very few changes.
      * https://github.com/vlucas/phpdotenv
-     *
-     * @param $value
-     *
-     * @return string
      */
     protected function resolveNestedVariables(string $value): string
     {
-        if (strpos($value, '$') !== false)
-        {
-            $loader = $this;
-
+        if (str_contains($value, '$')) {
             $value = preg_replace_callback(
-                '/\${([a-zA-Z0-9_]+)}/',
-                function ($matchedPatterns) use ($loader)
-                {
-                    $nestedVariable = $loader->getVariable($matchedPatterns[1]);
+                '/\${([a-zA-Z0-9_\.]+)}/',
+                function ($matchedPatterns) {
+                    $nestedVariable = $this->getVariable($matchedPatterns[1]);
 
-                    if (is_null($nestedVariable))
-                    {
+                    if ($nestedVariable === null) {
                         return $matchedPatterns[0];
                     }
-                    else
-                    {
-                        return $nestedVariable;
-                    }
+
+                    return $nestedVariable;
                 },
                 $value
             );
@@ -229,26 +213,23 @@ class DotEnv
         return $value;
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * Search the different places for environment variables and return first value found.
      *
      * This was borrowed from the excellent phpdotenv with very few changes.
      * https://github.com/vlucas/phpdotenv
      *
-     * @param string $name
-     *
-     * @return string
+     * @return string|null
      */
-    protected function getVariable(string $name): string|null
+    protected function getVariable(string $name)
     {
-        switch (true)
-        {
+        switch (true) {
             case array_key_exists($name, $_ENV):
                 return $_ENV[$name];
+
             case array_key_exists($name, $_SERVER):
                 return $_SERVER[$name];
+
             default:
                 $value = getenv($name);
 
@@ -256,8 +237,4 @@ class DotEnv
                 return $value === false ? null : $value;
         }
     }
-
-    //--------------------------------------------------------------------
-
 }
-
