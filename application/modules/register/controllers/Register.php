@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 /**
@@ -60,6 +61,8 @@ class Register extends MX_Controller
         $captchaObj = new Captcha($use_captcha);
         $captcha = false;
         $recaptcha = '';
+
+        Events::trigger('onRegisterPageOpened');
 
         if (count($_POST)) {
             $emailAvailable = $this->email_check($this->input->post('register_email'));
@@ -166,6 +169,8 @@ class Register extends MX_Controller
                 //Register our user.
                 $this->external_account_model->createAccount($username, $password, $email);
 
+                Events::trigger('onCreateAccount', $username);
+
                 // Log in
                 $sha_pass_hash = $this->user->getAccountPassword($username, $password);
                 $this->user->setUserDetails($username, $sha_pass_hash["verifier"]);
@@ -226,6 +231,8 @@ class Register extends MX_Controller
         $this->activation_model->remove($account['id'], $account['username'], $account['email']);
 
         $this->external_account_model->createAccount($account['username'], $account['password'], $account['email']);
+
+        Events::trigger('onCreateAccount', $account['username']);
 
         // Log in
         $password = $this->user->getAccountPassword($account['username'], $account['password']);
