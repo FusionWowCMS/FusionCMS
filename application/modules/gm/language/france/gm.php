@@ -1,0 +1,56 @@
+<?php
+
+$lang['invalid'] = "Valeurs invalides";
+$lang['message_too_long'] = "Le message est trop long. Il doit faire moins de 8000 caractères.";
+$lang['kick'] = "Expulser un joueur";
+$lang['ban'] = "Bannir un compte";
+$lang['ticket'] = "Ticket";
+$lang['time'] = "Temps";
+$lang['message'] = "Message";
+$lang['by'] = "par";
+$lang['view'] = "Voir";
+$lang['hide'] = "Cacher";
+$lang['close'] = "Fermer le ticket";
+$lang['answer'] = "Répondre";
+$lang['unstuck'] = "Se libérer";
+$lang['send_item'] = "Envoyer un objet";
+$lang['no_tickets'] = "Aucun ticket";
+$lang['account_name'] = "Nom du compte";
+$lang['ban_reason'] = "Raison du bannissement";
+$lang['account'] = "Compte";
+$lang['has_been_banned'] = "a été banni";
+$lang['character_name'] = "Nom du personnage";
+$lang['character_has_been_kicked'] = "Le personnage a été expulsé";
+$lang['close_ticket'] = "Êtes-vous sûr de vouloir fermer ce ticket ?";
+$lang['close_short'] = "Fermer";
+$lang['ban_short'] = "Bannir";
+$lang['kick_short'] = "Expulser";
+$lang['send'] = "Envoyer";
+$lang['mail_sent'] = "L'email a été envoyé";
+$lang['teleported'] = "Le personnage a été téléporté";
+$lang['must_be_offline'] = "Le personnage doit être hors ligne";
+$lang['item_sent'] = "L'objet a été envoyé";
+
+$lang['table_command_rank'] = "Rang";
+$lang['table_command'] = "Commande";
+$lang['table_help'] = "Aide";
+
+$lang['ticket_list'] = "Liste des tickets";
+$lang['ban_list'] = "Liste des bannissements";
+$lang['history_list'] = "Historique";
+$lang['banned_account_list'] = "Liste des comptes bannis";
+$lang['banned_ip_list'] = "Liste des IP bannies";
+$lang['gm_panel'] = "Panneau GM";
+$lang['banned_account_list_active'] = "Comptes bannis actifs";
+$lang['banned_account_list_expired'] = "Comptes bannis expirés";
+$lang['ip'] = "IP";
+$lang['ban_ip'] = "Bannir une IP";
+$lang['no_data'] = "Aucune donnée";
+$lang['day'] = "Jour";
+$lang['gm'] = "GM";
+$lang['action'] = "Action";
+$lang['type'] = "Type";
+$lang['affected'] = "Affecté";
+$lang['banned_at'] = "Banni à";
+$lang['unbanned_at'] = "Désbanni à";
+$lang['banned_by'] = "Banni par";
