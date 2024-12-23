@@ -1062,11 +1062,11 @@ CREATE TABLE `sideboxes`  (
 -- Records of sideboxes
 -- ----------------------------
 INSERT INTO `sideboxes` (`id`, `type`, `displayName`, `rank_needed`, `order`, `location`, `permission`, `pages`) VALUES
-(1, 'status', '{"english":"Server status"}', 1, 0, 'side', NULL, '["news"]'),
-(2, 'language_picker', '{"english":"Language"}', 1, 3, 'side', NULL, '["news"]'),
+(1, 'status', '{"english": "Server Status","spanish": "Estado del Servidor","simplified-chinese": "服务器状态","portuguese-brazilian": "Status do Servidor","france": "État du Serveur","persian": "وضعیت سرور"}', 1, 0, 'side', NULL, '["news"]'),
+(2, 'language_picker', '{"english": "Language","spanish": "Idioma","simplified-chinese": "语言","portuguese-brazilian": "Idioma","france": "Langue","persian": "زبان"}', 1, 3, 'side', NULL, '["news"]'),
 (3, 'top', '', 1, 1, 'top', NULL, '["news"]'),
-(4, 'info_login', '{"english":"User area"}', 1, 2, 'side', NULL, '["news"]'),
-(5, 'discord', '{"english":"Discord"}', 1, 4, 'side', NULL, '["news"]');
+(4, 'info_login', '{"english": "User area","spanish": "Área de usuario","simplified-chinese": "用户区域","portuguese-brazilian": "Área do usuário","france": "Zone utilisateur","persian": "منطقه کاربری"}', 1, 2, 'side', NULL, '["news"]'),
+(5, 'discord', '{"english": "Discord","spanish": "Discord","simplified-chinese": "Discord","portuguese-brazilian": "Discord","france": "Discord","persian": "دیسکورد"}', 1, 4, 'side', NULL, '["news"]');
 
 -- ----------------------------
 -- Table structure for sideboxes_custom
