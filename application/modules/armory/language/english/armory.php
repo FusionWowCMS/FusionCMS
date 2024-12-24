@@ -12,26 +12,25 @@
  *  will automatically look in that folder too.
  */
 
- $lang['search_title'] = "Rechercher";
- $lang['search_headline'] = "Recherche dans l'armurerie";
- $lang['search_placeholder'] = "Rechercher des personnages, des objets et des guildes...";
- $lang['search_button'] = "Rechercher";
- $lang['search_too_short'] = "La chaîne de recherche doit contenir plus de 2 caractères !";
- $lang['characters'] = "Personnages";
- $lang['items'] = "Objets";
- $lang['guilds'] = "Guildes";
- $lang['no_characters_found'] = "Aucun personnage trouvé";
- $lang['no_items_found'] = "Aucun objet trouvé";
- $lang['no_guilds_found'] = "Aucune guilde trouvée";
- $lang['name'] = "Nom";
+ $lang['search_title'] = "Search";
+ $lang['search_headline'] = "Armory search";
+ $lang['search_placeholder'] = "Search characters, items and guilds...";
+ $lang['search_button'] = "Search";
+ $lang['search_too_short'] = "Search string must be longer than 2 characters!";
+ $lang['characters'] = "Characters";
+ $lang['items'] = "Items";
+ $lang['guilds'] = "Guilds";
+ $lang['no_characters_found'] = "No characters found";
+ $lang['no_items_found'] = "No items found";
+ $lang['no_guilds_found'] = "No guilds found";
+ $lang['name'] = "Name";
  $lang['faction'] = "Faction";
- $lang['members'] = "Membres";
- $lang['owner'] = "Propriétaire";
- $lang['realm'] = "Royaume";
- $lang['level'] = "Niveau";
- $lang['required'] = "Nécessaire";
+ $lang['members'] = "Members";
+ $lang['owner'] = "Owner";
+ $lang['realm'] = "Realm";
+ $lang['level'] = "Level";
+ $lang['required'] = "Required";
  $lang['type'] = "Type";
- $lang['view_character_profile'] = "Voir le profil du personnage";
- $lang['cant_be_empty'] = "Le champ de recherche ne peut pas être vide !";
- $lang['misc'] = "Divers";
- 
+ $lang['view_character_profile'] = "View character profile";
+ $lang['cant_be_empty'] = "Search field can't be empty!";
+ $lang['misc'] = "Miscellaneous";
