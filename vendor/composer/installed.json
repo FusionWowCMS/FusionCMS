@@ -1029,17 +1029,17 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v5.4.2",
-            "version_normalized": "5.4.2.0",
+            "version": "v5.4.3",
+            "version_normalized": "5.4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "642a97adcc2bf6c1b2458d6afeeb36ae001c1c2f"
+                "reference": "c6bff5795081ca5e60aabda59fb87daa511acd1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/642a97adcc2bf6c1b2458d6afeeb36ae001c1c2f",
-                "reference": "642a97adcc2bf6c1b2458d6afeeb36ae001c1c2f",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/c6bff5795081ca5e60aabda59fb87daa511acd1e",
+                "reference": "c6bff5795081ca5e60aabda59fb87daa511acd1e",
                 "shasum": ""
             },
             "require": {
@@ -1050,7 +1050,7 @@
                 "phpunit/phpunit": "^8.5 || ^7.5",
                 "smarty/smarty-lexer": "^4.0.2"
             },
-            "time": "2024-11-20T21:18:16+00:00",
+            "time": "2024-12-23T00:38:44+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1096,7 +1096,7 @@
             "support": {
                 "forum": "https://github.com/smarty-php/smarty/discussions",
                 "issues": "https://github.com/smarty-php/smarty/issues",
-                "source": "https://github.com/smarty-php/smarty/tree/v5.4.2"
+                "source": "https://github.com/smarty-php/smarty/tree/v5.4.3"
             },
             "install-path": "../smarty/smarty"
         },

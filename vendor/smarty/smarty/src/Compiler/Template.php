@@ -505,7 +505,7 @@ class Template extends BaseCompiler {
 	 *
 	 * @return string
 	 */
-	public function compileVariable($variable) {
+	public function triggerTagNoCache($variable): void {
 		if (!strpos($variable, '(')) {
 			// not a variable variable
 			$var = trim($variable, '\'');
@@ -516,7 +516,6 @@ class Template extends BaseCompiler {
 					false
 				)->isNocache();
 		}
-		return '$_smarty_tpl->getValue(' . $variable . ')';
 	}
 
 	/**
@@ -665,7 +664,7 @@ class Template extends BaseCompiler {
 		$script = null;
 		$cacheable = true;
 
-		$result = call_user_func_array(
+		$result = \call_user_func_array(
 			$defaultPluginHandlerFunc,
 			[
 				$tag,
@@ -1281,9 +1280,10 @@ class Template extends BaseCompiler {
 		}
 		// call post compile callbacks
 		foreach ($this->postCompileCallbacks as $cb) {
-			$parameter = $cb;
-			$parameter[0] = $this;
-			call_user_func_array($cb[0], $parameter);
+			$callbackFunction = $cb[0];
+			$parameters = $cb;
+			$parameters[0] = $this;
+			$callbackFunction(...$parameters);
 		}
 		// return compiled code
 		return $this->prefixCompiledCode . $this->parser->retvalue . $this->postfixCompiledCode;
