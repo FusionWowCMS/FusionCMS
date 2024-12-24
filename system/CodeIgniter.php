@@ -38,22 +38,6 @@ $benchmark = Services::timer(true);
 $benchmark->start('total_execution');
 $benchmark->start('bootstrap');
 
-/*
- * ------------------------------------------------------
- *  Load any environment-specific settings from .env file
- * ------------------------------------------------------
- */
-if (is_file(APPPATH . 'config/Boot/' . ENVIRONMENT . '.php')) {
-    require_once APPPATH . 'config/Boot/' . ENVIRONMENT . '.php';
-} else {
-    // @codeCoverageIgnoreStart{
-    header('HTTP/1.1 503 Service Unavailable.', true, 503);
-    echo 'The application environment is not set correctly.';
-
-    exit(EXIT_ERROR); // EXIT_ERROR
-    // @codeCoverageIgnoreEnd
-}
-
 //--------------------------------------------------------------------
 // CSRF Protection
 //--------------------------------------------------------------------

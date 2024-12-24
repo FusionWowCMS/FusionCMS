@@ -315,7 +315,7 @@ class Services extends BaseService
      * The Router class uses a RouteCollection's array of routes, and determines
      * the correct Controller and Method to execute.
      */
-    public static function router(RouteCollectionInterface $routes = null, bool $getShared = false)
+    public static function router(?RouteCollectionInterface $routes = null, bool $getShared = false)
     {
         if ($getShared === true)
         {
