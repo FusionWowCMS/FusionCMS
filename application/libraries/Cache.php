@@ -66,11 +66,10 @@ class Cache
     /**
      * Get cached data by name
      *
-     * @param  String $name
-     * @param  Boolean $useLanguage
+     * @param String $name
      * @return Mixed
      */
-    public function get($name)
+    public function get(string $name): mixed
     {
         // If cache is turned off
         if (!$this->enabled) {
@@ -86,12 +85,12 @@ class Cache
             return $this->runtimeCache[$name];
         } else {
             // Format file name
-            $fileName = "writable/cache/data/" . $name . ".cache";
+            $fileName = 'writable/cache/data/' . $name . '.cache';
 
             // Cache exists
             if (file_exists($fileName)) {
                 // Load the cache
-                $content = file_get_contents("writable/cache/data/" . $name . ".cache");
+                $content = file_get_contents('writable/cache/data/' . $name . '.cache');
 
                 // Decode the JSON data
                 $data = json_decode($content, true);
@@ -126,7 +125,7 @@ class Cache
      * @param Mixed $data
      * @param Int $expiration In seconds
      */
-    public function save($name, $data, $expiration = 31536000)
+    public function save(string $name, mixed $data, int $expiration = 31536000)
     {
         // If cache is turned off
         if (!$this->enabled) {
@@ -156,9 +155,9 @@ class Cache
      *
      * @param String $name
      */
-    public function delete($name)
+    public function delete(string $name): void
     {
-        $matches = glob("writable/cache/data/" . $name);
+        $matches = glob('writable/cache/data/' . $name);
 
         if ($matches) {
             foreach ($matches as $file) {
@@ -174,7 +173,7 @@ class Cache
     /**
      * Delete all cache
      */
-    public function deleteAll()
+    public function deleteAll(): void
     {
         $this->delete('*');
     }

@@ -24,8 +24,8 @@ class Acl
 
     public function __construct()
     {
-        $this->modules = array();
-        $this->runtimeCache = array();
+        $this->modules = [];
+        $this->runtimeCache = [];
         $this->CI = &get_instance();
     }
 
