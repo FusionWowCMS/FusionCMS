@@ -15,7 +15,7 @@ class Top100arena extends VoteCallback
 {
     public string $name = "Top100arena";
     public string $url = "top100arena.com";
-    public string $voteLinkFormat = "{vote_link}&incentive={user_id}";
+    public string $voteLinkFormat = "{vote_link}?incentive={user_id}";
 
     protected function checkAccess(): bool
     {
