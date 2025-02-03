@@ -71,11 +71,9 @@ class Modules extends MX_Controller
         // Replace the setting with the newValue
         $manifest[$setting] = $newValue;
 
-        $prettyJSON = new PrettyJSON($manifest);
-
         // Rewrite the file with the new data
         $fileHandle = fopen($filePath, "w");
-        fwrite($fileHandle, $prettyJSON->get());
+        fwrite($fileHandle, json_encode($manifest, JSON_PRETTY_PRINT));
         fclose($fileHandle);
     }
 
