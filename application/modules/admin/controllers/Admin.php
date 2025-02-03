@@ -32,6 +32,18 @@ class Admin extends MX_Controller
 
         $uptimes = $this->flush_uptime($realms);
 
+        $server_software = 'Unknown';
+        if (array_key_exists( 'SERVER_SOFTWARE',  $_SERVER)) {
+            $server_software = $_SERVER['SERVER_SOFTWARE'];
+
+            if (stripos($server_software, 'Apache') !== false && stripos($server_software, 'Win') !== false) {
+
+                if (preg_match('/^Apache\/[\d\.]+(?:\s*\(Win\d+\))?/', $server_software, $matches)) {
+                    $server_software = $matches[0];
+                }
+            }
+        }
+
         $data = [
             'url' => $this->template->page_url,
             'theme' => $this->template->theme_data,
@@ -40,7 +52,7 @@ class Admin extends MX_Controller
             'ci_version' => CI_VERSION,
             'os' => $this->getOsName(),
             'php_sapi' => PHP_SAPI,
-            'server_software' => $_SERVER['SERVER_SOFTWARE'],
+            'server_software' => $server_software,
             'theme_value' => $this->config->item('theme'),
             'unique' => $this->getUnique(),
             'views' => $this->getViews(),
