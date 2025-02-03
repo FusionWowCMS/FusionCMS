@@ -15,7 +15,6 @@ class Modules extends MX_Controller
         $this->load->library('administrator');
         $this->load->helper('file');
         $this->load->library('upload');
-        require_once('application/libraries/Prettyjson.php');
 
         requirePermission("view");
     }
