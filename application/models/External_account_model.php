@@ -18,27 +18,25 @@ use MX\CI;
 class External_account_model extends CI_Model
 {
     private BaseConnection $connection;
-    private $id;
-    private $username;
-    private $password;
-    private $email;
-    private $joindate;
-    private $last_ip;
-    private $last_login;
-    private $expansion;
-    private $account_cache;
-    private $totp_secret;
+    private int $id;
+    private string $username;
+    private string $password;
+    private string $email;
+    private string $joindate;
+    private string $last_ip;
+    private string $last_login;
+    private int $expansion;
+    private array $account_cache;
+    private string $totp_secret;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->account_cache = [];
+        $this->noUserExists();
 
         if ($this->user->getOnline()) {
             $this->initialize();
-        } else {
-            $this->noUserExists();
         }
     }
 
@@ -143,6 +141,7 @@ class External_account_model extends CI_Model
 
     private function noUserExists(): void
     {
+        $this->account_cache = [];
         $this->id = 0;
         $this->username = 'Guest';
         $this->password = '';
