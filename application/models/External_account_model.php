@@ -129,7 +129,7 @@ class External_account_model extends CI_Model
             $this->joindate = $result['joindate'];
             $this->expansion = $result['expansion'];
             $this->last_ip = $result['last_ip'];
-            $this->last_login = $result['last_login'];
+            $this->last_login = $result['last_login'] ?? '';
             $this->totp_secret = $result['totp_secret'] ?? '';
             return true;
         }
