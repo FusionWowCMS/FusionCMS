@@ -1,6 +1,6 @@
 'use strict';
 
-const FONTAWESOME_VERSION = '6.x';
+const FONTAWESOME_VERSION = '6.7.2';
 const jsBanner = `/*!
  * Font Awesome Icon Picker
  * https://farbelous.github.io/fontawesome-iconpicker/
@@ -46,22 +46,22 @@ module.exports = function(grunt) {
                                 style = style.toLowerCase();
                                 if (style.startsWith('brand')) {
                                     targetJSON.icons.push({
-                                        title: 'fab ' + icon,
+                                        title: 'fa-brands ' + icon,
                                         searchTerms: ele.search.terms
                                     });
                                 } else if (style.startsWith('solid')) {
                                     targetJSON.icons.push({
-                                        title: 'fas ' + icon,
+                                        title: 'fa-solid ' + icon,
                                         searchTerms: ele.search.terms
                                     });
                                 } else if (style.startsWith('regular')) {
                                     targetJSON.icons.push({
-                                        title: 'far ' + icon,
+                                        title: 'fa-regular ' + icon,
                                         searchTerms: ele.search.terms
                                     });
                                 } else if (style.startsWith('light')) {
                                     targetJSON.icons.push({
-                                        title: 'fal ' + icon,
+                                        title: 'fa-light ' + icon,
                                         searchTerms: ele.search.terms
                                     });
                                 }

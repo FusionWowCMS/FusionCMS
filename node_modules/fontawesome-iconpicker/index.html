@@ -3,20 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Font Awesome Icon Picker plugin for Bootstrap</title>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-85082661-5"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-
-      gtag('js', new Date());
-      gtag('config', 'UA-85082661-5');
-    </script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <link href="dist/css/fontawesome-iconpicker.min.css" rel="stylesheet">
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -82,22 +70,21 @@
 
     <p class="lead">
         Font Awesome Icon Picker is a fully customizable plugin for Twitter Bootstrap,
-        with a powerful base API, based on
-        <a href="https://itsjavi.com/bootstrap-popover-picker" target="_blank">Bootstrap Popover Picker</a>
+        with a powerful base API, based on Bootstrap Popover Picker
     </p>
     <div class="lead">
 
-        <a class="btn btn-warning" href="https://github.com/itsjavi/fontawesome-iconpicker">
-            <i class="fab fa-github"></i> Source Code
+        <a class="btn btn-warning" href="https://github.com/Nightprince/fontawesome-iconpicker">
+            <i class="fa-brands fa-github"></i> Source Code
         </a>
 
-        <a class="btn btn-primary" href="https://github.com/itsjavi/fontawesome-iconpicker/releases">
-            <i class="fas fa-download"></i> Download
+        <a class="btn btn-primary" href="https://github.com/Nightprince/fontawesome-iconpicker/releases">
+            <i class="fa-solid fa-download"></i> Download
         </a>
 
         <a class="btn btn-primary" target="_blank"
            href="https://chrome.google.com/webstore/detail/font-awesome-icon-picker/mcepmpclbgahgbpcgbmnpplcfmlaiopm">
-            <i class="fas fa-puzzle-piece"></i> Chrome extension
+            <i class="fa-solid fa-puzzle-piece"></i> Chrome extension
         </a>
 
         <a class="btn btn-success" href="https://github.com/itsjavi/itsjavi.github.io/blob/master/BACKERS.md#sponsors--backers">
@@ -106,7 +93,7 @@
 
         <a class="btn btn-default"
            href="https://github.com/itsjavi/itsjavi.github.io/blob/master/BACKERS.md#sponsors">
-            <i class="fas fa-star"></i> Supporters
+            <i class="fa-solid fa-star"></i> Supporters
         </a>
     </div>
     <p class="lead">
@@ -124,20 +111,20 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Default</label>
-                        <input class="form-control icp icp-auto" value="fas fa-anchor" type="text"/>
+                        <input class="form-control icp icp-auto" value="fa-solid fa-anchor" type="text"/>
                     </div>
                     <div class="form-group">
                         <label>As a component</label>
 
                         <div class="input-group">
-                            <input data-placement="bottomRight" class="form-control icp icp-auto" value="fas fa-archive"
+                            <input data-placement="bottomRight" class="form-control icp icp-auto" value="fa-solid fa-box-archive"
                                    type="text"/>
                             <span class="input-group-addon"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>With the input as a search box</label>
-                        <input class="form-control icp icp-auto" data-input-search="true" value="fas fa-plane"
+                        <input class="form-control icp icp-auto" data-input-search="true" value="fa-solid fa-plane"
                                type="text"/>
                     </div>
                     <div class="form-group">
@@ -175,26 +162,26 @@
                 <div class="col-md-7">
                     <div class="form-group">
                         <label>With custom options, e.g. a subset of icons</label>
-                        <input class="form-control icp icp-opts" value="fab fa-github" type="text"/><br>
+                        <input class="form-control icp icp-opts" value="fa-brands fa-github" type="text"/><br>
                         <pre class="well">
 {
     //...
     title: 'With custom options',
     icons: [
         {
-            title: "fab fa-github",
+            title: "fa-brands fa-github",
             searchTerms: ['repository', 'code']
         },
         {
-            title: "fas fa-heart",
+            title: "fa-solid fa-heart",
             searchTerms: ['love']
         },
         {
-            title: "fab fa-html5",
+            title: "fa-brands fa-html5",
             searchTerms: ['web']
         },
         {
-            title: "fab fa-css3",
+            title: "fa-brands fa-css3",
             searchTerms: ['style']
         }
     ],
@@ -219,10 +206,10 @@
     </div>
 </div>
 <footer>
-    created by <a href="https://itsjavi.com" target="_blank">Javi Aguilar</a>
+    created by <a href="https://itsjavi.com" target="_blank">Javi Aguilar</a> and <a href="https://www.keramatjokar.ir" target="_blank">Keramat Jokar</a>
 </footer>
-<script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="dist/js/fontawesome-iconpicker.js"></script>
 <script>
   $(function () {
@@ -248,19 +235,19 @@
         title: 'With custom options',
         icons: [
           {
-            title: "fab fa-github",
+            title: "fa-brands fa-github",
             searchTerms: ['repository', 'code']
           },
           {
-            title: "fas fa-heart",
+            title: "fa-solid fa-heart",
             searchTerms: ['love']
           },
           {
-            title: "fab fa-html5",
+            title: "fa-brands fa-html5",
             searchTerms: ['web']
           },
           {
-            title: "fab fa-css3",
+            title: "fa-brands fa-css3",
             searchTerms: ['style']
           }
         ],
