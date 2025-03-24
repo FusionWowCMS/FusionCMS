@@ -256,6 +256,12 @@
 					"controller": "menu",
 					"requirePermission": "viewMenuLinks"
 				},
+				{
+					"text": "Ucp Menu links",
+					"icon": "link",
+					"controller": "ucpmenu",
+					"requirePermission": "viewMenuLinks"
+				},
 
 				{
 					"text": "Sideboxes",

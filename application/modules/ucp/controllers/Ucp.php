@@ -2,6 +2,10 @@
 
 use MX\MX_Controller;
 
+/**
+ * Ucp Controller Class
+ * @property ucp_model $ucp_model ucp_model Class
+ */
 class Ucp extends MX_Controller
 {
     public function __construct()
@@ -11,6 +15,8 @@ class Ucp extends MX_Controller
         $this->user->userArea();
 
         $this->load->config('links');
+
+        $this->load->model("ucp_model");
     }
 
     public function index()
@@ -19,7 +25,29 @@ class Ucp extends MX_Controller
 
         $this->template->setTitle(lang("user_panel", "ucp"));
 
-        $data = array(
+        $menus = $this->ucp_model->getMenu();
+
+        $groupedMenus = [];
+        foreach ($menus as &$menu) {
+            $menu['name'] = $this->template->format(langColumn($menu['name']), false, false);
+
+            // Add the website path if internal link
+            if (!preg_match("/https?:\/\//", $menu['link'])) {
+                $menu['link'] = $this->template->page_url . $menu['link'];
+            }
+
+            if ($menu['permission'] == 'securityAccount') {
+                if ($this->config->item('totp_secret')) {
+                    $groupedMenus[$menu['group']][] = $menu;
+                }
+                continue;
+            }
+
+            if (hasPermission($menu['permission'], $menu['permissionModule']))
+                $groupedMenus[$menu['group']][] = $menu;
+        }
+
+        $data = [
             "username" => $this->user->getUsername(),
             "nickname" => $this->user->getNickname(),
             "vp" => $this->internal_user_model->getVp(),
@@ -32,7 +60,7 @@ class Ucp extends MX_Controller
             "avatar" => $this->user->getAvatar($this->user->getId()),
             "id" => $this->user->getId(),
 
-            "config" => array(
+            "config" => [
                 "vote" => $this->config->item('ucp_vote'),
                 "donate" => $this->config->item('ucp_donate'),
                 "store" => $this->config->item('ucp_store'),
@@ -41,12 +69,13 @@ class Ucp extends MX_Controller
                 "teleport" => $this->config->item('ucp_teleport'),
                 "admin" => $this->config->item('ucp_admin'),
                 "gm" => $this->config->item('ucp_mod')
-            ),
+            ],
 
             "characters" => $this->realms->getTotalCharacters(),
             "realms" => $this->realms->getRealms(),
             "realmObj" => $this->realms,
-        );
+            "menus" => $groupedMenus,
+        ];
         
         $data['email'] = false;
 

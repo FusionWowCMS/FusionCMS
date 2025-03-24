@@ -49,6 +49,7 @@
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/dropzone/dropzone.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/theme.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/custom.css">
+		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}node_modules/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
 		{if $extra_css}<link rel="stylesheet" href="{$url}application/{$extra_css}" type="text/css">{/if}
 
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/jquery/jquery.min.js"></script>
@@ -97,6 +98,7 @@
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/imagesloader/jquery.imagesloader-1.0.1.js"></script>
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/js/custom.js"></script>
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}node_modules/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js"></script>
 
 		<script type="text/javascript">
 		function getCookie(c_name) {

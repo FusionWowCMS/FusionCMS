@@ -727,6 +727,36 @@ INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `orde
 
 
 -- ----------------------------
+-- Table structure for menu_ucp
+-- ----------------------------
+DROP TABLE IF EXISTS `menu_ucp`;
+CREATE TABLE IF NOT EXISTS `menu_ucp` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text,
+  `link` varchar(255) DEFAULT '#',
+  `icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `order` int(11) NOT NULL DEFAULT 0,
+  `group` int(11) NOT NULL DEFAULT 0,
+  `permission` varchar(100) DEFAULT NULL,
+  `permissionModule` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of menu_ucp
+-- ----------------------------
+INSERT INTO `menu_ucp` (`id`, `name`, `link`, `icon`, `order`, `group`, `permission`, `permissionModule`) VALUES
+(1, '{"english":"Account Overview"}', 'ucp', NULL, 1, 1, 'view', 'ucp'),
+(2, '{"english":"Account settings"}', 'ucp/settings', NULL, 2, 1, 'canUpdateAccountSettings', 'ucp'),
+(3, '{"english":"Account Security"}', 'ucp/security', NULL, 3, 1, 'securityAccount', 'ucp'),
+(4, '{"english":"Teleport hub"}', 'teleport', NULL, 4, 2, 'view', 'teleport'),
+(5, '{"english":"Vote panel"}', 'vote', NULL, 5, 2, 'view', 'vote'),
+(6, '{"english":"Donate panel"}', 'donate', NULL, 6, 2, 'view', 'donate'),
+(7, '{"english":"Store"}', 'store', NULL, 7, 2, 'view', 'store'),
+(8, '{"english":"GM panel"}', 'gm', NULL, 8, 3, 'view', 'gm'),
+(9, '{"english":"Admin panel"}', 'admin', NULL, 9, 3, 'view', 'admin');
+
+-- ----------------------------
 -- Table structure for gm_log
 -- ----------------------------
 DROP TABLE IF EXISTS `gm_log`;
