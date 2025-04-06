@@ -53,8 +53,11 @@ function Tooltip() {
             function () {
                 $(document).bind('mousemove', Tooltip.addEvents.handleMouseMove);
 
+                // `Attributes`: Initialize
+                const attributes = this.dataset;
+
                 Tooltip.Character.get(this, function (data) {
-                    Tooltip.show(data);
+                    Tooltip.show(data, attributes);
                 });
             },
             function () {
