@@ -406,6 +406,23 @@ class Realms
     }
 
     /**
+     * Get the character faction (alliance/horde) by the race id
+     *
+     * @param  int $raceId
+     * @return Int
+     */
+    public function getFactionByRaceId(int $raceId): int
+    {
+        if (in_array($raceId, $this->getAllianceRaces())) {
+            return 1;
+        } elseif (in_array($raceId, $this->getHordeRaces())) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
      * Load the general emulator, from the first realm
      */
     public function getEmulator()
