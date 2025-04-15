@@ -989,16 +989,16 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v5.4.4",
+            "version": "v5.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "df4795b803df99645abaebca57db65442754246d"
+                "reference": "e26f82d02c4d18fc82094c28fbc65f711e39ed5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/df4795b803df99645abaebca57db65442754246d",
-                "reference": "df4795b803df99645abaebca57db65442754246d",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/e26f82d02c4d18fc82094c28fbc65f711e39ed5d",
+                "reference": "e26f82d02c4d18fc82094c28fbc65f711e39ed5d",
                 "shasum": ""
             },
             "require": {
@@ -1053,7 +1053,7 @@
             "support": {
                 "forum": "https://github.com/smarty-php/smarty/discussions",
                 "issues": "https://github.com/smarty-php/smarty/issues",
-                "source": "https://github.com/smarty-php/smarty/tree/v5.4.4"
+                "source": "https://github.com/smarty-php/smarty/tree/v5.4.5"
             },
             "funding": [
                 {
@@ -1061,7 +1061,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-13T20:12:10+00:00"
+            "time": "2025-04-15T11:20:08+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1147,7 +1147,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -1166,6 +1166,6 @@
         "ext-gd": "*",
         "ext-intl": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
