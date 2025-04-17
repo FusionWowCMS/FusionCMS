@@ -35,21 +35,26 @@ jobs:
       - name: Update dependencies
         run: composer update --no-interaction
 
-      - name: Commit updated files
+      - name: Generate PR title from composer outdated
+        id: pr_title
         run: |
-          git config user.name "GitHub Action Bot"
-          git config user.email "bot@users.noreply.github.com"
-          git checkout -B composer-update-vendor
-          git add composer.lock vendor/
-          git diff --cached --quiet || git commit -m "chore: update dependencies with vendor"
-          git push --force origin composer-update-vendor
+          OUTDATED=$(composer outdated --direct --format=json)
+          TITLE="Bump dependencies"
+          if [ "$(echo "$OUTDATED" | jq '.installed | length')" -gt 0 ]; then
+            TITLE="Bump:"
+            echo "$OUTDATED" | jq -r '.installed[] | "- \(.name) from \(.version) to \(.latest)"' >> title.txt
+            echo "title=$(cat title.txt)" >> $GITHUB_OUTPUT
+          else
+            echo "title=Update Composer dependencies" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: composer-update-vendor
-          title: "chore: update Composer dependencies with vendor"
+          title: ${{ steps.pr_title.outputs.title }}
           body: |
-            This PR updates PHP dependencies based on the current `composer.json` file and includes the `vendor/` directory.
-            Auto-generated every 24 hours.
+            This PR updates PHP dependencies based on `composer.json` and includes the `vendor/` directory.
+          base: main
+          head: composer-update-vendor
