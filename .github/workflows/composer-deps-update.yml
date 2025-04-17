@@ -53,7 +53,7 @@ jobs:
             NAME=$(echo "$PACKAGE" | jq -r '.name')
             FROM=$(echo "$PACKAGE" | jq -r '.version')
             TO=$(echo "$PACKAGE" | jq -r '.latest')
-            BRANCH="dependabot/composer/$(echo $NAME | tr '/' '-')-$TO"
+            BRANCH="dependabot/composer/$(echo $NAME | tr '/' '/')-$TO"
             REPO_URL="https://github.com/$(echo "$NAME" | cut -d/ -f1)/$(echo "$NAME" | cut -d/ -f2)"
 
             echo "name=$NAME" >> $GITHUB_OUTPUT
@@ -94,7 +94,7 @@ jobs:
           git checkout -b "${{ steps.pr_meta.outputs.branch }}"
           git add composer.lock vendor/
           git commit -m "Bump ${{ steps.pr_meta.outputs.name }} from ${{ steps.pr_meta.outputs.from }} to ${{ steps.pr_meta.outputs.to }}"
-          git push origin "${{ steps.pr_meta.outputs.branch }}"
+          git push -u origin "${{ steps.pr_meta.outputs.branch }}"
 
       - name: Create Pull Request
         if: steps.pr_meta.outputs.skip != 'true'
