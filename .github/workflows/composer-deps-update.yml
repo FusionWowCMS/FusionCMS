@@ -1,0 +1,55 @@
+name: Update Composer Dependencies (with vendor)
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-composer-deps:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up PHP 8.3 with extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: curl,mysqli,openssl,soap,mbstring,json,zip,zlib,libxml,dom,gmp,gd,intl
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer
+        run: |
+          curl -sS https://getcomposer.org/installer | php
+          sudo mv composer.phar /usr/local/bin/composer
+
+      - name: Update dependencies
+        run: composer update --no-interaction
+
+      - name: Commit updated files
+        run: |
+          git config user.name "GitHub Action Bot"
+          git config user.email "bot@users.noreply.github.com"
+          git checkout -B composer-update-vendor
+          git add composer.lock vendor/
+          git diff --cached --quiet || git commit -m "chore: update dependencies with vendor"
+          git push --force origin composer-update-vendor
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: composer-update-vendor
+          title: "chore: update Composer dependencies with vendor"
+          body: |
+            This PR updates PHP dependencies based on the current `composer.json` file and includes the `vendor/` directory.
+            Auto-generated every 24 hours.
