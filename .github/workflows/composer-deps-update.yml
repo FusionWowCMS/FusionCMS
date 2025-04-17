@@ -107,3 +107,4 @@ jobs:
           body: ${{ steps.pr_meta.outputs.body }}
           committer: "dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
           author: "dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
+          push: false
