@@ -42,7 +42,7 @@ jobs:
           TITLE="Bump dependencies"
           if [ "$(echo "$OUTDATED" | jq '.installed | length')" -gt 0 ]; then
             TITLE="Bump:"
-            echo "$OUTDATED" | jq -r '.installed[] | "- \(.name) from \(.version) to \(.latest)"' >> title.txt
+            echo "$OUTDATED" | jq -r '.installed[] | "- \(.name) from \(.version) to \(.latest)"' > title.txt
             echo "title=$(cat title.txt)" >> $GITHUB_OUTPUT
           else
             echo "title=Update Composer dependencies" >> $GITHUB_OUTPUT
