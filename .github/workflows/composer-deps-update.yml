@@ -21,8 +21,8 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "dependabot[bot]"
+          git config user.email "49699333+dependabot[bot]@users.noreply.github.com"
 
       - name: Set up PHP 8.3 with extensions
         uses: shivammathur/setup-php@v2
@@ -43,28 +43,25 @@ jobs:
           curl -sS https://getcomposer.org/installer | php
           sudo mv composer.phar /usr/local/bin/composer
 
-      - name: Update dependencies
-        run: |
-          composer update --no-interaction
-          git checkout -b composer-update-vendor
-          git add composer.lock vendor/
-          git commit -m "chore: update Composer dependencies with vendor"
-          git push origin composer-update-vendor
-
-      - name: Generate PR title and body from composer outdated
+      - name: Check outdated package and generate metadata
         id: pr_meta
         run: |
           OUTDATED=$(composer outdated --direct --format=json)
           PACKAGE=$(echo "$OUTDATED" | jq -r '.installed[0]')
-          
+
           if [ -n "$PACKAGE" ] && [ "$PACKAGE" != "null" ]; then
             NAME=$(echo "$PACKAGE" | jq -r '.name')
             FROM=$(echo "$PACKAGE" | jq -r '.version')
             TO=$(echo "$PACKAGE" | jq -r '.latest')
+            BRANCH="dependabot/composer/$(echo $NAME | tr '/' '-')-$TO"
             REPO_URL="https://github.com/$(echo "$NAME" | cut -d/ -f1)/$(echo "$NAME" | cut -d/ -f2)"
-          
+
+            echo "name=$NAME" >> $GITHUB_OUTPUT
+            echo "from=$FROM" >> $GITHUB_OUTPUT
+            echo "to=$TO" >> $GITHUB_OUTPUT
+            echo "branch=$BRANCH" >> $GITHUB_OUTPUT
             echo "title=Bump $NAME from $FROM to $TO" >> $GITHUB_OUTPUT
-          
+
             echo "body<<EOF" >> $GITHUB_OUTPUT
             echo "Bumps [$NAME]($REPO_URL) from $FROM to $TO." >> $GITHUB_OUTPUT
             echo "- [Release notes]($REPO_URL/releases)" >> $GITHUB_OUTPUT
@@ -82,17 +79,31 @@ jobs:
             echo "Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           else
-            echo "title=Update Composer dependencies" >> $GITHUB_OUTPUT
-            echo "body=No direct dependencies were updated." >> $GITHUB_OUTPUT
+            echo "No outdated packages."
+            echo "skip=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Exit if nothing to update
+        if: steps.pr_meta.outputs.skip == 'true'
+        run: echo "No changes to commit."
+
+      - name: Update dependencies and push
+        if: steps.pr_meta.outputs.skip != 'true'
+        run: |
+          composer update --no-interaction
+          git checkout -b "${{ steps.pr_meta.outputs.branch }}"
+          git add composer.lock vendor/
+          git commit -m "Bump ${{ steps.pr_meta.outputs.name }} from ${{ steps.pr_meta.outputs.from }} to ${{ steps.pr_meta.outputs.to }}"
+          git push origin "${{ steps.pr_meta.outputs.branch }}"
+
       - name: Create Pull Request
+        if: steps.pr_meta.outputs.skip != 'true'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: composer-update-vendor
+          branch: ${{ steps.pr_meta.outputs.branch }}
+          base: main
           title: ${{ steps.pr_meta.outputs.title }}
           body: ${{ steps.pr_meta.outputs.body }}
-          base: main
           committer: "dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
           author: "dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
