@@ -39,14 +39,12 @@ jobs:
         id: pr_title
         run: |
           OUTDATED=$(composer outdated --direct --format=json)
-          TITLE="Bump:"
-
           UPDATED_PACKAGES=$(echo "$OUTDATED" | jq -r '.installed[] | "\(.name) from \(.version) to \(.latest)"')
           
           if [ -n "$UPDATED_PACKAGES" ]; then
-            TITLE="Bump:"
-            echo "$UPDATED_PACKAGES" > title.txt
-            echo "title=$(cat title.txt)" >> $GITHUB_OUTPUT
+            echo "title<<EOF" >> $GITHUB_OUTPUT
+            echo "$UPDATED_PACKAGES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           else
             echo "title=Update Composer dependencies" >> $GITHUB_OUTPUT
           fi
