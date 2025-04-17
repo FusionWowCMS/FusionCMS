@@ -46,13 +46,24 @@ jobs:
       - name: Check outdated package and generate metadata
         id: pr_meta
         run: |
-          OUTDATED=$(composer outdated --direct --format=json)
-          PACKAGE=$(echo "$OUTDATED" | jq -r '.installed[0]')
+          BEFORE=$(composer show -D --format=json | jq -c '.installed | map({name, version})')
+          composer update --no-interaction
+          AFTER=$(composer show -D --format=json | jq -c '.installed | map({name, version})')
 
-          if [ -n "$PACKAGE" ] && [ "$PACKAGE" != "null" ]; then
-            NAME=$(echo "$PACKAGE" | jq -r '.name')
-            FROM=$(echo "$PACKAGE" | jq -r '.version')
-            TO=$(echo "$PACKAGE" | jq -r '.latest')
+          CHANGED=$(jq -n --argjson before "$BEFORE" --argjson after "$AFTER" '
+            [
+              .before[], .after[] | group_by(.name) | map({
+                name: .[0].name,
+                from: (. | map(select(.version != null)) | .[0].version),
+                to: (. | map(select(.version != null)) | .[1].version)
+              }) | .[]
+            ] | unique_by(.name) | map(select(.from != .to)) | .[0]
+          ')
+
+          if [ -n "$CHANGED" ]; then
+            NAME=$(echo "$CHANGED" | jq -r '.name')
+            FROM=$(echo "$CHANGED" | jq -r '.from')
+            TO=$(echo "$CHANGED" | jq -r '.to')
             BRANCH="dependabot/composer/$(echo $NAME | tr '/' '/')-$TO"
             REPO_URL="https://github.com/$(echo "$NAME" | cut -d/ -f1)/$(echo "$NAME" | cut -d/ -f2)"
 
@@ -90,7 +101,6 @@ jobs:
       - name: Update dependencies and push
         if: steps.pr_meta.outputs.skip != 'true'
         run: |
-          composer update --no-interaction
           git checkout -b "${{ steps.pr_meta.outputs.branch }}"
           git add composer.lock vendor/
           git commit -m "Bump ${{ steps.pr_meta.outputs.name }} from ${{ steps.pr_meta.outputs.from }} to ${{ steps.pr_meta.outputs.to }}"
@@ -107,4 +117,3 @@ jobs:
           body: ${{ steps.pr_meta.outputs.body }}
           committer: "dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
           author: "dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
-          push: false
