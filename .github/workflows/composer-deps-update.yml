@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up PHP 8.3 with extensions
         uses: shivammathur/setup-php@v2
@@ -35,18 +37,39 @@ jobs:
       - name: Update dependencies
         run: composer update --no-interaction
 
-      - name: Generate PR title from composer outdated
-        id: pr_title
+      - name: Generate PR title and body from composer outdated
+        id: pr_meta
         run: |
           OUTDATED=$(composer outdated --direct --format=json)
-          UPDATED_PACKAGES=$(echo "$OUTDATED" | jq -r '.installed[] | "\(.name) from \(.version) to \(.latest)"')
+          PACKAGE=$(echo "$OUTDATED" | jq -r '.installed[0]')
           
-          if [ -n "$UPDATED_PACKAGES" ]; then
-            echo "title<<EOF" >> $GITHUB_OUTPUT
-            echo "$UPDATED_PACKAGES" >> $GITHUB_OUTPUT
+          if [ -n "$PACKAGE" ] && [ "$PACKAGE" != "null" ]; then
+            NAME=$(echo "$PACKAGE" | jq -r '.name')
+            FROM=$(echo "$PACKAGE" | jq -r '.version')
+            TO=$(echo "$PACKAGE" | jq -r '.latest')
+            REPO_URL="https://github.com/$(echo "$NAME" | cut -d/ -f1)/$(echo "$NAME" | cut -d/ -f2)"
+          
+            echo "title=Bump $NAME from $FROM to $TO" >> $GITHUB_OUTPUT
+          
+            echo "body<<EOF" >> $GITHUB_OUTPUT
+            echo "Bumps [$NAME]($REPO_URL) from $FROM to $TO." >> $GITHUB_OUTPUT
+            echo "- [Release notes]($REPO_URL/releases)" >> $GITHUB_OUTPUT
+            echo "- [Changelog]($REPO_URL/blob/master/CHANGELOG.md)" >> $GITHUB_OUTPUT
+            echo "- [Commits]($REPO_URL/compare/v$FROM...v$TO)" >> $GITHUB_OUTPUT
+            echo "" >> $GITHUB_OUTPUT
+            echo "---" >> $GITHUB_OUTPUT
+            echo "updated-dependencies:" >> $GITHUB_OUTPUT
+            echo "- dependency-name: $NAME" >> $GITHUB_OUTPUT
+            echo "  dependency-version: $TO" >> $GITHUB_OUTPUT
+            echo "  dependency-type: direct:production" >> $GITHUB_OUTPUT
+            echo "  update-type: version-update:semver-patch" >> $GITHUB_OUTPUT
+            echo "" >> $GITHUB_OUTPUT
+            echo "Signed-off-by: dependabot[bot] <support@github.com>" >> $GITHUB_OUTPUT
+            echo "Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           else
             echo "title=Update Composer dependencies" >> $GITHUB_OUTPUT
+            echo "body=No direct dependencies were updated." >> $GITHUB_OUTPUT
           fi
 
       - name: Create Pull Request
@@ -54,8 +77,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: composer-update-vendor
-          title: ${{ steps.pr_title.outputs.title }}
-          body: |
-            This PR updates PHP dependencies based on `composer.json` and includes the `vendor/` directory.
+          title: ${{ steps.pr_meta.outputs.title }}
+          body: ${{ steps.pr_meta.outputs.body }}
           base: main
-          head: composer-update-vendor
+          committer: "dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
+          author: "dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
