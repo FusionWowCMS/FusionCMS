@@ -50,6 +50,7 @@ class Admin extends MX_Controller
             'version' => $this->administrator->getVersion(),
             'php_version' => phpversion(),
             'ci_version' => CI_VERSION,
+            'smarty_version'  => $this->smarty::SMARTY_VERSION,
             'os' => $this->getOsName(),
             'php_sapi' => PHP_SAPI,
             'server_software' => $server_software,
