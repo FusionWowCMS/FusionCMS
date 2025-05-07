@@ -101,9 +101,9 @@
             'dev_requirement' => false,
         ),
         'laminas/laminas-escaper' => array(
-            'pretty_version' => '2.16.0',
-            'version' => '2.16.0.0',
-            'reference' => '9cf1f5317ca65b4fd5c6a3c2855e24a187b288c8',
+            'pretty_version' => '2.17.0',
+            'version' => '2.17.0.0',
+            'reference' => 'df1ef9503299a8e3920079a16263b578eaf7c3ba',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laminas/laminas-escaper',
             'aliases' => array(),
