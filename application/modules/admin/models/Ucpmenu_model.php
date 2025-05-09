@@ -1,6 +1,6 @@
 <?php
 
-class UcpMenu_model extends CI_Model
+class Ucpmenu_model extends CI_Model
 {
     public function getMenuLinks(): bool|array
     {

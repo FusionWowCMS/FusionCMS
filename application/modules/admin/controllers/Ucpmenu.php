@@ -6,7 +6,7 @@ use MX\MX_Controller;
  * Menu Controller Class
  * @property ucpmenu_model $ucpmenu_model ucpmenu_model Class
  */
-class UcpMenu extends MX_Controller
+class Ucpmenu extends MX_Controller
 {
     public function __construct()
     {
