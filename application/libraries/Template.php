@@ -389,8 +389,8 @@ class Template
             "slider_interval" => $this->CI->config->item('slider_interval'),
             "slider_style" => $this->CI->config->item('slider_style'),
             "vote_reminder" => $this->voteReminder(),
-            "keywords" => ($this->custom_keywords) ? $this->custom_keywords : $this->CI->config->item("keywords"),
-            "description" => ($this->custom_description) ? $this->custom_description : $this->CI->config->item("description"),
+            "keywords" => ($this->custom_keywords) ?? $this->CI->config->item("keywords"),
+            "description" => ($this->custom_description) ?? $this->CI->config->item("description"),
             "menu_top" => $this->getMenu("top"),
             "menu_side" => $this->getMenu("side"),
             "menu_bottom" => $this->getMenu("bottom"),
@@ -410,12 +410,12 @@ class Template
             "cdn_link" => $this->CI->config->item('cdn') === true ? $this->CI->config->item('cdn_link') : null,
             "isOnline" => $this->CI->user->isOnline(),
             "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
-            "social_media" => array(
+            "social_media" => [
                 'facebook' => $this->CI->config->item('facebook'),
                 'twitter' => $this->CI->config->item('twitter'),
                 'youtube' => $this->CI->config->item('youtube'),
                 'discord' => $this->CI->config->item('discord')
-            ),
+            ],
             "use_captcha" => false,
             "captcha_type" => $this->CI->config->item('captcha_type')
         );
@@ -459,48 +459,39 @@ class Template
      */
     public function loadSideboxes(string $location = 'side'): array
     {
-        $out = [];
+        $output = [];
+        $module = CI::$APP->router->fetch_module();
+        $sideBoxes = $this->CI->cms_model->getSideboxes($location, $module);
 
-        $sideBoxes_db = $this->CI->cms_model->getSideboxes($location, CI::$APP->router->fetch_module());
-
-        // If we got sideboxes
-        if ($sideBoxes_db)
-        {
-            // Go through them all and add them to the output.
-            foreach ($sideBoxes_db as $sideBox)
-            {
-                if ($sideBox['permission'] && !hasViewPermission($sideBox['permission'], "--SIDEBOX--"))
-                    continue;
-
-                $fileLocation = 'application/modules/sidebox_' . $sideBox['type'] . '/controllers/' . ucfirst($sideBox['type']) . '.php';
-
-                if (file_exists($fileLocation))
-                {
-                    require_once($fileLocation);
-
-                    if ($sideBox['type'] == 'custom')
-                        $object = new $sideBox['type']($sideBox['id']);
-                    else
-                        $object = new $sideBox['type']();
-
-                    $out[] = array(
-                        'name' => langColumn($sideBox['displayName']),
-                        'location' => $sideBox['location'],
-                        'data' => $object->view(),
-                        'type' => $sideBox['type']
-                    );
-                }
-                else
-                {
-                    $out[] = array(
-                        'name' => "Oops, something went wrong",
-                        'data' => 'The following sideBox module is missing or contains an invalid module structure: <b>sidebox_' . $sideBox['type'] . '</b>'
-                    );
-                }
+        foreach ((array) $sideBoxes as $sideBox) {
+            if ($sideBox['permission'] && !hasViewPermission($sideBox['permission'], "--SIDEBOX--")) {
+                continue;
             }
+
+            $sideboxType = $sideBox['type'];
+            $fileLocation = APPPATH . 'modules/sidebox_' . $sideboxType . '/controllers/' . ucfirst($sideboxType) . '.php';
+
+            if (!file_exists($fileLocation)) {
+                $output[] = [
+                    'name' => "Oops, something went wrong",
+                    'data' => 'The following sideBox module is missing or contains an invalid module structure: <b>sidebox_' . $sideboxType . '</b>'
+                ];
+                continue;
+            }
+
+            require_once($fileLocation);
+
+            $object = ($sideboxType === 'custom') ? new $sideboxType($sideBox['id']) : new $sideboxType();
+
+            $output[] = [
+                'name'     => langColumn($sideBox['displayName']),
+                'location' => $sideBox['location'],
+                'data'     => $object->view(),
+                'type'     => $sideboxType,
+            ];
         }
 
-        return $out;
+        return $output;
     }
 
     /**
@@ -510,7 +501,7 @@ class Template
      * @param Array $data Array of additional template data
      * @return String
      */
-    public function loadPage(string $page, array $data = array()): string
+    public function loadPage(string $page, array $data = []): string
     {
         // Get the module, we need to check if it's enabled first
         $data['module'] = array_key_exists("module", $data) ? $data['module'] : $this->module_name;
