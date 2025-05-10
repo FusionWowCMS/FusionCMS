@@ -30,7 +30,7 @@ class Top_model extends CI_Model
     {
         $this->connect();
 
-        $result = $this->connection->query("SELECT " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "name", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "gender", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "class", false, $this->realmId) . "," . table("characters", $this->realmId) . "." . column("characters", "race", false, $this->realmId) . ", COUNT(character_achievement.achievement) AS achievement_points FROM character_achievement RIGHT JOIN " . table("characters", $this->realmId) . " ON " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . " = character_achievement.`guid` GROUP BY " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . " ORDER BY achievement_points DESC LIMIT ?", [$limit]);
+        $result = $this->connection->query("SELECT " . table("characters", $this->realmId) . "." . columns("characters", ["guid", "name", "level", "class", "race", "gender"]) . ", COUNT(character_achievement.achievement) AS achievement_points FROM character_achievement RIGHT JOIN " . table("characters", $this->realmId) . " ON " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . " = character_achievement.`guid` GROUP BY " . table("characters", $this->realmId) . "." . column("characters", "guid", false, $this->realmId) . " ORDER BY achievement_points DESC LIMIT ?", [$limit]);
 
         return $this->getResult($result);
     }
