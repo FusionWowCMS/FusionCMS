@@ -51,5 +51,10 @@
  $lang['nature'] = "Résistance à la Nature";
  $lang['fire'] = "Résistance au Feu";
  $lang['frost'] = "Résistance au Givre";
- $lang['sha
- 
+ $lang['shadow'] = "Résistance à l'Ombre";
+ $lang['arcane'] = "Résistance aux Arcanes";
+ $lang['durability'] = "Durabilité";
+ $lang['requires_level'] = "Niveau requis";
+ $lang['item_level'] = "Niveau d'objet";
+ $lang['unknown_effect'] = "Effet inconnu";
+ $lang['dps'] = "dégâts par seconde";
