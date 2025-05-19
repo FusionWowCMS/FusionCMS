@@ -39,16 +39,12 @@ class Cms_model extends CI_Model
         }
     }
 
-    public function getSideboxes(string $type = 'side', string $page = '*')
+    public function getSideboxes(string $page = '*'): array
     {
         // Query: Prepare
         $query = $this->db->table('sideboxes')
                           ->select('*')
                           ->orderBy('order', 'ASC');
-
-        // Query: Filter (Type)
-        if($type && in_array($type, ['top', 'side', 'bottom']))
-            $query = $query->where('location', $type);
 
         // Query: Filter (Page)
         if($page && $page !== '*')

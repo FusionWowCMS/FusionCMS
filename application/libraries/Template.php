@@ -268,9 +268,10 @@ class Template
     private function handleNormalPage($content, bool|string|array$css, bool|string|array$js): mixed
     {
         //Load the sideboxes
-        $sideboxes        = $this->loadSideboxes();
-        $sideboxes_top    = $this->loadSideboxes('top');
-        $sideboxes_bottom = $this->loadSideboxes('bottom');
+        $sideboxes = $this->loadSideboxes();
+        $sideboxes_side   = $sideboxes['side'] ?? [];
+        $sideboxes_top    = $sideboxes['top'] ?? [];
+        $sideboxes_bottom = $sideboxes['bottom'] ?? [];
         $header           = $this->getHeader($css, $js);
         $modals           = $this->getModals();
 
@@ -298,7 +299,7 @@ class Template
             "image_path" => $this->image_path,
             "isOnline" => $this->CI->user->isOnline(),
             "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
-            "sideboxes" => $sideboxes,
+            "sideboxes" => $sideboxes_side,
             "sideboxes_top" => $sideboxes_top,
             "sideboxes_bottom" => $sideboxes_bottom
         ];
@@ -454,16 +455,23 @@ class Template
     /**
      * Loads the sideboxes, and returns the result
      *
-     * @param string $location
      * @return array
      */
-    public function loadSideboxes(string $location = 'side'): array
+    public function loadSideboxes(): array
     {
-        $output = [];
-        $module = CI::$APP->router->fetch_module();
-        $sideBoxes = $this->CI->cms_model->getSideboxes($location, $module);
+        $output = [
+            'side' => [],
+            'top' => [],
+            'bottom' => [],
+        ];
 
-        foreach ((array) $sideBoxes as $sideBox) {
+        $module = CI::$APP->router->fetch_module();
+
+        $allSideboxes = $this->CI->cms_model->getSideboxes($module);
+
+        foreach ((array) $allSideboxes as $sideBox) {
+            $location = $sideBox['location'] ?? 'side';
+
             if ($sideBox['permission'] && !hasViewPermission($sideBox['permission'], "--SIDEBOX--")) {
                 continue;
             }
@@ -472,7 +480,7 @@ class Template
             $fileLocation = APPPATH . 'modules/sidebox_' . $sideboxType . '/controllers/' . ucfirst($sideboxType) . '.php';
 
             if (!file_exists($fileLocation)) {
-                $output[] = [
+                $output[$location][] = [
                     'name' => "Oops, something went wrong",
                     'data' => 'The following sideBox module is missing or contains an invalid module structure: <b>sidebox_' . $sideboxType . '</b>'
                 ];
@@ -483,9 +491,9 @@ class Template
 
             $object = ($sideboxType === 'custom') ? new $sideboxType($sideBox['id']) : new $sideboxType();
 
-            $output[] = [
+            $output[$location][] = [
                 'name'     => langColumn($sideBox['displayName']),
-                'location' => $sideBox['location'],
+                'location' => $location,
                 'data'     => $object->view(),
                 'type'     => $sideboxType,
             ];
