@@ -377,8 +377,10 @@ class Template
         header('X-Frame-Options: SAMEORIGIN');
         header('X-Content-Type-Options: nosniff');
 
+        $menus = $this->getMenu();
+
         // Gather the header data
-        $header_data = array(
+        $header_data = [
             "style_path" => $this->style_path,
             "theme_path" => $this->theme_path,
             "full_theme_path" => $this->page_url . "application/" . $this->theme_path,
@@ -392,9 +394,9 @@ class Template
             "vote_reminder" => $this->voteReminder(),
             "keywords" => ($this->custom_keywords) ?? $this->CI->config->item("keywords"),
             "description" => ($this->custom_description) ?? $this->CI->config->item("description"),
-            "menu_top" => $this->getMenu("top"),
-            "menu_side" => $this->getMenu("side"),
-            "menu_bottom" => $this->getMenu("bottom"),
+            "menu_top"    => $menus['top'] ?? [],
+            "menu_side"   => $menus['side'] ?? [],
+            "menu_bottom" => $menus['bottom'] ?? [],
             "path" => base_url() . basename(APPPATH) . '/',
             "favicon" => $this->theme_data['favicon'],
             "minify_js" => !$this->CI->config->item('enable_minify_js'),
@@ -419,7 +421,7 @@ class Template
             ],
             "use_captcha" => false,
             "captcha_type" => $this->CI->config->item('captcha_type')
-        );
+        ];
 
         $headerView = "application/" . $this->theme_path . "views/header.tpl";
 
@@ -584,18 +586,24 @@ class Template
     /**
      * Get the menu links
      *
-     * @param Int|string $side ID of the specific menu
+     * @return array
      */
-    public function getMenu(int|string $side = "top"): array
+    public function getMenu(): array
     {
-        $result = array();
+        $result = [
+            'top' => [],
+            'side' => [],
+            'bottom' => [],
+        ];
 
         // Get the database values
-        $links = $this->CI->cms_model->getLinks($side);
+        $links = $this->CI->cms_model->getLinks();
         $moduleName = $this->getModuleName();
 
         foreach ($links as $item)
         {
+            $side = $item['type'] ?? 'side';
+
             if ($item['permission'] && !hasViewPermission($item['permission'], "--MENU--"))
                 continue;
 
@@ -604,13 +612,12 @@ class Template
             $item['active'] = false;
 
             // Hard coded PM count
-            if($item['link'] == "messages")
+            if ($item['link'] == "messages")
             {
                 $count = $this->CI->cms_model->getMessagesCount();
-
-                if($count > 0)
+                if ($count > 0)
                 {
-                    $item['name'] .= " <b>(".$count.")</b>";
+                    $item['name'] .= " <b>(" . $count . ")</b>";
                 }
             }
 
@@ -620,12 +627,9 @@ class Template
                 {
                     $item['active'] = true;
                 }
-                elseif ($moduleName == "page")
+                elseif ($moduleName == "page" && ($moduleName . "/" . $this->custom_page == $item['link']))
                 {
-                    if ($moduleName . "/" . $this->custom_page == $item['link'])
-                    {
-                        $item['active'] = true;
-                    }
+                    $item['active'] = true;
                 }
 
                 $item['link'] = $this->page_url . $item['link'];
@@ -634,7 +638,7 @@ class Template
             // Append if it's a direct link or not
             $item['link'] = 'href="' . $item['link'] . '"';
 
-            $result[] = $item;
+            $result[$side][] = $item;
         }
 
         return $result;
