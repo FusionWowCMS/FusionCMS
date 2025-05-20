@@ -123,21 +123,27 @@ class Dashboard_model extends CI_Model
         }
     }
 
-    public function getGraph($daily = false, $ago = 0)
+    public function getGraph(bool $daily = false, array $agos = [0]): array
     {
-        if ($daily)
-        {
-            $query = $this->db->query("SELECT visitor_log.date, COUNT(DISTINCT ip) ipCount FROM visitor_log WHERE visitor_log.date BETWEEN DATE_FORMAT(CURRENT_DATE - INTERVAL $ago MONTH, '%Y-%m-01') AND DATE_FORMAT(CURRENT_DATE - INTERVAL $ago MONTH, '%Y-%m-31') GROUP BY visitor_log.date");
-        } else {
-            $query = $this->db->query("SELECT visitor_log.date, COUNT(DISTINCT ip) ipCount FROM visitor_log WHERE YEAR(date) = YEAR(CURRENT_DATE()) - $ago GROUP BY visitor_log.date");
-            
+        $unionQueries = [];
+
+        foreach ($agos as $ago) {
+            if ($daily) {
+                $from = "DATE_FORMAT(CURRENT_DATE - INTERVAL {$ago} MONTH, '%Y-%m-01')";
+                $to   = "LAST_DAY(CURRENT_DATE - INTERVAL {$ago} MONTH)";
+            } else {
+                $from = "DATE_FORMAT(CURRENT_DATE - INTERVAL {$ago} YEAR, '%Y-01-01')";
+                $to   = "DATE_FORMAT(CURRENT_DATE - INTERVAL {$ago} YEAR, '%Y-12-31')";
+            }
+
+            $unionQueries[] = "SELECT visitor_log.date, COUNT(DISTINCT ip) as ipCount, {$ago} as ago FROM visitor_log WHERE visitor_log.date BETWEEN {$from} AND {$to} GROUP BY visitor_log.date";
         }
 
-        if ($query->getNumRows()) {
-            return $query->getResultArray();
-        } else {
-            return false;
-        }
+        $finalQuery = implode(" UNION ALL ", $unionQueries);
+
+        $query = $this->db->query($finalQuery);
+
+        return $query->getResultArray();
     }
 
     /* Modules */
