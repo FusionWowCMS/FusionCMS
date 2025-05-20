@@ -1271,8 +1271,8 @@ CREATE TABLE `teleport_locations`  (
 DROP TABLE IF EXISTS `visitor_log`;
 CREATE TABLE `visitor_log`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `timestamp` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `date` DATE NULL DEFAULT NULL,
+  `timestamp` int(10) NULL DEFAULT NULL,
   `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `unique_date_ip` (`date`, `ip`) USING BTREE
