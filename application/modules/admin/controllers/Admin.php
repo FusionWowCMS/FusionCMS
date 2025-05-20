@@ -27,11 +27,6 @@ class Admin extends MX_Controller
 
         $this->administrator->setTitle("Dashboard");
 
-        // Load realm objects
-        $realms = $this->realms->getRealms();
-
-        $uptimes = $this->flush_uptime($realms);
-
         $server_software = 'Unknown';
         if (array_key_exists( 'SERVER_SOFTWARE',  $_SERVER)) {
             $server_software = $_SERVER['SERVER_SOFTWARE'];
@@ -72,8 +67,6 @@ class Admin extends MX_Controller
             'graphMonthly' => [$graphMonthly[0], $graphMonthly[1]],
             'graphDaily' => [$graphDaily[0], $graphDaily[1], $graphDaily[2]],
             'realm_status' => $this->config->item('disable_realm_status'),
-            'realms' => $realms,
-            'uptimes' => $uptimes,
             'latestVersion' => $this->getLatestVersion(),
             'isOldTheme' => empty($this->template->theme_data['min_required_version']),
         ];
@@ -249,16 +242,24 @@ class Admin extends MX_Controller
             }
         }
     }
-	
+
 	public function realmstatus()
     {
-        $data = array(
-			"realmstatus" => $this->realms->getRealms(),
-        );
+        $realms = $this->realms->getRealms();
+        $uptimes = $this->flush_uptime($realms);
 
-		$out = $this->template->loadPage("ajax_files/realmstatus.tpl", $data);
-
-        die($out);
+        echo json_encode([
+            'realms' => array_map(function($realm) use ($uptimes) {
+                return [
+                    'id' => $realm->getId(),
+                    'name' => $realm->getName(),
+                    'is_online' => $realm->isOnline(),
+                    'percentage' => $realm->getPercentage(),
+                    'online_players' => $realm->getOnline(),
+                    'uptime' => $realm->isOnline() ? ($uptimes[$realm->getId()] ?? 0) : 0,
+                ];
+            }, $realms)
+        ]);
     }
 
     public function destroySession()

@@ -21808,3 +21808,7 @@ i.fa-solid {
 img.theme {
     height: 360px;
 }
+
+#realms-loading .fa-spin.fa-2xl {
+	font-size: 3em;
+}

@@ -547,38 +547,57 @@
                                         </div>
                                     </div>
 									{if !$realm_status}
-									{foreach from=$realms item=realm key=index name=count}
-                                    <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-6">
-                                        <div class="mb-10 flex items-center justify-between">
-                                            <h3 class="font-heading text-base font-semibold leading-tight text-muted-800 dark:text-white">
-                                                <span>Realm: {$realm->getName()}</span>
-                                            </h3>
-                                        </div>
-											<div class="mb-6">
-												<div>
-													<div class="semi-donut text-muted-500 dark:text-muted-400 m-2" style="--percentage : {$realm->getPercentage()};">
-														{if $realm->isOnline()}
-															<span>Online</span>
-														{else}
-															<span>Offline</span>
-														{/if}
-													</div>
-												</div>
-											</div>
-                                        <div class="mt-auto">
-                                            <div class="border-muted-200 dark:border-muted-700 flex w-full border-t pt-4 text-center">
-                                                <div class="border-muted-200 dark:border-muted-700 flex-1 border-r px-2">
-                                                    <span class="text-muted-400 font-sans text-xs"> Total players online </span>
-                                                    <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> {$realm->getOnline()} </p>
-                                                </div>
-                                                <div class="flex-1 px-2">
-                                                    <span class="text-muted-400 font-sans text-xs"> Uptime </span>
-                                                    <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> {if $realm->isOnline()} {$uptimes[$realm->getId()]} {else} 0 {/if}</p>
-                                                </div>
+                                        <div id="realms-container" class="ptablet:grid-cols-2 ltablet:flex ltablet:flex-col grid gap-2 lg:flex lg:flex-col">
+                                            <div id="realms-loading" class="flex justify-center items-center p-4 w-full text-muted-500 dark:text-muted-400 text-sm">
+                                                <i class="fa-solid fa-spinner-third fa-spin fa-2xl"></i>
                                             </div>
+                                            <script>
+                                                document.addEventListener("DOMContentLoaded", function () {
+                                                    fetch(Config.URL + "admin/realmstatus")
+                                                        .then(response => response.json())
+                                                        .then(data => {
+                                                            const container = document.getElementById('realms-container');
+                                                            const loader = document.getElementById('realms-loading');
+                                                            if (loader) loader.remove();
+                                                            data.realms.forEach(realm => {
+                                                                const card = document.createElement('div');
+                                                                card.className = "border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-6 mb-3";
+
+                                                                card.innerHTML = `
+                                                                        <div class="mb-10 flex items-center justify-between">
+                                                                            <h3 class="font-heading text-base font-semibold leading-tight text-muted-800 dark:text-white">
+                                                                                <span>Realm: ${ realm.name }</span>
+                                                                            </h3>
+                                                                        </div>
+                                                                        <div class="mb-6">
+                                                                            <div>
+                                                                                <div class="semi-donut text-muted-500 dark:text-muted-400 m-2" style="--percentage : ${ realm.percentage };">
+                                                                                    <span>${ realm.is_online ? 'Online' : 'Offline'}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="mt-auto">
+                                                                            <div class="border-muted-200 dark:border-muted-700 flex w-full border-t pt-4 text-center">
+                                                                                <div class="border-muted-200 dark:border-muted-700 flex-1 border-r px-2">
+                                                                                    <span class="text-muted-400 font-sans text-xs"> Total players online </span>
+                                                                                    <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> ${ realm.online_players } </p>
+                                                                                </div>
+                                                                                <div class="flex-1 px-2">
+                                                                                    <span class="text-muted-400 font-sans text-xs"> Uptime </span>
+                                                                                    <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> ${ realm.uptime } </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                `;
+                                                                container.appendChild(card);
+                                                            });
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error loading realms:', error);
+                                                        });
+                                                });
+                                            </script>
                                         </div>
-                                    </div>
-									{/foreach}
 									{/if}
                                 </div>
                             </div>
