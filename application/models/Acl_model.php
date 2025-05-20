@@ -41,7 +41,7 @@ class Acl_model extends CI_Model
      */
     public function getGroupRolesByUser($userId, $moduleName = false)
     {
-        $query =  $this->db->table("acl_group_roles agr, acl_account_groups aag")->select("agr.role_name, agr.module")
+        $query = $this->db->table("acl_group_roles agr, acl_account_groups aag")->select("agr.role_name, agr.module")
                     ->where("aag.account_id", $userId)
                     ->where("aag.group_id = agr.group_id");
 
@@ -351,10 +351,10 @@ class Acl_model extends CI_Model
      */
     public function assignGroupToUser($groupId, $accountId)
     {
-        $data = array(
+        $data = [
             "account_id" => $accountId,
             "group_id" => $groupId
-        );
+        ];
 
         $this->db->table('acl_account_groups')->insert($data);
     }
@@ -406,9 +406,10 @@ class Acl_model extends CI_Model
     /**
      * Assign a permission to a user
      *
-     * @param Int $accountId
+     * @param $accontId
      * @param String $permissionName
      * @param string $moduleName
+     * @param $value
      */
     public function assignPermissionToUser($accontId, $permissionName, $moduleName, $value)
     {

@@ -63,11 +63,12 @@ class Acl
         $userId = $this->CI->user->getId();
 
         // Fill runtime cache
-        $this->fillRuntimeCache($userId);
+        if(!isset($this->runtimeCache[$userId][$moduleName][$permissionName]))
+            $this->fillRuntimeCache($userId);
 
         // It's been queried already
-        if(isset($this->runtimeCache[$moduleName][$permissionName][$userId]))
-            return $this->runtimeCache[$moduleName][$permissionName][$userId];
+        if(isset($this->runtimeCache[$userId][$moduleName][$permissionName]))
+            return $this->runtimeCache[$userId][$moduleName][$permissionName];
 
         // DEBUG
         # echo str_replace(['1', '2', '3'], [$moduleName, $permissionName, $userId], '[1][2][3]<br />');
@@ -98,11 +99,12 @@ class Acl
             $userId = $this->CI->user->getId();
 
         // Fill runtime cache
-        $this->fillRuntimeCache($userId);
+        if(!isset($this->runtimeCache[$userId][$moduleName][$permissionName]))
+            $this->fillRuntimeCache($userId);
 
         // It's been queried already
-        if(isset($this->runtimeCache[$moduleName][$permissionName][$userId]))
-            return $this->runtimeCache[$moduleName][$permissionName][$userId];
+        if(isset($this->runtimeCache[$userId][$moduleName][$permissionName]))
+            return $this->runtimeCache[$userId][$moduleName][$permissionName];
 
         // DEBUG
         # echo str_replace(['1', '2', '3'], [$moduleName, $permissionName, $userId], '[1][2][3]<br />');
@@ -160,7 +162,7 @@ class Acl
      * @param  int $userId
      * @return void
      */
-    private function fillRuntimeCache(int $userId = 0)
+    private function fillRuntimeCache(int $userId = 0): void
     {
         // STOP! Its filled already
         if(count($this->runtimeCache))
@@ -170,10 +172,21 @@ class Acl
         if(!$userId)
             $userId = CI::$APP->user->getId();
 
-        ####################################################################################################
-        ################################## Account permissions (db).Start ##################################
-        ####################################################################################################
 
+        $this->loadDbPermissions($userId);
+
+        $this->loadManifestPermissions($userId);
+
+    }
+
+    /**
+     * Account permissions from DB
+     *
+     * @param int $userId
+     * @return void
+     */
+    private function loadDbPermissions(int $userId): void
+    {
         // Get: Account permissions
         $accountPermissions = CI::$APP->acl_model->getAccountPermissions($userId);
 
@@ -184,10 +197,10 @@ class Acl
         $permissions = array_column((array)$accountPermissions, 'module', 'permission_name') + array_column((array)$accountRolesPermissions, 'module', 'role_name');
 
         // Loop through permissions
-        foreach($permissions as $module => $permission)
+        foreach ($permissions as $module => $permission)
         {
             // Check if its menu permission
-            if(in_array(strtoupper(trim($permission)), ['--MENU--', '--PAGE--', '--SIDEBOX--']))
+            if (in_array(strtoupper(trim($permission)), ['--MENU--', '--PAGE--', '--SIDEBOX--']))
             {
                 // Temporary store module and permission
                 $tmp = [
@@ -204,19 +217,18 @@ class Acl
             }
 
             // Fill runtime cache
-            $this->runtimeCache[$module][$permission][$userId] = true;
+            $this->runtimeCache[$userId][$module][$permission] = true;
         }
+    }
 
-        ####################################################################################################
-        ################################### Account permissions (db).End ###################################
-        ####################################################################################################
-
-        /**************************************************************************************************/
-
-        ####################################################################################################
-        ################################ Manifest permissions (json).Start #################################
-        ####################################################################################################
-
+    /**
+     * Manifest permissions
+     *
+     * @param int $userId
+     * @return void
+     */
+    private function loadManifestPermissions(int $userId): void
+    {
         // Get: Account roles (account-specific-roles and account-group-roles)
         $roles = array_merge(array_column((array)CI::$APP->acl_model->getAccountRoles($userId), 'role_name'), array_column((array)CI::$APP->acl_model->getGroupRolesByUser($userId), 'role_name'));
 
@@ -224,41 +236,42 @@ class Acl
         $manifestPermissions = [];
 
         // Get: Modules
-        if(!empty($modules = glob(realpath(APPPATH) . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR)))
+        if (!empty($modules = glob(realpath(APPPATH) . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR)))
         {
             // Loop through modules
-            foreach($modules as $module)
-            {
+            foreach ($modules as $module) {
                 // Load manifest
-                $this->loadManifest(basename($module));
+                if (!isset($this->modules[basename($module)])) {
+                    $this->loadManifest(basename($module));
+                }
 
                 // Prevent error
-                if(!isset($manifestPermissions[basename($module)]))
+                if (!isset($manifestPermissions[basename($module)]))
                     $manifestPermissions[basename($module)] = [];
 
                 // Priority 1: Store available permissions (db)
-                if(is_array($roles))
+                if (is_array($roles))
                 {
                     // Loop through account roles
-                    foreach($roles as $role)
+                    foreach ($roles as $role)
                     {
                         // Get: Manifest role
                         $manifest = $this->getManifestRole($role, basename($module));
 
                         // Set: Manifest permissions (db)
-                        if(isset($manifest['permissions']) && is_array($manifest['permissions']))
+                        if (isset($manifest['permissions']) && is_array($manifest['permissions']))
                             $manifestPermissions[basename($module)] = array_merge($manifestPermissions[basename($module)], $manifest['permissions']);
                     }
                 }
 
                 // Priority 2: Store available permissions (json)
-                if(is_array($this->modules[basename($module)]['permissions']))
+                if (is_array($this->modules[basename($module)]['permissions']))
                 {
                     // Loop through manifest permissions
-                    foreach($this->modules[basename($module)]['permissions'] as $permission => $permission_info)
+                    foreach ($this->modules[basename($module)]['permissions'] as $permission => $permission_info)
                     {
                         // Set: Manifest permissions (manifest.json/default)
-                        if(!isset($manifestPermissions[basename($module)][$permission]))
+                        if (!isset($manifestPermissions[basename($module)][$permission]))
                             $manifestPermissions[basename($module)][$permission] = $permission_info['default'];
                     }
                 }
@@ -266,19 +279,15 @@ class Acl
         }
 
         // Loop through manifest permissions
-        foreach($manifestPermissions as $module => $perms)
+        foreach ($manifestPermissions as $module => $perms)
         {
             // Loop through permissions
-            foreach($perms as $k => $v)
+            foreach ($perms as $k => $v)
             {
-                // Fill runtime cache (if its not being filled by database already)
-                if(!isset($this->runtimeCache[basename($module)][$k][$userId]))
-                    $this->runtimeCache[basename($module)][$k][$userId] = (bool)$v;
+                // Fill runtime cache (if it's not being filled by database already)
+                if (!isset($this->runtimeCache[$userId][basename($module)][$k]))
+                    $this->runtimeCache[$userId][basename($module)][$k] = (bool)$v;
             }
         }
-
-        ####################################################################################################
-        ################################# Manifest permissions (json).End ##################################
-        ####################################################################################################
     }
 }
