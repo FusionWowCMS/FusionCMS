@@ -41,6 +41,9 @@ class Acl_model extends CI_Model
      */
     public function getGroupRolesByUser(int $userId, false|string $moduleName = false): array
     {
+        if ($userId == 0)
+            return [];
+
         $query = $this->db->table('acl_group_roles agr')
             ->select('agr.role_name, agr.module')
             ->join('acl_account_groups aag', 'aag.group_id = agr.group_id', 'inner')
@@ -116,6 +119,9 @@ class Acl_model extends CI_Model
      */
     public function getAccountPermissions(int $userId): array
     {
+        if ($userId == 0)
+            return [];
+
         $query = $this->db->table('acl_account_permissions')->select("account_id, permission_name, module, value")->where("account_id", $userId)->get();
 
         return $query->getResultArray() ?? [];
@@ -130,6 +136,9 @@ class Acl_model extends CI_Model
      */
     public function getAccountRoles(int $userId, false|string $module = false): array
     {
+        if ($userId == 0)
+            return [];
+
         $builder = $this->db->table('acl_account_roles')->select("role_name")->where("account_id", $userId);
 
         if ($module) {
@@ -150,6 +159,9 @@ class Acl_model extends CI_Model
         if (!$accountId) {
             $accountId = $this->user->getId();
         }
+
+        if ($accountId == 0)
+            return [];
 
         $builder = $this->db->table("acl_account_groups aag, acl_groups ag");
         $builder->select("ag.id, ag.priority, ag.name, ag.color, ag.color");
