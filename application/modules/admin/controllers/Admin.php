@@ -143,141 +143,115 @@ class Admin extends MX_Controller
     private function graphMonthly($ago = 0)
     {
         if ($this->config->item('disable_visitor_graph'))
-        {
             return false;
+
+        $cacheKey = $ago == 0 ? 'dashboard_monthly' : "dashboard_monthly_{$ago}_year_ago";
+
+        $cache = $this->cache->get($cacheKey);
+        if ($cache !== false) {
+            return $cache;
         }
 
-        if ($ago == 0)
-            $cache = $this->cache->get("dashboard_monthly");
-        else
-            $cache = $this->cache->get('dashboard_monthly_'.$ago.'_year_ago');
+        $rows = $this->dashboard_model->getGraph(false, $ago);
+        $data = $this->buildMonthlyGraph($rows);
 
-        if ($cache !== false)
-        {
-            $data = $cache;
-        } else {
-            $rows = $this->dashboard_model->getGraph(false, $ago);
-            $fullGraph = [];
-
-            if($rows)
-            {
-                foreach ($rows as $row)
-                {
-                    $expld = explode("-", $row["date"]);
-
-                    $year = $expld[0];
-                    $month = $expld[1];
-
-                    $date = new DateTime();
-                    $fullYear = [];
-                    for ($i = 1; $i <= 12; $i++)
-                    {
-                        if ($date->format("Y") == $year && $i > $date->format("m"))
-                        {
-                            continue;
-                        }
-
-                        if ($date->format("Y") != $year && $i < $date->format("m"))
-                        {
-                            continue;
-                        }
-
-                        $fullYear[($i < 10 ? "0" : "") . $i] = 0;
-                    }
-
-                    if (!isset($fullGraph[$year]["month"]))
-                    {
-                        $fullGraph[$year]["month"] = $fullYear;
-                    }
-
-                    if (isset($fullGraph[$year]["month"][$month]))
-                    {
-                        $fullGraph[$year]["month"][$month] = $fullGraph[$year]["month"][$month] + $row["ipCount"];
-                    }
-                }
-            }
-
-            $data = $fullGraph;
-
-            if ($ago == 0)
-                $this->cache->save('dashboard_monthly', $data, 60 * 60 * 24 * 15); // Every two weeks
-            else
-                $this->cache->save('dashboard_monthly_'.$ago.'_year_ago', $data, 60 * 60 * 24 * 9 * 30); // every 9 months
-        }
+        //                   Every two weeks  -  Every 9 months
+        $ttl = $ago === 0 ? 60 * 60 * 24 * 15 : 60 * 60 * 24 * 30 * 9;
+        $this->cache->save($cacheKey, $data, $ttl);
 
         return $data;
+    }
+
+    private function buildMonthlyGraph(array $rows = null): array
+    {
+        if (empty($rows)) {
+            return [];
+        }
+
+        $graph = [];
+        $now = new DateTimeImmutable();
+
+        foreach ($rows as $row) {
+            [$year, $month] = explode('-', $row['date']);
+
+            if (!isset($graph[$year]['month'])) {
+                $graph[$year]['month'] = $this->initializeMonths((int)$year, (int)$now->format('Y'), (int)$now->format('m'));
+            }
+
+            if (isset($graph[$year]['month'][$month])) {
+                $graph[$year]['month'][$month] += $row['ipCount'];
+            }
+        }
+
+        return $graph;
+    }
+
+    private function initializeMonths(int $year, int $currentYear, int $currentMonth): array
+    {
+        $months = [];
+        for ($i = 1; $i <= 12; $i++) {
+            if (
+                ($year === $currentYear && $i > $currentMonth) ||
+                ($year !== $currentYear && $i < $currentMonth)
+            ) {
+                continue;
+            }
+
+            $monthKey = sprintf('%02d', $i);
+            $months[$monthKey] = 0;
+        }
+
+        return $months;
     }
     
     private function graphDaily($ago = 0)
     {
         if ($this->config->item('disable_visitor_graph'))
-        {
             return false;
+
+        $cacheKey = $ago === 0 ? 'dashboard_daily' : "dashboard_daily_{$ago}_month_ago";
+        $data = $this->cache->get($cacheKey);
+
+        if ($data !== false) {
+            return $data;
         }
 
-        if ($ago == 0)
-            $cache = $this->cache->get("dashboard_daily");
-        else
-            $cache = $this->cache->get('dashboard_daily_'.$ago.'_month_ago');
-    
-        if ($cache !== false)
-        {
-            $data = $cache;
+        $rows = $this->dashboard_model->getGraph(true, $ago);
+        $fullMonth = [];
+
+        if (!empty($rows)) {
+            foreach ($rows as $row) {
+                [$year, , $day] = explode("-", $row["date"]);
+
+                if (!isset($fullMonth[$year]["day"])) {
+                    $fullMonth[$year]["day"] = $this->initializeDays();
+                }
+
+                if (isset($fullMonth[$year]["day"][$day])) {
+                    $fullMonth[$year]["day"][$day] += $row["ipCount"];
+                }
+            }
         } else {
-            $rows = $this->dashboard_model->getGraph(true, $ago);
-    
-            $fullMonth = [];
-
-            if ($rows) {
-                foreach ($rows as $row)
-                {
-                    $expld = explode("-", $row["date"]);
-
-                    $year = $expld[0];
-                    $day = $expld[2];
-
-                    $fullDays = [];
-                    for ($i = 1; $i <= 31; $i++)
-                    {
-                        $fullDays[($i < 10 ? "0" : "") . $i] = 0;
-                    }
-
-                    if (!isset($fullMonth[$year]["day"]))
-                    {
-                        $fullMonth[$year]["day"] = $fullDays;
-                    }
-
-                    if (isset($fullMonth[$year]["day"][$day]))
-                    {
-                        $fullMonth[$year]["day"][$day] += $row["ipCount"];
-                    }
-                }
-            } else {
-                $fullDays = [];
-                for ($i = 1; $i <= 31; $i++)
-                {
-                    $fullDays[($i < 10 ? "0" : "") . $i] = 0;
-                }
-                $year = date('Y');
-                $fullMonth[$year]["day"] = $fullDays;
-            }
-
-            $currentYear = $ago > 0 && date('m') == '01' ? (date('Y') - 1) : date('Y');
-
-            $data = $fullMonth[$currentYear]["day"] ?? null;
-
-            if (!isset($data))
-            {
-                $data = [];
-            }
-
-            if ($ago == 0)
-                $this->cache->save('dashboard_daily', $data, 60 * 60 * 24);
-            else
-                $this->cache->save('dashboard_daily_'.$ago.'_month_ago', $data, 60 * 60 * 24);
+            $currentYear = date('Y');
+            $fullMonth[$currentYear]["day"] = $this->initializeDays();
         }
+
+        $targetYear = ($ago > 0 && date('m') === '01') ? (date('Y') - 1) : date('Y');
+        $data = $fullMonth[$targetYear]["day"] ?? [];
+
+        $this->cache->save($cacheKey, $data, 60 * 60 * 24);
 
         return $data;
+    }
+
+    private function initializeDays(): array
+    {
+        $days = [];
+        for ($i = 1; $i <= 31; $i++) {
+            $dayKey = sprintf('%02d', $i);
+            $days[$dayKey] = 0;
+        }
+        return $days;
     }
 
     public function checkSoap()
