@@ -41,7 +41,7 @@ class Aclmanager extends MX_Controller
             "modules" => $this->getAllRoles(),
             "guestId" => $this->config->item('default_guest_group'),
             "playerId" => $this->config->item('default_player_group'),
-            "links" => $this->cms_model->getLinks("all"),
+            "links" => $this->cms_model->getLinks(),
             "sideboxes" => $this->cms_model->getSideboxes(),
             "pages" => $this->cms_model->getPages()
         ];
@@ -140,6 +140,8 @@ class Aclmanager extends MX_Controller
         requirePermission("deletePermissions");
 
         $this->acl_model->deleteGroup($id);
+
+        $this->acl->clearCache();
     }
 
     /**
@@ -202,6 +204,8 @@ class Aclmanager extends MX_Controller
             }
         }
 
+        $this->acl->clearCache();
+
         die('1');
     }
 
@@ -261,6 +265,8 @@ class Aclmanager extends MX_Controller
                 $this->acl_model->addRoleToGroup($id, $roleParts[1], $roleParts[0]);
             }
         }
+
+        $this->acl->clearCache();
 
         die('1');
     }

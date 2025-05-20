@@ -103,6 +103,8 @@ class Menu extends MX_Controller
 
         if ($this->input->post('visibility') == "group") {
             $this->menu_model->setPermission($id);
+
+            $this->acl->clearCache();
         }
 
         die("yes");
@@ -207,6 +209,8 @@ class Menu extends MX_Controller
         } elseif ($this->input->post('visibility') != "group" && $hasPermission) {
             $this->menu_model->deletePermission($id);
         }
+
+        $this->acl->clearCache();
 
         die('yes');
     }

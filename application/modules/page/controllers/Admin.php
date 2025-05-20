@@ -169,6 +169,8 @@ class Admin extends MX_Controller
                 $this->page_model->deletePermission($id);
             }
 
+            $this->acl->clearCache();
+
             // Add log
             $this->dblogger->createLog("admin", "edit", "Edited page", ['ID' => $id, 'Page' => $headline]);
 
@@ -178,6 +180,8 @@ class Admin extends MX_Controller
 
             if ($this->input->post('visibility') == "group") {
                 $this->page_model->setPermission($id);
+
+                $this->acl->clearCache();
             }
 
             // Add log

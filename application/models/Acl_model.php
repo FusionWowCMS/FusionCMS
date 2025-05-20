@@ -59,19 +59,12 @@ class Acl_model extends CI_Model
      *
      * @param  int $userId
      * @param  int $default_group
+     * @param  bool $auth
+     * @param  bool $player_only
      * @return array
      */
-    public function getAccountRolesPermissions(int $userId = 0, int $default_group = 1): array
+    public function getAccountRolesPermissions(int $userId = 0, int $default_group = 1, bool $auth = false, bool $player_only = true): array
     {
-        // Groups: Initialize
-        $groups = (array)$this->getGroupsByUser($userId);
-
-        // Auth: Initialize | Keep track of user authentication status
-        $auth = $userId && $default_group === $this->config->item('default_player_group');
-
-        // Player only: Initialize
-        $player_only = $auth && count($groups) == 1 && in_array($this->config->item('default_player_group'), array_column($groups, 'id'));
-
         if(!$auth || $player_only)
         {
             // Query: Prepare

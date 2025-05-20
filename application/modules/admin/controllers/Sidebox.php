@@ -107,8 +107,11 @@ class Sidebox extends MX_Controller
         $id = $this->sidebox_model->add($data);
 
         // Set sidebox permission (if required)
-        if($this->input->post('visibility') == 'group')
+        if($this->input->post('visibility') == 'group') {
             $this->sidebox_model->setPermission($id);
+
+            $this->acl->clearCache();
+        }
 
         // Handle custom sidebox text
         if($data['type'] == 'custom')
@@ -285,6 +288,8 @@ class Sidebox extends MX_Controller
             $this->sidebox_model->deletePermission($id);
         }
 
+        $this->acl->clearCache();
+
         die('yes');
     }
 
@@ -298,6 +303,8 @@ class Sidebox extends MX_Controller
         }
 
         $this->sidebox_model->delete($id);
+
+        $this->acl->clearCache();
     }
 
     /**

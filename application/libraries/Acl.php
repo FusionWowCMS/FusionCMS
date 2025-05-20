@@ -172,11 +172,9 @@ class Acl
         if(!$userId)
             $userId = CI::$APP->user->getId();
 
-
         $this->loadDbPermissions($userId);
 
         $this->loadManifestPermissions($userId);
-
     }
 
     /**
@@ -187,11 +185,35 @@ class Acl
      */
     private function loadDbPermissions(int $userId): void
     {
-        // Get: Account permissions
-        $accountPermissions = CI::$APP->acl_model->getAccountPermissions($userId);
+        // Groups: Initialize
+        $groups = (array)CI::$APP->acl_model->getGroupsByUser($userId);
+
+        $default_player_group = CI::$APP->config->item('default_player_group');
+
+        $default_group = (CI::$APP->user->isOnline() ? $default_player_group : CI::$APP->config->item('default_guest_group'));
+
+        // Auth: Initialize | Keep track of user authentication status
+        $auth = $userId && $default_group === $default_player_group;
+
+        // Player only: Initialize
+        $player_only = $auth && count($groups) == 1 && in_array($default_player_group, array_column($groups, 'id'));
 
         // Get: Account roles permissions
-        $accountRolesPermissions = CI::$APP->acl_model->getAccountRolesPermissions($userId, (CI::$APP->user->isOnline() ? CI::$APP->config->item('default_player_group') : CI::$APP->config->item('default_guest_group')));
+        $cacheKey = 'permissions_group_' . $default_group;
+        if(!$auth || $player_only) {
+            if ($cached = $this->CI->cache->get($cacheKey)) {
+                $accountRolesPermissions = $cached;
+            } else {
+                $accountRolesPermissions = CI::$APP->acl_model->getAccountRolesPermissions($userId, $default_group, $auth, $player_only);
+
+                $this->CI->cache->save($cacheKey, $accountRolesPermissions, 3600);
+            }
+        } else {
+            $accountRolesPermissions = CI::$APP->acl_model->getAccountRolesPermissions($userId, $default_group, true, false);
+        }
+
+        // Get: Account permissions
+        $accountPermissions = CI::$APP->acl_model->getAccountPermissions($userId);
 
         // Merge: account-permissions and account-roles-permissions
         $permissions = array_column((array)$accountPermissions, 'module', 'permission_name') + array_column((array)$accountRolesPermissions, 'module', 'role_name');
@@ -289,5 +311,10 @@ class Acl
                     $this->runtimeCache[$userId][basename($module)][$k] = (bool)$v;
             }
         }
+    }
+
+    public function clearCache(): void {
+        CI::$APP->cache->delete(CI::$APP->config->item('default_player_group'));
+        CI::$APP->cache->delete(CI::$APP->config->item('default_guest_group'));
     }
 }
