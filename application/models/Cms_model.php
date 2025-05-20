@@ -26,16 +26,27 @@ class Cms_model extends CI_Model
         }
     }
 
-    private function logVisit()
+    private function logVisit(): void
     {
         if (!$this->input->is_ajax_request() && !isset($_GET['is_json_ajax'])) {
-            $data = [
-                'date'      => date("Y-m-d"),
-                'ip'        => $this->input->ip_address(),
-                'timestamp' => time()
-            ];
+            $ip   = $this->input->ip_address();
+            $date = date("Y-m-d");
 
-            $this->db->table('visitor_log')->upsert($data);
+            $exists = $this->db->table('visitor_log')
+                ->select('id')
+                ->where('date', $date)
+                ->where('ip', $ip)
+                ->limit(1)
+                ->get()
+                ->getRow();
+
+            if (!$exists) {
+                $this->db->table('visitor_log')->insert([
+                    'date'      => $date,
+                    'ip'        => $ip,
+                    'timestamp' => time()
+                ]);
+            }
         }
     }
 
