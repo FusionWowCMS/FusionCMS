@@ -35,27 +35,23 @@ class Acl_model extends CI_Model
     /**
      * Get the roles for a group by the user ID
      *
-     * @param  Int $userId
-     * @param  String $moduleName
+     * @param Int $userId
+     * @param false|String $moduleName
      * @return Array
      */
-    public function getGroupRolesByUser($userId, $moduleName = false)
+    public function getGroupRolesByUser(int $userId, false|string $moduleName = false): array
     {
-        $query = $this->db->table("acl_group_roles agr, acl_account_groups aag")->select("agr.role_name, agr.module")
-                    ->where("aag.account_id", $userId)
-                    ->where("aag.group_id = agr.group_id");
+        $query = $this->db->table('acl_group_roles agr')
+            ->select('agr.role_name, agr.module')
+            ->join('acl_account_groups aag', 'aag.group_id = agr.group_id', 'inner')
+            ->where('aag.account_id', $userId);
 
         if ($moduleName) {
             $query->where("agr.module", $moduleName);
         }
 
-        $query = $query->get();
 
-        if ($query->getNumRows()) {
-            return $query->getResultArray();
-        } else {
-            return false;
-        }
+        return $query->get()->getResultArray() ?? [];
     }
 
     /**
@@ -65,7 +61,7 @@ class Acl_model extends CI_Model
      * @param  int $default_group
      * @return array
      */
-    public function getAccountRolesPermissions(int $userId = 0, int $default_group = 1)
+    public function getAccountRolesPermissions(int $userId = 0, int $default_group = 1): array
     {
         // Groups: Initialize
         $groups = (array)$this->getGroupsByUser($userId);
@@ -122,28 +118,24 @@ class Acl_model extends CI_Model
     /**
      * Get the account-specific permissions
      *
-     * @param  Int $userId
+     * @param Int $userId
      * @return Array
      */
-    public function getAccountPermissions($userId)
+    public function getAccountPermissions(int $userId): array
     {
         $query = $this->db->table('acl_account_permissions')->select("account_id, permission_name, module, value")->where("account_id", $userId)->get();
 
-        if ($query->getNumRows() > 0) {
-            return $query->getResultArray();
-        } else {
-            return false;
-        }
+        return $query->getResultArray() ?? [];
     }
 
     /**
      * Get the account-specific roles
      *
-     * @param  Int $userId
-     * @param  String $module
+     * @param Int $userId
+     * @param false|String $module
      * @return Array
      */
-    public function getAccountRoles($userId, $module = false)
+    public function getAccountRoles(int $userId, false|string $module = false): array
     {
         $builder = $this->db->table('acl_account_roles')->select("role_name")->where("account_id", $userId);
 
@@ -151,22 +143,16 @@ class Acl_model extends CI_Model
             $builder->where("module", $module);
         }
 
-        $query = $builder->get();
-
-        if ($query->getNumRows() > 0) {
-            return $query->getResultArray();
-        } else {
-            return false;
-        }
+        return $builder->get()->getResultArray() ?? [];
     }
 
     /**
      * Get the groups of the given user
      *
-     * @param  $accountId
+     * @param false|int $accountId
      * @return Array
      */
-    public function getGroupsByUser($accountId = false)
+    public function getGroupsByUser(false|int $accountId = false): array
     {
         if (!$accountId) {
             $accountId = $this->user->getId();
@@ -183,7 +169,7 @@ class Acl_model extends CI_Model
             return $query->getResultArray();
         } else {
             // No group found; default to player
-            return array($this->getGroup($this->config->item('default_player_group')));
+            return [$this->getGroup($this->config->item('default_player_group'))];
         }
     }
 
@@ -192,65 +178,55 @@ class Acl_model extends CI_Model
      *
      * @return Array
      */
-    public function getGroups()
+    public function getGroups(): array
     {
         $query = $this->db->table('acl_groups ag')->select('ag.id, ag.priority, ag.name, ag.color, ag.description')->get();
 
         if ($query->getNumRows() > 0) {
             return $query->getResultArray();
         } else {
-            return false;
+            return [];
         }
     }
 
     /**
      * Get member count of a group
      *
-     * @param  Int $groupId
+     * @param Int $groupId
      * @return Int
      */
-    public function getGroupMemberCount($id)
+    public function getGroupMemberCount(int $groupId): int
     {
-        $query = $this->db->query("SELECT COUNT(*) `memberCount` FROM acl_account_groups WHERE group_id=?", array($id));
-
-        if ($query->getNumRows() > 0) {
-            $result = $query->getResultArray();
-
-            return $result[0]['memberCount'];
-        } else {
-            return 0;
-        }
+        return (int) $this->db->table('acl_account_groups')->where('group_id', $groupId)->countAllResults();
     }
 
-    /*
+    /**
      * Get the members of a group
      * @param Int $groupId
      * @return Array
      */
-    public function getGroupMembers($id)
+    public function getGroupMembers(int $groupId): array
     {
-        $query = $this->db->query("SELECT account_id FROM acl_account_groups WHERE group_id=?", array($id));
+        $result = $this->db->table('acl_account_groups')
+            ->select('account_id')
+            ->where('group_id', $groupId)
+            ->get()
+            ->getResultArray();
 
-        if ($query->getNumRows()) {
-            $result = $query->getResultArray();
-
-            foreach ($result as $k => $v) {
-                $result[$k]['username'] = $this->user->getUsername($v['account_id']);
-            }
-
-            return $result;
-        } else {
-            return false;
+        foreach ($result as &$row) {
+            $row['username'] = $this->user->getUsername($row['account_id']);
         }
+
+        return $result ?: [];
     }
 
     /**
      * Get the group by the given id.
      *
-     * @param  $groupId
-     * @return Array
+     * @param int $groupId
+     * @return false|array
      */
-    public function getGroup($groupId)
+    public function getGroup(int $groupId): false|array
     {
         $query = $this->db->table('acl_groups')->select('id, priority, name, color, description')->where('id', $groupId)->get();
 
@@ -266,10 +242,10 @@ class Acl_model extends CI_Model
     /**
      * Get the group by the given name
      *
-     * @param  $groupName
+     * @param string $groupName
      * @return Boolean
      */
-    public function getGroupByName($groupName)
+    public function getGroupByName(string $groupName)
     {
         $query = $this->db->table('acl_groups')->select('id, priority, name, color, description')->where('name', $groupName)->get();
 
@@ -285,39 +261,34 @@ class Acl_model extends CI_Model
     /**
      * Check if a group has a specific role
      *
-     * @param  Int $id
-     * @param  String $name
-     * @param  String $module
-     * @return Boolean
+     * @param Int $groupId
+     * @param String $name
+     * @param String $module
+     * @return int
      */
-    public function groupHasRole($groupId, $name, $module)
+    public function groupHasRole(int $groupId, string $name, string $module): int
     {
-        $query = $this->db->query("SELECT COUNT(*) `total` FROM acl_group_roles WHERE role_name=? AND module=? AND group_id=?", array($name, $module, $groupId));
-
-        if ($query->getNumRows()) {
-            $result = $query->getResultArray();
-
-            return $result[0]['total'];
-        } else {
-            return false;
-        }
+        return (int) $this->db->table('acl_group_roles')
+            ->where('role_name', $name)
+            ->where('module', $module)
+            ->where('group_id', $groupId)
+            ->countAllResults();
     }
 
     /**
      * Get the database roles for a module
      *
-     * @param  String $moduleName
+     * @param String $moduleName
+     * @param int $groupId
      * @return Array
      */
-    public function getRolesByModule($moduleName, $groupId)
+    public function getRolesByModule(string $moduleName, int $groupId): array
     {
-        $query = $this->db->query("SELECT * FROM acl_group_roles WHERE module = ? AND group_id = ?", [$moduleName, $groupId]);
-
-        if ($query->getNumRows() > 0) {
-            return $query->getResultArray();
-        } else {
-            return false;
-        }
+        return $this->db->table('acl_group_roles')
+            ->where('module', $moduleName)
+            ->where('group_id', $groupId)
+            ->get()
+            ->getResultArray() ?? [];
     }
 
     /**
@@ -326,7 +297,7 @@ class Acl_model extends CI_Model
      * @param $data
      * @return int
      */
-    public function createGroup($data)
+    public function createGroup($data): int
     {
         $this->db->table('acl_groups')->insert($data);
 
@@ -338,7 +309,7 @@ class Acl_model extends CI_Model
      *
      * @param Int $groupId
      */
-    public function deleteGroup($groupId)
+    public function deleteGroup(int $groupId): void
     {
         $this->db->table('acl_groups')->delete(['id' => $groupId]);
     }
@@ -349,7 +320,7 @@ class Acl_model extends CI_Model
      * @param Int $groupId
      * @param Int $accountId
      */
-    public function assignGroupToUser($groupId, $accountId)
+    public function assignGroupToUser(int $groupId, int $accountId): void
     {
         $data = [
             "account_id" => $accountId,
@@ -365,7 +336,7 @@ class Acl_model extends CI_Model
      * @param Int $groupId
      * @param Int $accountId
      */
-    public function removeGroupFromUser($groupId, $accountId)
+    public function removeGroupFromUser(int $groupId, int $accountId): void
     {
         $data = [
             "account_id" => $accountId,
@@ -380,7 +351,7 @@ class Acl_model extends CI_Model
      *
      * @param Int $accountId
      */
-    public function removeGroupsFromUser($accountId)
+    public function removeGroupsFromUser(int $accountId): void
     {
         $data = [
             "account_id" => $accountId
@@ -394,7 +365,7 @@ class Acl_model extends CI_Model
      *
      * @param Int $accountId
      */
-    public function removePermissionsFromUser($accountId)
+    public function removePermissionsFromUser(int $accountId): void
     {
         $data = [
             "account_id" => $accountId
@@ -406,15 +377,15 @@ class Acl_model extends CI_Model
     /**
      * Assign a permission to a user
      *
-     * @param $accontId
+     * @param int $accountId
      * @param String $permissionName
      * @param string $moduleName
      * @param $value
      */
-    public function assignPermissionToUser($accontId, $permissionName, $moduleName, $value)
+    public function assignPermissionToUser(int $accountId, string $permissionName, string $moduleName, $value): void
     {
         $data = [
-            "account_id" => $accontId,
+            "account_id" => $accountId,
             "permission_name" => $permissionName,
             "module" => $moduleName,
             "value" => $value
@@ -430,7 +401,7 @@ class Acl_model extends CI_Model
      * @param String $name
      * @param String $module
      */
-    public function addRoleToGroup($groupId, $name, $module)
+    public function addRoleToGroup(int $groupId, string $name, string $module): void
     {
         $data = [
             'group_id' => $groupId,
@@ -448,7 +419,7 @@ class Acl_model extends CI_Model
      * @param String $name
      * @param String $module
      */
-    public function deleteRoleFromGroup($groupId, $name, $module)
+    public function deleteRoleFromGroup(int $groupId, string $name, string $module): void
     {
         $this->db->table('acl_group_roles')->delete(['group_id' => $groupId, 'role_name' => $name, 'module' => $module]);
     }
@@ -459,7 +430,7 @@ class Acl_model extends CI_Model
      * @param Int $id
      * @param Array $data
      */
-    public function saveGroup($id, $data)
+    public function saveGroup(int $id, array $data): void
     {
         $this->db->table('acl_groups')->where('id', $id)->update($data);
     }
@@ -469,7 +440,7 @@ class Acl_model extends CI_Model
      *
      * @param Int $groupId
      */
-    public function deleteAllRoleFromGroup($groupId)
+    public function deleteAllRoleFromGroup(int $groupId): void
     {
         $this->db->table('acl_group_roles')->delete(['group_id' => $groupId]);
     }
