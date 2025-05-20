@@ -61,8 +61,7 @@ CREATE TABLE `acl_account_roles`  (
   `account_id` int(11) UNSIGNED NOT NULL,
   `role_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `module` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`account_id`, `role_name`) USING BTREE,
-  UNIQUE INDEX `account_id_role_name`(`account_id`, `role_name`) USING BTREE
+  PRIMARY KEY (`account_id`, `role_name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
 
 -- ----------------------------
@@ -78,7 +77,6 @@ CREATE TABLE `acl_group_roles`  (
   `role_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `module` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`group_id`, `role_name`, `module`) USING BTREE,
-  UNIQUE INDEX `group_id_role_id`(`group_id`, `role_name`, `module`) USING BTREE,
   CONSTRAINT `FK__groups` FOREIGN KEY (`group_id`) REFERENCES `acl_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
 
