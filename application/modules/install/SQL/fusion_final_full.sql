@@ -29,7 +29,6 @@ CREATE TABLE `acl_account_groups`  (
   `account_id` int(10) UNSIGNED NOT NULL,
   `group_id` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`account_id`, `group_id`) USING BTREE,
-  UNIQUE INDEX `account_id_group_id`(`account_id`, `group_id`) USING BTREE,
   INDEX `FK__acl_groups`(`group_id`) USING BTREE,
   CONSTRAINT `FK__acl_groups` FOREIGN KEY (`group_id`) REFERENCES `acl_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
@@ -47,8 +46,7 @@ CREATE TABLE `acl_account_permissions`  (
   `permission_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `module` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `value` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
-  PRIMARY KEY (`account_id`) USING BTREE,
-  UNIQUE INDEX `account_id_permission_id`(`account_id`, `permission_name`, `module`) USING BTREE
+  PRIMARY KEY (`account_id`, `permission_name`, `module`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
 
 -- ----------------------------
