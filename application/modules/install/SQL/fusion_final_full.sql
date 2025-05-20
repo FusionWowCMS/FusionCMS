@@ -695,10 +695,10 @@ CREATE TABLE `menu`  (
 -- Records of menu
 -- ----------------------------
 INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `order`, `permission`, `side`, `dropdown`, `parent_id`) VALUES
-(1, '{"english":"Home","spanish":"Inicio","simplified-chinese":"首页","portuguese-brazilian":"Início","france":"Accueil","persian":"خانه"}', 'news', 'top', 1, 0, 1, NULL, 'L', 0, 0),
+(1, '{"english":"Home","spanish":"Inicio","simplified-chinese":"首页","portuguese-brazilian":"Início","france":"Accueil","persian":"خانه"}', '', 'top', 1, 0, 1, NULL, 'L', 0, 0),
 (3, '{"english":"Features","france":"Fonctionnalités","spanish":"Características","persian":"ویژگی‌ها","portuguese-brazilian":"Funcionalidades","simplified-chinese":"功能"}', '#', 'top', 1, 0, 4, NULL, 'L', 1, 0),
 (4, '{"english":"Forum","france":"Forum","persian":"فروم","portuguese-brazilian":"Fórum","simplified-chinese":"论坛 ","spanish":"Foro"}', 'forum', 'top', 1, 0, 3, NULL, 'L', 0, 0),
-(7, '{"english":"Home","france":"Accueil","persian":"خانه ","portuguese-brazilian":"Início","simplified-chinese":"首页 ","spanish":"Inicio"}', 'news', 'side', 1, 0, 8, NULL, 'L', 0, 0),
+(7, '{"english":"Home","france":"Accueil","persian":"خانه ","portuguese-brazilian":"Início","simplified-chinese":"首页 ","spanish":"Inicio"}', '', 'side', 1, 0, 8, NULL, 'L', 0, 0),
 (8, '{"english":"Private messages","france":"Messages privés","persian":"پیام‌های خصوصی","portuguese-brazilian":"Mensagens privadas","simplified-chinese":"私信 ","spanish":"Mensajes privados"}', 'messages', 'side', 2, 0, 11, '', 'L', 0, 0),
 (9, '{"english":"How to connect","france":"Comment se connecter","persian":"نحوه اتصال","portuguese-brazilian":"Como conectar","simplified-chinese":"如何连接","spanish":"Cómo conectarse"}', 'page/connect', 'top', 1, 0, 1, NULL, 'L', 0, 12),
 (10, '{"english":"Forum","france":"Forum","persian":"فروم","portuguese-brazilian":"Fórum","simplified-chinese":"论坛 ","spanish":"Foro"}', 'forum', 'side', 1, 0, 11, NULL, 'L', 0, 0),
@@ -713,7 +713,7 @@ INSERT INTO `menu` (`id`, `name`, `link`, `type`, `rank`, `specific_rank`, `orde
 (19, '{"english":"Online players","france":"Joueurs en ligne","persian":"بازیکنان آنلاین","portuguese-brazilian":"Jogadores online","simplified-chinese":"在线玩家","spanish":"Jugadores en línea"}', 'online', 'side', 1, 0, 14, NULL, 'L', 0, 0),
 (20, '{"english":"Changelog","france":"Journal des modifications","persian":"تاریخچه تغییرات","portuguese-brazilian":"Registro de alterações","simplified-chinese":"更新日志","spanish":"Registro de cambios"}', 'changelog', 'side', 1, 0, 21, NULL, NULL, 0, 0),
 (21, '{"english":"Admin panel","france":"Panneau d\'administration","persian":"پنل مدیریت","portuguese-brazilian":"Painel de administração","simplified-chinese":"管理面板","spanish":"Panel de administración"}', 'admin', 'side', 5, 0, 18, '21', 'L', 0, 0),
-(22, '{"english":"Home","france":"Accueil","persian":"خانه","portuguese-brazilian":"Início","simplified-chinese":"首页 ","spanish":"Inicio"}', 'news', 'bottom', 1, 0, 10, NULL, 'L', 0, 0),
+(22, '{"english":"Home","france":"Accueil","persian":"خانه","portuguese-brazilian":"Início","simplified-chinese":"首页 ","spanish":"Inicio"}', '', 'bottom', 1, 0, 10, NULL, 'L', 0, 0),
 (23, '{"english":"Forum","france":"Forum","persian":"فروم","portuguese-brazilian":"Fórum","simplified-chinese":"论坛 ","spanish":"Foro"}', 'forum', 'bottom', 1, 0, 11, NULL, 'L', 0, 0),
 (24, '{"english":"Store","france":"Boutique","persian":"فروشگاه","portuguese-brazilian":"Loja","simplified-chinese":"商店","spanish":"Tienda"}', 'store', 'bottom', 1, 0, 13, NULL, 'L', 0, 0),
 (25, '{"english":"How to connect","france":"Comment se connecter","persian":"چگونه متصل شویم","portuguese-brazilian":"Como se conectar","simplified-chinese":"如何连接","spanish":"Cómo conectarse"}', 'page/connect', 'bottom', 1, 0, 12, NULL, 'L', 0, 0),
