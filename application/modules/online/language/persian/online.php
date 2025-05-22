@@ -21,3 +21,4 @@ $lang['no_players'] = "هیچ بازیکنی آنلاین نیست";
 $lang['offline'] = "آفلاین";
 $lang['view_profile'] = "نمایش پروفایل شخصیت";
 $lang['online_players'] = "بازیکنان آنلاین";
+$lang['realm'] = "ریلم";

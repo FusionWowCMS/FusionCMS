@@ -21,3 +21,4 @@
  $lang['offline'] = "Hors ligne";
  $lang['view_profile'] = "Voir le profil du personnage";
  $lang['online_players'] = "Joueurs en ligne";
+$lang['realm'] = "Royaume";

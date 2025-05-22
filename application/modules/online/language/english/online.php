@@ -21,3 +21,4 @@ $lang['no_players'] = "There are no players online";
 $lang['offline'] = "Offline";
 $lang['view_profile'] = "View character profile";
 $lang['online_players'] = "Online players";
+$lang['realm'] = "Realm";

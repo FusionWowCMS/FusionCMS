@@ -8,39 +8,77 @@ class Online extends MX_Controller
     {
         parent::__construct();
 
-        requirePermission("view");
+        requirePermission('view');
+        $this->load->config('online');
     }
 
     public function index()
     {
-        $this->template->setTitle(lang("online_players", "online"));
+        clientLang("no_players", "online");
+        clientLang("offline", "online");
 
-        $cache = $this->cache->get("online_module");
+        $this->template->setTitle(lang('online_players', 'online'));
 
-        // Perform ajax call to refresh if expired
-        if ($cache !== false) {
-            $page = $cache;
-        } else {
-            // Prepare data
-            $data = [
-                "module" => "online",
-                "image_path" => $this->template->image_path
-            ];
+        $content_data = [
+            'realms' => $this->realms->getRealms(),
+            'url' => $this->template->page_url,
+        ];
 
-            // Load the template file and format
-            $ajax = $this->template->loadPage("ajax.tpl", $data);
+        $page_content = $this->template->loadPage('online.tpl', $content_data);
 
-            // Load the topsite page and format the page contents
-            $data2 = [
-                "module" => "default",
-                "headline" => lang("online_players", "online"),
-                "content" => $ajax
-            ];
+        //Load the page
+        $page_data = [
+            'module' => 'default',
+            'headline' => lang('online_players', 'online'),
+            'content' => $page_content
+        ];
 
-            $page = $this->template->loadPage("page.tpl", $data2);
+        $page = $this->template->loadPage('page.tpl', $page_data);
+
+        $this->template->view($page, 'modules/online/css/online.css', 'modules/online/js/online.js');
+    }
+
+    public function online_refresh($realm_id = 0)
+    {
+        $realm = $this->realms->getRealm($realm_id);
+
+        if (!$realm || !$realm->isOnline()) {
+            echo json_encode(['status' => 'offline']);
+            return;
         }
 
-        //Load the template form
-        $this->template->view($page, "modules/online/css/online.css", "modules/online/js/sort.js");
+        $cache = $this->cache->get('online_list_' . $realm_id);
+
+        if ($cache !== false) {
+            echo json_encode(['status' => 'ok', 'data' => $cache]);
+            return;
+        }
+
+        $hide_gms = $this->config->item('hide_gms');
+        $players = $realm->getCharacters()->getOnlinePlayers($hide_gms);
+
+        if (empty($players)) {
+            echo json_encode(['status' => 'empty', 'data' => []]);
+            return;
+        }
+
+        $data = [];
+
+        foreach ($players as $character) {
+            $data[] = [
+                "guid" => $character['guid'],
+                "name" => $character['name'],
+                "level" => $character['level'],
+                "race" => $character['race'],
+                "gender" => $character['gender'],
+                "class" => $character['class'],
+                "zone" => $this->realms->getZone($character['zone'])
+            ];
+        }
+
+        $this->cache->save('online_list_' . $realm_id, $data, 60 * 5);
+
+        echo json_encode(['status' => 'ok', 'data' => $data]);
     }
+
 }

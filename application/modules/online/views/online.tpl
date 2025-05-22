@@ -1,47 +1,28 @@
-<div class="accordion accordion-flush" id="online_page">
-    {foreach from=$realms item=realm}
-        <div class="accordion-item mb-3">
-            <h2 class="accordion-header" id="{$realm->getId()}">
-                <button class="accordion-button text-center" type="button" data-bs-toggle="collapse" data-bs-target="#realm-{$realm->getId()}" aria-expanded="true" aria-controls="realm-{$realm->getId()}">{$realm->getName()} ({$realm->getOnline()})</button>
-            </h2>
-            {if $realm->isOnline()}
-            <div id="realm-{$realm->getId()}" class="accordion-collapse collapse {if count($realms) == 1}show{/if}" aria-labelledby="{$realm->getId()}" data-bs-parent="#online_page">
-                <div class="accordion-body p-0" id="online_realm_{$realm->getId()}">
-                    {if $realm->getOnline() > 0}
-                    <div class="table-responsive text-nowrap">
-                        <table class="nice_table">
-                            <thead>
-                                <tr>
-                                    <th><a href="javascript:void(0)" onClick="Sort.name({$realm->getId()})">{lang("character", "online")}</a></th>
-                                    <th><a href="javascript:void(0)" onClick="Sort.level({$realm->getId()})">{lang("level", "online")}</a></th>
-                                    <th>{lang("race", "online")}</th>
-                                    <th>{lang("class", "online")}</th>
-                                    <th><a href="javascript:void(0)" onClick="Sort.location({$realm->getId()})">{lang("location", "online")}</a></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {foreach from=$realm->getCharacters()->getOnlinePlayers($hide_gms) item=character}
-                                <tr>
-                                    <td><a data-tip="{lang("view_profile", "online")}" href="{$url}character/{$realm->getId()}/{$character.guid}">{$character.name}</a></td>
-                                    <td>{$character.level}</td>
-                                    <td><img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif"></td>
-                                    <td><img src="{$url}application/images/stats/{$character.class}.gif"/></td>
-                                    <td>{$realmsObj->getZone($character.zone)}</td>
-                                </tr>
-                            {/foreach}
-                            </tbody>
-                        </table>
-                    </div>
-                    {else}
-                        <center style="margin-bottom:10px;">{lang("no_players", "online")}</center>
-                    {/if}
-                </div>
-            </div>
-            {else}
-            <button class="accordion-button text-center" type="button" data-bs-toggle="collapse" data-bs-target="#realm-{$realm->getId()}" aria-expanded="true" aria-controls="realm-{$realm->getId()}">
-                {$realm->getName()} ({lang("offline", "online")})
-            </button>
-            {/if}
+<div class="container">
+    <div class="row align-items-center mb-3">
+        <div class="col-auto">
+            <label for="realmSelect" class="col-form-label">{lang("realm", "online")}</label>
         </div>
-    {/foreach}
+        <div class="col">
+            <select id="realmSelect" class="form-select">
+                {foreach from=$realms item=realm}
+                    <option value="{$realm->getId()}">{$realm->getName()} ({$realm->getOnline()})</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+
+    <div id="playersTableContainer" style="display:none;" class="table-responsive">
+        <table id="playersTable" class="nice_table">
+            <thead>
+            <tr>
+                <th>{lang("character", "online")}</th>
+                <th>{lang("level", "online")}</th>
+                <th>{lang("race", "online")}</th>
+                <th>{lang("class", "online")}</th>
+                <th>{lang("location", "online")}</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
 </div>
