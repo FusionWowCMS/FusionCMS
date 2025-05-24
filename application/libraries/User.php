@@ -75,7 +75,7 @@ class User
      */
     public function setUserDetails(string $username, string $password): int
     {
-        $check = $this->CI->external_account_model->initialize($username);
+        $check = $this->CI->external_account_model->initialize(strtoupper($username));
 
         if (!$check) {
             return 1;
