@@ -6,6 +6,7 @@ $emulators = [
     'trinity_df'               => 'TrinityCore - Dragon Flight (10.x.x)',
     'trinity_sl'               => 'TrinityCore - Shadowlands (9.x.x)',
     'trinity_legion'           => 'TrinityCore - Legion (7.x.x)',
+    'trinity_bfa'              => 'TrinityCore - Battle for Azeroth (8.3.7)',
     'trinity_cata'             => 'TrinityCore - Cataclysm (4.3.4)',
     'trinity_wotlkclassic'     => 'TrinityCore - Wotlk Classic (3.4.3)',
     'trinity_cataclassic'      => 'TrinityCore - Cataclysm Classic (4.4.0)',
