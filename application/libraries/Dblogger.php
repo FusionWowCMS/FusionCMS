@@ -45,7 +45,7 @@ class Dblogger
      */
     public function getLogs(?string $type = "", int $offset = 0, int $limit = 0, int $accountId = 0, string|null|array $event = ""): mixed
     {
-        return $this->CI->logger_model->getLogsDb($type, $offset, $limit, $accountId);
+        return $this->CI->logger_model->getLogsDb($type, $offset, $limit, $accountId, $event);
     }
 
     /**
