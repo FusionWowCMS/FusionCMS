@@ -138,6 +138,8 @@ class Donate extends MX_Controller
 
                 Events::trigger('onSuccessDonate', $this->user->getId(), $specify_donate);
 
+                $this->dblogger->createLog("user", "donate", $specify_donate['price'].$this->config->item('donation_currency_sign'), $specify_donate['points'], Dblogger::STATUS_SUCCEED, $this->user->getId());
+
                 redirect(base_url('/donate/success'));
             }
         } catch (Exception $e) {

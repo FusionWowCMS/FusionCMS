@@ -126,6 +126,9 @@ class Teleport extends MX_Controller
                 //MAKE SURE THAT THE CHARACTER EXISTS AND THAT HE IS OFFLINE, ALSO MAKE SURE WE CAN AFFORD IT
                 $character_exists = $this->teleport_model->characterExists($characterGuid, $realmConnection->getConnection());
 
+                //Get the character name
+                $CharacterName = $realmConnection->getNameByGuid($characterGuid);
+
                 if ($character_exists) {
                     if ($this->canPay($this->user->getVp(), $this->user->getDp(), $realmConnection->getGold($this->user->getId(), $characterGuid), $teleport_exists['vpCost'], $teleport_exists['dpCost'], $teleport_exists['goldCost'])) {
                         //Update the vp, dp and gold.
@@ -137,6 +140,8 @@ class Teleport extends MX_Controller
                         $this->teleport_model->setLocation($location['x'], $location['y'], $location['z'], $location['orientation'], $location['mapId'], $characterGuid, $realmConnection->getConnection());
 
                         Events::trigger('onTeleport', $this->user->getId(), $characterGuid, $teleport_exists['vpCost'], $teleport_exists['dpCost'], $teleport_exists['goldCost'], $location['x'], $location['y'], $location['z'], $location['orientation'], $location['mapId']);
+
+                        $this->dblogger->createLog("user", "service", "Teleport", $CharacterName, Dblogger::STATUS_SUCCEED, $this->user->getId());
 
                         die("1");
                     } else {

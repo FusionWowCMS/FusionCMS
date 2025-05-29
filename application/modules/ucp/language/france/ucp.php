@@ -79,3 +79,15 @@ $lang['google_authenticator'] = "Google Authenticator";
 $lang['six_digit_auth_code'] = "Code Authenticator à 6 chiffres";
 $lang['six_digit_not_empty'] = "Le code Authenticator à 6 chiffres ne peut pas être vide";
 $lang['six_digit_not_true'] = "Le code Authenticator est incorrect";
+
+// Recent Activity
+$lang['recent_activity'] = 'Activité récente';
+$lang['account_login'] = 'Connexion au compte';
+$lang['account_logout'] = 'Déconnexion du compte';
+$lang['account_recovery'] = 'Récupération du compte';
+$lang['service'] = 'Service';
+$lang['character'] = 'Personnage';
+$lang['amount'] = 'Montant';
+$lang['ip'] = 'IP';
+$lang['today'] = 'Aujourd\'hui';
+$lang['yesterday'] = 'Hier';

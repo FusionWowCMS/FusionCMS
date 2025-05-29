@@ -63,3 +63,32 @@ $lang['nickname_taken'] = "El apodo ya está en uso";
 $lang['invalid_language'] = "Idioma inválido";
 
 $lang['change_information'] = "Cambiar información";
+
+// Security
+$lang['account_security'] = "Seguridad de la cuenta";
+$lang['save_changes'] = "Guardar cambios";
+$lang['two_factor'] = "AUTENTICACIÓN DE DOS FACTORES";
+$lang['two_factor_description'] = "La autenticación de dos factores ayuda a proteger tu cuenta contra accesos no autorizados añadiendo una capa adicional de seguridad.";
+$lang['two_factor_help'] = "Descarga la aplicación Google Authenticator desde Google Play o App Store. Abre la aplicación y usa la cámara de tu teléfono para escanear el código de barras inferior. Ingresa el código de verificación de 6 dígitos generado por la aplicación Authenticator.";
+$lang['qr_code'] = "Código QR";
+$lang['qr_code_help_1'] = "¿No puedes escanear el código QR? También puedes ingresar la";
+$lang['qr_code_help_2'] = "clave manualmente.";
+$lang['select_authentication'] = "Seleccionar método de autenticación";
+$lang['disabled'] = "Desactivado";
+$lang['google_authenticator'] = "Google Authenticator";
+$lang['six_digit_auth_code'] = "Código de autenticación de 6 dígitos";
+$lang['six_digit_not_empty'] = "El código de autenticación de 6 dígitos no puede estar vacío";
+$lang['six_digit_not_true'] = "El código de autenticación no es correcto";
+
+// Recent Activity
+$lang['recent_activity'] = 'Actividad reciente';
+$lang['account_login'] = 'Inicio de sesión';
+$lang['account_logout'] = 'Cierre de sesión';
+$lang['account_recovery'] = 'Recuperación de cuenta';
+$lang['service'] = 'Servicio';
+$lang['character'] = 'Personaje';
+$lang['amount'] = 'Cantidad';
+$lang['ip'] = 'IP';
+$lang['today'] = 'Hoy';
+$lang['yesterday'] = 'Ayer';
+

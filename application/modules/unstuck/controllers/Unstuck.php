@@ -163,6 +163,8 @@ class Unstuck extends MX_Controller
                     $this->user->setVp($this->user->getVp() - $price);
                 }
 
+                $this->dblogger->createLog("user", "service", "Unstuck", $characterName, Dblogger::STATUS_SUCCEED, $this->user->getId());
+
                 //Successful
                 $data = [
                     'status' => true,

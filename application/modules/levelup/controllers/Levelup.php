@@ -130,6 +130,8 @@ class levelup extends MX_Controller
                     $this->user->setDp($this->user->getDp() - $price);
                 }
 
+                $this->dblogger->createLog("user", "service", "Level Up", $CharacterName, Dblogger::STATUS_SUCCEED, $this->user->getId());
+
                 //Successful
                 die(lang("successfully", "levelup"));
 

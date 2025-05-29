@@ -79,3 +79,15 @@ $lang['google_authenticator'] = "Google Authenticator";
 $lang['six_digit_auth_code'] = "کد 6 رقمی احراز ورود";
 $lang['six_digit_not_empty'] = "کد احراز ورود 6 رقمی نمی تواند خالی باشد";
 $lang['six_digit_not_true'] = "کد احراز صحیح نیست";
+
+// Recent Activity
+$lang['recent_activity'] = 'فعالیت‌های اخیر';
+$lang['account_login'] = 'ورود به حساب';
+$lang['account_logout'] = 'خروج از حساب';
+$lang['account_recovery'] = 'بازیابی حساب';
+$lang['service'] = 'سرویس';
+$lang['character'] = 'شخصیت';
+$lang['amount'] = 'مقدار';
+$lang['ip'] = 'آی‌پی';
+$lang['today'] = 'امروز';
+$lang['yesterday'] = 'دیروز';

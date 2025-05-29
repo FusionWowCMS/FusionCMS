@@ -111,6 +111,20 @@
 					{/foreach}
 				</div>
 			{/if}
+
+			<div class="section-header">{lang("recent_activity", "ucp")}</div>
+			<div class="section-body">
+				{foreach from=$recent_activity item=activity}
+					<div class="table-responsive text-nowrap">
+						<table class="nice_table mb-3">
+							<tr>
+								<td> <i class="fas {$activity.icon}"></i> {$activity.title}</td>
+								<td class="col-3">{$activity.activity_time nofilter}</td>
+							</tr>
+						</table>
+					</div>
+				{/foreach}
+			</div>
 		</div>
 	</div>
 </div>

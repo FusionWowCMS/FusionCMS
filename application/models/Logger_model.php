@@ -10,23 +10,36 @@
 
 class Logger_model extends CI_Model
 {
-    public function getLogsDb(string $logType = "", int $offset = 0, int $limit = 0): ?array
+    public function getLogsDb($logType = "", int $offset = 0, int $limit = 0, int $accountId = 0, $event = ''): ?array
     {
-        if (($logType != "" && !is_string($logType)) || !is_numeric($limit) || !is_numeric($offset)) {
+        if (($logType != "" && !is_string($logType)) || (!is_string($event) && !is_array($event)) || !is_numeric($limit) || !is_numeric($offset) || !is_numeric($accountId)) {
             return null;
         }
 
         $builder = $this->db->table('logs')->select('*');
+
         if ($logType != "") {
             $builder->where('type', $logType);
         }
-        $builder->orderBy('time', 'DESC');
-        if ($limit > 0 && $offset == 0) {
-            $builder->limit($limit);
+
+        if (!empty($event)) {
+            if (is_array($event)) {
+                $builder->whereIn('event', $event);
+            } else {
+                $builder->where('event', $event);
+            }
         }
-        if ($limit > 0 && $offset > 0) {
+
+        if ($accountId > 0) {
+            $builder->where('user_id', $accountId);
+        }
+
+        $builder->orderBy('time', 'DESC');
+
+        if ($limit > 0) {
             $builder->limit($limit, $offset);
         }
+
         $query = $builder->get();
 
         // Get the results

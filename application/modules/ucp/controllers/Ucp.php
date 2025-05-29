@@ -17,6 +17,7 @@ class Ucp extends MX_Controller
         $this->load->config('links');
 
         $this->load->model("ucp_model");
+        $this->load->library("dblogger");
     }
 
     public function index()
@@ -47,6 +48,60 @@ class Ucp extends MX_Controller
                 $groupedMenus[$menu['group']][] = $menu;
         }
 
+        $recent_activity = $this->dblogger->getLogs('user', 0, 5, $this->user->getId(), ['login', 'logout', 'recovery', 'service']);
+
+        $recent_activities = [];
+        foreach ($recent_activity as $activityLog) {
+            $time = date("H:i", $activityLog['time']);
+            $date = date("Y-m-d", $activityLog['time']);
+            $today = date("Y-m-d");
+            $yesterday = date("Y-m-d", strtotime("-1 day"));
+
+            if ($date == $today) {
+                $date_label = lang('today', 'ucp');
+            } elseif ($date == $yesterday) {
+                $date_label = lang('yesterday', 'ucp');
+            } else {
+                $date_label = date("F j, Y", $activityLog['time']);
+            }
+
+            $activity_time = "{$date_label}, {$time} — " . lang('ip', 'ucp') . ": {$activityLog['ip']}";
+            $title = '';
+            $icon = '';
+
+            switch ($activityLog['event']) {
+                case 'login':
+                    $title = lang('account_login', 'ucp');
+                    $icon = 'fa-sign-in-alt';
+                    break;
+                case 'logout':
+                    $title = lang('account_logout', 'ucp');
+                    $icon = 'fa-sign-out-alt';
+                    break;
+                case 'recovery':
+                    $title = lang('account_recovery', 'ucp');
+                    $icon = 'fa-clock-rotate-left';
+                    break;
+                case 'donate':
+                    $title = lang('donate', 'main') . ": {$activityLog['message']} | " . lang('donation_points', 'main') . ": {$activityLog['custom']}";
+                    $icon = 'fa-circle-dollar-to-slot';
+                    break;
+                case 'service':
+                    $title = "{$activityLog['message']} | " . lang('character', 'ucp') . ": {$activityLog['custom']}";
+                    $icon = ' fa-users-gear';
+                    break;
+                default:
+                    break;
+            }
+
+            $recent_activities[] = [
+                'icon' => $icon,
+                'title' => $title,
+                'event' => strtolower($activityLog['event']),
+                'activity_time' => $activity_time,
+            ];
+        }
+
         $data = [
             "username" => $this->user->getUsername(),
             "nickname" => $this->user->getNickname(),
@@ -75,6 +130,7 @@ class Ucp extends MX_Controller
             "realms" => $this->realms->getRealms(),
             "realmObj" => $this->realms,
             "menus" => $groupedMenus,
+            "recent_activity" => $recent_activities,
         ];
         
         $data['email'] = false;
