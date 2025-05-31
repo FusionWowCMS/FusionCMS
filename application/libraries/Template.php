@@ -417,7 +417,8 @@ class Template
                 'facebook' => $this->CI->config->item('facebook'),
                 'twitter' => $this->CI->config->item('twitter'),
                 'youtube' => $this->CI->config->item('youtube'),
-                'discord' => $this->CI->config->item('discord')
+                'discord' => $this->CI->config->item('discord'),
+                'instagram' => $this->CI->config->item('instagram')
             ],
             "use_captcha" => false,
             "captcha_type" => $this->CI->config->item('captcha_type')

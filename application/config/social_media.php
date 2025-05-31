@@ -6,7 +6,7 @@ if (! defined('BASEPATH')) {
 
 /**
  * @package FusionCMS
- * @version 6.0
+ * @version 9.3
  * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
@@ -20,3 +20,4 @@ $config['facebook'] = "https://facebook.com";
 $config['twitter'] = "https://twitter.com";
 $config['youtube'] = "https://youtube.com";
 $config['discord'] = "https://discord.com";
+$config['instagram'] = "https://instagram.com";
