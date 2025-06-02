@@ -91,15 +91,16 @@ class Characters_model
      */
     public function getOnlinePlayers(bool $removeGMs = false): false|array
     {
-        return $this->getCharacters(columns("characters", array("guid", "account", "name", "race", "class", "gender", "level", "zone"), $this->realmId), array(column("characters", "online", false, $this->realmId) => 1), $removeGMs);
+        return $this->getCharacters(columns("characters", ["guid", "account", "name", "race", "class", "gender", "level", "zone"], $this->realmId), [column("characters", "online", false, $this->realmId) => 1], $removeGMs);
     }
 
     /**
      * Get the online player count
      *
+     * @param false|string $faction (alliance, horde)
      * @return Int
      */
-    public function getOnlineCount($faction = false)
+    public function getOnlineCount(bool|string $faction = false): int
     {
         // Make sure we're connected
         $this->connect();
@@ -109,11 +110,11 @@ class Characters_model
                 $query = $this->db->query("SELECT COUNT(*) as `total` FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "online", false, $this->realmId) . "='1'");
                 break;
 
-            case "alliance":
+            case 'alliance':
                 $query = $this->db->query("SELECT COUNT(*) as `total` FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "online", false, $this->realmId) . "='1' AND " . column("characters", "race") . " IN(" . implode(",", get_instance()->realms->getAllianceRaces()) . ")");
                 break;
 
-            case "horde":
+            case 'horde':
                 $query = $this->db->query("SELECT COUNT(*) as `total` FROM " . table("characters", $this->realmId) . " WHERE " . column("characters", "online", false, $this->realmId) . "='1' AND " . column("characters", "race") . " IN(" . implode(",", get_instance()->realms->getHordeRaces()) . ")");
                 break;
         }
@@ -138,12 +139,12 @@ class Characters_model
     }
 
     /**
-     * Count the characters that belongs to one account
+     * Count the characters that belong to one account
      *
-     * @param  Int $account
+     * @param Int $account
      * @return Int
      */
-    public function getCharacterCount($account)
+    public function getCharacterCount(int $account): int
     {
         $this->connect();
 
@@ -166,29 +167,28 @@ class Characters_model
     }
 
     /**
-    * Get the characters that belongs to one account
+    * Get the characters that belong to one account
      *
-    * @param  Int $acc
+    * @param false|Int $acc
     * @return Array
     */
-    public function getCharactersByAccount($acc = false)
+    public function getCharactersByAccount(false|int $acc = false): array
     {
-        if ($acc == false) {
+        if (!$acc) {
             $CI = &get_instance();
             $acc = $CI->user->getId();
         }
 
-
-        return $this->getCharacters(columns("characters", array("guid", "name", "race", "class", "gender", "level", "online", "money"), $this->realmId), array(column("characters", "account", false, $this->realmId) => $acc));
+        return $this->getCharacters(columns("characters", ["guid", "name", "race", "class", "gender", "level", "online", "money", "zone"], $this->realmId), [column("characters", "account", false, $this->realmId) => $acc]);
     }
 
     /**
-    * Get the character guid by the name
+     * Get the character guid by the name
      *
-    * @param  String $name
-    * @return Int
-    */
-    public function getGuidByName($name)
+     * @param String $name
+     * @return false|int
+     */
+    public function getGuidByName(string $name): false|int
     {
         $this->connect();
 
