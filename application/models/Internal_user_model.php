@@ -18,6 +18,7 @@ class Internal_user_model extends CI_Model
     private $nickname;
     private $location;
     private $avatarId;
+    private $total_votes;
     private $permissionCache;
     private $language;
 
@@ -32,6 +33,7 @@ class Internal_user_model extends CI_Model
         } else {
             $this->vp = 0;
             $this->dp = 0;
+            $this->total_votes = 0;
             $this->location = "";
             $this->nickname = "";
             $this->language = $this->config->item('language');
@@ -59,6 +61,7 @@ class Internal_user_model extends CI_Model
 
             $this->vp = $result[0]['vp'];
             $this->dp = $result[0]['dp'];
+            $this->total_votes = $result[0]['total_votes'];
             $this->location = $result[0]['location'];
             $this->nickname = $result[0]['nickname'];
             $this->language = $result[0]['language'];
@@ -181,35 +184,27 @@ class Internal_user_model extends CI_Model
         }
     }
 
-    public function getTotalVotes()
+    public function getTotalVotes(): int
     {
-        $query = $this->db->query("SELECT total_votes FROM account_data WHERE nickname = ?", array($this->nickname));
-
-        if ($query->getNumRows() > 0) {
-            $result = $query->getResultArray();
-
-            return $result[0]['id'];
-        } else {
-            return false;
-        }
+        return $this->total_votes;
     }
 
-    public function getVp()
+    public function getVp(): int
     {
         return $this->vp;
     }
 
-    public function getDp()
+    public function getDp(): int
     {
         return $this->dp;
     }
 
-    public function getLocation()
+    public function getLocation(): string
     {
         return $this->location;
     }
 
-    public function getLanguage()
+    public function getLanguage(): ?string
     {
         return $this->language;
     }

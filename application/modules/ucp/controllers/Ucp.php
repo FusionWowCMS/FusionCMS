@@ -31,6 +31,7 @@ class Ucp extends MX_Controller
         $groupedMenus = [];
         foreach ($menus as &$menu) {
             $menu['name'] = $this->template->format(langColumn($menu['name']), false, false);
+            $menu['description'] = $this->template->format(langColumn($menu['description']), false, false);
 
             // Add the website path if internal link
             if (!preg_match("/https?:\/\//", $menu['link'])) {
@@ -109,6 +110,7 @@ class Ucp extends MX_Controller
             "dp" => $this->internal_user_model->getDp(),
             "url" => $this->template->page_url,
             "location" => $this->internal_user_model->getLocation(),
+            "total_votes" => $this->internal_user_model->getTotalVotes(),
             "groups" => $this->acl_model->getGroupsByUser($this->user->getId()),
             "register_date" => $this->user->getRegisterDate(),
             "status" => $this->user->getAccountStatus(),
