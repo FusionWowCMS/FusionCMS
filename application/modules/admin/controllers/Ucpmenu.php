@@ -49,6 +49,8 @@ class Ucpmenu extends MX_Controller
                 if (strlen($links[$key]['name']) > 15) {
                     $links[$key]['name'] = mb_substr($links[$key]['name'], 0, 15) . '...';
                 }
+
+                $links[$key]['description'] = langColumn($links[$key]['description']);
             }
         }
 
@@ -80,6 +82,7 @@ class Ucpmenu extends MX_Controller
         requirePermission('addMenuLinks');
 
         $name = $this->input->post('name');
+        $description = $this->input->post('description');
         $link = $this->input->post('link');
         $icon = $this->input->post('icon');
         $group = $this->input->post('group');
@@ -100,7 +103,7 @@ class Ucpmenu extends MX_Controller
             die("Link can't be empty");
         }
 
-        $this->ucpmenu_model->add($name, $link, $icon, $group, $permission, $permissionModule);
+        $this->ucpmenu_model->add($name, $description, $link, $icon, $group, $permission, $permissionModule);
 
         die("yes");
     }
@@ -194,6 +197,7 @@ class Ucpmenu extends MX_Controller
         }
 
         $data['name'] = $this->input->post('name');
+        $data['description'] = $this->input->post('description');
         $data['link'] = $this->input->post('link');
         $data['icon'] = $this->input->post('icon');
         $data['group'] = $this->input->post('group');

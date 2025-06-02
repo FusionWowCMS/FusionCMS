@@ -729,6 +729,7 @@ DROP TABLE IF EXISTS `menu_ucp`;
 CREATE TABLE IF NOT EXISTS `menu_ucp` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text,
+  `description` TEXT NULL DEFAULT NULL,
   `link` varchar(255) DEFAULT '#',
   `icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `order` int(11) NOT NULL DEFAULT 0,
@@ -741,16 +742,16 @@ CREATE TABLE IF NOT EXISTS `menu_ucp` (
 -- ----------------------------
 -- Records of menu_ucp
 -- ----------------------------
-INSERT INTO `menu_ucp` (`id`, `name`, `link`, `icon`, `order`, `group`, `permission`, `permissionModule`) VALUES
-(1, '{"english":"Account Overview"}', 'ucp', NULL, 1, 1, 'view', 'ucp'),
-(2, '{"english":"Account settings"}', 'ucp/settings', NULL, 2, 1, 'canUpdateAccountSettings', 'ucp'),
-(3, '{"english":"Account Security"}', 'ucp/security', NULL, 3, 1, 'securityAccount', 'ucp'),
-(4, '{"english":"Teleport hub"}', 'teleport', NULL, 4, 2, 'view', 'teleport'),
-(5, '{"english":"Vote panel"}', 'vote', NULL, 5, 2, 'view', 'vote'),
-(6, '{"english":"Donate panel"}', 'donate', NULL, 6, 2, 'view', 'donate'),
-(7, '{"english":"Store"}', 'store', NULL, 7, 2, 'view', 'store'),
-(8, '{"english":"GM panel"}', 'gm', NULL, 8, 3, 'view', 'gm'),
-(9, '{"english":"Admin panel"}', 'admin', NULL, 9, 3, 'view', 'admin');
+INSERT INTO `menu_ucp` (`id`, `name`, `description`, `link`, `icon`, `order`, `group`, `permission`, `permissionModule`) VALUES
+(1, '{"english":"Account Overview"}', 'View and manage your game account details, characters, and activity history', 'ucp', 'fa-solid fa-user', 1, 1, 'view', 'ucp'),
+(2, '{"english":"Account settings"}', 'Manage your account preferences', 'ucp/settings', 'fa-solid fa-tools', 2, 1, 'canUpdateAccountSettings', 'ucp'),
+(3, '{"english":"Account Security"}', 'Manage your account security', 'ucp/security', 'fa-solid fa-user-shield', 3, 1, 'securityAccount', 'ucp'),
+(4, '{"english":"Teleport hub"}', 'Instantly travel to any location"}', 'teleport', 'fa-solid fa-location', 4, 2, 'view', 'teleport'),
+(5, '{"english":"Vote panel"}', 'Help the server rise in rankings through the Vote panel and receive VP', 'vote', 'fa-solid fa-gavel', 5, 2, 'view', 'vote'),
+(6, '{"english":"Donate panel"}', 'Support the server\'s growth through the Donate panel and receive DP', 'donate', 'fa-solid fa-coin', 6, 2, 'view', 'donate'),
+(7, '{"english":"Store"}', 'Purchase items, mounts, and upgrades', 'store', 'fa-solid fa-shopping-cart', 7, 2, 'view', 'store'),
+(8, '{"english":"GM panel"}', 'Access tools and controls to manage players and ...', 'gm', 'fa-solid fa-users', 8, 3, 'view', 'gm'),
+(9, '{"english":"Admin panel"}', 'Manage settings, accounts, and server operations', 'admin', 'fa-solid fa-user-crown', 9, 3, 'view', 'admin');
 
 -- ----------------------------
 -- Table structure for gm_log

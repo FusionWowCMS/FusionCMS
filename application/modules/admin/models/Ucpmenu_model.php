@@ -5,7 +5,7 @@ class Ucpmenu_model extends CI_Model
     public function getMenuLinks(): bool|array
     {
         $query = $this->db->table('menu_ucp')
-            ->select(['id', 'name', 'link', 'icon', 'order', 'group', 'permission', 'permissionModule'])
+            ->select(['id', 'name', 'description', 'link', 'icon', 'order', 'group', 'permission', 'permissionModule'])
             ->orderBy('`group`', 'ASC')
             ->orderBy('`order`', 'ASC')
             ->get();
@@ -43,10 +43,11 @@ class Ucpmenu_model extends CI_Model
         $this->db->table('menu_ucp')->where('id', $id)->update($data);
     }
 
-    public function add($name, $link, $icon, $group, $permission, $permissionModule)
+    public function add($name, $description, $link, $icon, $group, $permission, $permissionModule)
     {
         $data = [
             "name" => $name,
+            "description" => $description,
             "link" => $link,
             "icon" => $icon,
             "group" => $group,
