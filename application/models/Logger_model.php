@@ -10,10 +10,10 @@
 
 class Logger_model extends CI_Model
 {
-    public function getLogsDb($logType = "", int $offset = 0, int $limit = 0, int $accountId = 0, $event = ''): ?array
+    public function getLogsDb($logType = "", int $offset = 0, int $limit = 0, int $accountId = 0, $event = ''): array
     {
         if (($logType != "" && !is_string($logType)) || (!is_string($event) && !is_array($event)) || !is_numeric($limit) || !is_numeric($offset) || !is_numeric($accountId)) {
-            return null;
+            return [];
         }
 
         $builder = $this->db->table('logs')->select('*');
@@ -46,7 +46,7 @@ class Logger_model extends CI_Model
         if ($query->getNumRows() > 0) {
             return $query->getResultArray();
         } else {
-            return null;
+            return [];
         }
     }
 
