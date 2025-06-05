@@ -67,8 +67,8 @@ class Trinity_bfa implements Emulator
         ],
 
         'account_access' => [
-            'id'      => 'AccountId',
-            'gmlevel' => 'SecurityLevel'
+            'id'      => 'id',
+            'gmlevel' => 'gmlevel'
         ],
 
         'account_banned' => [
