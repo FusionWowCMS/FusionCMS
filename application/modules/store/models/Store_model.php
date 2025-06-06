@@ -31,27 +31,12 @@ class Store_model extends CI_Model
         }
     }
 
-    public function getGroupTitle($id)
+    public function getStoreGroups(): false|array
     {
-        $query = $this->db->table('store_groups')->select()->where(['id' => $id])->get();
+        $query = $this->db->table('store_groups')->select()->get();
 
         if ($query->getNumRows() > 0) {
-            $result = $query->getResultArray();
-
-            return $result[0]['title'];
-        } else {
-            return false;
-        }
-    }
-
-    public function getGroupId($title)
-    {
-        $query = $this->db->table('store_groups')->select()->where(['title' => $title])->get();
-
-        if ($query->getNumRows() > 0) {
-            $result = $query->getResultArray();
-
-            return $result[0]['id'];
+            return $query->getResultArray();
         } else {
             return false;
         }

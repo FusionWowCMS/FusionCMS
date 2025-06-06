@@ -100,42 +100,47 @@ class Store extends MX_Controller
     }
 
     /**
-     * Put items in their groups and put un-assigned items in a separate list
+     * Put items in their groups and put unassigned items in a separate list
      *
-     * @param  Array $items
+     * @param array|false $items
      * @return Array
      */
-    private function formatItems($items)
+    private function formatItems(array|false $items): array
     {
-        if ($items != false) {
-            $data = array(
-                'groups' => array(), // Holds group titles and their items
-                'items' => array() // Holds items without a group
-            );
+        if (!$items)
+            return [];
 
-            $currentGroup = null;
+        $allGroups = $this->store_model->getStoreGroups();
+        $groupsCache = [];
 
-            // Loop through all items
-            foreach ($items as $item) {
-                if (empty($item['group'])) {
-                    array_push($data['items'], $item);
-                } else {
-                    if ($currentGroup != $item['group']) {
-                        $currentGroup = $item['group'];
+        foreach ($allGroups as $group) {
+            $groupsCache[$group['id']] = $group;
+        }
 
-                        // Assign the name to a group
-                        $data['groups'][$item['group']]['title'] = $this->store_model->getGroupTitle($item['group']);
-                        $data['groups'][$item['group']]['id'] = $this->store_model->getGroupId($data['groups'][$item['group']]['title']);
+        $data = [
+            'groups' => [],
+            'items' => []
+        ];
 
-                        // Create the item array
-                        $data['groups'][$item['group']]['items'] = array();
-                    }
-
-                    array_push($data['groups'][$item['group']]['items'], $item);
-                }
+        // Loop through all items
+        foreach ($items as $item) {
+            if (empty($item['group']) || !isset($groupsCache[$item['group']])) {
+                $data['items'][] = $item;
+                continue;
             }
 
-            return $data;
+            if (!isset($data['groups'][$item['group']])) {
+                $group = $groupsCache[$item['group']];
+                $data['groups'][$item['group']] = [
+                    'title' => $group['title'],
+                    'id' => $group['id'],
+                    'items' => []
+                ];
+            }
+
+            $data['groups'][$item['group']]['items'][] = $item;
         }
+
+        return $data;
     }
 }
