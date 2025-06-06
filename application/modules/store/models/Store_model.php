@@ -57,7 +57,7 @@ class Store_model extends CI_Model
         }
     }
 
-    public function logOrder($vp, $dp, $cart)
+    public function logOrder($vp, $dp, $cart): void
     {
         $data = [
             'vp_cost'   => $vp,
@@ -71,12 +71,12 @@ class Store_model extends CI_Model
         $this->db->table('order_log')->insert($data);
     }
 
-    public function completeOrder()
+    public function completeOrder(): void
     {
         $this->db->query("UPDATE order_log SET completed = '1' WHERE user_id = ? ORDER BY id DESC LIMIT 1", [$this->user->getId()]);
     }
 
-    public function getOrders($completed)
+    public function getOrders($completed): array|false
     {
         if ($completed) {
             $query = $this->db->query("SELECT * FROM order_log WHERE completed = ? ORDER BY id DESC LIMIT 10", [$completed]);
@@ -104,25 +104,23 @@ class Store_model extends CI_Model
         }
     }
 
-    public function findByUserId($type, $string)
+    public function findByUserId($type, $string): array|false
     {
         $query = $this->db->query("SELECT * FROM order_log WHERE `user_id` = ? AND `completed` = ?", [$string, $type]);
 
         if ($query->getNumRows()) {
-            $row = $query->getResultArray();
-
-            return $row;
+            return $query->getResultArray();
         } else {
             return false;
         }
     }
 
-    public function refund($user_id, $vp, $dp)
+    public function refund($user_id, $vp, $dp): void
     {
         $this->db->query("UPDATE account_data SET vp = vp + ?, dp = dp + ? WHERE id = ?", [$vp, $dp, $user_id]);
     }
 
-    public function deleteLog($id)
+    public function deleteLog($id): void
     {
         $this->db->query("DELETE FROM order_log WHERE id = ?", [$id]);
     }

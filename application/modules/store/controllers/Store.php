@@ -40,27 +40,27 @@ class Store extends MX_Controller
         clientLang("dp", "store");
 
         // Gather the template data
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
             'image_path' => $this->template->image_path,
             'vp' => $this->user->getVp(),
             'dp' => $this->user->getDp(),
             'data' => $this->getData(),
             'minimize' => $this->config->item('minimize_groups_by_default')
-        );
+        ];
 
         // Load the content
         $content = $this->template->loadPage("store.tpl", $data);
 
         // Load the topsite page and format the page contents
-        $pageData = array(
+        $pageData = [
             "module" => "default",
             "headline" => breadcrumb([
                             "ucp" => lang("ucp"),
                             "store" => lang("item_store", "store")
             ]),
             "content" => $content
-        );
+        ];
 
         $page = $this->template->loadPage("page.tpl", $pageData);
 
@@ -73,17 +73,17 @@ class Store extends MX_Controller
      *
      * @return Array
      */
-    private function getData()
+    private function getData(): array
     {
         $cache = $this->cache->get("store_items");
 
         if ($cache !== false) {
             return $cache;
         } else {
-            $data = array();
+            $data = [];
 
             foreach ($this->realms->getRealms() as $realm) {
-                // Load all items that belongs to this realm
+                // Load all items that belong to this realm
                 $items = $this->store_model->getItems($realm->getId());
 
                 // Assign the realm name
