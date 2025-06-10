@@ -524,6 +524,7 @@ class Template
         $data['full_theme_path'] = array_key_exists("full_theme_path", $data) ? $data['full_theme_path'] : $this->full_theme_path;
         $data['writable_path']   = array_key_exists("writable_path", $data) ? $data['writable_path'] : $this->writable_path;
         $data['CI']              = array_key_exists("CI", $data) ? $data['CI'] : $this->CI;
+        $data['ucp_menus']       = array_key_exists("ucp_menus", $data) ? $data['ucp_menus'] : $this->getUcpMenu();
 
         // Should we load from the default views or not?
         if ($data['module'] == "default")
@@ -886,5 +887,45 @@ class Template
     public function setCustomPage($page): void
     {
         $this->custom_page = $page;
+    }
+
+    /**
+     * Get the ucp menus
+     * @return array
+     */
+    private function getUcpMenu(): array
+    {
+        $cache = $this->CI->cache->get("ucp_menu");
+
+        if ($cache !== false) {
+            return $cache;
+        } else {
+            $menus = $this->CI->cms_model->getUcpMenu();
+
+            $groupedMenus = [];
+            foreach ($menus as &$menu) {
+                $menu['name'] = $this->format(langColumn($menu['name']), false, false);
+                $menu['description'] = $this->format(langColumn($menu['description']), false, false);
+
+                // Add the website path if internal link
+                if (!preg_match("/https?:\/\//", $menu['link'])) {
+                    $menu['link'] = $this->page_url . $menu['link'];
+                }
+
+                if ($menu['permission'] == 'securityAccount') {
+                    if ($this->CI->config->item('totp_secret')) {
+                        $groupedMenus[$menu['group']][] = $menu;
+                    }
+                    continue;
+                }
+
+                if (hasPermission($menu['permission'], $menu['permissionModule']))
+                    $groupedMenus[$menu['group']][] = $menu;
+            }
+
+            $this->CI->cache->save('ucp_menu', $groupedMenus, 86400); // 1 day
+
+            return $groupedMenus;
+        }
     }
 }

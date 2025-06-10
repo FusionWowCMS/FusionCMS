@@ -16,7 +16,6 @@ class Ucp extends MX_Controller
 
         $this->load->config('links');
 
-        $this->load->model("ucp_model");
         $this->load->library("dblogger");
     }
 
@@ -25,29 +24,6 @@ class Ucp extends MX_Controller
         requirePermission("view");
 
         $this->template->setTitle(lang("user_panel", "ucp"));
-
-        $menus = $this->ucp_model->getMenu();
-
-        $groupedMenus = [];
-        foreach ($menus as &$menu) {
-            $menu['name'] = $this->template->format(langColumn($menu['name']), false, false);
-            $menu['description'] = $this->template->format(langColumn($menu['description']), false, false);
-
-            // Add the website path if internal link
-            if (!preg_match("/https?:\/\//", $menu['link'])) {
-                $menu['link'] = $this->template->page_url . $menu['link'];
-            }
-
-            if ($menu['permission'] == 'securityAccount') {
-                if ($this->config->item('totp_secret')) {
-                    $groupedMenus[$menu['group']][] = $menu;
-                }
-                continue;
-            }
-
-            if (hasPermission($menu['permission'], $menu['permissionModule']))
-                $groupedMenus[$menu['group']][] = $menu;
-        }
 
         $recent_activity = $this->dblogger->getLogs('user', 0, 5, $this->user->getId(), ['login', 'logout', 'recovery', 'service']);
 
@@ -131,7 +107,6 @@ class Ucp extends MX_Controller
             "characters" => $this->realms->getTotalCharacters(),
             "realms" => $this->realms->getRealms(),
             "realmObj" => $this->realms,
-            "menus" => $groupedMenus,
             "recent_activity" => $recent_activities,
         ];
         

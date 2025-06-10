@@ -11,9 +11,9 @@
         </a>
 
     </div>
-    <div class="section-header">User <span>Control</span> Panel</div>
+    <div class="section-header">User Control Panel</div>
     <div class="section-body">
-        {foreach $menus as $group => $menusGroup}
+        {foreach $ucp_menus as $group => $menusGroup}
             <div class="list-group mt-3">
                 {foreach $menusGroup as $menu}
                     <a href="{$menu.link}" class="list-group-item list-group-item-action {if $link_active == $menu.link}active{/if}">
