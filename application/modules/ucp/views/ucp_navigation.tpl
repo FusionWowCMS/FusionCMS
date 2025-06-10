@@ -16,7 +16,7 @@
         {foreach $ucp_menus as $group => $menusGroup}
             <div class="list-group mt-3">
                 {foreach $menusGroup as $menu}
-                    <a href="{$menu.link}" class="list-group-item list-group-item-action {if $link_active == $menu.link}active{/if}">
+                    <a href="{$menu.link}" class="list-group-item list-group-item-action {if $url|cat:$link_active == $menu.link}active{/if}">
                         {$menu.name}
                     </a>
                 {/foreach}
