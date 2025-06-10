@@ -26,4 +26,5 @@ $lang['pay_paypal'] = "Payer avec PayPal";
 $lang['pay_paygol'] = "Payer par SMS";
 $lang['donate'] = "Faire un don";
 $lang['no_methods'] = "Veuillez configurer au moins un mode de paiement.";
+$lang['payment_methods'] = "Sélectionnez le mode de paiement";
  

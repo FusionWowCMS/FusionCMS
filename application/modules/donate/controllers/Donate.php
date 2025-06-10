@@ -37,7 +37,7 @@ class Donate extends MX_Controller
         $this->load->model('paypal_model');
     }
 
-    public function index()
+    public function index(): void
     {
         requirePermission("view");
 
@@ -55,12 +55,30 @@ class Donate extends MX_Controller
             }
         }
 
+        $modulesPath = rtrim(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, realpath(APPPATH)), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'modules';
+        $imagePath = rtrim(realpath(APPPATH . 'image'), DIRECTORY_SEPARATOR);
+
+        $donateFolders = [];
+        $donateNames = [];
+
+        foreach (glob($modulesPath . DIRECTORY_SEPARATOR . 'donate_*', GLOB_ONLYDIR) as $folder) {
+            $folderName = basename($folder);
+            if (preg_match('/^donate_(.+)$/', $folderName, $matches)) {
+                $donateName = $matches[1];
+
+                $donateFolders[] = $folderName;
+                $donateNames[] = $donateName;
+            }
+        }
+
         $data = [
             "paypal" => $paypal,
             "user_id" => $user_id,
             "server_name" => $this->config->item('server_name'),
             "currency" => $this->config->item('donation_currency'),
             "currency_sign" => $this->config->item('donation_currency_sign'),
+            "donateFolders" => $donateFolders,
+            "donateNames" => $donateNames,
         ];
 
         $data['use_paypal'] = !empty($this->config->item("paypal_userid")) && !empty($this->config->item("paypal_secretpass")) && $this->config->item("use_paypal");

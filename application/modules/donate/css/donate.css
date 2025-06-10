@@ -1,0 +1,23 @@
+.donate-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.donate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.donate-img {
+    object-fit: contain;
+}
+
+.donate-animated {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.donate-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}

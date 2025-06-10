@@ -29,4 +29,5 @@ $lang['for'] = "por";
 $lang['pay_paypal'] = "Pagar com PayPal";
 $lang['pay_paygol'] = "Pagar com SMS";
 $lang['donate'] = "Doar";
-$lang['no_methods'] = "Por favor, configure pelo menos um método de pagamento."; 
+$lang['no_methods'] = "Por favor, configure pelo menos um método de pagamento.";
+$lang['payment_methods'] = "Selecione o método de pagamento";
