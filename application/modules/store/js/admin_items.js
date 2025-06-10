@@ -222,9 +222,10 @@ var Items = {
 
 	editGroup: function(id)
 	{
-		var data = {
-			title:$("#title").val(),
-			order:$("#order").val(),
+		const data = {
+			title: $("#title").val(),
+			order: $("#order").val(),
+			icon: $("#icon").val(),
 			csrf_token_name: Config.CSRF
 		};
 

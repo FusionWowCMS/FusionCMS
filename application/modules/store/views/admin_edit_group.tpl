@@ -9,6 +9,11 @@
 				</div>
 
 				<div class="col-sm-6 mb-3">
+					<label class="col-form-label" for="icon">Group icon</label>
+					<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded icp" type="text" name="icon" id="icon" value="{$group.icon}" />
+				</div>
+
+				<div class="col-sm-6 mb-3">
 					<label class="col-form-label" for="order" data-bs-toggle="tooltip" data-placement="top" title="Specify an order, it will be sorted ascending by group order">Group order</label>
 					<div data-plugin-spinner data-plugin-options='{ "min": 0, "max": 9999 }'>
 						<div class="input-group">
@@ -30,3 +35,9 @@
 		</form>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$('.icp').iconpicker().show();
+	});
+</script>

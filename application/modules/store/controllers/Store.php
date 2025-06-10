@@ -133,6 +133,7 @@ class Store extends MX_Controller
                 $group = $groupsCache[$item['group']];
                 $data['groups'][$item['group']] = [
                     'title' => $group['title'],
+                    'icon' => $group['icon'],
                     'id' => $group['id'],
                     'items' => []
                 ];

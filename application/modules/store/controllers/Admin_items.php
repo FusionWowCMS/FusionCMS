@@ -77,6 +77,7 @@ class Admin_items extends MX_Controller
         requirePermission("canAddGroups");
 
         $data["title"] = $this->input->post("title");
+        $data["icon"] = $this->input->post("icon");
         $data["orderNumber"] = $this->input->post("order");
 
         if (!$data['title']) {
@@ -105,10 +106,10 @@ class Admin_items extends MX_Controller
 
         $group = $this->items_model->getGroup($id);
 
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
             'group' => $group,
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("admin_edit_group.tpl", $data);
@@ -128,11 +129,11 @@ class Admin_items extends MX_Controller
         // Change the title
         $this->administrator->setTitle("Add item");
 
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
             'groups' => $this->items_model->getGroups(),
             'realms' => $this->realms->getRealms()
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("admin_add_item.tpl", $data);
