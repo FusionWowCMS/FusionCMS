@@ -5,7 +5,7 @@
 			<div class="section-header text-center">{lang("payment_methods", "donate")}</span></div>
 			<div class="section-body">
 
-				{if $use_paypal || $donateNames|@count}
+				{if $use_paypal || $additionalGateways|@count}
 
 					<div id="donate-methods" class="donate-animated donate-visible d-flex flex-wrap justify-content-center gap-4 mt-4">
 
@@ -18,11 +18,11 @@
 							</a>
 						{/if}
 
-						{foreach from=$donateNames item=name key=index}
-							<a href="{$url}{$donateFolders[$index]}" class="donate-card text-decoration-none">
+						{foreach from=$additionalGateways key=key item=item}
+							<a href="{$item.url}" class="donate-card text-decoration-none">
 								<div class="card text-center shadow border-0 p-3 h-100">
-									<img src="{$url}application/modules/{$donateFolders[$index]}/images/{$name}.png" alt="{$name}" class="donate-img mx-auto mb-2">
-									<h6>{$name|capitalize}</h6>
+									<img src="{$item.icon}" alt="{$item.name}" class="donate-img mx-auto mb-2">
+									<h6>{$item.name|capitalize}</h6>
 								</div>
 							</a>
 						{/foreach}

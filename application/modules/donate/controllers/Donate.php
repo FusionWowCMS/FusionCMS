@@ -55,19 +55,38 @@ class Donate extends MX_Controller
             }
         }
 
+        // Modules path: Forge
         $modulesPath = rtrim(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, realpath(APPPATH)), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'modules';
-        $imagePath = rtrim(realpath(APPPATH . 'image'), DIRECTORY_SEPARATOR);
 
-        $donateFolders = [];
-        $donateNames = [];
+        // Donate gateways: Initialize
+        $donateGateways = [];
 
-        foreach (glob($modulesPath . DIRECTORY_SEPARATOR . 'donate_*', GLOB_ONLYDIR) as $folder) {
-            $folderName = basename($folder);
-            if (preg_match('/^donate_(.+)$/', $folderName, $matches)) {
-                $donateName = $matches[1];
+        // Donate gateways: Find
+        foreach(glob($modulesPath . DIRECTORY_SEPARATOR . 'donate_*', GLOB_ONLYDIR) as $key => $module)
+        {
+            // Donate gateways: Append
+            $donateGateways[$key] = [
+                'url'  => base_url() . basename($module),
+                'name' => ucfirst(strtolower(str_replace('donate_', '', basename($module)))),
+                'icon' => base_url() . strtolower(basename(APPPATH)) . '/' . strtolower(basename($modulesPath)) . '/' . strtolower($this->router->fetch_module()) . '/images/unknown.png'
+            ];
 
-                $donateFolders[] = $folderName;
-                $donateNames[] = $donateName;
+            // Module: Loop through tree | Find icon
+            foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($module, FilesystemIterator::SKIP_DOTS)) as $file)
+            {
+                // SKIP.. invalid file
+                if(!$file->isFile())
+                    continue;
+
+                // Icon: Found
+                if(in_array(strtolower($file->getExtension()), ['jpg', 'jpeg', 'png']) && strpos(strtolower($file->getFilename()), strtolower($donateGateways[$key]['name'] . '.')) !== false)
+                {
+                    // Donate gateways: Fill (icon)
+                    $donateGateways[$key]['icon'] = base_url() . str_replace(FCPATH, '', $file->getPathname());
+
+                    // STOP.. no need to go any further
+                    break;
+                }
             }
         }
 
@@ -77,8 +96,7 @@ class Donate extends MX_Controller
             "server_name" => $this->config->item('server_name'),
             "currency" => $this->config->item('donation_currency'),
             "currency_sign" => $this->config->item('donation_currency_sign'),
-            "donateFolders" => $donateFolders,
-            "donateNames" => $donateNames,
+            "additionalGateways" => $donateGateways
         ];
 
         $data['use_paypal'] = !empty($this->config->item("paypal_userid")) && !empty($this->config->item("paypal_secretpass")) && $this->config->item("use_paypal");
