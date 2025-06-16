@@ -128,7 +128,7 @@
 												</div>
 											{/foreach}
 										{/if}
-													
+
 										{if isset($realm.items)}
 										{foreach from=$realm.items.items item=item}
 										<div class="store_item" id="item_{$item.id}">

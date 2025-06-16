@@ -107,8 +107,13 @@ class Store extends MX_Controller
      */
     private function formatItems(array|false $items): array
     {
+        $data = [
+            'groups' => [],
+            'items' => []
+        ];
+
         if (!$items)
-            return [];
+            return $data;
 
         $allGroups = $this->store_model->getStoreGroups();
         $groupsCache = [];
@@ -116,11 +121,6 @@ class Store extends MX_Controller
         foreach ($allGroups as $group) {
             $groupsCache[$group['id']] = $group;
         }
-
-        $data = [
-            'groups' => [],
-            'items' => []
-        ];
 
         // Loop through all items
         foreach ($items as $item) {
