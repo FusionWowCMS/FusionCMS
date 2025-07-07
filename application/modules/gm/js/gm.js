@@ -162,6 +162,11 @@ const Gm = {
                     icon: "success",
                     title: lang("teleported", "gm"),
                 });
+            } else if (data == '3') {
+                Swal.fire({
+                    icon: "error",
+                    title: lang("must_be_offline", "gm"),
+                });
             } else {
                 Swal.fire({
                     icon: 'error',

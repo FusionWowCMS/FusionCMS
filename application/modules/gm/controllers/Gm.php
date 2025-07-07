@@ -152,7 +152,7 @@ class Gm extends MX_Controller
             else
             {
                 //Die 2 to mark failure because char is online.
-                die('2');
+                die('3');
             }
         }
         else
