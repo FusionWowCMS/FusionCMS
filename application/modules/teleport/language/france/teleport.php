@@ -18,6 +18,7 @@
  $lang['wrong_faction'] = "L'emplacement que vous avez sélectionné est uniquement disponible pour l'autre faction";
  $lang['doesnt_exist'] = "L'emplacement que vous avez sélectionné n'existe pas !";
  $lang['no_location'] = "L'emplacement de téléportation n'a pas été défini !";
+$lang['level_too_low'] = "Le niveau de votre personnage est trop bas pour se téléporter à cet endroit.";
  $lang['select'] = "Sélectionner";
  $lang['selected'] = "Sélectionné";
  $lang['teleported'] = "a été téléporté !";

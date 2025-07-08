@@ -1258,6 +1258,8 @@ CREATE TABLE `teleport_locations`  (
   `goldCost` int(11) NULL DEFAULT 0,
   `realm` int(11) NULL DEFAULT 1,
   `required_faction` int(1) NOT NULL DEFAULT 0,
+  `required_level` int(1) NOT NULL DEFAULT 1,
+  `map_id` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `realm_fk`(`realm`) USING BTREE,
   CONSTRAINT `realm_fk` FOREIGN KEY (`realm`) REFERENCES `realms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -1266,6 +1268,45 @@ CREATE TABLE `teleport_locations`  (
 -- ----------------------------
 -- Records of teleport_locations
 -- ----------------------------
+INSERT INTO `teleport_locations` (`id`, `name`, `description`, `x`, `y`, `z`, `orientation`, `mapId`, `vpCost`, `dpCost`, `goldCost`, `realm`, `required_faction`, `required_level`, `map_id`) VALUES
+	(1, 'Orgrimmar', 'Capital City', 1629.36, -4373.39, 31.2564, 3.54839, 1, 0, 0, 350, 1, 2, 1, 1),
+	(2, 'Thunder Bluff', 'Capital City', -1277.37, 124.804, 131.287, 5.22274, 1, 0, 0, 350, 1, 2, 1, 1),
+	(4, 'Darnassus', 'Capital City', 9949.56, 2284.21, 1341.4, 1.59587, 1, 0, 0, 350, 1, 1, 1, 1),
+	(5, 'Ragefire Chasm', 'Dungeon', 1811.78, -4410.5, -18.4704, 5.20165, 1, 0, 0, 250, 1, 2, 15, 1),
+	(6, 'Wailing Caverns', 'Dungeon', -731.607, -2218.39, 17.0281, 2.78486, 1, 0, 0, 350, 1, 0, 17, 1),
+	(7, 'The Barrens', 'Zone', 884.54, -3548.45, 91.8532, 2.95957, 1, 0, 0, 250, 1, 2, 10, 1),
+	(8, 'Stormwind', 'Capital City', -8833.38, 628.628, 94.0066, 1.06535, 0, 0, 0, 350, 1, 1, 1, 2),
+	(9, 'Ironforge', 'Capital City', -4918.88, -940.406, 501.564, 5.42347, 0, 0, 0, 350, 1, 1, 1, 2),
+	(10, 'Undercity', 'Capital City', 1584.07, 241.987, -52.1534, 0.049647, 0, 0, 0, 350, 1, 2, 1, 2),
+	(11, 'Blackrock Mountain', 'Dungeon', -7494.94, -1123.49, 265.547, 3.3092, 0, 0, 0, 250, 1, 0, 50, 2),
+	(12, 'Karazhan', 'Raid', -11118.9, -2010.33, 47.0819, 0.649895, 0, 0, 0, 350, 1, 0, 70, 2),
+	(13, 'Elwynn Forest', 'Zone', -9617.06, -288.949, 57.3053, 4.72687, 0, 0, 0, 250, 1, 1, 1, 2),
+	(14, 'Shattrath City', 'Capital City', -1838.16, 5301.79, -12.428, 5.9517, 530, 0, 0, 350, 1, 0, 60, 3),
+	(15, 'Hellfire Peninsula', 'Zone', -211.237, 4278.54, 86.5678, 4.59776, 530, 0, 0, 350, 1, 0, 58, 3),
+	(16, 'Black Temple', 'Raid', -3649.92, 317.469, 35.2827, 2.94285, 530, 0, 0, 350, 1, 0, 70, 3),
+	(17, 'Dalaran', 'Capital City', 5804.15, 624.771, 647.767, 1.64, 571, 0, 0, 450, 1, 0, 70, 4),
+	(18, 'Icecrown', 'Zone', 7253.64, 1644.78, 433.68, 4.83412, 571, 0, 0, 450, 1, 0, 77, 4),
+	(19, 'Ulduar', 'Raid', 9049.37, -1282.35, 1060.19, 5.8395, 571, 0, 0, 450, 1, 0, 80, 4),
+	(20, 'Icecrown Citadel', 'Raid', 5873.82, 2110.98, 636.011, 3.5523, 571, 0, 0, 550, 1, 0, 80, 4);
+
+-- ----------------------------
+-- Table structure for teleport_maps
+-- ----------------------------
+DROP TABLE IF EXISTS `teleport_maps`;
+CREATE TABLE `teleport_maps` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NULL DEFAULT NULL COLLATE utf8_unicode_ci,
+	PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of teleport_maps
+-- ----------------------------
+INSERT INTO `teleport_maps` (`id`, `name`) VALUES (1, 'Kalimdor');
+INSERT INTO `teleport_maps` (`id`, `name`) VALUES (2, 'Eastern Kingdoms');
+INSERT INTO `teleport_maps` (`id`, `name`) VALUES (3, 'Outland');
+INSERT INTO `teleport_maps` (`id`, `name`) VALUES (4, 'Northrend');
+
 
 -- ----------------------------
 -- Table structure for visitor_log

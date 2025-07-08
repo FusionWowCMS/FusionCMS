@@ -9,9 +9,10 @@ use MX\MX_Controller;
  */
 class Teleport extends MX_Controller
 {
-    private $teleportLocations;
-    private $characters;
-    private $total;
+    private array $teleportLocations;
+    private array $teleportMaps;
+    private array $characters;
+    private int $total;
 
     public function __construct()
     {
@@ -31,8 +32,8 @@ class Teleport extends MX_Controller
      */
     private function init()
     {
-
         $this->teleportLocations = $this->teleport_model->getTeleportLocations();
+        $this->teleportMaps = $this->teleport_model->getTeleportMaps();
 
         $this->characters = $this->user->getCharacters($this->user->getId());
 
@@ -73,27 +74,28 @@ class Teleport extends MX_Controller
         $this->template->setTitle(lang("teleport_hub", "teleport"));
 
         //Load the content
-        $content_data = array(
+        $content_data = [
             "locations" => $this->teleportLocations,
+            "maps" => $this->teleportMaps,
             "characters" => $this->characters,
             "url" => $this->template->page_url,
             "total" => $this->total,
             "vp" => $this->user->getVp(),
             "dp" => $this->user->getDp(),
             "avatar" => $this->user->getAvatar($this->user->getId()),
-        );
+        ];
 
         $page_content = $this->template->loadPage("teleport.tpl", $content_data);
 
         //Load the page
-        $page_data = array(
+        $page_data = [
             "module" => "default",
             "headline" => breadcrumb([
-                            "ucp" => lang("ucp"),
-                            "teleport" => lang("teleport_hub", "teleport")
+                "ucp" => lang("ucp"),
+                "teleport" => lang("teleport_hub", "teleport")
             ]),
             "content" => $page_content
-        );
+        ];
 
         $page = $this->template->loadPage("page.tpl", $page_data);
 
@@ -105,56 +107,57 @@ class Teleport extends MX_Controller
      */
     public function submit()
     {
-        //Get the post variables
+        // Get the post variables
         $characterGuid = $this->input->post('guid');
         $teleportLocationId = $this->input->post('id');
 
-        if ($teleportLocationId && $characterGuid) {
-            $realmId = $this->teleport_model->getLocationRealm($teleportLocationId);
-
-            $faction = $this->realms->getRealm($realmId)->getCharacters()->getFaction($characterGuid);
-
-            $teleport_exists = $this->teleport_model->teleportLocationExists($teleportLocationId, $faction);
-
-            if ($teleport_exists) {
-                //The location exists
-                //TELEPORT THE USER TO THIS LOCATION.
-                $location = $teleport_exists;
-                $realmConnection = $this->realms->getRealm($location['realm'])->getCharacters();
-                $realmConnection->connect();
-
-                //MAKE SURE THAT THE CHARACTER EXISTS AND THAT HE IS OFFLINE, ALSO MAKE SURE WE CAN AFFORD IT
-                $character_exists = $this->teleport_model->characterExists($characterGuid, $realmConnection->getConnection());
-
-                //Get the character name
-                $CharacterName = $realmConnection->getNameByGuid($characterGuid);
-
-                if ($character_exists) {
-                    if ($this->canPay($this->user->getVp(), $this->user->getDp(), $realmConnection->getGold($this->user->getId(), $characterGuid), $teleport_exists['vpCost'], $teleport_exists['dpCost'], $teleport_exists['goldCost'])) {
-                        //Update the vp, dp and gold.
-                        $this->user->setVp($this->user->getVp() - $teleport_exists['vpCost']);
-                        $this->user->setDp($this->user->getDp() - $teleport_exists['dpCost']);
-                        $realmConnection->setGold($this->user->getId(), $characterGuid, ($realmConnection->getGold($this->user->getId(), $characterGuid) - ($teleport_exists['goldCost'] * 100 * 100)));
-
-                        //Change the location of our user
-                        $this->teleport_model->setLocation($location['x'], $location['y'], $location['z'], $location['orientation'], $location['mapId'], $characterGuid, $realmConnection->getConnection());
-
-                        Events::trigger('onTeleport', $this->user->getId(), $characterGuid, $teleport_exists['vpCost'], $teleport_exists['dpCost'], $teleport_exists['goldCost'], $location['x'], $location['y'], $location['z'], $location['orientation'], $location['mapId']);
-
-                        $this->dblogger->createLog("user", "service", "Teleport", $CharacterName, Dblogger::STATUS_SUCCEED, $this->user->getId());
-
-                        die("1");
-                    } else {
-                        die(lang("cant_afford", "teleport"));
-                    }
-                } else {
-                    die(lang("must_be_offline", "teleport"));
-                }
-            } else {
-                die(lang("wrong_faction", "teleport"));
-            }
-        } else {
+        if (!$teleportLocationId || !$characterGuid) {
             die(lang("no_location", "teleport"));
+        }
+
+        $teleport_exists = $this->teleport_model->teleportLocationExists($teleportLocationId);
+
+        if (!$teleport_exists) {
+            die(lang("no_location", "teleport"));
+        }
+
+        $realmId = $teleport_exists['realm'];
+        $faction = $this->realms->getRealm($realmId)->getCharacters()->getFaction($characterGuid);
+
+        if ($teleport_exists['required_faction'] > 0 && $teleport_exists['required_faction'] != $faction) {
+            die(lang("wrong_faction", "teleport"));
+        }
+
+        $realmConnection = $this->realms->getRealm($realmId)->getCharacters();
+        $realmConnection->connect();
+
+        // MAKE SURE THAT THE CHARACTER EXISTS AND THAT HE IS OFFLINE, ALSO MAKE SURE WE CAN AFFORD IT
+        $character_exists = $this->teleport_model->characterExists($characterGuid, $realmConnection->getConnection());
+        if (!$character_exists) {
+            die(lang("must_be_offline", "teleport"));
+        }
+
+        // Check the character level with the required level
+        if ($character_exists['level'] < $teleport_exists['required_level']) {
+            die(lang("level_too_low", "teleport"));
+        }
+
+        if ($this->canPay($this->user->getVp(), $this->user->getDp(), $realmConnection->getGold($this->user->getId(), $characterGuid), $teleport_exists['vpCost'], $teleport_exists['dpCost'], $teleport_exists['goldCost'])) {
+            // Update the vp, dp and gold.
+            $this->user->setVp($this->user->getVp() - $teleport_exists['vpCost']);
+            $this->user->setDp($this->user->getDp() - $teleport_exists['dpCost']);
+            $realmConnection->setGold($this->user->getId(), $characterGuid, ($realmConnection->getGold($this->user->getId(), $characterGuid) - ($teleport_exists['goldCost'] * 100 * 100)));
+
+            // Change the location of character
+            $this->teleport_model->setLocation($teleport_exists['x'], $teleport_exists['y'], $teleport_exists['z'], $teleport_exists['orientation'], $teleport_exists['mapId'], $characterGuid, $realmConnection->getConnection());
+
+            Events::trigger('onTeleport', $this->user->getId(), $characterGuid, $teleport_exists['vpCost'], $teleport_exists['dpCost'], $teleport_exists['goldCost'], $teleport_exists['x'], $teleport_exists['y'], $teleport_exists['z'], $teleport_exists['orientation'], $teleport_exists['mapId']);
+
+            $this->dblogger->createLog("user", "service", "Teleport Character " . $character_exists[column("characters", "name", false, $realmId)], $teleport_exists['name'], Dblogger::STATUS_SUCCEED, $this->user->getId());
+
+            die("1");
+        } else {
+            die(lang("cant_afford", "teleport"));
         }
     }
 
@@ -169,7 +172,7 @@ class Teleport extends MX_Controller
      * @param  $requiredGold
      * @return bool
      */
-    public function canPay($currentVp, $currentDp, $currentGold, $requiredVp, $requiredDp, $requiredGold)
+    public function canPay($currentVp, $currentDp, $currentGold, $requiredVp, $requiredDp, $requiredGold): bool
     {
         //check if we can pay
         if (($currentVp >= $requiredVp) && ($currentDp >= $requiredDp) && ($currentGold >= $requiredGold)) {

@@ -2,45 +2,35 @@
 
 class Teleport_model extends CI_Model
 {
-    public function getTeleportLocations()
+    public function getTeleportLocations(): array
     {
         $query = $this->db->query("SELECT * FROM teleport_locations");
 
         if ($query->getNumRows() > 0) {
             return $query->getResultArray();
         } else {
-            return false;
+            return [];
         }
     }
 
-    public function teleportLocationExists($teleportLocationId, $faction = "")
+    public function getTeleportMaps(): array
     {
-        if ($faction != "") {
-            $faction = "," . $faction;
-        }
+        $query = $this->db->query("SELECT id, name FROM teleport_maps");
 
-        if ($faction) {
-            $query = $this->db->query("SELECT t.id, t.name, t.description, t.x, t.y, t.z, t.orientation, t.mapId, t.vpCost, t.dpCost, t.goldCost, t.realm, r.realmName, t.required_faction FROM teleport_locations t, realms r WHERE r.id = t.realm AND t.id = ? AND t.required_faction IN(0" . $faction . ") ORDER BY t.realm ASC", [$teleportLocationId]);
+        if ($query->getNumRows() > 0) {
+            return $query->getResultArray();
         } else {
-            $query = $this->db->query("SELECT t.id, t.name, t.description, t.x, t.y, t.z, t.orientation, t.mapId, t.vpCost, t.dpCost, t.goldCost, t.realm, r.realmName, t.required_faction FROM teleport_locations t, realms r WHERE r.id = t.realm AND t.id = ? ORDER BY t.realm ASC", [$teleportLocationId]);
+            return [];
         }
+    }
+
+    public function teleportLocationExists($teleportLocationId)
+    {
+        $query = $this->db->query("SELECT t.id, t.name, t.description, t.x, t.y, t.z, t.orientation, t.mapId, t.vpCost, t.dpCost, t.goldCost, t.realm, r.realmName, t.required_faction, t.required_level, t.map_id FROM teleport_locations t, realms r WHERE r.id = t.realm AND t.id = ? ORDER BY t.realm ASC", [$teleportLocationId]);
 
         if ($query->getNumRows() > 0) {
             $result = $query->getResultArray();
             return $result[0];
-        } else {
-            return false;
-        }
-    }
-
-    public function getLocationRealm($id)
-    {
-        $query = $this->db->query("SELECT realm FROM teleport_locations WHERE id=?", array($id));
-
-        if ($query->getNumRows() > 0) {
-            $result = $query->getResultArray();
-
-            return $result[0]['realm'];
         } else {
             return false;
         }
