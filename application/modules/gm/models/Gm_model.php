@@ -231,7 +231,7 @@ class Gm_model extends CI_Model
             }
         }
 
-        return false;
+        return [];
     }
 
     public function setBanIP($realmConnection, $ip, $bannedBy, $banReason, $banDay)
