@@ -1,14 +1,18 @@
 <?php
 
+use CodeIgniter\Database\BaseConnection;
+
 class Guild_model extends CI_Model
 {
+    private BaseConnection $connection;
+
     public function getGuild($realm, $guildId)
     {
         $realm = $this->realms->getRealm($realm);
         $realm->getCharacters()->connect();
-        $connection = $realm->getCharacters()->getConnection();
+        $this->connection = $realm->getCharacters()->getConnection();
 
-        $query = $connection->query(query('get_guild', $realm->getId()), [$guildId]);
+        $query = $this->connection->query(query('get_guild', $realm->getId()), [$guildId]);
 
         if ($query->getNumRows() > 0) {
             $result = $query->getResultArray();
@@ -17,18 +21,19 @@ class Guild_model extends CI_Model
             return false;
         }
     }
-    public function getGuildMembers($realm, $guildId)
+
+    public function getGuildMembers($realm, $guildId): array
     {
         $realm = $this->realms->getRealm($realm);
         $realm->getCharacters()->connect();
-        $connection = $realm->getCharacters()->getConnection();
+        $this->connection = $realm->getCharacters()->getConnection();
 
-        $query = $connection->query(query('get_guild_members', $realm->getId()), [$guildId]);
+        $query = $this->connection->query(query('get_guild_members', $realm->getId()), [$guildId]);
 
         if ($query->getNumRows() > 0) {
             return $query->getResultArray();
         } else {
-            return false;
+            return [];
         }
     }
 
