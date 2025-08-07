@@ -15,34 +15,23 @@
 											<h2 class="font-heading text-base font-semibold leading-tight mb-1 text-white"><span>Shortcuts</span></h2>
 											<p class="font-alt text-xs font-normal leading-tight mb-3"><span class="text-white"> Frequently used shortcuts: </span></p>
 											<div class="mt-auto flex gap-2">
-												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
-												    <a href="{$url}changelog/admin" data-toggle="tooltip" data-placement="top" title="ChangeLog">
-														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-															<i class="fs-4 fa-duotone fa-list-ul"></i>
-														</div>
-													</a>
-												</div>
-												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
-												    <a href="{$url}admin/cachemanager" data-toggle="tooltip" data-placement="top" title="Manage cache">
-														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-															<i class="fs-4 fa-duotone fa-box-archive"></i>
-														</div>
-													</a>
-												</div>
-												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
-												    <a href="{$url}page/admin" data-toggle="tooltip" data-placement="top" title="Custom pages">
-														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-															<i class="fs-4 fa-duotone fa-window"></i>
-														</div>
-													</a>
-												</div>
-												<div class="relative inline-flex shrink-0 items-center justify-center outline-none h-10 w-10 nui-mask nui-mask-blob">
-												    <a href="{$url}admin/modules" data-toggle="tooltip" data-placement="top" title="Modules">
-														<div class="flex h-full w-full items-center justify-center overflow-hidden text-center transition-all duration-300">
-															<i class="fs-4 fa-duotone fa-sitemap"></i>
-														</div>
-													</a>
-												</div>
+
+                                                <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-1">
+                                                    <div class="flex w-full items-center justify-between gap-3" shape="curved">
+                                                        <a href="{$url}changelog/admin" data-toggle="tooltip" data-placement="top" title="ChangeLog" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
+                                                            <i class="fa-duotone fa-solid fa-file-invoice"></i>
+                                                        </a>
+                                                        <a href="{$url}admin/cachemanager" data-toggle="tooltip" data-placement="top" title="Manage cache" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
+                                                            <i class="fa-duotone fa-solid fa-database"></i>
+                                                        </a>
+                                                        <a href="{$url}page/admin" data-toggle="tooltip" data-placement="top" title="Custom pages" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
+                                                            <i class="fa-duotone fa-window"></i>
+                                                        </a>
+                                                        <a href="{$url}admin/modules" data-toggle="tooltip" data-placement="top" title="Modules" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
+                                                            <i class="fa-duotone fa-solid fa-square-this-way-up"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
 											</div>
 										</div>
 										<div class="border-primary-300/60 flex h-full flex-1 flex-col px-4 sm:border-l sm:px-6">
