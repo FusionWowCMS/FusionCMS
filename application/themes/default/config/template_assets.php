@@ -22,7 +22,7 @@ $assets = [
                         # CMS stylesheet files
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'css' . DS . 'default.css'),
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'css' . DS . 'tooltip.css'),
-                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'fonts' . DS . 'fontawesome' . DS . 'v6.6.0' . DS . 'css' . DS . 'all.css'),
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'fonts' . DS . 'fontawesome' . DS . 'v7.0.0' . DS . 'css' . DS . 'all.css'),
 
                         # CMS dependencies
                         '@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap")',
