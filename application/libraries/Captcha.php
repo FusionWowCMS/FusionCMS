@@ -12,19 +12,19 @@
 
 class Captcha
 {
-    protected $CI;
+    protected Controller $CI;
 
     /**
      * Configuration
      */
-    private $stack = "abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ123456789";
-    private $length = 7;
+    private string $stack = "abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ123456789";
+    private int $length = 7;
 
     /**
      * Runtime values
      */
-    private $value;
-    private $stackLength;
+    private mixed $value;
+    private int $stackLength;
 
     /**
      * Initialize the current session if available
@@ -56,7 +56,7 @@ class Captcha
     /**
      * Generate a new value and tie it to a session
      */
-    public function generate()
+    public function generate(): void
     {
         $this->value = "";
 
@@ -72,12 +72,12 @@ class Captcha
      *
      * @return String
      */
-    private function random()
+    private function random(): string
     {
         return $this->stack[rand(0, $this->stackLength)];
     }
 
-    private function adjustBrightness($hexCode, $adjustPercent)
+    private function adjustBrightness($hexCode, $adjustPercent): string
     {
         $hexCode = ltrim($hexCode, '#');
 
@@ -97,7 +97,7 @@ class Captcha
         return '#' . implode($hexCode);
     }
 
-    private function getContrastColor($hexColor)
+    private function getContrastColor($hexColor): string
     {
         // hexColor RGB
         $R1 = hexdec(substr($hexColor, 1, 2));
@@ -142,33 +142,32 @@ class Captcha
      * @param Int $width
      * @param Int $height
      */
-    public function output($width = 150, $height = 30)
+    public function output(int $width = 150, int $height = 30): void
     {
-        $bgcolor = sprintf("#%02x%02x%02x", rand(0, 255), rand(0, 255), rand(0, 255));
-        $textcolor = $this->getContrastColor($bgcolor);
-        $gridColor = $this->getContrastColor($textcolor);
+        $bgColor = sprintf("#%02x%02x%02x", rand(0, 255), rand(0, 255), rand(0, 255));
+        $textColor = $this->getContrastColor($bgColor);
+        $gridColor = $this->getContrastColor($textColor);
 
-        $vals = array(
+        $vals = [
             'word'          => $this->getValue(),
             'img_path'      => FCPATH . '/writable/uploads/captcha/',
             'img_url'       => pageURL . '/writable/uploads/captcha/',
 
             'img_width'     => $width,
-              'img_height'    => $height,
+            'img_height'    => $height,
 
             'font_size'     => 16,
             'font_path'     => APPPATH . 'fonts/Roboto-Regular.ttf',
 
-            'colors'        => array(
-                'background' => sscanf($bgcolor, "#%02x%02x%02x"),
-                'border' => sscanf($textcolor, "#%02x%02x%02x"),
-                'text' => sscanf($textcolor, "#%02x%02x%02x"),
-                'grid' => sscanf($gridColor, "#%02x%02x%02x")
-            )
-        );
+            'colors'        => [
+                'background' => sscanf($bgColor, "#%02x%02x%02x"),
+                'border'     => sscanf($textColor, "#%02x%02x%02x"),
+                'text'       => sscanf($textColor, "#%02x%02x%02x"),
+                'grid'       => sscanf($gridColor, "#%02x%02x%02x")
+            ]
+        ];
 
         $cap = create_captcha($vals);
-        //die(print_r($cap));
 
         // Define the headers and output it
         header("Cache-Control: no-cache, must-revalidate");
@@ -184,9 +183,9 @@ class Captcha
     /**
      * Get the captcha value as plaintext and destroy the session
      *
-     * @return String
+     * @return mixed
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
