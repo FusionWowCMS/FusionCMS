@@ -101,14 +101,30 @@ class Edit extends MX_Controller
      */
     private function getConfig($file)
     {
+        $comments = [];
+
+        $fileContent = file($file);
+
+        foreach ($fileContent as $line) {
+            if (preg_match('/^\s*\$config\s*\[\s*[\'"](.+?)[\'"]\s*\]\s*=.*?;\s*\/\/\s*(.+)$/', $line, $matches)) {
+                $comments[$matches[1]] = trim($matches[2]);
+            }
+        }
+
         include($file);
 
         // Skip! don't list this file
-        if(isset($config) && isset($config['force_hidden']) && $config['force_hidden'])
+        if (isset($config) && isset($config['force_hidden']) && $config['force_hidden'])
             return;
 
-        $this->configs[$this->getConfigName($file)] = $config;
-        $this->configs[$this->getConfigName($file)]['source'] = $this->getConfigSource($file);
+        $name = $this->getConfigName($file);
+        $this->configs[$name] = $config;
+        $this->configs[$name]['source'] = $this->getConfigSource($file);
+
+        // load comments
+        foreach ($comments as $key => $comment) {
+            $this->configs[$name]['__comments'][$key] = $comment;
+        }
     }
 
     private function getConfigSource($file)

@@ -28,9 +28,16 @@
 
 		<form role="form" onSubmit="Settings.submitConfig(this, '{$moduleName}', '{$title}');return false" id="gui_{$title}">
 			{foreach from=$config item=option key=label}
-				{if $label != "source"}
+				{if $label != "source" && $label != "__comments"}
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label" for="{$label}">{ucfirst(preg_replace("/_/", " ", $label))}</label>
+						<label class="col-sm-2 col-form-label" for="{$label}">
+							{ucfirst(preg_replace("/_/", " ", $label))}
+							{if isset($config.__comments[$label])}
+								<i class="fa fa-question-circle text-muted"
+								   data-toggle="tooltip"
+								   title="{$config.__comments[$label]|escape}"></i>
+							{/if}
+						</label>
 						<div class="col-sm-10">
 							{if $option|is_array}
 								<div class="chip-input-wrapper border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md relative py-6 sm:py-2" data-name="{$label}">
