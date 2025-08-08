@@ -208,7 +208,7 @@
 						{if hasPermission("toggleModules", "admin")}
 						<li>
 							<a href="{$url}admin/modules" class="nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex w-full cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4">
-								<i class="fa-duotone fa-sitemap {if $current_page == "modules"}text-primary-500{/if}"></i>
+								<i class="fa-duotone fa-solid fa-square-this-way-up {if $current_page == "modules"}text-primary-500{/if}"></i>
 								<span class="whitespace-nowrap font-sans text-sm block {if $current_page == "modules"}text-primary-500{/if}">Modules</span>
 							</a>
 						</li>
