@@ -23,9 +23,9 @@ class Edit extends MX_Controller
     /**
      * Output the configs
      *
-     * @param String $module
+     * @param bool|String $module
      */
-    public function index($module = false)
+    public function index(bool|string $module = false): void
     {
         // Make sure the module exists and has configs
         if (
@@ -44,11 +44,11 @@ class Edit extends MX_Controller
         // Change the title
         $this->administrator->setTitle($this->manifest['name']);
 
-        $data = array(
+        $data = [
             "configs" => $this->configs,
             "moduleName" => $module,
             "url" => $this->template->page_url
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("config.tpl", $data);

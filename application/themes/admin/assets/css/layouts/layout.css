@@ -74,3 +74,33 @@ html.dark .btn-default {
     border-width: 1px;
 }
 
+.chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 16px;
+    padding: 0 8px;
+    margin: 2px;
+    font-size: 13px;
+}
+.chip button.remove-chip {
+    background: none;
+    border: none;
+    font-size: 16px;
+    line-height: 1;
+    margin-left: 6px;
+    cursor: pointer;
+}
+.chip-input-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    border-radius: 6px;
+    padding: 6px;
+}
+.chip-input {
+    border: none;
+    outline: none;
+    min-width: 120px;
+    flex: 1;
+    font-size: 14px;
+}

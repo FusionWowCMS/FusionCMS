@@ -513,13 +513,18 @@ var Settings = {
 
 	submitConfig: function(form, moduleName, configName)
 	{
-		var values = {csrf_token_name: Config.CSRF};
-		
-		$("input, select", $(form)).each(function(i, e)
-		{
-			if($(this).attr("type") != "submit")
-			{
-				values[$(this).attr("name")] = $(this).val();
+		var values = {};
+
+		values['csrf_token_name'] = Config.CSRF;
+
+		var formData = $(form).serializeArray();
+		$.each(formData, function(i, field) {
+			if (field.name.endsWith("[]")) {
+				var key = field.name.slice(0, -2);
+				if (!values[key]) values[key] = [];
+				values[key].push(field.value);
+			} else {
+				values[field.name] = field.value;
 			}
 		});
 
@@ -527,7 +532,6 @@ var Settings = {
 		{
 			if(data == "yes")
 			{
-				console.log(data);
 				Swal.fire({
 					icon: "success",
 					title: "The settings have been saved!",
@@ -535,12 +539,11 @@ var Settings = {
 			}
 			else
 			{
-				console.log(data);
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
 					text: data,
-				})
+				});
 			}
 		});
 	},
@@ -576,13 +579,18 @@ var Settings = {
 
 	submitThemeConfig: function(form, themeName, configName)
 	{
-		var values = {csrf_token_name: Config.CSRF};
-		
-		$("input, select", $(form)).each(function(i, e)
-		{
-			if($(this).attr("type") != "submit")
-			{
-				values[$(this).attr("name")] = $(this).val();
+		var values = {};
+
+		values['csrf_token_name'] = Config.CSRF;
+
+		var formData = $(form).serializeArray();
+		$.each(formData, function(i, field) {
+			if (field.name.endsWith("[]")) {
+				var key = field.name.slice(0, -2);
+				if (!values[key]) values[key] = [];
+				values[key].push(field.value);
+			} else {
+				values[field.name] = field.value;
 			}
 		});
 
@@ -590,7 +598,6 @@ var Settings = {
 		{
 			if(data == "yes")
 			{
-				console.log(data);
 				Swal.fire({
 					icon: "success",
 					title: "Theme settings have been saved!",
@@ -598,12 +605,11 @@ var Settings = {
 			}
 			else
 			{
-				console.log(data);
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
 					text: data,
-				})
+				});
 			}
 		});
 	},
@@ -814,3 +820,37 @@ var Settings = {
 		});
 	},
 }
+
+const ChipInput = {
+	handleKey(e, input, name) {
+		if (e.key === 'Enter' && input.value.trim() !== '') {
+			e.preventDefault();
+
+			const wrapper = input.closest('.chip-input-wrapper');
+			const value = input.value.trim();
+			input.value = '';
+
+			const chip = document.createElement('div');
+			chip.className = 'chip inline-block px-3 font-sans transition-shadow duration-300 py-1 text-[0.65rem] rounded-full bg-success-100 text-success-500 border-success-100 dark:border-success-500 dark:text-success-500 border dark:bg-transparent';
+
+			const span = document.createElement('span');
+			span.textContent = value;
+
+			const removeBtn = document.createElement('button');
+			removeBtn.type = 'button';
+			removeBtn.className = 'remove-chip';
+			removeBtn.textContent = '×';
+			removeBtn.onclick = () => chip.remove();
+
+			const hiddenInput = document.createElement('input');
+			hiddenInput.type = 'hidden';
+			hiddenInput.name = name + '[]';
+			hiddenInput.value = value;
+
+			chip.appendChild(span);
+			chip.appendChild(removeBtn);
+			chip.appendChild(hiddenInput);
+			wrapper.insertBefore(chip, input);
+		}
+	}
+};

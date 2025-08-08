@@ -1,19 +1,9 @@
 <?php
 
-/**
- * @package FusionCMS
- * @author  Jesper Lindström
- * @author  Xavier Geerinck
- * @author  Elliott Robbins
- * @author  Keramat Jokar (Nightprince) <https://github.com/Nightprince>
- * @author  Ehsan Zare (Darksider) <darksider.legend@gmail.com>
- * @link    https://github.com/FusionWowCMS/FusionCMS
- */
-
 class ConfigEditor
 {
     private string $file;
-    private mixed $data;
+    private string $data;
 
     /**
      * Initialize the config editor and load the file
@@ -22,16 +12,12 @@ class ConfigEditor
      */
     public function __construct(string $file)
     {
-        $this->data = "";
-        $this->file = $file;
-
-        $handle = fopen($this->file, "r");
-
-        while (!feof($handle)) {
-            $this->data .= fgets($handle);
+        if (!file_exists($file)) {
+            throw new InvalidArgumentException("Config file not found: $file");
         }
 
-        fclose($handle);
+        $this->file = $file;
+        $this->data = file_get_contents($file);
     }
 
     /**
@@ -42,54 +28,15 @@ class ConfigEditor
      */
     public function set(mixed $key, mixed $value): void
     {
-        // Create an array
-        if (is_array($value)) {
-            $value = "[" . implode(",", $value) . "]";
-        }
-
-        // Create a boolean
-        elseif (is_bool($value)) {
-            $value = ($value) ? "true" : "false";
-        }
-
-        // Create a boolean from string
-        elseif (in_array($value, ["true", "false"])) {
-            $value = $value;
-        }
-
-        // Create an integer
-        elseif (is_numeric($value)) {
-            $value = $value;
-        } elseif (empty($value)) {
-            $value = "false";
-        }
-
-        // Create an array from a string of numbers separated by comma
-        elseif (preg_match("/^([0-9]*,? ?)*$/", $value)) {
-            $value = "[" . $value . "]";
-        }
-
-        // Create a string
-        else {
-            $value = "\"" . str_replace('"', '\"', $value) . "\"";
-        }
+        $value = $this->formatValue($value);
 
         // Check for sub array replacement
-        if (preg_match("/.*-.*/", $key)) {
-            $parts = explode("-", $key);
-
-            preg_match('/\$config\[["\']' . $parts[0] . '["\']\] ?= [^;]*/', $this->data, $matches);
-
-            if (count($matches)) {
-                $matches[0] = preg_replace('/^\$config\[["\']' . $parts[0] . '["\']\] ?= /', "", $matches[0]);
-                $matches[0] = preg_replace('/;$/', "", $matches[0]);
-
-                $key = $parts[0];
-                $value = preg_replace('/["\']' . $parts[1] . '["\'] ?=> ?["\']?.*["\']?,?/', "'" . $parts[1] . "' => " . $value . ",", $matches[0]);
-            }
+        if (str_contains($key, '-')) {
+            [$mainKey, $subKey] = explode('-', $key, 2);
+            $this->updateNestedKey($mainKey, $subKey, $value);
+        } else {
+            $this->updateFlatKey($key, $value);
         }
-
-        $this->data = preg_replace('/\$config\[["\']' . $key . '["\']\] ?= ?["\']?.*["\']?;/', "\$config['" . $key . "'] = " . $value . ";", $this->data);
     }
 
     /**
@@ -97,18 +44,121 @@ class ConfigEditor
      */
     public function save(): void
     {
-        $file = fopen($this->file, "w");
-        fwrite($file, $this->data);
-        fclose($file);
+        file_put_contents($this->file, $this->data);
     }
 
     /**
      * Get the edited config content
      *
-     * @return mixed
+     * @return string
      */
-    public function get(): mixed
+    public function get(): string
     {
         return $this->data;
+    }
+
+    /**
+     * Convert different types of values to strings compatible with PHP config syntax
+     *
+     * @param mixed $value
+     * @return string
+     */
+    private function formatValue(mixed $value): string
+    {
+        if (is_string($value)) {
+            $lower = strtolower($value);
+            if ($lower === 'true') {
+                $value = true;
+            } elseif ($lower === 'false') {
+                $value = false;
+            }
+        }
+
+        if (empty($value) && !is_numeric($value) && !is_bool($value)) {
+            return 'false';
+        }
+
+        return match (true) {
+            is_array($value) => $this->formatArray($value),
+            is_bool($value) => $value ? 'true' : 'false',
+            is_float($value) => rtrim(rtrim(number_format($value, 8, '.', ''), '0'), '.'),
+            is_int($value) => (string)$value,
+            is_numeric($value) => (string)$value,
+            is_string($value) => "'" . str_replace("'", "\\'", $value) . "'",
+            default => 'NULL',
+        };
+    }
+
+    /**
+     * Format array as PHP-style [...] string
+     *
+     * @param array $array
+     * @return string
+     */
+    private function formatArray(array $array): string
+    {
+        $formatted = [];
+
+        foreach ($array as $key => $val) {
+            $keyStr = is_int($key) ? '' : $this->formatValue($key) . ' => ';
+            $formatted[] = $keyStr . $this->formatValue($val);
+        }
+
+        return '[' . implode(', ', $formatted) . ']';
+    }
+
+
+    /**
+     * Update or insert a top-level config key
+     *
+     * @param string $key
+     * @param string $value
+     * @return void
+     */
+    private function updateFlatKey(string $key, string $value): void
+    {
+        $pattern = '/\$config\[\'?' . preg_quote($key, '/') . '\'?\]\s*=\s*[^;]+;/';
+        $replacement = "\$config['$key'] = $value;";
+
+        if (preg_match($pattern, $this->data)) {
+            $this->data = preg_replace($pattern, $replacement, $this->data);
+        } else {
+            $this->data .= PHP_EOL . $replacement;
+        }
+    }
+
+
+    /**
+     * Update or insert a nested key inside an array config (e.g. $config['array'] = [...])
+     *
+     * @param string $mainKey
+     * @param string $subKey
+     * @param string $newValue
+     * @return void
+     */
+    private function updateNestedKey(string $mainKey, string $subKey, string $newValue): void
+    {
+        $pattern = '/\$config\[\'?' . preg_quote($mainKey, '/') . '\'?\]\s*=\s*array\s*\((.*?)\);/s';
+
+        if (preg_match($pattern, $this->data, $matches)) {
+            $arrayBody = $matches[1];
+
+            $subPattern = '/[\'"]' . preg_quote($subKey, '/') . '[\'"]\s*=>\s*[^,]+/';
+            if (preg_match($subPattern, $arrayBody)) {
+                $arrayBody = preg_replace($subPattern, "'$subKey' => $newValue", $arrayBody);
+            } else {
+                $arrayBody = trim($arrayBody);
+                if (!empty($arrayBody)) {
+                    $arrayBody .= ", ";
+                }
+                $arrayBody .= "'$subKey' => $newValue";
+            }
+
+            $this->data = preg_replace($pattern, "\$config['$mainKey'] = [$arrayBody];", $this->data);
+        } else {
+            // If there is no main key, create a new array
+            $newArray = "\$config['$mainKey'] = ['$subKey' => $newValue];";
+            $this->data .= PHP_EOL . $newArray;
+        }
     }
 }
