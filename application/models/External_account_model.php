@@ -124,7 +124,7 @@ class External_account_model extends CI_Model
             $result = $query->getRowArray();
             $this->id = $result['id'];
             $this->username = $result['username'];
-            $this->password = $result['verifier'] ?? $result['sha_pass_hash'];
+            $this->password = $result['verifier'] ?? strtoupper($result['sha_pass_hash']);
             $this->email = $result['email'];
             $this->joindate = $result['joindate'];
             $this->expansion = $result['expansion'];

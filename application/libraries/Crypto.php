@@ -129,7 +129,7 @@ class Crypto
         }
 
         return [
-            'verifier' => sha1(strtoupper($username) . ':' . strtoupper($password))
+            'verifier' => strtoupper(sha1(strtoupper($username) . ':' . strtoupper($password)))
         ];
     }
 
