@@ -117,7 +117,7 @@ class ConfigEditor
      */
     private function updateFlatKey(string $key, string $value): void
     {
-        $pattern = '/\$config\[\'?' . preg_quote($key, '/') . '\'?\]\s*=\s*[^;]+;/';
+        $pattern = '/\$config\[(["\'])?' . preg_quote($key, '/') . '\1?\]\s*=\s*[^;]+;/';
         $replacement = "\$config['$key'] = $value;";
 
         if (preg_match($pattern, $this->data)) {
@@ -138,7 +138,7 @@ class ConfigEditor
      */
     private function updateNestedKey(string $mainKey, string $subKey, string $newValue): void
     {
-        $pattern = '/\$config\[\'?' . preg_quote($mainKey, '/') . '\'?\]\s*=\s*array\s*\((.*?)\);/s';
+        $pattern = '/\$config\[(["\'])?' . preg_quote($mainKey, '/') . '\1?\]\s*=\s*array\s*\((.*?)\);/s';
 
         if (preg_match($pattern, $this->data, $matches)) {
             $arrayBody = $matches[1];
