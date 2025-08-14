@@ -96,20 +96,18 @@
                 <div data-id="0" class="type_content type_content_pvp">
                     <div class="header">
                         <div id="column">
-                            <a href="javascript:void(0);" class="pvptab_button active" data-id="2"
-                               onClick="Top.togglePVPTab(2);">{lang('top_today_kills', 'sidebox_top')}
+                            <a href="javascript:void(0);" class="pvptab_button active" data-id="2" onClick="Top.togglePVPTab(2);">
+                                {lang('top_today_kills', 'sidebox_top')}
                             </a>
-                            <div id="tab_dot">
-                            </div>
+                            <div id="tab_dot"></div>
                         </div>
                         <div id="column">
-                            <a href="javascript:void(0);" class="pvptab_button" data-id="1"
-                               onClick="Top.togglePVPTab(1);">{lang('top_yesterday_kills', 'sidebox_top')}
+                            <a href="javascript:void(0);" class="pvptab_button" data-id="1" onClick="Top.togglePVPTab(1);">
+                                {lang('top_yesterday_kills', 'sidebox_top')}
                             </a>
                         </div>
                         <div id="column">
-                            <a href="javascript:void(0);" class="pvptab_button" data-id="0"
-                               onClick="Top.togglePVPTab(0);">
+                            <a href="javascript:void(0);" class="pvptab_button" data-id="0" onClick="Top.togglePVPTab(0);">
                                 {lang('top_total_kills', 'sidebox_top')}
                             </a>
                         </div>
@@ -125,20 +123,16 @@
                                             <tr>
                                                 <td class="col-1 rank">
                                                     {if $character.rank == 1 || $character.rank == 2 || $character.rank == 3}
-                                                        <img width="16px" height="16px"
-                                                             src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
+                                                        <img width="16px" height="16px" src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
                                                     {/if}
                                                 </td>
                                                 <td class="col-2 stats_name">
-                                                    <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif"
-                                                         width="20px">
-                                                    <img src="{$url}application/images/stats/{$character.class}.gif"
-                                                         width="20px">
+                                                    <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif" width="20px">
+                                                    <img src="{$url}application/images/stats/{$character.class}.gif" width="20px">
                                                 </td>
 
                                                 <td class="col-3">
-                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/"
-                                                       data-character-tip="{$character.guid}" data-realm="{$realm.id}">
+                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/" data-character-tip="{$character.guid}" data-realm="{$realm.id}">
                                                         {$character.name}
                                                     </a>
                                                 </td>
@@ -147,7 +141,7 @@
                                                     {$character.guild}
                                                 </td>
 
-                                                <td class="col-5">Kills : {$character.totalKills}</td>
+                                                <td class="col-5">{lang('kills', 'sidebox_top')} : {$character.totalKills}</td>
                                             </tr>
                                         {/foreach}
                                     </table>
@@ -166,20 +160,16 @@
                                             <tr>
                                                 <td class="col-1 rank">
                                                     {if $character.rank == 1 || $character.rank == 2 || $character.rank == 3}
-                                                        <img width="16px" height="16px"
-                                                             src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
+                                                        <img width="16px" height="16px" src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
                                                     {/if}
                                                 </td>
                                                 <td class="col-2 stats_name">
-                                                    <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif"
-                                                         width="20px">
-                                                    <img src="{$url}application/images/stats/{$character.class}.gif"
-                                                         width="20px">
+                                                    <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif" width="20px">
+                                                    <img src="{$url}application/images/stats/{$character.class}.gif" width="20px">
                                                 </td>
 
                                                 <td class="col-3">
-                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/"
-                                                       data-character-tip="{$character.guid}" data-realm="{$realm.id}">
+                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/" data-character-tip="{$character.guid}" data-realm="{$realm.id}">
                                                         {$character.name}
                                                     </a>
                                                 </td>
@@ -188,7 +178,7 @@
                                                     {$character.guild}
                                                 </td>
 
-                                                <td class="col-5">Kills : {$character.yesterdayKills}</td>
+                                                <td class="col-5">{lang('kills', 'sidebox_top')} : {$character.yesterdayKills}</td>
                                             </tr>
                                         {/foreach}
                                     </table>
@@ -208,20 +198,16 @@
                                             <tr>
                                                 <td class="col-1 rank">
                                                     {if $character.rank == 1 || $character.rank == 2 || $character.rank == 3}
-                                                        <img width="16px" height="16px"
-                                                             src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
+                                                        <img width="16px" height="16px" src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
                                                     {/if}
                                                 </td>
                                                 <td class="col-2 stats_name">
-                                                    <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif"
-                                                         width="20px">
-                                                    <img src="{$url}application/images/stats/{$character.class}.gif"
-                                                         width="20px">
+                                                    <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif" width="20px">
+                                                    <img src="{$url}application/images/stats/{$character.class}.gif" width="20px">
                                                 </td>
 
                                                 <td class="col-3">
-                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/"
-                                                       data-character-tip="{$character.guid}" data-realm="{$realm.id}">
+                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/" data-character-tip="{$character.guid}" data-realm="{$realm.id}">
                                                         {$character.name}
                                                     </a>
                                                 </td>
@@ -230,7 +216,7 @@
                                                     {$character.guild}
                                                 </td>
 
-                                                <td class="col-5 user-points">Kills : {$character.todayKills}</td>
+                                                <td class="col-5 user-points">{lang('kills', 'sidebox_top')} : {$character.todayKills}</td>
                                             </tr>
                                         {/foreach}
                                     </table>
@@ -247,8 +233,8 @@
                 <!-- START OF ACHIEVEMENTS TAB -->
                 <div data-id="1" class="type_content type_content_achievement" style="display: none;">
                     <div class="header">
-                        <div id="column"><a href="javascript:void(0);"
-                                            class="achievementtab_button active">Achievement</a>
+                        <div id="column">
+                            <a href="javascript:void(0);" class="achievementtab_button active">{lang('achievement', 'sidebox_top')}</a>
                             <div id="tab_dot"></div>
                         </div>
                     </div>
@@ -263,20 +249,16 @@
                                             <tr>
                                                 <td class="col-1 rank">
                                                     {if $character.rank == 1 || $character.rank == 2 || $character.rank == 3}
-                                                        <img width="16px" height="16px"
-                                                             src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
+                                                        <img width="16px" height="16px" src="{$url}application/modules/sidebox_top/images/{$character.rank}.ico"/>
                                                     {/if}
                                                 </td>
                                                 <td class="col-2 stats_name">
-                                                    <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif"
-                                                         width="20px">
-                                                    <img src="{$url}application/images/stats/{$character.class}.gif"
-                                                         width="20px">
+                                                    <img src="{$url}application/images/stats/{$character.race}-{$character.gender}.gif" width="20px">
+                                                    <img src="{$url}application/images/stats/{$character.class}.gif" width="20px">
                                                 </td>
 
                                                 <td class="col-3">
-                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/"
-                                                       data-character-tip="{$character.guid}" data-realm="{$realm.id}">
+                                                    <a href="{$url}character/{$realm.id}/{$character.guid}/" data-character-tip="{$character.guid}" data-realm="{$realm.id}">
                                                         {$character.name}
                                                     </a>
                                                 </td>
@@ -285,8 +267,7 @@
                                                     {$character.guild}
                                                 </td>
 
-                                                <td class="col-5 user-points">Points
-                                                    : {$character.achievement_points}</td>
+                                                <td class="col-5 user-points">{lang('points', 'sidebox_top')} : {$character.achievement_points}</td>
                                             </tr>
                                         {/foreach}
                                     </table>
@@ -302,7 +283,10 @@
                 <!-- START OF GUILD TABS -->
                 <div data-id="2" class="type_content type_content_guild" style="display: none;">
                     <div class="header">
-                        <div id="column"><a href="javascript:void(0);" class="guildtab_button active">Guilds</a>
+                        <div id="column">
+                            <a href="javascript:void(0);" class="guildtab_button active">
+                                {lang('guilds', 'sidebox_top')}
+                            </a>
                             <div id="tab_dot"></div>
                         </div>
                     </div>
@@ -316,13 +300,11 @@
                                             <tr>
                                                 <td class="col-1 rank">
                                                     {if $guild.rank == 1 || $guild.rank == 2 || $guild.rank == 3}
-                                                        <img width="16px" height="16px"
-                                                             src="{$url}application/modules/sidebox_top/images/{$guild.rank}.ico"/>
+                                                        <img width="16px" height="16px" src="{$url}application/modules/sidebox_top/images/{$guild.rank}.ico"/>
                                                     {/if}
                                                 </td>
                                                 <td class="col-2 stats_name">
-                                                    <img src="{$url}application/modules/sidebox_top/images/faction-{$guild.faction}.jpg"
-                                                         width="20px"/>
+                                                    <img src="{$url}application/modules/sidebox_top/images/faction-{$guild.faction}.jpg" width="20px"/>
                                                 </td>
 
                                                 <td class="col-3">
@@ -330,14 +312,12 @@
                                                 </td>
 
                                                 <td class="col-4">
-                                                    <a href="{$url}character/{$realm.id}/{$guild.leaderguid}"
-                                                       data-character-tip="{$guild.leaderguid}"
-                                                       data-realm="{$realm.id}">
-                                                        Leader ({$guild.leaderName})
+                                                    <a href="{$url}character/{$realm.id}/{$guild.leaderguid}" data-character-tip="{$guild.leaderguid}" data-realm="{$realm.id}">
+                                                        {lang('leader', 'sidebox_top')} ({$guild.leaderName})
                                                     </a>
                                                 </td>
 
-                                                <td class="col-5 user-points">Points : {$guild.achievement_points}</td>
+                                                <td class="col-5 user-points">{lang('points', 'sidebox_top')} : {$guild.achievement_points}</td>
                                             </tr>
                                         {/foreach}
                                     </table>
@@ -359,11 +339,11 @@
     <div class="top_ranked_row">
         <div id="top10_types_menu">
             <a href="javascript:void(0);" id="type_button_0" onClick="Top.toggleType(0);"
-               class="col-xs-12 col-sm-12 col-md-12 col-lg-3 nice_button active">PVP</a>
+               class="col-xs-12 col-sm-12 col-md-12 col-lg-3 nice_button active">{lang('pvp', 'sidebox_top')}</a>
             <a href="javascript:void(0);" id="type_button_1" onClick="Top.toggleType(1);"
-               class="col-xs-12 col-sm-12 col-md-12 col-lg-3 nice_button">ACHIEVEMENT</a>
+               class="col-xs-12 col-sm-12 col-md-12 col-lg-3 nice_button">{lang('achievements', 'sidebox_top')}</a>
             <a href="javascript:void(0);" id="type_button_2" onClick="Top.toggleType(2);"
-               class="col-xs-12 col-sm-12 col-md-12 col-lg-3 nice_button">GUILD</a>
+               class="col-xs-12 col-sm-12 col-md-12 col-lg-3 nice_button">{lang('guild', 'sidebox_top')}</a>
         </div>
 
         <div id="top10_realms_menu">

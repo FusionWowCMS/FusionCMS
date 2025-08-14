@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Note to module developers:
  * 	Keeping a module specific language file like this
@@ -12,17 +11,17 @@
  *	will automatically look in that folder too.
  */
 
-$lang['top_total_kills'] = "Total des tués";
-$lang['top_yesterday_kills'] = "Tués hier";
-$lang['top_today_kills'] = "Tués aujourd'hui";
-$lang['no_players'] = "Aucun personnage trouvé";
-$lang['kills'] = "Tués";
-$lang['achievement'] = "Succès";
-$lang['points'] = "Points";
-$lang['guilds'] = "Guildes";
-$lang['leader'] = "Chef";
+$lang['top_total_kills'] = "Muertes Totales";
+$lang['top_yesterday_kills'] = "Muertes Ayer";
+$lang['top_today_kills'] = "Muertes Hoy";
+$lang['no_players'] = "Personaje no encontrado";
+$lang['kills'] = "Muertes";
+$lang['achievement'] = "Logro";
+$lang['points'] = "Puntos";
+$lang['guilds'] = "Hermandades";
+$lang['leader'] = "Líder";
 $lang['pvp'] = "JcJ";
-$lang['achievements'] = "Succès";
-$lang['guild'] = "Guilde";
+$lang['achievements'] = "Logros";
+$lang['guild'] = "Hermandad";
 
  

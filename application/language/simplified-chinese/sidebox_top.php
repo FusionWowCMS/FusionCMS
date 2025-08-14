@@ -16,3 +16,12 @@ $lang['top_total_kills'] = "总击杀数";
 $lang['top_yesterday_kills'] = "昨日击杀数";
 $lang['top_today_kills'] = "今日击杀数";
 $lang['no_players'] = "未找到角色";
+$lang['kills'] = "击杀";
+$lang['achievement'] = "成就";
+$lang['points'] = "积分";
+$lang['guilds'] = "公会";
+$lang['leader'] = "会长";
+$lang['pvp'] = "玩家对玩家";
+$lang['achievements'] = "成就";
+$lang['guild'] = "公会";
+

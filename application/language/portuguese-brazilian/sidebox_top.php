@@ -15,8 +15,17 @@
  *	will automatically look in that folder too.
  */
 
- $lang['top_total_kills'] = "Total de Mortes";
- $lang['top_yesterday_kills'] = "Mortes Ontem";
- $lang['top_today_kills'] = "Mortes Hoje";
- $lang['no_players'] = "Personagem não encontrado";
+$lang['top_total_kills'] = "Total de Mortes";
+$lang['top_yesterday_kills'] = "Mortes Ontem";
+$lang['top_today_kills'] = "Mortes Hoje";
+$lang['no_players'] = "Personagem não encontrado";
+$lang['kills'] = "Abates";
+$lang['achievement'] = "Conquista";
+$lang['points'] = "Pontos";
+$lang['guilds'] = "Guildas";
+$lang['leader'] = "Líder";
+$lang['pvp'] = "JxJ";
+$lang['achievements'] = "Conquistas";
+$lang['guild'] = "Guilda";
+
  
