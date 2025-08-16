@@ -43,6 +43,10 @@ export const renderIcon = (instance, params) => {
 
   // Animate icon
   dom.addClass(icon, params.showClass && params.showClass.icon)
+
+  // Re-adjust the success icon on system theme change
+  const colorSchemeQueryList = window.matchMedia('(prefers-color-scheme: dark)')
+  colorSchemeQueryList.addEventListener('change', adjustSuccessIconBackgroundColor)
 }
 
 /**
@@ -81,11 +85,17 @@ const adjustSuccessIconBackgroundColor = () => {
   }
 }
 
-const successIconHtml = `
-  <div class="swal2-success-circular-line-left"></div>
+/**
+ *
+ * @param {SweetAlertOptions} params
+ * @returns {string}
+ */
+const successIconHtml = (params) => `
+  ${params.animation ? '<div class="swal2-success-circular-line-left"></div>' : ''}
   <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
-  <div class="swal2-success-ring"></div> <div class="swal2-success-fix"></div>
-  <div class="swal2-success-circular-line-right"></div>
+  <div class="swal2-success-ring"></div>
+  ${params.animation ? '<div class="swal2-success-fix"></div>' : ''}
+  ${params.animation ? '<div class="swal2-success-circular-line-right"></div>' : ''}
 `
 
 const errorIconHtml = `
@@ -108,7 +118,7 @@ const setContent = (icon, params) => {
   if (params.iconHtml) {
     newContent = iconContent(params.iconHtml)
   } else if (params.icon === 'success') {
-    newContent = successIconHtml
+    newContent = successIconHtml(params)
     oldContent = oldContent.replace(/ style=".*?"/g, '') // undo adjustSuccessIconBackgroundColor()
   } else if (params.icon === 'error') {
     newContent = errorIconHtml

@@ -43,6 +43,11 @@ export const setFocus = (index, increment) => {
   if (focusableElements.length) {
     index = index + increment
 
+    // shift + tab when .swal2-popup is focused
+    if (index === -2) {
+      index = focusableElements.length - 1
+    }
+
     // rollover to first item
     if (index === focusableElements.length) {
       index = 0
@@ -198,8 +203,8 @@ const handleArrows = (key) => {
  * @param {Function} dismissWith
  */
 const handleEsc = (event, innerParams, dismissWith) => {
+  event.preventDefault()
   if (callIfFunction(innerParams.allowEscapeKey)) {
-    event.preventDefault()
     dismissWith(DismissReason.esc)
   }
 }

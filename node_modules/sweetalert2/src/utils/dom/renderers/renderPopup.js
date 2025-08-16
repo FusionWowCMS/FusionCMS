@@ -1,4 +1,5 @@
 import { swalClasses } from '../../classes.js'
+import { addDraggableListeners, removeDraggableListeners } from '../../draggable.js'
 import * as dom from '../../dom/index.js'
 
 /**
@@ -42,6 +43,14 @@ export const renderPopup = (instance, params) => {
 
   // Classes
   addClasses(popup, params)
+
+  if (params.draggable && !params.toast) {
+    dom.addClass(popup, swalClasses.draggable)
+    addDraggableListeners(popup)
+  } else {
+    dom.removeClass(popup, swalClasses.draggable)
+    removeDraggableListeners(popup)
+  }
 }
 
 /**

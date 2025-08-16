@@ -30,7 +30,6 @@ const classNames = [
   'confirm',
   'deny',
   'cancel',
-  'default-outline',
   'footer',
   'icon',
   'icon-content',
@@ -80,6 +79,8 @@ const classNames = [
   'icon-info',
   'icon-question',
   'icon-error',
+  'draggable',
+  'dragging',
 ]
 
 export const swalClasses = classNames.reduce((acc, className) => {
