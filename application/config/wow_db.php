@@ -39,4 +39,5 @@ $config['wow_item_db'] = [
     ['name' => 'WowHead TBC', 'link' => 'https://www.wowhead.com/tbc/'],
     ['name' => 'WowHead Wotlk', 'link' => 'https://www.wowhead.com/wotlk/'],
     ['name' => 'WowHead Cata', 'link' => 'https://www.wowhead.com/cata/'],
+    ['name' => 'WowHead Mop Classic', 'link' => 'https://www.wowhead.com/mop-classic/'],
 ];
