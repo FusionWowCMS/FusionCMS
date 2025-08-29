@@ -59,36 +59,48 @@ class News extends MX_Controller
         }
 
         // Get the cache
-        $cache = $this->cache->get("news_id" . $id . "_" . getLang());
+        $cache = $this->cache->get("news_id_" . $id . "_" . getLang());
 
         // Check if cache is valid
         if ($cache !== false) {
-            $this->template->view($cache, "modules/news/css/news.css", "modules/news/js/ajax.js");
+            $this->news_articles = $cache;
         } else {
             // Get the article passed
-            $this->news_articles = $this->template->format(array($this->news_model->getArticle($id)));
+            $article = $this->template->format([$this->news_model->getArticle($id)])[0];
 
-            // For each key we need to add the special values that we want to print
-            foreach ($this->news_articles as $key => $article) {
-                $this->news_articles[$key]['headline'] = langColumn($article['headline']);
-                $this->news_articles[$key]['content'] = langColumn($article['content']);
-                $this->news_articles[$key]['date'] = date("Y/m/d", $article['timestamp']);
-                $this->news_articles[$key]['author'] = $this->user->getNickname($article['author_id']);
-                $this->news_articles[$key]['link'] = ($article['comments'] == -1) ? '' : "href='javascript:void(0)' onClick='Ajax.showComments(" . $article['id'] . ")'";
-                $this->news_articles[$key]['comments_id'] = "id='comments_" . $article['id'] . "'";
-                $this->news_articles[$key]['comments_button_id'] = "id='comments_button_" . $article['id'] . "'";
-                $this->news_articles[$key]['tags'] = $this->news_model->getTags($id);
-                $this->news_articles[$key]['type_content'] = ($article['type'] == 2) ? $article['type_content'] : json_decode($article['type_content'], true);
-                $this->news_articles[$key]['avatar'] = false;
-            }
+            $article['headline'] = langColumn($article['headline']);
+            $article['content'] = langColumn($article['content']);
+            $article['date'] = date("Y/m/d", $article['timestamp']);
+            $article['author'] = $this->user->getNickname($article['author_id']);
+            $article['link'] = ($article['comments'] == -1) ? '' : "href='javascript:void(0)' onClick='Ajax.showComments(" . $article['id'] . ")'";
+            $article['comments_id'] = "id='comments_" . $article['id'] . "'";
+            $article['comments_button_id'] = "id='comments_button_" . $article['id'] . "'";
+            $article['tags'] = $this->news_model->getTags($id);
+            $article['type_content'] = ($article['type'] == 2) ? $article['type_content'] : json_decode($article['type_content'], true);
+            $article['avatar'] = false;
 
-            $content = $this->template->loadPage("articles.tpl", array("articles" => $this->news_articles, 'url' => $this->template->page_url, "pagination" => ''));
-            $content .= $this->template->loadPage("expand_comments.tpl", array("article" => $this->news_articles[0], 'url' => $this->template->page_url));
-            $this->cache->save("news_id" . $id . "_" . getLang(), $content);
+            $this->news_articles = [$article];
 
-            // Load the template and pass the page content
-            $this->template->view($content, "modules/news/css/news.css", "modules/news/js/ajax.js");
+            $this->cache->save("news_id_" . $id . "_" . getLang(), $this->news_articles);
         }
+
+        $content = $this->template->loadPage("articles.tpl",
+            [
+                "articles" => $this->news_articles,
+                'url' => $this->template->page_url,
+                "pagination" => ''
+            ]
+        );
+
+        $content .= $this->template->loadPage("expand_comments.tpl",
+            [
+                "article" => $this->news_articles[0],
+                'url' => $this->template->page_url
+            ]
+        );
+
+        // Load the template and pass the page content
+        $this->template->view($content, "modules/news/css/news.css", "modules/news/js/ajax.js");
     }
 
     public function rss()
@@ -129,27 +141,17 @@ class News extends MX_Controller
 
     private function displayPage()
     {
-        // Get the cache
-        $cache = $this->cache->get("news_" . $this->startIndex . "_" . getLang());
-
-        // Check if cache is valid
-        if ($cache !== false) {
-            $this->template->view($cache, "modules/news/css/news.css", "modules/news/js/ajax.js");
-        } else {
-            $content = $this->template->loadPage(
-                "articles.tpl",
-                array(
+        $content = $this->template->loadPage("articles.tpl",
+            [
                 "articles" => $this->news_articles,
                 'url' => $this->template->page_url,
                 "pagination" => $this->pagination->create_links(),
-                'single' => false)
-            );
+                'single' => false
+            ]
+        );
 
-            $this->cache->save("news_" . $this->startIndex . "_" . getLang(), $content);
-
-            // Load the template and pass the page content
-            $this->template->view($content, "modules/news/css/news.css", "modules/news/js/ajax.js");
-        }
+        // Load the template and pass the page content
+        $this->template->view($content, "modules/news/css/news.css", "modules/news/js/ajax.js");
     }
 
     private function getNews()
@@ -162,6 +164,16 @@ class News extends MX_Controller
 
         if (empty($this->startIndex)) {
             $this->startIndex = 0;
+        }
+
+        // Get the cache
+        $cache = $this->cache->get("news_data_" . $this->startIndex . "_" . getLang());
+
+        // Check if cache is valid
+        if ($cache !== false) {
+            $this->news_articles = $cache;
+            $this->pagination->initialize($config);
+            return;
         }
 
         $summary_character_limit = $this->config->item('summary_character_limit');
@@ -184,6 +196,8 @@ class News extends MX_Controller
             $this->news_articles[$key]['avatar'] = false;
             $this->news_articles[$key]['readMore'] = strlen($this->news_articles[$key]['content']) > $summary_character_limit;
         }
+
+        $this->cache->save("news_data_" . $this->startIndex . "_" . getLang(), $this->news_articles);
     }
 
     private function initPagination()
