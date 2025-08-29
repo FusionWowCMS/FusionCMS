@@ -19,26 +19,24 @@ class Top extends MX_Controller
 
     public function view()
     {
-        $cache = $this->cache->get("sidebox_top_" . getLang());
+        $cache = $this->cache->get("sidebox_top_data_" . getLang());
 
         if ($cache !== false)
-            $output = $cache;
+            $data = $cache;
         else {
-            $data = array(
+            $data = [
                 'module' => 'sidebox_top',
                 'selected_realm' => 1,
                 'url' => $this->template->page_url,
                 'realms' => $this->getData(),
                 'load_css' => 'application/modules/sidebox_top/css/sidebox_top.css'
-            );
-
-            $output = $this->template->loadPage("sidebox_top.tpl", $data);
+            ];
 
             // Cache for 12 hours
-            $this->cache->save("sidebox_top_" . getLang(), $output, 60 * 60 * 12);
+            $this->cache->save("sidebox_top_data_" . getLang(), $data, 60 * 60 * 12);
         }
 
-        return $output;
+        return $this->template->loadPage("sidebox_top.tpl", $data);
     }
 
     private function getData()
@@ -46,7 +44,7 @@ class Top extends MX_Controller
         if (count($this->realms->getRealms()) == 0) {
             return "This module has not been configured";
         } else {
-            $data = array();
+            $data = [];
             $limit = $this->config->item('top_players_limit');
 
             foreach ($this->realms->getRealms() as $realm) {
@@ -69,6 +67,4 @@ class Top extends MX_Controller
             return $data;
         }
     }
-
-
 }
