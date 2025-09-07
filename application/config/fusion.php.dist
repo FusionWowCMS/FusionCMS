@@ -2,7 +2,7 @@
 
 /**
  * @package FusionCMS
- * @version 6.0
+ * @version 9.4
  * @link https://github.com/FusionWowCMS/FusionCMS
  */
 
@@ -14,7 +14,7 @@
 | An additional password to add another layer of security
 |
 */
-$config['security_code'] = "CHANGE-ME";
+$config['security_code'] = 'CHANGE-ME';
 
 /*
 |--------------------------------------------------------------------------
@@ -24,28 +24,28 @@ $config['security_code'] = "CHANGE-ME";
 | Must be located in application/views/NAME and must contain a valid theme manifest
 |
 */
-$config['theme'] = "default";
+$config['theme'] = 'default';
 
 /*
 |--------------------------------------------------------------------------
 | Website title
 |--------------------------------------------------------------------------
 */
-$config['title'] = "";
+$config['title'] = '';
 
 /*
 |--------------------------------------------------------------------------
 | Server name
 |--------------------------------------------------------------------------
 */
-$config['server_name'] = "";
+$config['server_name'] = '';
 
 /*
 |--------------------------------------------------------------------------
 | Realmlist
 |--------------------------------------------------------------------------
 */
-$config['realmlist'] = "";
+$config['realmlist'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ $config['has_smtp'] = 0;
 | 10 = The War Within/ TWW
 |
 */
-$config['max_expansion'] = "0";
+$config['max_expansion'] = 0;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,7 +139,7 @@ $config['slider_style'] = false;
 |
 */
 $config['vote_reminder'] = 0;
-$config['vote_reminder_image'] = "/images/misc/banner.jpg";
+$config['vote_reminder_image'] = '/images/misc/banner.jpg';
 $config['reminder_interval'] = 60 * 60 * 12;
 
 /*
