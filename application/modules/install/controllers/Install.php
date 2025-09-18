@@ -224,57 +224,65 @@ class Database extends Config
         die('1');
     }
 
+    private function saveConfig(string $file, array $data): void
+    {
+        $config = new ConfigEditor($file);
+
+        foreach ($data as $key => $value) {
+            $config->set($key, $value);
+        }
+
+        $config->save();
+    }
+
     private function config()
     {
+        // owner.php
         $owner = fopen("application/config/owner.php", "w");
         fwrite($owner, '<?php $config["owner"] = "'.addslashes($_POST['superadmin']).'";');
         fclose($owner);
 
         require_once('application/libraries/ConfigEditor.php');
 
+        // fusion.php
         $distConfig = 'application/config/fusion.php.dist';
-        $config = 'application/config/fusion.php';
+        $fusionConfig = 'application/config/fusion.php';
         if(file_exists($distConfig))
-            copy($distConfig, $config); // preserve the original in-case they mess up the new one
+            copy($distConfig, $fusionConfig); // preserve the original in-case they mess up the new one
 
-        $config = new ConfigEditor($config);
+        $fusionData = [
+            'title'         => $_POST['title'],
+            'server_name'   => $_POST['server_name'],
+            'realmlist'     => $_POST['realmlist'],
+            'keywords'      => $_POST['keywords'],
+            'description'   => $_POST['description'],
+            'analytics'     => !empty($_POST['analytics']) ? $_POST['analytics'] : false,
+            'security_code' => $_POST['security_code'],
+            'max_expansion' => $_POST['max_expansion'],
+        ];
 
-        $data['title'] = $_POST['title'];
-        $data['server_name'] = $_POST['server_name'];
-        $data['realmlist'] = $_POST['realmlist'];
-        $data['keywords'] = $_POST['keywords'];
-        $data['description'] = $_POST['description'];
-        $data['analytics'] = ($_POST['analytics']) ? $_POST['analytics'] : false;
-        $data['cdn'] = ($_POST['cdn'] == '1') ? true : false;
-        $data['security_code'] = $_POST['security_code'];
-        $data['max_expansion'] = $_POST['max_expansion'];
+        $this->saveConfig($fusionConfig, $fusionData);
 
-        foreach($data as $key => $value)
-        {
-            $config->set($key, $value);
-        }
+        // cdn.php
+        $cdnData = [
+            'cdn'           => ($_POST['cdn'] == '1') ? true : false,
+            'cdn_link'      => $_POST['cdn_link'],
+        ];
 
-        $config->save();
+        $this->saveConfig('application/config/cdn.php', $cdnData);
 
-        $config = 'application/config/captcha.php';
-        $config = new ConfigEditor($config);
+        // captcha.php
+        $captchaData = [
+            'use_captcha'          => ($_POST['captcha'] == 'disabled') ? false : true,
+            'captcha_type'         => ($_POST['captcha'] == 'recaptcha') ? 'recaptcha' : 'inbuilt',
+            'recaptcha_site_key'   => $_POST['site_key'],
+            'recaptcha_secret_key' => $_POST['secret_key'],
+        ];
 
-        $data['use_captcha'] = ($_POST['captcha'] == 'disabled') ? false : true;
-        $data['captcha_type'] = ($_POST['captcha'] == 'recaptcha') ? 'recaptcha' : 'inbuilt';
-        $data['recaptcha_site_key'] = $_POST['site_key'];
-        $data['recaptcha_secret_key'] = $_POST['secret_key'];
+        $this->saveConfig('application/config/captcha.php', $captchaData);
 
-        foreach($data as $key => $value)
-        {
-            $config->set($key, $value);
-        }
-
-        $config->save();
-
-        // config/auth.php
-        $config = new ConfigEditor('application/config/auth.php');
-
-        $data = [
+        // auth.php
+        $authData = [
             'rbac'                  => $_POST['realmd_rbac'],
             'battle_net'            => $_POST['realmd_battle_net'],
             'totp_secret'           => $_POST['realmd_totp_secret'],
@@ -283,15 +291,12 @@ class Database extends Config
         ];
 
         if(!empty($_POST['realmd_battle_net']) && $_POST['realmd_battle_net'] == 'true')
-            $data['battle_net_encryption'] = $_POST['realmd_battle_net_encryption'];
+            $authData['battle_net_encryption'] = $_POST['realmd_battle_net_encryption'];
 
         if(!empty($_POST['realmd_totp_secret']) && $_POST['realmd_totp_secret'] == 'true')
-            $data['realmd_totp_secret_name'] = $_POST['realmd_totp_secret_name'];
+            $authData['realmd_totp_secret_name'] = $_POST['realmd_totp_secret_name'];
 
-        foreach($data as $key => $value)
-            $config->set($key, $value);
-
-        $config->save();
+        $this->saveConfig('application/config/auth.php', $authData);
 
         die('1');
     }

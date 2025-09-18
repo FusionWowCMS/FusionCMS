@@ -23,4 +23,4 @@ if (! defined('BASEPATH')) {
 */
 
 $config['cdn'] = false;
-$config['cdn_link'] = "https://cdn.google.com/";
+$config['cdn_link'] = 'https://cdn.google.com/';

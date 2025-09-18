@@ -32,7 +32,8 @@ var Memory = (function()
 			"captcha",
 			"site_key",
 			"secret_key",
-			"cdn"
+			"cdn",
+			"cdn_link"
 		],
 
 		5: [

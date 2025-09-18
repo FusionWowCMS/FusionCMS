@@ -249,6 +249,7 @@ const Ajax = {
 				site_key: $("#site_key").val(),
 				secret_key: $("#secret_key").val(),
 				cdn: $("#cdn").val(),
+                cdn_link: $("#cdn_link").val(),
 				security_code: $("#security_code").val(),
 				emulator: $("#emulator").val(),
 				superadmin: name,
