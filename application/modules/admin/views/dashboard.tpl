@@ -261,8 +261,12 @@
         {foreach from=$graphMonthly[0] item=data key=key}
             {if isset($data["month"])}
                 {foreach from=$data["month"] item=month key=keyMonth}
-                    {$month},
-            {/foreach}
+                    {if isset($month)}
+                        {$month},
+                    {else}
+                        0,
+                    {/if}
+                {/foreach}
             {else}
                 {$month},
             {/if}
