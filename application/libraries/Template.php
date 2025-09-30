@@ -895,37 +895,34 @@ class Template
      */
     private function getUcpMenu(): array
     {
-        $cache = $this->CI->cache->get("ucp_menu");
+        $menus = $this->CI->cache->get("ucp_menu_data");
 
-        if ($cache !== false) {
-            return $cache;
-        } else {
+        if ($menus === false) {
             $menus = $this->CI->cms_model->getUcpMenu();
+            $this->CI->cache->save('ucp_menu_data', $menus, 86400); // 1 day
+        }
 
-            $groupedMenus = [];
-            foreach ($menus as &$menu) {
-                $menu['name'] = $this->format(langColumn($menu['name']), false, false);
-                $menu['description'] = $this->format(langColumn($menu['description']), false, false);
+        $groupedMenus = [];
+        foreach ($menus as &$menu) {
+            $menu['name'] = $this->format(langColumn($menu['name']), false, false);
+            $menu['description'] = $this->format(langColumn($menu['description']), false, false);
 
-                // Add the website path if internal link
-                if (!preg_match("/https?:\/\//", $menu['link'])) {
-                    $menu['link'] = $this->page_url . $menu['link'];
-                }
-
-                if ($menu['permission'] == 'securityAccount') {
-                    if ($this->CI->config->item('totp_secret')) {
-                        $groupedMenus[$menu['group']][] = $menu;
-                    }
-                    continue;
-                }
-
-                if (hasPermission($menu['permission'], $menu['permissionModule']))
-                    $groupedMenus[$menu['group']][] = $menu;
+            // Add the website path if internal link
+            if (!preg_match("/https?:\/\//", $menu['link'])) {
+                $menu['link'] = $this->page_url . $menu['link'];
             }
 
-            $this->CI->cache->save('ucp_menu', $groupedMenus, 86400); // 1 day
+            if ($menu['permission'] == 'securityAccount') {
+                if ($this->CI->config->item('totp_secret')) {
+                    $groupedMenus[$menu['group']][] = $menu;
+                }
+                continue;
+            }
 
-            return $groupedMenus;
+            if (hasPermission($menu['permission'], $menu['permissionModule']))
+                $groupedMenus[$menu['group']][] = $menu;
         }
+
+        return $groupedMenus;
     }
 }
