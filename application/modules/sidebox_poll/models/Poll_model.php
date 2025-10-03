@@ -2,7 +2,7 @@
 
 class Poll_model extends CI_Model
 {
-    public function getPolls()
+    public function getPolls(): array|false
     {
         $query = $this->db->query("SELECT * FROM sideboxes_poll_questions ORDER BY questionid DESC");
 
@@ -13,22 +13,9 @@ class Poll_model extends CI_Model
         }
     }
 
-    public function getPoll()
+    public function pollExists(int $questionid): bool
     {
-        $query = $this->db->query("SELECT * FROM sideboxes_poll_questions ORDER BY questionid DESC LIMIT 1");
-
-        if ($query->getNumRows() > 0) {
-            $row = $query->getResultArray();
-
-            return $row[0];
-        } else {
-            return false;
-        }
-    }
-
-    public function pollExists($questionid)
-    {
-        $query = $this->db->query("SELECT COUNT(*) as total FROM sideboxes_poll_questions WHERE questionid=? LIMIT 1", [$questionid]);
+        $query = $this->db->query("SELECT COUNT(*) as total FROM sideboxes_poll_questions WHERE questionid = ? LIMIT 1", [$questionid]);
 
         if ($query->getNumRows() > 0) {
             $row = $query->getResultArray();
@@ -43,7 +30,7 @@ class Poll_model extends CI_Model
         }
     }
 
-    public function getMyVote($questionId)
+    public function getMyVote(int $questionId)
     {
         $query = $this->db->query("SELECT answerid FROM sideboxes_poll_votes WHERE questionid=? AND userid = ?", [$questionId, $this->user->getId()]);
 
@@ -56,7 +43,7 @@ class Poll_model extends CI_Model
         }
     }
 
-    public function getAnswers($questionId)
+    public function getAnswers(int $questionId): array|false
     {
         $query = $this->db->query("SELECT * FROM sideboxes_poll_answers WHERE questionid=? ORDER BY answerid ASC", [$questionId]);
 
@@ -67,7 +54,7 @@ class Poll_model extends CI_Model
         }
     }
 
-    public function getVoteCount($questionId, $answerId)
+    public function getVoteCount(int $questionId, int $answerId)
     {
         $query = $this->db->query("SELECT COUNT(*) AS `total` FROM sideboxes_poll_votes WHERE questionid=? AND answerid=?", [$questionId, $answerId]);
 
@@ -80,7 +67,7 @@ class Poll_model extends CI_Model
         }
     }
 
-    public function insertAnswer($questionId, $answerId, $userId)
+    public function insertAnswer(int $questionId, int $answerId, int $userId): bool
     {
         //Make sure something is filled in.
         if (!$questionId || !$answerId || !$userId) {
@@ -95,7 +82,7 @@ class Poll_model extends CI_Model
         }
     }
 
-    public function hasVoted($pollId, $userId)
+    public function hasVoted(int $pollId, int $userId): bool
     {
         if (!$pollId || !$userId) {
             return false;
@@ -116,7 +103,7 @@ class Poll_model extends CI_Model
         }
     }
 
-    public function add($data, $answers)
+    public function add($data, $answers): void
     {
         $this->db->table('sideboxes_poll_questions')->insert($data);
 
@@ -131,7 +118,7 @@ class Poll_model extends CI_Model
         }
     }
 
-    public function delete($id)
+    public function delete(int $id): void
     {
         $this->db->query("DELETE FROM sideboxes_poll_questions WHERE questionid=?", [$id]);
         $this->db->query("DELETE FROM sideboxes_poll_votes WHERE questionid=?", [$id]);

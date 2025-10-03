@@ -622,10 +622,10 @@ input[type="radio"] {
     font-weight: bold;
 }
 
-#poll_actions {
-    display: block;
-    text-align: center;
-    width: 90px;
+.poll_actions {
+    display: block !important;
+    text-align: center !important;
+    width: 90px !important;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5px;
