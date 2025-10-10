@@ -15,21 +15,20 @@ class Page_model extends CI_Model
 
     public function delete($id)
     {
-        $this->db->query("DELETE FROM pages WHERE id=?", [$id]);
+        $this->db->query("DELETE FROM pages WHERE id = ?", [$id]);
 
         $this->deletePermission($id);
     }
 
-    public function setPermission($id, $group_id)
+    public function setPermission($id)
     {
-        $this->db->query("UPDATE pages SET `permission`=? WHERE id=?", [$id, $id]);
-        $this->db->query("INSERT INTO acl_group_roles(`group_id`, `name`, `module`) VALUES(?, ?, '--PAGE--')", [$group_id, $id]);
+        $this->db->query("UPDATE pages SET `permission` = ? WHERE id = ?", [$id, $id]);
     }
 
     public function deletePermission($id)
     {
-        $this->db->query("UPDATE pages SET `permission`='' WHERE id=?", [$id]);
-        $this->db->query("DELETE FROM acl_group_roles WHERE module = '--PAGE--' AND name = ?", [$id]);
+        $this->db->query("UPDATE pages SET `permission` = '' WHERE id = ?", [$id]);
+        $this->db->query("DELETE FROM acl_group_roles WHERE module = '--PAGE--' AND role_name = ?", [$id]);
     }
 
     public function hasPermission($id)
@@ -72,7 +71,7 @@ class Page_model extends CI_Model
 
     public function getPage($id)
     {
-        $query = $this->db->query("SELECT * FROM pages WHERE id=?", array($id));
+        $query = $this->db->query("SELECT * FROM pages WHERE id = ?", [$id]);
 
         if ($query->getNumRows() > 0) {
             $result = $query->getResultArray();
@@ -86,9 +85,9 @@ class Page_model extends CI_Model
     public function pageExists($identifier, $id)
     {
         if ($id) {
-            $query = $this->db->query("SELECT COUNT(*) as `total` FROM pages WHERE id !=? AND identifier=?", array($id, $identifier));
+            $query = $this->db->query("SELECT COUNT(*) as `total` FROM pages WHERE id != ? AND identifier = ?", [$id, $identifier]);
         } else {
-            $query = $this->db->query("SELECT COUNT(*) as `total` FROM pages WHERE identifier=?", array($identifier));
+            $query = $this->db->query("SELECT COUNT(*) as `total` FROM pages WHERE identifier = ?", [$identifier]);
         }
 
         if ($query->getNumRows()) {

@@ -89,3 +89,24 @@ function getColumnLang(string $json): string
 
     return $CI->language->getColumnLanguage($json);
 }
+
+function is_json($string)
+{
+    if (!is_string($string)) {
+        return false;
+    }
+
+    $trimmed = trim($string);
+    if ($trimmed === '' || !in_array($trimmed[0], ['{', '['])) {
+        return false;
+    }
+
+    if (function_exists('json_validate')) {
+        // PHP 8.3+
+        return json_validate($string);
+    }
+
+    // PHP < 8.3 fallback
+    json_decode($string);
+    return (json_last_error() === JSON_ERROR_NONE);
+}

@@ -25,11 +25,12 @@ class Admin extends MX_Controller
         // Change the title
         $this->administrator->setTitle("Pages");
 
-        $pages = $this->page_model->getPages(true);
+        $pages = $this->page_model->getPages();
 
         if ($pages) {
             foreach ($pages as $key => $value) {
                 $pages[$key]['name'] = langColumn($value['name']);
+                $pages[$key]['content'] = langColumn($value['content']);
 
                 if (strlen($pages[$key]['name']) > 20) {
                     $pages[$key]['name'] = mb_substr($pages[$key]['name'], 0, 20) . '...';
@@ -38,10 +39,10 @@ class Admin extends MX_Controller
         }
 
         // Prepare my data
-        $data = array(
-            'url' => $this->template->page_url,
+        $data = [
+            'url'   => $this->template->page_url,
             'pages' => $pages
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("admin.tpl", $data);
@@ -63,6 +64,9 @@ class Admin extends MX_Controller
         // Prepare my data
         $data = array(
             'url' => $this->template->page_url,
+            "defaultLanguage" => $this->config->item('language'),
+            "languages" => $this->language->getAllLanguages(),
+            "abbreviationLanguage" => $this->language->getAbbreviationByLanguage($this->language->getLanguage()),
         );
 
         // Load my view
@@ -85,26 +89,33 @@ class Admin extends MX_Controller
 
         $page = $this->page_model->getPage($id);
 
-        if ($page == false) {
-            show_error("There is no page with ID " . $id, 400);
+        $title = langColumn($page['name']);
 
+        $page['name'] = json_decode($page['name'], true);
+        $page['content'] = is_json($page['content']) ? json_decode($page['content'], true) : $page['content'];
+
+        if (!$page) {
+            show_error("There is no page with ID " . $id, 400);
             die();
         }
 
         // Change the title
-        $this->administrator->setTitle(langColumn($page['name']));
+        $this->administrator->setTitle($title);
 
         // Prepare my data
-        $data = array(
+        $data = [
             'url' => $this->template->page_url,
+            "defaultLanguage" => $this->config->item('language'),
+            "languages" => $this->language->getAllLanguages(),
+            "abbreviationLanguage" => $this->language->getAbbreviationByLanguage($this->language->getLanguage()),
             'page' => $page
-        );
+        ];
 
         // Load my view
         $output = $this->template->loadPage("admin_edit.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('' . langColumn($page['name']), $output);
+        $content = $this->administrator->box($title, $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/page/js/admin.js");
@@ -135,7 +146,7 @@ class Admin extends MX_Controller
         $identifier = $this->input->post('identifier');
         $content = $this->input->post('content', false);
 
-        if (strlen($headline) > 70 || strlen($headline) < 15 || empty($headline)) {
+        if (strlen(langColumn($headline)) > 70 || empty(langColumn($headline))) {
             die("The headline must be between 1-70 characters long");
         }
 

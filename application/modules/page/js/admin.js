@@ -32,11 +32,25 @@ var Pages = {
 	{
 		tinyMCE.triggerSave();
 
+        let headlineData = {};
+        const $headlines = document.querySelectorAll('[__headline__]');
+
+        [...$headlines].map((item, index) => {
+            headlineData[item.getAttribute('__headline__')] = item.value;
+        });
+
+        let contentData = {};
+        const $contents = document.querySelectorAll('[__content__]');
+
+        [...$contents].map((item, index) => {
+            contentData[item.getAttribute('__content__')] = item.value;
+        });
+
 		var data = {
-			name: $("#headline").val(),
+			name: JSON.stringify(headlineData),
 			identifier: $("#identifier").val(),
 			rank_needed: $("#rank_needed").val(),
-			content: $("textarea.tinymce").val(),
+			content: JSON.stringify(contentData),
 			visibility: $("#visibility").val(),
 			csrf_token_name: Config.CSRF
 		};
