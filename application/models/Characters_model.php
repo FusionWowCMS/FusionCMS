@@ -170,9 +170,9 @@ class Characters_model
     * Get the characters that belong to one account
      *
     * @param false|Int $acc
-    * @return Array
+    * @return False|Array
     */
-    public function getCharactersByAccount(false|int $acc = false): array
+    public function getCharactersByAccount(false|int $acc = false): false|array
     {
         if (!$acc) {
             $CI = &get_instance();
