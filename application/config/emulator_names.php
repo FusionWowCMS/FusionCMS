@@ -2,6 +2,7 @@
 
 $emulators = [
     'trinity'                  => 'TrinityCore (3.3.5a)',
+    'trinity_mid'              => 'TrinityCore - Midnight (12.x.x)',
     'trinity_tww'              => 'TrinityCore - The War Within (11.x.x)',
     'trinity_df'               => 'TrinityCore - Dragon Flight (10.2.7)',
     'trinity_sl'               => 'TrinityCore - Shadowlands (9.2.7)',
