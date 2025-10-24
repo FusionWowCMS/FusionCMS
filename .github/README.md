@@ -64,6 +64,7 @@ its ease of use and development, safe and secure codebase and dedication to simp
 | Calssic (TBC , Wotlk, Cataclysm)     | ✅ |
 | Dragonflight                         | ✅ |
 | The War Within                       | ✅ |
+| Midnight                             | ✅ |
 
 ## Getting Started
 
