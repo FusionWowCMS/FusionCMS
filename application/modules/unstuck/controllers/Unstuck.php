@@ -94,14 +94,15 @@ class Unstuck extends MX_Controller
     {
         $characterGuid = $this->input->post('guid');
         $realmId = $this->input->post('realm');
+        $realm = $this->realms->getRealm($realmId);
 
         // Make sure the realm actually supports console commands
-        if (!$this->realms->getRealm($realmId)->getEmulator()->hasConsole()) {
+        if (!$realm->getEmulator()->hasConsole()) {
             die(lang("not_support", "unstuck"));
         }
 
         if ($characterGuid && $realmId) {
-            $realmConnection = $this->realms->getRealm($realmId)->getCharacters();
+            $realmConnection = $realm->getCharacters();
             $realmConnection->connect();
 
             $character = $realmConnection->getCharacterByGuid($characterGuid);
@@ -153,9 +154,9 @@ class Unstuck extends MX_Controller
             //Check if the user can afford the service
             if ($this->user->getVp() >= $price) {
                 //Execute the command
-                $this->realms->getRealm($realmId)->getEmulator()->sendCommand('.revive ' . $characterName);
+                $realm->getEmulator()->sendCommand('.revive ' . $characterName);
 
-                $this->home($realmId, $characterGuid);
+                $this->home($realm, $characterGuid);
                 $this->unstuck_model->setLocation($this->gps['posX'], $this->gps['posY'], $this->gps['posZ'], $this->gps['orientation'], $this->gps['mapId'], $characterGuid, $realmConnection->getConnection());
 
                 // Update Donation Points
@@ -190,14 +191,31 @@ class Unstuck extends MX_Controller
         }
     }
 
-    public function home($realmid, $guid)
+    public function home(Realm $realm, int $guid): void
     {
-        $rows = $this->unstuck_model->getcharacter_homebind($realmid, $guid);
-        $this->gps['mapId'] = $rows[0]['mapId'];
-        $this->gps['orientation'] = 1.64;
-        $this->gps['posX'] = $rows[0]['posX'];
-        $this->gps['posY'] = $rows[0]['posY'];
-        $this->gps['posZ'] = $rows[0]['posZ'];
+        $rows = $this->unstuck_model->getcharacter_homebind($realm->getId(), $guid);
+
+        switch ($realm->getConfig('emulator')) {
+            case 'cmangos':
+            case 'mangos_zero':
+            case 'mangos_one_two':
+            case 'mangos_three':
+            case 'vmangos':
+            case 'oregoncore':
+                $this->gps['mapId'] = $rows[0]['map'];
+                $this->gps['orientation'] = 1.64;
+                $this->gps['posX'] = $rows[0]['position_x'];
+                $this->gps['posY'] = $rows[0]['position_y'];
+                $this->gps['posZ'] = $rows[0]['position_z'];
+                break;
+            default:
+                $this->gps['mapId'] = $rows[0]['mapId'];
+                $this->gps['orientation'] = 1.64;
+                $this->gps['posX'] = $rows[0]['posX'];
+                $this->gps['posY'] = $rows[0]['posY'];
+                $this->gps['posZ'] = $rows[0]['posZ'];
+                break;
+        }
     }
 
 }
