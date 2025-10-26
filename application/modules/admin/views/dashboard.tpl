@@ -261,7 +261,7 @@
         {foreach from=$graphMonthly[0] item=data key=key}
             {if isset($data["month"])}
                 {foreach from=$data["month"] item=month key=keyMonth}
-                    {if isset($month)}
+                    {if isset($month) && !is_array($month)}
                         {$month},
                     {else}
                         0,
@@ -275,7 +275,7 @@
         {foreach from=$graphMonthly[1] item=data key=key}
             {if isset($data["month"])}
                 {foreach from=$data["month"] item=month key=keyMonth}
-                    {if isset($month)}
+                    {if isset($month) && !is_array($month)}
                         {$month},
                     {else}
                         0,
