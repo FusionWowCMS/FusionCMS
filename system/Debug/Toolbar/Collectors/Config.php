@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CodeIgniter\Debug\Toolbar\Collectors;
 
 use App\Config\App;
+use Smartyengine;
 
 /**
  * Debug toolbar configuration
@@ -38,6 +39,11 @@ class Config
             'cspEnabled'  => $config->CSPEnabled,
         ];
 
-        return get_instance()->smarty->view(realpath(SYSTEMPATH) . DIRECTORY_SEPARATOR . 'Debug'  . DIRECTORY_SEPARATOR . 'Toolbar' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . '_config.tpl', $data, true);
+        if (isset(get_instance()->smarty))
+            $smarty = get_instance()->smarty;
+        else
+            $smarty = new Smartyengine;
+
+        return $smarty->view(realpath(SYSTEMPATH) . DIRECTORY_SEPARATOR . 'Debug'  . DIRECTORY_SEPARATOR . 'Toolbar' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . '_config.tpl', $data, true);
     }
 }

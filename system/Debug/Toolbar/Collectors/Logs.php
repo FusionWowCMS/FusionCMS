@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CodeIgniter\Debug\Toolbar\Collectors;
 
 use App\Config\Services;
+use Smartyengine;
 
 /**
  * Loags collector
@@ -60,7 +61,12 @@ class Logs extends BaseCollector
             'logs' => $this->collectLogs(),
         ];
 
-        return get_instance()->smarty->view(realpath(SYSTEMPATH) . DIRECTORY_SEPARATOR . 'Debug'  . DIRECTORY_SEPARATOR . 'Toolbar' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . '_logs.tpl', $data, true);
+        if (isset(get_instance()->smarty))
+            $smarty = get_instance()->smarty;
+        else
+            $smarty = new Smartyengine;
+
+        return $smarty->view(realpath(SYSTEMPATH) . DIRECTORY_SEPARATOR . 'Debug'  . DIRECTORY_SEPARATOR . 'Toolbar' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . '_logs.tpl', $data, true);
     }
 
     /**

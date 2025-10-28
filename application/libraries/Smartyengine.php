@@ -35,7 +35,9 @@ class Smartyengine extends Smarty
             }
         }
 
-        $this->php_functions_extend();
+        try {
+            $this->php_functions_extend();
+        } catch (Exception) {}
 
         log_message('debug', "Smarty Class Initialized");
     }
