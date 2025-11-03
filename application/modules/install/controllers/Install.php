@@ -64,21 +64,44 @@ class Install extends MX_Controller
 
     private function check()
     {
-        if (! isset($_GET['test']))
-            return;
-        if (! isset($_GET['path']))
-            return;
+        $folder = $_GET['test'] ?? null;
+        $path   = $_GET['path'] ?? null;
 
-        $folder = $_GET['test'];
-        $path = $_GET['path'];
+        if (empty($folder) || empty($path)) {
+            die("Missing parameters");
+        }
 
-        $file = fopen($path ."/".$folder."/write_test.txt", "w");
+        $targetDir = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $folder;
+        $testFile  = $targetDir . DIRECTORY_SEPARATOR . "write_test.txt";
 
-        fwrite($file, "success");
+        // Check for directory exist
+        if (!is_dir($targetDir)) {
+            die("404: Folder not found " . $targetDir);
+        }
+
+        // Check write access
+        if (!is_writable($targetDir)) {
+            die("403: No write permission to " . $targetDir);
+        }
+
+        // Attempt to write
+        $file = @fopen($testFile, "w");
+        if ($file === false) {
+            die("500: Failed to create file " . $testFile);
+        }
+
+        $result = @fwrite($file, "success");
         fclose($file);
 
-        unlink($path ."/".$folder."/write_test.txt");
+        if ($result === false) {
+            @unlink($testFile);
+            die("500: Failed to write file " . $testFile);
+        }
 
+        // Delete the test file
+        @unlink($testFile);
+
+        // Success
         die("1");
     }
 
