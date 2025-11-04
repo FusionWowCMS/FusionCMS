@@ -391,20 +391,18 @@ class Character extends MX_Controller
      */
     private function getProfile()
     {
-        $cache = $this->cache->get("character_" . $this->realm . "_" . $this->id . "_" . getLang());
+        $cache = $this->cache->get("character_data_" . $this->realm . "_" . $this->id . "_" . getLang());
+
+        $charData = null;
 
         if ($cache !== false) {
-            $this->template->setTitle($cache['name']);
-            $this->template->setDescription($cache['description']);
-            $this->template->setKeywords($cache['keywords']);
+            $charData = $cache['charData'];
 
-            $page = $cache['page'];
+            $page = $this->getRenderCharacterPage($charData);
         } else {
             if ($this->character_model->characterExists()) {
                 // Load all items and info
                 $this->getInfo();
-
-                $this->template->setTitle($this->name);
 
                 $avatarArray = [
                     'class' => $this->class,
@@ -440,38 +438,45 @@ class Character extends MX_Controller
                     "faction" => $this->realms->getRealm($this->realm)->getCharacters()->getFaction($this->id)
                 ];
 
-                $character = $this->template->loadPage("character.tpl", $charData);
-
-                $data = [
-                    "module" => "default",
-                    "headline" => breadcrumb([
-                        "profile/" . $this->account => lang("view_profile", "character"),
-                        uri_string() => $this->name
-                    ]),
-                    "content" => $character
-                ];
-
-                $keywords = "armory," . $charData['name'] . ",lv" . $charData['level'] . "," . $charData['raceName'] . "," . $charData['className'] . "," . $charData['realmName'];
-                $description = $charData['name'] . " - level " . $charData['level'] . " " . $charData['raceName'] . " " . $charData['className'] . " on " . $charData['realmName'];
-
-                $this->template->setDescription($description);
-                $this->template->setKeywords($keywords);
-
-                $page = $this->template->loadPage("page.tpl", $data);
+                $page = $this->getRenderCharacterPage($charData);
             } else {
-                $keywords = "";
-                $description = "";
-
                 $page = $this->getError(true);
             }
 
             if ($this->canCache) {
                 // Cache for 30 min
-                $this->cache->save("character_" . $this->realm . "_" . $this->id . "_" . getLang(), ['page' => $page, 'name' => $this->name, 'keywords' => $keywords, 'description' => $description], 60 * 30);
+                $this->cache->save("character_data_" . $this->realm . "_" . $this->id . "_" . getLang(), ['charData' => $charData, 'name' => $this->name], 60 * 30);
             }
         }
 
         $this->template->view($page, $this->css, $this->js);
+    }
+
+    /**
+     * @param mixed $charData
+     * @return String
+     */
+    private function getRenderCharacterPage(mixed $charData): string
+    {
+        $this->template->setTitle($charData['name']);
+        $character = $this->template->loadPage("character.tpl", $charData);
+
+        $data = [
+            "module" => "default",
+            "headline" => breadcrumb([
+                "profile/" . $this->account => lang("view_profile", "character"),
+                uri_string() => $charData['name']
+            ]),
+            "content" => $character
+        ];
+
+        $keywords = "armory," . $charData['name'] . ",lv" . $charData['level'] . "," . $charData['raceName'] . "," . $charData['className'] . "," . $charData['realmName'];
+        $description = $charData['name'] . " - level " . $charData['level'] . " " . $charData['raceName'] . " " . $charData['className'] . " on " . $charData['realmName'];
+
+        $this->template->setDescription($description);
+        $this->template->setKeywords($keywords);
+
+        return $this->template->loadPage("page.tpl", $data);
     }
 
     /**
