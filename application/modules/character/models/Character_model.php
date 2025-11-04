@@ -66,14 +66,14 @@ class Character_model extends CI_Model
 
             return $row[0];
         } else {
-            return array(
+            return [
                 "account" => "",
                 "name" => "",
                 "race" => "",
                 "class" => "",
                 "gender" => "",
                 "level" => ""
-            );
+            ];
         }
     }
 

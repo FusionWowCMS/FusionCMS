@@ -122,16 +122,16 @@ class Character extends MX_Controller
         if ($this->realms->getRealm($this->realm)->getEmulator()->hasStats()) {
             $character_stats = $this->character_model->getStats();
         } else {
-            $character_stats = array('maxhealth' => lang("unknown", "character"));
+            $character_stats = ['maxhealth' => lang("unknown", "character")];
         }
 
-        $this->pvp = array(
+        $this->pvp = [
             'totalKills' => (array_key_exists("totalKills", $character_data)) ? $character_data['totalKills'] : false,
             'todayKills' => (array_key_exists("todayKills", $character_data)) ? $character_data['todayKills'] : false,
             'yesterdayKills' => (array_key_exists("yesterdayKills", $character_data)) ? $character_data['yesterdayKills'] : false,
             'honor' => (array_key_exists("totalHonorPoints", $character_data)) ? $character_data['totalHonorPoints'] : false,
             'arena' => (array_key_exists("arenaPoints", $character_data)) ? $character_data['arenaPoints'] : false
-        );
+        ];
 
         // Assign the character data as real variables
         foreach ($character_data as $key => $value) {
@@ -147,7 +147,7 @@ class Character extends MX_Controller
         $this->guild = $this->character_model->getGuild();
         $this->guildName = $this->character_model->getGuildName($this->guild);
 
-        if (in_array($this->race, array(4, 10))) {
+        if (in_array($this->race, [4, 10])) {
             if ($this->race == 4) {
                 $this->raceName = "Night elf";
             } else {
@@ -406,14 +406,14 @@ class Character extends MX_Controller
 
                 $this->template->setTitle($this->name);
 
-                $avatarArray = array(
+                $avatarArray = [
                     'class' => $this->class,
                     'race' => $this->race,
                     'level' => $this->level,
                     'gender' => $this->gender
-                );
+                ];
 
-                $charData = array(
+                $charData = [
                     "name" => $this->name,
                     "race" => $this->race,
                     "class" => $this->class,
@@ -438,18 +438,18 @@ class Character extends MX_Controller
                     "fcms_tooltip" => true,
                     "has_stats" => $this->realms->getRealm($this->realm)->getEmulator()->hasStats(),
                     "faction" => $this->realms->getRealm($this->realm)->getCharacters()->getFaction($this->id)
-                );
+                ];
 
                 $character = $this->template->loadPage("character.tpl", $charData);
 
-                $data = array(
+                $data = [
                     "module" => "default",
                     "headline" => breadcrumb([
                         "profile/" . $this->account => lang("view_profile", "character"),
                         uri_string() => $this->name
                     ]),
                     "content" => $character
-                );
+                ];
 
                 $keywords = "armory," . $charData['name'] . ",lv" . $charData['level'] . "," . $charData['raceName'] . "," . $charData['className'] . "," . $charData['realmName'];
                 $description = $charData['name'] . " - level " . $charData['level'] . " " . $charData['raceName'] . " " . $charData['className'] . " on " . $charData['realmName'];
@@ -467,7 +467,7 @@ class Character extends MX_Controller
 
             if ($this->canCache) {
                 // Cache for 30 min
-                $this->cache->save("character_" . $this->realm . "_" . $this->id . "_" . getLang(), array('page' => $page, 'name' => $this->name, 'keywords' => $keywords, 'description' => $description), 60 * 30);
+                $this->cache->save("character_" . $this->realm . "_" . $this->id . "_" . getLang(), ['page' => $page, 'name' => $this->name, 'keywords' => $keywords, 'description' => $description], 60 * 30);
             }
         }
 
@@ -481,11 +481,11 @@ class Character extends MX_Controller
     {
         $this->template->setTitle(lang("doesnt_exist", "character"));
 
-        $data = array(
-            "module" => "default",
+        $data = [
+            "module"   => "default",
             "headline" => lang("doesnt_exist", "character"),
-            "content" => "<center style='margin:10px;font-weight:bold;'>" . lang("doesnt_exist_long", "character") . "</center>"
-        );
+            "content"  => "<center style='margin:10px;font-weight:bold;'>" . lang("doesnt_exist_long", "character") . "</center>"
+        ];
 
         $page = $this->template->loadPage("page.tpl", $data);
 
