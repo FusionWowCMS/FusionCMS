@@ -85,7 +85,7 @@ class Character extends MX_Controller
         ];
 
         // Force turn off cache
-        if($data['cache']['item'] === false || ($trans && $data['cache']['trans']))
+        if($data['cache']['item'] === false || ($trans && $data['cache']['trans'] === false))
             $this->canCache = false;
 
         return $this->template->loadPage('item.tpl', $data);
