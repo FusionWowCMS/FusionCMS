@@ -746,7 +746,7 @@ INSERT INTO `menu_ucp` (`id`, `name`, `description`, `link`, `icon`, `order`, `g
 (1, '{"english":"Account Overview"}', 'View and manage your game account details, characters, and activity history', 'ucp', 'fa-solid fa-user', 1, 1, 'view', 'ucp'),
 (2, '{"english":"Account settings"}', 'Manage your account preferences', 'ucp/settings', 'fa-solid fa-tools', 2, 1, 'canUpdateAccountSettings', 'ucp'),
 (3, '{"english":"Account Security"}', 'Manage your account security', 'ucp/security', 'fa-solid fa-user-shield', 3, 1, 'securityAccount', 'ucp'),
-(4, '{"english":"Teleport hub"}', 'Instantly travel to any location"}', 'teleport', 'fa-solid fa-location', 4, 2, 'view', 'teleport'),
+(4, '{"english":"Teleport hub"}', 'Instantly travel to any location', 'teleport', 'fa-solid fa-location', 4, 2, 'view', 'teleport'),
 (5, '{"english":"Vote panel"}', 'Help the server rise in rankings through the Vote panel and receive VP', 'vote', 'fa-solid fa-gavel', 5, 2, 'view', 'vote'),
 (6, '{"english":"Donate panel"}', 'Support the server\'s growth through the Donate panel and receive DP', 'donate', 'fa-solid fa-coin', 6, 2, 'view', 'donate'),
 (7, '{"english":"Store"}', 'Purchase items, mounts, and upgrades', 'store', 'fa-solid fa-shopping-cart', 7, 2, 'view', 'store'),
