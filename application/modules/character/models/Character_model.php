@@ -176,7 +176,7 @@ class Character_model extends CI_Model
         } else {
             $this->connect();
 
-            $query = $this->connection->query("SELECT " . column("guild", "name", true, $this->realmId) . " FROM " . table("guild", $this->realmId) . " WHERE " . column("guild", "guildid", false, $this->realmId) . "= ?", [$this->id]);
+            $query = $this->connection->query("SELECT " . column("guild", "name", true, $this->realmId) . " FROM " . table("guild", $this->realmId) . " WHERE " . column("guild", "guildid", false, $this->realmId) . "= ?", [$id]);
 
             if ($query && $query->getNumRows() > 0) {
                 $row = $query->getResultArray();
