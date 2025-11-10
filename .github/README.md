@@ -61,7 +61,7 @@ its ease of use and development, safe and secure codebase and dedication to simp
 | Legion                               | ✅ |
 | Battle For Azeroth                   | ✅ |
 | Shadowlands                          | ✅ |
-| Calssic (TBC , Wotlk, Cataclysm)     | ✅ |
+| Classic (TBC , Wotlk, Cataclysm)     | ✅ |
 | Dragonflight                         | ✅ |
 | The War Within                       | ✅ |
 | Midnight                             | ✅ |
