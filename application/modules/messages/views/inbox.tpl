@@ -15,7 +15,7 @@
 
 <div id="pm_inbox" class="pm_spot" {if $is_sent}style="display:none;"{/if}>
     {if $messages}
-        <table class="table table-striped">
+        <table class="table table-striped nice_table">
             <thead>
             <tr>
                 <th width="18%">{lang("sender", "messages")}</th>
@@ -42,7 +42,7 @@
 
 <div id="pm_sent" class="pm_spot" {if !$is_sent}style="display:none;"{/if}>
     {if $sent}
-        <table class="table table-striped">
+        <table class="table table-striped nice_table">
             <thead>
             <tr>
                 <th width="18%">{lang("receiver", "messages")}</th>
