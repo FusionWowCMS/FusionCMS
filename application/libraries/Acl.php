@@ -18,7 +18,7 @@ use MX\CI;
 
 class Acl
 {
-    private $CI;
+    private Controller $CI;
     private array $modules;
     private array $runtimeCache;
 
@@ -164,9 +164,10 @@ class Acl
      */
     private function fillRuntimeCache(int $userId = 0): void
     {
-        // STOP! Its filled already
-        if(count($this->runtimeCache))
+        // Already filled for this user id
+        if (isset($this->runtimeCache[$userId]) && count($this->runtimeCache[$userId])) {
             return;
+        }
 
         // Set: User id
         if(!$userId)
