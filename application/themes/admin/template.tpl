@@ -124,7 +124,6 @@
 		};
 	</script>
 
-	<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/js/router.js"></script>
 	<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/js/adminMenu.js"></script>
 	<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/js/mli.js"></script>
 	<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/js/login.js"></script>
@@ -139,13 +138,6 @@
 		{
 			$(document).ready(function()
 			{
-				{if $extra_css}
-					Router.loadedCSS.push("{$extra_css}");
-				{/if}
-				{if $extra_js}
-					Router.loadedJS.push("{$extra_js}");
-				{/if}
-
 				$('[data-bs-toggle=tooltip],[rel=tooltip]').tooltip({ container: 'body' });
 				$(".nano").nanoScroller();
 				$(".nano-pane").show();

@@ -227,13 +227,6 @@ class Template
      */
     public function view(string $content, bool|string|array $css = false, bool|string|array $js = false)
     {
-        // Avoid loading the main site in the ACP layout
-        if ($this->CI->input->get('is_acp'))
-        {
-            $this->CI->load->library('administrator');
-            $this->CI->administrator->view('<script>window.location.reload()</script>');
-        }
-
         if ($this->CI->config->item("message_enabled") && $this->CI->router->fetch_class() != "auth" && !$this->CI->user->isStaff())
         {
             $output = $this->handleAnnouncement();
@@ -675,15 +668,6 @@ class Template
      */
     public function show404()
     {
-        if ($this->CI->input->get('is_acp'))
-        {
-            header('HTTP/1.0 404 Not Found');
-        }
-        if ($this->CI->input->get('is_mod'))
-        {
-            header('HTTP/1.0 404 Not Found');
-        }
-
         $this->setTitle(lang("404_title", "error"));
 
         $message = $this->loadPage("error.tpl", [
