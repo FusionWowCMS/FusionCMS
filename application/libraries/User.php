@@ -118,7 +118,6 @@ class User
      */
     public function isStaff(int|bool $id = false): bool
     {
-        $id = $id ? $id : $this->id;
         return ($this->isGm($id) || $this->isDev($id) || $this->isAdmin($id) || $this->isOwner($id));
     }
 
@@ -132,8 +131,7 @@ class User
      */
     public function isGm(int|bool $id = false): bool
     {
-        $id = $id ? $id : $this->id;
-        return hasPermission("view", "gm", $id);
+        return hasPermission("view", "gm", $id ?? $this->id);
     }
 
     /**
@@ -146,8 +144,7 @@ class User
      */
     public function isDev(int|bool $id = false): bool
     {
-        $id = $id ? $id : $this->id;
-        return hasPermission("view", "gm", $id);
+        return hasPermission("view", "gm", $id ?? $this->id);
     }
 
     /**
@@ -160,8 +157,7 @@ class User
      */
     public function isAdmin(int|bool $id = false): bool
     {
-        $id = $id ? $id : $this->id;
-        return hasPermission("view", "admin", $id);
+        return hasPermission("view", "admin", $id ?? $this->id);
     }
 
     /**
@@ -174,8 +170,7 @@ class User
      */
     public function isOwner(int|bool $id = false): bool
     {
-        $id = $id ? $id : $this->id;
-        return hasPermission("view", "admin", $id);
+        return hasPermission("view", "admin", $id ?? $this->id);
     }
 
     /**
