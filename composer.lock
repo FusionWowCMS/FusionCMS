@@ -534,16 +534,16 @@
         },
         {
             "name": "kint-php/kint",
-            "version": "6.0.1",
+            "version": "6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kint-php/kint.git",
-                "reference": "2bd133be30a0d4f5523e3d7d8e94b788d95978e6"
+                "reference": "dd0f723029e3ebd0fa4edd895fa408bb2ce7003e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kint-php/kint/zipball/2bd133be30a0d4f5523e3d7d8e94b788d95978e6",
-                "reference": "2bd133be30a0d4f5523e3d7d8e94b788d95978e6",
+                "url": "https://api.github.com/repos/kint-php/kint/zipball/dd0f723029e3ebd0fa4edd895fa408bb2ce7003e",
+                "reference": "dd0f723029e3ebd0fa4edd895fa408bb2ce7003e",
                 "shasum": ""
             },
             "require": {
@@ -554,7 +554,7 @@
                 "phpunit/phpunit": "^9",
                 "seld/phar-utils": "^1",
                 "symfony/finder": ">=7",
-                "vimeo/psalm": "^5"
+                "vimeo/psalm": "^6"
             },
             "suggest": {
                 "kint-php/kint-helpers": "Provides extra helper functions",
@@ -591,9 +591,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kint-php/kint/issues",
-                "source": "https://github.com/kint-php/kint/tree/6.0.1"
+                "source": "https://github.com/kint-php/kint/tree/6.1.0"
             },
-            "time": "2025-01-01T23:10:26+00:00"
+            "time": "2025-11-08T12:59:43+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
