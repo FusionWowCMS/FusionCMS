@@ -691,7 +691,7 @@ class Builder extends BaseBuilder
 
             $identityInFields = in_array($tableIdentity, $keys, true);
 
-            $fieldNames = array_map(static fn ($columnName) => trim($columnName, '"'), $keys);
+            $fieldNames = array_map(static fn ($columnName): string => trim($columnName, '"'), $keys);
 
             if (empty($constraints)) {
                 $tableIndexes = $this->db->getIndexData($table);
@@ -770,7 +770,7 @@ class Builder extends BaseBuilder
             $sql .= implode(
                 ",\n",
                 array_map(
-                    static fn ($key, $value) => $key . ($value instanceof RawSql ?
+                    static fn ($key, $value): string => $key . ($value instanceof RawSql ?
                         ' = ' . $value :
                     " = {$alias}.{$value}"),
                     array_keys($updateFields),
@@ -784,7 +784,7 @@ class Builder extends BaseBuilder
                 '(' . implode(
                     ', ',
                     array_map(
-                        static fn ($columnName) => $columnName === $tableIdentity
+                        static fn ($columnName): string => $columnName === $tableIdentity
                     ? "CASE WHEN {$alias}.{$columnName} IS NULL THEN (SELECT "
                     . 'isnull(IDENT_CURRENT(\'' . $fullTableName . '\')+IDENT_INCR(\''
                     . $fullTableName . "'),1)) ELSE {$alias}.{$columnName} END"
