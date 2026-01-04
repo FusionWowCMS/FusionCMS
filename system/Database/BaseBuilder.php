@@ -663,7 +663,7 @@ class BaseBuilder
         } else {
             // Split multiple conditions
             // @TODO This does not parse `BETWEEN a AND b` correctly.
-            if (preg_match_all('/\sAND\s|\sOR\s/i', $cond, $joints, PREG_OFFSET_CAPTURE)) {
+            if (preg_match_all('/\sAND\s|\sOR\s/i', $cond, $joints, PREG_OFFSET_CAPTURE) >= 1) {
                 $conditions = [];
                 $joints     = $joints[0];
                 array_unshift($joints, ['', 0]);
@@ -1793,7 +1793,7 @@ class BaseBuilder
      *
      * @param '_deleteBatch'|'_insertBatch'|'_updateBatch'|'_upsertBatch' $renderMethod
      *
-     * @return false|int|list<string> Number of rows inserted or FALSE on failure, SQL array when testMode
+     * @return false|int|list<string> Number of rows inserted or FALSE on no data to perform an insert operation, SQL array when testMode
      *
      * @throws DatabaseException
      */
@@ -3177,7 +3177,7 @@ class BaseBuilder
                     //  5 => ')'                /* optional */
                     // ];
 
-                    if (isset($matches[4]) && $matches[4] !== '') {
+                    if ($matches[4] !== '') {
                         $protectIdentifiers = false;
                         if (strpos($matches[4], '.') !== false) {
                             $protectIdentifiers = true;
