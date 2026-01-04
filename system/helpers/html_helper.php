@@ -45,9 +45,10 @@ if (!function_exists('ul')) {
     /**
      * Unordered List
      *
-     * Generates an HTML unordered list from an single or
-     * multi-dimensional array.
+     * Generates an HTML unordered list from a single or
+     * multidimensional array.
      *
+     * @param array $list List entries
      * @param array|object|string $attributes HTML attributes string, array, object
      */
     function ul(array $list, $attributes = ''): string
@@ -62,7 +63,7 @@ if (!function_exists('ol')) {
     /**
      * Ordered List
      *
-     * Generates an HTML ordered list from an single or multi-dimensional array.
+     * Generates an HTML ordered list from a single or multidimensional array.
      *
      * @param array|object|string $attributes HTML attributes string, array, object
      */
@@ -78,7 +79,7 @@ if (!function_exists('_list')) {
     /**
      * Generates the list
      *
-     * Generates an HTML ordered list from an single or multi-dimensional array.
+     * Generates an HTML ordered list from a single or multidimensional array.
      *
      * @param array $list
      * @param array|object|string $attributes string, array, object
@@ -122,7 +123,7 @@ if (!function_exists('img')) {
      * Generates an image element
      *
      * @param array|string $src Image source URI, or array of attributes and values
-     * @param bool $indexPage Whether to treat $src as a routed URI string
+     * @param bool $indexPage Should `Config\App::$indexPage` be added to the source path
      * @param array|object|string $attributes Additional HTML attributes
      */
     function img($src = '', bool $indexPage = false, $attributes = ''): string
@@ -240,7 +241,7 @@ if (!function_exists('script_tag')) {
      * Generates link to a JS file
      *
      * @param array|string $src Script source or an array of attributes
-     * @param bool $indexPage Should indexPage be added to the JS path
+     * @param bool $indexPage Should `Config\App::$indexPage` be added to the JS path
      */
     function script_tag($src = '', bool $indexPage = false): string
     {
@@ -279,7 +280,7 @@ if (!function_exists('link_tag')) {
      * Generates link tag
      *
      * @param array<string, bool|string>|string $href Stylesheet href or an array
-     * @param bool $indexPage should indexPage be added to the CSS path.
+     * @param bool $indexPage Should `Config\App::$indexPage` be added to the CSS path.
      */
     function link_tag(
         $href = '',
@@ -342,6 +343,7 @@ if (!function_exists('video')) {
      * @param array|string $src Either a source string or an array of sources
      * @param string $unsupportedMessage The message to display if the media tag is not supported by the browser
      * @param string $attributes HTML attributes
+     * @param bool $indexPage Should `Config\App::$indexPage` be added to the source path
      */
     function video($src, string $unsupportedMessage = '', string $attributes = '', array $tracks = [], bool $indexPage = false): string
     {
@@ -389,6 +391,7 @@ if (!function_exists('audio')) {
      * @param array|string $src Either a source string or an array of sources
      * @param string $unsupportedMessage The message to display if the media tag is not supported by the browser.
      * @param string $attributes HTML attributes
+     * @param bool $indexPage Should `Config\App::$indexPage` be added to the source path
      */
     function audio($src, string $unsupportedMessage = '', string $attributes = '', array $tracks = [], bool $indexPage = false): string
     {
@@ -469,6 +472,7 @@ if (!function_exists('source')) {
      * @param string $src The path of the media resource
      * @param string $type The MIME-type of the resource with optional codecs parameters
      * @param string $attributes HTML attributes
+     * @param bool $indexPage Should `Config\App::$indexPage` be added to the source path
      */
     function source(string $src, string $type = 'unknown', string $attributes = '', bool $indexPage = false): string
     {
@@ -531,6 +535,9 @@ if (!function_exists('track')) {
      * formatted in WebVTT format.
      *
      * @param string $src The path of the .VTT file
+     * @param string $kind How the text track is meant to be used
+     * @param string $srcLanguage Language of the track text data
+     * @param string $label A user-readable title of the text track
      */
     function track(string $src, string $kind, string $srcLanguage, string $label): string
     {
@@ -553,6 +560,7 @@ if (!function_exists('object')) {
      * @param string $data A resource URL
      * @param string $type Content-type of the resource
      * @param string $attributes HTML attributes
+     * @param bool $indexPage Should `Config\App::$indexPage` be added to the data path
      */
     function object(string $data, string $type = 'unknown', string $attributes = '', array $params = [], bool $indexPage = false): string
     {
@@ -606,6 +614,7 @@ if (!function_exists('embed')) {
      * @param string $src The path of the resource to embed
      * @param string $type MIME-type
      * @param string $attributes HTML attributes
+     * @param bool $indexPage Should `Config\App::$indexPage` be added to the source path
      */
     function embed(string $src, string $type = 'unknown', string $attributes = '', bool $indexPage = false): string
     {

@@ -3157,21 +3157,27 @@ class BaseBuilder
                 );
 
                 foreach ($conditions as &$condition) {
-                    if (($op = $this->getOperator($condition)) === false
-                        || ! preg_match('/^(\(?)(.*)(' . preg_quote($op, '/') . ')\s*(.*(?<!\)))?(\)?)$/i', $condition, $matches)
+                    $op = $this->getOperator($condition);
+                    if (
+                        $op === false
+                        || ! preg_match(
+                            '/^(\(?)(.*)(' . preg_quote($op, '/') . ')\s*(.*(?<!\)))?(\)?)$/i',
+                            $condition,
+                            $matches
+                        )
                     ) {
                         continue;
                     }
-                    // $matches = array(
-                    //	0 => '(test <= foo)',	/* the whole thing */
-                    //	1 => '(',		/* optional */
-                    //	2 => 'test',		/* the field name */
-                    //	3 => ' <= ',		/* $op */
-                    //	4 => 'foo',		/* optional, if $op is e.g. 'IS NULL' */
-                    //	5 => ')'		/* optional */
-                    // );
+                    // $matches = [
+                    //  0 => '(test <= foo)',   /* the whole thing */
+                    //  1 => '(',               /* optional */
+                    //  2 => 'test',            /* the field name */
+                    //  3 => ' <= ',            /* $op */
+                    //  4 => 'foo',	            /* optional, if $op is e.g. 'IS NULL' */
+                    //  5 => ')'                /* optional */
+                    // ];
 
-                    if (! empty($matches[4])) {
+                    if (isset($matches[4]) && $matches[4] !== '') {
                         $protectIdentifiers = false;
                         if (strpos($matches[4], '.') !== false) {
                             $protectIdentifiers = true;

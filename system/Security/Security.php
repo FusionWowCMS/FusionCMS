@@ -149,7 +149,7 @@ class Security
     //--------------------------------------------------------------------
 
     /**
-     * CSRF Verify
+     * CSRF verification.
      *
      * @return $this
      */
