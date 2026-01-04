@@ -656,9 +656,7 @@ abstract class BaseConnection implements ConnectionInterface
             $query->setDuration($startTime, $startTime);
 
             // This will trigger a rollback if transactions are being used
-            if ($this->transDepth !== 0) {
-                $this->transStatus = false;
-            }
+            $this->handleTransStatus();
 
             if (
                 $this->DBDebug
@@ -724,8 +722,7 @@ abstract class BaseConnection implements ConnectionInterface
      * is performed, nor are transactions handled. Simply takes a raw
      * query string and returns the database-specific result id.
      *
-     * @return         false|object|resource
-     * @phpstan-return false|TResult
+     * @return false|TResult
      */
     public function simpleQuery(string $sql)
     {
@@ -835,6 +832,18 @@ abstract class BaseConnection implements ConnectionInterface
         $this->transStatus = true;
 
         return $this;
+    }
+
+    /**
+     * Handle transaction status when a query fails
+     *
+     * @internal This method is for internal database component use only
+     */
+    public function handleTransStatus(): void
+    {
+        if ($this->transDepth !== 0) {
+            $this->transStatus = false;
+        }
     }
 
     /**

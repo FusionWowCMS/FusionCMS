@@ -27,7 +27,7 @@ class Events
     /**
      * The list of listeners.
      *
-     * @var array
+     * @var array<string, array{0: bool, 1: list<int>, 2: list<callable(mixed): mixed>}>
      */
     protected static $listeners = [];
 
@@ -51,7 +51,7 @@ class Events
      * Stores information about the events
      * for display in the debug toolbar.
      *
-     * @var list<array<string, float|string>>
+     * @var list<array{start: float, end: float, event: string}>
      */
     protected static $performanceLog = [];
 
@@ -77,15 +77,12 @@ class Events
         $events = APPPATH . 'config' . DIRECTORY_SEPARATOR . 'Events.php';
         $files  = [];
 
-        $files = array_filter(array_map(static function (string $file): false|string {
-            if (is_file($file)) {
-                return realpath($file) ?: $file;
-            }
+        $files = array_filter(array_map(
+            static fn (string $file): false|string => realpath($file),
+            $files,
+        ));
 
-            return false; // @codeCoverageIgnore
-        }, $files));
-
-        static::$files = array_unique(array_merge($files, [$events]));
+        static::$files = array_values(array_merge($files, [$events]));
 
         foreach (static::$files as $file) {
             include $file;
@@ -103,9 +100,9 @@ class Events
      *  Events::on('create', [$myInstance, 'myMethod']);  // Method on an existing instance
      *  Events::on('create', function() {});              // Closure
      *
-     * @param string   $eventName
-     * @param callable $callback
-     * @param int      $priority
+     * @param string $eventName
+     * @param callable(mixed): mixed $callback
+     * @param int $priority
      *
      * @return void
      */
@@ -131,7 +128,7 @@ class Events
      *  b) a method returns false, at which point execution of subscribers stops.
      *
      * @param string $eventName
-     * @param mixed  $arguments
+     * @param mixed  ...$arguments
      */
     public static function trigger($eventName, ...$arguments): bool
     {
@@ -168,6 +165,8 @@ class Events
      * sorted by priority.
      *
      * @param string $eventName
+     *
+     * @return list<callable(mixed): mixed>
      */
     public static function listeners($eventName): array
     {
@@ -194,6 +193,7 @@ class Events
      * it was removed.
      *
      * @param string $eventName
+     * @param callable(mixed): mixed $listener
      */
     public static function removeListener($eventName, callable $listener): bool
     {
@@ -237,6 +237,8 @@ class Events
     /**
      * Sets the path to the file that routes are read from.
      *
+     * @param list<string> $files
+     *
      * @return void
      */
     public static function setFiles(array $files)
@@ -269,7 +271,7 @@ class Events
     /**
      * Getter for the performance log records.
      *
-     * @return list<array<string, float|string>>
+     * @return list<array{start: float, end: float, event: string}>
      */
     public static function getPerformanceLogs()
     {
