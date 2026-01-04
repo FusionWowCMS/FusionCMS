@@ -475,6 +475,8 @@ abstract class BaseConnection implements ConnectionInterface
 
     /**
      * Close the database connection.
+     *
+     * @return void
      */
     public function close()
     {
@@ -734,6 +736,8 @@ abstract class BaseConnection implements ConnectionInterface
      * Disable Transactions
      *
      * This permits transactions to be disabled at run-time.
+     *
+     * @return void
      */
     public function transOff()
     {
@@ -1434,7 +1438,7 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Returns an array of table names
      *
-     * @return array|false
+     * @return false|list<string>
      *
      * @throws DatabaseException
      */
@@ -1461,6 +1465,7 @@ abstract class BaseConnection implements ConnectionInterface
         $query = $this->query($sql);
 
         foreach ($query->getResultArray() as $row) {
+            /** @var string $table */
             $table = $row['table_name'] ?? $row['TABLE_NAME'] ?? $row[array_key_first($row)];
 
             $this->dataCache['table_names'][] = $table;
@@ -1511,7 +1516,7 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Fetch Field Names
      *
-     * @return array|false
+     * @return false|list<string>
      *
      * @throws DatabaseException
      */
@@ -1588,7 +1593,7 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Returns an object with foreign key data
      *
-     * @return array
+     * @return array<string, stdClass>
      */
     public function getForeignKeyData(string $table)
     {
@@ -1747,7 +1752,9 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Platform-specific field data information.
      *
-     * @see    getFieldData()
+     * @return list<stdClass>
+     * @see getFieldData()
+     *
      */
     abstract protected function _fieldData(string $table): array;
 
