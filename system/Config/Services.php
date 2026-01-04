@@ -107,13 +107,11 @@ class Services extends BaseService
      */
     public static function curlrequest(array $options = [], ?ResponseInterface $response = null, bool $getShared = false)
     {
-        if ($getShared === true)
-        {
+        if ($getShared) {
             return self::getSharedInstance('curlrequest', $options, $response);
         }
 
-        if ( ! is_object($response))
-        {
+        if ( ! is_object($response)) {
             $response = new Response();
         }
 

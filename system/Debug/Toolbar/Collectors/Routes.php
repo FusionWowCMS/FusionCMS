@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace CodeIgniter\Debug\Toolbar\Collectors;
 
-use CodeIgniter\Router\DefinedRouteCollector;
-use App\Config\Services;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
@@ -74,8 +72,8 @@ class Routes extends BaseCollector
      */
     public function display(): array
     {
-        $rawRoutes = Services::routes(true);
-        $router    = Services::router(null, null, true);
+        $rawRoutes = service('routes', true);
+        $router    = service('router', null, null, true);
 
         // Get our parameters
         // Closure routes
@@ -129,19 +127,6 @@ class Routes extends BaseCollector
         // Defined Routes
         $routes = [];
 
-        $definedRouteCollector = new DefinedRouteCollector($rawRoutes);
-
-        foreach ($definedRouteCollector->collect() as $route) {
-            // filter for strings, as callbacks aren't displayable
-            if ($route['handler'] !== '(Closure)') {
-                $routes[] = [
-                    'method'  => strtoupper($route['method']),
-                    'route'   => $route['route'],
-                    'handler' => $route['handler'],
-                ];
-            }
-        }
-
         return [
             'matchedRoute' => $matchedRoute,
             'routes'       => $routes,
@@ -153,7 +138,7 @@ class Routes extends BaseCollector
      */
     public function getBadgeValue(): int
     {
-        $rawRoutes = Services::routes(true);
+        $rawRoutes = service('routes', true);
 
         return count($rawRoutes->getRoutes());
     }

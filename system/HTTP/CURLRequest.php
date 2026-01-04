@@ -389,16 +389,16 @@ class CURLRequest extends OutgoingRequest
         // Set the string we want to break our response from
         $breakString = "\r\n\r\n";
 
-        while (strpos($output, 'HTTP/1.1 100 Continue') === 0) {
+        while (str_starts_with($output, 'HTTP/1.1 100 Continue')) {
             $output = substr($output, strpos($output, $breakString) + 4);
         }
 
-        if (strpos($output, 'HTTP/1.1 200 Connection established') === 0) {
+        if (preg_match('/HTTP\/\d\.\d 200 Connection established/i', $output)) {
             $output = substr($output, strpos($output, $breakString) + 4);
         }
 
         // If request and response have Digest
-        if (isset($this->config['auth'][2]) && $this->config['auth'][2] === 'digest' && strpos($output, 'WWW-Authenticate: Digest') !== false) {
+        if (isset($this->config['auth'][2]) && $this->config['auth'][2] === 'digest' && str_contains($output, 'WWW-Authenticate: Digest')) {
             $output = substr($output, strpos($output, $breakString) + 4);
         }
 

@@ -141,8 +141,8 @@ if (!function_exists('img')) {
         $img = '<img';
 
         // Check for a relative URI
-        if (!preg_match('#^([a-z]+:)?//#i', $src['src']) && strpos($src['src'], 'data:') !== 0) {
-            if ($indexPage === true) {
+        if (preg_match('#^([a-z]+:)?//#i', $src['src']) !== 1 && ! str_starts_with($src['src'], 'data:')) {
+            if ($indexPage) {
                 $img .= ' src="' . get_instance()->config->site_url($src['src']) . '"';
             } else {
                 $img .= ' src="' . get_instance()->config->base_url($src['src']) . '"';
@@ -356,7 +356,7 @@ if (!function_exists('video')) {
 
         if (_has_protocol($src)) {
             $video .= ' src="' . $src . '"';
-        } elseif ($indexPage === true) {
+        } elseif ($indexPage) {
             $video .= ' src="' . $CI->config->site_url($src) . '"';
         } else {
             $video .= ' src="' . $CI->config->base_url($src) . '"';
@@ -404,7 +404,7 @@ if (!function_exists('audio')) {
 
         if (_has_protocol($src)) {
             $audio .= ' src="' . $src . '"';
-        } elseif ($indexPage === true) {
+        } elseif ($indexPage) {
             $audio .= ' src="' . $CI->config->site_url($src) . '"';
         } else {
             $audio .= ' src="' . $CI->config->base_url($src) . '"';
@@ -478,7 +478,7 @@ if (!function_exists('source')) {
     {
         $CI =& get_instance();
         if (!_has_protocol($src)) {
-            $src = $indexPage === true ? $CI->config->site_url($src) : $CI->config->base_url($src);
+            $src = $indexPage ? $CI->config->site_url($src) : $CI->config->base_url($src);
         }
 
         $source = '<source src="' . $src
@@ -566,7 +566,7 @@ if (!function_exists('object')) {
     {
         $CI =& get_instance();
         if (!_has_protocol($data)) {
-            $data = $indexPage === true ? $CI->config->site_url($data) : $CI->config->base_url($data);
+            $data = $indexPage ? $CI->config->site_url($data) : $CI->config->base_url($data);
         }
 
         $object = '<object data="' . $data . '" '
@@ -620,7 +620,7 @@ if (!function_exists('embed')) {
     {
         $CI =& get_instance();
         if (!_has_protocol($src)) {
-            $src = $indexPage === true ? $CI->config->site_url($src) : $CI->config->base_url($src);
+            $src = $indexPage ? $CI->config->site_url($src) : $CI->config->base_url($src);
         }
 
         return '<embed src="' . $src

@@ -15,8 +15,6 @@ namespace CodeIgniter\Database;
 
 use CodeIgniter\CLI\CLI;
 use App\Config\Database;
-use Faker\Factory;
-use Faker\Generator;
 use InvalidArgumentException;
 
 /**
@@ -67,13 +65,6 @@ class Seeder
     protected $silent = false;
 
     /**
-     * Faker Generator instance.
-     *
-     * @deprecated
-     */
-    private static ?Generator $faker = null;
-
-    /**
      * Seeder constructor.
      */
     public function __construct(Database $config, ?BaseConnection $db = null)
@@ -96,20 +87,6 @@ class Seeder
 
         $this->db    = $db;
         $this->forge = Database::forge($this->DBGroup);
-    }
-
-    /**
-     * Gets the Faker Generator instance.
-     *
-     * @deprecated
-     */
-    public static function faker(): ?Generator
-    {
-        if (self::$faker === null && class_exists(Factory::class)) {
-            self::$faker = Factory::create();
-        }
-
-        return self::$faker;
     }
 
     /**

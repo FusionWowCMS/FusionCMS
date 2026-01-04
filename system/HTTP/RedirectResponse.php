@@ -11,7 +11,6 @@
 
 namespace CodeIgniter\HTTP;
 
-use App\Config\Services;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 
 /**
@@ -55,7 +54,7 @@ class RedirectResponse extends Response
     {
         $namedRoute = $route;
 
-        $route = Services::routes()->reverseRoute($route, ...$params);
+        $route = service('routes')->reverseRoute($route, ...$params);
 
         if (! $route) {
             throw HTTPException::forInvalidRedirectRoute($namedRoute);
@@ -74,7 +73,7 @@ class RedirectResponse extends Response
      */
     public function back(?int $code = null, string $method = 'auto')
     {
-        Services::session();
+        service('session');
 
         return $this->redirect(previous_url(), $method, $code);
     }
@@ -89,7 +88,7 @@ class RedirectResponse extends Response
      */
     public function withInput()
     {
-        $session = Services::session();
+        $session = service('session');
         $session->setFlashdata('_ci_old_input', [
             'get'  => $_GET ?? [],
             'post' => $_POST ?? [],
@@ -111,11 +110,10 @@ class RedirectResponse extends Response
      */
     private function withErrors(): self
     {
-        $validation = Services::validation();
+        $validation = service('validation');
 
-        if ($validation->getErrors()) {
-            $session = Services::session();
-            $session->setFlashdata('_ci_validation_errors', $validation->getErrors());
+        if ($validation->getErrors() !== []) {
+            service('session')->setFlashdata('_ci_validation_errors', $validation->getErrors());
         }
 
         return $this;
@@ -130,7 +128,7 @@ class RedirectResponse extends Response
      */
     public function with(string $key, $message)
     {
-        Services::session()->setFlashdata($key, $message);
+        service('session')->setFlashdata($key, $message);
 
         return $this;
     }
@@ -145,7 +143,7 @@ class RedirectResponse extends Response
      */
     public function withCookies()
     {
-        $this->cookieStore = new CookieStore(Services::response()->getCookies());
+        $this->cookieStore = new CookieStore(service('response')->getCookies());
 
         return $this;
     }
@@ -160,8 +158,14 @@ class RedirectResponse extends Response
      */
     public function withHeaders()
     {
-        foreach (Services::response()->headers() as $name => $header) {
-            $this->setHeader($name, $header->getValue());
+        foreach (service('response')->headers() as $name => $value) {
+            if ($value instanceof Header) {
+                $this->setHeader($name, $value->getValue());
+            } else {
+                foreach ($value as $header) {
+                    $this->addHeader($name, $header->getValue());
+                }
+            }
         }
 
         return $this;

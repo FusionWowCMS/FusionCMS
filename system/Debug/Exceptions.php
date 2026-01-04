@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace CodeIgniter\Debug;
 
-use App\Config\Services;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Exceptions\HasExitCodeInterface;
 use CodeIgniter\Exceptions\HTTPExceptionInterface;
@@ -125,7 +124,7 @@ class Exceptions
 
         [$statusCode, $exitCode] = $this->determineCodes($exception);
 
-        $this->request = Services::request();
+        $this->request = service('request');
 
         if ($this->config->log === true && ! in_array($statusCode, $this->config->ignoreCodes, true)) {
             $routeInfo = '[Method: ' . $this->request->getMethod();
@@ -153,7 +152,7 @@ class Exceptions
             }
         }
 
-        $this->response = Services::response();
+        $this->response = service('response');
 
         if (method_exists($this->config, 'handler')) {
             // Use new ExceptionHandler

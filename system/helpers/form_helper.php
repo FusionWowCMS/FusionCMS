@@ -635,7 +635,7 @@ if (!function_exists('set_select')) {
         if (isset($CI->form_validation) && is_object($CI->form_validation) && $CI->form_validation->has_rule($field)) {
             return $CI->form_validation->set_select($field, $value, $default);
         } elseif (($input = $CI->input->post($field, false)) === NULL) {
-            return ($default === true) ? ' selected="selected"' : '';
+            return $default ? ' selected="selected"' : '';
         }
 
         $value = (string)$value;
@@ -690,7 +690,7 @@ if (!function_exists('set_checkbox')) {
             return ($input === $value) ? ' checked="checked"' : '';
         }
 
-        return ($default === true) ? ' checked="checked"' : '';
+        return $default ? ' checked="checked"' : '';
     }
 }
 
@@ -730,7 +730,7 @@ if (!function_exists('set_radio')) {
             return ($input === $value) ? ' checked="checked"' : '';
         }
 
-        return ($default === true) ? ' checked="checked"' : '';
+        return $default ? ' checked="checked"' : '';
     }
 }
 
@@ -814,7 +814,7 @@ if (!function_exists('parse_form_attributes')) {
             if (!is_bool($val)) {
                 if ($key === 'value') {
                     $val = html_escape($val);
-                } elseif ($key === 'name' && !strlen($default['name'])) {
+                } elseif ($key === 'name' && $default['name'] === '') {
                     continue;
                 }
                 $att .= $key . '="' . $val . '"' . ($key === array_key_last($default) ? '' : ' ');

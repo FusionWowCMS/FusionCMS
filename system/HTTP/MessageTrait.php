@@ -12,6 +12,7 @@
 namespace CodeIgniter\HTTP;
 
 use CodeIgniter\HTTP\Exceptions\HTTPException;
+use InvalidArgumentException;
 
 /**
  * Message Trait
@@ -158,6 +159,23 @@ trait MessageTrait
         return $this;
     }
 
+    private function hasMultipleHeaders(string $name): bool
+    {
+        $origName = $this->getHeaderName($name);
+
+        return isset($this->headers[$origName]) && is_array($this->headers[$origName]);
+    }
+
+    private function checkMultipleHeaders(string $name): void
+    {
+        if ($this->hasMultipleHeaders($name)) {
+            throw new InvalidArgumentException(
+                'The header "' . $name . '" already has multiple headers.'
+                . ' You cannot change them. If you really need to change, remove the header first.'
+            );
+        }
+    }
+
     /**
      * Removes a header from the list of headers we track.
      *
@@ -184,6 +202,33 @@ trait MessageTrait
         array_key_exists($origName, $this->headers)
             ? $this->headers[$origName]->appendValue($value)
             : $this->setHeader($name, $value);
+
+        return $this;
+    }
+
+    /**
+     * Adds a header (not a header value) with the same name.
+     * Use this only when you set multiple headers with the same name,
+     * typically, for `Set-Cookie`.
+     *
+     * @return $this
+     */
+    public function addHeader(string $name, string $value): static
+    {
+        $origName = $this->getHeaderName($name);
+
+        if (! isset($this->headers[$origName])) {
+            $this->setHeader($name, $value);
+
+            return $this;
+        }
+
+        if (! $this->hasMultipleHeaders($name) && isset($this->headers[$origName])) {
+            $this->headers[$origName] = [$this->headers[$origName]];
+        }
+
+        // Add the header.
+        $this->headers[$origName][] = new Header($origName, $value);
 
         return $this;
     }

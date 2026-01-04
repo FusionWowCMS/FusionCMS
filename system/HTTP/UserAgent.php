@@ -209,7 +209,7 @@ class UserAgent
         }
 
         // No need to be specific, it's a browser
-        if ($key === null) {
+        if ((string) $key === '') {
             return true;
         }
 
@@ -227,7 +227,7 @@ class UserAgent
         }
 
         // No need to be specific, it's a robot
-        if ($key === null) {
+        if ((string) $key === '') {
             return true;
         }
 
@@ -245,7 +245,7 @@ class UserAgent
         }
 
         // No need to be specific, it's a mobile
-        if ($key === null) {
+        if ((string) $key === '') {
             return true;
         }
 

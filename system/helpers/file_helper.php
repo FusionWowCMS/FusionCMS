@@ -134,7 +134,7 @@ if (!function_exists('delete_files')) {
 
                 if (is_dir($filepath) && $filename[0] !== '.' && !is_link($filepath)) {
                     delete_files($filepath, $del_dir, $htdocs, $_level + 1);
-                } elseif ($htdocs !== true or !preg_match('/^(\.htaccess|index\.(html|htm|php)|web\.config)$/i', $filename)) {
+                } if (! $htdocs || preg_match('/^(\.htaccess|index\.(html|htm|php)|web\.config)$/i', $filename) !== 1) {
                     @unlink($filepath);
                 }
             }

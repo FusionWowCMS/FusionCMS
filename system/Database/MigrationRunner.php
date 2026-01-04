@@ -390,7 +390,7 @@ class MigrationRunner
      */
     public function findMigrations(): array
     {
-        $namespaces = $this->namespace ? [$this->namespace] : array_keys(Services::autoloader()->getNamespace());
+        $namespaces = $this->namespace !== null ? [$this->namespace] : array_keys(service('autoloader')->getNamespace());
         $migrations = [];
 
         foreach ($namespaces as $namespace) {
@@ -415,7 +415,7 @@ class MigrationRunner
     public function findNamespaceMigrations(string $namespace): array
     {
         $migrations = [];
-        $locator    = Services::locator(true);
+        $locator    = service('locator', true);
 
         if (! empty($this->path)) {
             get_instance()->load->helper('directory');
@@ -451,11 +451,11 @@ class MigrationRunner
 
         $filename = basename($path, '.php');
 
-        if (! preg_match($this->regex, $filename)) {
+        if (preg_match($this->regex, $filename) !== 1) {
             return false;
         }
 
-        $locator = Services::locator(true);
+        $locator = service('locator', true);
 
         $migration = new stdClass();
 
@@ -525,7 +525,7 @@ class MigrationRunner
     {
         preg_match($this->regex, $migration, $matches);
 
-        return count($matches) ? $matches[1] : '0';
+        return $matches !== [] ? $matches[1] : '0';
     }
 
     /**
@@ -540,7 +540,7 @@ class MigrationRunner
     {
         preg_match($this->regex, $migration, $matches);
 
-        return count($matches) ? $matches[2] : '';
+        return $matches !== [] ? $matches[2] : '';
     }
 
     /**
@@ -646,7 +646,7 @@ class MigrationRunner
         }
 
         // If a namespace was specified then use it
-        if ($this->namespace) {
+        if ($this->namespace !== null) {
             $builder->where('namespace', $this->namespace);
         }
 
@@ -701,7 +701,7 @@ class MigrationRunner
             ->get()
             ->getResultObject();
 
-        $batch = is_array($batch) && count($batch)
+        $batch = is_array($batch) && $batch !== []
             ? end($batch)->batch
             : 0;
 
@@ -726,7 +726,7 @@ class MigrationRunner
             ->get()
             ->getResultObject();
 
-        return count($migration) ? $migration[0]->version : '0';
+        return $migration !== [] ? $migration[0]->version : '0';
     }
 
     /**

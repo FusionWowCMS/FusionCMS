@@ -135,7 +135,7 @@ class Forge extends BaseForge
                 $wantToAddNull   = strpos($processedFields[$i]['null'], ' NOT') === false;
                 $currentNullable = $nullableMap[$processedFields[$i]['name']];
 
-                if ($wantToAddNull === true && $currentNullable === true) {
+                if ($wantToAddNull && $currentNullable === true) {
                     $processedFields[$i]['null'] = '';
                 } elseif ($processedFields[$i]['null'] === '' && $currentNullable === false) {
                     // Nullable by default
@@ -293,7 +293,7 @@ class Forge extends BaseForge
     {
         $sql = parent::_dropTable($table, $ifExists, $cascade);
 
-        if ($sql !== true && $cascade === true) {
+        if ($sql !== true && $cascade) {
             $sql .= ' CASCADE CONSTRAINTS PURGE';
         } elseif ($sql !== true) {
             $sql .= ' PURGE';
