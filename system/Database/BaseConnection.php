@@ -418,7 +418,12 @@ abstract class BaseConnection implements ConnectionInterface
             // Connect to the database and set the connection ID
             $this->connID = $this->connect($this->pConnect);
         } catch (Throwable $e) {
-            $connectionErrors[] = sprintf('Main connection [%s]: %s', $this->DBDriver, $e->getMessage());
+            $this->connID       = false;
+            $connectionErrors[] = sprintf(
+                'Main connection [%s]: %s',
+                $this->DBDriver,
+                $e->getMessage()
+            );
             log_message('error', 'Error connecting to the database: ' . $e);
         }
 
@@ -439,7 +444,12 @@ abstract class BaseConnection implements ConnectionInterface
                         // Try to connect
                         $this->connID = $this->connect($this->pConnect);
                     } catch (Throwable $e) {
-                        $connectionErrors[] = sprintf('Failover #%d [%s]: %s', ++$index, $this->DBDriver, $e->getMessage());
+                        $connectionErrors[] = sprintf(
+                            'Failover #%d [%s]: %s',
+                            ++$index,
+                            $this->DBDriver,
+                            $e->getMessage()
+                        );
                         log_message('error', 'Error connecting to the database: ' . $e);
                     }
 
@@ -477,7 +487,7 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Platform dependent way method for closing the connection.
      *
-     * @return mixed
+     * @return void
      */
     abstract protected function _close();
 
