@@ -55,8 +55,7 @@ if (!function_exists('set_cookie')) {
         ?bool $secure = null,
         ?bool $httpOnly = null,
         ?string $sameSite = null
-    )
-    {
+    ): void {
         get_instance()->input->set_cookie($name, $value, $expire, $domain, $path, $prefix, $secure, $httpOnly, $sameSite);
     }
 }
@@ -93,7 +92,7 @@ if (!function_exists('delete_cookie')) {
      *
      * @return void
      */
-    function delete_cookie($name, string $domain = '', string $path = '/', string $prefix = '')
+    function delete_cookie($name, string $domain = '', string $path = '/', string $prefix = ''): void
     {
         set_cookie($name, '', '', $domain, $path, $prefix);
     }

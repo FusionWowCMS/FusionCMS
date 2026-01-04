@@ -327,7 +327,7 @@ if (!function_exists('convert_accented_characters')) {
                 include(APPPATH . 'config/' . ENVIRONMENT . '/foreign_chars.php');
             }
 
-            if (empty($foreign_characters) or !is_array($foreign_characters)) {
+            if (empty($foreign_characters) || !is_array($foreign_characters)) {
                 $array_from = [];
                 $array_to = [];
 
