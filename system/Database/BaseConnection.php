@@ -338,7 +338,7 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Array of table aliases.
      *
-     * @var array
+     * @var list<string>
      */
     protected $aliasedTables = [];
 
@@ -574,10 +574,14 @@ abstract class BaseConnection implements ConnectionInterface
      *
      * @return $this
      */
-    public function addTableAlias(string $table)
+    public function addTableAlias(string $alias)
     {
-        if (! in_array($table, $this->aliasedTables, true)) {
-            $this->aliasedTables[] = $table;
+        if ($alias === '') {
+            return $this;
+        }
+
+        if (! in_array($alias, $this->aliasedTables, true)) {
+            $this->aliasedTables[] = $alias;
         }
 
         return $this;
@@ -824,6 +828,16 @@ abstract class BaseConnection implements ConnectionInterface
     }
 
     /**
+     * Reset transaction status - to restart transactions after strict mode failure
+     */
+    public function resetTransStatus(): static
+    {
+        $this->transStatus = true;
+
+        return $this;
+    }
+
+    /**
      * Begin Transaction
      */
     public function transBegin(bool $testMode = false): bool
@@ -913,7 +927,7 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Returns a non-shared new instance of the query builder for this connection.
      *
-     * @param array|string $tableName
+     * @param array|string|TableName $tableName
      *
      * @return BaseBuilder
      *
@@ -1045,9 +1059,10 @@ abstract class BaseConnection implements ConnectionInterface
      * the correct identifiers.
      *
      * @param array|int|string $item
-     * @param bool             $prefixSingle       Prefix a table name with no segments?
-     * @param bool             $protectIdentifiers Protect table or column names?
-     * @param bool             $fieldExists        Supplied $item contains a column name?
+     * @param array|int|string|TableName $item
+     * @param bool $prefixSingle Prefix a table name with no segments?
+     * @param bool $protectIdentifiers Protect table or column names?
+     * @param bool $fieldExists Supplied $item contains a column name?
      *
      * @return         array|string
      * @phpstan-return ($item is array ? array : string)
@@ -1066,6 +1081,11 @@ abstract class BaseConnection implements ConnectionInterface
             }
 
             return $escapedArray;
+        }
+
+        if ($item instanceof TableName) {
+            /** @psalm-suppress NoValue I don't know why ERROR. */
+            return $this->escapeTableName($item);
         }
 
         // If you pass `['column1', 'column2']`, `$item` will be int because the array keys are int.
@@ -1134,6 +1154,42 @@ abstract class BaseConnection implements ConnectionInterface
         }
 
         return $item . $alias;
+    }
+    /**
+     * Escape the SQL Identifier
+     *
+     * This function escapes single identifier.
+     *
+     * @param non-empty-string|TableName $item
+     */
+    public function escapeIdentifier($item): string
+    {
+        if ($item === '') {
+            return '';
+        }
+
+        if ($item instanceof TableName) {
+            return $this->escapeTableName($item);
+        }
+
+        return $this->escapeChar
+            . str_replace(
+                $this->escapeChar,
+                $this->escapeChar . $this->escapeChar,
+                $item,
+            )
+            . $this->escapeChar;
+    }
+
+    /**
+     * Returns escaped table name with alias.
+     */
+    private function escapeTableName(TableName $tableName): string
+    {
+        $alias = $tableName->getAlias();
+
+        return $this->escapeIdentifier($tableName->getActualTableName())
+            . (($alias !== '') ? ' ' . $this->escapeIdentifier($alias) : '');
     }
 
     private function protectDotItem(string $item, string $alias, bool $protectIdentifiers, bool $fieldExists): string
@@ -1518,12 +1574,16 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Fetch Field Names
      *
+     * @param string|TableName $tableName
+     *
      * @return false|list<string>
      *
      * @throws DatabaseException
      */
-    public function getFieldNames(string $table)
+    public function getFieldNames($tableName)
     {
+        $table = ($tableName instanceof TableName) ? $tableName->getTableName() : $tableName;
+
         // Is there a cached result?
         if (isset($this->dataCache['field_names'][$table])) {
             return $this->dataCache['field_names'][$table];
@@ -1533,7 +1593,7 @@ abstract class BaseConnection implements ConnectionInterface
             $this->initialize();
         }
 
-        if (false === ($sql = $this->_listColumns($table))) {
+        if (false === ($sql = $this->_listColumns($tableName))) {
             if ($this->DBDebug) {
                 throw new DatabaseException('This feature is not available for the database you are using.');
             }
@@ -1747,9 +1807,11 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Generates a platform-specific query string so that the column names can be fetched.
      *
+     * @param string|TableName $table
+     *
      * @return false|string
      */
-    abstract protected function _listColumns(string $table = '');
+    abstract protected function _listColumns($table = '');
 
     /**
      * Platform-specific field data information.

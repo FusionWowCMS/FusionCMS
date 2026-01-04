@@ -179,6 +179,13 @@ class Database extends Config
         "strictOn" => false,
         "failover" => [],
         "port" => '.(int)$_POST['cms_port'].',
+        "numberNative" => false,
+        "foundRows"    => false,
+        "dateFormat"   => [
+            "date"     => "Y-m-d",
+            "datetime" => "Y-m-d H:i:s",
+            "time"     => "H:i:s,
+        ],
     ];
 
     public array $account = [
@@ -199,6 +206,13 @@ class Database extends Config
         "strictOn" => false,
         "failover" => [],
         "port" => '.(int)$_POST['auth_port'].',
+        "numberNative" => false,
+        "foundRows"    => false,
+        "dateFormat"   => [
+            "date"     => "Y-m-d",
+            "datetime" => "Y-m-d H:i:s",
+            "time"     => "H:i:s,
+        ],
     ];
 }
 ';
@@ -450,6 +464,13 @@ class Database extends Config
                 'compress' => false,
                 'strictOn' => false,
                 'failover' => [],
+                'numberNative' => false,
+                'foundRows'    => false,
+                'dateFormat'   => [
+                    'date'     => 'Y-m-d',
+                    'datetime' => 'Y-m-d H:i:s',
+                    'time'     => 'H:i:s',
+                ],
             ];
 
             $worldConfig = [
@@ -470,6 +491,13 @@ class Database extends Config
                 'compress' => false,
                 'strictOn' => false,
                 'failover' => [],
+                'numberNative' => false,
+                'foundRows'    => false,
+                'dateFormat'   => [
+                    'date'     => 'Y-m-d',
+                    'datetime' => 'Y-m-d H:i:s',
+                    'time'     => 'H:i:s',
+                ],
             ];
 
             // Connect to characters
