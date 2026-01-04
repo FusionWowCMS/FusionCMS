@@ -20,6 +20,7 @@ use ErrorException;
 use PgSql\Connection as PgSqlConnection;
 use PgSql\Result as PgSqlResult;
 use stdClass;
+use Stringable;
 
 /**
  * Connection for Postgre
@@ -230,12 +231,15 @@ class Connection extends BaseConnection
             $this->initialize();
         }
 
-        /** @psalm-suppress NoValue I don't know why ERROR. */
-        if (is_string($str) || (is_object($str) && method_exists($str, '__toString'))) {
+        if ($str instanceof Stringable) {
             if ($str instanceof RawSql) {
                 return $str->__toString();
             }
 
+            $str = (string) $str;
+        }
+
+        if (is_string($str)) {
             return pg_escape_literal($this->connID, $str);
         }
 
@@ -243,7 +247,6 @@ class Connection extends BaseConnection
             return $str ? 'TRUE' : 'FALSE';
         }
 
-        /** @psalm-suppress NoValue I don't know why ERROR. */
         return parent::escape($str);
     }
 

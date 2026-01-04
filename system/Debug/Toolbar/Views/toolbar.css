@@ -275,10 +275,10 @@
   max-width: none;
 }
 #debug-bar .timeline td.child-container {
-  padding: 0px;
+  padding: 0;
 }
 #debug-bar .timeline td.child-container .timeline {
-  margin: 0px;
+  margin: 0;
 }
 #debug-bar .timeline td.child-container .timeline td:first-child:not(.child-container) {
   padding-left: calc(5px + 10px * var(--level));

@@ -18,7 +18,7 @@ use App\Config\App;
  * @var    string
  *
  */
-const CI_VERSION = '4.4.3';
+const CI_VERSION = '4.5.1';
 
 $appConfig ??= config(App::class);
 

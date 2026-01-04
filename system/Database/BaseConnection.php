@@ -17,6 +17,7 @@ use Closure;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\Events\Events;
 use stdClass;
+use Stringable;
 use Throwable;
 
 /**
@@ -1289,12 +1290,15 @@ abstract class BaseConnection implements ConnectionInterface
             return array_map([&$this, 'escape'], $str);
         }
 
-        /** @psalm-suppress NoValue I don't know why ERROR. */
-        if (is_string($str) || (is_object($str) && method_exists($str, '__toString'))) {
+        if ($str instanceof Stringable) {
             if ($str instanceof RawSql) {
                 return $str->__toString();
             }
 
+            $str = (string) $str;
+        }
+
+        if (is_string($str)) {
             return "'" . $this->escapeString($str) . "'";
         }
 
@@ -1308,8 +1312,8 @@ abstract class BaseConnection implements ConnectionInterface
     /**
      * Escape String
      *
-     * @param list<string>|string $str  Input string
-     * @param bool                $like Whether or not the string will be used in a LIKE condition
+     * @param list<string|Stringable>|string|Stringable $str Input string
+     * @param bool $like Whether the string will be used in a LIKE condition
      *
      * @return list<string>|string
      */
@@ -1321,6 +1325,14 @@ abstract class BaseConnection implements ConnectionInterface
             }
 
             return $str;
+        }
+
+        if ($str instanceof Stringable) {
+            if ($str instanceof RawSql) {
+                return $str->__toString();
+            }
+
+            $str = (string) $str;
         }
 
         $str = $this->_escapeString($str);
@@ -1351,7 +1363,7 @@ abstract class BaseConnection implements ConnectionInterface
      * Calls the individual driver for platform
      * specific escaping for LIKE conditions
      *
-     * @param list<string>|string $str
+     * @param list<string|Stringable>|string|Stringable $str
      *
      * @return list<string>|string
      */
