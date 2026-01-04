@@ -28,6 +28,12 @@ use CodeIgniter\Entity\Cast\CastInterface as EntityCastInterface;
 use CodeIgniter\Entity\Exceptions\CastException;
 use InvalidArgumentException;
 
+/**
+ * @phpstan-type cast_handlers array<string, class-string<EntityCastInterface|CastInterface>>
+ *
+ * @see CodeIgniter\DataCaster\DataCasterTest
+ * @see CodeIgniter\Entity\EntityTest
+ */
 final class DataCaster
 {
     /**
@@ -40,7 +46,7 @@ final class DataCaster
     /**
      * Convert handlers
      *
-     * @var array<string, class-string> [type => classname]
+     * @var cast_handlers [type => classname]
      */
     private array $castHandlers = [
         'array'     => ArrayCast::class,
@@ -69,8 +75,10 @@ final class DataCaster
     private readonly ?object $helper;
 
     /**
-     * @param array<string, class-string>|null $castHandlers Custom convert handlers
-     * @param array<string, string>|null       $types        [field => type]
+     * @param cast_handlers|null $castHandlers Custom convert handlers
+     * @param array<string, string>|null $types [field => type]
+     * @param object|null $helper Helper object.
+     * @param bool $strict Strict mode? Set to `false` for casts for Entity.
      */
     public function __construct(
         ?array $castHandlers = null,
@@ -78,7 +86,7 @@ final class DataCaster
         ?object $helper = null,
         bool $strict = true
     ) {
-        $this->castHandlers = array_merge($this->castHandlers, $castHandlers);
+        $this->castHandlers = array_merge($this->castHandlers, $castHandlers ?? []);
         $this->helper       = $helper;
 
         if ($types !== null) {
@@ -124,13 +132,16 @@ final class DataCaster
      * Add ? at the beginning of the type (i.e. ?string) to get `null`
      * instead of casting $value when $value is null.
      *
-     * @param         mixed       $value  The value to convert
-     * @param         string      $field  The field name
-     * @param         string      $method Allowed to "get" and "set"
-     * @phpstan-param 'get'|'set' $method
+     * @param mixed $value The value to convert
+     * @param string $field The field name
+     * @param string $method Allowed to "get" and "set"
      */
     public function castAs(mixed $value, string $field, string $method = 'get'): mixed
     {
+        if ($method !== 'get' && $method !== 'set') {
+            throw CastException::forInvalidMethod($method);
+        }
+
         // If the type is not defined, return as it is.
         if (! isset($this->types[$field])) {
             return $value;

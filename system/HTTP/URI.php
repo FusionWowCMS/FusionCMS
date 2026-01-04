@@ -162,25 +162,26 @@ class URI
         ?string $fragment = null
     ): string {
         $uri = '';
-        if ($scheme !== null && $scheme !== '') {
+
+        if ((string) $scheme !== '') {
             $uri .= $scheme . '://';
         }
 
-        if ($authority !== null && $authority !== '') {
+        if ((string) $authority !== '') {
             $uri .= $authority;
         }
 
-        if (isset($path) && $path !== '') {
-            $uri .= substr($uri, -1, 1) !== '/'
-                ? '/' . ltrim($path, '/')
-                : ltrim($path, '/');
+        if ((string) $path !== '') {
+            $uri .= str_ends_with($uri, '/')
+                ? ltrim($path, '/')
+                : '/' . ltrim($path, '/');
         }
 
-        if ($query !== '' && $query !== null) {
+        if ((string) $query !== '') {
             $uri .= '?' . $query;
         }
 
-        if ($fragment !== '' && $fragment !== null) {
+        if ((string) $fragment !== '') {
             $uri .= '#' . $fragment;
         }
 

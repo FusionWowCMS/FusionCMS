@@ -347,10 +347,23 @@ class Connection extends BaseConnection
             $retval[$i]->max_length = $length;
 
             $retval[$i]->nullable = $query[$i]->NULLABLE === 'Y';
-            $retval[$i]->default  = $query[$i]->DATA_DEFAULT;
+            $retval[$i]->default  = $this->normalizeDefault($query[$i]->DATA_DEFAULT);
         }
 
         return $retval;
+    }
+
+    /**
+     * Removes trailing whitespace from default values
+     * returned in database column metadata queries.
+     */
+    private function normalizeDefault(?string $default): ?string
+    {
+        if ($default === null) {
+            return $default;
+        }
+
+        return rtrim($default);
     }
 
     /**
@@ -527,7 +540,7 @@ class Connection extends BaseConnection
     public function storedProcedure(string $procedureName, array $params)
     {
         if ($procedureName === '') {
-            throw new DatabaseException(lang('Database.invalidArgument', [$procedureName]));
+            throw new DatabaseException(lang('Database.invalidArgument', $procedureName));
         }
 
         // Build the query string

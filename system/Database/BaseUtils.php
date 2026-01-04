@@ -251,7 +251,7 @@ abstract class BaseUtils
             $xml .= $tab . '<' . $element . '>' . $newline;
 
             foreach ($row as $key => $val) {
-                $val = (! empty($val)) ? xml_convert((string) $val) : '';
+                $val = empty($val) ? '' : xml_convert((string) $val);
 
                 $xml .= $tab . $tab . '<' . $key . '>' . $val . '</' . $key . '>' . $newline;
             }
