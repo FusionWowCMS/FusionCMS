@@ -410,7 +410,7 @@ class Email
     {
         $this->initialize($config);
         if (! isset(static::$func_overload)) {
-            static::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
+            static::$func_overload = extension_loaded('mbstring') && ini_get('mbstring.func_overload');
         }
     }
 
