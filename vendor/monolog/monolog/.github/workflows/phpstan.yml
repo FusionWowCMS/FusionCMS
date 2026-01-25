@@ -1,0 +1,40 @@
+name: "PHPStan"
+
+on:
+  - push
+  - pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: "PHPStan"
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version:
+          - "8.0"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          coverage: none
+          extensions: mongodb, redis, amqp
+
+      - name: Add require for mongodb/mongodb to make tests runnable
+        run: "composer require ${{ env.COMPOSER_FLAGS }} mongodb/mongodb --dev --no-update"
+
+      - uses: ramsey/composer-install@v3
+        with:
+          dependency-versions: highest
+          # --ignore-platform-req=php here needed as long as elasticsearch/elasticsearch does not support php 8
+          composer-options: '--ignore-platform-req=php'
+
+      - name: Run PHPStan
+        run: composer phpstan
