@@ -184,7 +184,7 @@ class Database extends Config
         "dateFormat"   => [
             "date"     => "Y-m-d",
             "datetime" => "Y-m-d H:i:s",
-            "time"     => "H:i:s,
+            "time"     => "H:i:s",
         ],
     ];
 
@@ -211,7 +211,7 @@ class Database extends Config
         "dateFormat"   => [
             "date"     => "Y-m-d",
             "datetime" => "Y-m-d H:i:s",
-            "time"     => "H:i:s,
+            "time"     => "H:i:s",
         ],
     ];
 }
