@@ -166,7 +166,7 @@ function smarty_tag_minify(array $params = [])
 
     // Loop through files and add them to minifier
     foreach($files as $file)
-        $minifier->add((filter_var($file, FILTER_VALIDATE_URL) !== FALSE) ? Services::curlrequest()->get($file)->getBody() : $file);
+        $minifier->add((filter_var($file, FILTER_VALIDATE_URL) !== FALSE) ? (string) Services::curlrequest()->get($file)->getBody() : $file);
 
     // Save minified file
     $minifier->minify($outputPATH . $outputFILE);
