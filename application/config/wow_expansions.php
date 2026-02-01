@@ -1,6 +1,6 @@
 <?php
 
-$config['expansions_name_en'] = array(
+$config['expansions_name_en'] = [
     0 => 'Vanilla/Classic',
     1 => 'The Burning Crusade',
     2 => 'Wrath of The Lich King',
@@ -13,9 +13,9 @@ $config['expansions_name_en'] = array(
     9 => 'Dragon Flight',
     10 => 'The War Within',
     11 => 'Midnight',
-);
+];
 
-$config['expansions_small_name_en'] = array(
+$config['expansions_small_name_en'] = [
     0 => 'classic',
     1 => 'tbc',
     2 => 'wotlk',
@@ -27,5 +27,5 @@ $config['expansions_small_name_en'] = array(
     8 => 'sl',
     9 => 'df',
     10 => 'tww',
-    11 => 'mid',
-);
+    11 => 'midnight',
+];
