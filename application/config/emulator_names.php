@@ -13,6 +13,7 @@ $emulators = [
     'trinity_cataclassic'      => 'TrinityCore - Cataclysm Classic (4.4.2)',
     'trinity_old'              => 'TrinityCore (3.3.5a) Old Base',
     'skyfire'                  => 'Skyfire (5.4.8)',
+    'skyfire_old'              => 'Skyfire (5.4.8) Old Base',
     'azerothcore'              => 'AzerothCore (3.3.5a)',
     'azerothcore_old'          => 'AzerothCore (3.3.5a) Old Base',
     'cmangos'                  => 'CMangos (1.12.1 / 2.4.3 / 3.3.5a)',
