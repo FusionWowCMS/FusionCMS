@@ -266,6 +266,7 @@ class Administrator
             "nickname" => $this->CI->user->getNickname(),
             "current_page" => $this->currentPage,
             "defaultLanguage" => $this->CI->config->item('language'),
+            "client_language" => $this->CI->language->getClientData(),
             "languages" => $this->CI->language->getAllLanguages(),
             "abbreviationLanguage" => $this->CI->language->getAbbreviationByLanguage($this->CI->language->getLanguage()),
             "serverName" => $this->CI->config->item('server_name'),

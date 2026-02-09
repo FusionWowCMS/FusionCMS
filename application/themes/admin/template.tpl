@@ -55,6 +55,7 @@
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/jquery/jquery.min.js"></script>
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/modernizr/modernizr.js"></script>
+		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/js/language.js"></script>
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/common/common.js"></script>
@@ -122,6 +123,10 @@
 			defaultLanguage: "{$defaultLanguage}",
 			languages: [ {foreach from=$languages item=language}"{$language}",{/foreach} ]
 		};
+
+		$(document).ready(function () {
+			{if $client_language}Language.set("{addslashes($client_language)}");{/if}
+		});
 	</script>
 
 	<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/js/adminMenu.js"></script>
