@@ -1,22 +1,22 @@
 <section class="card">
-	<header class="card-header">
-		<h2 class="card-title font-heading font-light text-muted-800 dark:text-white md:block">Accounts</h2>
-	</header>
-	<div class="card-body">
-		<table class="table table-bordered table-striped" id="acclist">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Username</th>
-					<th>EMail</th>
-					<th>Join date</th>
-					<th>Expansion</th>
-                    <th>Action</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-	</div>
+    <header class="card-header">
+        <h2 class="card-title font-heading font-light text-muted-800 dark:text-white md:block">{lang('accounts', 'admin')}</h2>
+    </header>
+    <div class="card-body">
+        <table class="table table-bordered table-striped" id="acclist">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>{lang('username', 'admin')}</th>
+                    <th>{lang('email', 'admin')}</th>
+                    <th>{lang('join_date', 'admin')}</th>
+                    <th>{lang('expansion', 'admin')}</th>
+                    <th>{lang('action', 'admin')}</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
 </section>
 
 <script>
@@ -39,7 +39,7 @@ $(document).ready(function() {
             { "data": "joindate" },
             { "data": "expansion" },
             { "data": null, "render": function(data, type, row, meta) {
-                return '<a href="{$url}admin/accounts/get/' + row.id + '">View</a>';
+                return '<a href="{$url}admin/accounts/get/' + row.id + '">{lang('view', 'admin')}</a>';
             }}
         ]
     });
@@ -48,6 +48,6 @@ $(document).ready(function() {
         table.search(this.value).draw();
     });
 
-	$('input[type="search"]').addClass('form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 h-10 text-sm leading-5 rounded-xl !bg-muted-100 dark:!bg-muted-700 focus:!bg-white dark:focus:!bg-muted-900 mb-3');
+    $('input[type="search"]').addClass('form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 h-10 text-sm leading-5 rounded-xl !bg-muted-100 dark:!bg-muted-700 focus:!bg-white dark:focus:!bg-muted-900 mb-3');
 });
 </script>

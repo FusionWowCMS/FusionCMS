@@ -1,6 +1,6 @@
 <section class="card" id="main_groups">
 	<div class="card-header">
-		Groups (<div style="display:inline;" id="groups_count">{if !$groups}0{else}{count($groups)}{/if}</div>){if hasPermission("addPermissions")}<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="javascript:void(0)" onClick="Groups.add()">Create group</a>{/if}
+		{lang('groups', 'admin')} (<div style="display:inline;" id="groups_count">{if !$groups}0{else}{count($groups)}{/if}</div>){if hasPermission("addPermissions")}<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="javascript:void(0)" onClick="Groups.add()">{lang('create_group', 'admin')}</a>{/if}
 	</div>
 
 	<div class="card-body">
@@ -9,10 +9,10 @@
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>Name</th>
-				<th>Priority</th>
-				<th>Members</th>
-				<th style="text-align: center;">Action</th>
+				<th>{lang('name', 'admin')}</th>
+				<th>{lang('priority', 'admin')}</th>
+				<th>{lang('members', 'admin')}</th>
+				<th style="text-align: center;">{lang('action', 'admin')}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,15 +21,15 @@
 					<td> {$group.id}</td>
 					<td data-toggle="tooltip" data-placement="bottom" title="{$group.description}"><b style="color:{$group.color} !important;">{$group.name}</b></td>
 					<td> {$group.priority}</td>
-					<td>{if $group.memberCount}{$group.memberCount} {($group.memberCount == 1) ? "member" : "members"}{/if}</td>
+					<td>{if $group.memberCount}{$group.memberCount} {if $group.memberCount == 1}{lang('member', 'admin')}{else}{lang('members', 'admin')}{/if}{/if}</td>
 					<td style="text-align:center;">
 						{if hasPermission("editPermissions")}
-							<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="{$url}admin/aclmanager/editGroup/{$group.id}">Edit</a>&nbsp;
+							<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="{$url}admin/aclmanager/editGroup/{$group.id}">{lang('edit', 'admin')}</a>&nbsp;
 						{/if}
 
 						{if hasPermission("deletePermissions")}
 							{if !in_array($group.id, array($guestId, $playerId))}
-							<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="javascript:void(0)" onClick="Groups.remove({$group.id}, this)">Delete</a>
+							<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" href="javascript:void(0)" onClick="Groups.remove({$group.id}, this)">{lang('delete', 'admin')}</a>
 							{/if}
 						{/if}
 					</td>
@@ -43,59 +43,59 @@
 
 <section class="card" id="add_groups" style="display:none;">
 	<div class="card-header">
-	<a href='javascript:void(0)' onClick="Groups.add()" data-toggle="tooltip" data-placement="bottom" title="Return to groups">Groups</a> &rarr; New group
+	<a href='javascript:void(0)' onClick="Groups.add()" data-toggle="tooltip" data-placement="bottom" title="{lang('return_to_groups', 'admin')}">{lang('groups', 'admin')}</a> &rarr; {lang('new_group', 'admin')}
 	</div>
 	<div class="card-body">
 	<form onSubmit="Groups.create(this); return false" id="submit_form">
 	
 		<div class="form-group row">
-		<label class="col-sm-2 col-form-label" for="name">Group name</label>
+		<label class="col-sm-2 col-form-label" for="name">{lang('group_name', 'admin')}</label>
 		<div class="col-sm-10">
 		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="name" id="name"/>
 		</div>
         </div>
 
 		<div class="form-group row">
-		<label class="col-sm-2 col-form-label" for="priority">Priority</label>
+		<label class="col-sm-2 col-form-label" for="priority">{lang('priority', 'admin')}</label>
 		<div class="col-sm-10">
 		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="number" name="priority" id="priority" value="1"/>
 		</div>
         </div>
 
 		<div class="form-group row">
-		<label class="col-sm-2 col-form-label" for="description">Description (optional)</label>
+		<label class="col-sm-2 col-form-label" for="description">{lang('description_optional', 'admin')}</label>
 		<div class="col-sm-10">
 		<input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" name="description" id="description"/>
 		</div>
         </div>
 
 		<div class="form-group row">
-		<label class="col-sm-2 col-form-label" for="color">Group color (optional)</label>
+		<label class="col-sm-2 col-form-label" for="color">{lang('group_color_optional', 'admin')}</label>
 		<div class="col-sm-10">
 		<input type="color" name="color" id="color" value="#ffffff"/>
 		</div>
         </div>
 
 		<div class="form-group row">
-		<label class="col-sm-2 col-form-label" for="members">Members</label>
+		<label class="col-sm-2 col-form-label" for="members">{lang('members', 'admin')}</label>
 		<div class="col-sm-10">
 		<span>
 			<div class="memberList">
-				Members can be added once the group has been created
+				{lang('members_added_after_create', 'admin')}
 			</div>
 		</span>
 		</div>
         </div>
 
 		<label class="col-sm-3 col-form-label" for="roles">
-			<a href="javascript:void(0)" onClick="$('#visibility input[type=checkbox]').each(function(){ this.checked = true; });" style="float:right;display:block;">[Select all]</a>
-			Visibility permissions
+			<a href="javascript:void(0)" onClick="$('#visibility input[type=checkbox]').each(function(){ this.checked = true; });" style="float:right;display:block;">[{lang('select_all', 'admin')}]</a>
+			{lang('visibility_permissions', 'admin')}
 		</label>
 
 		<div id="visibility">
 			{if $links}
 				<div class="role_module">
-					<h3>Menu links</h3>
+					<h3>{lang('menu_links', 'admin')}</h3>
 					{foreach from=$links item=link}
 						<table class="table table-responsive-md table-hover">
 							{if $link.permission}
@@ -108,7 +108,7 @@
 									<td style="font-size:10px;">{$link.link}</td>
 								</tr>
 							{else}
-								<tr style="opacity:0.6" data-toggle="tooltip" data-placement="bottom" title="This menu link is set to 'Visible to everyone'-mode.<br />If you want to control the visibility per group, please<br /> go to 'Menu links' and change the visibility mode.">
+								<tr style="opacity:0.6" data-toggle="tooltip" data-placement="bottom" title="{lang('visibility_everyone_notice', 'admin', [lang('menu_links', 'admin')])}">
 									<td width="5%" style="text-align:center;"><input type="checkbox" disabled="disabled" checked="checked"></td>
 									<td width="25%">
 										<span style="font-size:10px;padding:0px;display:inline;">{$link.side}&nbsp;&nbsp;</span>
@@ -124,7 +124,7 @@
 
 			{if $pages}
 				<div class="role_module">
-					<h3>Custom pages</h3>
+					<h3>{lang('custom_pages', 'admin')}</h3>
 					{foreach from=$pages item=page}
 						<table class="table table-responsive-md table-hover">
 							{if $page.permission}
@@ -135,7 +135,7 @@
 									<td style="font-size:10px;">pages/{$page.identifier}</td>
 								</tr>
 							{else}
-								<tr style="opacity:0.6" data-toggle="tooltip" data-placement="bottom" title="This page is set to 'Visible to everyone'-mode.<br />If you want to control the visibility per group, please<br /> go to 'Custom pages' and change the visibility mode.">
+								<tr style="opacity:0.6" data-toggle="tooltip" data-placement="bottom" title="{lang('visibility_everyone_notice', 'admin', [lang('custom_pages', 'admin')])}">
 									<td width="5%" style="text-align:center;"><input type="checkbox" disabled="disabled" checked="checked"></td>
 									<td width="25%">
 										<label for="PAGE_{$page.id}" style="display:inline;border:none;font-weight:bold;">{langColumn($page.name)}</label></td>
@@ -149,7 +149,7 @@
 
 			{if $sideboxes}
 				<div class="role_module">
-					<h3>Sideboxes</h3>
+					<h3>{lang('sideboxes', 'admin')}</h3>
 					{foreach from=$sideboxes item=sidebox}
 						<table class="table table-responsive-md table-hover">
 							{if $sidebox.permission}
@@ -160,7 +160,7 @@
 									<td style="font-size:10px;">{$sidebox.type}</td>
 								</tr>
 							{else}
-								<tr style="opacity:0.6" data-toggle="tooltip" data-placement="bottom" title="This sidebox is set to 'Visible to everyone'-mode.<br />If you want to control the visibility per group, please<br /> go to 'Sideboxes' and change the visibility mode.">
+								<tr style="opacity:0.6" data-toggle="tooltip" data-placement="bottom" title="{lang('visibility_everyone_notice', 'admin', [lang('sideboxes', 'admin')])}">
 									<td width="5%" style="text-align:center;"><input type="checkbox" disabled="disabled" checked="checked"></td>
 									<td width="25%">
 										<label for="SIDEBOX_{$sidebox.id}" style="display:inline;border:none;font-weight:bold;">{langColumn($sidebox.displayName)}</label></td>
@@ -173,9 +173,9 @@
 			{/if}
 		</div>
 
-		<label for="roles" data-toggle="tooltip" data-placement="bottom" title="A role is a pre-defined set of permissions. The color indicates the role's danger-level. Please note that certain permissions may have a default value of 'allowed', such as actions that are meant to be performed by everyone by default.">
-			<a href="javascript:void(0)" onClick="$('#roles input[type=checkbox]').each(function(){ this.checked = true; });" style="float:right;display:block;">[Select all]</a>
-			Roles <a>(?)</a>
+		<label for="roles" data-toggle="tooltip" data-placement="bottom" title="{lang('roles_tooltip', 'admin')}">
+			<a href="javascript:void(0)" onClick="$('#roles input[type=checkbox]').each(function(){ this.checked = true; });" style="float:right;display:block;">[{lang('select_all', 'admin')}]</a>
+			{lang('roles', 'admin')} <a>(?)</a>
 		</label>
 		
 		<div id="roles">
@@ -199,7 +199,7 @@
 			{/foreach}
 		</div>
 
-		<button type="submit" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md">Submit group</button>
+		<button type="submit" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md">{lang('submit_group', 'admin')}</button>
 	</form>
 	</div>
 </div>

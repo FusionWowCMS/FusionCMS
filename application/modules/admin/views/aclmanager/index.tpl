@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        What do you want to manage?
+        {lang('what_manage', 'admin')}
     </div>
 
     <div class="card-body">
@@ -14,8 +14,8 @@
                             </div>
                         </header>
                         <div class="card-body">
-                            <h3 class="mt-0 font-weight-semibold mt-0 text-center">Groups</h3>
-                            <p class="text-center">Groups are a set of roles that are assigned to users</p>
+                            <h3 class="mt-0 font-weight-semibold mt-0 text-center">{lang('groups', 'admin')}</h3>
+                            <p class="text-center">{lang('groups_description', 'admin')}</p>
                         </div>
                     </section>
                 </a>

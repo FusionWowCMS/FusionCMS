@@ -2,18 +2,18 @@
 	<div class="col">
 		<section class="card">
 			<header class="card-header">
-				<h2 class="card-title font-heading font-light text-muted-800 dark:text-white md:block">Sent Email log</h2>
+				<h2 class="card-title font-heading font-light text-muted-800 dark:text-white md:block">{lang('sent_email_log', 'admin')}</h2>
 			</header>
 			<div class="card-body">
 				<table class="table table-bordered table-striped mb-0" id="emaillogs">
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>User</th>
-							<th>Email</th>
-							<th>Subject</th>
-							<th>Time</th>
-							<th>Message</th>
+							<th>{lang('user', 'admin')}</th>
+							<th>{lang('email', 'admin')}</th>
+							<th>{lang('subject', 'admin')}</th>
+							<th>{lang('time', 'admin')}</th>
+							<th>{lang('message', 'admin')}</th>
 							<th style="display:none;"></th>
 						</tr>
 					</thead>
@@ -53,7 +53,7 @@
 			return [
 				'<table class="table table-striped mb-0">',
 					'<tr class="b-top-0">',
-						'<td><label class="mb-0">Message:</label></td>',
+						'<td><label class="mb-0">{lang('message', 'admin')}:</label></td>',
 						'<td>' + data[7] + '</td>',
 					'</tr>',
 				'</table>'
