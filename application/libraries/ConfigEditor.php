@@ -141,7 +141,7 @@ class ConfigEditor
         $pattern = '/\$config\[(["\'])?' . preg_quote($mainKey, '/') . '\1?\]\s*=\s*array\s*\((.*?)\);/s';
 
         if (preg_match($pattern, $this->data, $matches)) {
-            $arrayBody = $matches[1];
+            $arrayBody = $matches[2];
 
             $subPattern = '/[\'"]' . preg_quote($subKey, '/') . '[\'"]\s*=>\s*[^,]+/';
             if (preg_match($subPattern, $arrayBody)) {
