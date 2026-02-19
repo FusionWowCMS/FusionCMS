@@ -185,12 +185,29 @@ class Install extends MX_Controller
             die("Missing parameters");
         }
 
-        $targetDir = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $folder;
-        $testFile  = $targetDir . DIRECTORY_SEPARATOR . "write_test.txt";
+        $basePaths = [
+            'application' => APPPATH,
+            'writable' => WRITEPATH,
+        ];
 
-        // Check for directory exist
-        if (!is_dir($targetDir)) {
-            die("404: Folder not found " . $targetDir);
+        if (!isset($basePaths[$path])) {
+            die('400: Invalid path alias ' . $path);
+        }
+
+        $basePath = realpath($basePaths[$path]);
+
+        if ($basePath === false || !is_dir($basePath)) {
+            die('500: Base path not found ' . $basePaths[$path]);
+        }
+
+        $targetDir = realpath($basePath . DIRECTORY_SEPARATOR . trim($folder, '/\\'));
+
+        if ($targetDir === false || !is_dir($targetDir)) {
+            die('404: Folder not found ' . $folder);
+        }
+
+        if (strpos($targetDir, $basePath) !== 0) {
+            die('400: Invalid folder path ' . $folder);
         }
 
         // Check write access
@@ -198,14 +215,13 @@ class Install extends MX_Controller
             die("403: No write permission to " . $targetDir);
         }
 
-        // Attempt to write
-        $file = @fopen($testFile, "w");
-        if ($file === false) {
-            die("500: Failed to create file " . $testFile);
+        $testFile = @tempnam($targetDir, 'fusion_install_');
+
+        if ($testFile === false) {
+            die('500: Failed to create temp file in ' . $targetDir);
         }
 
-        $result = @fwrite($file, "success");
-        fclose($file);
+        $result = @file_put_contents($testFile, 'success', LOCK_EX);
 
         if ($result === false) {
             @unlink($testFile);
