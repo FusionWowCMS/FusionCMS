@@ -56,9 +56,10 @@ if (!function_exists('html_purify')) {
         }
 
         // Force HTMLPurifier cache into writable/ (vendor/ should remain read-only)
-        $cachePath = FCPATH . 'writable/cache/htmlpurifier';
+        $cachePath = FCPATH . 'writable/cache/data/htmlpurifier';
         if (!is_dir($cachePath)) {
             @mkdir($cachePath, 0775, true);
+            @fopen($cachePath . '/index.html', "w");
         }
         @chmod($cachePath, 0775);
 
