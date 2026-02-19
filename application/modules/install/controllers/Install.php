@@ -221,13 +221,27 @@ class Install extends MX_Controller
 
     private function checkPhpExtensions()
     {
-        $req = ['mysqli', 'curl', 'openssl', 'soap', 'gd', 'gmp', 'mbstring', 'intl', 'json', 'xml', 'zip'];
-        $loaded = get_loaded_extensions();
+        $checks = [
+            'mysqli' => static fn(): bool => extension_loaded('mysqli'),
+            'curl' => static fn(): bool => extension_loaded('curl'),
+            'openssl' => static fn(): bool => extension_loaded('openssl'),
+            'soap' => static fn(): bool => extension_loaded('soap'),
+            'gd' => static fn(): bool => extension_loaded('gd'),
+            'gmp' => static fn(): bool => extension_loaded('gmp'),
+            'mbstring' => static fn(): bool => extension_loaded('mbstring'),
+            'intl' => static fn(): bool => extension_loaded('intl'),
+            'json' => static fn(): bool => extension_loaded('json'),
+            'xml' => static fn(): bool => extension_loaded('xml') || extension_loaded('libxml'),
+            'zip' => static fn(): bool => extension_loaded('zip'),
+        ];
+
         $errors = [];
 
-        foreach ($req as $ext)
-            if (! in_array($ext, $loaded))
-                $errors[] = $ext;
+        foreach ($checks as $extension => $check) {
+            if (!$check()) {
+                $errors[] = $extension;
+            }
+        }
 
         die($errors ? join(', ', $errors) : '1');
     }
