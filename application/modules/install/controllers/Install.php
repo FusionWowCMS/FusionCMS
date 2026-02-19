@@ -265,18 +265,64 @@ class Install extends MX_Controller
     private function checkApacheModules()
     {
         $req = ['mod_rewrite', 'mod_headers', 'mod_expires', 'mod_deflate', 'mod_filter'];
-        $loaded = function_exists('apache_get_modules') ? apache_get_modules() : false;
+        $serverSoftware = strtolower((string) ($_SERVER['SERVER_SOFTWARE'] ?? 'unknown'));
 
-        if(is_bool($loaded) && !$loaded)
-            die('2');
+        // Native Apache module detection when available.
+        if (str_contains($serverSoftware, 'apache')) {
+            $loaded = function_exists('apache_get_modules') ? apache_get_modules() : false;
 
-        $errors = [];
+            if ($loaded === false || !is_array($loaded)) {
+                die('2');
+            }
+            $errors = [];
 
-        foreach ($req as $ext)
-            if (!in_array($ext, $loaded))
-                $errors[] = $ext;
+            foreach ($req as $ext)
+                if (!in_array($ext, $loaded, true))
+                    $errors[] = $ext;
 
-        die($errors ? join(', ', $errors) : '1');
+            die($errors ? join(', ', $errors) : '1');
+        }
+
+        // Best-effort checks for non-Apache servers. We only fail on things we can prove missing.
+        if (str_contains($serverSoftware, 'nginx')) {
+            if (!function_exists('shell_exec')) {
+                die('1');
+            }
+
+            $disabledFunctions = array_map('trim', explode(',', (string) ini_get('disable_functions')));
+            if (in_array('shell_exec', $disabledFunctions, true)) {
+                die('1');
+            }
+
+            $nginxVersion = @shell_exec('nginx -V 2>&1');
+            if (!is_string($nginxVersion) || trim($nginxVersion) === '') {
+                die('1');
+            }
+
+            $errors = [];
+
+            // Nginx directives mapping:
+            // - rewrite => ngx_http_rewrite_module
+            // - headers/expires => ngx_http_headers_module
+            // - deflate => ngx_http_gzip_module
+            if (str_contains($nginxVersion, '--without-http_rewrite_module')) {
+                $errors[] = 'mod_rewrite';
+            }
+
+            if (str_contains($nginxVersion, '--without-http_headers_module')) {
+                $errors[] = 'mod_headers';
+                $errors[] = 'mod_expires';
+            }
+
+            if (str_contains($nginxVersion, '--without-http_gzip_module')) {
+                $errors[] = 'mod_deflate';
+            }
+
+            // mod_filter has no strict 1:1 equivalent we can reliably detect across non-Apache stacks.
+            die($errors ? join(', ', array_values(array_unique($errors))) : '1');
+        }
+
+        die('1');
     }
 
     private function checkPhpVersion()
