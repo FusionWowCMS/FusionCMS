@@ -25,35 +25,49 @@ if (!function_exists('html_purify')) {
             foreach ($dirty_html as $key => $val) {
                 $clean_html[$key] = html_purify($val, $config);
             }
-        } else {
-            $ci = &get_instance();
-
-            switch ($config) {
-                case 'comment':
-                    $config = HTMLPurifier_Config::createDefault();
-                    $config->set('Core.Encoding', $ci->config->item('charset'));
-                    $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
-                    $config->set('HTML.Allowed', 'p,a[href|title],abbr[title],acronym[title],b,strong,blockquote[cite],code,em,i,strike');
-                    $config->set('AutoFormat.AutoParagraph', true);
-                    $config->set('AutoFormat.Linkify', true);
-                    $config->set('AutoFormat.RemoveEmpty', true);
-                    break;
-
-                case false:
-                    $config = HTMLPurifier_Config::createDefault();
-                    $config->set('Core.Encoding', $ci->config->item('charset'));
-                    $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
-                    break;
-
-                default:
-                    show_error('The HTMLPurifier configuration labeled "'.htmlspecialchars($config, ENT_QUOTES, $ci->config->item('charset')).'" could not be found.');
-            }
-
-            $purifier = new HTMLPurifier($config);
-            $clean_html = $purifier->purify($dirty_html);
+            return $clean_html;
         }
 
-        return $clean_html;
+        $ci = &get_instance();
+
+        switch ($config) {
+            case 'comment':
+                $config = HTMLPurifier_Config::createDefault();
+                $config->set('Core.Encoding', $ci->config->item('charset'));
+                $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
+                $config->set('HTML.Allowed', 'p,a[href|title],abbr[title],acronym[title],b,strong,blockquote[cite],code,em,i,strike');
+                $config->set('AutoFormat.AutoParagraph', true);
+                $config->set('AutoFormat.Linkify', true);
+                $config->set('AutoFormat.RemoveEmpty', true);
+                break;
+
+            case false:
+                $config = HTMLPurifier_Config::createDefault();
+                $config->set('Core.Encoding', $ci->config->item('charset'));
+                $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
+                break;
+
+            default:
+                show_error(
+                    'The HTMLPurifier configuration labeled "' .
+                    htmlspecialchars((string)$config, ENT_QUOTES, $ci->config->item('charset')) .
+                    '" could not be found.'
+                );
+        }
+
+        // Force HTMLPurifier cache into writable/ (vendor/ should remain read-only)
+        $cachePath = FCPATH . 'writable/cache/data/htmlpurifier';
+        if (!is_dir($cachePath)) {
+            @mkdir($cachePath, 0775, true);
+            @fopen($cachePath . '/index.html', "w");
+        }
+        @chmod($cachePath, 0775);
+
+        $config->set('Cache.DefinitionImpl', 'Serializer');
+        $config->set('Cache.SerializerPath', $cachePath);
+
+        $purifier = new HTMLPurifier($config);
+        return $purifier->purify($dirty_html);
     }
 }
 

@@ -2,7 +2,7 @@
 <div class="tabs">
     <ul class="nav nav-tabs mb-2">
 	    <li class="nav-item">
-			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl active" href="#DB" data-bs-target="#DB" data-bs-toggle="tab">Database</a>
+			<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-xl active" href="#DB" data-bs-target="#DB" data-bs-toggle="tab">{lang('database', 'admin')}</a>
         </li>
         <!--<li class="nav-item">
 			<a class="nav-link" href="#files" data-bs-target="#files" data-bs-toggle="tab">Files</a>
@@ -13,22 +13,22 @@
 			<div class="row">
 			<div class="col-lg-4 mb-3">
 			<section class="card">
-				<header class="card-header">General</header>
+				<header class="card-header">{lang('general', 'admin')}</header>
 				<div class="card-body">
 					<div class="col-sm-12">
 					<form onSubmit="Backups.saveSettings(); return false">
 						<div class="form-group row">
-							<label class="col-sm-4 col-form-label align-self-center" for="auto_backups">Auto generate?</label>
+							<label class="col-sm-4 col-form-label align-self-center" for="auto_backups">{lang('auto_generate', 'admin')}</label>
 							<div class="col-sm-8">
 								<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="auto_backups" name="auto_backups" {if !hasPermission("editBackupSettings", "admin")}disabled{/if}>
-									<option value="true" {if $config.auto_backups}selected{/if}>Yes</option>
-									<option value="false" {if !$config.auto_backups}selected{/if}>No</option>
+									<option value="true" {if $config.auto_backups}selected{/if}>{lang('yes', 'admin')}</option>
+									<option value="false" {if !$config.auto_backups}selected{/if}>{lang('no', 'admin')}</option>
 								</select>
 							</div>
 						</div>
 						
 						<div class="form-group row">
-							<label class="col-sm-4 col-form-label" for="backups_interval">Interval</label>
+							<label class="col-sm-4 col-form-label" for="backups_interval">{lang('interval', 'admin')}</label>
 							<div class="col-sm-4">
 								<div data-plugin-spinner>
 									<div class="input-group">
@@ -47,14 +47,14 @@
 
 							<div class="col-sm-4">
 								<select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="backups_time" name="backups_time" {if !hasPermission("editBackupSettings", "admin")}disabled{/if}>
-									<option value="hour" {if $config.backups_time == "hour"}selected{/if}>Hours</option>
-									<option value="day" {if $config.backups_time == "day"}selected{/if}>Days</option>
+									<option value="hour" {if $config.backups_time == "hour"}selected{/if}>{lang('hours', 'admin')}</option>
+									<option value="day" {if $config.backups_time == "day"}selected{/if}>{lang('days', 'admin')}</option>
 								</select>
 							</div>
 						</div>
 
 						<div class="form-group row mb-3">
-							<label class="col-sm-4 col-form-label" for="backups_max_keep">Max keep</label>
+							<label class="col-sm-4 col-form-label" for="backups_max_keep">{lang('max_keep', 'admin')}</label>
 							<div class="col-sm-8">
 								<div data-plugin-spinner>
 									<div class="input-group">
@@ -72,8 +72,8 @@
 							</div>
 						</div>
 	
-						{if hasPermission("editBackupSettings", "admin")}<input class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit" value="Save">{/if}
-						{if hasPermission("generateBackup", "admin")}<a href="javascript:void(0)" onClick="Backups.generate(this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right">Generate Backup</a>{/if}
+						{if hasPermission("editBackupSettings", "admin")}<input class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md" type="submit" value="{lang('save', 'admin')}">{/if}
+						{if hasPermission("generateBackup", "admin")}<a href="javascript:void(0)" onClick="Backups.generate(this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right">{lang('generate_backup', 'admin')}</a>{/if}
 					</form>
 					</div>
 				</div>
@@ -81,16 +81,16 @@
 			</div>
 			<div class="col-lg-8 mb-3">
 			<section class="card">
-				<header class="card-header">Backups</header>
+				<header class="card-header">{lang('backups', 'admin')}</header>
 				<div class="card-body">
 				{if $backups}
 				<table class="table table-responsive-md table-hover">
 					<thead>
 						<tr>
-							<th>Backup ID</th>
-							<th>Name</th>
-							<th>Date</th>
-							<th style="text-align: center;">Action</th>
+							<th>{lang('backup_id', 'admin')}</th>
+							<th>{lang('name', 'admin')}</th>
+							<th>{lang('date', 'admin')}</th>
+							<th style="text-align: center;">{lang('action', 'admin')}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -100,9 +100,9 @@
 							<td>{$backup.backup_name}.zip</td>
 							<td>{$backup.created_date}</td>
 							<td style="text-align:center;">
-								<a class="btn btn-success btn-sm {if !hasPermission("executeBackupActions", "admin")}disabled{/if}" href="{$url}admin/backups/download/{$backup.id}">Download</a>
-								<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md {if !hasPermission("executeBackupActions", "admin")}disabled{/if}" href="javascript:void(0)" onClick="Backups.restore({$backup.id})">Restore</a>
-								<a class="btn btn-danger btn-sm {if !hasPermission("executeBackupActions", "admin")}disabled{/if}" href="javascript:void(0)" onClick="Backups.remove({$backup.id}, this)">Delete</a>
+								<a class="btn btn-success btn-sm {if !hasPermission("executeBackupActions", "admin")}disabled{/if}" href="{$url}admin/backups/download/{$backup.id}">{lang('download', 'admin')}</a>
+								<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md {if !hasPermission("executeBackupActions", "admin")}disabled{/if}" href="javascript:void(0)" onClick="Backups.restore({$backup.id})">{lang('restore', 'admin')}</a>
+								<a class="btn btn-danger btn-sm {if !hasPermission("executeBackupActions", "admin")}disabled{/if}" href="javascript:void(0)" onClick="Backups.remove({$backup.id}, this)">{lang('delete', 'admin')}</a>
 							</td>
 						</tr>
 					{/foreach}

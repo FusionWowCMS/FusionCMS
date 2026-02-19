@@ -15,7 +15,7 @@ class Cachemanager extends MX_Controller
 
         $this->itemMatches = ["spells/*", "items/*", "search/*"];
         $this->minifyMatches = ["minify/*"];
-        $this->websiteMatches = ["*.cache"];
+        $this->websiteMatches = ["*.cache", "*.ser"];
 
         parent::__construct();
 

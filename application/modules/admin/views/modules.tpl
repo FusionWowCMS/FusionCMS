@@ -10,11 +10,11 @@
 					</div>
 				</form>
 
-				<p><span>Only ZIP file type is supported.</span></p>
-				<p><span>The module in zip must have a folder, and if it has SQL, it must have a folder called sql inside the module folder and be placed inside it.</span></p>
+				<p><span>{lang('zip_only_supported', 'admin')}</span></p>
+				<p><span>{lang('module_zip_structure', 'admin')}</span></p>
 
-				<h4 class="section-sub-title"><span>Uploaded</span> module</h4>
-				<span class="no-files-uploaded">No modules uploaded yet.</span>
+				<h4 class="section-sub-title"><span>{lang('uploaded', 'admin')}</span> {lang('module', 'admin')}</h4>
+				<span class="no-files-uploaded">{lang('no_modules_uploaded', 'admin')}</span>
 
 				<div class="preview-container dz-preview uploaded-files">
 					<div id="previews">
@@ -40,7 +40,7 @@
 <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-6 mb-3">
     <div>
         <div class="mb-4 flex items-center justify-between">
-            <h3 class="font-heading text-sm font-semibold leading-tight text-muted-800 dark:text-white"><span>Important</span></h3>
+            <h3 class="font-heading text-sm font-semibold leading-tight text-muted-800 dark:text-white"><span>{lang('important_note', 'admin')}</span></h3>
             <div class="relative">
                 <svg data-v-cd102a71="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon text-muted-400 h-4 w-4" width="1em" height="1em" viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9m4.3 13a1.94 1.94 0 0 0 3.4 0"></path>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div>
-            <p class="font-alt text-xs font-normal leading-normal leading-normal"><span class="text-muted-400">Third-party modules are not supported! Use at your own risk<br>You can download tested modules <a href="https://github.com/FusionWowCMS/Modules" class="alert-link" target="_blank">here</a></span></p>
+            <p class="font-alt text-xs font-normal leading-normal leading-normal"><span class="text-muted-400">{lang('third_party_modules_warning', 'admin', ["<a href=\"https://github.com/FusionWowCMS/Modules\" class=\"alert-link\" target=\"_blank\">{lang('here', 'admin')}</a>"])}</span></p>
         </div>
         <div></div>
     </div>
@@ -69,21 +69,21 @@
 				<div class="card-actions">
 					<span class="badge badge-success align-right" id="enabled_count">{count($enabled_modules)}</span>
 				</div>
-				<h2 class="card-title text-muted-800 dark:text-white"">Installed modules</h2>
+				<h2 class="card-title text-muted-800 dark:text-white"">{lang('installed_modules', 'admin')}</h2>
 			</header>
 			<div class="card-body p-0">
 				<table class="table m-0">
 					<tbody id="enabled_modules">
 						{foreach from=$enabled_modules item=module key=key}
 							<tr class="border-top">
-								<td class="font-weight-bold border-0 w-70 align-middle text-muted-800 dark:text-white">{ucfirst($module.name)} <span class="font-weight-normal">by</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small><br><small>Version: {if isset($module.version)} {$module.version} {else} 1.0.0 {/if} | Date: {if isset($module.date)} {$module.date} {else} 1.0.0 {/if}</small></td>
+								<td class="font-weight-bold border-0 w-70 align-middle text-muted-800 dark:text-white">{ucfirst($module.name)} <span class="font-weight-normal">{lang('by', 'admin')}</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small><br><small>{lang('version', 'admin')}: {if isset($module.version)} {$module.version} {else} 1.0.0 {/if} | {lang('date', 'admin')}: {if isset($module.date)} {$module.date} {else} 1.0.0 {/if}</small></td>
 								<td class="pull-right">
 									<div class="flex flex-col gap-2 sm:flex-row">
 										{if $module.has_configs && hasPermission("editModuleConfigs")}
-											<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md white-space" href="{$url}admin/edit/{$key}">Edit Configs</a>
+											<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md white-space" href="{$url}admin/edit/{$key}">{lang('edit_configs', 'admin')}</a>
 										{/if}
 										{if hasPermission("toggleModules")}
-											<a href="javascript:void(0)" onClick="Modules.disableModule('{$key}', this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500">Disable</a>
+											<a href="javascript:void(0)" onClick="Modules.disableModule('{$key}', this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500">{lang('disable', 'admin')}</a>
 										{/if}
 									</div>
 								</td>
@@ -101,21 +101,21 @@
 				<div class="card-actions">
 					<span class="badge badge-danger align-right" id="disabled_count">{count($disabled_modules)}</span>
 				</div>
-				<h2 class="card-title text-muted-800 dark:text-white"">Disabled modules</h2>
+				<h2 class="card-title text-muted-800 dark:text-white"">{lang('disabled_modules', 'admin')}</h2>
 			</header>
 			<div class="card-body p-0">
 				<table class="table m-0">
 					<tbody id="disabled_modules">
 						{foreach from=$disabled_modules item=module key=key}
 							<tr class="border-top">
-								<td class="font-weight-bold border-0 w-70 align-middle text-muted-800 dark:text-white">{ucfirst($module.name)} <span class="font-weight-normal">by</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small><br><small>Version: {if isset($module.version)} {$module.version} {else} 1.0.0 {/if} | Date: {if isset($module.date)} {$module.date} {else} 2023.01.01 {/if}</small></td>
+								<td class="font-weight-bold border-0 w-70 align-middle text-muted-800 dark:text-white">{ucfirst($module.name)} <span class="font-weight-normal">{lang('by', 'admin')}</span> <a href="{$module.author.website}" target="_blank">{$module.author.name}</a><br><small class="font-weight-normal" style="color:#97989d;">{$module.description}</small><br><small>{lang('version', 'admin')}: {if isset($module.version)} {$module.version} {else} 1.0.0 {/if} | {lang('date', 'admin')}: {if isset($module.date)} {$module.date} {else} 2023.01.01 {/if}</small></td>
 								<td class="pull-right">
 									<div class="flex flex-col gap-2 sm:flex-row">
 										{if $module.has_configs && hasPermission("editModuleConfigs")}
-											<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md white-space" href="{$url}admin/edit/{$key}">Edit Configs</a>
+											<a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md white-space" href="{$url}admin/edit/{$key}">{lang('edit_configs', 'admin')}</a>
 										{/if}
 										{if hasPermission("toggleModules")}
-											<a href="javascript:void(0)" onClick="Modules.enableModule('{$key}', this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500">Enable</a>
+											<a href="javascript:void(0)" onClick="Modules.enableModule('{$key}', this);" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500">{lang('enable', 'admin')}</a>
 										{/if}
 									</div>
 								</td>

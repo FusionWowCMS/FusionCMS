@@ -2,23 +2,23 @@
 
 	<h2>
 		<img src="{$url}application/themes/admin/images/icons/black16x16/ic_settings.png"/>
-		What do you want to manage?
+		{lang('what_manage', 'admin')}
 	</h2>
 
 	<span style="padding-top:22px;padding-bottom:22px;">
-		<a href="{$url}aclmanager/groups" class="big_icon_button" data-tip="Groups are a set of roles that is assigned to users">
+		<a href="{$url}aclmanager/groups" class="big_icon_button" data-tip="{lang('groups_description', 'admin')}">
 			<img src="{$url}application/modules/admin/images/id.png" style="margin-top:-12px;">
-			Groups
+			{lang('groups', 'admin')}
 		</a>
 
-		<a href="{$url}aclmanager/roles" class="big_icon_button" data-tip="A role is a set of permissions that can be assigned to a group">
+		<a href="{$url}aclmanager/roles" class="big_icon_button" data-tip="{lang('roles_description', 'admin')}">
 			<img src="{$url}application/modules/admin/images/eye.png" style="margin-top:-4px;">
-			Roles
+			{lang('roles', 'admin')}
 		</a>
 
-		<a href="{$url}aclmanager/users" class="big_icon_button" data-tip="Users can be specifically allowed or denied to certain permissions">
+		<a href="{$url}aclmanager/users" class="big_icon_button" data-tip="{lang('user_permissions_description', 'admin')}">
 			<img src="{$url}application/modules/admin/images/man-user.png" style="margin-top:-14px;">
-			User permissions
+			{lang('user_permissions', 'admin')}
 		</a>
 
 		<div class="clear"></div>

@@ -263,6 +263,15 @@ class Language
             $path = "application/themes/" . $this->CI->template->theme . "/language/" . $language . "/" . $file . ".php";
         }
 
+        // Look in the admin theme directory
+        elseif (
+            is_dir("application/themes/admin/language/")
+            && is_dir("application/themes/admin/language/" . $language)
+            && file_exists("application/themes/admin/language/" . $language . "/" . $file . ".php")
+        ) {
+            $path = "application/themes/admin/language/" . $language . "/" . $file . ".php";
+        }
+
         // No language file was found, and this is the default language
         elseif ($language == $this->defaultLanguage) {
             $this->data[$language][$file] = array();

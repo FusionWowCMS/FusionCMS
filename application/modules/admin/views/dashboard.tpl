@@ -9,25 +9,25 @@
 													<img src="{$avatar}" class="max-h-full max-w-full object-cover shadow-sm dark:border-transparent h-16 w-16">
 												</div>
 											</div>
-											<h2 class="font-heading text-3xl font-bold leading-none ltablet:!text-2xl text-white"><span>Welcome back, {$nickname}.</span></h2>
+											<h2 class="font-heading text-3xl font-bold leading-none ltablet:!text-2xl text-white"><span>{lang('welcome_back', 'admin', [$nickname])}</span></h2>
 										</div>
 										<div class="flex h-full flex-1 flex-col px-4 sm:px-6">
-											<h2 class="font-heading text-base font-semibold leading-tight mb-1 text-white"><span>Shortcuts</span></h2>
-											<p class="font-alt text-xs font-normal leading-tight mb-3"><span class="text-white"> Frequently used shortcuts: </span></p>
+											<h2 class="font-heading text-base font-semibold leading-tight mb-1 text-white"><span>{lang('shortcuts', 'admin')}</span></h2>
+											<p class="font-alt text-xs font-normal leading-tight mb-3"><span class="text-white"> {lang('frequently_used_shortcuts', 'admin')} </span></p>
 											<div class="mt-auto flex gap-2">
 
                                                 <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-1">
                                                     <div class="flex w-full items-center justify-between gap-3" shape="curved">
-                                                        <a href="{$url}changelog/admin" data-toggle="tooltip" data-placement="top" title="ChangeLog" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
+                                                        <a href="{$url}changelog/admin" data-toggle="tooltip" data-placement="top" title="{lang('changelog', 'admin')}" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
                                                             <i class="fa-duotone fa-solid fa-file-invoice"></i>
                                                         </a>
-                                                        <a href="{$url}admin/cachemanager" data-toggle="tooltip" data-placement="top" title="Manage cache" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
+                                                        <a href="{$url}admin/cachemanager" data-toggle="tooltip" data-placement="top" title="{lang('manage_cache', 'admin')}" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
                                                             <i class="fa-duotone fa-solid fa-database"></i>
                                                         </a>
-                                                        <a href="{$url}page/admin" data-toggle="tooltip" data-placement="top" title="Custom pages" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
+                                                        <a href="{$url}page/admin" data-toggle="tooltip" data-placement="top" title="{lang('custom_pages', 'admin')}" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
                                                             <i class="fa-duotone fa-window"></i>
                                                         </a>
-                                                        <a href="{$url}admin/modules" data-toggle="tooltip" data-placement="top" title="Modules" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
+                                                        <a href="{$url}admin/modules" data-toggle="tooltip" data-placement="top" title="{lang('modules', 'admin')}" class="text-muted-400 hover:bg-primary-500 hover:shadow-primary-500/30 dark:hover:shadow-primary-800/30 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:text-white hover:shadow-xl">
                                                             <i class="fa-duotone fa-solid fa-square-this-way-up"></i>
                                                         </a>
                                                     </div>
@@ -35,9 +35,9 @@
 											</div>
 										</div>
 										<div class="border-primary-300/60 flex h-full flex-1 flex-col px-4 sm:border-l sm:px-6">
-											<h2 class="font-heading text-base font-semibold leading-tight mb-1 text-white"><span>Articles</span></h2>
-											<p class="font-alt text-xs font-normal leading-tight mb-3"><span class="text-white"> Submit a new article to your users. </span></p>
-											<div class="mt-auto"><a href="{$url}news/admin" type="button" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right is-button rounded is-button-default w-full"><span>News articles</span></a></div>
+											<h2 class="font-heading text-base font-semibold leading-tight mb-1 text-white"><span>{lang('articles', 'admin')}</span></h2>
+											<p class="font-alt text-xs font-normal leading-tight mb-3"><span class="text-white"> {lang('submit_article', 'admin')} </span></p>
+											<div class="mt-auto"><a href="{$url}news/admin" type="button" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right is-button rounded is-button-default w-full"><span>{lang('news_articles', 'admin')}</span></a></div>
 										</div>
 									</div>
 								</div>
@@ -83,7 +83,7 @@
 
                                             <div class="mb-1 flex items-center justify-between">
                                                 <h5 class="font-heading text-sm font-medium leading-tight text-muted-500 dark:text-muted-400">
-                                                    <span>Income this month</span>
+                                                    <span>{lang('income_this_month', 'admin')}</span>
                                                 </h5>
                                                 <div class="relative inline-flex shrink-0 items-center justify-center h-8 w-8 rounded-full bg-success-100 text-success-500 dark:bg-success-500/20 dark:text-success-400 dark:border-success-500 dark:border-2">
 
@@ -118,7 +118,7 @@
                                                         </g>
                                                     </svg>
 												{/if}
-                                                <span class="text-muted-400 text-xs">since last month</span>
+                                                <span class="text-muted-400 text-xs">{lang('since_last_month', 'admin')}</span>
                                             </div>
 
                                         </div>
@@ -128,7 +128,7 @@
 
                                             <div class="mb-1 flex items-center justify-between">
                                                 <h5 class="font-heading text-sm font-medium leading-tight text-muted-500 dark:text-muted-400">
-                                                    <span>Votes this month</span>
+                                                    <span>{lang('votes_this_month', 'admin')}</span>
                                                 </h5>
                                                 <div class="relative inline-flex shrink-0 items-center justify-center h-8 w-8 rounded-full bg-yellow-100 text-yellow-500 dark:border-2 dark:border-yellow-500 dark:bg-yellow-500/20 dark:text-yellow-400">
 
@@ -163,7 +163,7 @@
                                                         </g>
                                                     </svg>
 												{/if}
-                                                <span class="text-muted-400 text-xs">since last month</span>
+                                                <span class="text-muted-400 text-xs">{lang('since_last_month', 'admin')}</span>
                                             </div>
 
                                         </div>
@@ -173,7 +173,7 @@
 
                                             <div class="mb-1 flex items-center justify-between">
                                                 <h5 class="font-heading text-sm font-medium leading-tight text-muted-500 dark:text-muted-400">
-                                                    <span>Registrations this month</span>
+                                                    <span>{lang('registrations_this_month', 'admin')}</span>
                                                 </h5>
                                                 <div class="relative inline-flex shrink-0 items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-500 dark:bg-primary-500/20 dark:text-primary-400 dark:border-primary-500 dark:border-2">
 
@@ -208,7 +208,7 @@
                                                         </g>
                                                     </svg>
 												{/if}
-                                                <span class="text-muted-400 text-xs">since last month</span>
+                                                <span class="text-muted-400 text-xs">{lang('since_last_month', 'admin')}</span>
                                             </div>
 
                                         </div>
