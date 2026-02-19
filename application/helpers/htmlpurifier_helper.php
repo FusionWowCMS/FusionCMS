@@ -2,6 +2,20 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+/*
+ * Codeigniter HTMLPurifier Helper
+ *
+ * Purify input using the HTMLPurifier standalone class.
+ * Easily use multiple purifier configurations.
+ *
+ * @author     Tyler Brownell <tyler.brownell@mssociety.ca>
+ * @copyright  Public Domain
+ *
+ * @access  public
+ * @param   string or array  $dirty_html  A string (or array of strings) to be cleaned.
+ * @param   string           $config      The name of the configuration (switch case) to use.
+ * @return  string or array               The cleaned string (or array of strings).
+ */
 if (!function_exists('html_purify')) {
     function html_purify($dirty_html, $config = false): array|string
     {
@@ -39,7 +53,6 @@ if (!function_exists('html_purify')) {
                     htmlspecialchars((string)$config, ENT_QUOTES, $ci->config->item('charset')) .
                     '" could not be found.'
                 );
-                return '';
         }
 
         // Force HTMLPurifier cache into writable/ (vendor/ should remain read-only)
