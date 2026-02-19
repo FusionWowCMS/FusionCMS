@@ -138,10 +138,18 @@ class ConfigEditor
      */
     private function updateNestedKey(string $mainKey, string $subKey, string $newValue): void
     {
-        $pattern = '/\$config\[(["\'])?' . preg_quote($mainKey, '/') . '\1?\]\s*=\s*array\s*\((.*?)\);/s';
+        $pattern = '/\$config\[(["\'])?' . preg_quote($mainKey, '/') . '\1?\]\s*=\s*(array\s*\((.*?)\)|\[(.*?)\]);/s';
 
         if (preg_match($pattern, $this->data, $matches)) {
-            $arrayBody = $matches[2];
+
+            // if array(...)
+            if (!empty($matches[3])) {
+                $arrayBody = $matches[3];
+            }
+            // if [ ... ]
+            else {
+                $arrayBody = $matches[4];
+            }
 
             $subPattern = '/[\'"]' . preg_quote($subKey, '/') . '[\'"]\s*=>\s*[^,]+/';
             if (preg_match($subPattern, $arrayBody)) {
@@ -154,7 +162,10 @@ class ConfigEditor
                 $arrayBody .= "'$subKey' => $newValue";
             }
 
-            $this->data = preg_replace($pattern, "\$config['$mainKey'] = [$arrayBody];", $this->data);
+            // always store output as short array
+            $replacement = "\$config['$mainKey'] = [$arrayBody];";
+
+            $this->data = preg_replace($pattern, $replacement, $this->data);
         } else {
             // If there is no main key, create a new array
             $newArray = "\$config['$mainKey'] = ['$subKey' => $newValue];";
