@@ -1,5 +1,5 @@
-{ 
-    "next": "Next", 
+{
+    "next": "Next",
     "okay": "Okay",
     "cancel": "Cancel",
     "language": "Language",
@@ -73,6 +73,9 @@
     "auth_database_detail": "Enter Realmd/Logon/Auth database information.",
     "auth_config": "Auth configuration <span style='color: #f00;'>(! important)</span>",
     "auth_config_detail": "Settings related to Realmd/Logon/Auth database and account password encryption.",
+    "auto_detect_auth_config": "Auto detect from database",
+    "autodetect_fill_db_first": "Please fill all auth database fields first.",
+    "autodetect_done": "Auth configuration has been auto detected.",
     "account_encryption": "Account password encryption",
     "account_encryption_detail": "<span style='color: #f00;'>SRP6:</span> Select this for most modern emulators (with <b>salt</b> and <b>verifier</b> columns in <b>auth.accounts</b> table).<br/><span style='color: #f00;'>SPH:</span> Select this for aged emulators (with <b>sha_pass_hash</b> column in <b>auth.accounts</b> table).<br/><span style='color: #f00;'>SRP:</span> Mostly for <b>cMangos</b> and <b>vMangos</b> emulators.",
     "rbac": "RBAC",

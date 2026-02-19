@@ -567,7 +567,15 @@
 
 												<br />
 												<fieldset class="relative">
-													<div class="mb-6"><p class="font-heading text-base font-medium leading-none text-white">{{auth_config}}</p><p class="font-sans text-xs font-normal leading-normal text-muted-400">{{auth_config_detail}}</p></div>
+													<div class="mb-6">
+												<div class="flex flex-wrap items-center justify-between gap-3">
+													<div>
+														<p class="font-heading text-base font-medium leading-none text-white">{{auth_config}}</p>
+														<p class="font-sans text-xs font-normal leading-normal text-muted-400">{{auth_config_detail}}</p>
+													</div>
+													<button type="button" id="auto_detect_auth_config" class="is-button rounded is-button-default">{{auto_detect_auth_config}}</button>
+												</div>
+											</div>
 													<div class="grid grid-cols-12 gap-4">
 														<div class="col-span-12">
 															<p class="font-sans text-s font-normal leading-normal text-muted-400">{{account_encryption}}</p>

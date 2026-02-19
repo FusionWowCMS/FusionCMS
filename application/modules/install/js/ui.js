@@ -41,6 +41,10 @@ const UI = {
 				e.stopPropagation();
 			}
 		});
+
+        $('#auto_detect_auth_config').click(function () {
+            UI.AuthConfig.autoDetect();
+        });
     },
 
     /**
@@ -204,6 +208,55 @@ const UI = {
                 });
             }
         },
+
+    AuthConfig: {
+        autoDetect: function () {
+            const dbData = {
+                auth_hostname: $('#realmd_hostname').val(),
+                auth_username: $('#realmd_username').val(),
+                auth_password: $('#realmd_password').val(),
+                auth_database: $('#realmd_database').val()
+            };
+
+            if ($('#realmd_port').val())
+                dbData['auth_port'] = $('#realmd_port').val();
+
+            const required = ['auth_hostname', 'auth_username', 'auth_password', 'auth_database'];
+
+            for (let key in required) {
+                key = required[key];
+
+                if ((dbData[key] === undefined || !dbData[key].length)) {
+                    UI.alert(Language.get('autodetect_fill_db_first') || 'Please fill all auth database fields first.');
+                    return;
+                }
+            }
+
+            UI.displayLoading(function () {
+                Ajax.autoDetectAuthConfig(dbData, function (response) {
+                    UI.completeLoading();
+
+                    let data;
+
+                    try {
+                        data = JSON.parse(response);
+                    } catch (e) {
+                        UI.alert(response);
+                        return;
+                    }
+
+                    $('#realmd_account_encryption').val(data.realmd_account_encryption);
+                    $('#realmd_rbac').val(data.realmd_rbac);
+                    $('#realmd_battle_net').val(data.realmd_battle_net).trigger('change');
+                    $('#realmd_battle_net_encryption').val(data.realmd_battle_net_encryption);
+                    $('#realmd_totp_secret').val(data.realmd_totp_secret).trigger('change');
+                    $('#realmd_totp_secret_name').val(data.realmd_totp_secret_name);
+
+                    UI.alert(Language.get('autodetect_done') || 'Auth configuration has been auto detected.', 1200);
+                });
+            });
+        }
+    },
 
     /**
      * Shows an alert box

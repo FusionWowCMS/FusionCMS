@@ -1,5 +1,5 @@
-{ 
-    "next": "Próximo", 
+{
+    "next": "Próximo",
     "okay": "Ok",
     "cancel": "Cancelar",
     "language": "Idioma",
@@ -119,5 +119,8 @@
     "copyright": "All rights reserved.",
     "previous_step": "Etapa anterior",
     "next_step": "Próxima Etapa",
-    "step": "Etapa"
+    "step": "Etapa",
+    "auto_detect_auth_config": "Detectar automaticamente do banco de dados",
+    "autodetect_fill_db_first": "Preencha primeiro todos os campos do banco de dados Auth.",
+    "autodetect_done": "A configuração de Auth foi detectada automaticamente."
 }

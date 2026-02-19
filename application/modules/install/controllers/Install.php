@@ -49,9 +49,123 @@ class Install extends MX_Controller
                 case 'checkPhpVersion': $this->checkPhpVersion(); break;
                 case 'setAndCheckDbConnection': $this->setAndCheckDbConnection(); break;
                 case 'checkAuthConfig': $this->checkAuthConfig(); break;
+                case 'autoDetectAuthConfig': $this->autoDetectAuthConfig(); break;
                 case 'final': $this->finalStep(); break;
                 case 'getEmulators': $this->getEmulators(); break;
             }
+        }
+    }
+
+    private function autoDetectAuthConfig()
+    {
+        $required = ['auth_hostname', 'auth_username', 'auth_database'];
+
+        foreach ($required as $field) {
+            if (!isset($_POST[$field]) || $_POST[$field] === '') {
+                die('Missing DB field: ' . $field);
+            }
+        }
+
+        $hostname = $_POST['auth_hostname'];
+        $username = $_POST['auth_username'];
+        $password = $_POST['auth_password'] ?? '';
+        $database = $_POST['auth_database'];
+        $port = !empty($_POST['auth_port']) ? (int)$_POST['auth_port'] : 3306;
+
+        try {
+            $mysqli = new mysqli($hostname, $username, $password, $database, $port);
+        } catch (Throwable $e) {
+            die('Auto detect failed: Auth Connection Error (' . $e->getCode() . ') ' . $e->getMessage());
+        }
+
+        if ($mysqli->connect_errno) {
+            die('Auto detect failed: Auth Connection Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
+        }
+
+        try {
+            $stmt = $mysqli->prepare('SELECT TABLE_NAME, COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = ?');
+
+            if (!$stmt) {
+                die('Auto detect failed: Unable to prepare schema query.');
+            }
+
+            $stmt->bind_param('s', $database);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $tables = [];
+            while ($column = $result->fetch_assoc()) {
+                $tableName = strtolower($column['TABLE_NAME']);
+                $columnName = strtolower($column['COLUMN_NAME']);
+
+                if (!isset($tables[$tableName])) {
+                    $tables[$tableName] = [];
+                }
+
+                $tables[$tableName][$columnName] = true;
+            }
+
+            $stmt->close();
+
+            $hasColumn = static function (array $tableMap, array $tableNames, string $columnName): bool {
+                $columnName = strtolower($columnName);
+
+                foreach ($tableNames as $tableName) {
+                    $tableName = strtolower($tableName);
+
+                    if (isset($tableMap[$tableName][$columnName])) {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
+
+            $hasTable = static function (array $tableMap, array $tableNames): bool {
+                foreach ($tableNames as $tableName) {
+                    if (isset($tableMap[strtolower($tableName)])) {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
+
+            $accountTables = ['account', 'accounts'];
+            $battleNetTables = ['battlenet_accounts', 'battle_net_accounts', 'bnet_accounts'];
+
+            $accountEncryption = 'SRP6';
+            if ($hasColumn($tables, $accountTables, 'salt') && $hasColumn($tables, $accountTables, 'verifier')) {
+                $accountEncryption = 'SRP6';
+            } elseif ($hasColumn($tables, $accountTables, 'sha_pass_hash')) {
+                $accountEncryption = 'SPH';
+            } elseif ($hasColumn($tables, $accountTables, 'v') && $hasColumn($tables, $accountTables, 's')) {
+                $accountEncryption = 'SRP';
+            }
+
+            $hasRbac = $hasTable($tables, ['rbac_permissions', 'rbac_account_permissions', 'rbac_linked_permissions']);
+            $hasBattleNet = $hasTable($tables, $battleNetTables);
+
+            $battleNetEncryption = 'SRP6_V2';
+            if ($hasBattleNet && $hasColumn($tables, $battleNetTables, 'sha_pass_hash')) {
+                $battleNetEncryption = 'SPH';
+            } elseif ($hasBattleNet && $hasColumn($tables, $battleNetTables, 'salt') && $hasColumn($tables, $battleNetTables, 'verifier')) {
+                $battleNetEncryption = 'SRP6_V2';
+            }
+
+            $totpSecret = $hasColumn($tables, $accountTables, 'totp_secret') || $hasColumn($tables, $accountTables, 'token_key');
+            $totpSecretName = $hasColumn($tables, $accountTables, 'totp_secret') ? 'totp_secret' : 'token_key';
+
+            die(json_encode([
+                'realmd_account_encryption' => $accountEncryption,
+                'realmd_rbac' => $hasRbac ? 'true' : 'false',
+                'realmd_battle_net' => $hasBattleNet ? 'true' : 'false',
+                'realmd_battle_net_encryption' => $battleNetEncryption,
+                'realmd_totp_secret' => $totpSecret ? 'true' : 'false',
+                'realmd_totp_secret_name' => $totpSecretName,
+            ]));
+        } finally {
+            $mysqli->close();
         }
     }
 

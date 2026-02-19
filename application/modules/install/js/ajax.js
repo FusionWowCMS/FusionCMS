@@ -95,6 +95,13 @@ const Ajax = {
         })
     },
 
+    autoDetectAuthConfig: function (data, onComplete) {
+        $.post("install/next?step=autoDetectAuthConfig", data, function (data) {
+            if (onComplete !== undefined)
+                onComplete(data);
+        })
+    },
+
     checkPermissions: function (onComplete) {
 		let done = 0;
 

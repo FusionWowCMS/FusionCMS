@@ -119,5 +119,8 @@
     "copyright": "Tous droits réservés.",
     "previous_step": "Étape précédente",
     "next_step": "Étape suivante",
-    "step": "Étape"
+    "step": "Étape",
+    "auto_detect_auth_config": "Détection automatique depuis la base de données",
+    "autodetect_fill_db_first": "Veuillez d'abord remplir tous les champs de la base de données Auth.",
+    "autodetect_done": "La configuration Auth a été détectée automatiquement."
 }

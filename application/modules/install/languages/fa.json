@@ -1,5 +1,5 @@
-{ 
-    "next": "بعدی", 
+{
+    "next": "بعدی",
     "okay": "باشه",
     "cancel": "انصراف",
     "language": "زبان",
@@ -67,6 +67,9 @@
     "auth_database_detail": "اطلاعات دیتابیس Realmd/Logon/Auth را وارد کنید.",
     "auth_config": "تنظیمات Auth <span style='color: #f00;'>(! مهم)</span>",
     "auth_config_detail": "تنظیمات مربوط به دیتابیس Realmd/Logon/Auth و رمزنگاری رمز عبور اکانت ها.",
+    "auto_detect_auth_config": "تشخیص خودکار از دیتابیس",
+    "autodetect_fill_db_first": "لطفا ابتدا تمام فیلدهای دیتابیس احراز هویت را تکمیل کنید.",
+    "autodetect_done": "تنظیمات احراز هویت به‌صورت خودکار شناسایی شد.",
     "account_encryption": "رمزنگاری رمز عبور اکانت ها",
     "account_encryption_detail": "<span style='color: #f00;'>SRP6:</span> این مورد را برای اکثر Coreهای مدرن تر (با ستون های <b>salt</b> و <b>verifier</b> در جدول <b>auth.accounts</b> انتخاب کنید).<br/><span style='color: #f00;'>SPH:</span> این مورد را برای Coreهای قدیمی انتخاب کنید (با ستون <b>sha_pass_hash</b> در جدول <b>auth.accounts</b>).<br/><span style='color: #f00;'>SRP:</span> بیشتر برای Coreهای <b>cMangos</b> و <b>vMangos</b>.",
     "rbac": "RBAC",
