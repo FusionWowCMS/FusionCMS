@@ -3,26 +3,26 @@
 	<table class="table table-responsive-md table-hover">
 		<thead>
 			<tr>
-				<th>Cache</th>
-				<th>Size</th>
+				<th>{lang('cache', 'admin')}</th>
+				<th>{lang('size', 'admin')}</th>
 			</tr>
 		</thead>
 		<tbody>
 		<tr>
-			<td>Item cache</td>
-			<td id="row_item">{$item.files} files ({$item.sizeString})</td>
+			<td>{lang('item_cache', 'admin')}</td>
+			<td id="row_item">{lang('files_count', 'admin', [$item.files])} ({$item.sizeString})</td>
 		</tr>
 		<tr>
-			<td>Website cache</td>
-			<td id="row_website">{$website.files} files ({$website.sizeString})</td>
+			<td>{lang('website_cache', 'admin')}</td>
+			<td id="row_website">{lang('files_count', 'admin', [$website.files])} ({$website.sizeString})</td>
 		</tr>
 		<tr>
-			<td>Theme minify cache</td>
-			<td id="row_theme">{$theme.files} files ({$theme.sizeString})</td>
+			<td>{lang('theme_minify_cache', 'admin')}</td>
+			<td id="row_theme">{lang('files_count', 'admin', [$theme.files])} ({$theme.sizeString})</td>
 		</tr>
 		<tr>
-			<td><b>Total</b></td>
-			<td id="row_total"><b>{$total.files} files ({$total.size})</b></td>
+			<td><b>{lang('total', 'admin')}</b></td>
+			<td id="row_total"><b>{lang('files_count', 'admin', [$total.files])} ({$total.size})</b></td>
 		</tr>
 		</tbody>
 	</table>

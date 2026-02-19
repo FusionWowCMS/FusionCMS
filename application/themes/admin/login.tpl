@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Login - Admin Panel</title>
+    <title>{lang('login_title', 'admin_theme')}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Roboto%20Flex&amp;family=Inter&amp;family=Karla&amp;family=Fira%20Code&amp;display=swap">
@@ -61,7 +61,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 24 24" data-v-cd102a71>
                             <path fill="currentColor" d="m1.027 11.993l4.235 4.25L6.68 14.83l-1.821-1.828L22.974 13v-2l-18.12.002L6.69 9.174L5.277 7.757l-4.25 4.236Z"/>
                         </svg>
-                        <span>Back to Home</span>
+                        <span>{lang('back_to_home', 'admin_theme')}</span>
                     </a>
 					<label for="mode" class="nui-focus relative block h-9 w-9 shrink-0 overflow-hidden rounded-full transition-all duration-300 focus-visible:outline-2 dark:ring-offset-muted-900">
 						<input type="checkbox" id="mode" class="absolute start-0 top-0 z-[2] h-full w-full cursor-pointer opacity-0">
@@ -85,7 +85,7 @@
                 </div>
                 <div>
                     <h2 class="font-heading text-3xl font-medium mt-6 text-muted-800 dark:text-white">
-                        Welcome back {$username}. 
+                        {lang('welcome_back', 'admin_theme', [$username])}
                     </h2>
                 </div>
                 <form onSubmit="Login.send(this); return false" class="mt-6">
@@ -94,21 +94,21 @@
                             <div class="space-y-4">
                                 <div class="form-group relative">
                                     <label for="security_code" class="pb-1 text-[0.825rem] nui-label w-full">
-                                        Security Code
+                                        {lang('security_code', 'admin_theme')}
                                     </label>
                                     <div class="group/nui-input relative">
-                                        <input id="security_code" name="security_code" type="password" autocomplete="off" autofocus required class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded h-12" placeholder="Security Code" value>
+                                        <input id="security_code" name="security_code" type="password" autocomplete="off" autofocus required class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded h-12" placeholder="{lang('security_code', 'admin_theme')}" value>
                                     </div>
                                 </div>
                                 
                             </div>
                             <div class="mt-6 flex items-center justify-between">
-                                <div class="text-xs leading-5"><a href="../" class="text-primary-600 hover:text-primary-500 font-sans font-medium underline-offset-4 transition duration-150 ease-in-out hover:underline"> Not {$username}? </a></div>
+                                <div class="text-xs leading-5"><a href="../" class="text-primary-600 hover:text-primary-500 font-sans font-medium underline-offset-4 transition duration-150 ease-in-out hover:underline"> {lang('not_username', 'admin_theme', [$username])} </a></div>
                             </div>
                             <div class="mt-6">
                                 <div class="block w-full rounded-md shadow-sm">
                                     <button type="submit" class="is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500 !h-11 w-full" data-v-71bb21a6>
-                                        Sign in 
+                                        {lang('sign_in', 'admin_theme')} 
                                     </button>
                                 </div>
                             </div>
