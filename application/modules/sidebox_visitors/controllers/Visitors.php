@@ -38,21 +38,19 @@ class Visitors extends MX_Controller
         $realVisitors = array();
 
         if ($visitors) {
-            foreach ($visitors as $key => $value) {
-                if ($value['data'])
-                {
-
-                    $sessions = $this->parseSession($value['data']);
-					$data = unserialize($sessions);
-
-                    $visitors[$key]['user_id'] = $this->getUserId($data);
-                    $visitors[$key]['nickname'] = $this->getNickname($data);
-
-                    if (!array_key_exists($visitors[$key]['user_id'], $realVisitors))
-                    {
-                        $realVisitors[$visitors[$key]['user_id']] = $visitors[$key]['nickname'];
-                    }
+            foreach ($visitors as $value) {
+                if (empty($value['data'])) {
+                    continue;
                 }
+
+                $data = $this->parseSession($value['data']);
+                $userId = $this->getUserId($data);
+
+                if ($userId <= 0 || array_key_exists($userId, $realVisitors)) {
+                    continue;
+                }
+
+                $realVisitors[$userId] = $this->getNickname($data);
             }
         }
 
@@ -63,35 +61,32 @@ class Visitors extends MX_Controller
 
     private function getUserId($data)
     {
-        if (array_key_exists("uid", $data)) {
-            return (int)$data['uid'];
-        }
+        return isset($data['uid']) ? (int) $data['uid'] : 0;
     }
 
     private function getNickname($data)
     {
-        if (array_key_exists("nickname", $data)) {
-            return $data['nickname'];
-        }
+        return isset($data['nickname']) ? (string) $data['nickname'] : '';
     }
 
     private function parseSession($sess_data)
     {
-        $sess_data = rtrim($sess_data, ";");
-        $sess_data = preg_replace('/(;password\|.*?;email\|)/', '', $sess_data);
+        $sessInfo = [];
 
-        $sess_info = array();
-        $parts = explode(";", $sess_data);
-
-        foreach ($parts as $part) {
-            $part = explode("|", $part);
-            $key = preg_replace('/:.*/', '', $part[0]);
-            $value = preg_replace('/.*:/', '', $part[1]);
-            $value = str_replace('"', '', $value);
-            $sess_info[$key] = $value;
+        if (!str_contains($sess_data, 'uid|') && !str_contains($sess_data, 'nickname|')) {
+            return $sessInfo;
         }
 
-        $sess_info = serialize($sess_info);
-        return $sess_info;
+        if (preg_match('/(?:^|;)uid\|i:(\d+);/', $sess_data, $uidMatch) === 1) {
+            $sessInfo['uid'] = (int) $uidMatch[1];
+        } elseif (preg_match('/(?:^|;)uid\|s:\d+:"(\d+)";/', $sess_data, $uidMatch) === 1) {
+            $sessInfo['uid'] = (int) $uidMatch[1];
+        }
+
+        if (preg_match('/(?:^|;)nickname\|s:\d+:"((?:[^"\\\\]|\\\\.)*)";/', $sess_data, $nicknameMatch) === 1) {
+            $sessInfo['nickname'] = stripcslashes($nicknameMatch[1]);
+        }
+
+        return $sessInfo;
     }
 }

@@ -27,16 +27,17 @@ class Sessions extends MX_Controller
         if ($sessions)
 		{
             foreach ($sessions as $key => $value) {
-				$session = $this->session_model->getSessId($value['id']);
-				if (!empty($session['data']))
-				{
-					$session = $this->parseSession($session['data']);
-					$session = unserialize($session);
-				}
+                $session = [];
+                $sessionRow = $this->session_model->getSessId($value['id']);
 
-                if ($this->getUserId($session))
-				{
-                    $sessions[$key]['uid'] = $this->getUserId($session);
+                if (!empty($sessionRow['data'])) {
+                    $session = $this->parseSession($sessionRow['data']);
+                }
+
+                $userId = $this->getUserId($session);
+
+                if ($userId > 0) {
+                    $sessions[$key]['uid'] = $userId;
                     $sessions[$key]['nickname'] = $this->getNickname($session);
                 }
 
@@ -58,22 +59,14 @@ class Sessions extends MX_Controller
         $this->administrator->view($content, false, "modules/admin/js/session.js");
     }
 
-    private function getUserId($data)
+    private function getUserId($data): int
     {
-        if (array_key_exists("uid", $data)) {
-            return $data['uid'];
-        }
-		else
-		{
-			return false;
-		}
+        return isset($data['uid']) ? (int) $data['uid'] : 0;
     }
 
-    private function getNickname($data)
+    private function getNickname($data): string
     {
-        if (array_key_exists("nickname", $data)) {
-            return $data['nickname'];
-        }
+        return isset($data['nickname']) ? (string) $data['nickname'] : '';
     }
 
     private function getBrowser($user_agent): string
@@ -114,24 +107,25 @@ class Sessions extends MX_Controller
         }
     }
 
-    private function parseSession($sess_data): string
+    private function parseSession($sess_data): array
     {
-        $sess_data = rtrim($sess_data, ";");
-        $sess_info = array();
-        $parts = explode(";", $sess_data);
+        $sessInfo = [];
 
-        unset($parts[3], $parts[4]);
-
-        foreach ($parts as $part) {
-            $part = explode("|", $part);
-            $key = preg_replace('/:.*/', '', $part[0]);
-            $value = preg_replace('/.*:/', '', $part[1]);
-            $value = str_replace('"', '', $value);
-            $sess_info[$key] = $value;
+        if (!str_contains($sess_data, 'uid|') && !str_contains($sess_data, 'nickname|')) {
+            return $sessInfo;
         }
-        unset($sess_info["__ci_last_regenerate"], $sess_info["captcha"], $sess_info[""], $sess_info["admin_access"], $sess_info["language"], $sess_info["expansion"], $sess_info["email"], $sess_info["last_ip"], $sess_info["register_date"]);
 
-        return serialize($sess_info);
+        if (preg_match('/(?:^|;)uid\|i:(\d+);/', $sess_data, $uidMatch) === 1) {
+            $sessInfo['uid'] = (int) $uidMatch[1];
+        } elseif (preg_match('/(?:^|;)uid\|s:\d+:"(\d+)";/', $sess_data, $uidMatch) === 1) {
+            $sessInfo['uid'] = (int) $uidMatch[1];
+        }
+
+        if (preg_match('/(?:^|;)nickname\|s:\d+:"((?:[^"\\\\]|\\\\.)*)";/', $sess_data, $nicknameMatch) === 1) {
+            $sessInfo['nickname'] = stripcslashes($nicknameMatch[1]);
+        }
+
+        return $sessInfo;
     }
 
     public function deleteSessions()
