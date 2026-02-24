@@ -23,11 +23,20 @@ class Install extends MX_Controller
         $this->csrf_protection(false);
 
         $data = [
+            'base_url' => base_url(),
             'css' => basename(APPPATH) . '/modules/install/css/install.css',
-            'INSTALL_PATH' => basename(APPPATH) . '/modules/install/'
+            'install_path' => basename(APPPATH) . '/modules/install/',
+            'upgrade_url' => base_url('install/upgrade'),
+            'year' => date('Y'),
         ];
 
-       die($this->load->view('install', $data, true));
+        if (!isset($this->smarty)) {
+            $this->load->library('smartyengine', null, 'smarty');
+        }
+
+        $output = $this->smarty->view('modules/install/views/install.tpl', $data, true);
+
+        die($output);
     }
 
     public function next()

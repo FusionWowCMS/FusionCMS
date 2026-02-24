@@ -130,7 +130,7 @@ const Language = (() => {
 
         // Loop through `default` strings and replace document.. if exists
         Object.keys(self.lang[self.defaultLang]).forEach((key, index) => {
-            let find    = '{{' + key + '}}';
+            let find    = '[[' + key + ']]';
             let replace = self.get(key, self.userLang);
 
             // Replace

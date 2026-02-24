@@ -1002,17 +1002,23 @@ class Upgrade extends MX_Controller
      */
     public function index(): void
     {
+        if (!isset($this->smarty)) {
+            $this->load->library('smartyengine', null, 'smarty');
+        }
+
         // Page data
         $data = [
             # Metadata
+            'base_url'     => base_url(),
             'css'          => base_url(basename(APPPATH)) . '/modules/install/css/install.css',
-            'INSTALL_PATH' => base_url(basename(APPPATH)) . '/modules/install/',
+            'install_path' => base_url(basename(APPPATH)) . '/modules/install/',
+            'year'         => date('Y'),
 
             # Pagedata
             'statements' => $this->statements
         ];
 
-        die($this->load->view('upgrade', $data, true));
+        die($this->smarty->view('modules/install/views/upgrade.tpl', $data, true));
     }
 
     /**
