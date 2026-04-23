@@ -54,12 +54,11 @@ class Vote_model extends CI_Model
 
     public function getTopsite($id)
     {
-        $query = $this->db->query("SELECT * FROM vote_sites WHERE id=?", array($id));
+        $query = $this->db->query("SELECT * FROM vote_sites WHERE id = ?", [$id]);
 
         if ($query->getNumRows()) {
-            $result = $query->getResultArray();
 
-            return $result[0];
+            return $query->getRowArray();
         } else {
             return false;
         }
@@ -70,15 +69,15 @@ class Vote_model extends CI_Model
      */
     public function getVoteSiteByUrl($url)
     {
-        $query = $this->db->query("SELECT * FROM vote_sites WHERE vote_url LIKE '%" . $url . "%'");
+        $query = $this->db->table('vote_sites')
+            ->like('vote_url', $url, 'both')
+            ->get();
 
         if ($query->getNumRows()) {
-            $result = $query->getResultArray();
-
-            return $result[0];
-        } else {
-            return false;
+            return $query->getRowArray();
         }
+
+        return false;
     }
 
     public function getVoteLog($vote_site_id, $user_ip, $time_back, $ipLock = false)
@@ -124,9 +123,9 @@ class Vote_model extends CI_Model
             $query = $builder->get();
 
             if ($query->getNumRows()) {
-                $row = $query->getResultArray();
+                $row = $query->getRowArray();
 
-                $nextTime = $row[0]['time'] + ($time_interval * 60 * 60);
+                $nextTime = $row['time'] + ($time_interval * 60 * 60);
                 $untilNext = $nextTime - time();
 
                 return $this->template->formatTime($untilNext);
@@ -173,10 +172,10 @@ class Vote_model extends CI_Model
     {
         $query = $this->db->query("SELECT COUNT(*) AS `total` FROM monthly_votes WHERE month = ?", [date("Y-m")]);
 
-        $row = $query->getResultArray();
+        $row = $query->getRowArray();
 
-        if ($row[0]['total']) {
-            $this->db->query("UPDATE monthly_votes SET amount = amount + 1 WHERE month=?", [date("Y-m")]);
+        if ($row['total']) {
+            $this->db->query("UPDATE monthly_votes SET amount = amount + 1 WHERE month = ?", [date("Y-m")]);
         } else {
             $this->db->query("INSERT INTO monthly_votes(month, amount) VALUES(?, ?)", [date("Y-m"), 1]);
         }
