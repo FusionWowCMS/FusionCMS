@@ -4,13 +4,10 @@ use App\Config\Services;
 use CodeIgniter\Database\BaseConnection;
 
 /**
- * @package FusionCMS
- * @author  Jesper Lindström
- * @author  Xavier Geerinck
- * @author  Elliott Robbins
- * @link    http://fusion-hub.com
+ * Class InternalUserModel
+ *
+ * Handles internal user data stored in the `account_data` table.
  */
-
 class Internal_user_model extends CI_Model
 {
     private $vp;
@@ -115,24 +112,24 @@ class Internal_user_model extends CI_Model
     /**
      * Get the nickname
      *
-     * @param  Int $id
-     * @return String
+     * @param bool|Int $id
+     * @return string|null
      */
-    public function getNickname($id = false)
+    public function getNickname(bool|int $id = false): ?string
     {
         if (!$id) {
             return $this->nickname;
         } else {
-            $query = $this->db->table('account_data')->select('nickname')->where(array('id' => $id))->get();
+            $query = $this->db->table('account_data')->select('nickname')->where(['id' => $id])->get();
 
             if ($query->getNumRows() > 0) {
-                $result = $query->getResultArray();
+                $result = $query->getRowArray();
             } else {
-                $result[0]['nickname'] = "";
+                $result['nickname'] = '';
             }
 
-            if (strlen($result[0]['nickname']) > 0) {
-                return $result[0]['nickname'];
+            if (strlen($result['nickname']) > 0) {
+                return $result['nickname'];
             } else {
                 return $this->external_account_model->getUsername($id);
             }
@@ -142,21 +139,22 @@ class Internal_user_model extends CI_Model
     /**
      * Gets the value of the specified table, column where value = value
      *
-     * @param  String $table
-     * @param  String $column
-     * @param  String $value
-     * @return String, bool
+     * @param string $table
+     * @param string $column
+     * @param string $value
+     * @param string $columns
+     * @return string|array
      */
-    public function getValue($table, $column, $value, $columns = "*")
+    public function getValue(string $table, string $column, string $value, string $columns = "*"): array|string
     {
         //Continue with selecting data.
         $query = $this->db->table($table)->select($columns)->where(array($column => $value))->get();
-        $result = $query->getResultArray();
+        $result = $query->getRowArray();
 
         if ($query->getNumRows() > 0) {
-            return $result[0];
+            return $result;
         } else {
-            return "";
+            return '';
         }
     }
 
@@ -164,8 +162,8 @@ class Internal_user_model extends CI_Model
     {
         $query = $this->db->query("SELECT access_id FROM ranks WHERE id = ?", array($rankId));
         if ($query->getNumRows() > 0) {
-            $result = $query->getResultArray();
-            return $result[0]['access_id'];
+            $result = $query->getRowArray();
+            return $result['access_id'];
         } else {
             return false;
         }
@@ -176,9 +174,9 @@ class Internal_user_model extends CI_Model
         $query = $this->db->query("SELECT id FROM account_data WHERE nickname = ?", array($nickname));
 
         if ($query->getNumRows() > 0) {
-            $result = $query->getResultArray();
+            $result = $query->getRowArray();
 
-            return $result[0]['id'];
+            return $result['id'];
         } else {
             return false;
         }
@@ -217,9 +215,9 @@ class Internal_user_model extends CI_Model
 
         if($query->getNumRows() > 0)
         {
-            $result = $query->getResultArray();
+            $result = $query->getRowArray();
 
-            return $result[0]['avatar'];
+            return $result['avatar'];
         }
 
         return false;
@@ -231,13 +229,13 @@ class Internal_user_model extends CI_Model
         {
 			return $this->avatarId;
 		} else {
-			$query = $this->db->query("SELECT avatar FROM account_data WHERE id = ?", array($id));
+			$query = $this->db->query("SELECT avatar FROM account_data WHERE id = ?", [$id]);
 
 			if($query->getNumRows() > 0)
             {
-				$result = $query->getResultArray();
+				$result = $query->getRowArray();
 
-				return $result[0]['avatar'];
+				return $result['avatar'];
 			}
 		}
 	}
@@ -249,12 +247,12 @@ class Internal_user_model extends CI_Model
     */
     public function setVp($userId, $vp)
     {
-        $this->db->query("UPDATE account_data SET vp = ? WHERE id = ?", array($vp, $userId));
+        $this->db->query("UPDATE account_data SET vp = ? WHERE id = ?", [$vp, $userId]);
     }
 
     public function setLanguage($userId, $language)
     {
-        $this->db->query("UPDATE account_data SET language = ? WHERE id = ?", array($language, $userId));
+        $this->db->query("UPDATE account_data SET language = ? WHERE id = ?", [$language, $userId]);
     }
 
     public function setDp($userId, $dp)
