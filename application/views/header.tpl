@@ -30,9 +30,7 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 		<!-- Header CSS.Start -->
-		{minify files=array("application/css/default.css", "application/css/tooltip.css", "application/fonts/fontawesome/v7.0.0/css/all.css", "node_modules/bootstrap/dist/css/bootstrap.min.css", "node_modules/sweetalert2/dist/sweetalert2.min.css", "node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "{$APPPATH}{$theme_path}css/cms.css", "{$APPPATH}{$theme_path}css/main.css") type='css' output='writable/cache/data/minify/all.min.css' disable={$minify_css}}
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css">
-
+		{minify files=array("application/css/default.css", "application/css/tooltip.css", "application/fonts/fontawesome/v7.0.0/css/all.css", "node_modules/bootstrap/dist/css/bootstrap.min.css", "node_modules/sweetalert2/dist/sweetalert2.min.css", "node_modules/owl.carousel/dist/assets/owl.carousel.min.css", "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css", "node_modules/datatables/media/css/jquery.dataTables.min.css", "{$APPPATH}{$theme_path}css/cms.css", "{$APPPATH}{$theme_path}css/main.css") type='css' output='writable/cache/data/minify/all.min.css' disable={$minify_css}}
 
 		{if $extra_css}
 			{if !is_array($extra_css)}
@@ -49,10 +47,7 @@
 		<!-- Header CSS.End -->
 
 		<!-- Header JS.Start -->
-		{minify files=array("application/js/jquery.min.js", "application/js/jquery.placeholder.min.js", "application/js/jquery.transit.min.js", "application/js/jquery.sort.js", "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "node_modules/sweetalert2/dist/sweetalert2.all.min.js", "node_modules/owl.carousel/dist/owl.carousel.min.js", "application/js/main.js", "application/js/cookie.js", "application/js/ui.js", "application/js/language.js", "application/js/tooltip.js") type='js' output='writable/cache/data/minify/all.min.js' disable={$minify_js}}
-
-		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
-
+		{minify files=array("application/js/jquery.min.js", "application/js/jquery.placeholder.min.js", "application/js/jquery.transit.min.js", "application/js/jquery.sort.js", "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "node_modules/sweetalert2/dist/sweetalert2.all.min.js", "node_modules/owl.carousel/dist/owl.carousel.min.js", "node_modules/datatables/media/js/jquery.dataTables.js", "application/js/main.js", "application/js/cookie.js", "application/js/ui.js", "application/js/language.js", "application/js/tooltip.js") type='js' output='writable/cache/data/minify/all.min.js' disable={$minify_js}}
 		<!-- Header JS.End -->
 
 		<!--[if lt IE 9]>

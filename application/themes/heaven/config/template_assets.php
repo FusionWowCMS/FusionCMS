@@ -26,7 +26,7 @@ $assets = [
 
                         # CMS dependencies
                         '@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap")',
-                        '@import url("https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css")',
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'datatables' . DS . 'media' . DS . 'css' . DS . 'jquery.dataTables.min.css'),
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'bootstrap' . DS . 'dist' . DS . 'css' . DS . 'bootstrap.min.css'),
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'sweetalert2' . DS . 'dist' . DS . 'sweetalert2.min.css'),
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'owl.carousel' . DS . 'dist' . DS . 'assets' . DS . 'owl.carousel.min.css'),
@@ -78,7 +78,7 @@ $assets = [
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . 'js' . DS . 'language.js'),
 
                         # CMS dependencies
-                        'https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js',
+                        realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'datatables' . DS . 'media' . DS . 'js' . DS . 'jquery.dataTables.min.js'),
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'bootstrap' . DS . 'dist' . DS . 'js' . DS . 'bootstrap.bundle.min.js'),
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'sweetalert2' . DS . 'dist' . DS . 'sweetalert2.all.min.js'),
                         realpath(T_ROOT_PATH . '..' . DS . '..' . DS . '..' . DS . 'node_modules' . DS . 'owl.carousel' . DS . 'dist' . DS . 'owl.carousel.min.js'),

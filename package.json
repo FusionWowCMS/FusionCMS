@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bootstrap": "^5.3.0",
+    "datatables": "^1.10.18",
     "fontawesome-iconpicker": "github:Nightprince/fontawesome-iconpicker",
     "owl.carousel": "github:OwlCarousel2/OwlCarousel2",
     "sweetalert2": "^11.22.4",
