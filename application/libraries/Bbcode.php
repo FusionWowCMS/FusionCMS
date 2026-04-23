@@ -322,6 +322,8 @@ final class Bbcode
         ],
     ];
 
+    protected array $escape_attributes_tags = ['image'];
+
     public function __construct($parser = null)
     {
         if ($parser == self::HTML_TO_BBCODE)
@@ -360,12 +362,19 @@ final class Bbcode
     public function convert(string $text, $caseSensitive = null): string
     {
         $caseInsensitive = $caseSensitive === self::CASE_INSENSITIVE;
+        $escapeTags = $this->escape_attributes_tags ?? [];
 
-        foreach ($this->parsers as $bbcode_parser) {
-
+        foreach ($this->parsers as $tagName => $bbcode_parser) {
             $pattern = ($caseInsensitive) ? $bbcode_parser['pattern'] . 'i' : $bbcode_parser['pattern'];
 
-            $text = $this->searchAndReplace($pattern, $bbcode_parser['replace'], $text);
+            if (in_array($tagName, $escapeTags)) {
+                $text = preg_replace_callback($pattern, function($matches) use ($bbcode_parser) {
+                    $cleanContent = htmlspecialchars($matches[1], ENT_QUOTES, 'UTF-8');
+                    return str_replace('$1', $cleanContent, $bbcode_parser['replace']);
+                }, $text);
+            } else {
+                $text = $this->searchAndReplace($pattern, $bbcode_parser['replace'], $text);
+            }
         }
 
         return $text;
