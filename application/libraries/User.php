@@ -331,7 +331,7 @@ class User
     /**
      * Get the user's avatar id
      */
-    public function getAvatarId(bool|int $id = false)
+    public function getAvatarId(bool|int $id = false): int
     {
         return $this->CI->internal_user_model->getAvatarId($id);
     }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Config\Services;
-use CodeIgniter\Database\BaseConnection;
 
 /**
  * Class InternalUserModel
@@ -10,20 +9,17 @@ use CodeIgniter\Database\BaseConnection;
  */
 class Internal_user_model extends CI_Model
 {
-    private $vp;
-    private $dp;
-    private $nickname;
-    private $location;
-    private $avatarId;
-    private $total_votes;
-    private $permissionCache;
-    private $language;
+    private int $vp;
+    private int $dp;
+    private string $nickname;
+    private string $location;
+    private int $avatarId;
+    private int $total_votes;
+    private ?string $language;
 
     public function __construct()
     {
         parent::__construct();
-
-        $this->permissionCache = [];
 
         if ($this->user->getOnline()) {
             $this->initialize();
@@ -54,15 +50,15 @@ class Internal_user_model extends CI_Model
         }
 
         if ($query->getNumRows() > 0) {
-            $result = $query->getResultArray();
+            $result = $query->getRowArray();
 
-            $this->vp = $result[0]['vp'];
-            $this->dp = $result[0]['dp'];
-            $this->total_votes = $result[0]['total_votes'];
-            $this->location = $result[0]['location'];
-            $this->nickname = $result[0]['nickname'];
-            $this->language = $result[0]['language'];
-            $this->avatarId = $result[0]['avatar'];
+            $this->vp = $result['vp'];
+            $this->dp = $result['dp'];
+            $this->total_votes = $result['total_votes'];
+            $this->location = $result['location'];
+            $this->nickname = $result['nickname'];
+            $this->language = $result['language'];
+            $this->avatarId = $result['avatar'];
         } else {
             $this->makeNew();
         }
@@ -73,7 +69,7 @@ class Internal_user_model extends CI_Model
      */
     public function makeNew()
     {
-        $array = array(
+        $array = [
             'id' => $this->external_account_model->getId(),
             'vp' => 0,
             'dp' => 0,
@@ -81,7 +77,7 @@ class Internal_user_model extends CI_Model
             'nickname' => $this->external_account_model->getUsername(),
             'language' => $this->config->item('language'),
             'avatar' => 1
-        );
+        ];
 
         $this->db->table('account_data')->insert($array);
 
@@ -148,7 +144,7 @@ class Internal_user_model extends CI_Model
     public function getValue(string $table, string $column, string $value, string $columns = "*"): array|string
     {
         //Continue with selecting data.
-        $query = $this->db->table($table)->select($columns)->where(array($column => $value))->get();
+        $query = $this->db->table($table)->select($columns)->where([$column => $value])->get();
         $result = $query->getRowArray();
 
         if ($query->getNumRows() > 0) {
@@ -160,7 +156,8 @@ class Internal_user_model extends CI_Model
 
     public function getAccessId($rankId)
     {
-        $query = $this->db->query("SELECT access_id FROM ranks WHERE id = ?", array($rankId));
+        $query = $this->db->table('ranks')->select('access_id')->where('id', $rankId)->get();
+
         if ($query->getNumRows() > 0) {
             $result = $query->getRowArray();
             return $result['access_id'];
@@ -171,7 +168,7 @@ class Internal_user_model extends CI_Model
 
     public function getIdByNickname($nickname)
     {
-        $query = $this->db->query("SELECT id FROM account_data WHERE nickname = ?", array($nickname));
+        $query = $this->db->table('account_data')->select('id')->where('nickname', $nickname)->get();
 
         if ($query->getNumRows() > 0) {
             $result = $query->getRowArray();
@@ -211,7 +208,7 @@ class Internal_user_model extends CI_Model
     {
         $avatarId = !$id ? $this->avatarId : $this->getAvatarId($id);
 
-        $query = $this->db->query("SELECT avatar FROM avatars WHERE id = ?", array($avatarId));
+        $query = $this->db->table('avatars')->select('avatar')->where('id', $avatarId)->get();
 
         if($query->getNumRows() > 0)
         {
@@ -223,13 +220,13 @@ class Internal_user_model extends CI_Model
         return false;
     }
 
-	public function getAvatarId($id = false)
+	public function getAvatarId($id = false): int
     {
 		if(!$id)
         {
 			return $this->avatarId;
 		} else {
-			$query = $this->db->query("SELECT avatar FROM account_data WHERE id = ?", [$id]);
+            $query = $this->db->table('account_data')->select('avatar')->where('id', $id)->get();
 
 			if($query->getNumRows() > 0)
             {
@@ -238,6 +235,8 @@ class Internal_user_model extends CI_Model
 				return $result['avatar'];
 			}
 		}
+
+        return 1;
 	}
 
     /*
@@ -245,28 +244,28 @@ class Internal_user_model extends CI_Model
     |  Setters
     | -------------------------------------------------------------------
     */
-    public function setVp($userId, $vp)
+    public function setVp($userId, $vp): void
     {
-        $this->db->query("UPDATE account_data SET vp = ? WHERE id = ?", [$vp, $userId]);
+        $this->db->table('account_data')->where('id', $userId)->update(['vp' => $vp]);
     }
 
-    public function setLanguage($userId, $language)
+    public function setLanguage($userId, $language): void
     {
-        $this->db->query("UPDATE account_data SET language = ? WHERE id = ?", [$language, $userId]);
+        $this->db->table('account_data')->where('id', $userId)->update(['language' => $language]);
     }
 
-    public function setDp($userId, $dp)
+    public function setDp($userId, $dp): void
     {
-        $this->db->query("UPDATE account_data SET dp = ? WHERE id = ?", array($dp, $userId));
+        $this->db->table('account_data')->where('id', $userId)->update(['dp' => $dp]);
     }
 
-    public function setLocation($userId, $location)
+    public function setLocation($userId, $location): void
     {
-        $this->db->query("UPDATE account_data SET location = ? WHERE id = ?", array($location, $userId));
+        $this->db->table('account_data')->where('id', $userId)->update(['location' => $location]);
     }
 
-    public function setAvatar($userId, $avatarId)
+    public function setAvatar($userId, $avatarId): void
     {
-        $this->db->query("UPDATE account_data SET avatar = ? WHERE id = ?", array($avatarId, $userId));
+        $this->db->table('account_data')->where('id', $userId)->update(['avatar' => $avatarId]);
     }
 }
