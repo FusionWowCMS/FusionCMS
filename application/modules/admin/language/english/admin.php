@@ -407,4 +407,8 @@ $lang = [
     'auth_settings_help' => 'Settings related to Realmd/Logon/Auth database and account password encryption.',
     'add_new_realm' => 'Add a new realm',
     'host' => 'Host',
+    'edit_group'  => 'Edit group',
+    'color'       => 'Color',
+    'no_accounts' => 'No accounts found',
+    'permissions' => 'Permissions',
 ];
