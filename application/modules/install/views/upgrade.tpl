@@ -75,7 +75,7 @@
 					<div class="relative flex h-16 w-full items-center justify-between px-4">
 						<div class="flex items-center">
 							<img class="border-muted-200 dark:border-muted-700 flex w-56 items-center justify-center border-r pe-6" src="{$install_path}images/fusion.svg" alt="FusionCMS">
-							<div class="hidden items-center gap-2 ps-6 font-sans sm:flex" _lang_='{"step": "[[step]]"}' _step_>
+							<div class="hidden items-center gap-2 ps-6 font-sans sm:flex" _lang_='{literal}{"step": "[[step]]"}{/literal}' _step_>
 								<p class="text-muted-500 dark:text-muted-400" _step_number_>[[step]] 1: </p>
 								<h2 class="text-muted-800 font-semibold dark:text-white" _step_name_>[[language]]</h2>
 							</div>
