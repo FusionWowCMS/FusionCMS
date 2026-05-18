@@ -34,7 +34,7 @@
                 {if $realm.characters}
                     <option value="0"> Select Character</option>
                     {foreach from=$realm.characters item=character}
-                        {if $character.level != $maxlevel}
+                        {if $character.level < $maxlevel}
                             <option value="{$character.guid}">{$character.name} - Lvl {$character.level}</option>
                         {/if}
                     {/foreach}
