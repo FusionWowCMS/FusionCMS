@@ -42,7 +42,7 @@ var Settings = {
 			// but we can force dataType: 'json' in the $.post settings for safety)
 			if (data.status === 'success') {
 				Swal.fire({
-					text: data.message || lang("changes_saved", "ucp"),
+					html: data.message || lang("changes_saved", "ucp"),
 					icon: 'success',
 					willClose: () => {
 						window.location = Config.URL + "login";
@@ -56,13 +56,13 @@ var Settings = {
 				}
 
 				Swal.fire({
-					text: data.message || lang("invalid_pw", "ucp"),
+					html: data.message || lang("invalid_pw", "ucp"),
 					icon: 'error'
 				});
 			} else {
 				// Fallback for unexpected responses
 				Swal.fire({
-					text: data.message || data,
+					html: data.message || data,
 					icon: 'error'
 				});
 			}
@@ -70,7 +70,7 @@ var Settings = {
 			// Handle network/server errors
 			$("#settings_ajax").html('');
 			Swal.fire({
-				text: 'Request failed: ' + textStatus,
+				html: 'Request failed: ' + textStatus,
 				icon: 'error'
 			});
 		});
