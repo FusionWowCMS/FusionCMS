@@ -26,7 +26,7 @@ class Admin_items extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Items");
+        $this->administrator->setTitle(lang('items', 'store'));
 
         // Prepare my data
         $data = array(
@@ -40,7 +40,7 @@ class Admin_items extends MX_Controller
         $output = $this->template->loadPage("items.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Store', $output);
+        $content = $this->administrator->box(lang('store', 'store'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/store/js/admin_items.js");
@@ -52,7 +52,7 @@ class Admin_items extends MX_Controller
         requirePermission("canAddGroups");
 
         // Change the title
-        $this->administrator->setTitle("Add group");
+        $this->administrator->setTitle(lang('add_group', 'store'));
 
         $data = array(
             'url' => $this->template->page_url,
@@ -62,7 +62,7 @@ class Admin_items extends MX_Controller
         $output = $this->template->loadPage("admin_add_group.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Add group', $output);
+        $content = $this->administrator->box(lang('add_group', 'store'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/store/js/admin_items.js");
@@ -81,7 +81,7 @@ class Admin_items extends MX_Controller
         $data["orderNumber"] = $this->input->post("order");
 
         if (!$data['title']) {
-            die("Title can't be empty");
+            die(lang('title_cant_be_empty', 'store'));
         }
 
         $this->items_model->addGroup($data);
@@ -102,7 +102,7 @@ class Admin_items extends MX_Controller
         requirePermission("canAddGroups");
 
         // Change the title
-        $this->administrator->setTitle("Edit group");
+        $this->administrator->setTitle(lang('edit_group', 'store'));
 
         $group = $this->items_model->getGroup($id);
 
@@ -115,7 +115,7 @@ class Admin_items extends MX_Controller
         $output = $this->template->loadPage("admin_edit_group.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Edit group', $output);
+        $content = $this->administrator->box(lang('edit_group', 'store'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/store/js/admin_items.js");
@@ -127,7 +127,7 @@ class Admin_items extends MX_Controller
         requirePermission("canAddItems");
 
         // Change the title
-        $this->administrator->setTitle("Add item");
+        $this->administrator->setTitle(lang('add_item', 'store'));
 
         $data = [
             'url' => $this->template->page_url,
@@ -139,7 +139,7 @@ class Admin_items extends MX_Controller
         $output = $this->template->loadPage("admin_add_item.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Add item', $output);
+        $content = $this->administrator->box(lang('add_item', 'store'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/store/js/admin_items.js");
@@ -247,15 +247,15 @@ class Admin_items extends MX_Controller
         $data["icon"] = $this->input->post("icon");
 
         if (!is_numeric(preg_replace("/,/", "", $data["itemid"]))) {
-            die("Invalid item ID");
+            die(lang('invalid_item_id', 'store'));
         }
 
-		if ($data["itemcount"] == '' || empty($data["itemcount"]) || is_null($data["itemcount"])) {
+        if ($data["itemcount"] == '' || empty($data["itemcount"]) || is_null($data["itemcount"])) {
             $data["itemcount"] = 1;
         }
 
-		if ($data["group"] == 0) {
-            die("Group can't be empty");
+        if ($data["group"] == 0) {
+            die(lang('group_cant_be_empty', 'store'));
         }
 
         if (preg_match("/,/", $data["itemid"])) {
@@ -269,7 +269,7 @@ class Admin_items extends MX_Controller
             $item_data = $this->realms->getRealm($data["realm"])->getWorld()->getItem($data["itemid"]);
 
             if (!$item_data || empty($item_data) || is_null($item_data) || $item_data == 'empty') {
-                die("Invalid item");
+                die(lang('invalid_item', 'store'));
             }
 
             $post_name = $this->input->post('name');
@@ -302,7 +302,7 @@ class Admin_items extends MX_Controller
         $item = $this->items_model->getItem($id);
 
         if (!$item) {
-            show_error("There is no item with ID " . $id, 400);
+            show_error(lang('no_item_with_id', 'store') . $id, 400);
 
             die();
         }
@@ -321,7 +321,7 @@ class Admin_items extends MX_Controller
         $output = $this->template->loadPage("admin_edit_item.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('<a href="' . $this->template->page_url . 'store/admin_items">Items</a> &rarr; ' . $item['name'], $output);
+        $content = $this->administrator->box('<a href="' . $this->template->page_url . 'store/admin_items">' . lang('items', 'store') . '</a> &rarr; ' . $item['name'], $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/store/js/admin_items.js");
@@ -354,7 +354,7 @@ class Admin_items extends MX_Controller
         $this->cache->delete('store_items.cache');
 
         // Add log
-		$this->dblogger->createLog("admin", "edit", "Edited item", ['Item' => $data['name']]);
+        $this->dblogger->createLog("admin", "edit", "Edited item", ['Item' => $data['name']]);
 
         Events::trigger('onEditItemStore', $id, $data);
 
@@ -372,18 +372,18 @@ class Admin_items extends MX_Controller
         requirePermission("canEditGroups");
 
         if (!$id || !is_numeric($id)) {
-            die('No ID');
+            die(lang('no_id', 'store'));
         }
 
         $data["title"] = $this->input->post("title");
         $data["orderNumber"] = $this->input->post("order");
 
         if (!$data["title"]) {
-            die('Title can\'t be empty!');
+            die(lang('title_cant_be_empty', 'store'));
         }
 
         if (!$data["orderNumber"]) {
-            die('Order number can\'t be empty!');
+            die(lang('order_cant_be_empty', 'store'));
         }
 
         $this->items_model->editGroup($id, $data);

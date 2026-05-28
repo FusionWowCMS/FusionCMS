@@ -25,7 +25,7 @@ class Ucpmenu extends MX_Controller
     public function index()
     {
         //Set the title to menu
-        $this->administrator->setTitle("UCP Menu links");
+        $this->administrator->setTitle(lang('admin_ucp_menu_links', 'admin'));
 
         $links = $this->ucpmenu_model->getMenuLinks();
 
@@ -71,7 +71,7 @@ class Ucpmenu extends MX_Controller
         $output = $this->template->loadPage('menu/ucp_menu.tpl', $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('UCP Menu links', $output);
+        $content = $this->administrator->box(lang('admin_ucp_menu_links', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, 'modules/admin/js/ucp_menu.js');

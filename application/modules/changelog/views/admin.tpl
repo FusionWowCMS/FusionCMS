@@ -1,6 +1,6 @@
 <div class="card" id="main_changelog">
 	<div class="card-header">
-		Changes (<div style="display:inline;" id="changelog_count">{if !$changes}0{else}{count($changes)}{/if}</div>)
+		{lang('changes', 'changelog')} (<div style="display:inline;" id="changelog_count">{if !$changes}0{else}{count($changes)}{/if}</div>)
 	
 	{if hasPermission("canAddCategory")}
 		<span>
@@ -39,10 +39,10 @@
 				<table class="table table-responsive-md" id="headline_{$category.id}">
 					<thead>
 						<tr>
-							<th>Change</th>
-							<th>User</th>
-							<th>Date</th>
-							<th style="text-align: center;">Action</th>
+							<th>{lang('change', 'changelog')}</th>
+							<th>{lang('user', 'changelog')}</th>
+							<th>{lang('date', 'changelog')}</th>
+							<th style="text-align: center;">{lang('action', 'changelog')}</th>
 						</tr>
 					</thead>
 					<tbody>

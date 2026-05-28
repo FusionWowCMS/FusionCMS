@@ -26,7 +26,7 @@ class Logging extends MX_Controller
     public function index()
     {
         //Set the title to menu
-        $this->administrator->setTitle("Logs");
+        $this->administrator->setTitle(lang('admin_logs', 'admin'));
 
         $logs = $this->dblogger->getLogs("", 0, 10);
 
@@ -48,7 +48,7 @@ class Logging extends MX_Controller
         $output = $this->template->loadPage("logging/logging.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Website logs', $output);
+        $content = $this->administrator->box(lang('admin_website_logs', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/logging.js");

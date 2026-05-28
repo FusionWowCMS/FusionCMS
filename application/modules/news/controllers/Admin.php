@@ -26,7 +26,7 @@ class Admin extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("News");
+        $this->administrator->setTitle(lang('news', 'news'));
 
         $articles = $this->news_model->getArticles(true);
 
@@ -53,7 +53,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("admin.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('News articles', $output);
+        $content = $this->administrator->box(lang('news_articles', 'news'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/news/js/admin.js");
@@ -64,7 +64,7 @@ class Admin extends MX_Controller
         requirePermission("canAddArticle");
 
         // Change the title
-        $this->administrator->setTitle('News - New');
+        $this->administrator->setTitle(lang('news_new', 'news'));
 
         // Prepare my data
         $data = array(
@@ -78,7 +78,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("admin_new.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Create article', $output);
+        $content = $this->administrator->box(lang('create_article', 'news'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/news/js/admin.js");

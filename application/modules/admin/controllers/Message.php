@@ -19,7 +19,7 @@ class Message extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Global maintenance");
+        $this->administrator->setTitle(lang('admin_global_maintenance', 'admin'));
 
         // Prepare my data
         $data = array(
@@ -34,7 +34,7 @@ class Message extends MX_Controller
         $output = $this->template->loadPage("message.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Global maintenance', $output);
+        $content = $this->administrator->box(lang('admin_global_maintenance', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, "modules/admin/css/message.css", "modules/admin/js/settings.js");

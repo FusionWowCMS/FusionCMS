@@ -23,7 +23,7 @@ class Admin_orders extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Orders");
+        $this->administrator->setTitle(lang('orders', 'store'));
 
         $completed = $this->store_model->getOrders(1);
         $failed = $this->store_model->getOrders(0);
@@ -40,8 +40,8 @@ class Admin_orders extends MX_Controller
                         $character = $this->realms->getRealm($item['realm'])->getCharacters()->getNameByGuid($value['character']);
                     }
 
-                    $completed[$k]['json'][$key]['itemName'] = $item ? $item['name'] : 'Unknown';
-                    $completed[$k]['json'][$key]['characterName'] = (isset($character)) ? $character : 'Unknown';
+                    $completed[$k]['json'][$key]['itemName'] = $item ? $item['name'] : lang('unknown', 'store');
+                    $completed[$k]['json'][$key]['characterName'] = (isset($character)) ? $character : lang('unknown', 'store');
                 }
             }
         }
@@ -58,8 +58,8 @@ class Admin_orders extends MX_Controller
                         $character = $this->realms->getRealm($item['realm'])->getCharacters()->getNameByGuid($value['character']);
                     }
 
-                    $failed[$k]['json'][$key]['itemName'] = $item ? $item['name'] : 'Unknown';
-                    $failed[$k]['json'][$key]['characterName'] = (isset($character)) ? $character : 'Unknown';
+                    $failed[$k]['json'][$key]['itemName'] = $item ? $item['name'] : lang('unknown', 'store');
+                    $failed[$k]['json'][$key]['characterName'] = (isset($character)) ? $character : lang('unknown', 'store');
                 }
             }
         }
@@ -75,7 +75,7 @@ class Admin_orders extends MX_Controller
         $output = $this->template->loadPage("admin_orders.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Orders', $output);
+        $content = $this->administrator->box(lang('orders', 'store'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/store/js/admin_orders.js");
@@ -95,7 +95,7 @@ class Admin_orders extends MX_Controller
                 $user_id = $this->user->getId($string);
 
                 if (!$user_id) {
-                    die("<span>Unknown account</span>");
+                    die("<span>" . lang('unknown_account', 'store') . "</span>");
                 }
 
                 $results = $this->store_model->findByUserId($type, $user_id);
@@ -104,7 +104,7 @@ class Admin_orders extends MX_Controller
             }
 
             if (!$results) {
-                die("<span>No matches</span>");
+                die("<span>" . lang('no_matches', 'store') . "</span>");
             }
 
             foreach ($results as $k => $v) {
@@ -118,8 +118,8 @@ class Admin_orders extends MX_Controller
                         $character = $this->realms->getRealm($item['realm'])->getCharacters()->getNameByGuid($value['character']);
                     }
 
-                    $results[$k]['json'][$key]['itemName'] = $item ? $item['name'] : 'Unknown';
-                    $results[$k]['json'][$key]['characterName'] = (isset($character)) ? $character : 'Unknown';
+                    $results[$k]['json'][$key]['itemName'] = $item ? $item['name'] : lang('unknown', 'store');
+                    $results[$k]['json'][$key]['characterName'] = (isset($character)) ? $character : lang('unknown', 'store');
                 }
             }
 
@@ -139,7 +139,7 @@ class Admin_orders extends MX_Controller
         requirePermission("canRefundOrders");
 
         if (!$id || !is_numeric($id)) {
-            die("Bad ID");
+            die(lang('bad_id', 'store'));
         }
 
         $order = $this->store_model->getOrder($id);
@@ -153,7 +153,7 @@ class Admin_orders extends MX_Controller
 
             Events::trigger('onRefundStore', $id, $order['user_id'], $order['vp_cost'], $order['dp_cost']);
         } else {
-            die("Invalid order");
+            die(lang('invalid_order', 'store'));
         }
 
         die("done");

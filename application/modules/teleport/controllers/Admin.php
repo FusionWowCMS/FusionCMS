@@ -23,7 +23,7 @@ class Admin extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Teleport locations");
+        $this->administrator->setTitle(lang('teleport_locations', 'teleport'));
 
         $teleport_locations = $this->teleport_model->getTeleportLocations();
 
@@ -48,7 +48,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("teleport_admin.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Teleport locations', $output);
+        $content = $this->administrator->box(lang('teleport_locations', 'teleport'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/teleport/js/teleport_admin.js");
@@ -73,11 +73,11 @@ class Admin extends MX_Controller
         $data["required_faction"] = $this->input->post("required_faction");
 
         if (empty($data["name"])) {
-            die("Name can't be empty");
+            die(lang('name_cant_be_empty', 'teleport'));
         }
 
         if (!is_numeric($data["x"]) || !is_numeric($data["y"]) || !is_numeric($data["z"]) || !is_numeric($data["orientation"])) {
-            die("Teleport location can't be empty");
+            die(lang('location_cant_be_empty', 'teleport'));
         }
 
         $this->teleport_model->add($data);
@@ -105,7 +105,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("teleport_admin_add.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('New teleport location', $output);
+        $content = $this->administrator->box(lang('new_teleport_location', 'teleport'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/teleport/js/teleport_admin.js");
@@ -123,7 +123,7 @@ class Admin extends MX_Controller
         $teleport_location = $this->teleport_model->teleportLocationExists($id);
 
         if (!$teleport_location) {
-            show_error("There is no teleport location with ID " . $id, 400);
+            show_error(lang('no_location_with_id', 'teleport') . $id, 400);
 
             die();
         }
@@ -142,7 +142,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("teleport_admin_edit.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('<a href="' . $this->template->page_url . 'teleport/admin">Teleport locations</a> &rarr; ' . $teleport_location['name'], $output);
+        $content = $this->administrator->box('<a href="' . $this->template->page_url . 'teleport/admin">' . lang('teleport_locations', 'teleport') . '</a> &rarr; ' . $teleport_location['name'], $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/teleport/js/teleport_admin.js");
@@ -154,7 +154,7 @@ class Admin extends MX_Controller
         requirePermission("canEdit");
 
         if (!$id || !is_numeric($id)) {
-            die('No ID');
+            die(lang('no_id', 'teleport'));
         }
 
         $data["name"] = $this->input->post("name");
@@ -192,7 +192,7 @@ class Admin extends MX_Controller
         $this->teleport_model->delete($id);
 
         // Add log
-		$this->dblogger->createLog("admin", "delete", "Deleted teleport location", ['ID' => $id]);
+        $this->dblogger->createLog("admin", "delete", "Deleted teleport location", ['ID' => $id]);
 
         Events::trigger('onDeleteTeleport', $id);
     }

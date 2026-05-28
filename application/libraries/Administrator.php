@@ -273,6 +273,7 @@ class Administrator
             "avatar"    => $this->CI->user->getAvatar($this->CI->user->getId()),
             "groups" => $this->CI->acl_model->getGroupsByUser(),
             "notifications" => $notifications,
+            "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
             "cdn_link" => $this->CI->config->item('cdn') === true ? $this->CI->config->item('cdn_link') : null
         ];
 
@@ -370,6 +371,7 @@ class Administrator
                         "isOnline" => $this->CI->user->isOnline(),
                         "username" => $this->CI->user->getUsername(),
                         "avatar"    => $this->CI->user->getAvatar($this->CI->user->getId()),
+                        "isRTL" => $this->CI->language->getLanguage() == 'persian' || $this->CI->language->getClientData() == 'persian',
                         "cdn_link" => $this->CI->config->item('cdn') === true ? $this->CI->config->item('cdn_link') : null
                     ];
 

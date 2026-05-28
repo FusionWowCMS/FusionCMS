@@ -5,7 +5,7 @@
 	<table class="table table-responsive-md table-hover">
 		<thead>
 			<tr>
-				<th>ID</th>
+				<th>{lang('id', 'admin')}</th>
 				<th>{lang('name', 'admin')}</th>
 				<th style="text-align: center;">{lang('action', 'admin')}</th>
 			</tr>

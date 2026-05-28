@@ -23,7 +23,7 @@ class Admin extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Pages");
+        $this->administrator->setTitle(lang('pages', 'page'));
 
         $pages = $this->page_model->getPages();
 
@@ -48,7 +48,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("admin.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Custom pages', $output);
+        $content = $this->administrator->box(lang('custom_pages', 'page'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/page/js/admin.js");
@@ -59,7 +59,7 @@ class Admin extends MX_Controller
         requirePermission("canAdd");
 
         // Change the title
-        $this->administrator->setTitle('Page - New');
+        $this->administrator->setTitle(lang('page_new', 'page'));
 
         // Prepare my data
         $data = array(
@@ -73,7 +73,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("admin_new.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('New Page', $output);
+        $content = $this->administrator->box(lang('new_page', 'page'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/page/js/admin.js");

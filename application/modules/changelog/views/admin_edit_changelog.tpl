@@ -1,5 +1,5 @@
 <div class="box big">
-    <div class="card-header">Edit change</div>
+    <div class="card-header">{lang('edit_change', 'changelog')}</div>
     <div class="card-body">
         <form onSubmit="Changelog.save(this, {$changelog.change_id}); return false" id="submit_form">
             <div class="form-group row mb-3">

@@ -81,7 +81,7 @@ class Errorlogs extends MX_Controller
 
         $output = $this->template->loadPage("errorlogs.tpl", $data);
 
-        $content = $this->administrator->box('Error logs', $output);
+        $content = $this->administrator->box(lang('admin_error_logs', 'admin'), $output);
 
         $this->administrator->view($content);
     }

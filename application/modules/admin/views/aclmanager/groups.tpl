@@ -8,7 +8,7 @@
 		<table class="table table-responsive-md table-hover">
 		<thead>
 			<tr>
-				<th>ID</th>
+				<th>{lang('id', 'admin')}</th>
 				<th>{lang('name', 'admin')}</th>
 				<th>{lang('priority', 'admin')}</th>
 				<th>{lang('members', 'admin')}</th>

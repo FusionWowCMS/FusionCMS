@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        Edit article <a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="{$url}news/admin">Back</a>
+        {lang('edit_article', 'news')} <a class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md pull-right" href="{$url}news/admin">{lang('back', 'news')}</a>
     </div>
 
     <div class="card-body">
@@ -18,14 +18,14 @@
                         <div class="tab-pane {if $language@iteration == 1}active{/if}" id="article_{$flag}">
                             <form role="form" onSubmit="News.send(); return false">
                                 <div class="form-group row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="headline_{$flag}">Headline</label>
+                                    <label class="col-sm-2 col-form-label" for="headline_{$flag}">{lang('headline', 'news')}</label>
                                     <div class="col-sm-10">
                                         <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" id="headline_{$flag}" __headline__="{$language}" value="{if isset($article.headline[$language])}{$article.headline[$language]}{/if}">
                                     </div>
                                 </div>
                             </form>
                             <div class="form-group row mb-3">
-                                <label class="col-sm-2 col-form-label" for="description_{$flag}">Content</label>
+                                <label class="col-sm-2 col-form-label" for="description_{$flag}">{lang('content', 'news')}</label>
                                 <div class="col-sm-10">
                                     <textarea name="description_{$flag}" class="tinymce_{$flag} form-control max-h-52 nui-focus border-muted-300 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full border bg-white font-monospace transition-all duration-300 focus:shadow-lg disabled:cursor-not-allowed disabled:opacity-75 min-h-[2.5rem] text-sm leading-[1.6] rounded-xl resize-none p-2" id="description_{$flag}" __content__="{$language}" cols="30" rows="10">{if isset($article.content[$language])}{$article.content[$language]}{/if}</textarea>
                                 </div>
@@ -38,7 +38,7 @@
 
         <form role="form" onSubmit="News.send(this, {$article.id}); return false">
             <div class="form-group row mb-3">
-                <label class="col-sm-2 col-form-label" for="headline">Article settings</label>
+                <label class="col-sm-2 col-form-label" for="headline">{lang('article_settings', 'news')}</label>
                 <div class="col-sm-10">
                     <label for="comments" class="flex cursor-pointer items-center">
 						<span class="relative block">
@@ -48,7 +48,7 @@
 							</svg>
 						</span>
                         <span class="text-muted-400 relative ms-3 cursor-pointer select-none font-sans text-sm"></span>
-                        Allow comments
+                        {lang('allow_comments', 'news')}
                     </label>
                 </div>
             </div>
@@ -56,20 +56,20 @@
 
         <form role="form" onSubmit="News.send(this, {$article.id}); return false" enctype="multipart/form-data">
             <div class="form-group row mb-3">
-                <label class="col-sm-2 col-form-label">Thumbnail Type</label>
+                <label class="col-sm-2 col-form-label">{lang('thumbnail_type', 'news')}</label>
                 <div class="col-sm-10">
                     <select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded"
                             id="type" onChange="News.changeType(this)">
-                        <option value="0">None</option>
-                        <option value="1" {if $article.type == 1}selected{/if}>Image</option>
-                        <option value="2" {if $article.type == 2}selected{/if}>Video</option>
+                        <option value="0">{lang('none', 'news')}</option>
+                        <option value="1" {if $article.type == 1}selected{/if}>{lang('image', 'news')}</option>
+                        <option value="2" {if $article.type == 2}selected{/if}>{lang('video', 'news')}</option>
                     </select>
                 </div>
             </div>
 
             <div id="video" {if $article.type == 2}style="display:block" {else}style="display:none;"{/if}>
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label" for="type_video">Video url</label>
+                    <label class="col-sm-2 col-form-label" for="type_video">{lang('video_url', 'news')}</label>
                     <div class="col-sm-10">
                         <input class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-500 dark:focus:border-muted-700 peer w-full border bg-white font-monospace transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-75 px-2 h-10 py-2 text-sm leading-5 px-3 rounded" type="text" id="type_video" name="type_video" value="{$article.type_content}">
                     </div>
@@ -78,17 +78,16 @@
 
             <div id="image" {if $article.type == 1}style="display:block" {else}style="display:none;"{/if}>
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label" for="type_image">Thumbnail(s)</label>
+                    <label class="col-sm-2 col-form-label" for="type_image">{lang('thumbnails', 'news')}</label>
                     <div class="col-sm-10">
-                        <div class="row" data-type="imagesloader" data-modifyimagetext="Modify image">
+                        <div class="row" data-type="imagesloader" data-modifyimagetext="{lang('modify_image', 'news')}">
 
                             <!-- Progress bar -->
                             <div class="col-12 order-1 mt-2">
                                 <div data-type="progress" class="progress" style="height: 25px; display:none;">
                                     <div data-type="progressBar"
                                          class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                                         role="progressbar" style="width: 100%;">Load in progress...
-                                    </div>
+                                         role="progressbar" style="width: 100%;">{lang('load_in_progress', 'news')}</div>
                                 </div>
                             </div>
 
@@ -100,14 +99,14 @@
                                         <span class="fa fa-2x fa-spin fa-spinner"></span>
                                     </div>
                                     <img data-type="preview" class="btn btn-dark ratio-img img-fluid p-2 image border dashed rounded" src="" style="display: none; cursor: default;">
-                                    <span class="badge badge-pill badge-success p-2 w-50 main-tag" style="display:none;">Main</span>
+                                    <span class="badge badge-pill badge-success p-2 w-50 main-tag" style="display:none;">{lang('main', 'news')}</span>
                                 </div>
 
                                 <!-- Buttons -->
                                 <div data-type="image-buttons" class="row justify-content-center mt-2">
-                                    <button data-type="add" class="btn btn-outline-success w-auto" type="button"><i class="fa fa-camera m2-2"></i>Add</button>
+                                    <button data-type="add" class="btn btn-outline-success w-auto" type="button"><i class="fa fa-camera m2-2"></i>{lang('add', 'news')}</button>
                                     <button data-type="btn-modify" type="button" class="btn btn-outline-success m-0 w-auto" data-toggle="popover" data-placement="right" style="display:none;">
-                                        <i class="fa fa-pencil-alt me-2"></i>Modify
+                                        <i class="fa fa-pencil-alt me-2"></i>{lang('modify', 'news')}
                                     </button>
                                 </div>
                             </div>
@@ -118,22 +117,22 @@
                                     <div class="row">
                                         <div class="col p-0">
                                             <button data-operation="main" class="btn btn-block btn-success btn-sm rounded-pill" type="button">
-                                                <span class="fa fa-angle-double-up me-2"></span>Main
+                                                <span class="fa fa-angle-double-up me-2"></span>{lang('main', 'news')}
                                             </button>
                                         </div>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-6 p-0 pe-1">
-                                            <button data-operation="left" class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button"><span class="fa fa-angle-left me-2"></span>Left
+                                            <button data-operation="left" class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button"><span class="fa fa-angle-left me-2"></span>{lang('left', 'news')}
                                             </button>
                                         </div>
                                         <div class="col-6 p-0 ps-1">
-                                            <button data-operation="right" class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button">Right<span class="fa fa-angle-right ms-2"></span>
+                                            <button data-operation="right" class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button">{lang('right', 'news')}<span class="fa fa-angle-right ms-2"></span>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="row mt-2">
-                                        <button data-operation="remove" class="btn btn-outline-danger btn-sm btn-block" type="button"><span class="fa fa-times me-2"></span>Remove</button>
+                                        <button data-operation="remove" class="btn btn-outline-danger btn-sm btn-block" type="button"><span class="fa fa-times me-2"></span>{lang('remove', 'news')}</button>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +145,7 @@
                 <div id="image_preview"></div>
             </div>
 
-            <button type="submit" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md">Submit article</button>
+            <button type="submit" class="relative font-sans font-normal text-sm inline-flex items-center justify-center leading-5 no-underline h-8 px-3 py-2 space-x-1 border nui-focus transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:enabled:shadow-none text-muted-700 border-muted-300 dark:text-white dark:bg-muted-700 dark:border-muted-600 dark:hover:enabled:bg-muted-600 hover:enabled:bg-muted-50 dark:active:enabled:bg-muted-700/70 active:enabled:bg-muted-100 rounded-md">{lang('submit_article', 'news')}</button>
         </form>
     </div>
 </div>

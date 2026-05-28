@@ -109,7 +109,7 @@ class Updater extends MX_Controller
     public function index()
     {
         // Set page title
-        $this->administrator->setTitle('Updater');
+        $this->administrator->setTitle(lang('admin_updater', 'admin'));
 
         // Get last update log
         ($log = $this->dblogger->getLogs('updater', 0, 1)) ? $log = reset($log) : $log = ['time' => false];
@@ -152,7 +152,7 @@ class Updater extends MX_Controller
         $data['last_checked'] = date('Y-m-d H:i:s', filemtime($this->cache_path . $this->cache_file));
 
         // Render page
-        $this->administrator->view($this->administrator->box('Updater', $this->template->loadPage('updater.tpl', $data)), false, 'modules/admin/js/updater.js');
+        $this->administrator->view($this->administrator->box(lang('admin_updater', 'admin'), $this->template->loadPage('updater.tpl', $data)), false, 'modules/admin/js/updater.js');
     }
 
     /**

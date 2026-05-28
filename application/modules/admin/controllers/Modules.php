@@ -21,7 +21,7 @@ class Modules extends MX_Controller
 
     public function index()
     {
-        $this->administrator->setTitle("Modules");
+        $this->administrator->setTitle(lang('admin_modules', 'admin'));
 
         $this->administrator->loadModules();
 
@@ -33,7 +33,7 @@ class Modules extends MX_Controller
 
         $output = $this->template->loadPage("modules.tpl", $data);
 
-        $content = $this->administrator->box('Modules', $output);
+        $content = $this->administrator->box(lang('admin_modules', 'admin'), $output);
 
         $this->administrator->view($content, "modules/admin/css/modules.css", "modules/admin/js/modules.js");
     }

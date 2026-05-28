@@ -23,7 +23,7 @@ class Admin extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Topsites");
+        $this->administrator->setTitle(lang('topsites', 'vote'));
 
         $topsites = $this->vote_model->getVoteSites();
 
@@ -37,7 +37,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("admin.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Topsites', $output);
+        $content = $this->administrator->box(lang('topsites', 'vote'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/vote/js/admin.js");
@@ -58,11 +58,11 @@ class Admin extends MX_Controller
         $data["callback_enabled"] = $this->input->post("callback_enabled");
 
         if (empty($data["vote_url"])) {
-            die("Vote URL can't be empty");
+            die(lang('vote_url_cant_be_empty', 'vote'));
         }
 
         if (empty($data["vote_sitename"])) {
-            die("Vote name can't be empty");
+            die(lang('vote_name_cant_be_empty', 'vote'));
         }
 
         $this->vote_model->add($data);
@@ -81,7 +81,7 @@ class Admin extends MX_Controller
         requirePermission("canCreate");
 
         // Change the title
-        $this->administrator->setTitle('New topsite');
+        $this->administrator->setTitle(lang('new_topsite', 'vote'));
 
         // Prepare my data
         $data = [
@@ -92,7 +92,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("admin_add.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('New topsite', $output);
+        $content = $this->administrator->box(lang('new_topsite', 'vote'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/vote/js/admin.js");
@@ -115,7 +115,7 @@ class Admin extends MX_Controller
         $topsite = $this->vote_model->getTopsite($id);
 
         if (!$topsite) {
-            show_error("There is no topsite with ID " . $id, 400);
+            show_error(lang('no_topsite_with_id', 'vote') . $id, 400);
         }
 
         // Change the title
@@ -141,7 +141,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("admin_edit.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('<a href="' . $this->template->page_url . 'vote/admin">Topsites</a> &rarr; ' . $topsite['vote_sitename'], $output);
+        $content = $this->administrator->box('<a href="' . $this->template->page_url . 'vote/admin">' . lang('topsites', 'vote') . '</a> &rarr; ' . $topsite['vote_sitename'], $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/vote/js/admin.js");

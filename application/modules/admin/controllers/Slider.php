@@ -24,7 +24,7 @@ class Slider extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Manage slider");
+        $this->administrator->setTitle(lang('admin_manage_slider', 'admin'));
 
         $slides = $this->cms_model->getSlides();
 
@@ -56,7 +56,7 @@ class Slider extends MX_Controller
         $output = $this->template->loadPage("slider/slider.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Slides', $output);
+        $content = $this->administrator->box(lang('admin_slides', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/slider.js");
@@ -119,7 +119,7 @@ class Slider extends MX_Controller
     public function new()
     {
         // Change the title
-        $this->administrator->setTitle('Add slider');
+        $this->administrator->setTitle(lang('admin_add_slider', 'admin'));
 
         // Prepare my data
         $data = array(
@@ -130,7 +130,7 @@ class Slider extends MX_Controller
         $output = $this->template->loadPage("slider/add_slider.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Add slider', $output);
+        $content = $this->administrator->box(lang('admin_add_slider', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/slider.js");

@@ -25,7 +25,7 @@ class Email_template extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Email templates");
+        $this->administrator->setTitle(lang('admin_email_templates', 'admin'));
 
         $templates = $this->email_template_model->getTemplates();
 
@@ -39,7 +39,7 @@ class Email_template extends MX_Controller
         $output = $this->template->loadPage("email_template/index.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Email templates', $output);
+        $content = $this->administrator->box(lang('admin_email_templates', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/email_template.js");
@@ -48,7 +48,7 @@ class Email_template extends MX_Controller
     public function edit($id)
     {
         // Change the title
-        $this->administrator->setTitle("Edit template");
+        $this->administrator->setTitle(lang('admin_edit_template', 'admin'));
 
         if (!$id || !is_numeric($id)) {
             header('Location: ' . pageURL . 'admin/email_templates');
@@ -70,7 +70,7 @@ class Email_template extends MX_Controller
         $output = $this->template->loadPage("email_template/edit.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Edit template', $output);
+        $content = $this->administrator->box(lang('admin_edit_template', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/email_template.js");

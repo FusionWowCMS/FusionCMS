@@ -26,7 +26,7 @@ class Sidebox extends MX_Controller
         $this->sideboxModules = $this->getSideboxModules();
 
         // Change the title
-        $this->administrator->setTitle("Sideboxes");
+        $this->administrator->setTitle(lang('admin_sideboxes', 'admin'));
 
         $sideboxes = $this->sidebox_model->getSideboxes();
 
@@ -56,7 +56,7 @@ class Sidebox extends MX_Controller
         $output = $this->template->loadPage("sidebox/sidebox.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('', $output);
+        $content = $this->administrator->box(lang('admin_sideboxes', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/sidebox.js");
@@ -136,7 +136,7 @@ class Sidebox extends MX_Controller
         requirePermission('editSideboxes');
 
         // Set the title
-        $this->administrator->setTitle('Add Sidebox');
+        $this->administrator->setTitle(lang('admin_add_sidebox', 'admin'));
 
         // Fill sidebox modules
         $this->sideboxModules = $this->getSideboxModules();
@@ -152,7 +152,7 @@ class Sidebox extends MX_Controller
         $output = $this->template->loadPage('sidebox/add_sidebox.tpl', $data);
 
         // Put page view in the main box with a headline
-        $content = $this->administrator->box('', $output);
+        $content = $this->administrator->box(lang('admin_add_sidebox', 'admin'), $output);
 
         // Output page content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, 'modules/admin/js/sidebox.js');
@@ -201,7 +201,7 @@ class Sidebox extends MX_Controller
         $output = $this->template->loadPage('sidebox/edit_sidebox.tpl', $data);
 
         // Put page view in the main box with a headline
-        $content = $this->administrator->box('', $output);
+        $content = $this->administrator->box(lang('edit', 'admin'), $output);
 
         // Output page content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, 'modules/admin/js/sidebox.js');

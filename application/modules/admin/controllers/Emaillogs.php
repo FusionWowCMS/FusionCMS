@@ -27,7 +27,7 @@ class Emaillogs extends MX_Controller
 
         $output = $this->template->loadPage("emaillogs.tpl", $data);
 
-        $content = $this->administrator->box('Email logs', $output);
+        $content = $this->administrator->box(lang('admin_email_logs', 'admin'), $output);
 
         $this->administrator->view($content, false, false);
     }

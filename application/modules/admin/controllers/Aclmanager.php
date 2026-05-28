@@ -25,7 +25,7 @@ class Aclmanager extends MX_Controller
         $output = $this->template->loadPage("aclmanager/index.tpl");
 
         // Output the content
-        $output = $this->administrator->box("User groups &amp; permissions", $output);
+        $output = $this->administrator->box(lang('admin_user_groups_amp_permissions', 'admin'), $output);
         $this->administrator->view($output, "modules/admin/css/aclmanager.css");
     }
 

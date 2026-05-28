@@ -6,7 +6,7 @@
         <table class="table table-bordered table-striped" id="acclist">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>{lang('id', 'admin')}</th>
                     <th>{lang('username', 'admin')}</th>
                     <th>{lang('email', 'admin')}</th>
                     <th>{lang('join_date', 'admin')}</th>

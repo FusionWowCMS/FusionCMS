@@ -25,7 +25,7 @@ class Cachemanager extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Manage cache");
+        $this->administrator->setTitle(lang('admin_manage_cache', 'admin'));
 
         // Prepare my data
         $data = array(
@@ -36,7 +36,7 @@ class Cachemanager extends MX_Controller
         $output = $this->template->loadPage("cachemanager/cache.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Manage cache', $output);
+        $content = $this->administrator->box(lang('admin_manage_cache', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/cache.js");

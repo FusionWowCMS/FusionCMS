@@ -18,7 +18,7 @@ class Languages extends MX_Controller
      */
     public function index($default = false)
     {
-        $this->administrator->setTitle("Available languages");
+        $this->administrator->setTitle(lang('admin_available_languages', 'admin'));
 
         $data = array(
             'languages' => $this->language->getAllLanguages(),
@@ -27,7 +27,7 @@ class Languages extends MX_Controller
 
         $output = $this->template->loadPage("languages/languages.tpl", $data);
 
-        $content = $this->administrator->box('Available languages', $output);
+        $content = $this->administrator->box(lang('admin_available_languages', 'admin'), $output);
 
         $this->administrator->view($content, false, "modules/admin/js/languages.js");
     }

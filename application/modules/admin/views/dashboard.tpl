@@ -218,24 +218,24 @@
                                         <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md p-6" id="graphSelectorWrapper">
                                             <div class="flex gap-8">
                                                 <div>
-                                                    <span class="text-muted-400 font-sans text-xs">Unique this month</span>
+                                                    <span class="text-muted-400 font-sans text-xs">{lang('unique_this_month', 'admin')}</span>
                                                     <p class="text-primary-500 font-sans text-lg font-medium"> {$unique.month} </p>
                                                 </div>
                                                 <div>
-                                                    <span class="text-muted-400 font-sans text-xs">Views today</span>
+                                                    <span class="text-muted-400 font-sans text-xs">{lang('views_today', 'admin')}</span>
                                                     <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> {$views.today} </p>
                                                 </div>
                                                 <div>
-                                                    <span class="text-muted-400 font-sans text-xs">Views this month</span>
+                                                    <span class="text-muted-400 font-sans text-xs">{lang('views_this_month', 'admin')}</span>
                                                     <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> {$views.month} </p>
                                                 </div>
                                             </div>
                                             <h2>
-                                                Visitors:
+                                                {lang('visitors', 'admin')}:
                                                 <small class="float-end">
                                                     <select class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="graphSelector">
-                                                        <option value="Monthly">Monthly</option>
-                                                        <option value="Daily" selected>Daily</option>
+                                                        <option value="Monthly">{lang('monthly', 'admin')}</option>
+                                                        <option value="Daily" selected>{lang('daily', 'admin')}</option>
                                                     </select>
                                                 </small>
                                             </h2>
@@ -287,10 +287,10 @@
         {/foreach}];
     const options = {
         series: [{
-            name: 'Views of this year',
+            name: '{lang('views_of_this_year', 'admin')}',
             data: thisYearMonthlyData
         },{
-            name: 'Views of last year',
+            name: '{lang('views_of_last_year', 'admin')}',
             data: lastYearMonthData
         }],
         chart: {
@@ -334,13 +334,13 @@
 
     const options2 = {
         series: [{
-            name: 'Views of this month',
+            name: '{lang('views_of_this_month', 'admin')}',
             data: thisMonthDailyData
         },{
-            name: 'Views of last month',
+            name: '{lang('views_of_last_month', 'admin')}',
             data: lastMonthDailyData
         },{
-            name: 'Views of two month ago',
+            name: '{lang('views_of_two_month_ago', 'admin')}',
             data: twoMonthAgoDailyData
         }],
         colors: ['#8b5cf6', '#0ea5e9', '#14b8a6'],
@@ -430,7 +430,7 @@
                                         <div>
                                             <div class="mb-4 flex items-center justify-between">
                                                 <h3 class="font-heading text-sm font-semibold leading-tight text-muted-800 dark:text-white">
-                                                    <span>System information</span>
+                                                    <span>{lang('system_information', 'admin')}</span>
                                                 </h3>
                                             </div>
                                             <div>
@@ -438,7 +438,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> PHP version </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('php_version_label', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$php_version}</span></div>
                                                         </a>
@@ -446,7 +446,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> CodeIgniter version </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('codeigniter_version', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$ci_version}</span></div>
                                                         </a>
@@ -454,7 +454,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> Smarty version </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('smarty_version_label', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$smarty_version}</span></div>
                                                         </a>
@@ -462,7 +462,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> CMS version </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('cms_version', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$version}</span></div>
                                                         </a>
@@ -470,7 +470,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> OS </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('os_label', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$os}</span></div>
                                                         </a>
@@ -478,7 +478,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> PHP SAPI </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('php_sapi_label', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$php_sapi}</span></div>
                                                         </a>
@@ -486,7 +486,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> Server Software </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('server_software_label', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$server_software}</span></div>
                                                         </a>
@@ -494,7 +494,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> Page speed </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('page_speed', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$benchmark}</span></div>
                                                         </a>
@@ -502,7 +502,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> Memory usage </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('memory_usage', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$memory_usage}</span></div>
                                                         </a>
@@ -515,7 +515,7 @@
                                         <div>
                                             <div class="mb-4 flex items-center justify-between">
                                                 <h3 class="font-heading text-sm font-semibold leading-tight text-muted-800 dark:text-white">
-                                                    <span>Theme information</span>
+                                                    <span>{lang('theme_information', 'admin')}</span>
                                                 </h3>
                                             </div>
                                             <div>
@@ -523,7 +523,7 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> Name </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('name', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$theme.name}</span></div>
                                                         </a>
@@ -531,14 +531,14 @@
                                                     <li>
                                                         <a class="router-link-active router-link-exact-active group flex items-center justify-between">
                                                             <p class="font-alt text-sm font-normal leading-normal leading-normal">
-                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> Author </span>
+                                                                <span class="text-muted-500 dark:text-muted-400 group-hover:text-primary-500 transition-colors duration-300"> {lang('author', 'admin')} </span>
                                                             </p>
                                                             <div class="bg-muted-200 dark:bg-muted-700 text-muted-500 dark:text-muted-200 flex h-7 w-auto items-center justify-center rounded-full text-xs p-2"><span>{$theme.author}</span></div>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         {if hasPermission("changeTheme")}
-                                                            <a href="{$url}admin/theme" class="router-link-active router-link-exact-active bg-muted-100 hover:bg-muted-200 dark:bg-muted-700 dark:hover:bg-muted-900 text-primary-500 rounded-lg px-4 py-2 font-sans text-sm font-medium underline-offset-4 transition-colors duration-300 hover:underline">Change theme</a>
+                                                            <a href="{$url}admin/theme" class="router-link-active router-link-exact-active bg-muted-100 hover:bg-muted-200 dark:bg-muted-700 dark:hover:bg-muted-900 text-primary-500 rounded-lg px-4 py-2 font-sans text-sm font-medium underline-offset-4 transition-colors duration-300 hover:underline">{lang('change_theme', 'admin')}</a>
                                                         {/if}
                                                     </li>
                                                 </ul>
@@ -578,11 +578,11 @@
                                                                         <div class="mt-auto">
                                                                             <div class="border-muted-200 dark:border-muted-700 flex w-full border-t pt-4 text-center">
                                                                                 <div class="border-muted-200 dark:border-muted-700 flex-1 border-r px-2">
-                                                                                    <span class="text-muted-400 font-sans text-xs"> Total players online </span>
+                                                                                    <span class="text-muted-400 font-sans text-xs"> {lang('total_players_online', 'admin')} </span>
                                                                                     <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> ${ realm.online_players } </p>
                                                                                 </div>
                                                                                 <div class="flex-1 px-2">
-                                                                                    <span class="text-muted-400 font-sans text-xs"> Uptime </span>
+                                                                                    <span class="text-muted-400 font-sans text-xs"> {lang('uptime', 'admin')} </span>
                                                                                     <p class="text-muted-800 dark:text-muted-100 font-sans text-lg font-medium"> ${ realm.uptime } </p>
                                                                                 </div>
                                                                             </div>
@@ -608,7 +608,7 @@
             $.get(Config.URL + "admin/checkSoap", function(data) {
                 try {
                     if(data.includes("Something")) {
-                        $("#soapcheck").html('<div class="relative"><div class="nui-card nui-card-curved nui-card-white p-6"><div class="flex w-full flex-col gap-4 sm:flex-row"><svg data-v-26e5b7b0="" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="icon h-10 w-10 shrink-0" width="1em" height="1em" viewBox="0 0 256 256"><defs><linearGradient id="iconifyVue0" x1="99.687%" x2="39.836%" y1="15.801%" y2="97.438%"><stop offset="0%" stop-color="#0052CC"></stop><stop offset="92.3%" stop-color="#2684FF"></stop></linearGradient></defs><path fill="url(#iconifyVue0)" d="M75.793 117.95c-3.82-4.08-9.77-3.85-12.367 1.342L.791 244.565a7.488 7.488 0 0 0 6.697 10.838h87.228a7.22 7.22 0 0 0 6.699-4.14c18.808-38.89 7.413-98.018-25.622-133.314Z"></path><path fill="#2681FF" d="M121.756 4.011c-35.033 55.505-32.721 116.979-9.646 163.13l42.06 84.121a7.488 7.488 0 0 0 6.697 4.14h87.227a7.488 7.488 0 0 0 6.697-10.838S137.445 9.837 134.493 3.964c-2.64-5.258-9.344-5.33-12.737.047Z"></path></svg><div><h4 class="nui-heading nui-heading-md nui-weight-semibold nui-lead-tight after:text-muted-800 mb-4 dark:text-white"><span class="text-danger-500">Soap Checker</span></h4><p class="nui-paragraph nui-paragraph-sm nui-weight-normal nui-lead-normal"><span class="text-danger-500 line-clamp-4"><strong>Oh no!</strong><br/> Looks like a realm has a soap problem!</span></p><div class="flex items-center justify-between pt-4"><div class="flex gap-2"><a href="'+ Config.URL +'admin/checkSoap" class="router-link-active router-link-exact-active bg-muted-100 hover:bg-muted-200 dark:bg-muted-700 dark:hover:bg-muted-900 text-primary-500 rounded-lg px-4 py-2 font-sans text-sm font-medium underline-offset-4 transition-colors duration-300 hover:underline"> Details </a></div></div></div></div></div></div>');
+                        $("#soapcheck").html('<div class="relative"><div class="nui-card nui-card-curved nui-card-white p-6"><div class="flex w-full flex-col gap-4 sm:flex-row"><svg data-v-26e5b7b0="" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="icon h-10 w-10 shrink-0" width="1em" height="1em" viewBox="0 0 256 256"><defs><linearGradient id="iconifyVue0" x1="99.687%" x2="39.836%" y1="15.801%" y2="97.438%"><stop offset="0%" stop-color="#0052CC"></stop><stop offset="92.3%" stop-color="#2684FF"></stop></linearGradient></defs><path fill="url(#iconifyVue0)" d="M75.793 117.95c-3.82-4.08-9.77-3.85-12.367 1.342L.791 244.565a7.488 7.488 0 0 0 6.697 10.838h87.228a7.22 7.22 0 0 0 6.699-4.14c18.808-38.89 7.413-98.018-25.622-133.314Z"></path><path fill="#2681FF" d="M121.756 4.011c-35.033 55.505-32.721 116.979-9.646 163.13l42.06 84.121a7.488 7.488 0 0 0 6.697 4.14h87.227a7.488 7.488 0 0 0 6.697-10.838S137.445 9.837 134.493 3.964c-2.64-5.258-9.344-5.33-12.737.047Z"></path></svg><div><h4 class="nui-heading nui-heading-md nui-weight-semibold nui-lead-tight after:text-muted-800 mb-4 dark:text-white"><span class="text-danger-500">{lang('soap_checker', 'admin')}</span></h4><p class="nui-paragraph nui-paragraph-sm nui-weight-normal nui-lead-normal"><span class="text-danger-500 line-clamp-4"><strong>{lang('oh_no', 'admin')}</strong><br/> {lang('realm_has_soap_problem', 'admin')}</span></p><div class="flex items-center justify-between pt-4"><div class="flex gap-2"><a href="'+ Config.URL +'admin/checkSoap" class="router-link-active router-link-exact-active bg-muted-100 hover:bg-muted-200 dark:bg-muted-700 dark:hover:bg-muted-900 text-primary-500 rounded-lg px-4 py-2 font-sans text-sm font-medium underline-offset-4 transition-colors duration-300 hover:underline"> {lang('details', 'admin')} </a></div></div></div></div></div></div>');
                     }
                 } catch(e) {
                     console.log(e);

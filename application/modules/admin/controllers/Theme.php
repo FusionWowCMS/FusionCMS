@@ -19,7 +19,7 @@ class Theme extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Select theme");
+        $this->administrator->setTitle(lang('admin_select_theme', 'admin'));
 
         // Prepare my data
         $data = array(
@@ -32,7 +32,7 @@ class Theme extends MX_Controller
         $output = $this->template->loadPage("theme.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Select theme', $output);
+        $content = $this->administrator->box(lang('admin_select_theme', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, "modules/admin/css/theme.css", "modules/admin/js/theme.js");

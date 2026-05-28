@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>{lang('login_title', 'admin_theme')}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Roboto%20Flex&amp;family=Inter&amp;family=Karla&amp;family=Fira%20Code&amp;display=swap">
     <link rel="icon" type="image/png" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/images/favicon.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -22,6 +21,7 @@
 
     <link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/layouts/layout.css">
 	<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/sweetalert2/css/sweetalert2-dark.css">
+    {if $isRTL}<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/rtl.css">{/if}
 
 	<!-- JS -->
 	<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/jquery/jquery.min.js"></script>
@@ -52,7 +52,7 @@
 	<script type="text/javascript">let theme=localStorage.getItem("mode")||" dark";document.documentElement.classList.add(theme);</script>
 
 </head>
-<body class="">
+<body class="" {if $isRTL}dir="rtl"{/if}>
     <div class="dark:bg-muted-800 flex min-h-screen bg-white">
         <div class="relative flex flex-1 flex-col justify-center px-6 py-12 lg:w-2/5 lg:flex-none">
             <div class="dark:bg-muted-800 relative mx-auto w-full max-w-sm bg-white">

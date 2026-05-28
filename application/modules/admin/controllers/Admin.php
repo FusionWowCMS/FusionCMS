@@ -25,7 +25,7 @@ class Admin extends MX_Controller
         $benchmark = Services::timer(true);
         $benchmark->start('admin_execution');
 
-        $this->administrator->setTitle("Dashboard");
+        $this->administrator->setTitle(lang('admin_dashboard', 'admin'));
 
         $server_software = 'Unknown';
         if (array_key_exists( 'SERVER_SOFTWARE',  $_SERVER)) {
@@ -76,7 +76,7 @@ class Admin extends MX_Controller
 
         $output = $this->template->loadPage("dashboard.tpl", $data);
 
-        $content = $this->administrator->box('Dashboard', $output);
+        $content = $this->administrator->box(lang('admin_dashboard', 'admin'), $output);
 
         $this->administrator->view($content, false);
     }

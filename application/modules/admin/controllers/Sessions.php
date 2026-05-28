@@ -54,7 +54,7 @@ class Sessions extends MX_Controller
         $data = ['sessions' => $sessions];
 
         $output = $this->template->loadPage("sessions/sessions.tpl", $data);
-        $content = $this->administrator->box('Active sessions', $output);
+        $content = $this->administrator->box(lang('admin_active_sessions', 'admin'), $output);
 
         $this->administrator->view($content, false, "modules/admin/js/session.js");
     }

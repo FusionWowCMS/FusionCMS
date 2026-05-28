@@ -1,0 +1,28 @@
+@font-face{font-family:yekan;src:url(../webfonts/Yekan.eot);src:url(../webfonts/Yekan.eot?#iefix) format("embedded-opentype"),url(../webfonts/Yekan.woff) format("woff"),url(../webfonts/Yekan.ttf) format("truetype"),url(../webfonts/Yekan.svg#BYekan) format("svg");font-weight:400;font-style:normal}
+
+
+body {
+font-family: "yekan", Arial, sans-serif !important;;
+}
+
+.font-heading {
+    font-family: "yekan", sans-serif !important;
+}
+
+.font-alt {
+    font-family: "yekan", sans-serif !important;;
+}
+
+.font-sans {
+    font-family: "yekan", sans-serif !important;
+}
+
+.border-r {
+    border-right-width: 0 !important;
+    border-left-width: 1px !important;
+}
+
+.border-l {
+    border-left-width: 0 !important;
+    border-right-width: 1px !important;
+}

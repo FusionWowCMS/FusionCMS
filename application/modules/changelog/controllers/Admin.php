@@ -23,7 +23,7 @@ class Admin extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Changelog");
+        $this->administrator->setTitle(lang('changelog_title', 'changelog'));
 
         $changes = $this->changelog_model->getChangelog();
 
@@ -46,7 +46,7 @@ class Admin extends MX_Controller
         $output = $this->template->loadPage("admin.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Changelog', $output);
+        $content = $this->administrator->box(lang('changelog_title', 'changelog'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/changelog/js/admin_changelog.js");

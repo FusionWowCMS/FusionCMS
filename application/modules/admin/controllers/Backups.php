@@ -27,7 +27,7 @@ class Backups extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Backups");
+        $this->administrator->setTitle(lang('admin_backups', 'admin'));
 
         $backups = $this->cms_model->getBackups();
 
@@ -47,7 +47,7 @@ class Backups extends MX_Controller
         $output = $this->template->loadPage("backups.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Backups', $output);
+        $content = $this->administrator->box(lang('admin_backups', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/backups.js");

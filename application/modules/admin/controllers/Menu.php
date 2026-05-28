@@ -24,7 +24,7 @@ class Menu extends MX_Controller
     public function index()
     {
         //Set the title to menu
-        $this->administrator->setTitle("Menu links");
+        $this->administrator->setTitle(lang('admin_menu_links', 'admin'));
 
         $links = $this->menu_model->getMenuLinks();
 
@@ -68,7 +68,7 @@ class Menu extends MX_Controller
         $output = $this->template->loadPage("menu/menu.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Menu links', $output);
+        $content = $this->administrator->box(lang('admin_menu_links', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/menu.js");

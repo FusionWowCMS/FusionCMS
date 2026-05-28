@@ -28,7 +28,6 @@
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/animate/animate.compat.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/fonts/fontawesome/v7.0.0/css/all.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/magnific-popup/magnific-popup.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/owl.carousel/assets/owl.carousel.css">
@@ -50,6 +49,7 @@
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/theme.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/custom.css">
 		<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}node_modules/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
+		{if $isRTL}<link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/rtl.css">{/if}
 		{if $extra_css}<link rel="stylesheet" href="{$url}application/{$extra_css}" type="text/css">{/if}
 
 		<script src="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/vendor/jquery/jquery.min.js"></script>
@@ -153,9 +153,9 @@
 
     <link rel="stylesheet" href="{if $cdn_link != false}{$cdn_link}{else}{$url}{/if}application/themes/admin/assets/css/layouts/layout.css">
 	</head>
-    <body class="">
+    <body class="" {if $isRTL}dir="rtl"{/if}>
         <div class="bg-muted-100 dark:bg-muted-900 pb-20">
-			<div class="dark:bg-muted-800 border-muted-200 dark:border-muted-700 fixed left-0 top-0 z-[60] flex h-full flex-col border-r bg-white transition-all duration-300 w-[280px] lg:translate-x-0" __sidebar__>
+			<div class="dark:bg-muted-800 border-muted-200 dark:border-muted-700 fixed {if $isRTL}right-0{else}left-0{/if} top-0 z-[60] flex h-full flex-col border-r bg-white transition-all duration-300 w-[280px] lg:translate-x-0" __sidebar__>
 				<div class="flex h-16 w-full items-center justify-between px-6">
 					<img src="{$url}application/themes/admin/assets/images/fusion.svg" class="fusion-logo mt-4"/>
 					<button type="button" class="nui-mask nui-mask-blob hover:bg-muted-200 dark:hover:bg-muted-800 text-muted-700 dark:text-muted-400 flex h-10 w-10 cursor-pointer items-center justify-center transition-colors duration-300 lg:hidden" __sidebartogglermobile__>

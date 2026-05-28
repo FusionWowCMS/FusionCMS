@@ -28,7 +28,7 @@ class Settings extends MX_Controller
     public function index()
     {
         // Change the title
-        $this->administrator->setTitle("Settings");
+        $this->administrator->setTitle(lang('admin_settings', 'admin'));
 
         $config['title'] = $this->config->item('title');
         $config['server_name'] = $this->config->item('server_name');
@@ -111,7 +111,7 @@ class Settings extends MX_Controller
         $output = $this->template->loadPage("settings.tpl", $data);
 
         // Put my view in the main box with a headline
-        $content = $this->administrator->box('Settings', $output);
+        $content = $this->administrator->box(lang('admin_settings', 'admin'), $output);
 
         // Output my content. The method accepts the same arguments as template->view
         $this->administrator->view($content, false, "modules/admin/js/settings.js");
