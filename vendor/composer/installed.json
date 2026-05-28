@@ -2,41 +2,45 @@
     "packages": [
         {
             "name": "chillerlan/php-qrcode",
-            "version": "5.0.5",
-            "version_normalized": "5.0.5.0",
+            "version": "6.0.1",
+            "version_normalized": "6.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chillerlan/php-qrcode.git",
-                "reference": "7b66282572fc14075c0507d74d9837dab25b38d6"
+                "reference": "49006e34bd5328f163e80329e7312f34dceea59b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chillerlan/php-qrcode/zipball/7b66282572fc14075c0507d74d9837dab25b38d6",
-                "reference": "7b66282572fc14075c0507d74d9837dab25b38d6",
+                "url": "https://api.github.com/repos/chillerlan/php-qrcode/zipball/49006e34bd5328f163e80329e7312f34dceea59b",
+                "reference": "49006e34bd5328f163e80329e7312f34dceea59b",
                 "shasum": ""
             },
             "require": {
-                "chillerlan/php-settings-container": "^2.1.6 || ^3.2.1",
+                "chillerlan/php-settings-container": "^3.2.1",
                 "ext-mbstring": "*",
-                "php": "^7.4 || ^8.0"
+                "php": "^8.2"
             },
             "require-dev": {
-                "chillerlan/php-authenticator": "^4.3.1 || ^5.2.1",
+                "chillerlan/php-authenticator": "^5.3",
                 "ext-fileinfo": "*",
-                "phan/phan": "^5.5.2",
-                "phpcompatibility/php-compatibility": "10.x-dev",
+                "intervention/image": "^3.11",
+                "phan/phan": "^6.0.1",
+                "phpbench/phpbench": "^1.4",
                 "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^9.6",
-                "setasign/fpdf": "^1.8.2",
-                "slevomat/coding-standard": "^8.23.0",
-                "squizlabs/php_codesniffer": "^4.0.0"
+                "phpstan/phpstan": "^2.1.40",
+                "phpstan/phpstan-deprecation-rules": "^2.0.4",
+                "phpunit/phpunit": "^11.5",
+                "setasign/fpdf": "^1.8.6",
+                "slevomat/coding-standard": "^8.28",
+                "squizlabs/php_codesniffer": "^4.0"
             },
             "suggest": {
                 "chillerlan/php-authenticator": "Yet another Google authenticator! Also creates URIs for mobile apps.",
+                "intervention/image": "More advanced GD and ImageMagick output.",
                 "setasign/fpdf": "Required to use the QR FPDF output.",
                 "simple-icons/simple-icons": "SVG icons that you can use to embed as logos in the QR Code"
             },
-            "time": "2025-11-23T23:51:44+00:00",
+            "time": "2026-03-18T21:21:07+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -72,7 +76,7 @@
                     "homepage": "https://github.com/chillerlan/php-qrcode/graphs/contributors"
                 }
             ],
-            "description": "A QR Code generator and reader with a user-friendly API. PHP 7.4+",
+            "description": "A QR Code generator and reader with a user-friendly API. PHP 8.2+",
             "homepage": "https://github.com/chillerlan/php-qrcode",
             "keywords": [
                 "phpqrcode",
@@ -98,17 +102,17 @@
         },
         {
             "name": "chillerlan/php-settings-container",
-            "version": "3.2.1",
-            "version_normalized": "3.2.1.0",
+            "version": "3.3.0",
+            "version_normalized": "3.3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chillerlan/php-settings-container.git",
-                "reference": "95ed3e9676a1d47cab2e3174d19b43f5dbf52681"
+                "reference": "a0a487cbf5344f721eb504bf0f59bada40c381b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chillerlan/php-settings-container/zipball/95ed3e9676a1d47cab2e3174d19b43f5dbf52681",
-                "reference": "95ed3e9676a1d47cab2e3174d19b43f5dbf52681",
+                "url": "https://api.github.com/repos/chillerlan/php-settings-container/zipball/a0a487cbf5344f721eb504bf0f59bada40c381b7",
+                "reference": "a0a487cbf5344f721eb504bf0f59bada40c381b7",
                 "shasum": ""
             },
             "require": {
@@ -116,13 +120,15 @@
                 "php": "^8.1"
             },
             "require-dev": {
+                "phan/phan": "^5.5.2",
                 "phpmd/phpmd": "^2.15",
-                "phpstan/phpstan": "^1.11",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan": "^2.1.31",
+                "phpstan/phpstan-deprecation-rules": "^2.0.3",
                 "phpunit/phpunit": "^10.5",
-                "squizlabs/php_codesniffer": "^3.10"
+                "slevomat/coding-standard": "^8.22",
+                "squizlabs/php_codesniffer": "^4.0"
             },
-            "time": "2024-07-16T11:13:48+00:00",
+            "time": "2026-03-20T21:10:52+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -147,7 +153,8 @@
                 "Settings",
                 "configuration",
                 "container",
-                "helper"
+                "helper",
+                "property hook"
             ],
             "support": {
                 "issues": "https://github.com/chillerlan/php-settings-container/issues",
@@ -1102,17 +1109,17 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.33.0",
-            "version_normalized": "1.33.0.0",
+            "version": "v1.38.1",
+            "version_normalized": "1.38.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493"
+                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6d857f4d76bd4b343eac26d6b539585d2bc56493",
-                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/14c5439eec4ccff081ac14eca2dc57feb2a66d92",
+                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92",
                 "shasum": ""
             },
             "require": {
@@ -1125,7 +1132,7 @@
             "suggest": {
                 "ext-mbstring": "For best performance"
             },
-            "time": "2024-12-23T08:48:59+00:00",
+            "time": "2026-05-26T12:51:13+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1166,7 +1173,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.33.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.1"
             },
             "funding": [
                 {

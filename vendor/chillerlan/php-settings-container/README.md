@@ -1,7 +1,7 @@
 # chillerlan/php-settings-container
 
 A container class for settings objects - decouple configuration logic from your application! Not a DI container.
-- [`SettingsContainerInterface`](https://github.com/chillerlan/php-settings-container/blob/main/src/SettingsContainerInterface.php) provides immutable properties with magic getter & setter and some fancy.
+- [`SettingsContainerInterface`](https://github.com/chillerlan/php-settings-container/blob/main/src/SettingsContainerInterface.php) provides fancy [property hooks](https://wiki.php.net/rfc/property-hooks) for PHP < 8.4.
 
 [![PHP Version Support][php-badge]][php]
 [![version][packagist-badge]][packagist]
@@ -20,7 +20,7 @@ A container class for settings objects - decouple configuration logic from your 
 [coverage-badge]: https://img.shields.io/codecov/c/github/chillerlan/php-settings-container.svg?logo=codecov
 [coverage]: https://codecov.io/github/chillerlan/php-settings-container
 [codacy-badge]: https://img.shields.io/codacy/grade/bd2467799e2943d2853ce3ebad5af490/main?logo=codacy
-[codacy]: https://www.codacy.com/gh/chillerlan/php-settings-container/dashboard?branch=main
+[codacy]: https://app.codacy.com/gh/chillerlan/php-settings-container/dashboard?branch=main
 [downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/php-settings-container.svg?logo=packagist
 [downloads]: https://packagist.org/packages/chillerlan/php-settings-container/stats
 [gh-action-badge]: https://img.shields.io/github/actions/workflow/status/chillerlan/php-settings-container/ci.yml?branch=main&logo=github
@@ -77,16 +77,33 @@ $container->toArray(); // -> ['foo' => 'what', 'bar' => 'foo']
 $container->toJSON(); // -> {"foo": "what", "bar": "foo"}
 // JSON via JsonSerializable
 $json = json_encode($container); // -> {"foo": "what", "bar": "foo"}
+```
 
-//non-existing properties will be ignored:
+By default, non-existing properties will be ignored and return `null`:
+
+```php
 $container->nope = 'what';
 
 var_dump($container->nope); // -> null
 ```
 
-### Advanced usage
+You can change this behaviour by adding the attribute `ThrowOnInvalidProperty` to your container class:
+
 ```php
-// from library 1
+#[ThrowOnInvalidProperty(true)]
+class MyContainer extends SettingsContainerAbstract{
+	// ...
+}
+
+$container->nope = 'what'; // -> throws: attempt to write invalid property: "$nope"
+```
+
+
+### Advanced usage
+
+Suppose the following trait from library 1:
+
+```php
 trait SomeOptions{
 	protected string $foo;
 	protected string $what;
@@ -99,7 +116,7 @@ trait SomeOptions{
 	}
 
 	/*
-	 * special prefixed magic setters & getters
+	 * special prefixed magic setters & getters ("set_"/"get_" + property name)
 	 */
 
 	// this method will be called from __set() when property $what is set
@@ -112,12 +129,17 @@ trait SomeOptions{
 		return 'hash: '.$this->what;
 	}
 }
+```
 
-// from library 2
+And another trait from library 2:
+
+```php
 trait MoreOptions{
 	protected string $bar = 'whatever'; // provide default values
 }
 ```
+
+We can now plug the several library options together to a single class/object:
 
 ```php
 $commonOptions = [
@@ -127,7 +149,6 @@ $commonOptions = [
 	'bar' => 'nothing',
 ];
 
-// now plug the several library options together to a single object
 $container = new class ($commonOptions) extends SettingsContainerAbstract{
 	use SomeOptions, MoreOptions;
 };
@@ -139,6 +160,39 @@ $container->what = 'some value';
 var_dump($container->what); // -> hash: 5946210c9e93ae37891dfe96c3e39614 (custom getter added "hash: ")
 ```
 
+### A note on property hooks (PHP 8.4+)
+
+Property hooks are called whenever a property is accessed (except from within the hook itself of course), which means that the custom get/set methods this library allows would conflict when a custom method is defined for a property that also has a hook defined.
+To prevent double method calls, the internal methods `hasSetHook()` and `hasGetHook()` have been introduced, and are called whenever the magic get/set methods are called: when both, a custom method and a property hook exist, only the property hook will be called.
+<br/>Public properties will never call the magic get/set, however, their hooks *will* be called. (un)serializing a `SettingsContainerInterface` instance will bypass magic get/set and existing property hooks, while JSON de/encode as will call magic get/set or existing hooks explicitly via the `toArray()` and `fromIterable()` methods.
+
+```php
+class PropertyHooksContainer extends SettingsContainerAbstract{
+
+	protected string $someValue{
+		set => doStuff($value);
+	}
+
+	// this method will be ignored in magic calls as a "set" hook on the property exists
+	protected function set_someValue(string $value):void{
+		$this->someValue = doOtherStuff($value);
+	}
+
+	// this custom method will be called as the property has no "get" hook
+	protected function get_someValue():string{
+		return doWhatever($this->someValue);
+	}
+
+	// this property will never trigger the magic get/set and associated methods
+	public string $otherValue{
+		set => doStuff($value);
+		get => $this->otherValue;
+	}
+
+}
+```
+
+
 ### API
 
 #### [`SettingsContainerAbstract`](https://github.com/chillerlan/php-settings-container/blob/main/src/SettingsContainerAbstract.php)
@@ -146,7 +200,6 @@ var_dump($container->what); // -> hash: 5946210c9e93ae37891dfe96c3e39614 (custom
 | method                                     | return                       | info                                                                                                                |
 |--------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------------------------------|
 | `__construct(iterable $properties = null)` | -                            | calls `construct()` internally after the properties have been set                                                   |
-| (protected) `construct()`                  | void                         | calls a method with trait name as replacement constructor for each used trait                                       |
 | `__get(string $property)`                  | mixed                        | calls `$this->{'get_'.$property}()` if such a method exists                                                         |
 | `__set(string $property, $value)`          | void                         | calls `$this->{'set_'.$property}($value)` if such a method exists                                                   |
 | `__isset(string $property)`                | bool                         |                                                                                                                     |
@@ -162,6 +215,17 @@ var_dump($container->what); // -> hash: 5946210c9e93ae37891dfe96c3e39614 (custom
 | `__serialize()`                            | array                        | implements the [`Serializable`](https://www.php.net/manual/en/language.oop5.magic.php#object.serialize) interface   |
 | `__unserialize(array $data)`               | void                         | implements the [`Serializable`](https://www.php.net/manual/en/language.oop5.magic.php#object.unserialize) interface |
 
+
+#### Internal (protected) methods
+
+| method                               | return | info                                                                          |
+|--------------------------------------|--------|-------------------------------------------------------------------------------|
+| `construct()`                        | void   | calls a method with trait name as replacement constructor for each used trait |
+| `isPrivate(string $property)`        | bool   | private properties are excluded from magic calls                              |
+| `hasSetHook(string $property)`       | bool   |                                                                               |
+| `hasGetHook(string $property)`       | bool   |                                                                               |
+
+
 ## Disclaimer
-This might be either an utterly genius or completely stupid idea - you decide. However, i like it and it works.
-Also, this is not a dependency injection container. Stop using DI containers FFS.
+This might be either an absolutely brilliant or completely stupid idea - you decide (in hindsight it was a great idea I guess - property hooks made their way into PHP 8.4).
+<br/>Also, this is not a dependency injection container. Stop using DI containers FFS.
