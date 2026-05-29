@@ -54,7 +54,7 @@ class Aclmanager extends MX_Controller
 
         $output = $this->template->loadPage("aclmanager/groups.tpl", $data);
 
-        $output = $this->administrator->box("<a href='" . pageURL . "admin/aclmanager'>User groups &amp; permissions</a> &rarr; Groups", $output);
+        $output = $this->administrator->box("<a href='" . pageURL . "admin/aclmanager'>" . lang('admin_user_groups_amp_permissions', 'admin') . '</a> &rarr; '. lang('groups', 'admin'), $output);
 
         $this->administrator->view($output, "modules/admin/css/aclmanager.css", "modules/admin/js/groups.js");
     }
@@ -71,7 +71,6 @@ class Aclmanager extends MX_Controller
 
         if (!$group) {
             show_error("There is no group with ID " . $id, 400);
-
             die();
         }
 
@@ -125,7 +124,7 @@ class Aclmanager extends MX_Controller
         // Load my view
         $output = $this->template->loadPage("aclmanager/edit_group.tpl", $data);
 
-        $content = $this->administrator->box('<a href="' . $this->template->page_url . 'admin/aclmanager/groups">Groups</a> &rarr; ' . $group['name'], $output);
+        $content = $this->administrator->box('<a href="' . $this->template->page_url . 'admin/aclmanager/groups">' . lang('groups', 'admin') . '</a> &rarr; ' . $group['name'], $output);
 
         $this->administrator->view($content, "modules/admin/css/aclmanager.css", "modules/admin/js/groups.js");
     }
@@ -306,7 +305,7 @@ class Aclmanager extends MX_Controller
 
         $output = $this->template->loadPage("aclmanager/users.tpl", $data);
 
-        $output = $this->administrator->box("<a href='" . pageURL . "admin/aclmanager'>User groups &amp; permissions</a> &rarr; Users permissions", $output);
+        $output = $this->administrator->box("<a href='" . pageURL . "admin/aclmanager'>" . lang('admin_user_groups_amp_permissions', 'admin'), $output);
 
         $this->administrator->view($output, "modules/admin/css/aclmanager.css", "modules/admin/js/users.js");
     }
