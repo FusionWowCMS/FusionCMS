@@ -89,7 +89,7 @@ class Auth extends MX_Controller
         $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[4]|max_length[24]|alpha_numeric');
         $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]');
 
-        if ($show_captcha && $captcha_type == 'inbuilt')
+        if ($show_captcha && $captcha_type == 'image_captcha')
         {
             $this->form_validation->set_rules('captcha', 'captcha', 'trim|required|exact_length[7]|alpha_numeric');
         }
@@ -124,7 +124,7 @@ class Auth extends MX_Controller
             if ($show_captcha)
             {
                 $data['showCaptcha'] = true;
-                if ($captcha_type == 'inbuilt' || !empty($this->input->post('captcha'))) {
+                if ($captcha_type == 'image_captcha' || !empty($this->input->post('captcha'))) {
                     if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha'))) {
                         $data['messages']["error"] = lang("captcha_invalid", "auth");
                         die(json_encode($data));

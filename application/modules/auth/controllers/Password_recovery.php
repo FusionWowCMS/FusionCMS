@@ -55,7 +55,7 @@ class Password_recovery extends MX_Controller
 
         $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email');
 
-        if ($use_captcha && $captcha_type == 'inbuilt')
+        if ($use_captcha && $captcha_type == 'image_captcha')
         {
             $this->form_validation->set_rules('captcha', 'captcha', 'trim|required|exact_length[7]|alpha_numeric');
         }
@@ -74,7 +74,7 @@ class Password_recovery extends MX_Controller
             {
                 $data['showCaptcha'] = true;
 
-                if ($captcha_type == 'inbuilt') {
+                if ($captcha_type == 'image_captcha') {
                     if ($this->input->post('captcha') != $this->captcha->getValue() || empty($this->input->post('captcha'))) {
                         $data['messages']["error"] = lang("captcha_invalid", "auth");
                         die(json_encode($data));

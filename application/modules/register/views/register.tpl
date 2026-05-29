@@ -30,7 +30,7 @@ input + span[id] {
                 </div>
                 <div class="mb-3">
                 {if $use_captcha}
-                    {if $captcha_type == 'inbuilt'}
+                    {if $captcha_type == 'image_captcha'}
                         <label for="captcha"><img src="{$url}register/getCaptcha?{time()}" /></label>
                         <input class="form-control" type="text" name="register_captcha" id="register_captcha"/>
                         <span id="captcha_error">{$captcha_error}</span>

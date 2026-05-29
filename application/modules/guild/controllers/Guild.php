@@ -24,7 +24,7 @@ class Guild extends MX_Controller
     {
         // Make sure item and realm are set
         if (!$id || !$realm) {
-            die(lang("invalid", "guild"));
+            die(lang('invalid', 'guild'));
         }
 
         $cache = $this->cache->get('guild_' . $realm . '_' . $id . "_" . getLang());
@@ -36,12 +36,12 @@ class Guild extends MX_Controller
             $this->loadGuild($realm, $id);
 
             if (!$this->guild) {
-                $this->template->setTitle(lang("invalid_guild", "guild"));
+                $this->template->setTitle(lang('invalid_guild', 'guild'));
             } else {
                 $this->template->setTitle($this->guild['guildName']);
             }
 
-            $guild_data = array(
+            $guild_data = [
                 'module' => 'guild',
                 'guild' => $this->guild,
                 'members' => $this->members,
@@ -49,28 +49,28 @@ class Guild extends MX_Controller
                 'realmId' => $realm,
                 'realmName' => $this->realms->getRealm($realm)->getName(),
                 'url' => $this->template->page_url
-            );
+            ];
             if ($this->guild) {
                 $guild_data['guildMotd'] = $this->template->format($this->guild['motd']);
             }
 
-            $content = $this->template->loadPage("guild.tpl", $guild_data);
+            $content = $this->template->loadPage('guild.tpl', $guild_data);
 
-            $data = array(
-                "module" => "default",
-                "headline" => breadcrumb([
-                    "armory" => lang("armory", "guild"),
+            $data = [
+                'module' => "default",
+                'headline' => breadcrumb([
+                    'armory' => lang('armory', 'guild'),
                     uri_string() => ((!$this->guild) ? lang("invalid_guild", "guild") : $this->guild['guildName'])
                 ]),
-                "content" => $content
-            );
+                'content' => $content
+            ];
 
             $page = $this->template->loadPage("page.tpl", $data);
 
             $this->cache->save('guild_' . $realm . '_' . $id . "_" . getLang(), $page, 60 * 60);
         }
 
-        $this->template->view($page, "modules/guild/css/guild.css");
+        $this->template->view($page, 'modules/guild/css/guild.css');
     }
 
     public function loadGuild($realm, $id)

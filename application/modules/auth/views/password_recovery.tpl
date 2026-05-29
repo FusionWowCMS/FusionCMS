@@ -10,7 +10,7 @@
 
             <div class="captcha-field {if !$use_captcha}d-none{/if}">
                 <div class="input-group mt-3 mb-3">
-                    {if $captcha_type == 'inbuilt'}
+                    {if $captcha_type == 'image_captcha'}
                         <label for="floatingCaptcha" class="input-group-text w-100 rounded-0 rounded-top text-center d-block" id="captcha">
                             <img src="{$url}auth/getCaptcha?{time()}" alt="captcha" width="150" height="30" id="captchaImage">
                         </label>
@@ -37,7 +37,7 @@
 </div>
 
 {if $use_captcha}
-    {if $captcha_type == 'inbuilt'}
+    {if $captcha_type == 'image_captcha'}
         <script>
             $(window).on("load", function() {
                 Recovery.useCaptcha = true;

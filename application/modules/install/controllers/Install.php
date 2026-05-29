@@ -510,7 +510,7 @@ class Database extends Config
         // captcha.php
         $captchaData = [
             'use_captcha'          => ($_POST['captcha'] == 'disabled') ? false : true,
-            'captcha_type'         => ($_POST['captcha'] == 'recaptcha') ? 'recaptcha' : 'inbuilt',
+            'captcha_type'         => ($_POST['captcha'] == 'recaptcha') ? 'recaptcha' : 'image_captcha',
             'recaptcha_site_key'   => $_POST['site_key'],
             'recaptcha_secret_key' => $_POST['secret_key'],
         ];

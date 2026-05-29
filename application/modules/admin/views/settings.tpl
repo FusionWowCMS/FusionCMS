@@ -719,7 +719,7 @@
 					<select onChange="if(this.value == 'recaptcha' || this.value == 'recaptcha3'){ $('#captcha_site_key').fadeIn(150); } else { $('#captcha_site_key').fadeOut(150); }if(this.value == 'recaptcha' || this.value == 'recaptcha3'){ $('#captcha_secret_key').fadeIn(150); } else { $('#captcha_secret_key').fadeOut(150); }if(this.value == 'recaptcha'){ $('#captcha_theme').fadeIn(150); } else { $('#captcha_theme').fadeOut(150); }" class="form-control nui-focus border-muted-300 text-muted-600 placeholder:text-muted-300 focus:border-muted-300 focus:shadow-muted-300/50 dark:border-muted-700 dark:bg-muted-900/75 dark:text-muted-200 dark:placeholder:text-muted-600 dark:focus:border-muted-700 dark:focus:shadow-muted-800/50 peer w-full cursor-pointer appearance-none border bg-white font-sans focus:shadow-lg px-2 pe-9 h-10 py-2 text-sm leading-5 px-3 pe-6 rounded px-3" id="captcha">
 						<option value="recaptcha" {if $config.captcha_type == 'recaptcha'}selected{/if}>{lang('google_recaptcha_v2', 'admin')}</option>
 						<option value="recaptcha3" {if $config.captcha_type == 'recaptcha3'}selected{/if}>{lang('google_recaptcha_v3', 'admin')}</option>
-						<option value="inbuilt" {if $config.captcha_type == 'inbuilt'}selected{/if}>{lang('image_captcha', 'admin')}</option>
+						<option value="image_captcha" {if $config.captcha_type == 'image_captcha'}selected{/if}>{lang('image_captcha', 'admin')}</option>
 						<option value="disabled" {if !$config.use_captcha}selected{/if}>{lang('disable', 'admin')}</option>
 					</select>
 				</div>

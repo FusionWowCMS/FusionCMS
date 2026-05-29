@@ -18,7 +18,7 @@
 				<div class="password-feedback2 ps-2"></div>
 		
 				
-				<div class="captcha-field2 {if !$use_captcha && $captcha_type == 'inbuilt'}d-none{/if}">
+				<div class="captcha-field2 {if !$use_captcha && $captcha_type == 'image_captcha'}d-none{/if}">
 					<div class="input-group mt-3">
 						<label for="floatingCaptcha2" class="input-group-text w-100 rounded-0 rounded-top text-center d-block" id="captcha">
 							<img src="{$url}auth/getCaptcha?{time()}" alt="captcha" width="150" height="30" id="captchaImage2">

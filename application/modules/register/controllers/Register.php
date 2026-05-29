@@ -81,7 +81,7 @@ class Register extends MX_Controller
                     }
                     else
                         $recaptcha = 'disabled';
-                } else if ($captcha_type == 'inbuilt') {
+                } else if ($captcha_type == 'image_captcha') {
                     $captcha = strtoupper($this->input->post('register_captcha')) == strtoupper($captchaObj->getValue());
                 }
             } else {
@@ -124,7 +124,7 @@ class Register extends MX_Controller
                     if(!$captcha && !$recaptcha == 'disabled') {
                         $data['captcha_error'] = true;
                     }
-                } else if ($captcha_type == 'inbuilt') {
+                } else if ($captcha_type == 'image_captcha') {
                     if ($this->input->post('register_captcha') != $captchaObj->getValue()) {
                         $data['captcha_error'] = '<img src="' . $this->template->page_url . 'application/images/icons/exclamation.png" />';
                     }
