@@ -15,6 +15,7 @@
 .realm_bar {
 	--borderRadius-primary: 4px;
 
+	display: flex;
 	width: 100%;
 	height: 20px;
 
@@ -72,6 +73,18 @@
 	background: -moz-linear-gradient(top, var(--progressBar-fill-background-start) 0%, var(--progressBar-fill-background-end) 100%);
 	background: -webkit-linear-gradient(top, var(--progressBar-fill-background-start) 0%, var(--progressBar-fill-background-end) 100%);
 	background: linear-gradient(to bottom, var(--progressBar-fill-background-start) 0%, var(--progressBar-fill-background-end) 100%);
+}
+
+.realm_bar_fill.horde {
+	background: rgb(255 0 59);
+	color: #fff;
+	border-radius: var(--borderRadius-primary) 0 0 var(--borderRadius-primary);
+}
+
+.realm_bar_fill.alliance {
+	background: rgb(0 112 221);
+	color: #fff;
+	border-radius: 0 var(--borderRadius-primary) var(--borderRadius-primary) 0;
 }
 
 /*-------------------------------------------------------------------------*/
