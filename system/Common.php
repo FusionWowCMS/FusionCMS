@@ -479,7 +479,7 @@ if (! function_exists('show_404')) {
      * @param   string $page      Page URI
      * @param   bool   $log_error Whether to log the error
      */
-    function show_404(string $page = '', bool $log_error = true): void
+    function show_404(string $page = '', bool $log_error = false): void
     {
         if (is_cli()) {
             $heading = 'Not Found';
