@@ -124,7 +124,7 @@ class Password_recovery extends MX_Controller
         clientLang("password_changed", "recovery");
 
         $this->form_validation->set_rules('token', 'token', 'trim|required');
-        $this->form_validation->set_rules('new_password', 'new_password', 'trim|required|min_length[6]');
+        $this->form_validation->set_rules('new_password', 'new_password', 'trim|required|min_length[6]|max_length[16]');
 
         $this->form_validation->set_error_delimiters('', '');
 

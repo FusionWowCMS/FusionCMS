@@ -84,8 +84,8 @@ class Settings extends MX_Controller
             show_error('Invalid request', 403);
         }
 
-        $this->form_validation->set_rules('old_password', lang("old_password", "ucp"), 'trim|required|min_length[6]');
-        $this->form_validation->set_rules('new_password', lang("new_password", "ucp"), 'trim|required|min_length[6]');
+        $this->form_validation->set_rules('old_password', lang("old_password", "ucp"), 'trim|required|min_length[6]|max_length[16]');
+        $this->form_validation->set_rules('new_password', lang("new_password", "ucp"), 'trim|required|min_length[6]|max_length[16]');
 
         if ($this->form_validation->run() === false) {
             $response = [
