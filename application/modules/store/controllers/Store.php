@@ -27,17 +27,19 @@ class Store extends MX_Controller
 
     public function index()
     {
-        requirePermission("view");
+        requirePermission('view');
 
-        clientLang("cant_afford", "store");
-        clientLang("hide", "store");
-        clientLang("show", "store");
-        clientLang("loading", "store");
-        clientLang("want_to_buy", "store");
-        clientLang("yes", "store");
-        clientLang("checkout", "store");
-        clientLang("vp", "store");
-        clientLang("dp", "store");
+        $this->template->setTitle(lang('item_store', 'store'));
+
+        clientLang('cant_afford', 'store');
+        clientLang('hide', 'store');
+        clientLang('show', 'store');
+        clientLang('loading', 'store');
+        clientLang('want_to_buy', 'store');
+        clientLang('yes', 'store');
+        clientLang('checkout', 'store');
+        clientLang('vp', 'store');
+        clientLang('dp', 'store');
 
         // Gather the template data
         $data = [
@@ -50,22 +52,22 @@ class Store extends MX_Controller
         ];
 
         // Load the content
-        $content = $this->template->loadPage("store.tpl", $data);
+        $content = $this->template->loadPage('store.tpl', $data);
 
         // Load the topsite page and format the page contents
         $pageData = [
-            "module" => "default",
-            "headline" => breadcrumb([
-                            "ucp" => lang("ucp"),
-                            "store" => lang("item_store", "store")
+            'module' => 'default',
+            'headline' => breadcrumb([
+                            'ucp' => lang('ucp'),
+                            'store' => lang('item_store', 'store')
             ]),
-            "content" => $content
+            'content' => $content
         ];
 
-        $page = $this->template->loadPage("page.tpl", $pageData);
+        $page = $this->template->loadPage('page.tpl', $pageData);
 
         // Output the content
-        $this->template->view($page, "modules/store/css/store.css", "modules/store/js/store.js");
+        $this->template->view($page, 'modules/store/css/store.css', 'modules/store/js/store.js');
     }
 
     /**
