@@ -11,12 +11,12 @@ $config['use_captcha'] = true;
  *
  * What type of captcha?
  *
- * 'recaptcha'  = Google Recaptcha v2
- * 'recaptcha3' = Google Recaptcha v3
- * 'inbuilt'    = inbuilt captcha system
+ * 'recaptcha'       = Google Recaptcha v2
+ * 'recaptcha3'      = Google Recaptcha v3
+ * 'image_captcha'   = image captcha system
  *
  */
-$config["captcha_type"] = 'inbuilt';
+$config["captcha_type"] = 'image_captcha';
 
 /**
  *
