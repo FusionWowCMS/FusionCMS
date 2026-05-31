@@ -422,7 +422,8 @@
 																	<option value="recaptcha3">[[google_captcha3]]</option>
 																	<option value="recaptcha">[[google_captcha]]</option>
 																	<option value="image_captcha">[[image_captcha]]</option>
-																	<option value="disabled" selected>[[disable]]</option>
+																	<option value="fusion_captcha" selected>[[fusion_captcha]]</option>
+																	<option value="disabled">[[disable]]</option>
 																</select>
 															</div>
 														</div>

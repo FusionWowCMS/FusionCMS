@@ -128,5 +128,9 @@ $route['admin/theme/edit'] = "admin/edittheme/index";
 // Vote
 $route['vote/callback/(:any)'] = "vote/callback/index/$1";
 
+// Captcha
+$route['captcha/challenge'] = 'auth/captcha/challenge';
+$route['captcha/redeem']    = 'auth/captcha/redeem';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -19,6 +19,7 @@ class Auth extends MX_Controller
         $this->load->library('form_validation');
         $this->load->library('captcha');
         $this->load->library('recaptcha');
+        $this->load->library('FusionCaptcha');
         $this->load->library('GoogleAuthenticator');
         $this->load->model('login_model');
 
@@ -143,6 +144,13 @@ class Auth extends MX_Controller
                         $data['messages']["error"] = lang("captcha_invalid", "auth");
                         die(json_encode($data));
                     }
+                } else if ($captcha_type == 'fusion_captcha') {
+                    $token = $this->input->post('cap-token');
+                    if (!$this->fusioncaptcha->verify_final_token($token)) {
+                        $data['captcha_error'] = true;
+                        $data['messages']["error"] = lang("captcha_invalid", "auth");
+                        die(json_encode($data));
+                    }
                 }
             }
 
@@ -181,11 +189,13 @@ class Auth extends MX_Controller
             else
             {
                 $this->dblogger->createLog("user", "login", "Login", [], Dblogger::STATUS_FAILED, $this->user->getId($username));
+                $data['captcha_error'] = true;
                 $data["messages"]["error"] = lang("error", "auth");
             }
         }
         else
         {
+            $data['captcha_error'] = true;
             $data['messages']["error"] = validation_errors();
         }
         die(json_encode($data));

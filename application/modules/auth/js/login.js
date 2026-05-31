@@ -3,6 +3,7 @@ var Auth = {
 	useCaptcha: false,
 	useRecaptcha: false,
 	useRecaptcha3: false,
+	useFusionCaptcha: false,
 
 	login: function(submit = false) {
 		var postData = {
@@ -29,6 +30,10 @@ var Auth = {
 			postData["recaptcha"] = $(".g-recaptcha-response").val();
 		}
 
+		if(Auth.useFusionCaptcha) {
+			postData["cap-token"] = $('input[name="cap-token"]').val();
+		}
+
 		clearTimeout (Auth.timeout);
 		Auth.timeout = setTimeout (function()
 		{
@@ -43,6 +48,10 @@ var Auth = {
 
 					if(data["showCaptcha"] === true) {
 						$(".captcha-field").removeClass("d-none");
+					}
+
+					if (Auth.useFusionCaptcha && data.captcha_error === true) {
+						Auth.resetFusionCaptcha();
 					}
 
 					if(Auth.useRecaptcha3)
@@ -87,5 +96,17 @@ var Auth = {
 		var captchaID = $(ele).data("captcha-id");
 		var imgField = $("img#"+ captchaID);
 		imgField.attr("src", imgField.attr("src") +"&d="+ new Date().getTime());
+	},
+
+	resetFusionCaptcha: function () {
+		$('input[name="cap-token"]').val('');
+
+		const widget = document.querySelector('cap-widget');
+		if (widget && typeof widget.reset === 'function') {
+			widget.reset();
+			widget.removeAttribute('disabled');
+		} else {
+			console.warn('Fusion captcha widget not found. Please ensure it is in the DOM.');
+		}
 	}
 };

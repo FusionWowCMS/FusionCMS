@@ -24,6 +24,7 @@ class Register extends MX_Controller
         $this->load->helper(array('form', 'url', 'security'));
         $this->load->library('form_validation');
         $this->load->library('recaptcha');
+        $this->load->library('FusionCaptcha');
 
         $this->load->helper('email_helper');
 
@@ -83,6 +84,9 @@ class Register extends MX_Controller
                         $recaptcha = 'disabled';
                 } else if ($captcha_type == 'image_captcha') {
                     $captcha = strtoupper($this->input->post('register_captcha')) == strtoupper($captchaObj->getValue());
+                } else if ($captcha_type == 'fusion_captcha') {
+                    $token = $this->input->post('cap-token');
+                    $captcha = $this->fusioncaptcha->verify_final_token($token);
                 }
             } else {
                 $captcha = true;
@@ -96,7 +100,7 @@ class Register extends MX_Controller
 
         //Check if everything went correct
         if (!$this->form_validation->run() || !$captcha || !count($_POST) || !$usernameAvailable || !$emailAvailable) {
-            $fields = array('username', 'email', 'password', 'password_confirm');
+            $fields = ['username', 'email', 'password', 'password_confirm'];
 
             $data = [
                 "username_error" => $this->usernameError,
@@ -121,12 +125,16 @@ class Register extends MX_Controller
                 }
 
                 if ($captcha_type == 'recaptcha' || $captcha_type == 'recaptcha3') {
-                    if(!$captcha && !$recaptcha == 'disabled') {
+                    if (!$captcha && !$recaptcha == 'disabled') {
                         $data['captcha_error'] = true;
                     }
                 } else if ($captcha_type == 'image_captcha') {
                     if ($this->input->post('register_captcha') != $captchaObj->getValue()) {
                         $data['captcha_error'] = '<img src="' . $this->template->page_url . 'application/images/icons/exclamation.png" />';
+                    }
+                } else if ($captcha_type == 'fusion_captcha') {
+                    if(!$captcha) {
+                        $data['captcha_error'] = true;
                     }
                 }
             }
@@ -160,7 +168,7 @@ class Register extends MX_Controller
             {
                 $key = $this->activation_model->add($username, $password, $email);
 
-                $link = base_url().'register/activate/'.$key;
+                $link = base_url() . 'register/activate/'.$key;
 
                 sendMail($email, $this->config->item('server_name').': ' . lang('activate_account', 'register'), $username, lang('created_account_activate', 'register') . ' <a href="' . $link . '">' . $link . '</a>', 1);
             }

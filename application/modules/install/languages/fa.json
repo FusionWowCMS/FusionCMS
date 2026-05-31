@@ -50,6 +50,7 @@
     "google_captcha": "گوگل کپچا v2",
     "google_captcha3": "گوگل کپچا v3",
     "image_captcha": "کپچا تصویری",
+    "fusion_captcha": "کپچا Fusion",
     "optional": "دلخواه",
     "enable_google_captcha": "فعال کردن گوگل کپچا",
     "yes": "بله",

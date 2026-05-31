@@ -51,6 +51,7 @@
     "google_captcha": "Google ReCaptcha v2",
     "google_captcha3": "Google ReCaptcha v3",
     "image_captcha": "Captcha image",
+    "fusion_captcha": "Fusion Captcha",
     "optional": "facultatif",
     "enable_google_captcha": "Activer Google Captcha",
     "yes": "Oui",

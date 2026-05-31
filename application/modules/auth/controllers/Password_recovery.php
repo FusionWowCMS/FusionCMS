@@ -20,6 +20,7 @@ class Password_recovery extends MX_Controller
         $this->load->library('form_validation');
         $this->load->library('captcha');
         $this->load->library('recaptcha');
+        $this->load->library('FusionCaptcha');
 
         $this->user->guestArea();
 
@@ -93,6 +94,13 @@ class Password_recovery extends MX_Controller
                         $data['messages']["error"] = lang("captcha_invalid", "auth");
                         die(json_encode($data));
                     }
+                } else if ($captcha_type == 'fusion_captcha') {
+                    $token = $this->input->post('cap-token');
+                    if (!$this->fusioncaptcha->verify_final_token($token)) {
+                        $data['captcha_error'] = true;
+                        $data['messages']["error"] = lang("captcha_invalid", "auth");
+                        die(json_encode($data));
+                    }
                 }
             }
             
@@ -114,6 +122,7 @@ class Password_recovery extends MX_Controller
         }
         else
         {
+            $data['captcha_error'] = true;
             $data['messages']["error"] = validation_errors();
         }
         die(json_encode($data));

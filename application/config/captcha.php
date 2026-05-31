@@ -14,9 +14,10 @@ $config['use_captcha'] = true;
  * 'recaptcha'       = Google Recaptcha v2
  * 'recaptcha3'      = Google Recaptcha v3
  * 'image_captcha'   = image captcha system
+ * 'fusion_captcha'  = inbuilt captcha system
  *
  */
-$config["captcha_type"] = 'image_captcha';
+$config['captcha_type'] = 'fusion_captcha';
 
 /**
  *
@@ -52,3 +53,38 @@ $config["recaptcha_secret_key"] = "";
 
 // Theme
 $config['recaptcha_theme'] = 'dark'; // dark - light
+
+
+/**
+ * FusionCaptcha Configuration
+ *
+ * secret_key: Private key, used for HMAC signing on server (never expose)
+ * theme     : Widget theme ('light' or 'dark')
+ */
+$config['fusion_captcha_secret_key'] = '';
+$config['fusion_captcha_theme']      = 'dark';  // 'light' or 'dark'
+
+$config['fusion_captcha'] = [
+
+    // Challenge expires after
+    'challenge_ttl' => 300,
+
+    // Final token expires after
+    'token_ttl' => 600,
+
+    // Max worker difficulty
+    'difficulty' => 5,
+
+    // Number of POW challenges
+    'challenge_count' => 4,
+
+    // Rate limits
+    'max_challenges_per_minute' => 15,
+    'max_redeems_per_minute'    => 30,
+
+    // Bind token to IP
+    'bind_ip' => true,
+
+    // Bind token to user-agent hash
+    'bind_ua' => true,
+];

@@ -1,9 +1,3 @@
-<style>
-input + span[id] {
-    top: unset;
-}
-</style>
-
 <div class="page-subbody mt-0">
     <div class="col-12 col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 mx-auto">
         <div class="card-body p-5">
@@ -38,6 +32,25 @@ input + span[id] {
                         <div class="captcha {if $captcha_error && $captcha_type == 'recaptcha'} alert-captcha {/if}">
                             {$recaptcha_html}
                         </div>
+                    {elseif $captcha_type == 'fusion_captcha'}
+                        <script type="text/javascript" src="{$url}application/js/captcha/cap_widget.min.js"></script>
+                        <cap-widget
+                                data-cap-api-endpoint="/captcha/"
+                                data-cap-hidden-field-name="cap-token"
+                                data-cap-background="#1e1e1e"
+                                data-cap-color="#f0f0f0"
+                                data-cap-direction="{if $isRTL}rtl{else}ltr{/if}"
+                                {if $captcha_error}data-cap-error="true"{/if}
+                                data-cap-i18n-initial-state="{lang('initial_state', 'captcha')}"
+                                data-cap-i18n-verifying-label="{lang('verifying_label', 'captcha')}"
+                                data-cap-i18n-solved-label="{lang('solved_label', 'captcha')}"
+                                data-cap-i18n-error-label="{lang('error_label', 'captcha')}"
+                                data-cap-i18n-wasm-disabled="{lang('wasm_disabled', 'captcha')}"
+                                data-cap-i18n-verify-aria-label="{lang('verify_aria_label', 'captcha')}"
+                                data-cap-i18n-verifying-aria-label="{lang('verifying_aria_label', 'captcha')}"
+                                data-cap-i18n-verified-aria-label="{lang('verified_aria_label', 'captcha')}"
+                                data-cap-i18n-error-aria-label="{lang('error_aria_label', 'captcha')}">
+                        </cap-widget>
                     {/if}
                 {/if}
                 </div>
