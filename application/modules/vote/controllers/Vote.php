@@ -98,7 +98,11 @@ class Vote extends MX_Controller
             } else {
                 $this->vote_model->vote_log($api['user_id'], $api['user_ip'], $vote_site_id);
 
-                $this->vote_model->updateVp($this->user->getId(), $vote_site['points_per_vote']);
+                $result = $this->vote_model->atomicVote($api['user_id'], $api['user_ip'], $vote_site_id, $vote_site['points_per_vote']);
+
+                if (!$result) {
+                    die(lang("already_voted", "vote"));
+                }
 
                 Events::trigger('onVote', $api['user_id'], $api['username'], $vote_site);
 
