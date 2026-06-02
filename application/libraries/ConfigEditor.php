@@ -84,7 +84,7 @@ class ConfigEditor
             is_float($value) => rtrim(rtrim(number_format($value, 8, '.', ''), '0'), '.'),
             is_int($value) => (string)$value,
             is_numeric($value) => (string)$value,
-            is_string($value) => "'" . str_replace("'", "\\'", $value) . "'",
+            is_string($value) => "'" . addcslashes($value, '\\\'') . "'",
             default => 'NULL',
         };
     }
