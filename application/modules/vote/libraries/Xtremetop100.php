@@ -15,7 +15,7 @@ class Xtremetop100 extends VoteCallback
 {
     public string $name = "Xtremetop100";
     public string $url = "xtremetop100.com";
-    public string $voteLinkFormat = "{vote_link}-{user_id}";
+    public string $voteLinkFormat = "{vote_link}&postback={user_id}";
 
     protected function checkAccess(): bool
     {
@@ -24,6 +24,6 @@ class Xtremetop100 extends VoteCallback
 
     protected function readUserId()
     {
-        return $this->CI->input->get('p_resp');
+        return $this->CI->input->get('custom');
     }
 }
