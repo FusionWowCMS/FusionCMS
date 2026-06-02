@@ -1,3 +1,4 @@
+{if hasPermission('uploadModules', 'admin')}
 <div class="wrapper">
 	<section class="container-fluid inner-page">
 		<div class="row">
@@ -35,6 +36,7 @@
 		</div>
 	</section>
 </div>
+{/if}
 
 
 <div class="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-6 mb-3">

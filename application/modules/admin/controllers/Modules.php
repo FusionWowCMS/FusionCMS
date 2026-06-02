@@ -78,6 +78,8 @@ class Modules extends MX_Controller
 
     public function upload()
     {
+        requirePermission("uploadModules");
+
         ini_set('memory_limit', '5120M');
         set_time_limit(0);
 
@@ -113,11 +115,21 @@ class Modules extends MX_Controller
                     $zip = new ZipArchive();
                     $res = $zip->open($config['upload_path'] . '/' . $filename);
                     if ($res === true) {
+
+                        for ($i = 0; $i < $zip->numFiles; $i++) {
+                            $entryName = $zip->getNameIndex($i);
+                            // Prevent path traversal and absolute paths
+                            if (str_contains($entryName, '..') || str_starts_with($entryName, '/') || str_starts_with($entryName, '\\')) {
+                                $zip->close();
+                                die(json_encode(['status' => 'error', 'message' => 'Invalid file path in ZIP archive']));
+                            }
+                        }
+
                         // Extract file
                         $zip->extractTo(FCPATH . 'temp/modules/');
                         register_shutdown_function(function() { $this->removeDir(FCPATH . 'temp'); });
 
-                        $modules = array();
+                        $modules = [];
 
                         foreach (glob(FCPATH . 'temp/modules/*') as $file)
                         {
@@ -130,18 +142,18 @@ class Modules extends MX_Controller
                             $name = preg_replace('/temp\/modules\//', '', $file);
 
                             if (!file_exists($file . '/manifest.json')) {
-                                die(json_encode(array('status' => 'error', 'message' => 'The module <b>' . $name . '</b> is missing manifest.json')));
+                                die(json_encode(['status' => 'error', 'message' => 'The module <b>' . $name . '</b> is missing manifest.json']));
                             }
 
                             if (!is_dir($file . '/controllers')) {
-                                die(json_encode(array('status' => 'error', 'message' => 'The module <b>' . $name . '</b> is missing controllers')));
+                                die(json_encode(['status' => 'error', 'message' => 'The module <b>' . $name . '</b> is missing controllers']));
                             }
 
                             $modules[] = basename($name);
 
-                            foreach (glob(FCPATH . 'temp/modules/' . basename($name) . '/sql/*.sql') as $sqlname) {
-                                if (file_exists($sqlname)) {
-                                    $lines = file($sqlname);
+                            foreach (glob(FCPATH . 'temp/modules/' . basename($name) . '/sql/*.sql') as $sqlName) {
+                                if (file_exists($sqlName)) {
+                                    $lines = file($sqlName);
                                     $statement = '';
                                     foreach ($lines as $line) {
                                         $statement .= $line;
@@ -150,31 +162,31 @@ class Modules extends MX_Controller
                                                 $this->db->query($statement);
                                                 $statement = '';
                                             } catch (Throwable $t) {
-                                                unlink($sqlname);
-                                                die(json_encode(array('status' => 'error', 'message' => 'SQL import failed')));
+                                                unlink($sqlName);
+                                                die(json_encode(['status' => 'error', 'message' => 'SQL import failed']));
                                             }
                                         }
                                     }
-                                    unlink($sqlname);
+                                    unlink($sqlName);
                                 }
                             }
                             register_shutdown_function(function() use ($name) { $this->removeDir(FCPATH . 'application/modules/' . basename($name) . '/sql'); });
                         }
 
                         if(!is_array($modules) || !count($modules))
-                            die(json_encode(array('status' => 'error', 'message' => 'The module is not valid')));
+                            die(json_encode(['status' => 'error', 'message' => 'The module is not valid']));
 
                         // Extract file
                         $zip->extractTo(FCPATH . 'application/modules/');
                         $zip->close();
 
                         if (!unlink($config['upload_path'] . '/' . $filename)) {
-                            die(json_encode(array('status' => 'error', 'message' => 'Failed to delete uploaded zip file, but extraction worked')));
+                            die(json_encode(['status' => 'error', 'message' => 'Failed to delete uploaded zip file, but extraction worked']));
                         }
 
-                        die(json_encode(array('status' => 'success', 'message' => 'Module successfully uploaded')));
+                        die(json_encode(['status' => 'success', 'message' => 'Module successfully uploaded']));
                     } else {
-                        die(json_encode(array('status' => 'error', 'message' => 'Failed to extract')));
+                        die(json_encode(['status' => 'error', 'message' => 'Failed to extract']));
                     }
                 }
             }

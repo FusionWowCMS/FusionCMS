@@ -1,8 +1,8 @@
 {
 	"name": "Admin panel",
 	"description": "Default set of tools and pages for the admin panel",
-	"version": "2.0.0",
-	"date": "2023-05-30",
+	"version": "2.1.0",
+	"date": "2026-06-02",
 	"author": {
 		"name": "FusionCMS",
 		"website": "https:\/\/fusion-hub.com"
@@ -17,6 +17,7 @@
 		"deletePermissions": { "default": false, "description": "Delete groups, roles and permissions." },
 
 		"toggleModules": { "default": false, "description": "Enable or disable modules" },
+		"uploadModules": { "default": false, "description": "Can upload modules" },
 		"editModuleConfigs": { "default": false, "description": "Edit the config files of modules" },
 
 		"changeTheme": { "default": false, "description": "Change the theme" },
@@ -91,7 +92,8 @@
 
 			"permissions": {
 				"toggleModules": true,
-				"editModuleConfigs": true
+				"editModuleConfigs": true,
+				"uploadModules": true
 			}
 		},
 
