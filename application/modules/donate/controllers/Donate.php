@@ -23,6 +23,7 @@ use PayPal\Exception\PayPalConnectionException;
 /**
  * Donate Controller Class
  * @property donate_model $donate_model donate_model Class
+ * @property paypal_model $paypal_model paypal_model Class
  */
 class Donate extends MX_Controller
 {
@@ -139,21 +140,59 @@ class Donate extends MX_Controller
 
     public function checkPaypal($id)
     {
+        $id = (int)$id;
+        if ($id <= 0) {
+            redirect(base_url('/donate/error'));
+            return;
+        }
+
         $execute = new PaymentExecution();
 
         $payment_id = $_GET['paymentId'] ?? '';
         $payerId = $_GET['PayerID'] ?? '';
+
+        if (empty($payment_id) || empty($payerId)) {
+            redirect(base_url('/donate/error'));
+            return;
+        }
+
         $payment = Payment::get($payment_id, $this->getApi());
 
         $execute->setPayerId($payerId);
         try {
             $result = $payment->execute($execute, $this->getApi());
 
-            $payment_data = array(
+            // Get actual payment amount from PayPal
+            $actual_amount = (float) $result->transactions[0]->amount->total;
+            $setTax = (float) $this->config->item('paypal_tax');
+
+            // Fetch the donation details based on the ID from URL
+            $specify_donate = $this->paypal_model->getSpecifyDonate($id);
+
+            // If doesn't exist, reject
+            if (empty($specify_donate)) {
+                $this->paypal_model->setStatus($payment_id, "3");
+                $this->paypal_model->setError($payment_id, "Invalid donation ID: $id");
+                redirect(base_url('/donate/error'));
+                return;
+            }
+
+            $expected_amount = (float) $specify_donate['price'] + $setTax;
+
+            // Verify amount matches (allow 0.01 tolerance for rounding)
+            if (abs($actual_amount - $expected_amount) > 0.01) {
+                // Amount mismatch - possible manipulation
+                $this->paypal_model->setStatus($payment_id, "3");
+                $this->paypal_model->setError($payment_id, "Amount mismatch: paid $actual_amount, expected $expected_amount for tier $id");
+                redirect(base_url('/donate/error'));
+                return;
+            }
+
+            $payment_data = [
                 'payer_email' => $result->payer->payer_info->email,
                 'invoice_number' => $result->transactions[0]->invoice_number,
                 'transactions_code' => $result->transactions[0]->related_resources[0]->sale->id,
-            );
+            ];
             $this->paypal_model->update_payment($payment_id, $payment_data);
 
             $status = $this->paypal_model->getStatus($payment_id);

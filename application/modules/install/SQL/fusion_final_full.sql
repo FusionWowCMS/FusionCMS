@@ -907,7 +907,6 @@ DROP TABLE IF EXISTS `paypal_donate`;
 CREATE TABLE `paypal_donate`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `price` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `tax` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `points` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=Dynamic;
