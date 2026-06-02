@@ -348,7 +348,59 @@ class Install extends MX_Controller
                 die('Please fill all fields.');
         }
 
-        $db = fopen("application/config/Database.php", "w");
+        $cmsArray = [
+            'DSN' => '',
+            'hostname' => $_POST['cms_hostname'],
+            'username' => $_POST['cms_username'],
+            'password' => $_POST['cms_password'],
+            'database' => $_POST['cms_database'],
+            'DBDriver' => 'MySQLi',
+            'DBPrefix' => '',
+            'pConnect' => false,
+            'DBDebug' => true,
+            "charset" => 'utf8mb4',
+            'DBCollat' => 'utf8mb4_general_ci',
+            'swapPre' => "",
+            'encrypt' => false,
+            'compress' => false,
+            'strictOn' => false,
+            'failover' => [],
+            'port' => (int)$_POST['cms_port'],
+            'numberNative' => false,
+            'foundRows' => false,
+            'dateFormat' => [
+                'date' => 'Y-m-d',
+                'datetime' => 'Y-m-d H:i:s',
+                'time' => 'H:i:s',
+            ],
+        ];
+
+        $accountArray = [
+            "DSN" => '',
+            'hostname' => $_POST['auth_hostname'],
+            'username' => $_POST['auth_username'],
+            'password' => $_POST['auth_password'],
+            'database' => $_POST['auth_database'],
+            'DBDriver' => 'MySQLi',
+            'DBPrefix' => '',
+            'pConnect' => false,
+            'DBDebug' => false,
+            'charset' => 'utf8',
+            'DBCollat' => 'utf8_general_ci',
+            'swapPre' => '',
+            'encrypt' => false,
+            'compress' => false,
+            'strictOn' => false,
+            'failover' => [],
+            'port' => (int)$_POST['auth_port'],
+            'numberNative' => false,
+            'foundRows' => false,
+            'dateFormat' => [
+                'date' => 'Y-m-d',
+                'datetime' => 'Y-m-d H:i:s',
+                'time' => 'H:i:s',
+            ],
+        ];
 
         $raw = '<?php
 
@@ -360,65 +412,13 @@ class Database extends Config
 {
     public string $defaultGroup = "cms";
 
-    public array $cms = [
-        "DSN" => "",
-        "hostname" => "'.$_POST['cms_hostname'].'",
-        "username" => "'.$_POST['cms_username'].'",
-        "password" => "'.$_POST['cms_password'].'",
-        "database" => "'.$_POST['cms_database'].'",
-        "DBDriver" => "MySQLi",
-        "DBPrefix" => "",
-        "pConnect" => false,
-        "DBDebug" => true,
-        "charset" => "utf8mb4",
-        "DBCollat" => "utf8mb4_general_ci",
-        "swapPre" => "",
-        "encrypt" => false,
-        "compress" => false,
-        "strictOn" => false,
-        "failover" => [],
-        "port" => '.(int)$_POST['cms_port'].',
-        "numberNative" => false,
-        "foundRows"    => false,
-        "dateFormat"   => [
-            "date"     => "Y-m-d",
-            "datetime" => "Y-m-d H:i:s",
-            "time"     => "H:i:s",
-        ],
-    ];
+    public array $cms = ' . $this->arrayToPhpShortSyntax($cmsArray) . ';
 
-    public array $account = [
-        "DSN" => "",
-        "hostname" => "'.$_POST['auth_hostname'].'",
-        "username" => "'.$_POST['auth_username'].'",
-        "password" => "'.$_POST['auth_password'].'",
-        "database" => "'.$_POST['auth_database'].'",
-        "DBDriver" => "MySQLi",
-        "DBPrefix" => "",
-        "pConnect" => false,
-        "DBDebug" => false,
-        "charset" => "utf8",
-        "DBCollat" => "utf8_general_ci",
-        "swapPre" => "",
-        "encrypt" => false,
-        "compress" => false,
-        "strictOn" => false,
-        "failover" => [],
-        "port" => '.(int)$_POST['auth_port'].',
-        "numberNative" => false,
-        "foundRows"    => false,
-        "dateFormat"   => [
-            "date"     => "Y-m-d",
-            "datetime" => "Y-m-d H:i:s",
-            "time"     => "H:i:s",
-        ],
-    ];
+    public array $account = ' . $this->arrayToPhpShortSyntax($accountArray) . ';
 }
 ';
 
-        fwrite($db, $raw);
-
-        fclose($db);
+        file_put_contents("application/config/Database.php", $raw);
 
         // Make sure database connection
         $db = db_connect();
@@ -440,6 +440,43 @@ class Database extends Config
         } catch (DatabaseException $e) {
             die('Auth Connection Error (' . $e->getCode() . ') ' . $e->getMessage());
         }
+    }
+
+    private function arrayToPhpShortSyntax(array $array, string $indent = '    '): string
+    {
+        if (empty($array)) {
+            return '[]';
+        }
+
+        $output = "[\n";
+        $innerIndent = $indent . '    ';
+        $lastKey = array_key_last($array);
+
+        foreach ($array as $key => $value) {
+            if (is_int($key)) {
+                $keyStr = (string)$key;
+            } else {
+                $keyStr = "'" . str_replace(["\\", "'"], ["\\\\", "\\'"], $key) . "'";
+            }
+
+            if (is_array($value)) {
+                $valueStr = $this->arrayToPhpShortSyntax($value, $innerIndent);
+            } elseif (is_bool($value)) {
+                $valueStr = $value ? 'true' : 'false';
+            } elseif (is_null($value)) {
+                $valueStr = 'null';
+            } elseif (is_int($value) || is_float($value)) {
+                $valueStr = (string)$value;
+            } else {
+                $valueStr = "'" . str_replace(["\\", "'"], ["\\\\", "\\'"], $value) . "'";
+            }
+
+            $comma = ($key !== $lastKey) ? ',' : '';
+            $output .= $innerIndent . $keyStr . ' => ' . $valueStr . $comma . "\n";
+        }
+
+        $output .= $indent . "]";
+        return $output;
     }
 
     private function checkAuthConfig()
