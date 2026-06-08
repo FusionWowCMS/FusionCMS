@@ -8,7 +8,7 @@ use MX\CI;
  * @author  Jesper Lindström
  * @author  Xavier Geerinck
  * @author  Elliott Robbins
- * @link    http://fusion-hub.com
+ * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
 class Acl_model extends CI_Model

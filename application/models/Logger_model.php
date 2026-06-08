@@ -5,7 +5,7 @@
  * @author  Jesper Lindström
  * @author  Xavier Geerinck
  * @author  Elliott Robbins
- * @link    http://fusion-hub.com
+ * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
 class Logger_model extends CI_Model

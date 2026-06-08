@@ -6,7 +6,7 @@
  *
  * @package FusionCMS
  * @author  Maxi Arnicke
- * @link    http://fusion-hub.com
+ * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 
 require_once(APPPATH . 'modules/vote/libraries/classes/VoteCallback.php');

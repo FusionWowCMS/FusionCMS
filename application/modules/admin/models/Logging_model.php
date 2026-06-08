@@ -5,7 +5,7 @@
  * @version 6.X
  * @author  Jesper Lindström
  * @author  Xavier Geerinck
- * @link    http://fusion-hub.com
+ * @link    https://github.com/FusionWowCMS/FusionCMS
  */
 class Logging_model extends CI_Model
 {
