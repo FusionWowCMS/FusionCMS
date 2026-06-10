@@ -212,7 +212,7 @@ class Items
             }
 
             $data = [
-                'item' => $this->parseItemData($row),
+                'item' => $this->parseItemData($row, $realmObj),
                 'icon' => $row['icon'],
                 'api_item_icons' => $this->CI->config->item('api_item_icons')
             ];
@@ -234,7 +234,7 @@ class Items
     /**
      * Gather all data item needed
      */
-    private function parseItemData($itemDB)
+    private function parseItemData($itemDB, $realmObj)
     {
         // No item was found
         if (!$itemDB || $itemDB == "empty") {
@@ -259,7 +259,7 @@ class Items
             'durability'     => $itemDB['MaxDurability'] ?? null,
             'armor'          => array_key_exists('armor', $itemDB) ? $itemDB['armor'] : false,
             'required'       => $itemDB['RequiredLevel'] ?? null,
-            'AllowableClass' => $this->getAllowedClasses($itemDB),
+            'AllowableClass' => $this->getAllowedClasses($itemDB, $realmObj),
             'level'          => $itemDB['ItemLevel'] ?? null,
             'type'           => $this->getType($itemDB['class'], $itemDB['subclass']),
             'damage_type'    => array_key_exists("dmg_type1", $itemDB) ? $damages[$itemDB['dmg_type1']] : false,
@@ -286,9 +286,9 @@ class Items
         return $name;
     }
 
-    private function getAllowedClasses($itemDB): ?array
+    private function getAllowedClasses($itemDB, $realmObj): ?array
     {
-        return $itemDB['AllowableClass'] > 0 ? $this->getClassesFromMask($itemDB['AllowableClass'], $this->CI->config->item('classes_en')) : null;
+        return $itemDB['AllowableClass'] > 0 ? $this->getClassesFromMask($itemDB['AllowableClass'], array_intersect_key($this->CI->config->item('classes_en'), array_flip($realmObj->getExpansionClasses()))) : null;
     }
 
     private function calculateSpeed($delay): int|string
