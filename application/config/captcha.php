@@ -62,7 +62,6 @@ $config['recaptcha_theme'] = 'dark'; // dark - light
  * theme     : Widget theme ('light' or 'dark')
  */
 $config['fusion_captcha_secret_key'] = '';
-$config['fusion_captcha_theme']      = 'dark';  // 'light' or 'dark'
 
 $config['fusion_captcha'] = [
 

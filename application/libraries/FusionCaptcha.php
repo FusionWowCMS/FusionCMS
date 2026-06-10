@@ -377,6 +377,13 @@ class FusionCaptcha
 
     protected function cache_save(string $key, $value, int $ttl): void
     {
+        $cachePath = WRITEPATH . 'cache/data/captcha';
+        if (!is_dir($cachePath)) {
+            @mkdir($cachePath, 0775, true);
+            @fopen($cachePath . '/index.html', "w");
+        }
+        @chmod($cachePath, 0775);
+
         $this->CI->cache->save('captcha/captcha_' . $key, $value, $ttl);
     }
 
