@@ -1030,17 +1030,17 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v5.8.0",
-            "version_normalized": "5.8.0.0",
+            "version": "v5.8.2",
+            "version_normalized": "5.8.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "78d259d3b971c59a0cd719c270cc5cbb740c36a7"
+                "reference": "06594a114931ab6fea76b12f0207c5903cf01f8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/78d259d3b971c59a0cd719c270cc5cbb740c36a7",
-                "reference": "78d259d3b971c59a0cd719c270cc5cbb740c36a7",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/06594a114931ab6fea76b12f0207c5903cf01f8c",
+                "reference": "06594a114931ab6fea76b12f0207c5903cf01f8c",
                 "shasum": ""
             },
             "require": {
@@ -1051,7 +1051,7 @@
                 "phpunit/phpunit": "^8.5 || ^7.5",
                 "smarty/smarty-lexer": "^4.0.2"
             },
-            "time": "2026-02-15T14:27:15+00:00",
+            "time": "2026-06-24T08:04:41+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1097,7 +1097,7 @@
             "support": {
                 "forum": "https://github.com/smarty-php/smarty/discussions",
                 "issues": "https://github.com/smarty-php/smarty/issues",
-                "source": "https://github.com/smarty-php/smarty/tree/v5.8.0"
+                "source": "https://github.com/smarty-php/smarty/tree/v5.8.2"
             },
             "funding": [
                 {
@@ -1109,17 +1109,17 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.38.1",
-            "version_normalized": "1.38.1.0",
+            "version": "v1.38.2",
+            "version_normalized": "1.38.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92"
+                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/14c5439eec4ccff081ac14eca2dc57feb2a66d92",
-                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
+                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
                 "shasum": ""
             },
             "require": {
@@ -1132,7 +1132,7 @@
             "suggest": {
                 "ext-mbstring": "For best performance"
             },
-            "time": "2026-05-26T12:51:13+00:00",
+            "time": "2026-05-27T06:59:30+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1173,7 +1173,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.1"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.2"
             },
             "funding": [
                 {
