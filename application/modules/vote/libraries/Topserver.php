@@ -19,7 +19,7 @@ class Topserver extends VoteCallback
 
     protected function checkAccess(): bool
     {
-        return $this->CI->input->ip_address() == gethostbyname('topserver.live');
+        return $this->CI->input->ip_address() == gethostbyname('callback.topserver.live');
     }
 
     protected function readUserId()
