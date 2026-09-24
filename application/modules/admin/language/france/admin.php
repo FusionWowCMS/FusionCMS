@@ -458,6 +458,7 @@ $lang = [
     'dark' => 'Sombre',
     'light' => 'Clair',
     'image_captcha' => 'Captcha d\'image',
+    'fusion_captcha' => 'Captcha Fusion',
     'google_recaptcha_v2' => 'Google reCAPTCHA v2',
     'google_recaptcha_v3' => 'Google reCAPTCHA v3',
     'total_players_online' => 'Total des joueurs en ligne',

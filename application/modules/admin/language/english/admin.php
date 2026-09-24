@@ -462,6 +462,7 @@ $lang = [
     'dark' => 'Dark',
     'light' => 'Light',
     'image_captcha' => 'Image captcha',
+    'fusion_captcha' => 'Fusion captcha',
     'google_recaptcha_v2' => 'Google reCAPTCHA v2',
     'google_recaptcha_v3' => 'Google reCAPTCHA v3',
     'total_players_online' => 'Total players online',
