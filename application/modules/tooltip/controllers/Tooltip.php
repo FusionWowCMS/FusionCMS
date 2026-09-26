@@ -89,8 +89,15 @@ class Tooltip extends MX_Controller
             $avatarArray[$key] = $value;
         }
 
+        // Deleted characters keep their original name in deleteInfos_Name
+        $name = $avatarArray['name'];
+
+        if (empty($name) && !empty($avatarArray['deleteInfos_Name'])) {
+            $name = $avatarArray['deleteInfos_Name'];
+        }
+
         return [
-            'name'      => $avatarArray['name'],
+            'name'      => $name,
             'race'      => $avatarArray['race'],
             'class'     => $avatarArray['class'],
             'level'     => $avatarArray['level'],
