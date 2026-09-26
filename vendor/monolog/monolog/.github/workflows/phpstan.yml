@@ -7,10 +7,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   tests:
     name: "PHPStan"
@@ -23,20 +19,18 @@ jobs:
           - "8.0"
 
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
+      - uses: actions/checkout@v4
 
-      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: "${{ matrix.php-version }}"
           coverage: none
           extensions: mongodb, redis, amqp
 
       - name: Add require for mongodb/mongodb to make tests runnable
-        run: "composer require $COMPOSER_FLAGS mongodb/mongodb --dev --no-update"
+        run: "composer require ${{ env.COMPOSER_FLAGS }} mongodb/mongodb --dev --no-update"
 
-      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+      - uses: ramsey/composer-install@v3
         with:
           dependency-versions: highest
           # --ignore-platform-req=php here needed as long as elasticsearch/elasticsearch does not support php 8
