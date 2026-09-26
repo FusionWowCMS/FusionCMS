@@ -56,6 +56,18 @@ class FusionCaptcha
         $ip = $this->get_user_ip();
         $data = $this->read_ip_data($ip);
 
+        // Challenges are bound to the user-agent hash when bind_ua is enabled.
+        // If a different browser behind the same IP asks for a challenge, do not
+        // reuse the previous browser's challenge because redemption would fail
+        // with ua_mismatch.
+        if ($this->settings['bind_ua']) {
+            $currentUa = $this->user_agent_hash();
+            if (($data['ua'] ?? '') !== $currentUa) {
+                $data['ua'] = $currentUa;
+                $data['challenge'] = null;
+            }
+        }
+
         // Rate limit check (stored inside the same IP file)
         if (!$this->rate_limit_in_data($data, 'challenge', $this->settings['max_challenges_per_minute'])) {
             return ['success' => false, 'error' => 'rate_limited'];
@@ -305,8 +317,7 @@ class FusionCaptcha
             return;
         }
 
-        $prefix = 'captcha/captcha_';   // prefix used in cache_save
-        $files = glob('writable/cache/data/' . $prefix . '*');
+        $files = glob($this->cache_path() . '/captcha_*.cache');
 
         if (!is_array($files)) {
             return;
@@ -375,7 +386,7 @@ class FusionCaptcha
         return $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
     }
 
-    protected function cache_save(string $key, $value, int $ttl): void
+    protected function cache_path(): string
     {
         $cachePath = WRITEPATH . 'cache/data/captcha';
         if (!is_dir($cachePath)) {
@@ -384,12 +395,47 @@ class FusionCaptcha
         }
         @chmod($cachePath, 0775);
 
-        $this->CI->cache->save('captcha/captcha_' . $key, $value, $ttl);
+        return $cachePath;
+    }
+
+    protected function cache_file(string $key): string
+    {
+        $safeKey = preg_replace('/[^A-Za-z0-9_\-]/', '_', $key);
+        return $this->cache_path() . '/captcha_' . $safeKey . '.cache';
+    }
+
+    protected function cache_save(string $key, $value, int $ttl): void
+    {
+        // FusionCaptcha must keep challenge/token state even when FusionCMS'
+        // global data cache is disabled.
+        $payload = [
+            'expiration' => time() + $ttl,
+            'content'    => $value,
+        ];
+
+        $file = $this->cache_file($key);
+        @file_put_contents($file, json_encode($payload), LOCK_EX);
+        @chmod($file, 0640);
     }
 
     protected function cache_get(string $key)
     {
-        return $this->CI->cache->get('captcha/captcha_' . $key);
+        $file = $this->cache_file($key);
+        if (!is_file($file)) {
+            return false;
+        }
+
+        $payload = json_decode((string) @file_get_contents($file), true);
+        if (!is_array($payload) || !array_key_exists('expiration', $payload)) {
+            return false;
+        }
+
+        if ((int) $payload['expiration'] <= time()) {
+            @unlink($file);
+            return false;
+        }
+
+        return $payload['content'] ?? false;
     }
 
     protected function base64url_encode(string $data): string

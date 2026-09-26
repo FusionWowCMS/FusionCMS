@@ -458,6 +458,7 @@ $lang = [
     'dark' => 'تیره',
     'light' => 'روشن',
     'image_captcha' => 'کپچای تصویری',
+    'fusion_captcha' => 'کپچای Fusion',
     'google_recaptcha_v2' => 'گوگل ریکپچا v2',
     'google_recaptcha_v3' => 'گوگل ریکپچا v3',
     'total_players_online' => 'مجموع بازیکنان آنلاین',
