@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Events\Events;
 use MX\MX_Controller;
 
 class levelup extends MX_Controller
@@ -132,9 +133,10 @@ class levelup extends MX_Controller
 
                 $this->dblogger->createLog("user", "service", "Level Up", $CharacterName, Dblogger::STATUS_SUCCEED, $this->user->getId());
 
+                Events::trigger('onLevelUp', $CharacterName);
+
                 //Successful
                 die(lang("successfully", "levelup"));
-
             } else {
                 die(lang("dont_enough_Donation_Points", "levelup"));
             }
