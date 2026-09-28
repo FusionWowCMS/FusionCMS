@@ -1,6 +1,7 @@
 <?php
 
 use CodeIgniter\Database\BaseConnection;
+use CodeIgniter\Database\ResultInterface;
 use MX\CI;
 
 /**
@@ -61,6 +62,35 @@ class Characters_model
 
         $query = $this->db->table(table('characters', $this->realmId))->select($fields)->where($where)->get();
 
+        return $this->getCharactersResult($query, $removeGMs);
+    }
+
+    /**
+     * Get characters
+     *
+     * @param String $fields
+     * @param string $whereKey
+     * @param array $whereValue
+     * @param bool $removeGMs
+     * @return Mixed
+     */
+    public function getCharactersWhereIn(string $fields, string $whereKey, array $whereValue, bool $removeGMs = false): mixed
+    {
+        // Make sure we're connected
+        $this->connect();
+
+        $query = $this->db->table(table('characters', $this->realmId))->select($fields)->whereIn($whereKey, $whereValue)->get();
+
+        return $this->getCharactersResult($query, $removeGMs);
+    }
+
+    /**
+     * @param false|string|ResultInterface $query
+     * @param bool $removeGMs
+     * @return array|false|void
+     */
+    private function getCharactersResult(false|string|ResultInterface $query, bool $removeGMs)
+    {
         if ($this->db->error()) {
             $error = $this->db->error();
             if ($error['code'] != 0) {
@@ -70,7 +100,7 @@ class Characters_model
 
         $rows = $query->getResultArray();
         if ($query->getNumRows() > 0) {
-            if($removeGMs) {
+            if ($removeGMs) {
                 foreach ($rows as $key => $character) {
                     if (CI::$APP->external_account_model->getRank($character['account']) > 0) {
                         unset($rows[$key]);
