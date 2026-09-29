@@ -50,7 +50,7 @@ its ease of use and development, safe and secure codebase and dedication to simp
 
 ### Supported expansions
 
-| Emulator                             | Status |
+| Expansions                             | Status |
 |--------------------------------------|:--------:|
 | Classic                              | ✅ |
 | TBC                                  | ✅ |
@@ -61,10 +61,14 @@ its ease of use and development, safe and secure codebase and dedication to simp
 | Legion                               | ✅ |
 | Battle For Azeroth                   | ✅ |
 | Shadowlands                          | ✅ |
-| Classic (TBC , Wotlk, Cataclysm)     | ✅ |
 | Dragonflight                         | ✅ |
 | The War Within                       | ✅ |
 | Midnight                             | ✅ |
+| Classic TBC                          | ✅ |
+| Classic Wotlk                        | ✅ |
+| Classic Cataclysm                    | ✅ |
+| Classic Mists of Pandaria            | ✅ |
+| Forever                              | ✅ |
 
 ## Getting Started
 
