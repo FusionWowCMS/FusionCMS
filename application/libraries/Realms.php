@@ -526,6 +526,7 @@ class Realms
             "Void elf",
             "Dracthyr",
             "Earthen",
+            "Haranir",
         ];
 
         $level = $character['level'] < 30 ? 1 : ($character['level'] < 65 ? 60 : 70); // If character is below 30, use lvl 1 image below 65 use lvl 60 image and +65 use lvl70 image
@@ -546,6 +547,8 @@ class Realms
             $faction = ($raceId == 52) ? 'a' : 'h';
         } elseif ($race == "Earthen") {
             $faction = ($raceId == 85) ? 'a' : 'h';
+        } elseif ($race == "Haranir") {
+            $faction = ($raceId == 86) ? 'a' : 'h';
         }
 
         $race = preg_replace("/ /", "", $race);
