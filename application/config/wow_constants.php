@@ -38,6 +38,7 @@ $config['races_en'] = [
     85 => "Earthen",
     86 => "Haranir",
     91 => "Haranir",
+    90 => "Skyborne",
 ];
 
 $config['classes_en'] = [
