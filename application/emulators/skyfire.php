@@ -78,8 +78,8 @@ class Skyfire implements Emulator
         'battlenet_accounts' => [
             'id'            => 'id',
             'email'         => 'email',
-            'salt'          => 's',
-            'verifier'      => 'v',
+            'salt'          => 'salt',
+            'verifier'      => 'verifier',
             'sha_pass_hash' => 'sha_pass_hash',
             'joindate'      => 'joindate',
             'last_ip'       => 'last_ip',

@@ -201,7 +201,6 @@ class External_account_model extends CI_Model
         // Battlenet accounts
         if ($this->config->item('battle_net')) {
             $battleData = [
-                column("battlenet_accounts", "id") => $userId,
                 column("battlenet_accounts", "email") => strtoupper($email),
                 column("battlenet_accounts", "last_ip") => $this->input->ip_address(),
                 column("battlenet_accounts", "joindate") => date("Y-m-d H:i:s")
@@ -209,8 +208,9 @@ class External_account_model extends CI_Model
             list($hash, $battleData) = $this->setBattleNetPassword($email, $password, $battleData);
 
             $this->connection->table(table("battlenet_accounts"))->insert($battleData);
+            $battleNetId = $this->connection->insertID();
 
-            $this->connection->query("UPDATE account SET battlenet_account = $userId, battlenet_index = 1 WHERE id = $userId", [$userId]);
+            $this->connection->query("UPDATE account SET battlenet_account = ?, battlenet_index = 1 WHERE id = ?", [$battleNetId, $userId]);
         }
 
         // Fix for TrinityCore RBAC (or any emulator with 'rbac')
