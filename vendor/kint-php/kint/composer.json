@@ -21,7 +21,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3",
         "phpunit/phpunit": "^9",
-        "symfony/finder": ">=7",
+        "symfony/finder": "^8.1",
         "seld/phar-utils": "^1",
         "vimeo/psalm": "^6"
     },
@@ -38,7 +38,7 @@
     },
     "config": {
         "platform": {
-            "php": "8.3"
+            "php": "8.4.1"
         }
     },
     "scripts": {
